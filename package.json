@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/check-cms.mjs && node scripts/make-images.mjs",
+    "prebuild": "node scripts/make-cms-config.mjs && node scripts/check-cms.mjs && node scripts/make-images.mjs",
     "build": "next build",
     "start": "next start",
     "deploy": "npm run build && wrangler deploy",
     "lint": "next lint",
     "images": "node scripts/make-images.mjs",
     "contrast": "node scripts/check-contrast.mjs",
-    "cms": "node scripts/check-cms.mjs"
+    "cms": "node scripts/make-cms-config.mjs && node scripts/check-cms.mjs"
   },
   "dependencies": {
     "next": "15.5.4",

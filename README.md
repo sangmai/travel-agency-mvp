@@ -125,6 +125,30 @@ Lối thoát hiểm: nút **Sign In with GitHub Using PAT** chạy được ngay
 OAuth App, nhưng bắt người biên tập tự tạo và gia hạn token GitHub. Để dành cho
 lúc relay hỏng, không dùng làm đường chính.
 
+### Giao diện CMS
+
+Tiếng của giao diện **theo ngôn ngữ trình duyệt**, không theo khoá `locale`
+trong config. Máy cài tiếng Việt mở `/admin/` là ra tiếng Việt, không cần
+chỉnh gì. Sveltia có 32 ngôn ngữ; `vi` đạt khoảng 74% so với bản tiếng Anh,
+phần thiếu rơi về tiếng Anh.
+
+Bản ghim trong `public/admin/index.html` **phải đủ mới**: bản `0.113.2` trước
+đây chưa có bản dịch nào, nên giao diện luôn tiếng Anh dù cấu hình thế nào.
+
+`config.yml` được **sinh ra** bởi `scripts/make-cms-config.mjs`, không sửa tay
+(file đã nằm trong `.gitignore`). Lý do: ba trường cần mã định danh chính xác —
+ảnh của circuit, địa danh của chặng, tour của một avis. Trước đây phải gõ tay,
+gõ `ha-long` thay vì `halong` là build đỏ mà người sửa giá không hiểu vì sao.
+Giờ chúng là dropdown lấy thẳng từ content: thêm một ảnh vào `photos.json` là
+nó tự xuất hiện trong danh sách.
+
+Mọi list đều `collapsed: true` kèm `summary` — form circuit có 36 trường, để
+phẳng hết thì không ai dùng nổi.
+
+```bash
+npm run cms     # sinh lại + kiểm tra; cũng chạy ở prebuild
+```
+
 ### CMS và content phải khớp nhau
 
 Sveltia/Decap **ghi lại nguyên file** theo đúng những trường khai trong

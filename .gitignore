@@ -31,3 +31,6 @@ skills-lock.json
 
 # Vignettes de partage, régénérées au build.
 public/photos/og/
+
+# Configuration du CMS, générée au build depuis le contenu.
+public/admin/config.yml
