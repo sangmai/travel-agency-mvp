@@ -148,6 +148,9 @@ export type Site = {
   geo: { lat: number; lng: number };
   hours: { opens: string; closes: string; days: string[] };
   social: { facebook: string; instagram: string };
+  /** Profils publics vérifiés — réseaux, plateformes d'avis, annuaires.
+   *  Sert à désambiguïser l'entité auprès des moteurs. */
+  sameAs: string[];
   languages: string[];
   /** Note agrégée publiée par un tiers, affichée avec son lien. Elle n'est
    *  pas déclarée en aggregateRating : Google ne reconnaît pas la reprise

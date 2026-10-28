@@ -142,7 +142,11 @@ export function organisationNode(site: Site, reviews: Review[]) {
         opens: site.hours.opens,
         closes: site.hours.closes,
       },
-      sameAs: [site.social.facebook, site.social.instagram],
+      /* Tous les profils publics vérifiés, pas seulement les réseaux. Il
+         existe une « Jasmine Tours Ha Giang » sans aucun rapport et bien
+         mieux référencée : ces liens disent à un moteur laquelle est
+         laquelle. */
+      sameAs: site.sameAs,
       employee: site.team.map((_, i) => ({ "@id": `${personId}-${i}` })),
       /* Pas d'aggregateRating sur l'établissement. Une note agrégée doit
          reposer sur des avis vérifiables ; celle qui figurait ici était une

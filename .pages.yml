@@ -270,6 +270,7 @@ content:
         fields:
           - { name: facebook, label: Facebook, type: string, required: true }
           - { name: instagram, label: Instagram, type: string, required: true }
+      - { name: sameAs, label: Profils publics vérifiés, type: string, list: true, description: "Réseaux, plateformes d'avis, annuaires. Désambiguïse l'entreprise auprès des moteurs." }
       - { name: languages, label: Langues de travail, type: string, list: true }
       - name: reviewSource
         label: Note publiée par un tiers

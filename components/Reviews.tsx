@@ -20,8 +20,8 @@ export async function Reviews() {
             Le nombre est modeste et c'est ainsi : trois avis vérifiables valent
             mieux qu'une moyenne flatteuse que personne ne peut recouper. */}
         <p className="note">
-          Note moyenne de {score(site.reviewSource.rating)}/5 sur{" "}
-          {site.reviewSource.count} avis publiés, {site.reviewSource.note}.{" "}
+          <b>{score(site.reviewSource.rating)}/5</b> sur{" "}
+          {site.reviewSource.count} avis publiés. {site.reviewSource.note}{" "}
           <a className="lnk" href={site.reviewSource.url} rel="noopener nofollow">
             Voir la page {site.reviewSource.name}
           </a>

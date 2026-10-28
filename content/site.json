@@ -50,7 +50,7 @@
     "url": "https://www.tripadvisor.fr/Attraction_Review-g298085-d11631318-Reviews-Jasmin_Travel-Da_Nang.html",
     "rating": 4.7,
     "count": 3,
-    "note": "#306 sur 986 activités à Da Nang"
+    "note": "L'agence travaille surtout par recommandation : les avis en ligne sont peu nombreux, mais tous vérifiables."
   },
   "responseTime": "48 h",
   "currency": "EUR",
@@ -67,5 +67,11 @@
       "name": "Nguyen Thuy",
       "role": "Conseillère voyage, anglophone"
     }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/jasmintraveldanang",
+    "https://www.instagram.com/jasmintravel_vietnam",
+    "https://www.tripadvisor.fr/Attraction_Review-g298085-d11631318-Reviews-Jasmin_Travel-Da_Nang.html",
+    "https://www.petitfute.co.uk/v45017-da-nang/c1122-voyage-transports/c747-tours-operateurs/2032689-jasmin-travel.html"
   ]
 }
