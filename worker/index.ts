@@ -36,20 +36,26 @@ function clean(value: FormDataEntryValue | null, max = 2000): string {
  * personne a rempli le formulaire, elle doit pouvoir nous joindre autrement.
  *
  * Volontairement autonome — la feuille de style du site n'est pas chargée ici.
+ *
+ * `ref` est un code court affiché en bas de page. Il ne dit rien d'exploitable
+ * à un visiteur ni à un attaquant, mais il distingue d'un coup d'œil une clé
+ * absente d'une panne d'envoi — sans quoi la seule façon de savoir laquelle
+ * des deux est en cause est d'ouvrir les journaux.
  */
-function erreur(titre: string, message: string, status: number): Response {
+function erreur(titre: string, message: string, status: number, ref?: string): Response {
   const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex"><title>${titre} — ${site.name}</title>
 <style>body{margin:0;display:grid;place-items:center;min-height:100vh;
 background:#f6f1e7;color:#22303a;font:16px/1.6 system-ui,sans-serif;padding:24px}
 main{max-width:34rem}h1{font-size:1.6rem;margin:0 0 .6em}a{color:#1f5f54}
-p{margin:0 0 1em}</style></head><body><main>
+p{margin:0 0 1em}small{color:#5a6870}</style></head><body><main>
 <h1>${titre}</h1><p>${message}</p>
 <p>Écrivez-nous à <a href="mailto:${site.email}">${site.email}</a>
 ou appelez le <a href="tel:${site.phone}">${site.phoneDisplay}</a>.
 Nous reprenons votre projet de là.</p>
-<p><a href="/">Retour à l'accueil</a></p></main></body></html>`;
+<p><a href="/">Retour à l'accueil</a></p>
+${ref ? `<small>réf. ${ref}</small>` : ""}</main></body></html>`;
 
   return new Response(html, {
     status,
@@ -189,6 +195,7 @@ async function devis(request: Request, env: Env): Promise<Response> {
       "Votre demande n'est pas partie",
       "Un incident technique nous empêche de recevoir votre message. Il n'a pas été enregistré, merci de nous joindre directement.",
       500,
+      "CFG-01",
     );
   }
 
@@ -232,6 +239,7 @@ async function devis(request: Request, env: Env): Promise<Response> {
       "Votre demande n'est pas partie",
       "Un incident technique nous empêche de recevoir votre message. Il n'a pas été enregistré, merci de nous joindre directement.",
       500,
+      config ? "CFG-02" : "SRV-03",
     );
   }
 
