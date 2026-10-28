@@ -16,7 +16,18 @@
 
     // Une adresse inconnue rend out/404.html avec un vrai statut 404, et non
     // la page d'accueil en 200 : un crawler doit pouvoir faire la différence.
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+
+    // Sans ceci, le formulaire de devis ne peut pas fonctionner dans un
+    // navigateur. L'envoi d'un formulaire est une requête de navigation
+    // (Sec-Fetch-Mode: navigate) ; le service de fichiers statiques les
+    // intercepte pour y répondre par une page HTML, et refuse par un 405 tout
+    // ce qui n'est pas un GET — sans jamais réveiller le Worker.
+    //
+    // Le défaut est invisible en ligne de commande : aucun client HTTP
+    // n'envoie cet en-tête, donc le même POST passe parfaitement depuis curl
+    // et échoue depuis Chrome.
+    "run_worker_first": ["/api/*"]
   },
 
   // Le honeypot du formulaire arrête les robots naïfs ; ceci arrête quelqu'un
