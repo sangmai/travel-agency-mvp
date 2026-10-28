@@ -31,9 +31,9 @@ export async function Footer() {
 
             <p className="ftr__about">
               {site.name} est une agence de voyage locale francophone basée à
-              {" "}{site.address.city}, spécialisée depuis {site.founded} dans les
-              circuits privés sur mesure au Vietnam, au Laos et au Cambodge pour
-              les voyageurs francophones.
+              {" "}{site.address.city}, titulaire de la licence de tour-opérateur
+              international {site.license}, spécialisée depuis {site.founded} dans
+              les circuits privés sur mesure au Vietnam, au Laos et au Cambodge.
             </p>
 
             {/* NAP : doit être identique à Google Business Profile et au

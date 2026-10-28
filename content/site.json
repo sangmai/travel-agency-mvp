@@ -1,48 +1,64 @@
 {
-  "name": "Jasmine Travel",
-  "legalName": "Jasmine Travel Co., Ltd",
+  "name": "Jasmin Travel",
+  "legalName": "Jasmin Travel",
   "url": "https://travel-agency-mvp.maisang90dn.workers.dev",
   "locale": "fr_FR",
   "lang": "fr",
   "tagline": "Agence de voyage locale francophone au Vietnam",
-  "founded": "2012",
-  "license": "N° 01-XXXX/2024 — [À REMPLIR]",
-  "phone": "+84 24 3XXX XXXX",
-  "phoneDisplay": "+84 24 3XXX XXXX",
-  "whatsapp": "+84 9XX XXX XXX",
-  "email": "contact@jasmine-travel.fr",
+  "founded": "2015",
+  "license": "48-049/2015/TCDL-GP LHQT",
+  "membership": "Administration nationale du Tourisme du Vietnam",
+  "phone": "+84935165284",
+  "phoneDisplay": "+84 935 16 52 84",
+  "phoneAlt": "+84 914 02 52 69",
+  "whatsapp": "+84 935 16 52 84",
+  "email": "info@jasmin-travel.com",
   "address": {
-    "street": "XX rue Hang Bong, Hoan Kiem",
-    "city": "Hanoï",
-    "region": "Hanoï",
-    "postalCode": "100000",
+    "street": "270 Nguyen Luong Bang",
+    "city": "Da Nang",
+    "region": "Da Nang",
+    "postalCode": "550000",
     "country": "VN",
     "countryName": "Vietnam"
   },
   "geo": {
-    "lat": 21.0333,
-    "lng": 105.85
+    "lat": 16.0747,
+    "lng": 108.1497
+  },
+  "hours": {
+    "opens": "09:00",
+    "closes": "18:00",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ]
   },
   "social": {
-    "facebook": "https://www.facebook.com/jasminetravel.fr",
-    "instagram": "https://www.instagram.com/jasminetravel.fr"
+    "facebook": "https://www.facebook.com/jasmintraveldanang",
+    "instagram": "https://www.instagram.com/jasmintravel_vietnam"
   },
-  "rating": {
-    "value": 4.9,
-    "count": 384,
-    "best": 5
-  },
+  "languages": [
+    "français",
+    "anglais",
+    "vietnamien"
+  ],
   "responseTime": "48 h",
   "currency": "EUR",
-  "advisor": {
-    "name": "Lê Thị Mai Huong",
-    "role": "Fondatrice et conseillère voyage",
-    "since": 2012,
-    "bio": "Née à Hué, installée à Hanoï, Mai Huong a étudié le français à l'Université Nationale du Vietnam avant de guider pendant huit ans entre Sapa et le delta du Mékong. Elle a fondé Jasmine Travel en 2012 pour que les voyageurs francophones cessent d'acheter des itinéraires standardisés et parlent directement à quelqu'un qui connaît la route.",
-    "languages": [
-      "français",
-      "vietnamien",
-      "anglais"
-    ]
-  }
+  "team": [
+    {
+      "name": "Truong Dinh Tran",
+      "role": "Conseiller voyage"
+    },
+    {
+      "name": "Thoa Nguyen Thi",
+      "role": "Service réservations"
+    },
+    {
+      "name": "Nguyen Thuy",
+      "role": "Conseillère voyage, anglophone"
+    }
+  ]
 }

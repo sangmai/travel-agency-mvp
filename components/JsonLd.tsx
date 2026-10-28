@@ -93,7 +93,7 @@ export function touristTripNode(
 }
 
 export function organisationNode(site: Site, reviews: Review[]) {
-  const personId = `${site.url}/#${site.advisor.name.toLowerCase().replace(/\s+/g, "-")}`;
+  const personId = `${site.url}/#equipe`;
 
   return [
     {
@@ -102,9 +102,16 @@ export function organisationNode(site: Site, reviews: Review[]) {
       name: site.name,
       legalName: site.legalName,
       url: site.url,
-      description:
-        "Agence de voyage locale francophone basée à Hanoï, spécialisée dans les circuits privés sur mesure au Vietnam pour les voyageurs francophones.",
+      description: `${site.tagline} basée à ${site.address.city}, spécialisée dans les circuits privés sur mesure au Vietnam, au Laos et au Cambodge.`,
       foundingDate: site.founded,
+      /* La licence est la seule garantie vérifiable qu'un voyageur français
+         puisse opposer à une agence établie hors d'Europe. */
+      hasCredential: {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "Licence de tour-opérateur international",
+        identifier: site.license,
+        recognizedBy: { "@type": "Organization", name: site.membership },
+      },
       email: site.email,
       telephone: site.phone,
       priceRange: "€€–€€€",
@@ -127,25 +134,29 @@ export function organisationNode(site: Site, reviews: Review[]) {
         addressCountry: site.address.country,
       },
       geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
+      /* Les horaires déclarés s'affichent dans la fiche Google : annoncer une
+         plage pendant laquelle personne ne répond coûte l'appel. */
       openingHoursSpecification: {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        opens: "08:00",
-        closes: "20:00",
+        dayOfWeek: site.hours.days,
+        opens: site.hours.opens,
+        closes: site.hours.closes,
       },
       sameAs: [site.social.facebook, site.social.instagram],
-      employee: { "@id": personId },
-      aggregateRating: ratingNode(site.rating.value, site.rating.count),
+      employee: site.team.map((_, i) => ({ "@id": `${personId}-${i}` })),
+      /* Pas d'aggregateRating sur l'établissement. Une note agrégée doit
+         reposer sur des avis vérifiables ; celle qui figurait ici était une
+         moyenne inventée sur un nombre d'avis inventé. Les fiches voyage en
+         déclarent une, mais calculée depuis les avis réellement publiés. */
       review: reviewNodes(reviews),
     },
-    {
+    ...site.team.map((m, i) => ({
       "@type": "Person",
-      "@id": personId,
-      name: site.advisor.name,
-      jobTitle: site.advisor.role,
-      description: site.advisor.bio,
-      knowsLanguage: site.advisor.languages,
+      "@id": `${personId}-${i}`,
+      name: m.name,
+      jobTitle: m.role,
+      knowsLanguage: site.languages,
       worksFor: { "@id": orgId(site.url) },
-    },
+    })),
   ];
 }

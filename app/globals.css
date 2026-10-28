@@ -2703,3 +2703,29 @@ img {
   left: 0;
   position: absolute;
 }
+
+/* Équipe : des noms et des fonctions, sur la bande sombre. */
+.equipe {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin-top: 2rem;
+}
+
+.equipe li {
+  border-left: 2px solid var(--amber-light);
+  padding-left: 1rem;
+}
+
+.equipe b {
+  color: var(--on-dark);
+  display: block;
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.equipe span {
+  color: var(--on-dark-2);
+  font-size: 0.92rem;
+}

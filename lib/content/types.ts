@@ -119,10 +119,18 @@ export type Site = {
   url: string;
   locale: string;
   lang: string;
+  tagline: string;
   founded: string;
+  /** Licence de tour-opérateur international, délivrée par l'administration
+   *  vietnamienne du tourisme. Pour un voyageur français qui achète à une
+   *  agence étrangère, c'est la seule garantie vérifiable : elle doit être
+   *  exacte, et elle est affichée en toutes lettres. */
   license: string;
+  membership: string;
   phone: string;
   phoneDisplay: string;
+  phoneAlt: string;
+  whatsapp: string;
   email: string;
   address: {
     street: string;
@@ -133,15 +141,18 @@ export type Site = {
     countryName: string;
   };
   geo: { lat: number; lng: number };
+  hours: { opens: string; closes: string; days: string[] };
   social: { facebook: string; instagram: string };
-  rating: { value: number; count: number; best: number };
+  languages: string[];
   responseTime: string;
   currency: string;
-  advisor: {
-    name: string;
-    role: string;
-    since: number;
-    bio: string;
-    languages: string[];
-  };
+  /* Pas de `rating` : une note agrégée ne se déclare pas, elle se calcule
+     depuis des avis réels — `aggregate()` s'en charge. Le champ portait une
+     moyenne inventée sur un nombre d'avis inventé, publiée en données
+     structurées. C'est le genre de déclaration qui vaut une action manuelle
+     de Google, et qui ment au visiteur avant de lui vendre quoi que ce soit. */
+
+  /** Les personnes réellement nommées par l'agence. Sans biographie : nous
+   *  n'en avons pas, et en écrire une reviendrait à l'inventer. */
+  team: { name: string; role: string }[];
 };

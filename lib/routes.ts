@@ -41,7 +41,7 @@ export const ROUTES: Route[] = [
   { path: "/halong-ou-lan-ha", label: "Halong ou Lan Ha ?", group: "comparer", published: false },
   { path: "/avis", label: "Nos avis clients", group: "comparer", published: false },
   { path: "/carnets-de-voyage", label: "Carnets de voyage", group: "comparer", published: false },
-  { path: "/agence-de-voyage-vietnam", label: "Qui sommes-nous", group: "agence", published: false },
+  { path: "/agence-de-voyage-vietnam", label: "Qui sommes-nous", group: "agence", published: true },
 
   { path: "/mentions-legales", label: "Mentions légales", group: "legal", published: false },
   { path: "/conditions-generales-de-vente", label: "CGV", group: "legal", published: false },

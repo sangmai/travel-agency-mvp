@@ -54,7 +54,7 @@ export default async function Home() {
       "@type": "WebPage",
       "@id": `${site.url}/#webpage`,
       url: site.url,
-      name: "Voyage Vietnam sur mesure — Jasmine Travel, agence locale francophone",
+      name: "Voyage Vietnam sur mesure — Jasmin Travel, agence locale francophone",
       isPartOf: { "@id": siteId(site.url) },
       inLanguage: "fr-FR",
       breadcrumb: breadcrumb(site.url, [{ name: "Accueil" }]),

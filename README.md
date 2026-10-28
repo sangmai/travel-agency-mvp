@@ -1,4 +1,4 @@
-# Jasmine Travel — landing page
+# Jasmin Travel — landing page
 
 Landing page tiếng Pháp cho thị trường Pháp, từ khoá mục tiêu **"voyage vietnam"**.
 Next.js 15 (App Router), TypeScript, CSS thuần. Toàn bộ trang render tĩnh — không
@@ -78,7 +78,7 @@ thực. Đổi nó sang địa chỉ khác mà chưa xác thực domain thì m�
 prospect, một bên là địa chỉ in trên trang. Agency thường tách hai cái này.
 
 Khi có domain thật: xác thực ở Resend (Domains → Add Domain → dán bản ghi DNS
-vào Cloudflare), rồi đổi `DEVIS_FROM` thành `Jasmine Travel <devis@domain.fr>`.
+vào Cloudflare), rồi đổi `DEVIS_FROM` thành `Jasmin Travel <devis@domain.fr>`.
 Lúc đó `DEVIS_TO` muốn đặt gì cũng được.
 
 Chống spam: honeypot (`societe`) + rate limit 5 lần/phút theo IP, khai báo
@@ -107,7 +107,7 @@ Tạo OAuth App một lần, ở <https://github.com/settings/developers> → Ne
 
 | | |
 |---|---|
-| Application name | Jasmine Travel CMS |
+| Application name | Jasmin Travel CMS |
 | Homepage URL | `https://travel-agency-mvp.maisang90dn.workers.dev` |
 | Authorization callback URL | `https://travel-agency-mvp.maisang90dn.workers.dev/callback` |
 
@@ -318,7 +318,7 @@ inoubliable au cœur des rizières"* không ràng buộc agency vào gì cả; *
 marche, 12 km, +400 m"* thì có, và cho phép khách nói không. Đây cũng là lý do
 các trang kiểu này được AI trích khi có người hỏi một lịch trình cụ thể.
 
-**Một khác biệt cố ý với Terdav:** không có lịch départs. Jasmine Travel chỉ bán
+**Một khác biệt cố ý với Terdav:** không có lịch départs. Jasmin Travel chỉ bán
 privé theo ngày tự chọn — giống đúng phần "voyage sur mesure" của chính Terdav,
 nên mục Budget kết thúc bằng demande de devis chứ không phải bảng ngày.
 
@@ -418,7 +418,7 @@ Tham khảo từ các site đang top Google.fr cho "voyage vietnam"
 
 | | Đã triển khai |
 |---|---|
-| Title | `Voyage Vietnam sur mesure — Agence locale francophone \| Jasmine Travel` (58 ký tự, không bị cắt trong SERP) |
+| Title | `Voyage Vietnam sur mesure — Agence locale francophone \| Jasmin Travel` (58 ký tự, không bị cắt trong SERP) |
 | H1 | Chứa từ khoá ở dạng câu tự nhiên, không nhồi |
 | Trust signals | 4,9/5 · 384 avis · licence · 48h — ngay trong hero, lặp ở trust bar và footer |
 | Giá | `à partir de X €/pers` dạng text thuần trên từng circuit |

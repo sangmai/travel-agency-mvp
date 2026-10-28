@@ -30,11 +30,14 @@ const body = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(siteJson.url),
   title: {
-    default: "Voyage Vietnam sur mesure — Agence locale francophone | Jasmine Travel",
-    template: "%s | Jasmine Travel",
+    default: "Voyage Vietnam sur mesure — Agence locale francophone | Jasmin Travel",
+    template: "%s | Jasmin Travel",
   },
+  /* Pas de note dans la description : celle qui y figurait — 4,9/5 sur 384
+     avis — était inventée, et c'est l'extrait que Google affiche. Le
+     numéro de licence la remplace : il se vérifie, lui. */
   description:
-    "Voyage au Vietnam sur mesure avec une agence locale francophone à Hanoï. Circuits privés dès 870 €/pers., guide francophone, devis gratuit sous 48 h. Noté 4,9/5 sur 384 avis.",
+    `Voyage au Vietnam sur mesure avec une agence locale francophone à ${siteJson.address.city}. Circuits privés dès 870 €/pers., guide francophone, devis gratuit sous ${siteJson.responseTime}. Licence ${siteJson.license}.`,
   keywords: [
     "voyage vietnam",
     "voyage au vietnam",
@@ -59,15 +62,15 @@ export const metadata: Metadata = {
     locale: siteJson.locale,
     url: siteJson.url,
     siteName: siteJson.name,
-    title: "Voyage Vietnam sur mesure — Jasmine Travel, agence locale francophone",
+    title: "Voyage Vietnam sur mesure — Jasmin Travel, agence locale francophone",
     description:
-      "Circuits privés au Vietnam conçus depuis Hanoï pour les voyageurs francophones. Itinéraire chiffré sous 48 h, retouches sans frais, guide francophone et chauffeur privé.",
+      `Circuits privés au Vietnam conçus depuis ${siteJson.address.city} pour les voyageurs francophones. Itinéraire chiffré sous ${siteJson.responseTime}, retouches sans frais, guide francophone et chauffeur privé.`,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Voyage Vietnam sur mesure — Jasmine Travel",
+    title: "Voyage Vietnam sur mesure — Jasmin Travel",
     description:
-      "Agence locale francophone à Hanoï. Circuits privés dès 870 €/pers., devis gratuit sous 48 h.",
+      `Agence locale francophone à ${siteJson.address.city}. Circuits privés dès 870 €/pers., devis gratuit sous ${siteJson.responseTime}.`,
   },
   robots: {
     index: true,

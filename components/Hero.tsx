@@ -1,5 +1,5 @@
 import { Photo } from "./Photo";
-import { getSite } from "@/lib/content";
+import { aggregate, getReviews, getSite } from "@/lib/content";
 import { score } from "@/lib/format";
 
 /**
@@ -12,10 +12,13 @@ import { score } from "@/lib/format";
  * llms.txt et la fiche Google.
  */
 export async function Hero() {
-  const site = await getSite();
+  const [site, reviews] = await Promise.all([getSite(), getReviews()]);
+  const note = aggregate(reviews);
 
   const proof = [
-    { v: `${score(site.rating.value)}/5`, l: `sur ${site.rating.count} avis vérifiés` },
+    /* Calculé sur les avis réellement publiés, et non déclaré : la valeur
+       qui figurait ici était inventée. */
+    { v: `${score(note.value)}/5`, l: `sur ${note.count} avis publiés` },
     { v: site.responseTime, l: "pour recevoir votre itinéraire" },
     { v: `Depuis ${site.founded}`, l: `une agence locale, à ${site.address.city}` },
     { v: "Sans intermédiaire", l: "vous parlez à ceux qui opèrent" },
