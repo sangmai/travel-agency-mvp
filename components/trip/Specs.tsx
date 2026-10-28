@@ -33,11 +33,17 @@ export function tripSpecs(trip: Trip, rating: { value: number; count: number }):
     { label: "Hébergement", value: trip.confort },
     { label: "Saison", value: trip.saison, tableLabel: "Meilleure saison" },
     { label: "Groupe", value: trip.groupe, tableLabel: "Taille du groupe" },
-    {
-      label: "Avis",
-      value: `${score(rating.value)}/5 (${rating.count})`,
-      table: false,
-    },
+    /* Pas de ligne « Avis » tant qu'il n'y en a aucun : « 0,0/5 (0) » se lit
+       comme une très mauvaise note, pas comme une absence de note. */
+    ...(rating.count > 0
+      ? [
+          {
+            label: "Avis",
+            value: `${score(rating.value)}/5 (${rating.count})`,
+            table: false as const,
+          },
+        ]
+      : []),
   ];
 }
 

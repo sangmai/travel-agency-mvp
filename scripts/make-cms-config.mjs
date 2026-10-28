@@ -224,6 +224,8 @@ ${select("photo", "Photo de partage", OPT_PHOTOS, 6)}
               - { name: body, label: Texte, widget: text }
               - { name: title, label: Titre, widget: string, required: false }
 ${select("trip", "Voyage concerné", OPT_CIRCUITS, 14, ["required: false"])}
+              - { name: source, label: Source de l'avis, widget: string, required: false, hint: "Ex. Tripadvisor, Google. Un avis sans source vérifiable n'est pas publiable : la loi française l'interdit, et un visiteur a raison de s'en méfier." }
+              - { name: sourceUrl, label: Lien vers l'avis d'origine, widget: string, required: false }
               - { name: featured, label: Afficher sur la page d'accueil, widget: boolean, required: false, default: false }
 
   # ---------------------------------------------------------------- pages --
@@ -271,6 +273,17 @@ ${select("trip", "Voyage concerné", OPT_CIRCUITS, 14, ["required: false"])}
               - { name: days, label: Jours, widget: list, field: { name: day, label: Jour, widget: string } }
           - { name: social, label: Réseaux, widget: object, collapsed: true, fields: [{ name: facebook, label: Facebook, widget: string }, { name: instagram, label: Instagram, widget: string }] }
           - { name: languages, label: Langues de travail, widget: list, field: { name: langue, label: Langue, widget: string } }
+          - name: reviewSource
+            label: Note publiée par un tiers
+            widget: object
+            collapsed: true
+            hint: "Recopiée depuis la plateforme et affichée avec son lien. Elle n'est pas déclarée en données structurées : Google ne reconnaît pas la reprise d'une note tierce comme la sienne."
+            fields:
+              - { name: name, label: Plateforme, widget: string }
+              - { name: url, label: Lien vers la page d'avis, widget: string }
+              - { name: rating, label: Note, widget: number, value_type: float, min: 1, max: 5 }
+              - { name: count, label: Nombre d'avis, widget: number, value_type: int, min: 0 }
+              - { name: note, label: Classement, widget: string }
           - { name: responseTime, label: Délai de réponse, widget: string }
           - { name: currency, label: Devise, widget: hidden }
           - name: team
@@ -564,6 +577,8 @@ content:
               value: "{fields.slug}"
               label: "{fields.name} — {fields.days} j"
               search: "name,slug"
+          - { name: source, label: Source de l'avis, type: string, description: "Ex. Tripadvisor. Un avis sans source vérifiable n'est pas publiable." }
+          - { name: sourceUrl, label: Lien vers l'avis d'origine, type: string }
           - { name: featured, label: Afficher sur la page d'accueil, type: boolean }
 
   - name: site
@@ -616,6 +631,15 @@ content:
           - { name: facebook, label: Facebook, type: string, required: true }
           - { name: instagram, label: Instagram, type: string, required: true }
       - { name: languages, label: Langues de travail, type: string, list: true }
+      - name: reviewSource
+        label: Note publiée par un tiers
+        type: object
+        fields:
+          - { name: name, label: Plateforme, type: string, required: true }
+          - { name: url, label: Lien vers la page d'avis, type: string, required: true }
+          - { name: rating, label: Note, type: number, required: true }
+          - { name: count, label: Nombre d'avis, type: number, required: true }
+          - { name: note, label: Classement, type: string, required: true }
       - { name: responseTime, label: Délai de réponse, type: string, required: true }
       - { name: currency, label: Devise, type: string, hidden: true }
       - name: team

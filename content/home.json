@@ -63,8 +63,8 @@
   },
   "avis": {
     "kicker": "Avis vérifiés",
-    "title": "{note} sur 5, *réserves comprises*",
-    "lede": "Nous publions les avis tels qu'ils nous parviennent, y compris ceux qui pointent un hôtel décevant ou une étape ratée. Un mur de cinq étoiles sans une seule réserve n'a jamais aidé personne à choisir."
+    "title": "{note} sur 5 sur *Tripadvisor*",
+    "lede": "Nous ne publions que des avis qu'un visiteur peut aller vérifier lui-même : chaque témoignage porte le lien vers sa page d'origine. Ils sont peu nombreux — l'agence travaille surtout par recommandation — et nous préférons en afficher deux de vrais que vingt d'invérifiables."
   },
   "faq": {
     "kicker": "Questions fréquentes",

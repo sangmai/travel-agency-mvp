@@ -29,9 +29,6 @@ export const metadata: Metadata = {
 export default async function CircuitsIndex() {
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
 
-  /* Moyenne de tous les avis publiés, et non une valeur déclarée : celle qui
-     figurait ici venait de content/site.json et avait été inventée. */
-  const global = aggregate(await getReviews());
 
   const ratings = await Promise.all(
     trips.map(async (t) => aggregate(await getReviews({ trip: t.slug }))),
@@ -92,7 +89,7 @@ export default async function CircuitsIndex() {
             </p>
 
             <ul className="list__proof">
-              <li><b>{score(global.value)}/5</b> sur {global.count} avis publiés</li>
+              <li><b>{score(site.reviewSource.rating)}/5</b> sur {site.reviewSource.name}</li>
               <li><b>Devis sous {site.responseTime}</b>, gratuit et sans engagement</li>
               <li><b>Guide francophone</b> et chauffeur privé à chaque étape</li>
             </ul>

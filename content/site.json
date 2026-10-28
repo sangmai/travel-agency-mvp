@@ -45,6 +45,13 @@
     "anglais",
     "vietnamien"
   ],
+  "reviewSource": {
+    "name": "Tripadvisor",
+    "url": "https://www.tripadvisor.fr/Attraction_Review-g298085-d11631318-Reviews-Jasmin_Travel-Da_Nang.html",
+    "rating": 4.7,
+    "count": 3,
+    "note": "#306 sur 986 activités à Da Nang"
+  },
   "responseTime": "48 h",
   "currency": "EUR",
   "team": [

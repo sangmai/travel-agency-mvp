@@ -18,12 +18,12 @@ export async function Hero() {
 
   const h = (await getHome()).hero;
 
-  /* Les valeurs viennent du site et des avis réels ; seules les formulations
-     sont éditables. Un chiffre recopié à la main dans un texte finit toujours
-     par contredire celui que la page calcule. */
+  /* La note vient de Tripadvisor, affichée telle quelle et vérifiable par le
+     lien de la section avis. Nous n'en calculons plus la moyenne nous-mêmes :
+     deux témoignages publiés ne font pas une note d'agence. */
   const vars = {
-    note: score(note.value),
-    avis: note.count,
+    note: score(site.reviewSource.rating),
+    avis: site.reviewSource.count,
     delai: site.responseTime,
     annee: site.founded,
     ville: site.address.city,

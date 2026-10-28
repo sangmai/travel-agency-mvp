@@ -2729,3 +2729,11 @@ img {
   color: var(--on-dark-2);
   font-size: 0.92rem;
 }
+
+/* Provenance d'un avis : discrète, mais toujours cliquable. */
+.rev__src {
+  color: var(--amber-deep);
+  font-size: 0.82rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

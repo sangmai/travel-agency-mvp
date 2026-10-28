@@ -217,6 +217,8 @@ content:
               value: "{fields.slug}"
               label: "{fields.name} — {fields.days} j"
               search: "name,slug"
+          - { name: source, label: Source de l'avis, type: string, description: "Ex. Tripadvisor. Un avis sans source vérifiable n'est pas publiable." }
+          - { name: sourceUrl, label: Lien vers l'avis d'origine, type: string }
           - { name: featured, label: Afficher sur la page d'accueil, type: boolean }
 
   - name: site
@@ -269,6 +271,15 @@ content:
           - { name: facebook, label: Facebook, type: string, required: true }
           - { name: instagram, label: Instagram, type: string, required: true }
       - { name: languages, label: Langues de travail, type: string, list: true }
+      - name: reviewSource
+        label: Note publiée par un tiers
+        type: object
+        fields:
+          - { name: name, label: Plateforme, type: string, required: true }
+          - { name: url, label: Lien vers la page d'avis, type: string, required: true }
+          - { name: rating, label: Note, type: number, required: true }
+          - { name: count, label: Nombre d'avis, type: number, required: true }
+          - { name: note, label: Classement, type: string, required: true }
       - { name: responseTime, label: Délai de réponse, type: string, required: true }
       - { name: currency, label: Devise, type: string, hidden: true }
       - name: team

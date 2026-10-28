@@ -1,120 +1,26 @@
 {
   "reviews": [
     {
-      "author": "Claire et Vincent D.",
-      "city": "Nantes",
-      "date": "2026-03-18",
-      "rating": 5,
-      "body": "Nous avons changé d'avis trois fois sur la durée à Hoi An. Mai Huong a refait le devis à chaque fois, sans frais et sans nous le faire sentir. Sur place, le chauffeur nous attendait à chaque sortie d'hôtel.",
-      "title": "Un itinéraire retouché quatre fois, jamais un soupir",
-      "trip": "vietnam-du-nord-au-sud",
-      "featured": true
-    },
-    {
-      "author": "Sylvie M.",
-      "city": "Grenoble",
-      "date": "2026-02-11",
-      "rating": 5,
-      "body": "Le marché de Cai Rang à 5 h 30 : nous étions presque seuls. Notre guide avait insisté, il avait raison. Mention pour les 500 marches de Mua, qui se méritent mais qui offrent la plus belle vue du voyage.",
-      "trip": "vietnam-du-nord-au-sud"
-    },
-    {
-      "author": "Élodie et Thomas F.",
-      "city": "Clermont-Ferrand",
-      "date": "2026-03-02",
-      "rating": 5,
-      "body": "Pu Luong est la raison de venir. Deux jours là-bas valent une semaine ailleurs. La marche est accessible, mais prévoyez de vraies chaussures : les diguettes sont glissantes après la pluie.",
-      "trip": "montagnes-et-baies-du-nord"
-    },
-    {
-      "author": "Patrick et Hélène B.",
-      "city": "Lille",
-      "date": "2025-11-04",
-      "rating": 4,
-      "body": "Très beau circuit, bien dosé. Un bémol : la journée Hoi An–Saïgon est longue avec le transfert et le vol, on aurait aimé être prévenus plus clairement.",
-      "trip": "vietnam-du-nord-au-sud"
-    },
-    {
-      "author": "Jean-Marc P.",
-      "city": "Bordeaux",
-      "date": "2026-01-22",
-      "rating": 5,
-      "body": "Troisième séjour en Asie du Sud-Est et le premier où j'ai eu l'impression d'être quelque part plutôt que dans un produit. Nuits chez l'habitant simples, mais l'accueil ne se joue pas.",
-      "title": "Ha Giang sans croiser un seul autre Français",
-      "trip": "vietnam-authentique-hors-sentiers",
-      "featured": true
-    },
-    {
-      "author": "Michel et Annie L.",
-      "city": "Rennes",
-      "date": "2025-10-27",
-      "rating": 4,
-      "body": "Tout était à la hauteur sauf une nuit à Pu Luong, un peu rustique pour nous. Signalé au retour, l'agence a reconnu le point et retiré l'adresse de sa sélection.",
-      "title": "Très bon séjour, un hôtel en dessous du reste",
-      "trip": "montagnes-et-baies-du-nord",
-      "featured": true
-    },
-    {
-      "author": "Famille Berthier",
-      "city": "Lyon",
-      "date": "2026-02-04",
-      "rating": 5,
-      "body": "Le rythme était pensé pour eux : jamais plus de trois heures de route, une piscine chaque soir, et l'atelier de lanternes à Hoi An reste leur meilleur souvenir de voyage.",
-      "title": "Nos enfants de 7 et 11 ans n'ont jamais décroché",
-      "trip": "vietnam-en-famille",
-      "featured": true
-    },
-    {
-      "author": "Famille Caron",
-      "city": "Tours",
-      "date": "2025-10-30",
-      "rating": 5,
-      "body": "Notre guide s'est adressé aux enfants, pas au-dessus d'eux. C'est rare et ça change tout. Les cinq nuits à Hoi An à la fin sont une excellente idée.",
-      "trip": "vietnam-en-famille"
-    },
-    {
-      "author": "Sophie R.",
-      "city": "Strasbourg",
-      "date": "2025-11-09",
-      "rating": 5,
-      "body": "On nous proposait partout un vol Saïgon-Phnom Penh. Jasmin a insisté pour le bateau à Chau Doc. Une journée entière sur le fleuve, et le Cambodge qui arrive par l'eau.",
-      "title": "Le passage de frontière par le Mékong, à ne pas manquer",
-      "trip": "vietnam-et-cambodge",
-      "featured": true
-    },
-    {
-      "author": "Bernard T.",
-      "city": "Dijon",
-      "date": "2025-12-15",
-      "rating": 5,
-      "body": "Trois jours à Angkor, c'est le bon calcul. Les gens qui y vont une journée ne voient rien. Prévoyez des chaussures fermées, on marche beaucoup plus que ce qu'on imagine.",
-      "trip": "vietnam-et-cambodge"
-    },
-    {
-      "author": "Isabelle et Marc V.",
-      "city": "Angers",
-      "date": "2025-10-12",
-      "rating": 4,
-      "body": "Les paysages de Ha Giang sont au-delà de ce qu'on espérait. Attention toutefois : les journées de route sont longues et les routes sinueuses, à déconseiller si l'un de vous est sujet au mal des transports.",
-      "trip": "vietnam-authentique-hors-sentiers"
-    },
-    {
-      "author": "Nadia B.",
+      "author": "Frédéric D.",
       "city": "Toulouse",
-      "date": "2025-09-14",
+      "date": "2025-08-01",
       "rating": 5,
-      "body": "Jonque privée en baie de Lan Ha, un seul guide du début à la fin qui a fini par connaître nos habitudes. Le budget était conséquent, la prestation l'était aussi.",
-      "title": "Voyage de noces : rien à gérer, tout à vivre",
-      "trip": "vietnam-collection-signature",
+      "title": "Un voyage extraordinaire",
+      "body": "Nous avons passés 15j au Vietnam et nous avons eu Chung comme guide, il est très sympathique et parle très bien le français. Ils nous as fait découvrir le Vietnam dans toute sa splendeur et c'est une vraie encyclopédie de l'histoire de ce beau pays. Je conseille vivement l'agence Jasmin Travel qui donnera une autre dimension a votre séjour.",
+      "source": "Tripadvisor",
+      "sourceUrl": "https://www.tripadvisor.fr/Attraction_Review-g298085-d11631318-Reviews-Jasmin_Travel-Da_Nang.html",
       "featured": true
     },
     {
-      "author": "Philippe et Marie-Claude D.",
-      "city": "Aix-en-Provence",
-      "date": "2026-01-08",
+      "author": "Alain V.",
+      "city": "Toulon",
+      "date": "2017-02-01",
       "rating": 5,
-      "body": "Con Dao à la fin est une idée de gens qui connaissent le pays. Trois jours à ne croiser personne sur la plage, après deux semaines de visites : exactement ce qu'il fallait.",
-      "trip": "vietnam-collection-signature"
+      "title": "Laos-Cambodge, deux beaux pays à visiter",
+      "body": "Nous avons fait en janvier-février 2017, pendant 21 jours, un formidable voyage au Laos et au Cambodge avec l'agence vietnamienne, Jasmin Travel. Nous étions six personnes : trois couples d'amis. Nous avions demandé un voyage sur mesure, avec guides et chauffeurs. Nous avons été largement satisfaits : au Laos, séjours à Vientiane, Vang Vieng, Luang Prabang, avec visites des temples et pagodes, beaux hôtels et bons restaurants. Le meilleur souvenir : une randonnée de 2h et demi avec un guide spécial, dans la forêt primaire laotienne pour atteindre le village de Ban Long Lao, peuplé de deux ethnies Khamu et Hmong. Nous avons dormi dans une maison sur pilotis, sans eau ni électricité. Le repas laotien a été confectionné par notre guide dans le foyer de nos hôtes : un feu de bois à même le sol de la maison ! Quels moments intenses ! Ce contact avec la population locale fait du bien. Au Cambodge, l'agence avait prévu la visite incontournable des temples d'Angkor à Siem Reap, avec un guide chevronné et très instruit de la période de domination khmère. Tous les guides parlent très bien le français, tous jeunes et sympathiques. Le trajet et les étapes étaient bien « huilés ». Bref un beau voyage !",
+      "source": "Tripadvisor",
+      "sourceUrl": "https://www.tripadvisor.fr/Attraction_Review-g298085-d11631318-Reviews-Jasmin_Travel-Da_Nang.html",
+      "featured": true
     }
   ]
 }

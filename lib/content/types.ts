@@ -54,6 +54,11 @@ export type Review = {
   title?: string;
   /** Slug du voyage concerné. */
   trip?: string;
+  /** D'où vient l'avis, et où le vérifier. Un témoignage que le visiteur ne
+   *  peut pas retrouver ailleurs ne vaut rien — et en publier d'invérifiables
+   *  est une pratique commerciale trompeuse. */
+  source?: string;
+  sourceUrl?: string;
   /** Repris sur la page d'accueil. */
   featured?: boolean;
 };
@@ -144,6 +149,11 @@ export type Site = {
   hours: { opens: string; closes: string; days: string[] };
   social: { facebook: string; instagram: string };
   languages: string[];
+  /** Note agrégée publiée par un tiers, affichée avec son lien. Elle n'est
+   *  pas déclarée en aggregateRating : Google ne reconnaît pas la reprise
+   *  d'une note tierce comme la sienne, et une note d'établissement
+   *  auto-déclarée n'ouvre plus droit aux résultats enrichis. */
+  reviewSource: { name: string; url: string; rating: number; count: number; note: string };
   responseTime: string;
   currency: string;
   /* Pas de `rating` : une note agrégée ne se déclare pas, elle se calcule

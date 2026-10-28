@@ -60,6 +60,16 @@ export function ReviewCard({
         <br />
         {review.city}
         {departure ? ` · départ de ${monthYear(review.date)}` : ` · ${monthYear(review.date)}`}
+        {/* La provenance est affichée et cliquable : un témoignage que le
+            visiteur ne peut pas aller vérifier ne prouve rien. */}
+        {review.source && review.sourceUrl && (
+          <>
+            <br />
+            <a className="rev__src" href={review.sourceUrl} rel="noopener nofollow">
+              Vérifier sur {review.source}
+            </a>
+          </>
+        )}
       </p>
     </article>
   );

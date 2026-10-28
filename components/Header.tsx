@@ -1,13 +1,19 @@
 import { Glyph } from "./Art";
 import { getSite } from "@/lib/content";
 
+/**
+ * Les ancres sont absolues et non relatives. L'en-tête est servi sur les
+ * seize pages, mais ces sections n'existent que sur l'accueil : en écriture
+ * relative, « #budget » ne menait nulle part depuis une fiche voyage ou une
+ * page guide — soit quinze pages sur seize où le menu principal était inerte.
+ */
 const NAV = [
-  { href: "#regions", label: "Les régions" },
-  { href: "#circuits", label: "Circuits" },
-  { href: "#quand-partir", label: "Quand partir" },
-  { href: "#budget", label: "Budget" },
-  { href: "#avis", label: "Avis" },
-  { href: "#faq", label: "Questions" },
+  { href: "/#regions", label: "Les régions" },
+  { href: "/#circuits", label: "Circuits" },
+  { href: "/quand-partir-au-vietnam", label: "Quand partir" },
+  { href: "/budget-voyage-vietnam", label: "Budget" },
+  { href: "/#avis", label: "Avis" },
+  { href: "/#faq", label: "Questions" },
 ];
 
 const tel = (phone: string) => `tel:${phone.replace(/\s/g, "")}`;
@@ -32,7 +38,7 @@ export async function Header() {
 
         <div className="hdr__end">
           <a className="hdr__tel" href={tel(site.phone)}>{site.phoneDisplay}</a>
-          <a className="btn btn--amber btn--sm" href="#devis">Devis gratuit</a>
+          <a className="btn btn--amber btn--sm" href="/#devis">Devis gratuit</a>
         </div>
       </div>
     </header>
@@ -45,7 +51,7 @@ export async function MobileBar() {
   return (
     <div className="bar">
       <a href={tel(site.phone)}>Appeler</a>
-      <a href="#devis">Demander un devis gratuit</a>
+      <a href="/#devis">Demander un devis gratuit</a>
     </div>
   );
 }

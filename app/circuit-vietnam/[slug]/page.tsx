@@ -35,7 +35,6 @@ const ANCRES = [
   { id: "budget", label: "Budget" },
   { id: "hebergement", label: "Hébergement" },
   { id: "fiche-technique", label: "Fiche technique" },
-  { id: "avis", label: "Avis" },
 ];
 
 export async function generateStaticParams() {
@@ -150,6 +149,7 @@ export default async function TripPage({
             {ANCRES.map((a) => (
               <a key={a.id} href={`#${a.id}`}>{a.label}</a>
             ))}
+            {reviews.length > 0 && <a href="#avis">Avis</a>}
           </div>
         </nav>
 
@@ -246,6 +246,10 @@ export default async function TripPage({
 
         <Tech code={trip.code} specs={specs} />
 
+        {/* Un circuit sans avis n'affiche pas une section vide notée 0,0 : il
+            n'affiche rien. L'ancre disparaît de la barre de navigation avec
+            elle, sinon elle mène dans le vide. */}
+        {reviews.length > 0 && (
         <section className="sec sec--sand" id="avis">
           <div className="wrap wrap--wide">
             <SectionHead
@@ -260,6 +264,7 @@ export default async function TripPage({
             </div>
           </div>
         </section>
+        )}
 
         <Closing
           title="Ce voyage, à votre main"
