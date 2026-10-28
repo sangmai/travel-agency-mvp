@@ -175,6 +175,23 @@ async function devis(request: Request, env: Env): Promise<Response> {
     timeZone: "Europe/Paris",
   }).format(new Date());
 
+  // Sans clé, inutile d'appeler Resend pour s'entendre répondre 401. Le cas
+  // n'a rien d'exotique : le secret se pose à la main dans le tableau de bord,
+  // il est donc absent au premier déploiement et après chaque rotation de clé.
+  if (!env.RESEND_API_KEY) {
+    console.error(
+      "[devis] CONFIGURATION — le secret RESEND_API_KEY n'est pas posé sur ce " +
+        "Worker, aucune demande ne peut partir. Tableau de bord Cloudflare → " +
+        "Settings → Variables and Secrets → type Secret.",
+      { demande: d },
+    );
+    return erreur(
+      "Votre demande n'est pas partie",
+      "Un incident technique nous empêche de recevoir votre message. Il n'a pas été enregistré, merci de nous joindre directement.",
+      500,
+    );
+  }
+
   const voyageurs = d.voyageurs ? `${d.voyageurs} pers., ` : "";
   const reponse = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -193,14 +210,24 @@ async function devis(request: Request, env: Env): Promise<Response> {
   });
 
   if (!reponse.ok) {
-    // La demande est perdue pour l'agence si elle n'est écrite nulle part :
-    // on la journalise intégralement, elle reste repêchable dans les logs
-    // Cloudflare (`npx wrangler tail`, ou l'onglet Observability).
-    console.error("[devis] ENVOI ÉCHOUÉ — demande à repêcher", {
-      status: reponse.status,
-      resend: await reponse.text(),
-      demande: d,
-    });
+    /* Deux pannes très différentes se ressemblent vues d'ici : une clé
+       révoquée ou un destinataire refusé se répare en deux minutes, une
+       indisponibilité de Resend se subit. Les distinguer dans le journal
+       évite de chercher du mauvais côté.
+
+       La demande est perdue pour l'agence si elle n'est écrite nulle part :
+       on la journalise intégralement, elle reste repêchable dans les logs
+       Cloudflare (onglet Logs du Worker, ou `npx wrangler tail`). */
+    const config = reponse.status === 401 || reponse.status === 403;
+    console.error(
+      config
+        ? "[devis] CONFIGURATION — Resend refuse la clé ou le destinataire. " +
+            "Vérifier le secret RESEND_API_KEY (révoqué ? jamais posé ?) et " +
+            "que DEVIS_TO est bien l'adresse du compte Resend tant qu'aucun " +
+            "domaine n'y est vérifié."
+        : "[devis] ENVOI ÉCHOUÉ — panne côté Resend, demande à repêcher",
+      { status: reponse.status, resend: await reponse.text(), demande: d },
+    );
     return erreur(
       "Votre demande n'est pas partie",
       "Un incident technique nous empêche de recevoir votre message. Il n'a pas été enregistré, merci de nous joindre directement.",
