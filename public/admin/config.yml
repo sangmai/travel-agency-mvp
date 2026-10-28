@@ -116,15 +116,23 @@ collections:
         label: Agence et coordonnées
         file: content/site.json
         fields:
+          # ⚠️ Cette liste doit couvrir tous les champs de content/site.json.
+          # Le CMS réécrit le fichier entier à partir d'elle : un champ absent
+          # ici disparaît du contenu au premier enregistrement. Le script
+          # scripts/check-cms.mjs refuse de construire en cas d'écart.
           - { name: name, label: Nom, widget: string }
           - { name: legalName, label: Raison sociale, widget: string }
           - { name: url, label: URL du site, widget: string }
           - { name: locale, label: Locale, widget: hidden }
           - { name: lang, label: Langue, widget: hidden }
-          - { name: founded, label: Année de création, widget: string }
-          - { name: license, label: Licence tourisme, widget: string }
+          - { name: tagline, label: Phrase de positionnement, widget: string }
+          - { name: founded, label: En activité depuis, widget: string }
+          - { name: license, label: Licence tour-opérateur international, widget: string, hint: "Délivrée par l'administration vietnamienne. Affichée sur le site et déclarée à Google : doit être exacte." }
+          - { name: membership, label: Autorité de tutelle, widget: string }
           - { name: phone, label: Téléphone (format technique), widget: string }
           - { name: phoneDisplay, label: Téléphone affiché, widget: string }
+          - { name: phoneAlt, label: Second numéro, widget: string }
+          - { name: whatsapp, label: WhatsApp, widget: string }
           - { name: email, label: E-mail, widget: string }
           - name: address
             label: Adresse
@@ -138,25 +146,30 @@ collections:
               - { name: countryName, label: Pays, widget: string }
           - { name: geo, label: Coordonnées, widget: object, fields: [{ name: lat, label: Latitude, widget: number, value_type: float }, { name: lng, label: Longitude, widget: number, value_type: float }] }
           - { name: social, label: Réseaux, widget: object, fields: [{ name: facebook, label: Facebook, widget: string }, { name: instagram, label: Instagram, widget: string }] }
-          - name: rating
-            label: Note agrégée
+          - name: hours
+            label: Horaires d'ouverture
             widget: object
-            hint: "⚠️ Doit refléter des avis réels et vérifiables. Une note inventée viole les règles Google et expose à une sanction."
+            hint: "Repris dans la fiche Google. Annoncer une plage pendant laquelle personne ne répond coûte l'appel."
             fields:
-              - { name: value, label: Note, widget: number, value_type: float, min: 1, max: 5 }
-              - { name: count, label: Nombre d'avis, widget: number, value_type: int, min: 0 }
-              - { name: best, label: Note maximale, widget: hidden, default: 5 }
+              - { name: opens, label: Ouverture, widget: string }
+              - { name: closes, label: Fermeture, widget: string }
+              - { name: days, label: Jours, widget: list, field: { name: day, label: Jour, widget: string } }
+          - { name: languages, label: Langues de travail, widget: list, field: { name: langue, label: Langue, widget: string } }
           - { name: responseTime, label: Délai de réponse, widget: string }
           - { name: currency, label: Devise, widget: hidden }
-          - name: advisor
-            label: Conseillère
-            widget: object
+          - name: team
+            label: Équipe
+            widget: list
+            summary: '{{fields.name}} — {{fields.role}}'
+            hint: "Les personnes réellement joignables. Déclarées à Google comme employées de l'agence : n'y mettre que des noms réels."
             fields:
               - { name: name, label: Nom, widget: string }
               - { name: role, label: Fonction, widget: string }
-              - { name: since, label: Depuis, widget: number, value_type: int }
-              - { name: bio, label: Parcours, widget: text }
-              - { name: languages, label: Langues, widget: list, field: { name: item, label: Langue, widget: string } }
+
+          # Aucun champ « note globale ». Une note agrégée ne se saisit pas :
+          # elle se calcule depuis les avis publiés. Le champ qui existait ici
+          # a servi à déclarer à Google une moyenne inventée sur un nombre
+          # d'avis inventé.
 
       - name: faq
         label: Questions fréquentes

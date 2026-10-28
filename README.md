@@ -125,6 +125,29 @@ Lối thoát hiểm: nút **Sign In with GitHub Using PAT** chạy được ngay
 OAuth App, nhưng bắt người biên tập tự tạo và gia hạn token GitHub. Để dành cho
 lúc relay hỏng, không dùng làm đường chính.
 
+### CMS và content phải khớp nhau
+
+Sveltia/Decap **ghi lại nguyên file** theo đúng những trường khai trong
+`config.yml`. Một trường có trong JSON mà thiếu ở config sẽ **bị xoá** ngay lần
+đầu người biên tập bấm Publish — không báo lỗi, và không ai nối được "tôi vừa
+sửa số điện thoại" với "site không build nữa".
+
+Chuyện này đã xảy ra thật: khi làm lại danh tính agency, `config.yml` không
+theo kịp và 6 trường — gồm `team`, `hours`, `membership` — chỉ chờ một lần lưu
+là biến mất.
+
+```bash
+npm run cms     # cũng chạy tự động ở prebuild
+```
+
+Script so khớp tên trường hai chiều. Chiều nguy hiểm (có trong content, thiếu
+ở CMS) luôn làm build đỏ. Chiều ngược lại chỉ báo với trường `required` —
+trường tuỳ chọn vắng mặt là bình thường, báo hết sẽ làm chìm mất cảnh báo thật.
+
+Không có trường "note tổng" trong CMS. Note agrégée không phải thứ để gõ tay —
+nó tính từ avis đã đăng. Trường cũ ở đó từng dùng để khai với Google một điểm
+số bịa trên một số lượng avis bịa.
+
 ### Người biên tập dùng ra sao
 
 Vào `/admin/`, sửa tour hoặc giá, bấm **Publish** → commit vào GitHub →
