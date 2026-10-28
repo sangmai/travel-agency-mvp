@@ -24,6 +24,7 @@ const ROOT = path.join(import.meta.dirname, "..");
    dans le build et l'on déploierait 8,7 Mo de JPEG que personne ne demande. */
 const SRC = path.join(ROOT, "assets", "photos");
 const OUT = path.join(ROOT, "public", "photos", "v");
+const OG = path.join(ROOT, "public", "photos", "og");
 const MANIFEST = path.join(ROOT, "lib", "image-manifest.json");
 const META = path.join(ROOT, "content", "photos.json");
 
@@ -32,9 +33,19 @@ const META = path.join(ROOT, "content", "photos.json");
 const WIDTHS = [256, 384, 640, 960, 1280, 1920];
 const QUALITY = 74;
 
+/* Vignette de partage. 1200 × 630 est le format attendu par Facebook,
+   LinkedIn, X et WhatsApp ; en dessous de 600 px de large, plusieurs d'entre
+   eux dégradent l'aperçu en une petite icône.
+   En JPEG et non en WebP : certains aperçus — WhatsApp, Slack, plusieurs
+   clients de messagerie — ne lisent toujours pas le WebP, et une vignette
+   absente vaut moins qu'une vignette un peu plus lourde. */
+const OG_W = 1200;
+const OG_H = 630;
+
 const meta = JSON.parse(readFileSync(META, "utf8"));
 
 mkdirSync(OUT, { recursive: true });
+mkdirSync(OG, { recursive: true });
 
 const sources = readdirSync(SRC).filter((f) => /\.(jpe?g|png)$/i.test(f));
 const byFile = new Map(Object.entries(meta).map(([id, m]) => [m.file, id]));
@@ -71,6 +82,17 @@ for (const [id, m] of Object.entries(meta)) {
     }
     await sharp(file).resize({ width: w }).webp({ quality: QUALITY }).toFile(dest);
     written++;
+  }
+
+  const og = path.join(OG, `${id}.jpg`);
+  if (!existsSync(og)) {
+    await sharp(file)
+      .resize({ width: OG_W, height: OG_H, fit: "cover", position: "attention" })
+      .jpeg({ quality: 82, mozjpeg: true })
+      .toFile(og);
+    written++;
+  } else {
+    skipped++;
   }
 
   // Vignette floue encodée en base64, affichée pendant le chargement. Next la

@@ -11,6 +11,9 @@ import { getPhotoCredits } from "@/lib/content";
  */
 export const metadata: Metadata = {
   title: "Crédits photographiques",
+  /* Sans canonique propre, la page héritait de celle de la racine et se
+     déclarait donc comme étant la page d'accueil. */
+  alternates: { canonical: "/credits-photos" },
   description: "Auteurs, licences et sources des photographies utilisées sur le site.",
   robots: { index: false, follow: true },
 };
@@ -24,6 +27,7 @@ export default async function Credits() {
       <main id="contenu">
         <section className="sec">
           <div className="wrap">
+            <h1 className="sr-only">Crédits photographiques</h1>
             <SectionHead
               kicker="Mentions"
               title="Crédits photographiques"

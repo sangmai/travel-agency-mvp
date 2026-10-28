@@ -95,12 +95,13 @@ const QUESTIONS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Budget d'un voyage au Vietnam : prix réels poste par poste",
+  title: "Budget d'un voyage au Vietnam",
   description:
     "1 200 à 1 700 € par personne pour quinze jours en gamme charme, hors vols. Fourchettes détaillées : hébergement, guide, chauffeur, vols intérieurs, repas, visa.",
   alternates: { canonical: "/budget-voyage-vietnam" },
   openGraph: {
     type: "article",
+    images: [{ url: "/photos/og/marche.jpg", width: 1200, height: 630, alt: "Marché de rue au Vietnam" }],
     title: "Combien coûte un voyage au Vietnam ?",
     description:
       "Le détail poste par poste d'un circuit privé au Vietnam, avec des fourchettes plutôt qu'un « sur devis ».",

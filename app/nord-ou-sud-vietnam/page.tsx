@@ -119,12 +119,13 @@ const QUESTIONS = [
 const LABEL = { nord: "Nord", sud: "Sud", "égal": "Égalité" };
 
 export const metadata: Metadata = {
-  title: "Nord ou Sud Vietnam : lequel choisir selon vos dates ?",
+  title: "Nord ou Sud Vietnam : lequel choisir ?",
   description:
     "Le Nord si c'est votre premier voyage ou si vous partez entre octobre et avril. Le Sud en décembre-janvier et pour la plage. Comparatif critère par critère.",
   alternates: { canonical: "/nord-ou-sud-vietnam" },
   openGraph: {
     type: "article",
+    images: [{ url: "/photos/og/ninhbinh.jpg", width: 1200, height: 630, alt: "Pitons calcaires de Ninh Binh" }],
     title: "Nord ou Sud Vietnam : lequel choisir ?",
     description:
       "Paysages, climat, trajets, plages : le comparatif qui tranche, selon la saison et le temps dont vous disposez.",

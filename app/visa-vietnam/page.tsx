@@ -71,12 +71,13 @@ const QUESTIONS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Visa Vietnam : les Français en sont dispensés jusqu'à 45 jours",
+  title: "Visa Vietnam : dispense 45 jours",
   description:
     "Dispense de visa pour les ressortissants français depuis le 15 août 2023, séjours de 45 jours maximum. E-visa 90 jours au-delà, passeport valable six mois.",
   alternates: { canonical: "/visa-vietnam" },
   openGraph: {
     type: "article",
+    images: [{ url: "/photos/og/hanoi.jpg", width: 1200, height: 630, alt: "Vieille ville de Hanoï" }],
     title: "Faut-il un visa pour le Vietnam ?",
     description:
       "Dispense jusqu'à 45 jours pour les Français, e-visa au-delà. Ce qu'il faut vérifier avant de réserver.",

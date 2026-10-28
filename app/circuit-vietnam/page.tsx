@@ -16,10 +16,14 @@ import { euro, score } from "@/lib/format";
  * traîne.
  */
 export const metadata: Metadata = {
-  title: "Circuits au Vietnam — 6 itinéraires sur mesure, prix et programmes",
+  title: "Circuits au Vietnam — 6 itinéraires",
   description:
-    "Nos six circuits privés au Vietnam, de 10 à 18 jours, à partir de 870 €/pers. Programme jour par jour, niveau, hébergement et budget détaillé pour chacun. Devis gratuit sous 48 h.",
+    "Six circuits privés au Vietnam, de 10 à 18 jours, dès 870 €/pers. Programme jour par jour, hébergement et budget détaillé pour chacun.",
   alternates: { canonical: TRIP_BASE },
+  openGraph: {
+    type: "website",
+    images: [{ url: "/photos/og/trek.jpg", width: 1200, height: 630, alt: "Randonnée dans les rizières du nord du Vietnam" }],
+  },
 };
 
 export default async function CircuitsIndex() {

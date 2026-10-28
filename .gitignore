@@ -28,3 +28,6 @@ skills-lock.json
 
 # État local de wrangler dev.
 .wrangler/
+
+# Vignettes de partage, régénérées au build.
+public/photos/og/

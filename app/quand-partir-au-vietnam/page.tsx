@@ -71,12 +71,13 @@ const QUESTIONS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Quand partir au Vietnam ? Mois par mois et région par région",
+  title: "Quand partir au Vietnam ?",
   description:
-    "Mars et avril pour traverser tout le pays. Le Centre est sec quand le Nord et le Sud sont humides : tableau des douze mois pour les trois régions, rizières, Têt et typhons.",
+    "Mars et avril pour traverser tout le pays. Le Centre est sec quand le Nord et le Sud sont humides : le tableau des douze mois, région par région.",
   alternates: { canonical: "/quand-partir-au-vietnam" },
   openGraph: {
     type: "article",
+    images: [{ url: "/photos/og/rizieres.jpg", width: 1200, height: 630, alt: "Rizières en terrasses du nord du Vietnam" }],
     title: "Quand partir au Vietnam ? Le guide mois par mois",
     description:
       "Les trois régions du Vietnam n'ont pas la même saison. Tableau complet des douze mois, et ce qu'il faut en déduire pour son itinéraire.",

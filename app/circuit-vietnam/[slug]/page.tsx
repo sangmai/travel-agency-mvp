@@ -52,14 +52,28 @@ export async function generateMetadata({
   if (!trip) return {};
 
   return {
-    title: `${trip.name} — ${trip.days} jours, dès ${trip.priceFrom} € | Circuit privé`,
-    description: `${trip.tagline}. Programme jour par jour, niveau ${trip.niveau.toLowerCase()}, ${trip.confort.toLowerCase()}. À partir de ${trip.priceFrom} €/pers. hors vols. Devis gratuit sous ${site.responseTime}.`,
+    /* `absolute` retire le suffixe de marque : il coûte seize caractères, et
+       les titres dépassaient tous la soixantaine au-delà de laquelle Google
+       tronque. Sur une fiche produit, le nom du voyage et son prix valent
+       mieux que la marque, que `og:site_name` porte déjà. */
+    title: {
+      absolute: `${trip.name} — ${trip.days} jours dès ${trip.priceFrom} €`,
+    },
+    description: `${trip.tagline}. Programme jour par jour, ${trip.days} jours à partir de ${trip.priceFrom} €/pers. hors vols. Devis gratuit sous ${site.responseTime}.`,
     alternates: { canonical: tripUrl(trip.slug) },
     openGraph: {
       type: "article",
       title: `${trip.name} — ${trip.days} jours au Vietnam`,
       description: trip.tagline,
       url: site.url + tripUrl(trip.slug),
+      images: [
+        {
+          url: `/photos/og/${trip.photo}.jpg`,
+          width: 1200,
+          height: 630,
+          alt: `${trip.name}, circuit privé au Vietnam`,
+        },
+      ],
     },
   };
 }
@@ -165,7 +179,7 @@ export default async function TripPage({
               </figure>
 
               <div className="parcours__txt">
-                <h3 className="d3">Les étapes du parcours</h3>
+                <h2 className="d3">Les étapes du parcours</h2>
                 <ol className="etapes">
                   {stops.map((s, i) => (
                     <li key={s.id + i}>

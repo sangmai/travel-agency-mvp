@@ -93,12 +93,13 @@ const QUESTIONS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Itinéraire Vietnam : quel parcours pour 10, 15 ou 21 jours ?",
+  title: "Itinéraire Vietnam : 10, 15 ou 21 jours",
   description:
     "Quinze jours est le format le plus juste pour traverser le pays. En dessous de douze, mieux vaut une seule région. Durées, étapes, rythme et temps de trajet réels.",
   alternates: { canonical: "/itineraire-vietnam" },
   openGraph: {
     type: "article",
+    images: [{ url: "/photos/og/mekong.jpg", width: 1200, height: 630, alt: "Delta du Mékong" }],
     title: "Quel itinéraire au Vietnam selon la durée ?",
     description:
       "Ce qui tient en 10, 15 ou 21 jours — et ce à quoi chaque durée oblige à renoncer.",

@@ -65,12 +65,13 @@ const QUESTIONS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Agence de voyage locale au Vietnam — licence, équipe et adresse",
+  title: "Agence de voyage locale au Vietnam",
   description:
     "Agence francophone installée à Da Nang, licence de tour-opérateur international 48-049/2015/TCDL-GP LHQT. Qui répond, où nous sommes, et ce que nous ne faisons pas.",
   alternates: { canonical: "/agence-de-voyage-vietnam" },
   openGraph: {
     type: "article",
+    images: [{ url: "/photos/og/hanoi.jpg", width: 1200, height: 630, alt: "Rue de Hanoï, Vietnam" }],
     title: "Qui sommes-nous — agence locale au Vietnam",
     description:
       "Licence, adresse, équipe et limites assumées. Les informations qu'on vérifie avant de verser un acompte.",

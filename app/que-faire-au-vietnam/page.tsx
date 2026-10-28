@@ -162,12 +162,13 @@ const QUESTIONS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Que faire au Vietnam ? Onze expériences et leur durée réelle",
+  title: "Que faire au Vietnam ? 11 expériences",
   description:
-    "Baie de Lan Ha plutôt qu'Halong, rizières de Pu Luong, grottes de Phong Nha, marché flottant de Cai Rang à l'aube : ce que chaque étape demande vraiment comme temps.",
+    "Lan Ha plutôt qu'Halong, rizières de Pu Luong, marché flottant de Cai Rang à l'aube : onze expériences et le temps que chacune demande.",
   alternates: { canonical: "/que-faire-au-vietnam" },
   openGraph: {
     type: "article",
+    images: [{ url: "/photos/og/hoian.jpg", width: 1200, height: 630, alt: "Vieille ville de Hoi An" }],
     title: "Que faire au Vietnam ?",
     description:
       "Onze expériences, la durée que chacune demande, et le circuit qui y passe.",
