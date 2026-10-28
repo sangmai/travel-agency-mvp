@@ -33,9 +33,31 @@ function Season({ level }: { level: string }) {
   );
 }
 
-export async function WhenToGo() {
+/**
+ * Le tableau seul, sans titre de section : la page d'accueil l'introduit par
+ * un h2, la page guide par son h1. Dupliquer le rendu aurait laissé les deux
+ * diverger au premier changement de barème.
+ */
+export async function SeasonTable({ note }: { note?: React.ReactNode }) {
   const rows = await getSeasons();
 
+  return (
+    <DataTable
+      caption="Conditions de voyage mois par mois et par région. Source : moyennes climatiques 1991–2020 et retours de nos équipes sur le terrain."
+      columns={["Mois", "Nord", "Centre", "Sud", "À savoir"]}
+      rows={rows.map((m) => [
+        m.month,
+        <Season level={m.nord} key="n" />,
+        <Season level={m.centre} key="c" />,
+        <Season level={m.sud} key="s" />,
+        m.note,
+      ])}
+      note={note}
+    />
+  );
+}
+
+export async function WhenToGo() {
   return (
     <section className="sec" id="quand-partir">
       <div className="wrap">
@@ -44,16 +66,7 @@ export async function WhenToGo() {
           title="Quand partir au Vietnam ?"
           lede="Mars et avril sont les deux meilleurs mois pour traverser le pays du nord au sud : les trois régions y sont simultanément sèches et douces. Octobre est à éviter au Centre, où Hué et Hoi An peuvent être inondés, mais c'est l'un des plus beaux mois au Nord. Autrement dit, il n'existe pas de mauvaise période pour le Vietnam — seulement un itinéraire à adapter au mois choisi."
         />
-        <DataTable
-          caption="Conditions de voyage mois par mois et par région. Source : moyennes climatiques 1991–2020 et retours de nos équipes sur le terrain."
-          columns={["Mois", "Nord", "Centre", "Sud", "À savoir"]}
-          rows={rows.map((m) => [
-            m.month,
-            <Season level={m.nord} key="n" />,
-            <Season level={m.centre} key="c" />,
-            <Season level={m.sud} key="s" />,
-            m.note,
-          ])}
+        <SeasonTable
           note={
             <>
               Le Têt (nouvel an lunaire) tombe entre fin janvier et mi-février

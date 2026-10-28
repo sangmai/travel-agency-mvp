@@ -28,8 +28,8 @@ export const ROUTES: Route[] = [
   { path: "/vietnam-hors-sentiers", label: "Hors des sentiers battus", group: "envies", published: false },
   { path: "/vietnam-cuisine", label: "Cuisine et marchés", group: "envies", published: false },
 
-  { path: "/quand-partir-au-vietnam", label: "Quand partir", group: "preparer", published: false },
-  { path: "/budget-voyage-vietnam", label: "Budget du voyage", group: "preparer", published: false },
+  { path: "/quand-partir-au-vietnam", label: "Quand partir", group: "preparer", published: true },
+  { path: "/budget-voyage-vietnam", label: "Budget du voyage", group: "preparer", published: true },
   { path: "/visa-vietnam", label: "Visa et formalités", group: "preparer", published: false },
   { path: "/itineraire-vietnam", label: "Idées d'itinéraires", group: "preparer", published: false },
   { path: "/carte-vietnam", label: "Carte du Vietnam", group: "preparer", published: false },
@@ -50,5 +50,14 @@ export const ROUTES: Route[] = [
   { path: "/credits-photos", label: "Crédits photo", group: "legal", published: true },
 ];
 
-export const routesIn = (group: RouteGroup) => ROUTES.filter((r) => r.group === group);
+/**
+ * Ne rend que ce qui existe. Le pied de page décrivait l'arborescence visée
+ * plutôt que le site réel, et renvoyait vers vingt-huit pages absentes : pour
+ * un moteur, un maillage qui mène à des 404 ne dessine pas une ambition, il
+ * signale un site inachevé. Passer une route à `published: true` la fait
+ * apparaître ici et au sitemap d'un seul geste.
+ */
+export const routesIn = (group: RouteGroup) =>
+  ROUTES.filter((r) => r.group === group && r.published);
+
 export const publishedRoutes = () => ROUTES.filter((r) => r.published);

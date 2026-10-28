@@ -29,7 +29,6 @@ export async function Story() {
             {r.body.map((para) => (
               <p className="recit__para" key={para.slice(0, 24)}>{para}</p>
             ))}
-            <a className="lnk" href="/carnets-de-voyage">Lire d&apos;autres carnets →</a>
           </div>
         </div>
       </div>

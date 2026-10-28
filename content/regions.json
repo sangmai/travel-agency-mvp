@@ -15,7 +15,7 @@
         "Mai Chau"
       ],
       "duration": "8 à 12 jours",
-      "route": "/circuit-nord-vietnam",
+      "route": "/circuit-vietnam/montagnes-et-baies-du-nord",
       "photo": "rizieres"
     },
     {
@@ -33,7 +33,7 @@
         "Col des Nuages"
       ],
       "duration": "5 à 8 jours",
-      "route": "/circuit-centre-vietnam",
+      "route": "/circuit-vietnam/vietnam-du-nord-au-sud",
       "photo": "hoian"
     },
     {
@@ -51,7 +51,7 @@
         "Mui Ne"
       ],
       "duration": "5 à 9 jours",
-      "route": "/circuit-sud-vietnam",
+      "route": "/circuit-vietnam/vietnam-et-cambodge",
       "photo": "mekong"
     }
   ]

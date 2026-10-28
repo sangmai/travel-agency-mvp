@@ -2593,3 +2593,69 @@ img {
   white-space: nowrap;
   border: 0;
 }
+
+/* Pages guides : blocs éditoriaux et liste de circuits par saison. */
+.guide {
+  display: grid;
+  gap: 1.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  margin-top: 2rem;
+}
+
+.guide__bloc {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  padding: 1.5rem;
+}
+
+.guide__lieux {
+  color: var(--slate);
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  margin: 0.2rem 0 0.9rem;
+  text-transform: uppercase;
+}
+
+.guide__rep {
+  color: var(--ink);
+  margin-bottom: 0.7rem;
+}
+
+.saison-liste {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  list-style: none;
+  margin-top: 2rem;
+  padding: 0;
+}
+
+.saison-liste li {
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+}
+
+.saison-liste a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.saison-liste a:hover b {
+  text-decoration: underline;
+}
+
+.saison-liste b {
+  display: block;
+}
+
+.saison-liste span {
+  color: var(--slate);
+  font-size: 0.9rem;
+}

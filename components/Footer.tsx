@@ -3,12 +3,8 @@ import { getSite } from "@/lib/content";
 import { routesIn, type RouteGroup } from "@/lib/routes";
 
 /**
- * Le maillage interne décrit l'arborescence cible du site.
- *
- * ⚠️ Seules deux de ces routes existent ; les autres sont déclarées
- * `published: false` dans lib/routes.ts et renvoient des 404. À créer avant
- * mise en production, ou à retirer : un maillage vers des pages mortes
- * dégrade le crawl au lieu de l'améliorer.
+ * Maillage interne. `routesIn` ne rend que les routes publiées, donc une
+ * colonne vide disparaît d'elle-même au lieu d'afficher un titre sans liens.
  */
 const COLUMNS: { title: string; group: RouteGroup }[] = [
   { title: "Circuits", group: "circuits" },
@@ -56,16 +52,18 @@ export async function Footer() {
             </address>
           </div>
 
-          {COLUMNS.map((col) => (
-            <nav key={col.title} aria-label={col.title}>
-              <h3>{col.title}</h3>
-              <ul>
-                {routesIn(col.group).map((r) => (
-                  <li key={r.path}><a href={r.path}>{r.label}</a></li>
-                ))}
-              </ul>
-            </nav>
-          ))}
+          {COLUMNS.map((col) => routesIn(col.group)).map((routes, i) =>
+            routes.length === 0 ? null : (
+              <nav key={COLUMNS[i].title} aria-label={COLUMNS[i].title}>
+                <h3>{COLUMNS[i].title}</h3>
+                <ul>
+                  {routes.map((r) => (
+                    <li key={r.path}><a href={r.path}>{r.label}</a></li>
+                  ))}
+                </ul>
+              </nav>
+            ),
+          )}
         </div>
 
         <div className="ftr__bot">

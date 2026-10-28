@@ -1,37 +1,37 @@
 {
   "envies": [
     {
-      "route": "/circuit-vietnam-nord-sud",
+      "route": "/circuit-vietnam/vietnam-du-nord-au-sud",
       "title": "C'est ma première fois",
       "line": "Hanoï, la baie, Hué, Hoi An, le Mékong. Le pays dans sa longueur, sans rien bâcler.",
       "photo": "halong"
     },
     {
-      "route": "/voyage-vietnam-famille",
+      "route": "/circuit-vietnam/vietnam-en-famille",
       "title": "Nous partons en famille",
       "line": "Des étapes courtes, une piscine chaque soir, et des ateliers où les enfants font quelque chose de leurs mains.",
       "photo": "hoian"
     },
     {
-      "route": "/voyage-noces-vietnam",
+      "route": "/circuit-vietnam/vietnam-collection-signature",
       "title": "C'est notre voyage de noces",
       "line": "Une jonque privatisée en baie de Lan Ha, et personne d'autre que vous sur le pont au lever du jour.",
       "photo": "ninhbinh"
     },
     {
-      "route": "/vietnam-hors-sentiers",
+      "route": "/circuit-vietnam/vietnam-authentique-hors-sentiers",
       "title": "Je veux éviter les foules",
       "line": "Ha Giang, Cao Bang, Ba Be. On y dort chez l'habitant, et le français ne s'y parle pas.",
       "photo": "hagiang"
     },
     {
-      "route": "/trek-vietnam",
+      "route": "/circuit-vietnam/montagnes-et-baies-du-nord",
       "title": "Je viens pour marcher",
       "line": "Des vallées de Pu Luong aux villages hmong, à pied, avec un guide qui connaît les sentiers de mémoire.",
       "photo": "trek"
     },
     {
-      "route": "/vietnam-cuisine",
+      "route": "/circuit-vietnam",
       "title": "Je viens pour manger",
       "line": "Le bun cha au charbon de bois, les marchés à l'aube, et une matinée de cuisine chez une famille de Hoi An.",
       "photo": "cuisine"

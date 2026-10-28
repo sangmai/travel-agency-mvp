@@ -5,13 +5,12 @@
  * n'importent jamais `source` ni les JSON directement.
  */
 import { source } from "./source";
+import { ROUTES } from "../routes";
 import type { PhotoId, PlaceId, Review, Stop, Trip } from "./types";
 
 export type * from "./types";
 
 export const getSite = source.site;
-export const getRegions = source.regions;
-export const getEnvies = source.envies;
 export const getProcess = source.process;
 export const getComparison = source.comparison;
 export const getSeasons = source.seasons;
@@ -20,6 +19,49 @@ export const getFaq = source.faq;
 export const getStory = source.story;
 export const getPhotoMeta = source.photos;
 export const getCarnet = source.carnet;
+
+/**
+ * Les régions et les envies portent chacune un lien. Rien n'empêchait d'y
+ * écrire l'adresse d'une page qui n'existe pas : la compilation passait, et
+ * le visiteur tombait sur un 404 — un maillage interne vers des pages mortes
+ * étant précisément ce qui fait passer un site pour inachevé aux yeux d'un
+ * moteur.
+ *
+ * Le lien est donc vérifié au build contre les routes publiées et les fiches
+ * voyage existantes. Un éditeur qui se trompe d'adresse dans le CMS obtient
+ * un build rouge, ce qui se corrige, plutôt qu'une page morte en ligne, ce
+ * qui ne se remarque pas.
+ */
+async function verifierLiens<T extends { route: string }>(
+  entrees: T[],
+  fichier: string,
+): Promise<T[]> {
+  const connues = new Set<string>([
+    "/",
+    TRIP_BASE,
+    ...ROUTES.filter((r) => r.published).map((r) => r.path),
+    ...(await source.trips()).map((t) => tripUrl(t.slug)),
+  ]);
+
+  for (const e of entrees) {
+    const chemin = e.route.replace(/\/$/, "") || "/";
+    if (!connues.has(chemin)) {
+      throw new Error(
+        `content/${fichier} renvoie vers « ${e.route} », qui n'existe pas.\n` +
+          `Adresses disponibles : ${[...connues].sort().join(", ")}`,
+      );
+    }
+  }
+  return entrees;
+}
+
+export async function getRegions() {
+  return verifierLiens(await source.regions(), "regions.json");
+}
+
+export async function getEnvies() {
+  return verifierLiens(await source.envies(), "envies.json");
+}
 
 export async function getTrips(): Promise<Trip[]> {
   return source.trips();

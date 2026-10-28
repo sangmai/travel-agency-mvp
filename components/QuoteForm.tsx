@@ -123,12 +123,19 @@ export async function QuoteForm() {
                 />
               </div>
 
+              {/* ⚠️ AVANT MISE EN LIGNE — cette mention tient lieu d'information
+                  minimale ; le RGPD demande une politique de confidentialité
+                  accessible, nommant le responsable du traitement, la durée de
+                  conservation et la façon d'exercer ses droits. Le lien vers
+                  /politique-de-confidentialite a été retiré tant que la page
+                  n'existe pas : renvoyer une demande de consentement vers un
+                  404 est pire que ne pas la lier. */}
               <label className="f f--consent" htmlFor="consentement">
                 <input id="consentement" name="consentement" type="checkbox" required />
                 <span>
                   J&apos;accepte que {site.name} utilise ces informations pour me
-                  répondre. Aucune donnée n&apos;est cédée à un tiers. Voir la{" "}
-                  <a href="/politique-de-confidentialite">politique de confidentialité</a>.
+                  répondre. Elles sont transmises par e-mail à notre conseillère
+                  et ne servent à aucun autre usage.
                 </span>
               </label>
 
