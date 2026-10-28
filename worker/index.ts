@@ -133,9 +133,18 @@ async function devis(request: Request, env: Env): Promise<Response> {
   const merci = new URL("/merci/", request.url);
   const form = await request.formData();
 
-  // Honeypot : un champ invisible rempli signale un robot. On répond comme à
-  // un humain pour ne pas lui indiquer qu'il a été détecté.
-  if (clean(form.get("societe"))) return Response.redirect(merci, 303);
+  /* Honeypot : un champ invisible rempli signale un robot. On répond comme à
+     un humain pour ne pas lui indiquer qu'il a été détecté — ce qui rend la
+     prise silencieuse, et donc indétectable si elle se trompe de cible. D'où
+     la trace : une rafale de captures signifie soit une campagne de spam,
+     soit un piège qui attrape des clients. */
+  if (clean(form.get("reference-interne"))) {
+    console.warn("[devis] honeypot — demande écartée sans envoi", {
+      ip: request.headers.get("CF-Connecting-IP"),
+      agent: request.headers.get("user-agent"),
+    });
+    return Response.redirect(merci, 303);
+  }
 
   const d: Demande = {
     prenom: clean(form.get("prenom"), 80),

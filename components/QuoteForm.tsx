@@ -108,10 +108,19 @@ export async function QuoteForm() {
                 />
               </div>
 
-              {/* Honeypot : invisible, doit rester vide. */}
+              {/* Honeypot : invisible, doit rester vide. Le nom du champ ne
+                  doit évoquer aucune des catégories que le navigateur sait
+                  remplir seul — « societe » en était une, et Chrome y écrivait
+                  le nom de l'employeur du visiteur. */}
               <div aria-hidden="true" className="trap">
-                <label htmlFor="societe">Ne pas remplir</label>
-                <input id="societe" name="societe" type="text" tabIndex={-1} autoComplete="off" />
+                <label htmlFor="reference-interne">Ne pas remplir</label>
+                <input
+                  id="reference-interne"
+                  name="reference-interne"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
               </div>
 
               <label className="f f--consent" htmlFor="consentement">

@@ -2566,11 +2566,19 @@ img {
   margin-top: 2rem;
 }
 
-/* Honeypot : hors écran, mais pas `display:none` — un robot ignore un champ
-   masqué, il ne remplit que ce qu'il croit visible. */
+/* Honeypot. `display:none` et non un déport hors écran : le remplissage
+   automatique de Chrome traite un champ déporté comme visible et y écrit
+   volontiers, ce qui faisait passer de vrais visiteurs pour des robots — leur
+   demande était alors silencieusement jetée, et ils voyaient la page de
+   remerciement malgré tout.
+
+   Un robot qui lit le HTML sans appliquer la feuille de style remplit ce champ
+   quand même, et c'est l'immense majorité d'entre eux. Les deux erreurs
+   possibles ne coûtent pas le même prix : laisser passer un spam est une
+   nuisance, jeter la demande d'un client est une vente perdue dont personne
+   n'est averti. */
 .trap {
-  position: absolute;
-  left: -9999px;
+  display: none;
 }
 
 /* Visible des seuls lecteurs d'écran. */
