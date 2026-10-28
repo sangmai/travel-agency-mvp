@@ -26,12 +26,18 @@
   ],
 
   "vars": {
-    // Expéditeur des e-mails de devis. onboarding@resend.dev est l'adresse de
-    // test de Resend : elle n'envoie qu'au compte propriétaire de la clé. Une
-    // fois le domaine vérifié chez Resend, mettre « Jasmine Travel
-    // <devis@votre-domaine.fr> » — sans quoi les demandes de vrais visiteurs
-    // seront refusées.
-    "DEVIS_FROM": "Jasmine Travel <onboarding@resend.dev>"
+    // Expéditeur. onboarding@resend.dev est l'adresse de test de Resend, la
+    // seule autorisée tant qu'aucun domaine n'est vérifié. À remplacer par
+    // « Jasmine Travel <devis@votre-domaine.fr> » une fois le domaine vérifié.
+    "DEVIS_FROM": "Jasmine Travel <onboarding@resend.dev>",
+
+    // Boîte de réception des demandes — pas l'adresse publique du site.
+    // En mode test, Resend n'accepte comme destinataire que l'adresse du
+    // compte : la changer ici sans vérifier de domaine fait refuser tous les
+    // envois. Le voyageur, lui, n'est jamais destinataire, seulement Reply-To,
+    // ce que Resend autorise. C'est ce qui permet au formulaire de fonctionner
+    // pour de vrais visiteurs avant même d'avoir un domaine.
+    "DEVIS_TO": "maisang90dn@gmail.com"
   },
 
   // RESEND_API_KEY n'est pas ici : c'est un secret.

@@ -61,18 +61,25 @@ Form post sang `/api/devis`, Worker gửi mail qua **Resend** (3 000 mail/tháng
 miễn phí) về `email` trong `content/site.json`. `Reply-To` là địa chỉ của khách,
 nên người bán chỉ cần bấm **Reply** là trả lời thẳng cho khách.
 
-```bash
-# 1. Tạo tài khoản resend.com, lấy API key
-npx wrangler secret put RESEND_API_KEY     # production
-cp .dev.vars.example .dev.vars             # local, rồi điền key vào
-```
+API key đặt ở Cloudflare dashboard → Workers & Pages → `travel-agency-mvp` →
+Settings → Variables and Secrets → **Secret**, tên `RESEND_API_KEY`. Deploy chạy
+qua Workers Builds nên không dùng `wrangler secret put` ở máy. Chạy local thì
+`cp .dev.vars.example .dev.vars` rồi điền key.
 
-**2. Xác thực domain ở Resend** (Domains → Add Domain → thêm bản ghi DNS vào
-Cloudflare). Xong thì đổi `DEVIS_FROM` trong `wrangler.jsonc` thành
-`Jasmine Travel <devis@domain-thật.fr>`.
+**Chạy được ngay, chưa cần domain.** Resend ở chế độ test chỉ cho gửi tới đúng
+email của tài khoản — nhưng người nhận ở đây *luôn* là hộp thư agency
+(`DEVIS_TO`), còn địa chỉ khách chỉ nằm ở `Reply-To`, cái mà Resend không chặn.
+Nên khách thật gửi form vẫn tới nơi.
 
-Bước này **bắt buộc**. Khi chưa xác thực, `onboarding@resend.dev` chỉ gửi được
-về đúng email đã đăng ký Resend — đủ để test, không đủ để chạy thật.
+Vì vậy `DEVIS_TO` **phải** là email đăng ký Resend chừng nào domain chưa xác
+thực. Đổi nó sang địa chỉ khác mà chưa xác thực domain thì mọi mail bị từ chối.
+
+`DEVIS_TO` tách khỏi `email` trong `content/site.json`: một bên là nơi nhận
+prospect, một bên là địa chỉ in trên trang. Agency thường tách hai cái này.
+
+Khi có domain thật: xác thực ở Resend (Domains → Add Domain → dán bản ghi DNS
+vào Cloudflare), rồi đổi `DEVIS_FROM` thành `Jasmine Travel <devis@domain.fr>`.
+Lúc đó `DEVIS_TO` muốn đặt gì cũng được.
 
 Chống spam: honeypot (`societe`) + rate limit 5 lần/phút theo IP, khai báo
 trong `wrangler.jsonc`. Chưa dùng Turnstile vì nó cần JS phía client, mà trang

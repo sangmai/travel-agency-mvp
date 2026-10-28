@@ -15,18 +15,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
   const now = new Date();
 
+  /* `trailingSlash: true` fait que chaque page n'existe qu'avec une barre
+     finale, et c'est cette forme que portent les balises canoniques. Ici les
+     URL sont assemblées à la main, hors de cette normalisation : sans ce
+     rappel, le sitemap annoncerait des adresses qui redirigent, en
+     contradiction avec les canoniques des pages qu'il déclare. */
+  const url = (path: string) => `${site.url}${path.replace(/\/?$/, "/")}`;
+
   return [
-    { url: `${site.url}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: url("/"), lastModified: now, changeFrequency: "weekly", priority: 1 },
     ...publishedRoutes()
       .filter((r) => r.path !== "/credits-photos")
       .map((r) => ({
-        url: site.url + r.path,
+        url: url(r.path),
         lastModified: now,
         changeFrequency: "weekly" as const,
         priority: r.path === TRIP_BASE ? 0.9 : 0.6,
       })),
     ...trips.map((t) => ({
-      url: site.url + tripUrl(t.slug),
+      url: url(tripUrl(t.slug)),
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,

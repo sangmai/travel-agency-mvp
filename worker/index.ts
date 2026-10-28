@@ -12,11 +12,16 @@ interface Env {
      `html_handling` et `not_found_handling` qui y sont configurées. */
   ASSETS: { fetch(request: Request): Promise<Response> };
   DEVIS_LIMIT: { limit(options: { key: string }): Promise<{ success: boolean }> };
-  /* Secret, posé par `wrangler secret put` — jamais dans le dépôt. */
+  /* Secret, posé dans le tableau de bord Cloudflare — jamais dans le dépôt. */
   RESEND_API_KEY: string;
   /* Expéditeur. Tant que le domaine n'est pas vérifié chez Resend, seule
      l'adresse de test onboarding@resend.dev est acceptée. */
   DEVIS_FROM: string;
+  /* Boîte où tombent les demandes. Distincte de l'adresse publique affichée
+     sur le site : une agence trie ses prospects ailleurs que son courrier
+     courant, et tant que le domaine n'est pas vérifié chez Resend, celle-ci
+     doit être l'adresse du compte Resend. */
+  DEVIS_TO: string;
 }
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -179,7 +184,7 @@ async function devis(request: Request, env: Env): Promise<Response> {
     },
     body: JSON.stringify({
       from: env.DEVIS_FROM,
-      to: [site.email],
+      to: [env.DEVIS_TO],
       // L'agence répond en cliquant simplement sur « Répondre ».
       reply_to: `${d.prenom} ${d.nom} <${d.email}>`,
       subject: `Devis — ${d.prenom} ${d.nom}, ${voyageurs}${duree(d.duree)}`,
