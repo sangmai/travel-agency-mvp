@@ -31,9 +31,9 @@ export const ROUTES: Route[] = [
   { path: "/quand-partir-au-vietnam", label: "Quand partir", group: "preparer", published: true },
   { path: "/budget-voyage-vietnam", label: "Budget du voyage", group: "preparer", published: true },
   { path: "/visa-vietnam", label: "Visa et formalités", group: "preparer", published: true },
-  { path: "/itineraire-vietnam", label: "Idées d'itinéraires", group: "preparer", published: false },
+  { path: "/itineraire-vietnam", label: "Idées d'itinéraires", group: "preparer", published: true },
   { path: "/carte-vietnam", label: "Carte du Vietnam", group: "preparer", published: false },
-  { path: "/que-faire-au-vietnam", label: "Que faire au Vietnam", group: "preparer", published: false },
+  { path: "/que-faire-au-vietnam", label: "Que faire au Vietnam", group: "preparer", published: true },
 
   { path: "/nord-ou-sud-vietnam", label: "Nord ou Sud ?", group: "comparer", published: true },
   { path: "/vietnam-ou-thailande", label: "Vietnam ou Thaïlande ?", group: "comparer", published: false },
