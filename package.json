@@ -11,7 +11,8 @@
     "lint": "next lint",
     "images": "node scripts/make-images.mjs",
     "contrast": "node scripts/check-contrast.mjs",
-    "cms": "node scripts/make-cms-config.mjs && node scripts/check-cms.mjs"
+    "cms": "node scripts/make-cms-config.mjs && node scripts/check-cms.mjs",
+    "gbp": "node scripts/make-gbp-sheet.mjs"
   },
   "dependencies": {
     "next": "15.5.4",
