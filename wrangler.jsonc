@@ -27,7 +27,7 @@
     // Le défaut est invisible en ligne de commande : aucun client HTTP
     // n'envoie cet en-tête, donc le même POST passe parfaitement depuis curl
     // et échoue depuis Chrome.
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": ["/api/*", "/auth", "/callback"]
   },
 
   // Le honeypot du formulaire arrête les robots naïfs ; ceci arrête quelqu'un

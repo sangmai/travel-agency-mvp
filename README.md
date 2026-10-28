@@ -93,6 +93,38 @@ ngồi canh log.
 Chưa có mail tự động xác nhận cho khách: chỉ làm được sau khi xác thực domain,
 và trang `/merci/` đã đủ báo đã nhận.
 
+### Đăng nhập CMS — OAuth GitHub
+
+Sveltia và Decap **không** tự đổi được authorization code lấy token: việc đó
+cần client secret, thứ không được phép nằm trong trang web. Mặc định chúng gọi
+`api.netlify.com`, mà dịch vụ đó chỉ phục vụ site host trên Netlify — nên nút
+"Sign In with GitHub" bấm vào là quay vòng vô ích.
+
+Phần relay nằm trong `worker/auth.ts`, dùng chính Worker đang chạy, không dựng
+Worker thứ hai. Hai route `/auth` và `/callback`.
+
+Tạo OAuth App một lần, ở <https://github.com/settings/developers> → New OAuth App:
+
+| | |
+|---|---|
+| Application name | Jasmine Travel CMS |
+| Homepage URL | `https://travel-agency-mvp.maisang90dn.workers.dev` |
+| Authorization callback URL | `https://travel-agency-mvp.maisang90dn.workers.dev/callback` |
+
+Rồi đặt hai secret:
+
+```bash
+npx wrangler secret put GITHUB_CLIENT_ID
+npx wrangler secret put GITHUB_CLIENT_SECRET
+```
+
+Đổi domain thì phải sửa cả `base_url` trong `public/admin/config.yml` **và**
+callback URL của OAuth App — lệch một trong hai là GitHub từ chối.
+
+Lối thoát hiểm: nút **Sign In with GitHub Using PAT** chạy được ngay không cần
+OAuth App, nhưng bắt người biên tập tự tạo và gia hạn token GitHub. Để dành cho
+lúc relay hỏng, không dùng làm đường chính.
+
 ### Người biên tập dùng ra sao
 
 Vào `/admin/`, sửa tour hoặc giá, bấm **Publish** → commit vào GitHub →

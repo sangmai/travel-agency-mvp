@@ -9,6 +9,11 @@ backend:
   name: github
   repo: sangmai/travel-agency-mvp
   branch: main
+  # Sans ceci, le CMS s'adresse à api.netlify.com pour l'authentification —
+  # un service qui ne répond que pour les sites hébergés chez Netlify, donc un
+  # bouton de connexion qui tourne dans le vide. Le relais vit dans
+  # worker/auth.ts, sur ce domaine : routes /auth et /callback.
+  base_url: https://travel-agency-mvp.maisang90dn.workers.dev
   # Les commits portent le nom de l'éditeur, pas celui du CMS.
   commit_messages:
     create: 'Ajout {{collection}} "{{slug}}"'

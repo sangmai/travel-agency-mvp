@@ -6,8 +6,9 @@
  * le formulaire de devis et les adresses inconnues.
  */
 import site from "../content/site.json";
+import { demarrer, retour, type AuthEnv } from "./auth";
 
-interface Env {
+interface Env extends AuthEnv {
   /* Déclaré dans wrangler.jsonc. Sert out/, en appliquant les règles
      `html_handling` et `not_found_handling` qui y sont configurées. */
   ASSETS: { fetch(request: Request): Promise<Response> };
@@ -268,6 +269,11 @@ export default {
       }
       return devis(request, env);
     }
+
+    // Relais OAuth du CMS. Les deux noms sont imposés par le CMS, qui les
+    // déduit de `base_url` dans public/admin/config.yml.
+    if (pathname === "/auth") return demarrer(request, env);
+    if (pathname === "/callback") return retour(request, env);
 
     return env.ASSETS.fetch(request);
   },
