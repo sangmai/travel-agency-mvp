@@ -55,6 +55,37 @@ npm run build && npx wrangler dev   # http://localhost:8787
 npm run deploy                      # build + deploy thủ công
 ```
 
+### Form devis → email
+
+Form post sang `/api/devis`, Worker gửi mail qua **Resend** (3 000 mail/tháng
+miễn phí) về `email` trong `content/site.json`. `Reply-To` là địa chỉ của khách,
+nên người bán chỉ cần bấm **Reply** là trả lời thẳng cho khách.
+
+```bash
+# 1. Tạo tài khoản resend.com, lấy API key
+npx wrangler secret put RESEND_API_KEY     # production
+cp .dev.vars.example .dev.vars             # local, rồi điền key vào
+```
+
+**2. Xác thực domain ở Resend** (Domains → Add Domain → thêm bản ghi DNS vào
+Cloudflare). Xong thì đổi `DEVIS_FROM` trong `wrangler.jsonc` thành
+`Jasmine Travel <devis@domain-thật.fr>`.
+
+Bước này **bắt buộc**. Khi chưa xác thực, `onboarding@resend.dev` chỉ gửi được
+về đúng email đã đăng ký Resend — đủ để test, không đủ để chạy thật.
+
+Chống spam: honeypot (`societe`) + rate limit 5 lần/phút theo IP, khai báo
+trong `wrangler.jsonc`. Chưa dùng Turnstile vì nó cần JS phía client, mà trang
+hiện không có dòng JS nào — nếu sau này bị spam thật thì mới cân nhắc đánh đổi.
+
+Nếu Resend lỗi, khách thấy trang báo lỗi kèm số điện thoại chứ **không** thấy
+trang cảm ơn, và toàn bộ nội dung demande được `console.error` để vớt lại bằng
+`npx wrangler tail`. Đây là lưới an toàn, không phải chỗ lưu trữ — không ai
+ngồi canh log.
+
+Chưa có mail tự động xác nhận cho khách: chỉ làm được sau khi xác thực domain,
+và trang `/merci/` đã đủ báo đã nhận.
+
 ### Người biên tập dùng ra sao
 
 Vào `/admin/`, sửa tour hoặc giá, bấm **Publish** → commit vào GitHub →
@@ -367,9 +398,8 @@ nào xác nhận đọc nó. Chi phí bằng 0 nên vẫn làm, nhưng đừng c
 
 Theo thứ tự ưu tiên:
 
-1. **Nối form với CRM hoặc email.** `worker/index.ts` hiện chỉ validate và ghi log —
-   **demande devis đang bị mất**. Chưa làm xong thì chưa được cho trang chạy thật.
-   Log xem bằng `npx wrangler tail`.
+1. **Xác thực domain ở Resend** (xem mục *Form devis* bên trên). Chưa làm thì form
+   chỉ gửi được về đúng email đã đăng ký Resend — khách thật vẫn bị từ chối.
 2. **Thay 13 ảnh Commons bằng ảnh của agency.** Bỏ file mới vào `assets/photos/`,
    mô tả trong `content/photos.json` (alt tiếng Pháp có tên địa danh — bắt buộc,
    thiếu là **hỏng build**), rồi `npm run images`. Giữ `priority` **chỉ** trên

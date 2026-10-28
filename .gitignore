@@ -22,3 +22,9 @@ out/
 # Artefacts de l'outillage, pas du site.
 .agents/
 skills-lock.json
+
+# Secrets locaux de wrangler.
+.dev.vars
+
+# État local de wrangler dev.
+.wrangler/

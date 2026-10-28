@@ -1,0 +1,3 @@
+# Copier en .dev.vars pour `wrangler dev`. .dev.vars est ignoré par git.
+# En production, la clé est posée par : npx wrangler secret put RESEND_API_KEY
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxxx

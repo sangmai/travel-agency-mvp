@@ -3,12 +3,13 @@ import { Check } from "./Art";
 import { getSite } from "@/lib/content";
 
 /**
- * Formulaire sans JavaScript : un `<form>` HTML qui poste vers un Route
- * Handler. Il fonctionne si le JS ne charge pas et ne coûte rien au LCP.
+ * Formulaire sans JavaScript : un `<form>` HTML qui poste vers worker/index.ts,
+ * lequel envoie la demande par e-mail à l'agence. Il fonctionne si le JS ne
+ * charge pas et ne coûte rien au LCP.
  *
- * ⚠️ AVANT MISE EN LIGNE — /api/devis valide et journalise, mais ne transmet
- * encore rien. Reste à brancher le CRM ou l'envoi d'e-mail, et à ajouter une
- * limitation de débit (le honeypot seul ne suffit pas).
+ * Les `name` des champs sont lus tels quels par le Worker : en renommer un ici
+ * sans l'y renommer fait disparaître l'information de l'e-mail, sans que rien
+ * n'échoue au build.
  */
 const PROMISES = [
   { t: "Réponse sous 48 heures ouvrées", d: "Un itinéraire complet jour par jour, hôtels nommés, prix ferme. Pas une brochure." },
