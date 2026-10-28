@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/make-images.mjs",
     "build": "next build",
     "start": "next start",
+    "deploy": "npm run build && wrangler deploy",
     "lint": "next lint",
-    "prebuild": "node scripts/make-images.mjs",
     "images": "node scripts/make-images.mjs"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4"
   }
 }

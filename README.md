@@ -10,24 +10,34 @@ npm run dev     # http://localhost:3000
 npm run build   # kiểm tra trước khi deploy
 ```
 
-## Déploiement — Cloudflare Pages + Sveltia CMS
+## Déploiement — Cloudflare Workers + Sveltia CMS
 
 Site **tĩnh hoàn toàn**, chi phí **0 đ/tháng**. Tiền duy nhất là tên miền.
 
 ```
-GitHub ──push──▶ Cloudflare Pages ──▶ edge (tĩnh)
+GitHub ──push──▶ Workers Builds ──▶ edge
    ▲                   │
-   │             functions/api/devis.ts  ← form, Pages Function
+   │                   ├─ out/           ← file tĩnh, phục vụ thẳng
+   │                   └─ worker/index.ts ← chỉ chạy cho /api/devis và 404
 Sveltia CMS /admin ────┘
 ```
 
-### Cấu hình Cloudflare Pages
+Dùng Workers chứ không Pages: Pages chỉ còn được bảo trì, Cloudflare hướng dự án
+mới sang Workers. Hai bên cùng miễn phí, nhưng file tĩnh trên Workers được phục
+vụ **không qua** worker nên không tính vào hạn mức 100k request/ngày — worker
+chỉ thức dậy khi có người gửi form hoặc gõ sai địa chỉ.
+
+### Cấu hình Workers Builds
 
 | | |
 |---|---|
 | Build command | `npm run build` |
-| Output directory | `out` |
-| Node version | 22 |
+| Deploy command | `npx wrangler deploy` |
+| Biến môi trường | `NODE_VERSION=22` |
+
+Phần còn lại nằm trong `wrangler.jsonc`, không phải trong giao diện Cloudflare —
+thư mục tĩnh, cách xử lý barre finale và trang 404 đều khai báo ở đó, nên review
+được trong pull request.
 
 `prebuild` tự chạy `scripts/make-images.mjs` nên các biến thể ảnh được sinh lại
 trên Cloudflare — chúng **không** nằm trong git (xem `.gitignore`), chỉ manifest
@@ -35,9 +45,15 @@ trên Cloudflare — chúng **không** nằm trong git (xem `.gitignore`), chỉ
 
 ### Trước lần deploy đầu
 
-1. Trong `public/admin/config.yml`, điền `repo:` bằng tên repo thật.
-2. Đổi `url` trong `content/site.json` sang tên miền thật — nó là gốc của canonical, OG và sitemap.
-3. Mở `https://<domain>/admin/`, đăng nhập bằng GitHub.
+1. Đổi `url` trong `content/site.json` sang tên miền thật — nó là gốc của canonical, OG và sitemap.
+2. Mở `https://<domain>/admin/`, đăng nhập bằng GitHub.
+
+Chạy thử đúng như trên edge, trước khi push:
+
+```bash
+npm run build && npx wrangler dev   # http://localhost:8787
+npm run deploy                      # build + deploy thủ công
+```
 
 ### Người biên tập dùng ra sao
 
@@ -351,8 +367,9 @@ nào xác nhận đọc nó. Chi phí bằng 0 nên vẫn làm, nhưng đừng c
 
 Theo thứ tự ưu tiên:
 
-1. **Nối form với CRM hoặc email.** `functions/api/devis.ts` hiện chỉ validate và ghi log —
-   **demand devis đang bị mất**. Chưa làm xong thì chưa được cho trang chạy thật.
+1. **Nối form với CRM hoặc email.** `worker/index.ts` hiện chỉ validate và ghi log —
+   **demande devis đang bị mất**. Chưa làm xong thì chưa được cho trang chạy thật.
+   Log xem bằng `npx wrangler tail`.
 2. **Thay 13 ảnh Commons bằng ảnh của agency.** Bỏ file mới vào `assets/photos/`,
    mô tả trong `content/photos.json` (alt tiếng Pháp có tên địa danh — bắt buộc,
    thiếu là **hỏng build**), rồi `npm run images`. Giữ `priority` **chỉ** trên

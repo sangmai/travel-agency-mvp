@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "travel-agency-mvp",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-01-01",
+
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+
+    // Next exporte chaque page en <route>/index.html (trailingSlash: true).
+    // `auto-trailing-slash` sert /a-propos/ depuis a-propos/index.html et
+    // redirige /a-propos vers la forme avec barre — une seule URL par page,
+    // donc pas de contenu dupliqué aux yeux de Google.
+    "html_handling": "auto-trailing-slash",
+
+    // Une adresse inconnue rend out/404.html avec un vrai statut 404, et non
+    // la page d'accueil en 200 : un crawler doit pouvoir faire la différence.
+    "not_found_handling": "404-page"
+  },
+
+  "observability": { "enabled": true }
+}

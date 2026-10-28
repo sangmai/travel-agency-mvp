@@ -2,7 +2,7 @@
 /**
  * Génère les variantes d'images et leur manifeste.
  *
- * Lancé par `prebuild`, donc aussi sur Cloudflare Pages.
+ * Lancé par `prebuild`, donc aussi sur Cloudflare.
  *
  * Cloudflare n'a pas d'optimiseur d'images Next : plutôt que de payer
  * Cloudflare Images ou de servir des JPEG de 2000 px, on fabrique les
