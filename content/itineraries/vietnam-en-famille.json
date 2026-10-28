@@ -1,0 +1,296 @@
+{
+  "slug": "vietnam-en-famille",
+  "code": "JTV-FAM13",
+  "name": "Vietnam en famille",
+  "tagline": "Treize jours pensés pour que les enfants tiennent la distance",
+  "days": 13,
+  "priceFrom": 1150,
+  "niveau": "Facile",
+  "confort": "Hôtels 3★ et 4★ avec piscine",
+  "type": "Circuit privé famille",
+  "region": "Nord · Centre",
+  "saison": "Mars à mai, octobre à novembre",
+  "groupe": "Privé, 2 adultes et 1 à 3 enfants",
+  "photo": "hoian",
+  "intro": "Un itinéraire conçu autour d'une contrainte simple : aucun transfert de plus de trois heures. Le reste en découle — des étapes plus longues, une piscine chaque soir, et au moins une activité manuelle par jour. Il fonctionne sans aménagement à partir de 5 ans.",
+  "pitch": "Étapes raccourcies, hôtels avec piscine, ateliers de cuisine et balades à vélo. Conçu pour que des enfants de 6 à 14 ans tiennent la distance sans journée de transfert interminable.",
+  "audience": "Familles avec enfants de 6 à 14 ans",
+  "plus": [
+    "Aucun trajet de plus de 3 h, et jamais deux journées de route consécutives",
+    "Atelier de lanternes à Hoi An et cours de cuisine adapté aux enfants",
+    "Une nuit en jonque avec kayak et baignade depuis le pont",
+    "Un guide habitué aux familles, qui raconte plutôt qu'il ne commente"
+  ],
+  "stops": [
+    {
+      "place": "hanoi"
+    },
+    {
+      "place": "lan-ha"
+    },
+    {
+      "place": "ninh-binh"
+    },
+    {
+      "place": "hue"
+    },
+    {
+      "place": "da-nang"
+    },
+    {
+      "place": "hoi-an"
+    }
+  ],
+  "program": [
+    {
+      "n": "1",
+      "title": "Arrivée à Hanoï",
+      "body": "Accueil à l'aéroport et transfert à l'hôtel. Rien n'est prévu : après douze heures d'avion, la seule bonne idée est la piscine, puis un dîner tôt.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 45 min (35 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Dîner"
+        }
+      ]
+    },
+    {
+      "n": "2",
+      "title": "Hanoï en cyclo-pousse et marionnettes sur l'eau",
+      "body": "Le vieux quartier en cyclo-pousse le matin — les enfants adorent, et cela évite deux heures de marche dans la chaleur. L'après-midi, spectacle de marionnettes sur l'eau au théâtre Thang Long : quarante-cinq minutes, musique live, aucun texte à comprendre.",
+      "facts": [
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ],
+      "photo": "hanoi"
+    },
+    {
+      "n": "3",
+      "title": "Hanoï – baie de Lan Ha, nuit en jonque",
+      "body": "Route vers la côte et embarquement en début d'après-midi. Kayak en famille dans un lagon fermé, baignade depuis la plateforme arrière, et cours de confection de nems avec le cuisinier du bord avant le dîner.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h (170 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Cabine familiale sur jonque"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "halong"
+    },
+    {
+      "n": "4",
+      "title": "Lan Ha – Ninh Binh",
+      "body": "Débarquement en fin de matinée, puis route vers Tam Coc. Fin de journée tranquille, à vélo entre les rizières : terrain parfaitement plat, 6 kilomètres.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h (160 km)"
+        },
+        {
+          "key": "velo",
+          "value": "6 km, terrain plat"
+        },
+        {
+          "key": "nuit",
+          "value": "Maison d'hôtes avec piscine, Tam Coc"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "5",
+      "title": "Trang An en barque, et la ferme aux chèvres",
+      "body": "Deux heures de barque à rames sous les grottes immergées — le passage le plus bas oblige à se coucher dans la barque, ce qui fait rire tout le monde. L'après-midi, visite d'une ferme et fabrication de galettes de riz.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Barque 2 h"
+        },
+        {
+          "key": "nuit",
+          "value": "Maison d'hôtes avec piscine, Tam Coc"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ],
+      "photo": "ninhbinh"
+    },
+    {
+      "n": "6",
+      "title": "Ninh Binh – Hanoï – vol vers Hué",
+      "body": "Retour sur Hanoï en matinée et vol d'une heure dix vers Hué. Installation en fin d'après-midi, soirée libre au bord de la rivière des Parfums.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 2 h (100 km), vol 1 h 10"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hué"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "7",
+      "title": "Hué, la citadelle et le bateau-dragon",
+      "body": "La cité impériale le matin, en version courte : la porte du Midi, la salle du trône, la Cité pourpre interdite. Déjeuner, puis remontée de la rivière des Parfums en bateau-dragon jusqu'à la pagode Thien Mu.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "Environ 3 km dans la citadelle"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hué"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ],
+      "photo": "hue"
+    },
+    {
+      "n": "8",
+      "title": "Hué – col des Nuages – Hoi An",
+      "body": "La route côtière du col des Nuages, avec arrêt à la lagune de Lang Co et déjeuner de fruits de mer les pieds dans le sable. Arrivée à Hoi An en fin d'après-midi.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h (130 km) avec arrêts"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hoi An"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "9",
+      "title": "Hoi An, atelier de lanternes",
+      "body": "La vieille ville le matin, à hauteur d'enfant : le pont japonais, les maisons de marchands, et le marché aux tissus. L'après-midi, atelier de fabrication de lanternes en bambou et soie — chacun repart avec la sienne, pliable pour la valise.",
+      "facts": [
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hoi An"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ],
+      "photo": "hoian"
+    },
+    {
+      "n": "10",
+      "title": "Hoi An, cuisine et vélo",
+      "body": "Marché de Hoi An au petit matin avec le chef, puis traversée en barque jusqu'au village maraîcher de Tra Que et cours de cuisine en famille. L'après-midi, 4 kilomètres de piste plate jusqu'à la plage d'An Bang.",
+      "facts": [
+        {
+          "key": "velo",
+          "value": "8 km aller-retour, terrain plat"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hoi An"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "11-12",
+      "title": "Hoi An, deux journées libres",
+      "body": "Plage, piscine, ou retour en ville pour ce qu'on n'a pas eu le temps de voir. Nous ne programmons rien : à ce stade du voyage, les familles ont surtout besoin de ne rien faire.",
+      "facts": [
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hoi An"
+        },
+        {
+          "key": "repas",
+          "value": "Petits-déjeuners"
+        }
+      ]
+    },
+    {
+      "n": "13",
+      "title": "Départ depuis Da Nang",
+      "body": "Transfert à l'aéroport international de Da Nang selon l'horaire de votre vol. Chambre conservée jusqu'à midi.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 45 min (30 km)"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    }
+  ],
+  "nights": [
+    "2 nuits à Hanoï, hôtel 4★ avec piscine",
+    "1 nuit en baie de Lan Ha, cabine familiale sur jonque",
+    "2 nuits à Tam Coc, maison d'hôtes avec piscine",
+    "2 nuits à Hué, hôtel 4★ avec piscine",
+    "5 nuits à Hoi An, hôtel 4★ avec piscine, à 10 min du centre"
+  ],
+  "included": [
+    "L'hébergement en chambre double, dans les établissements nommés au programme",
+    "Les petits-déjeuners, et les repas indiqués jour par jour",
+    "Un guide francophone diplômé, présent à chaque étape",
+    "Les transferts en véhicule privé climatisé avec chauffeur",
+    "Les droits d'entrée sur les sites mentionnés au programme",
+    "Une assistance téléphonique locale 7j/7 pendant tout le séjour",
+    "L'eau minérale à bord du véhicule",
+    "Le vol intérieur Hanoï–Hué, bagages compris",
+    "La nuit en cabine familiale sur jonque, pension complète",
+    "L'atelier de lanternes et le cours de cuisine en famille",
+    "Les vélos et les cyclo-pousses prévus au programme"
+  ],
+  "excluded": [
+    "Les vols internationaux Paris–Hanoï et retour (600 à 950 € selon la saison)",
+    "L'assurance voyage, assistance et rapatriement",
+    "Le visa, si votre séjour dépasse 45 jours",
+    "Les repas non mentionnés au programme, et toutes les boissons",
+    "Le supplément chambre individuelle",
+    "Les pourboires au guide et au chauffeur, laissés à votre appréciation",
+    "Les dépenses personnelles et les excursions facultatives"
+  ]
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "month": "Janvier",
+    "nord": "moyen",
+    "centre": "moyen",
+    "sud": "ideal",
+    "note": "Nord frais (15 °C) et brumeux. Sud sec et ensoleillé."
+  },
+  {
+    "month": "Février",
+    "nord": "bon",
+    "centre": "bon",
+    "sud": "ideal",
+    "note": "Têt : hausse des prix, sites bondés une semaine."
+  },
+  {
+    "month": "Mars",
+    "nord": "ideal",
+    "centre": "ideal",
+    "sud": "ideal",
+    "note": "Le meilleur mois pour un circuit Nord-Sud complet."
+  },
+  {
+    "month": "Avril",
+    "nord": "ideal",
+    "centre": "ideal",
+    "sud": "bon",
+    "note": "Chaleur croissante au Sud, encore supportable."
+  },
+  {
+    "month": "Mai",
+    "nord": "bon",
+    "centre": "ideal",
+    "sud": "moyen",
+    "note": "Début de mousson au Sud, averses courtes en fin de journée."
+  },
+  {
+    "month": "Juin",
+    "nord": "moyen",
+    "centre": "ideal",
+    "sud": "moyen",
+    "note": "Nord chaud et humide. Plages du Centre au mieux."
+  },
+  {
+    "month": "Juillet",
+    "nord": "moyen",
+    "centre": "ideal",
+    "sud": "moyen",
+    "note": "Haute saison européenne : réserver 4 à 6 mois à l'avance."
+  },
+  {
+    "month": "Août",
+    "nord": "moyen",
+    "centre": "bon",
+    "sud": "moyen",
+    "note": "Rizières de Sapa et Ha Giang au vert maximal."
+  },
+  {
+    "month": "Septembre",
+    "nord": "ideal",
+    "centre": "moyen",
+    "sud": "moyen",
+    "note": "Récolte du riz au Nord. Risque de typhon au Centre."
+  },
+  {
+    "month": "Octobre",
+    "nord": "ideal",
+    "centre": "deconseille",
+    "sud": "bon",
+    "note": "Centre en saison des pluies : Hué et Hoi An peuvent être inondés."
+  },
+  {
+    "month": "Novembre",
+    "nord": "ideal",
+    "centre": "moyen",
+    "sud": "ideal",
+    "note": "Excellente fenêtre si l'on écourte le Centre."
+  },
+  {
+    "month": "Décembre",
+    "nord": "bon",
+    "centre": "bon",
+    "sud": "ideal",
+    "note": "Fêtes de fin d'année : disponibilités tendues dès septembre."
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "columns": [
+    "Agence locale au Vietnam",
+    "Tour-opérateur basé en France"
+  ],
+  "rows": [
+    {
+      "criterion": "Intermédiaires",
+      "local": "Aucun : vous parlez à l'équipe qui opère le voyage",
+      "to": "1 à 2 : le TO sous-traite à un réceptif vietnamien"
+    },
+    {
+      "criterion": "Prix à prestation égale",
+      "local": "Référence",
+      "to": "+ 20 à 35 % (marge d'intermédiation)"
+    },
+    {
+      "criterion": "Modification de l'itinéraire",
+      "local": "Sans frais jusqu'au départ",
+      "to": "Souvent facturée, parfois impossible après émission"
+    },
+    {
+      "criterion": "Assistance pendant le séjour",
+      "local": "Sur place, même fuseau horaire, 7j/7",
+      "to": "Hotline depuis la France, décalage de 5 à 6 h"
+    },
+    {
+      "criterion": "Connaissance du terrain",
+      "local": "Routes, travaux, météo locale connus en temps réel",
+      "to": "Fiches produits mises à jour une à deux fois par an"
+    },
+    {
+      "criterion": "Garantie financière APST",
+      "local": "Non applicable (droit vietnamien, licence tourisme)",
+      "to": "Oui, immatriculation Atout France"
+    },
+    {
+      "criterion": "Vols internationaux",
+      "local": "À réserver vous-même, ou via notre partenaire",
+      "to": "Inclus dans le forfait"
+    }
+  ]
+}

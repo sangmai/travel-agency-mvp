@@ -1,0 +1,23 @@
+[
+  {
+    "gamme": "Confort",
+    "hotel": "3★ et maisons d'hôtes",
+    "perDay": "55 – 75 €",
+    "twoWeeks": "770 – 1 050 €",
+    "inclus": "Guide francophone en journée, transferts privés, petits-déjeuners"
+  },
+  {
+    "gamme": "Charme",
+    "hotel": "4★ et boutique-hôtels",
+    "perDay": "85 – 120 €",
+    "twoWeeks": "1 190 – 1 680 €",
+    "inclus": "Guide privé, chauffeur dédié, croisière en baie, plusieurs dîners"
+  },
+  {
+    "gamme": "Signature",
+    "hotel": "5★ et adresses de caractère",
+    "perDay": "180 – 300 €",
+    "twoWeeks": "2 520 – 4 200 €",
+    "inclus": "Jonque privatisée, vols intérieurs, accompagnateur unique, pension quasi complète"
+  }
+]

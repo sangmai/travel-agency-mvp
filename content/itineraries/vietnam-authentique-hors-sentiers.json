@@ -1,0 +1,310 @@
+{
+  "slug": "vietnam-authentique-hors-sentiers",
+  "code": "JTV-HS12",
+  "name": "Vietnam authentique, hors sentiers",
+  "tagline": "Ha Giang, Cao Bang et Ba Be, là où le français ne se parle pas",
+  "days": 12,
+  "priceFrom": 980,
+  "niveau": "Modéré",
+  "confort": "Chez l'habitant, auberges simples, un hôtel 3★",
+  "type": "Circuit privé sur mesure",
+  "region": "Nord · Centre",
+  "saison": "Mars à mai, septembre à novembre",
+  "groupe": "Privé, à partir de 2 voyageurs",
+  "photo": "hagiang",
+  "intro": "Un circuit pour voyageurs déjà venus en Asie. Il monte à l'extrême nord, sur la boucle de Ha Giang et le plateau karstique de Dong Van, puis rejoint les chutes de Ban Gioc et le lac de Ba Be. L'hébergement y est simple et parfois rudimentaire — c'est la contrepartie de régions qui n'ont pas d'infrastructure touristique.",
+  "pitch": "La boucle de Ha Giang, les chutes de Ban Gioc et le lac de Ba Be : des régions où l'on dort chez l'habitant et où le français ne se parle pas. Nuitées simples, paysages sans équivalent.",
+  "audience": "Voyageurs déjà venus en Asie",
+  "plus": [
+    "La boucle de Ha Giang et le col de Ma Pi Leng, au-dessus du canyon de la Nho Que",
+    "Le marché de Dong Van ou de Meo Vac, selon le jour de passage",
+    "Les chutes de Ban Gioc, à cheval sur la frontière chinoise",
+    "Deux nuits chez l'habitant, dont une sur le lac de Ba Be"
+  ],
+  "stops": [
+    {
+      "place": "hanoi"
+    },
+    {
+      "place": "ha-giang"
+    },
+    {
+      "place": "dong-van"
+    },
+    {
+      "place": "cao-bang"
+    },
+    {
+      "place": "ban-gioc"
+    },
+    {
+      "place": "ba-be"
+    },
+    {
+      "place": "phong-nha"
+    }
+  ],
+  "program": [
+    {
+      "n": "1",
+      "title": "Arrivée à Hanoï",
+      "body": "Accueil à l'aéroport, transfert et installation. Soirée libre : le voyage commence tôt le lendemain.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 45 min (35 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★, vieux quartier de Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Dîner"
+        }
+      ]
+    },
+    {
+      "n": "2",
+      "title": "Hanoï – Ha Giang",
+      "body": "Longue route vers le nord, en montée progressive. Arrêt à Tuyen Quang pour le déjeuner. Arrivée à Ha Giang en fin d'après-midi : la ville n'a pas d'intérêt en soi, elle est le point de départ.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 6 h (300 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel simple, Ha Giang"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "3",
+      "title": "Ha Giang – Dong Van, la porte du Ciel",
+      "body": "La route monte par la porte du Ciel de Quan Ba et les deux collines jumelles, puis traverse le plateau karstique classé géoparc mondial par l'UNESCO. Arrêt à Yen Minh et au village hmong de Lung Tam, où l'on tisse encore le chanvre et le teint à l'indigo.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 5 h (150 km) avec arrêts"
+        },
+        {
+          "key": "nuit",
+          "value": "Maison d'hôtes, Dong Van"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "hagiang"
+    },
+    {
+      "n": "4",
+      "title": "Dong Van – col de Ma Pi Leng – Meo Vac",
+      "body": "Le marché de Dong Van si l'on est dimanche, sinon la vieille ville et le palais du roi des Hmong à Sa Phin. Puis le col de Ma Pi Leng, 20 kilomètres taillés à la main dans la falaise, 800 mètres au-dessus du canyon de la Nho Que. Descente en barque sur la rivière.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h (60 km), barque 1 h"
+        },
+        {
+          "key": "nuit",
+          "value": "Chez l'habitant, Meo Vac"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "5",
+      "title": "Meo Vac – Cao Bang",
+      "body": "Longue traversée d'est en ouest par Bao Lac, sur des routes de montagne étroites et sinueuses. Le paysage change : on quitte le karst pour des reliefs plus doux et plus boisés.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 7 h (230 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel simple, Cao Bang"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "6",
+      "title": "Chutes de Ban Gioc et grotte de Nguom Ngao",
+      "body": "Les chutes de Ban Gioc, larges de 300 mètres, marquent la frontière avec la Chine : les radeaux de bambou s'approchent jusqu'à la ligne. L'après-midi, la grotte de Nguom Ngao, longue de 2 kilomètres dont 900 mètres aménagés.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 2 h 30 aller-retour (180 km)"
+        },
+        {
+          "key": "marche",
+          "value": "3 km, dont la grotte"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel simple, Cao Bang"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "7",
+      "title": "Cao Bang – lac de Ba Be",
+      "body": "Route vers le sud-ouest jusqu'au parc national de Ba Be. Fin d'après-midi en barque sur le plus grand lac naturel du pays, entre les falaises calcaires. Nuit chez une famille tay, en maison sur pilotis.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 4 h (140 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Chez l'habitant, Pac Ngoi, lac de Ba Be"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "8",
+      "title": "Ba Be, marche et navigation",
+      "body": "Matinée de marche entre les villages tay de Pac Ngoi et Coc Toc, à flanc de colline. L'après-midi, navigation jusqu'à la grotte de Puong, un tunnel de 300 mètres creusé par la rivière, et à l'étang aux Fées.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "4 h de marche, 9 km, +300 m / -300 m"
+        },
+        {
+          "key": "nuit",
+          "value": "Chez l'habitant, Pac Ngoi, lac de Ba Be"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "9",
+      "title": "Ba Be – Hanoï – vol vers Dong Hoi",
+      "body": "Retour vers Hanoï en matinée, puis vol d'une heure trente vers Dong Hoi et transfert jusqu'à Phong Nha. Journée de transport, mais elle ouvre sur la plus grande région karstique du pays.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 5 h (250 km), vol 1 h 30, transfert 45 min"
+        },
+        {
+          "key": "nuit",
+          "value": "Maison d'hôtes, Phong Nha"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "10",
+      "title": "Phong Nha – Ke Bang, les grottes",
+      "body": "La grotte de Phong Nha en barque, sur la rivière souterraine Son, puis la grotte du Paradis : 31 kilomètres de galeries, dont un kilomètre aménagé sur passerelle de bois, avec une voûte à 70 mètres. L'après-midi, boucle à vélo dans la vallée de Bong Lai.",
+      "facts": [
+        {
+          "key": "velo",
+          "value": "15 km, terrain vallonné"
+        },
+        {
+          "key": "nuit",
+          "value": "Maison d'hôtes, Phong Nha"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "phongnha"
+    },
+    {
+      "n": "11",
+      "title": "Phong Nha – Dong Hoi – Hanoï",
+      "body": "Matinée libre, transfert à Dong Hoi et vol de retour vers Hanoï. Dernière soirée dans la capitale.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 45 min, vol 1 h 30"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★, vieux quartier de Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "12",
+      "title": "Départ",
+      "body": "Chambre conservée jusqu'à midi, puis transfert vers l'aéroport de Noi Bai.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 45 min (35 km)"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    }
+  ],
+  "nights": [
+    "2 nuits à Hanoï, hôtel 3★ dans le vieux quartier",
+    "1 nuit à Ha Giang, hôtel simple (confort basique)",
+    "1 nuit à Dong Van, maison d'hôtes",
+    "1 nuit à Meo Vac, chez l'habitant",
+    "2 nuits à Cao Bang, hôtel simple",
+    "2 nuits au lac de Ba Be, chez l'habitant en maison sur pilotis",
+    "2 nuits à Phong Nha, maison d'hôtes"
+  ],
+  "included": [
+    "L'hébergement en chambre double, dans les établissements nommés au programme",
+    "Les petits-déjeuners, et les repas indiqués jour par jour",
+    "Un guide francophone diplômé, présent à chaque étape",
+    "Les transferts en véhicule privé climatisé avec chauffeur",
+    "Les droits d'entrée sur les sites mentionnés au programme",
+    "Une assistance téléphonique locale 7j/7 pendant tout le séjour",
+    "L'eau minérale à bord du véhicule",
+    "Les vols intérieurs Hanoï–Dong Hoi et retour",
+    "Les nuits et repas chez l'habitant à Meo Vac et Ba Be",
+    "Les barques sur la Nho Que, le lac de Ba Be et la rivière Son",
+    "Les vélos à Phong Nha"
+  ],
+  "excluded": [
+    "Les vols internationaux Paris–Hanoï et retour (600 à 950 € selon la saison)",
+    "L'assurance voyage, assistance et rapatriement",
+    "Le visa, si votre séjour dépasse 45 jours",
+    "Les repas non mentionnés au programme, et toutes les boissons",
+    "Le supplément chambre individuelle",
+    "Les pourboires au guide et au chauffeur, laissés à votre appréciation",
+    "Les dépenses personnelles et les excursions facultatives"
+  ]
+}

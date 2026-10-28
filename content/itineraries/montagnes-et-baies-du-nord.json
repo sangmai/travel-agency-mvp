@@ -1,0 +1,266 @@
+{
+  "slug": "montagnes-et-baies-du-nord",
+  "code": "JTV-N10",
+  "name": "Montagnes et baies du Nord",
+  "tagline": "Lan Ha, Pu Luong et Mai Chau, à l'écart des grands axes",
+  "days": 10,
+  "priceFrom": 870,
+  "niveau": "Facile à modéré",
+  "confort": "Maisons d'hôtes, écolodges, une nuit en jonque",
+  "type": "Circuit privé sur mesure",
+  "region": "Nord",
+  "saison": "Mars à mai, septembre à novembre",
+  "groupe": "Privé, à partir de 2 voyageurs",
+  "photo": "ninhbinh",
+  "intro": "Dix jours dans le seul Nord, pour qui préfère approfondir plutôt que traverser. Ce circuit évite volontairement la baie d'Halong centrale au profit de Lan Ha, sa voisine immédiate et quatre fois moins fréquentée, puis remonte vers les vallées de Pu Luong, où le tourisme est arrivé il y a dix ans à peine.",
+  "pitch": "Un circuit qui évite volontairement la baie d'Halong centrale au profit de Lan Ha, voisine et quatre fois moins fréquentée, puis remonte vers les vallées de Pu Luong.",
+  "audience": "Voyageurs qui fuient les foules",
+  "plus": [
+    "Lan Ha plutôt qu'Halong : même décor karstique, une fraction des bateaux",
+    "Deux nuits en écolodge à Pu Luong, au-dessus des rizières en terrasses",
+    "Une journée de marche de village en village, sans dénivelé difficile",
+    "La nuit chez l'habitant à Mai Chau, chez une famille thaï blanche"
+  ],
+  "stops": [
+    {
+      "place": "hanoi"
+    },
+    {
+      "place": "ninh-binh"
+    },
+    {
+      "place": "lan-ha"
+    },
+    {
+      "place": "pu-luong"
+    },
+    {
+      "place": "mai-chau"
+    }
+  ],
+  "program": [
+    {
+      "n": "1",
+      "title": "Arrivée à Hanoï",
+      "body": "Accueil à l'aéroport et transfert vers le vieux quartier. Première soirée libre : nous conseillons simplement de marcher jusqu'au lac Hoan Kiem à la nuit tombée, quand les rues du centre sont fermées à la circulation.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 45 min (35 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★, vieux quartier de Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Dîner"
+        }
+      ],
+      "photo": "hanoi"
+    },
+    {
+      "n": "2",
+      "title": "Hanoï, le vieux quartier",
+      "body": "Matinée dans les 36 rues corporatives, puis le musée d'Ethnographie, qui présente les 54 groupes ethniques du pays — on y reconnaîtra plus tard les maisons sur pilotis de Mai Chau. Après-midi libre.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "Environ 4 km"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★, vieux quartier de Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "3",
+      "title": "Hanoï – Ninh Binh, Trang An en barque",
+      "body": "Route vers le sud et deux heures de barque à rames dans le complexe de Trang An, sous trois grottes immergées. En fin de journée, montée de la grotte de Mua : 500 marches, et la vue sur la boucle de la rivière Ngo Dong.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 2 h (100 km)"
+        },
+        {
+          "key": "marche",
+          "value": "500 marches, 45 min"
+        },
+        {
+          "key": "nuit",
+          "value": "Maison d'hôtes, Tam Coc"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "ninhbinh"
+    },
+    {
+      "n": "4",
+      "title": "Ninh Binh – baie de Lan Ha, nuit à bord",
+      "body": "Embarquement à Got en début d'après-midi. Navigation entre les îlots, kayak dans un lagon fermé, baignade selon la saison. Dîner à bord et nuit au mouillage.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h 30 (180 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Cabine double sur jonque traditionnelle"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "halong"
+    },
+    {
+      "n": "5",
+      "title": "Lan Ha – Pu Luong",
+      "body": "Dernière navigation au lever du jour, débarquement en fin de matinée, puis longue route vers l'ouest jusqu'à la réserve naturelle de Pu Luong. Installation en écolodge, à flanc de colline au-dessus des terrasses.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 5 h 30 (260 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Écolodge, Pu Luong"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "6",
+      "title": "Pu Luong, marche de village en village",
+      "body": "Journée de marche entre les hameaux thaï de Kho Muong, Hieu et Don. Chemins de terre et diguettes de rizières, pas de passage technique, mais quelques montées courtes. Déjeuner chez l'habitant à mi-parcours. Une roue à aubes en bambou alimente encore les terrasses hautes.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "5 h de marche, 12 km, +400 m / -400 m"
+        },
+        {
+          "key": "nuit",
+          "value": "Écolodge, Pu Luong"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "rizieres"
+    },
+    {
+      "n": "7",
+      "title": "Pu Luong – Mai Chau",
+      "body": "Route de crête vers la vallée de Mai Chau, puis l'après-midi à vélo dans la plaine, entre les villages de Lac et Pom Coong : terrain plat, 12 kilomètres sans difficulté. Nuit chez une famille thaï blanche, dans une maison sur pilotis.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 2 h (70 km)"
+        },
+        {
+          "key": "velo",
+          "value": "12 km, terrain plat"
+        },
+        {
+          "key": "nuit",
+          "value": "Chez l'habitant, maison sur pilotis, Mai Chau"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "8",
+      "title": "Mai Chau – Hanoï",
+      "body": "Matinée au marché local si le jour s'y prête, puis retour vers Hanoï par la route de Hoa Binh. Après-midi et soirée libres dans la capitale.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h 30 (150 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★, vieux quartier de Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "9",
+      "title": "Hanoï, journée libre",
+      "body": "Une journée sans programme. Les suggestions que nous faisons le plus souvent : le quartier français et l'opéra, le train street de Phung Hung, ou simplement un café aux œufs en terrasse à regarder la rue.",
+      "facts": [
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★, vieux quartier de Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "10",
+      "title": "Départ",
+      "body": "Chambre conservée jusqu'à midi, puis transfert vers l'aéroport de Noi Bai selon l'horaire de votre vol.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 45 min (35 km)"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    }
+  ],
+  "nights": [
+    "4 nuits à Hanoï, hôtel 3★ de charme dans le vieux quartier",
+    "1 nuit à Tam Coc, maison d'hôtes au pied des karsts",
+    "1 nuit en baie de Lan Ha, cabine double sur jonque",
+    "2 nuits à Pu Luong, écolodge avec piscine à débordement",
+    "1 nuit à Mai Chau, chez l'habitant en maison sur pilotis"
+  ],
+  "included": [
+    "L'hébergement en chambre double, dans les établissements nommés au programme",
+    "Les petits-déjeuners, et les repas indiqués jour par jour",
+    "Un guide francophone diplômé, présent à chaque étape",
+    "Les transferts en véhicule privé climatisé avec chauffeur",
+    "Les droits d'entrée sur les sites mentionnés au programme",
+    "Une assistance téléphonique locale 7j/7 pendant tout le séjour",
+    "L'eau minérale à bord du véhicule",
+    "La nuit en cabine double sur jonque en baie de Lan Ha, pension complète",
+    "Les barques à rames à Trang An et le kayak en baie",
+    "La location des vélos à Mai Chau",
+    "La nuit et les repas chez l'habitant à Mai Chau"
+  ],
+  "excluded": [
+    "Les vols internationaux Paris–Hanoï et retour (600 à 950 € selon la saison)",
+    "L'assurance voyage, assistance et rapatriement",
+    "Le visa, si votre séjour dépasse 45 jours",
+    "Les repas non mentionnés au programme, et toutes les boissons",
+    "Le supplément chambre individuelle",
+    "Les pourboires au guide et au chauffeur, laissés à votre appréciation",
+    "Les dépenses personnelles et les excursions facultatives"
+  ]
+}

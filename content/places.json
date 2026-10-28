@@ -1,0 +1,163 @@
+[
+  {
+    "id": "hanoi",
+    "fr": "Hanoï",
+    "map": "Hanoi",
+    "lat": 21.028,
+    "lon": 105.854
+  },
+  {
+    "id": "ninh-binh",
+    "fr": "Ninh Binh",
+    "map": "Ninh Binh",
+    "lat": 20.254,
+    "lon": 105.975
+  },
+  {
+    "id": "lan-ha",
+    "fr": "Baie de Lan Ha",
+    "map": "Lan Ha",
+    "lat": 20.75,
+    "lon": 107.07
+  },
+  {
+    "id": "ha-long",
+    "fr": "Baie d'Halong",
+    "map": "Ha Long",
+    "lat": 20.91,
+    "lon": 107.18
+  },
+  {
+    "id": "pu-luong",
+    "fr": "Pu Luong",
+    "map": "Pu Luong",
+    "lat": 20.46,
+    "lon": 105.15
+  },
+  {
+    "id": "mai-chau",
+    "fr": "Mai Chau",
+    "map": "Mai Chau",
+    "lat": 20.66,
+    "lon": 105.09
+  },
+  {
+    "id": "ha-giang",
+    "fr": "Ha Giang",
+    "map": "Ha Giang",
+    "lat": 22.823,
+    "lon": 104.983
+  },
+  {
+    "id": "dong-van",
+    "fr": "Dong Van",
+    "map": "Dong Van",
+    "lat": 23.277,
+    "lon": 105.363
+  },
+  {
+    "id": "cao-bang",
+    "fr": "Cao Bang",
+    "map": "Cao Bang",
+    "lat": 22.666,
+    "lon": 106.258
+  },
+  {
+    "id": "ban-gioc",
+    "fr": "Ban Gioc",
+    "map": "Ban Gioc",
+    "lat": 22.853,
+    "lon": 106.723
+  },
+  {
+    "id": "ba-be",
+    "fr": "Ba Be",
+    "map": "Ba Be",
+    "lat": 22.4,
+    "lon": 105.62
+  },
+  {
+    "id": "sapa",
+    "fr": "Sapa",
+    "map": "Sapa",
+    "lat": 22.336,
+    "lon": 103.844
+  },
+  {
+    "id": "phong-nha",
+    "fr": "Phong Nha",
+    "map": "Phong Nha",
+    "lat": 17.59,
+    "lon": 106.28
+  },
+  {
+    "id": "hue",
+    "fr": "Hué",
+    "map": "Hue",
+    "lat": 16.463,
+    "lon": 107.59
+  },
+  {
+    "id": "da-nang",
+    "fr": "Da Nang",
+    "map": "Da Nang",
+    "lat": 16.054,
+    "lon": 108.202
+  },
+  {
+    "id": "hoi-an",
+    "fr": "Hoi An",
+    "map": "Hoi An",
+    "lat": 15.88,
+    "lon": 108.338
+  },
+  {
+    "id": "hcmc",
+    "fr": "Hô Chi Minh-Ville",
+    "map": "Saigon",
+    "lat": 10.823,
+    "lon": 106.63
+  },
+  {
+    "id": "can-tho",
+    "fr": "Can Tho",
+    "map": "Can Tho",
+    "lat": 10.045,
+    "lon": 105.747
+  },
+  {
+    "id": "chau-doc",
+    "fr": "Chau Doc",
+    "map": "Chau Doc",
+    "lat": 10.701,
+    "lon": 105.112
+  },
+  {
+    "id": "phu-quoc",
+    "fr": "Phu Quoc",
+    "map": "Phu Quoc",
+    "lat": 10.22,
+    "lon": 103.96
+  },
+  {
+    "id": "con-dao",
+    "fr": "Con Dao",
+    "map": "Con Dao",
+    "lat": 8.69,
+    "lon": 106.6
+  },
+  {
+    "id": "phnom-penh",
+    "fr": "Phnom Penh",
+    "map": "Phnom Penh",
+    "lat": 11.562,
+    "lon": 104.888
+  },
+  {
+    "id": "siem-reap",
+    "fr": "Siem Reap",
+    "map": "Siem Reap",
+    "lat": 13.412,
+    "lon": 103.866
+  }
+]

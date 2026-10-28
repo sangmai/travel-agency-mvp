@@ -1,0 +1,283 @@
+{
+  "slug": "vietnam-collection-signature",
+  "code": "JTV-SIG14",
+  "name": "Vietnam, collection signature",
+  "tagline": "Quatorze jours en 5★, jonque privatisée et accompagnateur unique",
+  "days": 14,
+  "priceFrom": 3250,
+  "niveau": "Facile",
+  "confort": "Hôtels 5★ et adresses de caractère",
+  "type": "Circuit privé haut de gamme",
+  "region": "Nord · Centre · Sud",
+  "saison": "Octobre à avril",
+  "groupe": "Privé, à partir de 2 voyageurs",
+  "photo": "phuquoc",
+  "intro": "La même géographie que notre circuit Nord-Sud, servie autrement : adresses 5★ ou maisons de caractère, jonque privatisée pour vous seuls en baie de Lan Ha, vols intérieurs plutôt que longues routes, et le même guide-accompagnateur du premier au dernier jour. Le voyage se termine par trois nuits à Con Dao, l'archipel le plus préservé du pays.",
+  "pitch": "Hôtels 5★ de caractère, jonque privatisée en baie de Lan Ha, vols intérieurs et guide-accompagnateur unique sur tout le parcours.",
+  "audience": "Voyage de noces, anniversaire marquant",
+  "plus": [
+    "Une jonque privatisée en baie de Lan Ha : équipage et bateau pour vous seuls",
+    "Un accompagnateur francophone unique sur l'intégralité du parcours",
+    "Trois nuits à Con Dao, archipel encore protégé du tourisme de masse",
+    "Dîner privé dans le jardin d'une maison de mandarin à Hué"
+  ],
+  "stops": [
+    {
+      "place": "hanoi"
+    },
+    {
+      "place": "lan-ha"
+    },
+    {
+      "place": "hue"
+    },
+    {
+      "place": "hoi-an"
+    },
+    {
+      "place": "hcmc"
+    },
+    {
+      "place": "con-dao"
+    }
+  ],
+  "program": [
+    {
+      "n": "1",
+      "title": "Arrivée à Hanoï",
+      "body": "Accueil en salon d'arrivée, formalités accélérées et transfert privé. Installation dans un hôtel 5★ du quartier français. Rien n'est programmé le premier soir.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert privé 45 min (35 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 5★, quartier français, Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Dîner"
+        }
+      ]
+    },
+    {
+      "n": "2",
+      "title": "Hanoï, le vieux quartier et le quartier colonial",
+      "body": "Le matin, les 36 rues corporatives à pied avec votre accompagnateur. L'après-midi, le temple de la Littérature, puis le quartier français : l'opéra, la villa des Beaux-Arts, et un café dans l'ancien hôtel Métropole.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "Environ 5 km"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 5★, quartier français, Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ],
+      "photo": "hanoi"
+    },
+    {
+      "n": "3",
+      "title": "Hanoï – baie de Lan Ha, jonque privatisée",
+      "body": "Transfert vers la côte et embarquement sur votre jonque, privatisée : équipage, cuisinier et guide pour vous seuls. Navigation hors des routes communes, kayak dans un lagon fermé, dîner servi sur le pont supérieur.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert privé 3 h (170 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Jonque privatisée, baie de Lan Ha"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "halong"
+    },
+    {
+      "n": "4",
+      "title": "Lan Ha – Hanoï – vol vers Hué",
+      "body": "Lever de soleil sur le pont, dernière navigation, débarquement en fin de matinée. Retour sur Hanoï et vol vers Hué en début de soirée.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h (170 km), vol 1 h 10"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 5★ en bord de rivière, Hué"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "5",
+      "title": "Hué, cité impériale et dîner de mandarin",
+      "body": "La citadelle et la Cité pourpre interdite le matin, à l'ouverture et avant les groupes. L'après-midi, le tombeau de Tu Duc en barque sur la rivière des Parfums. Le soir, dîner privé dans le jardin d'une ancienne maison de mandarin, cuisine impériale servie en huit services.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "Environ 5 km"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 5★ en bord de rivière, Hué"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "hue"
+    },
+    {
+      "n": "6",
+      "title": "Hué – col des Nuages – Hoi An",
+      "body": "La route côtière du col des Nuages en véhicule privé, avec arrêt à la lagune de Lang Co. Installation dans une maison de charme à l'écart du centre de Hoi An.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert privé 3 h 30 (130 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Maison de charme 5★, Hoi An"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "7-9",
+      "title": "Hoi An, trois journées",
+      "body": "La vieille ville le premier matin, avant l'ouverture des boutiques. Les deux journées suivantes sont libres : cuisine à Tra Que, My Son au lever du jour, essayage chez un tailleur, ou la plage. Votre accompagnateur organise ce que vous décidez la veille.",
+      "facts": [
+        {
+          "key": "velo",
+          "value": "Vélos de l'hôtel à disposition"
+        },
+        {
+          "key": "nuit",
+          "value": "Maison de charme 5★, Hoi An"
+        },
+        {
+          "key": "repas",
+          "value": "Petits-déjeuners, déjeuner J7"
+        }
+      ],
+      "photo": "hoian"
+    },
+    {
+      "n": "10",
+      "title": "Hoi An – Hô Chi Minh-Ville",
+      "body": "Matinée libre, transfert vers Da Nang et vol vers le sud. Installation dans le district 1. En fin de journée, vue sur la ville depuis le dernier étage de la tour Bitexco.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 1 h (30 km), vol 1 h 20"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 5★, district 1, Hô Chi Minh-Ville"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "11",
+      "title": "Saïgon – Con Dao",
+      "body": "Matinée en ville : la poste centrale, le palais de la Réunification, et le quartier de Cho Lon. Vol d'une heure en début d'après-midi vers l'archipel de Con Dao, à 230 kilomètres au large.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Vol 1 h, transfert 20 min"
+        },
+        {
+          "key": "nuit",
+          "value": "Resort 5★, Con Dao"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "12-13",
+      "title": "Con Dao, deux journées libres",
+      "body": "Seize îles dont une seule habitée, un parc national qui couvre terre et mer, et des plages où l'on est souvent seul. Plongée, sortie en bateau vers Bay Canh, ou visite de l'ancien bagne colonial, qui explique une grande part de l'histoire du pays.",
+      "facts": [
+        {
+          "key": "nuit",
+          "value": "Resort 5★, Con Dao"
+        },
+        {
+          "key": "repas",
+          "value": "Petits-déjeuners"
+        }
+      ],
+      "photo": "phuquoc"
+    },
+    {
+      "n": "14",
+      "title": "Con Dao – Hô Chi Minh-Ville – départ",
+      "body": "Vol vers Hô Chi Minh-Ville et transfert à l'aéroport international selon l'horaire de votre vol de retour. Salon d'attente compris.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Vol 1 h, transfert 40 min"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    }
+  ],
+  "nights": [
+    "2 nuits à Hanoï, hôtel 5★ du quartier français",
+    "1 nuit en baie de Lan Ha, jonque entièrement privatisée",
+    "2 nuits à Hué, hôtel 5★ en bord de rivière des Parfums",
+    "4 nuits à Hoi An, maison de charme 5★ à l'écart du centre",
+    "1 nuit à Hô Chi Minh-Ville, hôtel 5★ district 1",
+    "3 nuits à Con Dao, resort 5★ en bord de plage"
+  ],
+  "included": [
+    "L'hébergement en chambre double, dans les établissements nommés au programme",
+    "Les petits-déjeuners, et les repas indiqués jour par jour",
+    "Un guide francophone diplômé, présent à chaque étape",
+    "Les transferts en véhicule privé climatisé avec chauffeur",
+    "Les droits d'entrée sur les sites mentionnés au programme",
+    "Une assistance téléphonique locale 7j/7 pendant tout le séjour",
+    "L'eau minérale à bord du véhicule",
+    "Un guide-accompagnateur francophone unique sur tout le parcours",
+    "La jonque entièrement privatisée en baie de Lan Ha, pension complète",
+    "Les vols intérieurs Hanoï–Hué, Da Nang–Saïgon, Saïgon–Con Dao et retour",
+    "Le dîner privé de cuisine impériale dans un jardin de mandarin à Hué",
+    "L'accueil en salon d'arrivée et les transferts privés avec eau et serviettes"
+  ],
+  "excluded": [
+    "Les vols internationaux Paris–Hanoï et retour (600 à 950 € selon la saison)",
+    "L'assurance voyage, assistance et rapatriement",
+    "Le visa, si votre séjour dépasse 45 jours",
+    "Les repas non mentionnés au programme, et toutes les boissons",
+    "Le supplément chambre individuelle",
+    "Les pourboires au guide et au chauffeur, laissés à votre appréciation",
+    "Les dépenses personnelles et les excursions facultatives"
+  ]
+}

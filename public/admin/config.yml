@@ -1,0 +1,204 @@
+# Configuration du CMS (format Decap, lue par Sveltia).
+#
+# Chaque collection décrit un fichier de content/ : les champs ci-dessous
+# doivent rester en phase avec lib/content/types.ts. Si l'un diverge, le build
+# échoue — c'est voulu, mieux vaut un build rouge qu'une page cassée en ligne.
+#
+
+backend:
+  name: github
+  repo: sangmai/travel-agency-mvp
+  branch: main
+  # Les commits portent le nom de l'éditeur, pas celui du CMS.
+  commit_messages:
+    create: 'Ajout {{collection}} "{{slug}}"'
+    update: 'Modif {{collection}} "{{slug}}"'
+    delete: 'Suppr {{collection}} "{{slug}}"'
+
+# Les photos envoyées depuis le CMS atterrissent ici ; scripts/make-images.mjs
+# en fabrique les variantes au build suivant.
+media_folder: assets/photos
+public_folder: /photos/v
+
+locale: fr
+
+collections:
+  # ------------------------------------------------------------- circuits --
+  # La collection qui compte : c'est là que vivent les tours et les prix.
+  - name: circuits
+    label: Circuits
+    label_singular: Circuit
+    folder: content/itineraries
+    extension: json
+    format: json
+    create: true
+    slug: '{{fields.slug}}'
+    identifier_field: name
+    summary: '{{name}} — {{days}} j, dès {{priceFrom}} €'
+    fields:
+      - { name: slug, label: Identifiant d'URL, widget: string, hint: "Sans accent ni espace. Change l'adresse de la page." }
+      - { name: code, label: Code voyage, widget: string }
+      - { name: name, label: Nom, widget: string }
+      - { name: tagline, label: Sous-titre, widget: string }
+      - { name: days, label: Durée (jours), widget: number, value_type: int, min: 1 }
+      - { name: priceFrom, label: Prix à partir de (€), widget: number, value_type: int, min: 0, hint: "Par personne, hors vols. Ce prix part aussi dans les données structurées Google." }
+      - { name: niveau, label: Niveau, widget: select, options: [Facile, Facile à modéré, Modéré, Modéré à soutenu] }
+      - { name: confort, label: Hébergement, widget: string }
+      - { name: type, label: Type de voyage, widget: string }
+      - { name: region, label: Régions, widget: string }
+      - { name: saison, label: Meilleure saison, widget: string }
+      - { name: groupe, label: Groupe, widget: string }
+      - { name: photo, label: Photo, widget: string, hint: "Identifiant présent dans content/photos.json : hagiang, halong, rizieres, hoian, mekong, hanoi, ninhbinh, hue, marche, phuquoc, phongnha, trek, cuisine." }
+      - { name: intro, label: Chapô, widget: text }
+      - { name: pitch, label: Accroche (page d'accueil), widget: text }
+      - { name: audience, label: Pour qui, widget: string }
+      - { name: tag, label: Étiquette, widget: string, required: false, hint: "Ex. « Le plus demandé ». Laisser vide si aucune." }
+      - { name: plus, label: Les plus, widget: list, field: { name: item, label: Point fort, widget: string } }
+      - name: stops
+        label: Étapes du parcours
+        widget: list
+        summary: '{{fields.place}}'
+        fields:
+          - { name: place, label: Lieu, widget: string, hint: "Identifiant présent dans content/places.json (ex. hanoi, lan-ha)." }
+          - { name: label, label: Libellé affiché, widget: string, required: false, hint: "Seulement s'il diffère du nom du lieu." }
+      - name: program
+        label: Programme jour par jour
+        widget: list
+        summary: 'Jour {{fields.n}} — {{fields.title}}'
+        fields:
+          - { name: n, label: Jour, widget: string, hint: "« 3 », ou « 8-9 » pour deux journées décrites ensemble." }
+          - { name: title, label: Titre, widget: string }
+          - { name: body, label: Texte, widget: text }
+          - name: facts
+            label: Données pratiques
+            widget: list
+            summary: '{{fields.key}} · {{fields.value}}'
+            fields:
+              - { name: key, label: Type, widget: select, options: [trajet, marche, velo, bateau, vol, nuit, repas] }
+              - { name: value, label: Valeur, widget: string, hint: "Ex. « Transfert 2 h (100 km) », « 5 h de marche, +400 m »." }
+          - { name: photo, label: Photo, widget: string, required: false }
+      - { name: nights, label: Hébergement nuit par nuit, widget: list, field: { name: item, label: Nuit, widget: string } }
+      - { name: included, label: Le prix comprend, widget: list, field: { name: item, label: Ligne, widget: string } }
+      - { name: excluded, label: Le prix ne comprend pas, widget: list, field: { name: item, label: Ligne, widget: string } }
+
+  # ----------------------------------------------------------------- avis --
+  - name: avis
+    label: Avis
+    files:
+      - name: reviews
+        label: Tous les avis
+        file: content/reviews.json
+        fields:
+          - name: reviews
+            label: Avis
+            widget: list
+            summary: '{{fields.author}} — {{fields.rating}}/5'
+            fields:
+              - { name: author, label: Auteur, widget: string }
+              - { name: city, label: Ville, widget: string }
+              - { name: date, label: Date de départ, widget: datetime, date_format: YYYY-MM-DD, time_format: false, picker_utc: true }
+              - { name: rating, label: Note sur 5, widget: number, value_type: int, min: 1, max: 5 }
+              - { name: body, label: Texte, widget: text }
+              - { name: title, label: Titre, widget: string, required: false }
+              - { name: trip, label: Voyage concerné, widget: string, required: false, hint: "Identifiant d'URL du circuit." }
+              - { name: featured, label: Afficher sur la page d'accueil, widget: boolean, required: false, default: false }
+
+  # ---------------------------------------------------------------- pages --
+  - name: pages
+    label: Pages
+    files:
+      - name: site
+        label: Agence et coordonnées
+        file: content/site.json
+        fields:
+          - { name: name, label: Nom, widget: string }
+          - { name: legalName, label: Raison sociale, widget: string }
+          - { name: url, label: URL du site, widget: string }
+          - { name: locale, label: Locale, widget: hidden }
+          - { name: lang, label: Langue, widget: hidden }
+          - { name: founded, label: Année de création, widget: string }
+          - { name: license, label: Licence tourisme, widget: string }
+          - { name: phone, label: Téléphone (format technique), widget: string }
+          - { name: phoneDisplay, label: Téléphone affiché, widget: string }
+          - { name: email, label: E-mail, widget: string }
+          - name: address
+            label: Adresse
+            widget: object
+            fields:
+              - { name: street, label: Rue, widget: string }
+              - { name: city, label: Ville, widget: string }
+              - { name: region, label: Région, widget: string }
+              - { name: postalCode, label: Code postal, widget: string }
+              - { name: country, label: Code pays, widget: string }
+              - { name: countryName, label: Pays, widget: string }
+          - { name: geo, label: Coordonnées, widget: object, fields: [{ name: lat, label: Latitude, widget: number, value_type: float }, { name: lng, label: Longitude, widget: number, value_type: float }] }
+          - { name: social, label: Réseaux, widget: object, fields: [{ name: facebook, label: Facebook, widget: string }, { name: instagram, label: Instagram, widget: string }] }
+          - name: rating
+            label: Note agrégée
+            widget: object
+            hint: "⚠️ Doit refléter des avis réels et vérifiables. Une note inventée viole les règles Google et expose à une sanction."
+            fields:
+              - { name: value, label: Note, widget: number, value_type: float, min: 1, max: 5 }
+              - { name: count, label: Nombre d'avis, widget: number, value_type: int, min: 0 }
+              - { name: best, label: Note maximale, widget: hidden, default: 5 }
+          - { name: responseTime, label: Délai de réponse, widget: string }
+          - { name: currency, label: Devise, widget: hidden }
+          - name: advisor
+            label: Conseillère
+            widget: object
+            fields:
+              - { name: name, label: Nom, widget: string }
+              - { name: role, label: Fonction, widget: string }
+              - { name: since, label: Depuis, widget: number, value_type: int }
+              - { name: bio, label: Parcours, widget: text }
+              - { name: languages, label: Langues, widget: list, field: { name: item, label: Langue, widget: string } }
+
+      - name: faq
+        label: Questions fréquentes
+        file: content/faq.json
+        fields:
+          - name: faq
+            label: Questions
+            widget: list
+            summary: '{{fields.q}}'
+            fields:
+              - { name: q, label: Question, widget: string }
+              - { name: a, label: Réponse, widget: text, hint: "Commencer par l'information directe, puis la nuance : c'est ce qu'un moteur génératif reprend." }
+
+      - name: regions
+        label: Les trois régions
+        file: content/regions.json
+        fields:
+          - name: regions
+            label: Régions
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { name: id, label: Identifiant, widget: string }
+              - { name: name, label: Nom, widget: string }
+              - { name: subtitle, label: Sous-titre, widget: string }
+              - { name: feel, label: Phrase sensorielle, widget: text }
+              - { name: summary, label: Description, widget: text }
+              - { name: highlights, label: Étapes phares, widget: list, field: { name: item, label: Lieu, widget: string } }
+              - { name: duration, label: Durée conseillée, widget: string }
+              - { name: route, label: Lien, widget: string }
+              - { name: photo, label: Photo, widget: string }
+
+      - name: envies
+        label: Par envie
+        file: content/envies.json
+        fields:
+          - name: envies
+            label: Envies
+            widget: list
+            summary: '{{fields.title}}'
+            fields:
+              - { name: route, label: Lien, widget: string }
+              - { name: title, label: Titre, widget: string }
+              - { name: line, label: Phrase, widget: text, hint: "Concrète et sensorielle. « Un séjour inoubliable » ne fait imaginer rien." }
+              - { name: photo, label: Photo, widget: string }
+
+  # Pas de collection « photos » : content/photos.json est un objet à clés
+  # dynamiques, forme que Decap ne sait pas éditer. Les crédits sont de toute
+  # façon écrits par scripts/fetch-photos.py, et une licence CC BY mal
+  # recopiée est un problème juridique, pas une coquille.

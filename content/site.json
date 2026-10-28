@@ -1,0 +1,48 @@
+{
+  "name": "Jasmine Travel",
+  "legalName": "Jasmine Travel Co., Ltd",
+  "url": "https://www.jasmine-travel.fr",
+  "locale": "fr_FR",
+  "lang": "fr",
+  "tagline": "Agence de voyage locale francophone au Vietnam",
+  "founded": "2012",
+  "license": "N° 01-XXXX/2024 — [À REMPLIR]",
+  "phone": "+84 24 3XXX XXXX",
+  "phoneDisplay": "+84 24 3XXX XXXX",
+  "whatsapp": "+84 9XX XXX XXX",
+  "email": "contact@jasmine-travel.fr",
+  "address": {
+    "street": "XX rue Hang Bong, Hoan Kiem",
+    "city": "Hanoï",
+    "region": "Hanoï",
+    "postalCode": "100000",
+    "country": "VN",
+    "countryName": "Vietnam"
+  },
+  "geo": {
+    "lat": 21.0333,
+    "lng": 105.85
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/jasminetravel.fr",
+    "instagram": "https://www.instagram.com/jasminetravel.fr"
+  },
+  "rating": {
+    "value": 4.9,
+    "count": 384,
+    "best": 5
+  },
+  "responseTime": "48 h",
+  "currency": "EUR",
+  "advisor": {
+    "name": "Lê Thị Mai Huong",
+    "role": "Fondatrice et conseillère voyage",
+    "since": 2012,
+    "bio": "Née à Hué, installée à Hanoï, Mai Huong a étudié le français à l'Université Nationale du Vietnam avant de guider pendant huit ans entre Sapa et le delta du Mékong. Elle a fondé Jasmine Travel en 2012 pour que les voyageurs francophones cessent d'acheter des itinéraires standardisés et parlent directement à quelqu'un qui connaît la route.",
+    "languages": [
+      "français",
+      "vietnamien",
+      "anglais"
+    ]
+  }
+}

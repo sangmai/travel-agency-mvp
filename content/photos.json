@@ -1,0 +1,158 @@
+{
+  "hagiang": {
+    "file": "hagiang.jpg",
+    "alt": "Pitons karstiques du plateau de Dong Van, dans la province de Ha Giang, au nord du Vietnam",
+    "place": "Plateau de Dong Van, Ha Giang",
+    "lat": 23,
+    "credit": {
+      "title": "SaPhin HaGiang Vietnam.JPG",
+      "author": "BacLuong at Vietnamese Wikipedia",
+      "licence": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:SaPhin_HaGiang_Vietnam.JPG"
+    }
+  },
+  "halong": {
+    "file": "hero-halong.jpg",
+    "alt": "Îlots calcaires de la baie d'Halong émergeant de la brume, au nord du Vietnam",
+    "place": "Baie d'Halong",
+    "lat": 20,
+    "credit": {
+      "title": "Ha Long Bay, Vietnam, Islands.jpg",
+      "author": "Vyacheslav Argenberg",
+      "licence": "CC BY 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Ha_Long_Bay,_Vietnam,_Islands.jpg"
+    }
+  },
+  "rizieres": {
+    "file": "nord-rizieres.jpg",
+    "alt": "Rizières en terrasses et montagnes de la vallée de Sapa, au nord du Vietnam",
+    "place": "Vallée de Sapa",
+    "lat": 22,
+    "credit": {
+      "title": "Rice terraces in Sapa, Vietnam.jpg",
+      "author": "Eerin25",
+      "licence": "CC0",
+      "page": "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_Sapa,_Vietnam.jpg"
+    }
+  },
+  "hoian": {
+    "file": "centre-hoian.jpg",
+    "alt": "Lanternes colorées illuminant une rue de la vieille ville de Hoi An à la tombée du jour",
+    "place": "Vieille ville de Hoi An",
+    "lat": 15,
+    "credit": {
+      "title": "Lanterns in Hoi An 2.jpg",
+      "author": "Christophe95",
+      "licence": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Lanterns_in_Hoi_An_2.jpg"
+    }
+  },
+  "mekong": {
+    "file": "sud-mekong.jpg",
+    "alt": "Barques chargées de marchandises au marché flottant de Cai Rang, dans le delta du Mékong",
+    "place": "Marché flottant de Cai Rang",
+    "lat": 10,
+    "credit": {
+      "title": "Cai Rang Floating Market 3.jpg",
+      "author": "Christophe95",
+      "licence": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Cai_Rang_Floating_Market_3.jpg"
+    }
+  },
+  "hanoi": {
+    "file": "hanoi.jpg",
+    "alt": "Marchande ambulante et ses paniers d'osier devant un mur ocre du vieux quartier de Hanoï",
+    "place": "Vieux quartier, Hanoï",
+    "lat": 21,
+    "credit": {
+      "title": "Street vendors in old quarter, Hanoi, Vietnam.jpg",
+      "author": "yeowatzup",
+      "licence": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Street_vendors_in_old_quarter,_Hanoi,_Vietnam.jpg"
+    }
+  },
+  "ninhbinh": {
+    "file": "ninhbinh.jpg",
+    "alt": "Barque glissant entre les pitons calcaires du complexe de Trang An, à Ninh Binh",
+    "place": "Trang An, Ninh Binh",
+    "lat": 20,
+    "credit": {
+      "title": "Trang An Landscape Complex, Ninh Binh Province, Vietnam, 20240202 1433 5283.jpg",
+      "author": "Jakub Hałun",
+      "licence": "CC BY 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Trang_An_Landscape_Complex,_Ninh_Binh_Province,_Vietnam,_20240202_1433_5283.jpg"
+    }
+  },
+  "hue": {
+    "file": "hue.jpg",
+    "alt": "La porte du Midi de la citadelle impériale de Hué, au centre du Vietnam",
+    "place": "Citadelle de Hué",
+    "lat": 16,
+    "credit": {
+      "title": "Meridian Gate, Hue (I).jpg",
+      "author": "Supanut Arunoprayote",
+      "licence": "CC BY 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Meridian_Gate,_Hue_(I).jpg"
+    }
+  },
+  "marche": {
+    "file": "marche.jpg",
+    "alt": "Marchande de fruits coiffée du chapeau conique, dans une rue vietnamienne",
+    "place": "Scène de rue",
+    "lat": null,
+    "credit": {
+      "title": "Vietnamese woman.jpg",
+      "author": "ZAC",
+      "licence": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Vietnamese_woman.jpg"
+    }
+  },
+  "phuquoc": {
+    "file": "phuquoc.jpg",
+    "alt": "Plage bordée de cocotiers sur l'île de Phu Quoc, au sud du Vietnam",
+    "place": "Île de Phu Quoc",
+    "lat": 10,
+    "credit": {
+      "title": "Beautiful beach on Phu Quoc island Vietnam (39543775721).jpg",
+      "author": "dronepicr",
+      "licence": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Beautiful_beach_on_Phu_Quoc_island_Vietnam_(39543775721).jpg"
+    }
+  },
+  "phongnha": {
+    "file": "phongnha.jpg",
+    "alt": "Galerie souterraine du parc national de Phong Nha-Ke Bang",
+    "place": "Grottes de Phong Nha",
+    "lat": 17,
+    "credit": {
+      "title": "Phong Nha-Ke Bang cave3.jpg",
+      "author": "[Tycho]",
+      "licence": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Phong_Nha-Ke_Bang_cave3.jpg"
+    }
+  },
+  "trek": {
+    "file": "envie-trek.jpg",
+    "alt": "Deux femmes hmong en costume traditionnel sur un sentier des environs de Sapa, au nord du Vietnam",
+    "place": "Environs de Sapa",
+    "lat": 22,
+    "credit": {
+      "title": "Wietnam, Sapa, Strój ludowy Hmong dwóch kobiet.jpg",
+      "author": "Martyna",
+      "licence": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Wietnam,_Sapa,_Str%C3%B3j_ludowy_Hmong_dw%C3%B3ch_kobiet.jpg"
+    }
+  },
+  "cuisine": {
+    "file": "envie-cuisine.jpg",
+    "alt": "Échoppe de cuisine de rue dans le vieux quartier de Hanoï, marmites et tabourets sur le trottoir",
+    "place": "Cuisine de rue, Hanoï",
+    "lat": 21,
+    "credit": {
+      "title": "Street Food - Hanoi - Vietnam (15852884012).jpg",
+      "author": "Esin Üstün from Istanbul, Turkey",
+      "licence": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Street_Food_-_Hanoi_-_Vietnam_(15852884012).jpg"
+    }
+  }
+}

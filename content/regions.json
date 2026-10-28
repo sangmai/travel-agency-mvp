@@ -1,0 +1,58 @@
+{
+  "regions": [
+    {
+      "id": "nord",
+      "name": "Le Nord",
+      "subtitle": "Montagnes, baies et riz en terrasses",
+      "feel": "L'odeur du charbon de bois dans les ruelles de Hanoï, et le silence de la baie au petit matin.",
+      "summary": "Le Nord concentre les paysages qui font la carte postale du Vietnam : la baie d'Halong, les rizières en terrasses de Sapa et de Ha Giang, et Hanoï, capitale millénaire à l'architecture coloniale intacte. C'est la région la plus contrastée en altitude et la plus marquée par les saisons.",
+      "highlights": [
+        "Hanoï",
+        "Baie d'Halong",
+        "Sapa",
+        "Ninh Binh",
+        "Ha Giang",
+        "Mai Chau"
+      ],
+      "duration": "8 à 12 jours",
+      "route": "/circuit-nord-vietnam",
+      "photo": "rizieres"
+    },
+    {
+      "id": "centre",
+      "name": "Le Centre",
+      "subtitle": "Patrimoine impérial et plages",
+      "feel": "Les lanternes qu'on allume à la nuit tombée, le long de la rivière Thu Bon.",
+      "summary": "Le Centre réunit trois sites classés à l'UNESCO en moins de 150 km : la cité impériale de Hué, la vieille ville de Hoi An et le sanctuaire cham de My Son. On y ajoute les grottes de Phong Nha et les plages de Da Nang et Lang Co.",
+      "highlights": [
+        "Hué",
+        "Hoi An",
+        "Da Nang",
+        "Phong Nha",
+        "My Son",
+        "Col des Nuages"
+      ],
+      "duration": "5 à 8 jours",
+      "route": "/circuit-centre-vietnam",
+      "photo": "hoian"
+    },
+    {
+      "id": "sud",
+      "name": "Le Sud",
+      "subtitle": "Delta du Mékong et vie urbaine",
+      "feel": "Le bruit des moteurs de barques avant l'aube, quand le marché flottant se charge à la lampe frontale.",
+      "summary": "Le Sud vit au rythme du delta du Mékong : marchés flottants, bras d'eau, vergers et villages sur pilotis. Hô Chi Minh-Ville en est le cœur électrique, et les îles de Phu Quoc ou Con Dao offrent la fin de parcours balnéaire.",
+      "highlights": [
+        "Hô Chi Minh-Ville",
+        "Delta du Mékong",
+        "Can Tho",
+        "Phu Quoc",
+        "Dalat",
+        "Mui Ne"
+      ],
+      "duration": "5 à 9 jours",
+      "route": "/circuit-sud-vietnam",
+      "photo": "mekong"
+    }
+  ]
+}

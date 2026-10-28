@@ -1,0 +1,24 @@
+node_modules/
+.next/
+out/
+build/
+.DS_Store
+*.pem
+.env*
+next-env.d.ts
+tsconfig.tsbuildinfo
+scripts/ne50.json
+
+# Variantes d'images : régénérées au build par scripts/make-images.mjs.
+# Le manifeste (lib/image-manifest.json) est versionné, lui, car TypeScript
+# l'importe — un clone neuf doit pouvoir compiler sans lancer le script.
+public/photos/v/
+out/
+
+# Réglages locaux de l'outil, propres à la machine.
+.claude/settings.local.json
+.DS_Store
+
+# Artefacts de l'outillage, pas du site.
+.agents/
+skills-lock.json

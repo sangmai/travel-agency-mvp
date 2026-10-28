@@ -1,0 +1,355 @@
+{
+  "slug": "vietnam-du-nord-au-sud",
+  "code": "JTV-NS15",
+  "name": "Vietnam du Nord au Sud",
+  "tagline": "Le pays dans sa longueur, de la baie d'Halong au delta du Mékong",
+  "days": 15,
+  "priceFrom": 1290,
+  "niveau": "Facile",
+  "confort": "Hôtels 3★ et 4★, une nuit en jonque",
+  "type": "Circuit privé sur mesure",
+  "region": "Nord · Centre · Sud",
+  "saison": "Mars à mai, septembre à novembre",
+  "groupe": "Privé, à partir de 2 voyageurs",
+  "photo": "halong",
+  "intro": "L'itinéraire que choisissent deux voyageurs sur trois pour une première fois au Vietnam. Il traverse le pays du nord au sud en quinze jours, sans jamais imposer plus de deux nuits consécutives de route, et combine les trois visages du pays : les karsts du Tonkin, le patrimoine impérial du Centre, et l'eau partout dans le delta.",
+  "pitch": "L'itinéraire classique, celui que choisissent deux voyageurs sur trois pour une première fois. Il traverse le pays dans sa longueur sans jamais imposer plus de deux nuits consécutives de route.",
+  "audience": "Première découverte du Vietnam",
+  "tag": "Le plus demandé",
+  "plus": [
+    "Une nuit à bord d'une jonque en baie de Lan Ha, quatre fois moins fréquentée que la baie d'Halong centrale",
+    "Le train de nuit Hanoï–Hué en cabine climatisée à quatre couchettes, plutôt qu'un vol intérieur",
+    "Quatre nuits à Hoi An, assez pour que la ville cesse d'être une étape",
+    "Le marché flottant de Cai Rang abordé à 5 h 30, avant les bateaux de touristes"
+  ],
+  "stops": [
+    {
+      "place": "hanoi"
+    },
+    {
+      "place": "ninh-binh"
+    },
+    {
+      "place": "lan-ha"
+    },
+    {
+      "place": "hue"
+    },
+    {
+      "place": "hoi-an"
+    },
+    {
+      "place": "hcmc"
+    },
+    {
+      "place": "can-tho",
+      "label": "Delta du Mékong"
+    }
+  ],
+  "program": [
+    {
+      "n": "1",
+      "title": "Arrivée à Hanoï",
+      "body": "Accueil à l'aéroport de Noi Bai par votre guide francophone et transfert vers le vieux quartier. Selon votre heure d'arrivée, première marche sans programme autour du lac Hoan Kiem, puis dîner de bun cha dans une échoppe de rue de la rue Hang Than.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 45 min (35 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★, vieux quartier de Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Dîner"
+        }
+      ],
+      "photo": "hanoi"
+    },
+    {
+      "n": "2",
+      "title": "Hanoï, à pied et en cyclo",
+      "body": "Les 36 rues corporatives du vieux quartier le matin, chacune encore vouée à son métier : le fer-blanc, la soie, le papier votif. L'après-midi, le temple de la Littérature et le musée d'Ethnographie, qui donne les clés des 54 groupes ethniques du pays — utile pour la suite du voyage.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "Environ 4 km dans la journée"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★, vieux quartier de Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "3",
+      "title": "Hanoï – Ninh Binh, la baie d'Halong terrestre",
+      "body": "Route vers le sud jusqu'au complexe de Trang An, classé à l'UNESCO. Deux heures de barque à rames entre les pitons calcaires et sous trois grottes immergées — ce sont des rameuses du village qui mènent, souvent avec les pieds. Montée des 500 marches de la grotte de Mua en fin de journée pour la vue sur les rizières de Tam Coc.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 2 h (100 km)"
+        },
+        {
+          "key": "marche",
+          "value": "500 marches, 45 min de montée"
+        },
+        {
+          "key": "nuit",
+          "value": "Maison d'hôtes, Tam Coc"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "ninhbinh"
+    },
+    {
+      "n": "4",
+      "title": "Ninh Binh – baie de Lan Ha, nuit en jonque",
+      "body": "Embarquement en début d'après-midi à Got, le port qui dessert Lan Ha plutôt que Tuan Chau. Navigation entre les îlots, baignade depuis le pont si la saison le permet, kayak une heure dans un lagon fermé. Dîner à bord et nuit au mouillage, moteurs éteints.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h 30 (180 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Cabine double sur jonque traditionnelle"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "halong"
+    },
+    {
+      "n": "5",
+      "title": "Lan Ha – Hanoï – train de nuit vers Hué",
+      "body": "Lever tôt pour le tai-chi sur le pont supérieur, puis dernière navigation et débarquement en fin de matinée. Retour sur Hanoï, temps libre et dîner en ville avant l'embarquement à la gare de Hanoï vers 22 h. Cabine climatisée à quatre couchettes, draps fournis.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h 30 (180 km), puis train de nuit"
+        },
+        {
+          "key": "nuit",
+          "value": "Cabine 4 couchettes, train Hanoï–Hué"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "6",
+      "title": "Hué, la cité impériale",
+      "body": "Arrivée à Hué en milieu de matinée. Après l'installation et une douche, la citadelle et la Cité pourpre interdite, puis le tombeau de l'empereur Tu Duc, le plus arboré des sept mausolées royaux. Retour par la rivière des Parfums en bateau-dragon.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "Environ 5 km dans l'enceinte de la citadelle"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★, rive sud, Hué"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ],
+      "photo": "hue"
+    },
+    {
+      "n": "7",
+      "title": "Hué – col des Nuages – Hoi An",
+      "body": "Route côtière vers le sud par le col des Nuages, 500 mètres au-dessus de la mer, qui marque la frontière climatique entre le nord et le sud du pays. Arrêt à la lagune de Lang Co, puis au sanctuaire cham de My Son si le temps le permet. Arrivée à Hoi An en fin d'après-midi, quand on allume les lanternes.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 4 h (130 km) avec arrêts"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hoi An"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ],
+      "photo": "hoian"
+    },
+    {
+      "n": "8-9",
+      "title": "Hoi An, deux journées libres",
+      "body": "La vieille ville à pied le premier matin : la maison Tan Ky, le pont japonais, les salles d'assemblée chinoises. Le reste est à vous. Les suggestions que nous faisons le plus souvent : une matinée de cuisine chez une famille de Tra Que, la plage d'An Bang à vélo (4 km de piste plate), ou une journée entière sans rien prévoir.",
+      "facts": [
+        {
+          "key": "velo",
+          "value": "Vélos de ville mis à disposition par l'hôtel"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hoi An"
+        },
+        {
+          "key": "repas",
+          "value": "Petits-déjeuners"
+        }
+      ]
+    },
+    {
+      "n": "10",
+      "title": "Hoi An – Da Nang – Hô Chi Minh-Ville",
+      "body": "Matinée libre, puis transfert vers l'aéroport de Da Nang et vol intérieur d'une heure vingt vers le sud. Accueil à Tan Son Nhat et installation dans le district 1. Le soir, la ville change complètement de rythme : cinq millions de deux-roues en circulation.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 1 h (30 km), vol 1 h 20"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★, district 1, Hô Chi Minh-Ville"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "11",
+      "title": "Saïgon, et les tunnels de Cu Chi",
+      "body": "Le matin, les 250 km de tunnels de Cu Chi, creusés à la main entre 1948 et 1968 — un tronçon élargi est praticable sur 60 mètres. L'après-midi en ville : la poste centrale d'Eiffel, l'ancien palais de la Réunification laissé dans son état de 1975, et le musée des Vestiges de guerre, dont la visite est éprouvante mais nécessaire.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 1 h 30 (70 km) aller-retour"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★, district 1, Hô Chi Minh-Ville"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "12",
+      "title": "Saïgon – Can Tho, entrée dans le delta",
+      "body": "Descente vers le delta par Vinh Long. Navigation sur un bras secondaire, arrêt dans un verger de ramboutans et chez un artisan qui fabrique encore des galettes de riz au charbon. Arrivée à Can Tho en fin d'après-midi.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h 30 (170 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★ en bord de fleuve, Can Tho"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "mekong"
+    },
+    {
+      "n": "13",
+      "title": "Marché flottant de Cai Rang, avant l'aube",
+      "body": "Départ du quai à 5 h 30. Le marché de gros bat son plein entre 6 h et 7 h 30 : chaque barque hisse au bout d'une perche l'échantillon de ce qu'elle vend. À 8 h, tout est fini et les bateaux de touristes arrivent. Petit-déjeuner de soupe à bord, puis retour par les arroyos.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Barque 4 h"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★ en bord de fleuve, Can Tho"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "14",
+      "title": "Can Tho – Hô Chi Minh-Ville",
+      "body": "Retour vers Saïgon dans la matinée. Après-midi libre : le marché Ben Thanh pour les derniers achats, ou le quartier chinois de Cho Lon et sa pagode Thien Hau, beaucoup plus calme. Dîner d'adieu avec votre guide.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h 30 (170 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★, district 1, Hô Chi Minh-Ville"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "15",
+      "title": "Départ",
+      "body": "Selon l'horaire de votre vol, matinée libre et chambre conservée jusqu'à midi. Transfert à l'aéroport de Tan Son Nhat trois heures avant le décollage.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 40 min (8 km)"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    }
+  ],
+  "nights": [
+    "2 nuits à Hanoï, hôtel 3★ de charme dans le vieux quartier",
+    "1 nuit à Tam Coc, maison d'hôtes au pied des karsts",
+    "1 nuit en baie de Lan Ha, cabine double sur jonque traditionnelle",
+    "1 nuit en train Hanoï–Hué, cabine climatisée à 4 couchettes",
+    "1 nuit à Hué, hôtel 4★ rive sud",
+    "3 nuits à Hoi An, hôtel 4★ avec piscine à 10 min du centre",
+    "3 nuits à Hô Chi Minh-Ville, hôtel 4★ district 1",
+    "2 nuits à Can Tho, hôtel 3★ en bord de fleuve"
+  ],
+  "included": [
+    "L'hébergement en chambre double, dans les établissements nommés au programme",
+    "Les petits-déjeuners, et les repas indiqués jour par jour",
+    "Un guide francophone diplômé, présent à chaque étape",
+    "Les transferts en véhicule privé climatisé avec chauffeur",
+    "Les droits d'entrée sur les sites mentionnés au programme",
+    "Une assistance téléphonique locale 7j/7 pendant tout le séjour",
+    "L'eau minérale à bord du véhicule",
+    "Le vol intérieur Da Nang–Hô Chi Minh-Ville, bagage en soute compris",
+    "La cabine climatisée à 4 couchettes sur le train de nuit Hanoï–Hué",
+    "La nuit en cabine double sur jonque en baie de Lan Ha, pension complète",
+    "Les barques à rames à Trang An et les sorties en bateau dans le delta"
+  ],
+  "excluded": [
+    "Les vols internationaux Paris–Hanoï et retour (600 à 950 € selon la saison)",
+    "L'assurance voyage, assistance et rapatriement",
+    "Le visa, si votre séjour dépasse 45 jours",
+    "Les repas non mentionnés au programme, et toutes les boissons",
+    "Le supplément chambre individuelle",
+    "Les pourboires au guide et au chauffeur, laissés à votre appréciation",
+    "Les dépenses personnelles et les excursions facultatives"
+  ]
+}

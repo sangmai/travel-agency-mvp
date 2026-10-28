@@ -1,0 +1,401 @@
+{
+  "slug": "vietnam-et-cambodge",
+  "code": "JTV-VC18",
+  "name": "Vietnam et Cambodge",
+  "tagline": "La descente du Mékong jusqu'aux temples d'Angkor",
+  "days": 18,
+  "priceFrom": 1740,
+  "niveau": "Facile",
+  "confort": "Hôtels 3★ et 4★, une nuit en jonque",
+  "type": "Circuit privé sur mesure",
+  "region": "Vietnam · Cambodge",
+  "saison": "Novembre à mars",
+  "groupe": "Privé, à partir de 2 voyageurs",
+  "photo": "mekong",
+  "intro": "Dix-huit jours pour relier Hanoï à Angkor en suivant le fleuve. La particularité de ce circuit tient au passage de frontière : il se fait par voie fluviale à Chau Doc plutôt qu'en avion, et l'on voit le Cambodge arriver par l'eau. Trois jours pleins sur le site d'Angkor, ce qui est le minimum.",
+  "pitch": "La descente du Mékong jusqu'à Angkor, avec passage de frontière par voie fluviale à Chau Doc plutôt qu'en avion. Trois jours pleins sur le site d'Angkor.",
+  "audience": "Voyageurs disposant de 3 semaines",
+  "plus": [
+    "Le passage de frontière Vietnam–Cambodge en bateau rapide sur le Mékong",
+    "Trois jours entiers à Angkor, dont un lever de soleil et un coucher",
+    "Une nuit en jonque en baie de Lan Ha au début du voyage",
+    "Le marché flottant de Cai Rang abordé avant les bateaux de touristes"
+  ],
+  "stops": [
+    {
+      "place": "hanoi"
+    },
+    {
+      "place": "lan-ha"
+    },
+    {
+      "place": "hue"
+    },
+    {
+      "place": "hoi-an"
+    },
+    {
+      "place": "hcmc",
+      "label": "Saïgon"
+    },
+    {
+      "place": "can-tho"
+    },
+    {
+      "place": "chau-doc"
+    },
+    {
+      "place": "phnom-penh"
+    },
+    {
+      "place": "siem-reap"
+    }
+  ],
+  "program": [
+    {
+      "n": "1-2",
+      "title": "Arrivée à Hanoï, et le vieux quartier",
+      "body": "Accueil à l'aéroport et installation dans le vieux quartier. La deuxième journée se partage entre les 36 rues corporatives, le temple de la Littérature et le musée d'Ethnographie.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 45 min (35 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★, vieux quartier de Hanoï"
+        },
+        {
+          "key": "repas",
+          "value": "Dîner J1, petit-déjeuner et déjeuner J2"
+        }
+      ],
+      "photo": "hanoi"
+    },
+    {
+      "n": "3",
+      "title": "Hanoï – baie de Lan Ha, nuit à bord",
+      "body": "Route vers la côte, embarquement à Got en début d'après-midi, kayak et baignade. Dîner à bord, nuit au mouillage entre les îlots.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h (170 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Cabine double sur jonque"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "halong"
+    },
+    {
+      "n": "4",
+      "title": "Lan Ha – Hanoï – train de nuit vers Hué",
+      "body": "Dernière navigation, retour sur Hanoï, dîner en ville et embarquement vers 22 h en cabine climatisée à quatre couchettes.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h (170 km), puis train de nuit"
+        },
+        {
+          "key": "nuit",
+          "value": "Cabine 4 couchettes, train Hanoï–Hué"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "5",
+      "title": "Hué, cité impériale et tombeaux royaux",
+      "body": "Arrivée en milieu de matinée. La citadelle et la Cité pourpre interdite, puis le tombeau de Tu Duc et celui de Khai Dinh, le plus tardif et le plus chargé des sept.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "Environ 5 km"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★, Hué"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ],
+      "photo": "hue"
+    },
+    {
+      "n": "6",
+      "title": "Hué – col des Nuages – My Son – Hoi An",
+      "body": "Le col des Nuages, puis le sanctuaire cham de My Son, bâti entre le IVᵉ et le XIIIᵉ siècle et classé à l'UNESCO. Arrivée à Hoi An en fin d'après-midi.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 4 h 30 (160 km) avec arrêts"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hoi An"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "7-8",
+      "title": "Hoi An, vieille ville et journée libre",
+      "body": "La vieille ville à pied le premier matin : pont japonais, maison Tan Ky, salles d'assemblée. La seconde journée est libre — cuisine à Tra Que, plage d'An Bang à vélo, ou rien du tout.",
+      "facts": [
+        {
+          "key": "velo",
+          "value": "Vélos mis à disposition"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Hoi An"
+        },
+        {
+          "key": "repas",
+          "value": "Petits-déjeuners, déjeuner J7"
+        }
+      ],
+      "photo": "hoian"
+    },
+    {
+      "n": "9",
+      "title": "Hoi An – Saïgon",
+      "body": "Matinée libre, transfert vers Da Nang et vol d'une heure vingt vers le sud. Installation dans le district 1, premier contact avec la circulation saïgonnaise.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 1 h (30 km), vol 1 h 20"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★, district 1, Saïgon"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "10",
+      "title": "Saïgon et les tunnels de Cu Chi",
+      "body": "Cu Chi le matin, la ville l'après-midi : poste centrale, palais de la Réunification, musée des Vestiges de guerre.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 1 h 30 aller-retour (70 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★, district 1, Saïgon"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "11",
+      "title": "Saïgon – Can Tho",
+      "body": "Descente dans le delta par Vinh Long, navigation sur un bras secondaire, arrêt dans un verger et chez un fabricant de galettes de riz.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 3 h 30 (170 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★ en bord de fleuve, Can Tho"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ]
+    },
+    {
+      "n": "12",
+      "title": "Cai Rang, puis Chau Doc",
+      "body": "Départ du quai à 5 h 30 pour le marché flottant, fini à 8 h. Puis route vers l'ouest jusqu'à Chau Doc, à la frontière, et montée au mont Sam en fin de journée.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Barque 3 h, puis transfert 3 h 30 (120 km)"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 3★, Chau Doc"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner, dîner"
+        }
+      ],
+      "photo": "mekong"
+    },
+    {
+      "n": "13",
+      "title": "Chau Doc – Phnom Penh, par le fleuve",
+      "body": "Embarquement à 7 h sur le bateau rapide. Formalités de frontière aux postes de Vinh Xuong et Kaam Samnor, à bord, puis remontée du Mékong jusqu'à Phnom Penh. Arrivée en milieu d'après-midi.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Bateau 5 h, frontière fluviale"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★, bord de fleuve, Phnom Penh"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "14",
+      "title": "Phnom Penh",
+      "body": "Le Palais royal et la pagode d'Argent le matin. L'après-midi, le musée du génocide de Tuol Sleng : la visite est éprouvante, elle n'est pas obligatoire, et votre guide vous laissera décider.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "Environ 4 km"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★, bord de fleuve, Phnom Penh"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "15",
+      "title": "Phnom Penh – Siem Reap",
+      "body": "Route vers le nord par Kampong Thom, avec arrêt aux temples pré-angkoriens de Sambor Prei Kuk, en brique et antérieurs d'un siècle et demi à Angkor. Arrivée à Siem Reap en fin de journée.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 6 h (320 km) avec arrêts"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Siem Reap"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "16",
+      "title": "Angkor, le grand circuit",
+      "body": "Angkor Vat au lever du soleil, avant les cars. Puis Angkor Thom, le Bayon et ses visages, la terrasse des Éléphants. Repos à l'hôtel aux heures chaudes, retour sur le site en fin d'après-midi.",
+      "facts": [
+        {
+          "key": "marche",
+          "value": "6 à 8 km dans la journée"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Siem Reap"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "17",
+      "title": "Angkor, Ta Prohm et Banteay Srei",
+      "body": "Ta Prohm, laissé sous les fromagers, puis Banteay Srei à 35 km, le temple de grès rose dont les sculptures sont les plus fines de tout l'ensemble. Coucher de soleil depuis Pre Rup.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 1 h 30 aller-retour (70 km)"
+        },
+        {
+          "key": "marche",
+          "value": "5 km"
+        },
+        {
+          "key": "nuit",
+          "value": "Hôtel 4★ avec piscine, Siem Reap"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner, déjeuner"
+        }
+      ]
+    },
+    {
+      "n": "18",
+      "title": "Départ depuis Siem Reap",
+      "body": "Matinée libre, chambre conservée jusqu'à midi, puis transfert à l'aéroport de Siem Reap-Angkor.",
+      "facts": [
+        {
+          "key": "trajet",
+          "value": "Transfert 50 min (45 km)"
+        },
+        {
+          "key": "repas",
+          "value": "Petit-déjeuner"
+        }
+      ]
+    }
+  ],
+  "nights": [
+    "3 nuits à Hanoï, hôtel 3★ dans le vieux quartier",
+    "1 nuit en baie de Lan Ha, cabine double sur jonque",
+    "1 nuit en train Hanoï–Hué, cabine climatisée à 4 couchettes",
+    "1 nuit à Hué, hôtel 4★",
+    "2 nuits à Hoi An, hôtel 4★ avec piscine",
+    "2 nuits à Saïgon, hôtel 4★ district 1",
+    "1 nuit à Can Tho, hôtel 3★ en bord de fleuve",
+    "1 nuit à Chau Doc, hôtel 3★",
+    "2 nuits à Phnom Penh, hôtel 4★ en bord de fleuve",
+    "3 nuits à Siem Reap, hôtel 4★ avec piscine"
+  ],
+  "included": [
+    "L'hébergement en chambre double, dans les établissements nommés au programme",
+    "Les petits-déjeuners, et les repas indiqués jour par jour",
+    "Un guide francophone diplômé, présent à chaque étape",
+    "Les transferts en véhicule privé climatisé avec chauffeur",
+    "Les droits d'entrée sur les sites mentionnés au programme",
+    "Une assistance téléphonique locale 7j/7 pendant tout le séjour",
+    "L'eau minérale à bord du véhicule",
+    "Le vol intérieur Da Nang–Hô Chi Minh-Ville",
+    "La cabine climatisée à 4 couchettes sur le train Hanoï–Hué",
+    "La nuit en cabine double sur jonque en baie de Lan Ha",
+    "Le bateau rapide Chau Doc–Phnom Penh et les formalités de frontière",
+    "Le pass trois jours pour le site d'Angkor"
+  ],
+  "excluded": [
+    "Les vols internationaux Paris–Hanoï et retour (600 à 950 € selon la saison)",
+    "L'assurance voyage, assistance et rapatriement",
+    "Le visa, si votre séjour dépasse 45 jours",
+    "Les repas non mentionnés au programme, et toutes les boissons",
+    "Le supplément chambre individuelle",
+    "Les pourboires au guide et au chauffeur, laissés à votre appréciation",
+    "Les dépenses personnelles et les excursions facultatives",
+    "Le visa cambodgien, délivré à l'arrivée à la frontière fluviale (30 USD)"
+  ]
+}

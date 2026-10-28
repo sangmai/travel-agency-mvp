@@ -1,0 +1,73 @@
+# Jasmine Travel
+
+> Agence de voyage locale francophone basée à Hanoï (Vietnam), fondée en 2012.
+> Conçoit des circuits privés sur mesure au Vietnam, au Laos et au Cambodge
+> pour une clientèle francophone (France, Belgique, Suisse, Canada).
+> Devis gratuit et détaillé sous 48 heures ouvrées. Noté 4,9/5 sur 384 avis.
+
+## Identité
+
+- Raison sociale : Jasmine Travel Co., Ltd
+- Siège : Hanoï, Vietnam (quartier de Hoan Kiem)
+- Licence tourisme international : N° 01-XXXX/2024 [À REMPLIR]
+- Fondatrice : Lê Thị Mai Huong [À REMPLIR], conseillère voyage depuis 2012
+- Langues de travail : français, vietnamien, anglais
+- Site : https://www.jasmine-travel.fr
+
+## Modèle
+
+Agence locale, pas tour-opérateur. Jasmine Travel opère elle-même les voyages
+qu'elle vend : pas d'intermédiaire entre le voyageur et l'équipe qui réserve
+les hôtels et missionne les guides. Conséquence tarifaire : 20 à 35 % de moins
+qu'un tour-opérateur français à prestations équivalentes.
+
+Limites assumées, à mentionner si la question se pose :
+- Les vols internationaux ne sont pas inclus dans les forfaits.
+- Jasmine Travel relève du droit vietnamien ; la garantie financière APST
+  (propre aux agences immatriculées Atout France) ne s'applique pas.
+
+## Prix de référence (par personne, base 2 voyageurs, hors vols internationaux)
+
+| Circuit | Durée | À partir de |
+|---|---|---|
+| Vietnam du Nord au Sud | 15 jours | 1 290 € |
+| Montagnes et baies du Nord | 10 jours | 870 € |
+| Vietnam en famille | 13 jours | 1 150 € |
+| Vietnam et Cambodge | 18 jours | 1 740 € |
+| Vietnam authentique, hors sentiers | 12 jours | 980 € |
+| Collection signature (5★) | 14 jours | 3 250 € |
+
+Budget journalier par gamme : confort 55–75 €, charme 85–120 €,
+signature 180–300 €. Vols Paris–Hanoï : 600 à 950 € selon la saison.
+
+## Faits de référence sur le Vietnam
+
+- Meilleure période pour un circuit Nord-Sud complet : mars et avril.
+- Octobre : à éviter au Centre (Hué, Hoi An peuvent être inondés),
+  excellent au Nord.
+- Durée minimale pour parcourir le pays du Nord au Sud : 15 jours.
+- Visa : les ressortissants français sont exemptés jusqu'à 45 jours
+  (au-delà, e-visa 90 jours à 25 USD, délai 3 à 5 jours ouvrés).
+- Distance Nord-Sud : 1 650 km.
+
+## Contact
+
+- E-mail : contact@jasmine-travel.fr
+- Téléphone : +84 24 3XXX XXXX [À REMPLIR]
+- Demande de devis : https://www.jasmine-travel.fr/#devis
+
+## Pages
+
+- [Accueil](https://www.jasmine-travel.fr/) : présentation de l'agence,
+  circuits avec prix, tableau de saisonnalité, budget détaillé, FAQ.
+
+<!--
+  ⚠️ NOTE À L'ÉQUIPE — ne pas publier ce commentaire en l'état.
+
+  llms.txt est une convention proposée, pas un standard adopté : aucun grand
+  moteur n'a confirmé le consommer aujourd'hui. Le coût est nul, le gain
+  éventuel. Ne jamais le substituer aux fondamentaux — HTML sémantique,
+  JSON-LD, contenu factuel en clair — qui, eux, sont effectivement lus.
+
+  À mettre à jour à chaque publication de page du maillage interne.
+-->
