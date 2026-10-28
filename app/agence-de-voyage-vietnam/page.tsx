@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { breadcrumb, orgId } from "@/components/JsonLd";
-import { getComparison, getSite } from "@/lib/content";
+import { getComparison, getSite, getGuide } from "@/lib/content";
 
 /**
  * Page de confiance. C'est la seule du site qui parle de l'agence elle-même,
@@ -41,44 +41,24 @@ const LIMITES = [
   },
 ];
 
-const QUESTIONS = [
-  {
-    q: "Comment vérifier qu'une agence de voyage au Vietnam est légale ?",
-    a: "Par son numéro de licence de tour-opérateur international, délivré par l'administration nationale du tourisme vietnamienne. Il se présente sous la forme NN-NNN/AAAA/TCDL-GP LHQT et doit être affiché par l'agence. Le nôtre est le 48-049/2015/TCDL-GP LHQT. Une agence qui ne le communique pas, ou qui ne donne qu'une adresse e-mail et un compte Facebook, ne doit pas recevoir d'acompte.",
-  },
-  {
-    q: "Quelle différence entre une agence locale et un tour-opérateur français ?",
-    a: "Le nombre d'intermédiaires. Un tour-opérateur basé en France sous-traite l'exécution à une agence réceptive vietnamienne : vous payez sa marge d'intermédiation, de l'ordre de 20 à 35 % à prestation égale, et vos demandes transitent par deux structures. Une agence locale opère elle-même. En contrepartie, elle ne relève pas du droit français et ne vend pas de forfait avec vol inclus.",
-  },
-  {
-    q: "Qui répond quand j'écris ?",
-    a: "Un conseiller nommé, le même du premier message jusqu'à votre retour. L'équipe tient dans une page : vous n'êtes jamais renvoyé d'un service à l'autre, et la personne qui a construit votre itinéraire est celle qui le corrige.",
-  },
-  {
-    q: "Que se passe-t-il si quelque chose tourne mal sur place ?",
-    a: "Nous sommes dans le même fuseau horaire que vous pendant le voyage, et non à cinq heures de décalage. Un hôtel qui ne convient pas, un vol annulé, un guide qui déçoit : la décision se prend dans l'heure parce qu'elle se prend sur place, par les gens qui ont réservé.",
-  },
-  {
-    q: "Comment se passe le paiement depuis la France ?",
-    a: "Un acompte confirme la réservation, le solde se règle avant le départ. Le détail, le calendrier et le barème d'annulation figurent en clair dans les conditions communiquées avec le devis — nous préférons que vous les lisiez avant de verser quoi que ce soit.",
-  },
-];
 
-export const metadata: Metadata = {
-  title: "Agence de voyage locale au Vietnam",
-  description:
-    "Agence francophone installée à Da Nang, licence de tour-opérateur international 48-049/2015/TCDL-GP LHQT. Qui répond, où nous sommes, et ce que nous ne faisons pas.",
-  alternates: { canonical: "/agence-de-voyage-vietnam" },
-  openGraph: {
-    type: "article",
-    images: [{ url: "/photos/og/hanoi.jpg", width: 1200, height: 630, alt: "Rue de Hanoï, Vietnam" }],
-    title: "Qui sommes-nous — agence locale au Vietnam",
-    description:
-      "Licence, adresse, équipe et limites assumées. Les informations qu'on vérifie avant de verser un acompte.",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const g = await getGuide("agence-de-voyage-vietnam");
+  return {
+    title: g.title,
+    description: g.description,
+    alternates: { canonical: "/agence-de-voyage-vietnam" },
+    openGraph: {
+      type: "article",
+      title: g.ogTitle,
+      description: g.ogDescription,
+      images: [{ url: `/photos/og/${g.photo}.jpg`, width: 1200, height: 630, alt: g.photoAlt }],
+    },
+  };
+}
 
 export default async function Agence() {
+  const guide = await getGuide("agence-de-voyage-vietnam");
   const [site, comparison] = await Promise.all([getSite(), getComparison()]);
 
   const jsonLd = {
@@ -93,7 +73,7 @@ export default async function Agence() {
       {
         "@type": "FAQPage",
         "@id": `${site.url}/agence-de-voyage-vietnam/#faq`,
-        mainEntity: QUESTIONS.map((f) => ({
+        mainEntity: guide.faq.map((f) => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -235,7 +215,7 @@ export default async function Agence() {
               lede="Les réponses sont dans le HTML même repliées : un lecteur d'écran comme un moteur les trouve sans ouvrir quoi que ce soit."
             />
             <div className="faq">
-              {QUESTIONS.map((f) => (
+              {guide.faq.map((f) => (
                 <details key={f.q}>
                   <summary>{f.q}</summary>
                   <p>{f.a}</p>

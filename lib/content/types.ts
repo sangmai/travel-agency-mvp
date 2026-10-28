@@ -156,3 +156,23 @@ export type Site = {
    *  n'en avons pas, et en écrire une reviendrait à l'inventer. */
   team: { name: string; role: string }[];
 };
+
+/**
+ * Page guide : tout ce qu'un éditeur doit pouvoir corriger sans toucher au
+ * code. Les règles de visa changent, les prix bougent, les saisons se
+ * précisent — ce sont les réponses qui vieillissent, pas la mise en page.
+ *
+ * Les tableaux propres à chaque page (postes de budget, critères Nord/Sud,
+ * expériences) restent dans le composant : leur forme est indissociable de
+ * la colonne qui les affiche.
+ */
+export type Guide = {
+  slug: string;
+  title: string;
+  description: string;
+  ogTitle: string;
+  ogDescription: string;
+  photo: PhotoId;
+  photoAlt: string;
+  faq: Faq[];
+};

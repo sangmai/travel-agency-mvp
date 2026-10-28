@@ -125,6 +125,23 @@ Lối thoát hiểm: nút **Sign In with GitHub Using PAT** chạy được ngay
 OAuth App, nhưng bắt người biên tập tự tạo và gia hạn token GitHub. Để dành cho
 lúc relay hỏng, không dùng làm đường chính.
 
+### Nội dung nào sửa được từ CMS
+
+| | |
+|---|---|
+| Tour và giá | `content/itineraries/*.json` — 6 circuit |
+| Avis | `content/reviews.json` |
+| Agency, licence, đội ngũ | `content/site.json` |
+| FAQ trang chủ, vùng miền, envies | `content/*.json` |
+| **7 trang guide** | `content/guides/*.json` — tiêu đề, mô tả SEO, ảnh share, **39 câu FAQ** |
+
+Trang guide tách theo nguyên tắc: **cái gì già đi thì vào CMS**. Quy định visa
+đổi, giá thay đổi, mùa chính xác hơn — đó là câu trả lời, không phải bố cục.
+
+Các bảng riêng của từng trang (8 poste chi phí, 8 tiêu chí Nord/Sud, 11 trải
+nghiệm) **vẫn nằm trong component**: hình dạng của chúng gắn chặt với cột hiển
+thị, đưa vào CMS sẽ thành một đống trường vô nghĩa `c1/c2/c3`.
+
 ### Giao diện CMS
 
 Tiếng của giao diện **theo ngôn ngữ trình duyệt**, không theo khoá `locale`

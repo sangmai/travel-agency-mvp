@@ -144,6 +144,51 @@ content:
       - { name: included, label: Le prix comprend, type: string, list: true }
       - { name: excluded, label: Le prix ne comprend pas, type: string, list: true }
 
+  - name: guides
+    label: Pages guides
+    type: collection
+    path: content/guides
+    format: json
+    filename: "{fields.slug}.json"
+    subfolders: false
+    view:
+      fields: [title, slug]
+      sort: [title]
+    fields:
+      - { name: slug, label: Identifiant d'URL, type: string, required: true, readonly: true, description: "Lié au fichier de la page : ne pas modifier." }
+      - { name: title, label: Titre de l'onglet, type: string, required: true, description: "Au-delà de 60 caractères, Google le tronque." }
+      - { name: description, label: Description pour Google, type: text, required: true, description: "Entre 120 et 165 caractères." }
+      - { name: ogTitle, label: Titre de partage, type: string, required: true }
+      - { name: ogDescription, label: Description de partage, type: text, required: true }
+      - name: photo
+        label: Photo de partage
+        type: select
+        required: true
+        options:
+          values:
+            - { name: "hagiang", label: "hagiang" }
+            - { name: "halong", label: "halong" }
+            - { name: "rizieres", label: "rizieres" }
+            - { name: "hoian", label: "hoian" }
+            - { name: "mekong", label: "mekong" }
+            - { name: "hanoi", label: "hanoi" }
+            - { name: "ninhbinh", label: "ninhbinh" }
+            - { name: "hue", label: "hue" }
+            - { name: "marche", label: "marche" }
+            - { name: "phuquoc", label: "phuquoc" }
+            - { name: "phongnha", label: "phongnha" }
+            - { name: "trek", label: "trek" }
+            - { name: "cuisine", label: "cuisine" }
+      - { name: photoAlt, label: Description de la photo, type: string, required: true }
+      - name: faq
+        label: Questions fréquentes
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{q}" }
+        fields:
+          - { name: q, label: Question, type: string, required: true }
+          - { name: a, label: Réponse, type: text, required: true, description: "Commencer par la réponse directe, puis la nuance." }
+
   - name: avis
     label: Avis
     type: file

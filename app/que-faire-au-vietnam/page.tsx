@@ -5,7 +5,7 @@ import { Photo } from "@/components/Photo";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { breadcrumb } from "@/components/JsonLd";
-import { getSite, getTrips, tripUrl, TRIP_BASE, type PlaceId } from "@/lib/content";
+import { getSite, getTrips, tripUrl, TRIP_BASE, type PlaceId, getGuide } from "@/lib/content";
 
 /**
  * Requête très large, donc très disputée. L'angle qui nous distingue n'est pas
@@ -138,44 +138,24 @@ const PAR_REGION = [
   },
 ];
 
-const QUESTIONS = [
-  {
-    q: "Que faire au Vietnam en priorité si c'est la première fois ?",
-    a: "Hanoï, une nuit en baie de Lan Ha, Ninh Binh, Hué, Hoi An et le delta du Mékong. Ces six étapes couvrent les trois régions, les trois climats et les trois cuisines du pays, et tiennent en quinze jours avec deux vols intérieurs. Tout le reste — Ha Giang, Phong Nha, les îles — mérite un second voyage plutôt qu'un raccourcissement du premier.",
-  },
-  {
-    q: "La baie d'Halong vaut-elle encore le détour ?",
-    a: "Oui, mais passez par la baie de Lan Ha. C'est le même massif karstique, immédiatement au sud, avec une fraction des bateaux. La baie d'Halong proprement dite concentre plusieurs centaines de jonques sur quelques itinéraires balisés ; Lan Ha offre les mêmes paysages, la baignade en plus et l'embouteillage en moins.",
-  },
-  {
-    q: "Peut-on voir des rizières en terrasses toute l'année ?",
-    a: "Elles sont là toute l'année, mais ne se ressemblent pas. En eau de mai à juin, elles font miroir. Dorées de la mi-septembre au début octobre, juste avant la moisson — c'est la période la plus photographiée. Entre les deux, le vert est uniforme et l'étagement des parcelles se lit beaucoup moins bien.",
-  },
-  {
-    q: "Quelles expériences ne figurent pas dans les circuits classiques ?",
-    a: "Phong Nha et ses grottes, la boucle de Ha Giang, Pu Luong, Ba Be et Cao Bang. Toutes demandent du temps de route, ce qui explique leur absence des programmes de douze jours. Elles valent d'être ajoutées dès que le séjour dépasse quinze jours, ou de remplacer une étape classique si vous êtes déjà venu.",
-  },
-  {
-    q: "Que faire au Vietnam avec des enfants ?",
-    a: "Les barques de Ninh Binh, le vélo dans les rizières, la nuit sur un bateau en baie de Lan Ha, un atelier de cuisine ou de lanternes à Hoi An, et le delta du Mékong qui se parcourt en bateau plutôt qu'en voiture. L'écueil n'est pas l'intérêt des étapes mais les temps de route : avec de jeunes enfants, nous ne dépassons pas trois heures par jour.",
-  },
-];
 
-export const metadata: Metadata = {
-  title: "Que faire au Vietnam ? 11 expériences",
-  description:
-    "Lan Ha plutôt qu'Halong, rizières de Pu Luong, marché flottant de Cai Rang à l'aube : onze expériences et le temps que chacune demande.",
-  alternates: { canonical: "/que-faire-au-vietnam" },
-  openGraph: {
-    type: "article",
-    images: [{ url: "/photos/og/hoian.jpg", width: 1200, height: 630, alt: "Vieille ville de Hoi An" }],
-    title: "Que faire au Vietnam ?",
-    description:
-      "Onze expériences, la durée que chacune demande, et le circuit qui y passe.",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const g = await getGuide("que-faire-au-vietnam");
+  return {
+    title: g.title,
+    description: g.description,
+    alternates: { canonical: "/que-faire-au-vietnam" },
+    openGraph: {
+      type: "article",
+      title: g.ogTitle,
+      description: g.ogDescription,
+      images: [{ url: `/photos/og/${g.photo}.jpg`, width: 1200, height: 630, alt: g.photoAlt }],
+    },
+  };
+}
 
 export default async function QueFaire() {
+  const guide = await getGuide("que-faire-au-vietnam");
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
 
   /* Le lien de chaque expérience vient des étapes réelles des circuits : si
@@ -197,7 +177,7 @@ export default async function QueFaire() {
       {
         "@type": "FAQPage",
         "@id": `${site.url}/que-faire-au-vietnam/#faq`,
-        mainEntity: QUESTIONS.map((f) => ({
+        mainEntity: guide.faq.map((f) => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -310,7 +290,7 @@ export default async function QueFaire() {
               lede="Les réponses sont dans le HTML même repliées : un lecteur d'écran comme un moteur les trouve sans ouvrir quoi que ce soit."
             />
             <div className="faq">
-              {QUESTIONS.map((f) => (
+              {guide.faq.map((f) => (
                 <details key={f.q}>
                   <summary>{f.q}</summary>
                   <p>{f.a}</p>

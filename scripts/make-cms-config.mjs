@@ -133,6 +133,36 @@ ${select("photo", "Photo", OPT_PHOTOS, 10, ["required: false"])}
       - { name: included, label: Le prix comprend, widget: list, collapsed: true, field: { name: item, label: Ligne, widget: string } }
       - { name: excluded, label: Le prix ne comprend pas, widget: list, collapsed: true, field: { name: item, label: Ligne, widget: string } }
 
+  # --------------------------------------------------------------- guides --
+  # Une entrée par page guide. Les réponses y vieillissent — règles de visa,
+  # prix, saisons — alors que la mise en page, elle, ne bouge pas.
+  - name: guides
+    label: Pages guides
+    label_singular: Page guide
+    folder: content/guides
+    extension: json
+    format: json
+    create: false
+    delete: false
+    identifier_field: title
+    summary: '{{title}} — {{faq.length}} questions'
+    fields:
+      - { name: slug, label: Identifiant d'URL, widget: string, readonly: true, hint: "Lié au fichier de la page : ne pas modifier." }
+      - { name: title, label: Titre de l'onglet, widget: string, hint: "Au-delà de 60 caractères, Google le tronque — suffixe de marque compris." }
+      - { name: description, label: Description pour Google, widget: text, hint: "Entre 120 et 165 caractères. C'est l'extrait affiché sous le titre dans les résultats." }
+      - { name: ogTitle, label: Titre de partage, widget: string }
+      - { name: ogDescription, label: Description de partage, widget: text }
+${select("photo", "Photo de partage", OPT_PHOTOS, 6)}
+      - { name: photoAlt, label: Description de la photo, widget: string }
+      - name: faq
+        label: Questions fréquentes
+        widget: list
+        collapsed: true
+        summary: '{{fields.q}}'
+        fields:
+          - { name: q, label: Question, widget: string }
+          - { name: a, label: Réponse, widget: text, hint: "Commencer par la réponse directe, puis la nuance : c'est la phrase qu'un moteur génératif reprend." }
+
   # ----------------------------------------------------------------- avis --
   - name: avis
     label: Avis
@@ -384,6 +414,38 @@ content:
       - { name: nights, label: Hébergement nuit par nuit, type: string, list: true }
       - { name: included, label: Le prix comprend, type: string, list: true }
       - { name: excluded, label: Le prix ne comprend pas, type: string, list: true }
+
+  - name: guides
+    label: Pages guides
+    type: collection
+    path: content/guides
+    format: json
+    filename: "{fields.slug}.json"
+    subfolders: false
+    view:
+      fields: [title, slug]
+      sort: [title]
+    fields:
+      - { name: slug, label: Identifiant d'URL, type: string, required: true, readonly: true, description: "Lié au fichier de la page : ne pas modifier." }
+      - { name: title, label: Titre de l'onglet, type: string, required: true, description: "Au-delà de 60 caractères, Google le tronque." }
+      - { name: description, label: Description pour Google, type: text, required: true, description: "Entre 120 et 165 caractères." }
+      - { name: ogTitle, label: Titre de partage, type: string, required: true }
+      - { name: ogDescription, label: Description de partage, type: text, required: true }
+      - name: photo
+        label: Photo de partage
+        type: select
+        required: true
+        options:
+          values:${vals(OPT_PHOTOS, 12)}
+      - { name: photoAlt, label: Description de la photo, type: string, required: true }
+      - name: faq
+        label: Questions fréquentes
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{q}" }
+        fields:
+          - { name: q, label: Question, type: string, required: true }
+          - { name: a, label: Réponse, type: text, required: true, description: "Commencer par la réponse directe, puis la nuance." }
 
   - name: avis
     label: Avis

@@ -11,6 +11,14 @@ import type { PhotoId, PlaceId, Review, Stop, Trip } from "./types";
 export type * from "./types";
 
 export const getSite = source.site;
+
+/** Lève si la page n'a pas de contenu : mieux vaut un build rouge qu'une
+ *  page guide servie sans titre ni questions. */
+export async function getGuide(slug: string) {
+  const g = (await source.guides()).find((x) => x.slug === slug);
+  if (!g) throw new Error(`content/guides/${slug}.json est introuvable.`);
+  return g;
+}
 export const getProcess = source.process;
 export const getComparison = source.comparison;
 export const getSeasons = source.seasons;

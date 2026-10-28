@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { breadcrumb } from "@/components/JsonLd";
-import { getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
 /**
  * « Itinéraire Vietnam » se cherche presque toujours avec une durée accolée :
@@ -65,48 +65,24 @@ const RYTHME = [
   },
 ];
 
-const QUESTIONS = [
-  {
-    q: "Quel itinéraire pour 15 jours au Vietnam ?",
-    a: "Hanoï trois nuits, une nuit en baie de Lan Ha, Ninh Binh deux nuits, puis vol vers Hué, deux nuits, route côtière vers Hoi An, trois nuits, et vol vers le delta du Mékong pour finir. C'est le format le plus courant parce que c'est le plus équilibré : deux vols intérieurs, sept étapes, jamais plus de trois heures de route d'affilée, et les trois régions couvertes.",
-  },
-  {
-    q: "Combien de jours faut-il au minimum pour le Vietnam ?",
-    a: "Dix jours pour que le voyage ait du sens, en se limitant à une région. En dessous, le temps de vol depuis la France — treize heures avec escale, plus le décalage de six heures — mange une part trop grande du séjour. Si vous ne disposez que d'une semaine, le Nord seul reste une très belle option, à condition d'accepter de ne pas voir le reste.",
-  },
-  {
-    q: "Faut-il commencer par le Nord ou par le Sud ?",
-    a: "Par le Nord dans la plupart des cas, pour deux raisons pratiques. Les vols depuis la France arrivent souvent à Hanoï le matin, ce qui donne une première journée utilisable, et terminer par le Sud permet de finir au chaud et éventuellement par la plage. Le sens inverse se justifie si vous partez en décembre ou janvier et voulez garder le Nord pour la fin de séjour, quand le crachin se lève parfois.",
-  },
-  {
-    q: "Peut-on ajouter le Cambodge ou le Laos ?",
-    a: "Oui, à partir de dix-huit jours. En dessous, l'ajout se paie sur le Vietnam : vous perdez trois jours en transferts et formalités pour n'effleurer ni l'un ni l'autre. Angkor demande trois jours pleins pour mériter le détour, et la boucle Vietnam-Cambodge se fait naturellement en terminant par le delta du Mékong puis Phnom Penh.",
-  },
-  {
-    q: "Combien d'étapes prévoir pour deux semaines ?",
-    a: "Six à sept, pas davantage. Au-delà, chaque étape se réduit à une nuit et le voyage devient une succession de trajets. Nos circuits de quinze jours comptent sept étapes, dont trois de trois nuits : c'est ce rapport qui permet de visiter sans courir.",
-  },
-  {
-    q: "Vaut-il mieux un circuit privé ou un voyage en groupe ?",
-    a: "Un circuit privé, si vous êtes au moins deux. Le guide et le véhicule sont facturés au groupe et non par personne : à partir de deux voyageurs, l'écart avec un départ groupé se réduit beaucoup, et vous gardez la main sur les horaires, les étapes et le rythme. Le départ groupé garde son intérêt pour un voyageur seul.",
-  },
-];
 
-export const metadata: Metadata = {
-  title: "Itinéraire Vietnam : 10, 15 ou 21 jours",
-  description:
-    "Quinze jours est le format le plus juste pour traverser le pays. En dessous de douze, mieux vaut une seule région. Durées, étapes, rythme et temps de trajet réels.",
-  alternates: { canonical: "/itineraire-vietnam" },
-  openGraph: {
-    type: "article",
-    images: [{ url: "/photos/og/mekong.jpg", width: 1200, height: 630, alt: "Delta du Mékong" }],
-    title: "Quel itinéraire au Vietnam selon la durée ?",
-    description:
-      "Ce qui tient en 10, 15 ou 21 jours — et ce à quoi chaque durée oblige à renoncer.",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const g = await getGuide("itineraire-vietnam");
+  return {
+    title: g.title,
+    description: g.description,
+    alternates: { canonical: "/itineraire-vietnam" },
+    openGraph: {
+      type: "article",
+      title: g.ogTitle,
+      description: g.ogDescription,
+      images: [{ url: `/photos/og/${g.photo}.jpg`, width: 1200, height: 630, alt: g.photoAlt }],
+    },
+  };
+}
 
 export default async function Itineraire() {
+  const guide = await getGuide("itineraire-vietnam");
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
   const parDuree = [...trips].sort((a, b) => a.days - b.days);
 
@@ -116,7 +92,7 @@ export default async function Itineraire() {
       {
         "@type": "FAQPage",
         "@id": `${site.url}/itineraire-vietnam/#faq`,
-        mainEntity: QUESTIONS.map((f) => ({
+        mainEntity: guide.faq.map((f) => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -233,7 +209,7 @@ export default async function Itineraire() {
               lede="Les réponses sont dans le HTML même repliées : un lecteur d'écran comme un moteur les trouve sans ouvrir quoi que ce soit."
             />
             <div className="faq">
-              {QUESTIONS.map((f) => (
+              {guide.faq.map((f) => (
                 <details key={f.q}>
                   <summary>{f.q}</summary>
                   <p>{f.a}</p>

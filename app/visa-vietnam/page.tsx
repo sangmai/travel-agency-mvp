@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { breadcrumb } from "@/components/JsonLd";
-import { getSite } from "@/lib/content";
+import { getSite, getGuide } from "@/lib/content";
 
 /**
  * La seule page du site où une erreur coûte un avion raté.
@@ -43,48 +43,24 @@ const CAS = [
   },
 ];
 
-const QUESTIONS = [
-  {
-    q: "Faut-il un visa pour le Vietnam quand on est français ?",
-    a: "Non, pas pour un séjour de 45 jours ou moins. Les ressortissants français en sont dispensés depuis le 15 août 2023, quel que soit le motif du voyage. Au-delà de 45 jours, un e-visa est nécessaire. Le passeport doit dans tous les cas être valable au moins six mois à la date d'entrée sur le territoire vietnamien.",
-  },
-  {
-    q: "Les 45 jours comptent-ils le jour d'arrivée et le jour de départ ?",
-    a: "Oui, les deux. Un vol qui atterrit le 1er du mois et un vol qui repart le 15 font quinze jours décomptés, pas treize. C'est l'erreur la plus fréquente sur les séjours longs, et le dépassement est sanctionné par une amende à la sortie du territoire, parfois assortie d'une interdiction de retour.",
-  },
-  {
-    q: "Où demander l'e-visa, et combien coûte-t-il ?",
-    a: "Uniquement sur le portail national de l'immigration du Vietnam. Le tarif officiel se règle en dollars américains et se situe autour de 25 $ pour une entrée simple et 50 $ pour des entrées multiples. Des dizaines de sites commerciaux se présentent comme officiels et facturent trois à cinq fois ce montant pour remplir le même formulaire : vérifiez que l'adresse se termine bien par .gov.vn.",
-  },
-  {
-    q: "Quel délai prévoir pour obtenir l'e-visa ?",
-    a: "Trois jours ouvrés selon le texte officiel, mais prévoyez une à deux semaines. Les délais s'allongent autour du Têt et pendant la haute saison, et une photo non conforme suffit à faire repartir le dossier de zéro. Ne prenez pas vos billets non remboursables avant d'avoir le document en main.",
-  },
-  {
-    q: "Mon passeport doit-il être valable combien de temps ?",
-    a: "Au moins six mois à compter de la date d'entrée au Vietnam, et non de la date de retour. Un passeport qui expire cinq mois après l'arrivée fait refuser l'embarquement dès Paris — la compagnie aérienne contrôle avant la police vietnamienne, parce que c'est elle qui devrait assurer le retour.",
-  },
-  {
-    q: "Les enfants ont-ils besoin de leur propre document ?",
-    a: "Oui. Chaque enfant, quel que soit son âge, doit avoir son passeport individuel valable six mois, et bénéficie de la même dispense de 45 jours. L'inscription d'un enfant sur le passeport d'un parent n'existe plus en France. Pour un mineur voyageant avec un seul parent, prévoyez en plus une autorisation de sortie du territoire et le livret de famille.",
-  },
-];
 
-export const metadata: Metadata = {
-  title: "Visa Vietnam : dispense 45 jours",
-  description:
-    "Dispense de visa pour les ressortissants français depuis le 15 août 2023, séjours de 45 jours maximum. E-visa 90 jours au-delà, passeport valable six mois.",
-  alternates: { canonical: "/visa-vietnam" },
-  openGraph: {
-    type: "article",
-    images: [{ url: "/photos/og/hanoi.jpg", width: 1200, height: 630, alt: "Vieille ville de Hanoï" }],
-    title: "Faut-il un visa pour le Vietnam ?",
-    description:
-      "Dispense jusqu'à 45 jours pour les Français, e-visa au-delà. Ce qu'il faut vérifier avant de réserver.",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const g = await getGuide("visa-vietnam");
+  return {
+    title: g.title,
+    description: g.description,
+    alternates: { canonical: "/visa-vietnam" },
+    openGraph: {
+      type: "article",
+      title: g.ogTitle,
+      description: g.ogDescription,
+      images: [{ url: `/photos/og/${g.photo}.jpg`, width: 1200, height: 630, alt: g.photoAlt }],
+    },
+  };
+}
 
 export default async function Visa() {
+  const guide = await getGuide("visa-vietnam");
   const site = await getSite();
 
   const jsonLd = {
@@ -93,7 +69,7 @@ export default async function Visa() {
       {
         "@type": "FAQPage",
         "@id": `${site.url}/visa-vietnam/#faq`,
-        mainEntity: QUESTIONS.map((f) => ({
+        mainEntity: guide.faq.map((f) => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -207,7 +183,7 @@ export default async function Visa() {
               lede="Les réponses sont dans le HTML même repliées : un lecteur d'écran comme un moteur les trouve sans ouvrir quoi que ce soit."
             />
             <div className="faq">
-              {QUESTIONS.map((f) => (
+              {guide.faq.map((f) => (
                 <details key={f.q}>
                   <summary>{f.q}</summary>
                   <p>{f.a}</p>

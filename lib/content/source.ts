@@ -13,6 +13,7 @@
 /* Les listes éditées depuis le CMS sont enveloppées dans un objet racine :
    Decap et Sveltia ne savent pas éditer un tableau au premier niveau. */
 import type {
+  Guide,
   BudgetRow,
   Comparison,
   Envie,
@@ -42,6 +43,13 @@ import reviewsJson from "@/content/reviews.json";
 import storyJson from "@/content/story.json";
 import carnetJson from "@/content/carnet.json";
 
+import gQuandPartirAuVietnam from "@/content/guides/quand-partir-au-vietnam.json";
+import gBudgetVoyageVietnam from "@/content/guides/budget-voyage-vietnam.json";
+import gVisaVietnam from "@/content/guides/visa-vietnam.json";
+import gNordOuSudVietnam from "@/content/guides/nord-ou-sud-vietnam.json";
+import gItineraireVietnam from "@/content/guides/itineraire-vietnam.json";
+import gQueFaireAuVietnam from "@/content/guides/que-faire-au-vietnam.json";
+import gAgenceDeVoyageVietnam from "@/content/guides/agence-de-voyage-vietnam.json";
 import nordSud from "@/content/itineraries/vietnam-du-nord-au-sud.json";
 import montagnes from "@/content/itineraries/montagnes-et-baies-du-nord.json";
 import famille from "@/content/itineraries/vietnam-en-famille.json";
@@ -55,6 +63,9 @@ import signature from "@/content/itineraries/vietnam-collection-signature.json";
  */
 const TRIPS = [nordSud, montagnes, famille, cambodge, horsSentiers, signature] as Trip[];
 
+/* Les pages guides : une entrée par page, même forme pour toutes. */
+const GUIDES: Guide[] = [gQuandPartirAuVietnam, gBudgetVoyageVietnam, gVisaVietnam, gNordOuSudVietnam, gItineraireVietnam, gQueFaireAuVietnam, gAgenceDeVoyageVietnam];
+
 export const source = {
   site: async (): Promise<Site> => siteJson,
   places: async (): Promise<Place[]> => placesJson,
@@ -67,6 +78,7 @@ export const source = {
   seasons: async (): Promise<SeasonRow[]> => seasonsJson,
   budget: async (): Promise<BudgetRow[]> => budgetJson,
   faq: async (): Promise<Faq[]> => faqJson.faq,
+  guides: async (): Promise<Guide[]> => GUIDES,
   reviews: async (): Promise<Review[]> => reviewsJson.reviews,
   story: async (): Promise<Story> => storyJson,
   carnet: async (): Promise<string[]> => carnetJson,

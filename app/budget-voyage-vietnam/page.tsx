@@ -5,7 +5,7 @@ import { BudgetTable } from "@/components/Budget";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { breadcrumb } from "@/components/JsonLd";
-import { getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
 /**
  * Deuxième requête informationnelle du marché après la saisonnalité.
@@ -67,48 +67,24 @@ const POSTES = [
   },
 ];
 
-const QUESTIONS = [
-  {
-    q: "Quel budget pour deux semaines au Vietnam ?",
-    a: "Entre 1 200 et 1 700 € par personne en gamme charme, hors vols internationaux, sur une base de deux voyageurs en chambre double. En gamme confort, comptez 800 à 1 100 €. Les vols Paris–Hanoï ajoutent 600 à 950 € selon la saison. Ces montants comprennent l'hébergement, le guide francophone, le chauffeur privé, les transferts, les petits-déjeuners et les entrées des sites prévus au programme.",
-  },
-  {
-    q: "Pourquoi le prix par personne baisse-t-il quand on est plus nombreux ?",
-    a: "Parce que le guide et le véhicule sont facturés au groupe, pas à la personne. Ce sont les deux plus gros postes après l'hébergement : à quatre, ils se divisent par deux par rapport à un couple. Un même circuit peut ainsi passer de 1 450 € à 1 050 € par personne sans rien changer au programme ni à la gamme d'hôtels.",
-  },
-  {
-    q: "Le Vietnam est-il plus cher que la Thaïlande ?",
-    a: "À prestation équivalente, non — le Vietnam reste 10 à 20 % en dessous sur l'hébergement et la restauration. L'écart se resserre sur les circuits privés avec guide, car les guides francophones y sont moins nombreux qu'en Thaïlande et donc mieux rémunérés. Sur le vol international, les deux destinations se valent.",
-  },
-  {
-    q: "Combien faut-il prévoir d'argent de poche ?",
-    a: "De 15 à 30 € par jour et par personne suffisent largement pour les déjeuners, les dîners, les boissons et quelques achats. Les cartes bancaires passent dans les hôtels et les restaurants des villes, beaucoup moins dans les campagnes et les marchés : prévoyez des espèces pour les étapes rurales.",
-  },
-  {
-    q: "Faut-il prévoir des pourboires ?",
-    a: "Ils ne sont pas obligatoires et ne figurent dans aucun de nos devis, mais l'usage existe pour le guide et le chauffeur en fin de circuit. L'ordre de grandeur pratiqué est de 3 à 5 € par jour et par voyageur pour le guide, la moitié pour le chauffeur. Nous le disons sans détour pour que personne ne se trouve embarrassé le dernier jour.",
-  },
-  {
-    q: "Qu'est-ce qui n'est jamais compris dans le prix annoncé ?",
-    a: "Les vols internationaux, l'assurance voyage, les déjeuners et dîners libres, les boissons, les pourboires et les dépenses personnelles. Chaque fiche circuit porte la liste exacte de ce qui est compris et de ce qui ne l'est pas — nous préférons une liste longue à une mauvaise surprise au moment du solde.",
-  },
-];
 
-export const metadata: Metadata = {
-  title: "Budget d'un voyage au Vietnam",
-  description:
-    "1 200 à 1 700 € par personne pour quinze jours en gamme charme, hors vols. Fourchettes détaillées : hébergement, guide, chauffeur, vols intérieurs, repas, visa.",
-  alternates: { canonical: "/budget-voyage-vietnam" },
-  openGraph: {
-    type: "article",
-    images: [{ url: "/photos/og/marche.jpg", width: 1200, height: 630, alt: "Marché de rue au Vietnam" }],
-    title: "Combien coûte un voyage au Vietnam ?",
-    description:
-      "Le détail poste par poste d'un circuit privé au Vietnam, avec des fourchettes plutôt qu'un « sur devis ».",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const g = await getGuide("budget-voyage-vietnam");
+  return {
+    title: g.title,
+    description: g.description,
+    alternates: { canonical: "/budget-voyage-vietnam" },
+    openGraph: {
+      type: "article",
+      title: g.ogTitle,
+      description: g.ogDescription,
+      images: [{ url: `/photos/og/${g.photo}.jpg`, width: 1200, height: 630, alt: g.photoAlt }],
+    },
+  };
+}
 
 export default async function BudgetPage() {
+  const guide = await getGuide("budget-voyage-vietnam");
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
 
   const jsonLd = {
@@ -117,7 +93,7 @@ export default async function BudgetPage() {
       {
         "@type": "FAQPage",
         "@id": `${site.url}/budget-voyage-vietnam/#faq`,
-        mainEntity: QUESTIONS.map((f) => ({
+        mainEntity: guide.faq.map((f) => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -199,7 +175,7 @@ export default async function BudgetPage() {
               lede="Les réponses sont dans le HTML même repliées : un lecteur d'écran comme un moteur les trouve sans ouvrir quoi que ce soit."
             />
             <div className="faq">
-              {QUESTIONS.map((f) => (
+              {guide.faq.map((f) => (
                 <details key={f.q}>
                   <summary>{f.q}</summary>
                   <p>{f.a}</p>

@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { breadcrumb } from "@/components/JsonLd";
-import { getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
 /**
  * Requête de comparaison, donc d'hésitation : celui qui la tape a déjà décidé
@@ -93,46 +93,26 @@ const PROFILS = [
   },
 ];
 
-const QUESTIONS = [
-  {
-    q: "Nord ou Sud Vietnam : que choisir si je n'ai que dix jours ?",
-    a: "Le Nord, dans la plupart des cas. En dix jours, traverser le pays revient à passer trois journées dans les transports pour effleurer chaque région. Le Nord concentre dans un rayon de 300 kilomètres ce que les voyageurs viennent chercher : Hanoï, la baie d'Halong ou de Lan Ha, Ninh Binh, et les rizières en terrasses qui n'existent nulle part ailleurs au Vietnam. Le Sud devient le meilleur choix si vous partez en décembre ou janvier et tenez à la plage.",
-  },
-  {
-    q: "Peut-on faire les deux en quinze jours ?",
-    a: "Oui, à condition d'accepter deux vols intérieurs et de renoncer au Centre ou de n'en garder qu'une étape. Quinze jours suffisent pour Hanoï, la baie, Hoi An et le delta du Mékong, en comptant environ une journée et demie de déplacements. En dessous de treize jours, le parcours devient une succession d'aéroports.",
-  },
-  {
-    q: "Quelle est la vraie différence entre le Nord et le Sud ?",
-    a: "Le relief et le climat, qui commandent tout le reste. Le Nord est montagneux et connaît quatre saisons, dont un véritable hiver à 15 °C. Le Sud est plat, sillonné de canaux, et ne descend jamais sous 26 °C. De là découlent deux voyages différents : on marche au Nord, on navigue au Sud. La cuisine, l'architecture et jusqu'à l'accent en portent la trace.",
-  },
-  {
-    q: "Et le Centre, faut-il le sacrifier ?",
-    a: "Pas si vos dates le permettent. Hué et Hoi An sont les deux plus belles villes du pays et se visitent en quatre jours à elles deux. Le vrai motif de les écarter n'est pas le temps mais la saison : d'octobre à décembre, le Centre est en pleine saison des pluies et Hoi An est régulièrement inondé, alors que le Nord et le Sud sont au mieux de leur forme.",
-  },
-  {
-    q: "Le Sud est-il moins intéressant que le Nord ?",
-    a: "Non, mais il est moins spectaculaire au premier regard. Le delta du Mékong ne se livre pas en une journée d'excursion depuis Hô Chi Minh-Ville : il demande d'y dormir, de prendre les bacs, de longer les canaux au petit matin quand les marchés flottants fonctionnent vraiment. Les voyageurs qui en reviennent déçus sont presque toujours ceux qui l'ont fait en aller-retour dans la journée.",
-  },
-];
 
 const LABEL = { nord: "Nord", sud: "Sud", "égal": "Égalité" };
 
-export const metadata: Metadata = {
-  title: "Nord ou Sud Vietnam : lequel choisir ?",
-  description:
-    "Le Nord si c'est votre premier voyage ou si vous partez entre octobre et avril. Le Sud en décembre-janvier et pour la plage. Comparatif critère par critère.",
-  alternates: { canonical: "/nord-ou-sud-vietnam" },
-  openGraph: {
-    type: "article",
-    images: [{ url: "/photos/og/ninhbinh.jpg", width: 1200, height: 630, alt: "Pitons calcaires de Ninh Binh" }],
-    title: "Nord ou Sud Vietnam : lequel choisir ?",
-    description:
-      "Paysages, climat, trajets, plages : le comparatif qui tranche, selon la saison et le temps dont vous disposez.",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const g = await getGuide("nord-ou-sud-vietnam");
+  return {
+    title: g.title,
+    description: g.description,
+    alternates: { canonical: "/nord-ou-sud-vietnam" },
+    openGraph: {
+      type: "article",
+      title: g.ogTitle,
+      description: g.ogDescription,
+      images: [{ url: `/photos/og/${g.photo}.jpg`, width: 1200, height: 630, alt: g.photoAlt }],
+    },
+  };
+}
 
 export default async function NordOuSud() {
+  const guide = await getGuide("nord-ou-sud-vietnam");
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
 
   const jsonLd = {
@@ -141,7 +121,7 @@ export default async function NordOuSud() {
       {
         "@type": "FAQPage",
         "@id": `${site.url}/nord-ou-sud-vietnam/#faq`,
-        mainEntity: QUESTIONS.map((f) => ({
+        mainEntity: guide.faq.map((f) => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -234,7 +214,7 @@ export default async function NordOuSud() {
               lede="Les réponses sont dans le HTML même repliées : un lecteur d'écran comme un moteur les trouve sans ouvrir quoi que ce soit."
             />
             <div className="faq">
-              {QUESTIONS.map((f) => (
+              {guide.faq.map((f) => (
                 <details key={f.q}>
                   <summary>{f.q}</summary>
                   <p>{f.a}</p>

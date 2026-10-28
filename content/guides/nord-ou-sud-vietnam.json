@@ -1,0 +1,31 @@
+{
+  "slug": "nord-ou-sud-vietnam",
+  "title": "Nord ou Sud Vietnam : lequel choisir ?",
+  "description": "Le Nord si c'est votre premier voyage ou si vous partez entre octobre et avril. Le Sud en décembre-janvier et pour la plage. Comparatif critère par critère.",
+  "ogTitle": "Nord ou Sud Vietnam : lequel choisir ?",
+  "ogDescription": "Paysages, climat, trajets, plages : le comparatif qui tranche, selon la saison et le temps dont vous disposez.",
+  "photo": "ninhbinh",
+  "photoAlt": "Pitons calcaires de Ninh Binh",
+  "faq": [
+    {
+      "q": "Nord ou Sud Vietnam : que choisir si je n'ai que dix jours ?",
+      "a": "Le Nord, dans la plupart des cas. En dix jours, traverser le pays revient à passer trois journées dans les transports pour effleurer chaque région. Le Nord concentre dans un rayon de 300 kilomètres ce que les voyageurs viennent chercher : Hanoï, la baie d'Halong ou de Lan Ha, Ninh Binh, et les rizières en terrasses qui n'existent nulle part ailleurs au Vietnam. Le Sud devient le meilleur choix si vous partez en décembre ou janvier et tenez à la plage."
+    },
+    {
+      "q": "Peut-on faire les deux en quinze jours ?",
+      "a": "Oui, à condition d'accepter deux vols intérieurs et de renoncer au Centre ou de n'en garder qu'une étape. Quinze jours suffisent pour Hanoï, la baie, Hoi An et le delta du Mékong, en comptant environ une journée et demie de déplacements. En dessous de treize jours, le parcours devient une succession d'aéroports."
+    },
+    {
+      "q": "Quelle est la vraie différence entre le Nord et le Sud ?",
+      "a": "Le relief et le climat, qui commandent tout le reste. Le Nord est montagneux et connaît quatre saisons, dont un véritable hiver à 15 °C. Le Sud est plat, sillonné de canaux, et ne descend jamais sous 26 °C. De là découlent deux voyages différents : on marche au Nord, on navigue au Sud. La cuisine, l'architecture et jusqu'à l'accent en portent la trace."
+    },
+    {
+      "q": "Et le Centre, faut-il le sacrifier ?",
+      "a": "Pas si vos dates le permettent. Hué et Hoi An sont les deux plus belles villes du pays et se visitent en quatre jours à elles deux. Le vrai motif de les écarter n'est pas le temps mais la saison : d'octobre à décembre, le Centre est en pleine saison des pluies et Hoi An est régulièrement inondé, alors que le Nord et le Sud sont au mieux de leur forme."
+    },
+    {
+      "q": "Le Sud est-il moins intéressant que le Nord ?",
+      "a": "Non, mais il est moins spectaculaire au premier regard. Le delta du Mékong ne se livre pas en une journée d'excursion depuis Hô Chi Minh-Ville : il demande d'y dormir, de prendre les bacs, de longer les canaux au petit matin quand les marchés flottants fonctionnent vraiment. Les voyageurs qui en reviennent déçus sont presque toujours ceux qui l'ont fait en aller-retour dans la journée."
+    }
+  ]
+}
