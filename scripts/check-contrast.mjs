@@ -17,6 +17,28 @@
  *
  * Sort en code 1 s'il reste un échec, pour servir de garde en intégration.
  */
+/* playwright n'est pas dans package.json : son installation télécharge des
+   navigateurs, et Cloudflare installe les dépendances de développement à
+   chaque build. Quelques centaines de mégaoctets à chaque déploiement pour
+   un outil qui ne sert qu'à la relecture, cela ne se justifie pas.
+
+   Il est donc chargé depuis l'endroit où il se trouve déjà, désigné par
+   PLAYWRIGHT_PATH. NODE_PATH ne sert à rien ici : les modules ES ne le
+   consultent pas. */
+let chromium;
+try {
+  ({ chromium } = await import(process.env.PLAYWRIGHT_PATH || "playwright"));
+} catch {
+  console.error(
+    "playwright est introuvable.\n\n" +
+      "  mkdir -p /tmp/pw && cd /tmp/pw && npm i playwright\n" +
+      "  npx playwright install chromium\n\n" +
+      "puis, depuis ce dépôt :\n" +
+      "  PLAYWRIGHT_PATH=/tmp/pw/node_modules/playwright/index.mjs npm run contrast -- <url>",
+  );
+  process.exit(2);
+}
+
 const BASE = process.argv[2] ?? "http://localhost:8787";
 const PAGES = ["/", "/circuit-vietnam/", "/circuit-vietnam/vietnam-du-nord-au-sud/", "/visa-vietnam/",
   "/nord-ou-sud-vietnam/", "/quand-partir-au-vietnam/", "/budget-voyage-vietnam/", "/credits-photos/", "/merci/"];

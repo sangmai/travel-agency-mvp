@@ -150,6 +150,27 @@ database, nội dung versioned trong git, rollback bằng `git revert`. Và
 Decap**, nên nếu thất vọng thì đổi sang Decap chỉ là thay thẻ `<script>` trong
 `public/admin/index.html` và dựng thêm một Worker OAuth. Hàng rào bảo hiểm rẻ.
 
+### Kiểm tra tương phản
+
+```bash
+mkdir -p /tmp/pw && cd /tmp/pw && npm i playwright && npx playwright install chromium
+cd -
+PLAYWRIGHT_PATH=/tmp/pw/node_modules/playwright/index.mjs npm run contrast -- <url>
+```
+
+Màu thật không đọc được từ file CSS — nó phụ thuộc kế thừa và chồng nền. Hai
+lỗi đã lọt qua mắt đọc code và chỉ script này tìm ra: một khối nền sáng đặt
+trong dải nền tối khiến chữ kế thừa màu của dải (1,35:1), và đoạn kết trắng
+95% trên nền ambre tụt xuống 4,25:1 — dưới ngưỡng AA, trên **mọi** trang.
+
+Script hợp thành nền theo alpha. Thiếu bước đó, một lớp phủ 7% bị đọc như màu
+đục và nó bịa ra 8 lỗi không tồn tại — đúng điều nó đã làm trước khi được sửa.
+
+`playwright` cố ý **không** nằm trong `package.json`: cài nó kéo theo trình
+duyệt vài trăm MB, mà Cloudflare cài devDependencies ở mỗi lần build.
+
+Thoát mã 1 nếu còn lỗi, nên dùng làm cổng chặn trong CI được.
+
 ### Ảnh — vì sao bỏ `next/image`
 
 Cloudflare không có bộ tối ưu ảnh của Next. Ba lối: `unoptimized` (phục vụ JPEG
