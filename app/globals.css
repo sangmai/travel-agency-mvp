@@ -1483,10 +1483,14 @@ img {
   color: #fff;
 }
 
+/* Blanc opaque, et non à 95 % : sur l'ambre, les 5 % de transparence
+   laissaient remonter le fond et faisaient tomber le rapport à 4,25:1, sous
+   le seuil AA. En plein, il est de 4,55:1 — la marge est mince, donc
+   éclaircir --amber casserait ce paragraphe. */
 .close p {
   margin: 0.9rem auto 0;
   max-width: 34rem;
-  color: rgba(255, 255, 255, 0.95);
+  color: #fff;
 }
 
 .close .btn {
@@ -2604,13 +2608,13 @@ img {
 
 .guide__bloc {
   background: var(--paper);
-  border: 1px solid var(--rule);
+  border: 1px solid var(--line);
   border-radius: var(--r);
   padding: 1.5rem;
 }
 
 .guide__lieux {
-  color: var(--slate);
+  color: var(--ink-3);
   font-size: 0.86rem;
   letter-spacing: 0.04em;
   margin: 0.2rem 0 0.9rem;
@@ -2631,11 +2635,17 @@ img {
   padding: 0;
 }
 
+/* La liste pose un fond clair à l'intérieur d'une bande sombre. Sans rétablir
+   explicitement les couleurs d'encre, tout ce qu'elle contient hérite de
+   celles de la bande — clair sur clair, soit 1,35:1. Les sélecteurs sont
+   préfixés par .sec--jade pour l'emporter sur ses propres règles de descendance. */
+.sec--jade .saison-liste li,
 .saison-liste li {
   align-items: center;
   background: var(--paper);
-  border: 1px solid var(--rule);
+  border: 1px solid var(--line);
   border-radius: var(--r);
+  color: var(--ink);
   display: flex;
   gap: 1rem;
   justify-content: space-between;
@@ -2655,7 +2665,41 @@ img {
   display: block;
 }
 
-.saison-liste span {
-  color: var(--slate);
+.sec--jade .saison-liste a > span,
+.saison-liste a > span {
+  color: var(--ink-2);
   font-size: 0.9rem;
+}
+
+.sec--jade .saison-liste .price span,
+.saison-liste .price span {
+  color: var(--ink-3);
+}
+
+/* Mention de mise à jour sur les pages à contenu périssable. */
+.maj {
+  border-left: 2px solid var(--amber);
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  margin-top: 1.6rem;
+  max-width: 42rem;
+  padding-left: 1rem;
+}
+
+.profil {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.4rem;
+}
+
+.profil li {
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.profil li::before {
+  color: var(--amber);
+  content: "—";
+  left: 0;
+  position: absolute;
 }

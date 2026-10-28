@@ -9,7 +9,8 @@
     "start": "next start",
     "deploy": "npm run build && wrangler deploy",
     "lint": "next lint",
-    "images": "node scripts/make-images.mjs"
+    "images": "node scripts/make-images.mjs",
+    "contrast": "node scripts/check-contrast.mjs"
   },
   "dependencies": {
     "next": "15.5.4",
