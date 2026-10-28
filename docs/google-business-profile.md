@@ -32,7 +32,7 @@ depuis la même source que le site, il n'y a donc rien à retaper.
 
 ## Description (750 caractères maximum)
 
-> Jasmin Travel est une agence de voyage locale francophone au vietnam, installée à
+> Jasmin Travel est une agence de voyage locale francophone au Vietnam, installée à
 > Da Nang et titulaire de la licence de tour-opérateur
 > international 48-049/2015/TCDL-GP LHQT. Nous concevons et opérons nous-mêmes des
 > circuits privés sur mesure au Vietnam, au Laos et au Cambodge, pour une

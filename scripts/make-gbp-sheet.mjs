@@ -62,7 +62,7 @@ ${champ("Année d'ouverture", site.founded, "Correspond à la licence de tour-op
 
 ## Description (750 caractères maximum)
 
-> ${site.legalName} est une ${site.tagline.toLowerCase()}, installée à
+> ${site.legalName} est une ${site.tagline[0].toLowerCase() + site.tagline.slice(1)}, installée à
 > ${site.address.city} et titulaire de la licence de tour-opérateur
 > international ${site.license}. Nous concevons et opérons nous-mêmes des
 > circuits privés sur mesure au Vietnam, au Laos et au Cambodge, pour une
