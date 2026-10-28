@@ -1,6 +1,7 @@
 import { Photo } from "./Photo";
 import { PriceFrom, SectionHead } from "./ui";
-import { getTrips, resolveStops, tripUrl } from "@/lib/content";
+import { Accent } from "@/lib/text";
+import { getTrips, resolveStops, tripUrl, getHome } from "@/lib/content";
 
 /**
  * Une liste, pas une grille : six itinéraires se comparent en lisant une
@@ -10,6 +11,7 @@ import { getTrips, resolveStops, tripUrl } from "@/lib/content";
  * rich snippet via le JSON-LD Offer et la citation par un moteur génératif.
  */
 export async function Circuits() {
+  const h = (await getHome()).circuits;
   const trips = await getTrips();
   const routes = await Promise.all(trips.map((t) => resolveStops(t.stops)));
 
@@ -17,9 +19,9 @@ export async function Circuits() {
     <section className="sec" id="circuits">
       <div className="wrap">
         <SectionHead
-          kicker="Itinéraires"
-          title={<>Des circuits éprouvés, <em>et aucun figé</em></>}
-          lede="Ceux que nos voyageurs réservent le plus souvent. Ils servent de point de départ, pas de produit fini : la durée, les étapes et la gamme d'hébergement se réajustent librement."
+          kicker={h.kicker}
+          title={<Accent>{h.title}</Accent>}
+          lede={h.lede}
         />
 
         <div className="trips">

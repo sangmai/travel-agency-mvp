@@ -1,5 +1,6 @@
 import { SectionHead } from "./ui";
-import { getFaq } from "@/lib/content";
+import { Accent } from "@/lib/text";
+import { getFaq, getHome } from "@/lib/content";
 
 /**
  * `<details>` natif : les réponses sont dans le HTML servi même repliées,
@@ -9,14 +10,16 @@ import { getFaq } from "@/lib/content";
  * Le balisage FAQPage (JsonLd.tsx) doit refléter ces questions mot pour mot.
  */
 export async function Faq() {
+  const h = (await getHome()).faq;
   const faq = await getFaq();
 
   return (
     <section className="sec" id="faq">
       <div className="wrap">
         <SectionHead
-          kicker="Questions fréquentes"
-          title="Ce que les voyageurs nous demandent"
+          kicker={h.kicker}
+          title={<Accent>{h.title}</Accent>}
+          lede={h.lede}
         />
         <div className="faq">
           {faq.map((item, i) => (

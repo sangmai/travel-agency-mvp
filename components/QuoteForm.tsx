@@ -1,6 +1,7 @@
 import { Photo } from "./Photo";
 import { Check } from "./Art";
-import { getSite } from "@/lib/content";
+import { getSite, getHome } from "@/lib/content";
+import { Accent } from "@/lib/text";
 
 /**
  * Formulaire sans JavaScript : un `<form>` HTML qui poste vers worker/index.ts,
@@ -11,15 +12,10 @@ import { getSite } from "@/lib/content";
  * sans l'y renommer fait disparaître l'information de l'e-mail, sans que rien
  * n'échoue au build.
  */
-const PROMISES = [
-  { t: "Réponse sous 48 heures ouvrées", d: "Un itinéraire complet jour par jour, hôtels nommés, prix ferme. Pas une brochure." },
-  { t: "Gratuit et sans engagement", d: "Vous ne payez rien tant que vous n'avez pas validé le programme et versé l'acompte." },
-  { t: "Retouches illimitées", d: "Une étape en plus, un hôtel différent, deux jours de moins : on refait le devis sans frais." },
-  { t: "Un seul interlocuteur francophone", d: "La même personne du premier message jusqu'à votre retour, joignable 7j/7 sur place." },
-];
 
 export async function QuoteForm() {
   const site = await getSite();
+  const h = (await getHome()).devis;
 
   return (
     <section className="sec sec--jade devis" id="devis">
@@ -31,23 +27,19 @@ export async function QuoteForm() {
       <div className="wrap devis__in">
         <div className="quote">
           <div>
-            <p className="kicker">Devis sur mesure</p>
+            <p className="kicker">{h.kicker}</p>
             <h2 className="d2">
-              Racontez-nous <em>le Vietnam que vous avez en tête</em>
+              <Accent>{h.title}</Accent>
             </h2>
-            <p className="lede">
-              Quelques lignes suffisent pour commencer. Si vous hésitez encore
-              sur les dates ou la durée, dites-le : c&apos;est précisément ce
-              dont nous discutons ensuite.
-            </p>
+            <p className="lede">{h.lede}</p>
 
             <div className="promises">
-              {PROMISES.map((p) => (
-                <div className="promise" key={p.t}>
+              {h.promises.map((p) => (
+                <div className="promise" key={p.title}>
                   <Check />
                   <p>
-                    <b>{p.t}</b>
-                    <span>{p.d}</span>
+                    <b>{p.title}</b>
+                    <span>{p.detail}</span>
                   </p>
                 </div>
               ))}
@@ -140,7 +132,7 @@ export async function QuoteForm() {
               </label>
 
               <div className="form__send">
-                <button className="btn btn--amber" type="submit">Recevoir mon itinéraire</button>
+                <button className="btn btn--amber" type="submit">{h.submit}</button>
                 <small>Gratuit · réponse sous {site.responseTime}</small>
               </div>
             </div>

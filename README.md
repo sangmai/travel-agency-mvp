@@ -133,7 +133,15 @@ lúc relay hỏng, không dùng làm đường chính.
 | Avis | `content/reviews.json` |
 | Agency, licence, đội ngũ | `content/site.json` |
 | FAQ trang chủ, vùng miền, envies | `content/*.json` |
+| **Trang chủ** | `content/home.json` — hero, 9 tiêu đề mục, form devis, bandeau cuối |
 | **7 trang guide** | `content/guides/*.json` — tiêu đề, mô tả SEO, ảnh share, **39 câu FAQ** |
+
+Hai quy ước để text sửa được từ CMS mà vẫn giữ định dạng và số liệu:
+
+- `*chữ*` → in nghiêng màu ambre. Dấu sao không xuất hiện trong tiếng Pháp nên không cần escape.
+- `{ville}`, `{note}`, `{avis}`, `{delai}`, `{annee}` → lấy giá trị thật từ
+  `site.json` và từ avis, thay vì chép tay. Gõ sai một khoá thì **build đỏ**,
+  chứ không phải in ra `{vile}` giữa tiêu đề.
 
 Trang guide tách theo nguyên tắc: **cái gì già đi thì vào CMS**. Quy định visa
 đổi, giá thay đổi, mùa chính xác hơn — đó là câu trả lời, không phải bố cục.

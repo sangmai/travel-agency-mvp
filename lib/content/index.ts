@@ -11,6 +11,7 @@ import type { PhotoId, PlaceId, Review, Stop, Trip } from "./types";
 export type * from "./types";
 
 export const getSite = source.site;
+export const getHome = source.home;
 
 /** Lève si la page n'a pas de contenu : mieux vaut un build rouge qu'une
  *  page guide servie sans titre ni questions. */

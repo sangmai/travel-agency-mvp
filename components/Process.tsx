@@ -1,18 +1,20 @@
 import { SectionHead } from "./ui";
-import { getProcess } from "@/lib/content";
+import { Accent } from "@/lib/text";
+import { getProcess, getHome } from "@/lib/content";
 
 /** La numérotation est légitime ici, et seulement ici : ces étapes forment
  *  une séquence réelle où l'ordre porte une information utile. */
 export async function Process() {
+  const h = (await getHome()).process;
   const steps = await getProcess();
 
   return (
     <section className="sec sec--sand" id="methode">
       <div className="wrap">
         <SectionHead
-          kicker="Notre méthode"
-          title="Comment naît votre voyage"
-          lede="Un seul interlocuteur du premier message jusqu'à votre retour. Aucune des trois premières étapes ne vous engage."
+          kicker={h.kicker}
+          title={<Accent>{h.title}</Accent>}
+          lede={h.lede}
         />
         <ol className="flow">
           {steps.map((s) => (

@@ -1,5 +1,6 @@
 import { Photo } from "./Photo";
-import { aggregate, getReviews, getSite } from "@/lib/content";
+import { aggregate, getReviews, getSite, getHome } from "@/lib/content";
+import { Accent, fill } from "@/lib/text";
 import { score } from "@/lib/format";
 
 /**
@@ -15,14 +16,19 @@ export async function Hero() {
   const [site, reviews] = await Promise.all([getSite(), getReviews()]);
   const note = aggregate(reviews);
 
-  const proof = [
-    /* Calculé sur les avis réellement publiés, et non déclaré : la valeur
-       qui figurait ici était inventée. */
-    { v: `${score(note.value)}/5`, l: `sur ${note.count} avis publiés` },
-    { v: site.responseTime, l: "pour recevoir votre itinéraire" },
-    { v: `Depuis ${site.founded}`, l: `une agence locale, à ${site.address.city}` },
-    { v: "Sans intermédiaire", l: "vous parlez à ceux qui opèrent" },
-  ];
+  const h = (await getHome()).hero;
+
+  /* Les valeurs viennent du site et des avis réels ; seules les formulations
+     sont éditables. Un chiffre recopié à la main dans un texte finit toujours
+     par contredire celui que la page calcule. */
+  const vars = {
+    note: score(note.value),
+    avis: note.count,
+    delai: site.responseTime,
+    annee: site.founded,
+    ville: site.address.city,
+  };
+  const t = (x: string) => fill(x, vars);
 
   return (
     <section className="hero over">
@@ -32,36 +38,32 @@ export async function Hero() {
       <div className="hero__veil" />
 
       <p className="caption">
-        Plateau de Dong Van, Ha Giang
-        <b>23°N</b>
+        {h.caption}
+        <b>{h.captionNote}</b>
       </p>
 
       <div className="wrap wrap--wide hero__in">
-        <p className="kicker">Agence locale francophone · {site.address.city}</p>
+        <p className="kicker">{t(h.kicker)}</p>
 
         <h1 className="d1">
-          Il y a mille façons de voyager au Vietnam. <em>Trouvons la vôtre.</em>
+          <Accent>{t(h.title)}</Accent>
         </h1>
 
-        <p className="hero__sub">
-          De la brume sur les karsts de Ha Giang aux barques du marché flottant
-          de Cai Rang, nous composons votre itinéraire étape par étape — depuis
-          {" "}{site.address.city}, avec ceux qui connaissent la route.
-        </p>
+        <p className="hero__sub">{t(h.sub)}</p>
 
         <div className="hero__cta">
-          <a className="btn btn--amber" href="#devis">Composer mon voyage</a>
-          <a className="btn btn--glass" href="#circuits">Voir les circuits et les prix</a>
+          <a className="btn btn--amber" href="#devis">{h.ctaPrimary}</a>
+          <a className="btn btn--glass" href="#circuits">{h.ctaSecondary}</a>
         </div>
       </div>
 
       <div className="proof">
         <div className="wrap wrap--wide">
           <div className="proof__grid">
-            {proof.map((p) => (
-              <div className="proof__cell" key={p.l}>
-                <b>{p.v}</b>
-                <span>{p.l}</span>
+            {h.proof.map((p) => (
+              <div className="proof__cell" key={p.label}>
+                <b>{t(p.value)}</b>
+                <span>{t(p.label)}</span>
               </div>
             ))}
           </div>

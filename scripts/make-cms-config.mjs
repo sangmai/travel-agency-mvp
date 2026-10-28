@@ -46,6 +46,46 @@ const select = (nom, label, options, prof, extra = []) => {
   ].join("\n");
 };
 
+/* Un en-tête de section : trois champs, répétés douze fois. Les générer
+   évite douze copies qui divergeraient au premier changement de libellé. */
+const SECTIONS = [
+  ["regions", "Les trois régions"], ["envies", "Par envie"],
+  ["circuits", "Les circuits"], ["process", "Notre méthode"],
+  ["comparatif", "Agence locale ou TO"], ["saison", "Quand partir"],
+  ["budget", "Budget"], ["avis", "Avis"], ["faq", "Questions fréquentes"],
+];
+
+const HINT_ACCENT =
+  "Un mot entre *astérisques* s'affiche en ambre et en italique. " +
+  "Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site.";
+
+const headSveltia = (cle, label, prof) => {
+  const t = " ".repeat(prof);
+  return [
+    `${t}- name: ${cle}`,
+    `${t}  label: ${label}`,
+    `${t}  widget: object`,
+    `${t}  collapsed: true`,
+    `${t}  fields:`,
+    `${t}    - { name: kicker, label: Surtitre, widget: string }`,
+    `${t}    - { name: title, label: Titre, widget: string, hint: "${HINT_ACCENT}" }`,
+    `${t}    - { name: lede, label: Chapô, widget: text, required: false }`,
+  ].join("\n");
+};
+
+const headPages = (cle, label, prof) => {
+  const t = " ".repeat(prof);
+  return [
+    `${t}- name: ${cle}`,
+    `${t}  label: ${label}`,
+    `${t}  type: object`,
+    `${t}  fields:`,
+    `${t}    - { name: kicker, label: Surtitre, type: string, required: true }`,
+    `${t}    - { name: title, label: Titre, type: string, required: true, description: "${HINT_ACCENT}" }`,
+    `${t}    - { name: lede, label: Chapô, type: text }`,
+  ].join("\n");
+};
+
 const OPT_PHOTOS = photos.map((p) => ({ label: p, value: p }));
 const OPT_LIEUX = lieux.map((l) => ({ label: `${l.fr} (${l.id})`, value: l.id }));
 const OPT_CIRCUITS = circuits.map((c) => ({ label: `${c.name} — ${c.days} j`, value: c.slug }));
@@ -246,6 +286,55 @@ ${select("trip", "Voyage concerné", OPT_CIRCUITS, 14, ["required: false"])}
           # Aucun champ « note globale ». Une note agrégée ne se saisit pas :
           # elle se calcule depuis les avis publiés. Le champ qui existait ici
           # a servi à déclarer à Google une moyenne inventée.
+
+      - name: accueil
+        label: Page d'accueil
+        file: content/home.json
+        fields:
+          - name: hero
+            label: Bandeau d'ouverture
+            widget: object
+            fields:
+              - { name: caption, label: Légende de la photo, widget: string }
+              - { name: captionNote, label: Latitude, widget: string }
+              - { name: kicker, label: Surtitre, widget: string }
+              - { name: title, label: Titre principal (h1), widget: string, hint: "⚠️ Doit contenir « voyage au Vietnam » ou « voyager au Vietnam » : c'est le mot-clé visé, et il a déjà disparu deux fois d'ici. ${HINT_ACCENT}" }
+              - { name: sub, label: Accroche, widget: text }
+              - { name: ctaPrimary, label: Bouton principal, widget: string }
+              - { name: ctaSecondary, label: Bouton secondaire, widget: string }
+              - name: proof
+                label: Chiffres de confiance
+                widget: list
+                collapsed: true
+                summary: '{{fields.value}} — {{fields.label}}'
+                fields:
+                  - { name: value, label: Valeur, widget: string, hint: "${HINT_ACCENT}" }
+                  - { name: label, label: Légende, widget: string }
+${SECTIONS.map(([c, l]) => headSveltia(c, l, 10)).join("\n")}
+          - name: devis
+            label: Formulaire de devis
+            widget: object
+            collapsed: true
+            fields:
+              - { name: kicker, label: Surtitre, widget: string }
+              - { name: title, label: Titre, widget: string, hint: "${HINT_ACCENT}" }
+              - { name: lede, label: Chapô, widget: text }
+              - name: promises
+                label: Nos engagements
+                widget: list
+                collapsed: true
+                summary: '{{fields.title}}'
+                fields:
+                  - { name: title, label: Promesse, widget: string }
+                  - { name: detail, label: Précision, widget: text }
+              - { name: submit, label: Texte du bouton, widget: string }
+          - name: closing
+            label: Bandeau de clôture
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Titre, widget: string }
+              - { name: body, label: Texte, widget: text }
 
       - name: faq
         label: Questions fréquentes
@@ -537,6 +626,55 @@ content:
         fields:
           - { name: name, label: Nom, type: string, required: true }
           - { name: role, label: Fonction, type: string, required: true }
+
+  - name: accueil
+    label: Page d'accueil
+    type: file
+    path: content/home.json
+    format: json
+    fields:
+      - name: hero
+        label: Bandeau d'ouverture
+        type: object
+        fields:
+          - { name: caption, label: Légende de la photo, type: string, required: true }
+          - { name: captionNote, label: Latitude, type: string, required: true }
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre principal (h1), type: string, required: true, description: "⚠️ Doit contenir « voyage au Vietnam » : c'est le mot-clé visé. ${HINT_ACCENT}" }
+          - { name: sub, label: Accroche, type: text, required: true }
+          - { name: ctaPrimary, label: Bouton principal, type: string, required: true }
+          - { name: ctaSecondary, label: Bouton secondaire, type: string, required: true }
+          - name: proof
+            label: Chiffres de confiance
+            type: object
+            list:
+              collapsible: { collapsed: true, summary: "{value} — {label}" }
+            fields:
+              - { name: value, label: Valeur, type: string, required: true, description: "${HINT_ACCENT}" }
+              - { name: label, label: Légende, type: string, required: true }
+${SECTIONS.map(([c, l]) => headPages(c, l, 6)).join("\n")}
+      - name: devis
+        label: Formulaire de devis
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "${HINT_ACCENT}" }
+          - { name: lede, label: Chapô, type: text, required: true }
+          - name: promises
+            label: Nos engagements
+            type: object
+            list:
+              collapsible: { collapsed: true, summary: "{title}" }
+            fields:
+              - { name: title, label: Promesse, type: string, required: true }
+              - { name: detail, label: Précision, type: text, required: true }
+          - { name: submit, label: Texte du bouton, type: string, required: true }
+      - name: closing
+        label: Bandeau de clôture
+        type: object
+        fields:
+          - { name: title, label: Titre, type: string, required: true }
+          - { name: body, label: Texte, type: text, required: true }
 
   - name: faq
     label: Questions fréquentes

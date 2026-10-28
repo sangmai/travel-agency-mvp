@@ -1,17 +1,19 @@
 import { ReviewCard, SectionHead } from "./ui";
-import { aggregate, getReviews } from "@/lib/content";
+import { Accent, fill } from "@/lib/text";
+import { aggregate, getReviews, getHome } from "@/lib/content";
 import { score } from "@/lib/format";
 
 export async function Reviews() {
+  const h = (await getHome()).avis;
   const reviews = await getReviews({ featured: true });
 
   return (
     <section className="sec sec--sand" id="avis">
       <div className="wrap">
         <SectionHead
-          kicker="Avis vérifiés"
-          title={<>{score(aggregate(reviews).value)} sur 5, <em>réserves comprises</em></>}
-          lede="Nous publions les avis tels qu'ils nous parviennent, y compris ceux qui pointent un hôtel décevant ou une étape ratée. Un mur de cinq étoiles sans une seule réserve n'a jamais aidé personne à choisir."
+          kicker={h.kicker}
+          title={<Accent>{fill(h.title, { note: score(aggregate(reviews).value) })}</Accent>}
+          lede={h.lede}
         />
         <div className="revs">
           {reviews.map((r) => (

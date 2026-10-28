@@ -1,6 +1,7 @@
 import { DataTable } from "./DataTable";
 import { SectionHead } from "./ui";
-import { getSeasons } from "@/lib/content";
+import { Accent } from "@/lib/text";
+import { getSeasons, getHome } from "@/lib/content";
 
 /**
  * « Quand partir au Vietnam » est l'une des requêtes informationnelles les
@@ -58,13 +59,14 @@ export async function SeasonTable({ note }: { note?: React.ReactNode }) {
 }
 
 export async function WhenToGo() {
+  const h = (await getHome()).saison;
   return (
     <section className="sec" id="quand-partir">
       <div className="wrap">
         <SectionHead
-          kicker="Saisonnalité"
-          title="Quand partir au Vietnam ?"
-          lede="Mars et avril sont les deux meilleurs mois pour traverser le pays du nord au sud : les trois régions y sont simultanément sèches et douces. Octobre est à éviter au Centre, où Hué et Hoi An peuvent être inondés, mais c'est l'un des plus beaux mois au Nord. Autrement dit, il n'existe pas de mauvaise période pour le Vietnam — seulement un itinéraire à adapter au mois choisi."
+          kicker={h.kicker}
+          title={<Accent>{h.title}</Accent>}
+          lede={h.lede}
         />
         <SeasonTable
           note={

@@ -1,6 +1,7 @@
 import { DataTable } from "./DataTable";
 import { SectionHead } from "./ui";
-import { getBudget } from "@/lib/content";
+import { Accent } from "@/lib/text";
+import { getBudget, getHome } from "@/lib/content";
 
 /**
  * Deuxième requête informationnelle du marché après la saisonnalité. Donner
@@ -30,13 +31,14 @@ export async function BudgetTable({ note }: { note?: React.ReactNode }) {
 }
 
 export async function Budget() {
+  const h = (await getHome()).budget;
   return (
     <section className="sec sec--sand" id="budget">
       <div className="wrap">
         <SectionHead
-          kicker="Budget"
-          title="Combien coûte un voyage au Vietnam ?"
-          lede="Comptez 55 à 75 € par jour et par personne en gamme confort, 85 à 120 € en gamme charme, et 180 à 300 € en gamme signature — guide francophone, chauffeur privé, hébergement et petits-déjeuners inclus. Les vols internationaux Paris–Hanoï s'ajoutent à ce budget, entre 600 et 950 € selon la saison."
+          kicker={h.kicker}
+          title={<Accent>{h.title}</Accent>}
+          lede={h.lede}
         />
         <BudgetTable
           note={

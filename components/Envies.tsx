@@ -1,6 +1,7 @@
 import { Photo } from "./Photo";
 import { SectionHead } from "./ui";
-import { getEnvies } from "@/lib/content";
+import { Accent } from "@/lib/text";
+import { getEnvies, getHome } from "@/lib/content";
 
 /**
  * Entrée par l'envie, juste après le hero — c'est la question que le visiteur
@@ -9,15 +10,16 @@ import { getEnvies } from "@/lib/content";
  * ainsi.
  */
 export async function Envies() {
+  const h = (await getHome()).envies;
   const envies = await getEnvies();
 
   return (
     <section className="sec" id="envies">
       <div className="wrap wrap--wide">
         <SectionHead
-          kicker="Par où commencer"
-          title={<>Dites-nous <em>ce que vous cherchez</em></>}
-          lede="Six façons d'aborder le pays. Aucune n'est figée — elles servent à démarrer la conversation, pas à vous ranger dans une case."
+          kicker={h.kicker}
+          title={<Accent>{h.title}</Accent>}
+          lede={h.lede}
         />
 
         <ul className="tiles">

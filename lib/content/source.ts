@@ -14,6 +14,7 @@
    Decap et Sveltia ne savent pas éditer un tableau au premier niveau. */
 import type {
   Guide,
+  Home,
   BudgetRow,
   Comparison,
   Envie,
@@ -30,6 +31,7 @@ import type {
 } from "./types";
 
 import siteJson from "@/content/site.json";
+import homeJson from "@/content/home.json";
 import placesJson from "@/content/places.json";
 import photosJson from "@/content/photos.json";
 import regionsJson from "@/content/regions.json";
@@ -79,6 +81,7 @@ export const source = {
   budget: async (): Promise<BudgetRow[]> => budgetJson,
   faq: async (): Promise<Faq[]> => faqJson.faq,
   guides: async (): Promise<Guide[]> => GUIDES,
+  home: async (): Promise<Home> => homeJson,
   reviews: async (): Promise<Review[]> => reviewsJson.reviews,
   story: async (): Promise<Story> => storyJson,
   carnet: async (): Promise<string[]> => carnetJson,

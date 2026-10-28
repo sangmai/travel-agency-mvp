@@ -17,6 +17,7 @@ import { Footer } from "@/components/Footer";
 import { Closing, JsonLd } from "@/components/ui";
 import { breadcrumb, organisationNode, siteId, touristTripNode } from "@/components/JsonLd";
 import {
+  getHome,
   getFaq,
   getReviews,
   getSite,
@@ -30,11 +31,12 @@ import {
  * Aucun composant client ; la seule animation est en CSS.
  */
 export default async function Home() {
-  const [site, trips, faq, featured] = await Promise.all([
+  const [site, trips, faq, featured, home] = await Promise.all([
     getSite(),
     getTrips(),
     getFaq(),
     getReviews({ featured: true }),
+    getHome(),
   ]);
 
   const tripNodes = await Promise.all(
@@ -100,10 +102,7 @@ export default async function Home() {
         <Budget />
         <Faq />
         <QuoteForm />
-        <Closing
-          title="Le Vietnam vous attend. Nous aussi."
-          body="Un message suffit pour recevoir un itinéraire conçu pour vous, chiffré et sans engagement."
-        />
+        <Closing title={home.closing.title} body={home.closing.body} />
       </main>
 
       <Footer />

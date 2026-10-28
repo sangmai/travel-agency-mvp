@@ -176,3 +176,29 @@ export type Guide = {
   photoAlt: string;
   faq: Faq[];
 };
+
+/** En-tête de section : « *mot* » donne l'accent ambre, « {cle} » une valeur
+ *  du site (voir lib/text.tsx). */
+export type Head = { kicker: string; title: string; lede?: string };
+
+export type Home = {
+  hero: Head & {
+    caption: string;
+    captionNote: string;
+    sub: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    proof: { value: string; label: string }[];
+  };
+  regions: Head;
+  envies: Head;
+  circuits: Head;
+  process: Head;
+  comparatif: Head;
+  saison: Head;
+  budget: Head;
+  avis: Head;
+  faq: Head;
+  devis: Head & { promises: { title: string; detail: string }[]; submit: string };
+  closing: { title: string; body: string };
+};

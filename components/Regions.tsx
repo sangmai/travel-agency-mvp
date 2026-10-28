@@ -1,12 +1,14 @@
 import { Photo, photoCaption } from "./Photo";
 import { SectionHead } from "./ui";
-import { getRegions } from "@/lib/content";
+import { Accent } from "@/lib/text";
+import { getRegions, getHome } from "@/lib/content";
 
 /**
  * Grille décalée, photo et texte alternant de côté : une rangée de cartes
  * identiques se lit comme un catalogue, pas comme une invitation.
  */
 export async function Regions() {
+  const h = (await getHome()).regions;
   const regions = await getRegions();
   const captions = await Promise.all(regions.map((r) => photoCaption(r.photo)));
 
@@ -14,9 +16,9 @@ export async function Regions() {
     <section className="sec sec--sand" id="regions">
       <div className="wrap">
         <SectionHead
-          kicker="Choisir sa région"
-          title={<>Il n&apos;y a pas un Vietnam, <em>il y en a trois</em></>}
-          lede="Le pays s'étire sur 1 650 kilomètres du nord au sud, soit la distance Lille–Marseille parcourue deux fois. Les trois régions ont des climats décalés, des cuisines distinctes et des paysages sans rapport entre eux. Le premier arbitrage d'un voyage au Vietnam est celui-là : tout traverser, ou en approfondir une seule."
+          kicker={h.kicker}
+          title={<Accent>{h.title}</Accent>}
+          lede={h.lede}
         />
 
         {regions.map((r, i) => (

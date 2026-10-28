@@ -280,6 +280,117 @@ content:
           - { name: name, label: Nom, type: string, required: true }
           - { name: role, label: Fonction, type: string, required: true }
 
+  - name: accueil
+    label: Page d'accueil
+    type: file
+    path: content/home.json
+    format: json
+    fields:
+      - name: hero
+        label: Bandeau d'ouverture
+        type: object
+        fields:
+          - { name: caption, label: Légende de la photo, type: string, required: true }
+          - { name: captionNote, label: Latitude, type: string, required: true }
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre principal (h1), type: string, required: true, description: "⚠️ Doit contenir « voyage au Vietnam » : c'est le mot-clé visé. Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: sub, label: Accroche, type: text, required: true }
+          - { name: ctaPrimary, label: Bouton principal, type: string, required: true }
+          - { name: ctaSecondary, label: Bouton secondaire, type: string, required: true }
+          - name: proof
+            label: Chiffres de confiance
+            type: object
+            list:
+              collapsible: { collapsed: true, summary: "{value} — {label}" }
+            fields:
+              - { name: value, label: Valeur, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+              - { name: label, label: Légende, type: string, required: true }
+      - name: regions
+        label: Les trois régions
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text }
+      - name: envies
+        label: Par envie
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text }
+      - name: circuits
+        label: Les circuits
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text }
+      - name: process
+        label: Notre méthode
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text }
+      - name: comparatif
+        label: Agence locale ou TO
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text }
+      - name: saison
+        label: Quand partir
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text }
+      - name: budget
+        label: Budget
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text }
+      - name: avis
+        label: Avis
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text }
+      - name: faq
+        label: Questions fréquentes
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text }
+      - name: devis
+        label: Formulaire de devis
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text, required: true }
+          - name: promises
+            label: Nos engagements
+            type: object
+            list:
+              collapsible: { collapsed: true, summary: "{title}" }
+            fields:
+              - { name: title, label: Promesse, type: string, required: true }
+              - { name: detail, label: Précision, type: text, required: true }
+          - { name: submit, label: Texte du bouton, type: string, required: true }
+      - name: closing
+        label: Bandeau de clôture
+        type: object
+        fields:
+          - { name: title, label: Titre, type: string, required: true }
+          - { name: body, label: Texte, type: text, required: true }
+
   - name: faq
     label: Questions fréquentes
     type: file

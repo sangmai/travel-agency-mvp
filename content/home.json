@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "caption": "Plateau de Dong Van, Ha Giang",
+    "captionNote": "23°N",
+    "kicker": "Agence locale francophone · {ville}",
+    "title": "Il y a mille façons de voyager au Vietnam. *Trouvons la vôtre.*",
+    "sub": "De la brume sur les karsts de Ha Giang aux barques du marché flottant de Cai Rang, nous composons votre itinéraire étape par étape — depuis  {ville}, avec ceux qui connaissent la route.",
+    "ctaPrimary": "Composer mon voyage",
+    "ctaSecondary": "Voir les circuits et les prix",
+    "proof": [
+      {
+        "value": "{note}/5",
+        "label": "sur {avis} avis publiés"
+      },
+      {
+        "value": "{delai}",
+        "label": "pour recevoir votre itinéraire"
+      },
+      {
+        "value": "Depuis {annee}",
+        "label": "une agence locale, à {ville}"
+      },
+      {
+        "value": "Sans intermédiaire",
+        "label": "vous parlez à ceux qui opèrent"
+      }
+    ]
+  },
+  "regions": {
+    "kicker": "Choisir sa région",
+    "title": "Il n'y a pas un Vietnam, *il y en a trois*",
+    "lede": "Le pays s'étire sur 1 650 kilomètres du nord au sud, soit la distance Lille–Marseille parcourue deux fois. Les trois régions ont des climats décalés, des cuisines distinctes et des paysages sans rapport entre eux. Le premier arbitrage d'un voyage au Vietnam est celui-là : tout traverser, ou en approfondir une seule."
+  },
+  "envies": {
+    "kicker": "Par où commencer",
+    "title": "Dites-nous *ce que vous cherchez*",
+    "lede": "Six façons d'aborder le pays. Aucune n'est figée — elles servent à démarrer la conversation, pas à vous ranger dans une case."
+  },
+  "circuits": {
+    "kicker": "Itinéraires",
+    "title": "Des circuits éprouvés, *et aucun figé*",
+    "lede": "Ceux que nos voyageurs réservent le plus souvent. Ils servent de point de départ, pas de produit fini : la durée, les étapes et la gamme d'hébergement se réajustent librement."
+  },
+  "process": {
+    "kicker": "Notre méthode",
+    "title": "Comment naît votre voyage",
+    "lede": "Un seul interlocuteur du premier message jusqu'à votre retour. Aucune des trois premières étapes ne vous engage."
+  },
+  "comparatif": {
+    "kicker": "Comparatif",
+    "title": "Agence locale ou *tour-opérateur français* ?",
+    "lede": "Une agence locale opère elle-même le voyage ; un tour-opérateur français sous-traite à un réceptif vietnamien et ajoute 20 à 35 % de marge d'intermédiation. En contrepartie, le tour-opérateur inclut les vols et relève de la garantie financière APST. Voici la comparaison poste par poste, limites comprises."
+  },
+  "saison": {
+    "kicker": "Saisonnalité",
+    "title": "Quand partir au Vietnam ?",
+    "lede": "Mars et avril sont les deux meilleurs mois pour traverser le pays du nord au sud : les trois régions y sont simultanément sèches et douces. Octobre est à éviter au Centre, où Hué et Hoi An peuvent être inondés, mais c'est l'un des plus beaux mois au Nord. Autrement dit, il n'existe pas de mauvaise période pour le Vietnam — seulement un itinéraire à adapter au mois choisi."
+  },
+  "budget": {
+    "kicker": "Budget",
+    "title": "Combien coûte un voyage au Vietnam ?",
+    "lede": "Comptez 55 à 75 € par jour et par personne en gamme confort, 85 à 120 € en gamme charme, et 180 à 300 € en gamme signature — guide francophone, chauffeur privé, hébergement et petits-déjeuners inclus. Les vols internationaux Paris–Hanoï s'ajoutent à ce budget, entre 600 et 950 € selon la saison."
+  },
+  "avis": {
+    "kicker": "Avis vérifiés",
+    "title": "{note} sur 5, *réserves comprises*",
+    "lede": "Nous publions les avis tels qu'ils nous parviennent, y compris ceux qui pointent un hôtel décevant ou une étape ratée. Un mur de cinq étoiles sans une seule réserve n'a jamais aidé personne à choisir."
+  },
+  "faq": {
+    "kicker": "Questions fréquentes",
+    "title": "Ce que les voyageurs nous demandent"
+  },
+  "devis": {
+    "kicker": "Devis sur mesure",
+    "title": "Racontez-nous *le Vietnam que vous avez en tête*",
+    "lede": "Quelques lignes suffisent pour commencer. Si vous hésitez encore sur les dates ou la durée, dites-le : c'est précisément ce dont nous discutons ensuite.",
+    "promises": [
+      {
+        "title": "Réponse sous 48 heures ouvrées",
+        "detail": "Un itinéraire complet jour par jour, hôtels nommés, prix ferme. Pas une brochure."
+      },
+      {
+        "title": "Gratuit et sans engagement",
+        "detail": "Vous ne payez rien tant que vous n'avez pas validé le programme et versé l'acompte."
+      },
+      {
+        "title": "Retouches illimitées",
+        "detail": "Une étape en plus, un hôtel différent, deux jours de moins : on refait le devis sans frais."
+      },
+      {
+        "title": "Un seul interlocuteur francophone",
+        "detail": "La même personne du premier message jusqu'à votre retour, joignable 7j/7 sur place."
+      }
+    ],
+    "submit": "Recevoir mon itinéraire"
+  },
+  "closing": {
+    "title": "Le Vietnam vous attend. Nous aussi.",
+    "body": "Un message suffit pour recevoir un itinéraire conçu pour vous, chiffré et sans engagement."
+  }
+}
