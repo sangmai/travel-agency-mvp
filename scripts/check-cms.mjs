@@ -84,6 +84,56 @@ for (const collection of cfg.collections ?? []) {
   }
 }
 
+/* ------------------------------------------------- Pages CMS ------------
+ *
+ * Mêmes contrôles de noms, sur la grammaire de Pages CMS : `type` et `list`
+ * au lieu de `widget`.
+ *
+ * Pas de contrôle de fraîcheur ici : le prebuild régénère .pages.yml juste
+ * avant, donc une comparaison avec le disque serait toujours satisfaite. Le
+ * fait qu'il doive être committé est signalé par le générateur lui-même, au
+ * moment où il constate un changement.
+ */
+const pcfg = parse(readFileSync(path.join(ROOT, ".pages.yml"), "utf8"));
+
+function comparerPages(valeur, champ, chemin, fichier) {
+  if (Array.isArray(valeur)) {
+    const premier = valeur[0];
+    if (premier && typeof premier === "object") comparerPages(premier, champ, chemin, fichier);
+    return;
+  }
+  if (!valeur || typeof valeur !== "object") return;
+
+  const liste = Array.isArray(champ) ? champ : champ?.fields;
+  if (!liste) return;
+  const declares = new Set(liste.map((f) => f.name));
+
+  for (const cle of Object.keys(valeur)) {
+    if (!declares.has(cle)) {
+      ecarts.push(`.pages.yml → ${fichier} : « ${chemin}${cle} » existe dans le contenu mais n'est pas déclaré.`);
+      continue;
+    }
+    comparerPages(valeur[cle], liste.find((f) => f.name === cle), `${chemin}${cle}.`, fichier);
+  }
+  for (const d of declares) {
+    const decl = liste.find((f) => f.name === d);
+    if (!(d in valeur) && decl?.required) {
+      ecarts.push(`.pages.yml → ${fichier} : « ${chemin}${d} » est obligatoire mais absent du contenu.`);
+    }
+  }
+}
+
+for (const e of pcfg.content ?? []) {
+  if (e.type === "file") {
+    comparerPages(lire(e.path), e.fields, "", e.path);
+  } else if (e.type === "collection") {
+    const { readdirSync } = await import("node:fs");
+    for (const nom of readdirSync(path.join(ROOT, e.path))) {
+      if (nom.endsWith(".json")) comparerPages(lire(`${e.path}/${nom}`), e.fields, "", `${e.path}/${nom}`);
+    }
+  }
+}
+
 if (ecarts.length > 0) {
   console.error(`\ncms : ${ecarts.length} écart(s) entre public/admin/config.yml et content/\n`);
   for (const e of ecarts) console.error(`  ✗ ${e}`);
@@ -91,4 +141,4 @@ if (ecarts.length > 0) {
   process.exit(1);
 }
 
-console.log("cms : config.yml et content/ concordent");
+console.log("cms : config.yml, .pages.yml et content/ concordent");

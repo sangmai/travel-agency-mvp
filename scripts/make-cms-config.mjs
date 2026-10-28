@@ -13,7 +13,7 @@
  * Le fichier produit n'est pas versionné : il se régénère au prebuild, comme
  * les variantes d'images.
  */
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const ROOT = path.join(import.meta.dirname, "..");
@@ -272,7 +272,294 @@ ${select("photo", "Photo", OPT_PHOTOS, 14)}
 `;
 
 writeFileSync(path.join(ROOT, "public/admin/config.yml"), yml);
+
+/* ------------------------------------------------------------ Pages CMS --
+ *
+ * Configuration d'essai, pour comparer les deux outils sur le même contenu.
+ *
+ * Deux différences de fonctionnement comptent ici. Pages CMS lit sa
+ * configuration dans le dépôt GitHub et non sur le site déployé : .pages.yml
+ * doit donc être versionné, là où le config.yml de Sveltia se régénère au
+ * build et reste ignoré par git. Et il sait référencer une collection en
+ * direct, ce qui évite de figer la liste des circuits dans un menu.
+ */
+const vals = (options, prof) =>
+  options
+    .map((o) => `\n${" ".repeat(prof)}- { name: "${o.value}", label: "${o.label}" }`)
+    .join("");
+
+const pages = `# ⚠️ FICHIER GÉNÉRÉ — ne pas modifier à la main.
+# Source : scripts/make-cms-config.mjs. Contrairement au config.yml de
+# Sveltia, celui-ci est versionné : Pages CMS le lit dans le dépôt GitHub,
+# pas sur le site déployé. S'il n'est pas à jour, la construction échoue.
+
+media:
+  - name: photos
+    label: Photographies
+    input: assets/photos
+    output: /photos/v
+    categories: [image]
+    rename: safe
+
+content:
+  - name: circuits
+    label: Circuits
+    type: collection
+    path: content/itineraries
+    format: json
+    filename: "{fields.slug}.json"
+    subfolders: false
+    view:
+      fields: [name, days, priceFrom, region]
+      sort: [days, priceFrom, name]
+    fields:
+      - { name: slug, label: Identifiant d'URL, type: string, required: true, pattern: "^[a-z0-9-]+$", description: "Sans accent ni espace. Change l'adresse de la page." }
+      - { name: code, label: Code voyage, type: string, required: true }
+      - { name: name, label: Nom, type: string, required: true }
+      - { name: tagline, label: Sous-titre, type: string, required: true }
+      - { name: days, label: Durée (jours), type: number, required: true, options: { min: 1, step: 1 } }
+      - { name: priceFrom, label: Prix à partir de (€), type: number, required: true, options: { min: 0, step: 10 }, description: "Par personne, hors vols. Ce prix part aussi dans les données structurées Google." }
+      - name: niveau
+        label: Niveau
+        type: select
+        required: true
+        options:
+          values: [Facile, Facile à modéré, Modéré, Modéré à soutenu]
+      - { name: confort, label: Hébergement, type: string, required: true }
+      - { name: type, label: Type de voyage, type: string, required: true }
+      - { name: region, label: Régions, type: string, required: true }
+      - { name: saison, label: Meilleure saison, type: string, required: true }
+      - { name: groupe, label: Groupe, type: string, required: true }
+      - name: photo
+        label: Photo
+        type: select
+        required: true
+        options:
+          values:${vals(OPT_PHOTOS, 12)}
+      - { name: intro, label: Chapô, type: text, required: true }
+      - { name: pitch, label: Accroche (page d'accueil), type: text, required: true }
+      - { name: audience, label: Pour qui, type: string, required: true }
+      - { name: tag, label: Étiquette, type: string, description: "Ex. « Le plus demandé ». Laisser vide si aucune." }
+      - { name: plus, label: Les plus, type: string, list: true }
+      - name: stops
+        label: Étapes du parcours
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{place}" }
+        fields:
+          - name: place
+            label: Lieu
+            type: select
+            required: true
+            options:
+              values:${vals(OPT_LIEUX, 16)}
+          - { name: label, label: Libellé affiché, type: string, description: "Seulement s'il diffère du nom du lieu." }
+      - name: program
+        label: Programme jour par jour
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "Jour {n} — {title}" }
+        fields:
+          - { name: n, label: Jour, type: string, required: true, description: "« 3 », ou « 8-9 » pour deux journées décrites ensemble." }
+          - { name: title, label: Titre, type: string, required: true }
+          - { name: body, label: Texte, type: text, required: true }
+          - name: facts
+            label: Données pratiques
+            type: object
+            list:
+              collapsible: { collapsed: true, summary: "{key} · {value}" }
+            fields:
+              - name: key
+                label: Type
+                type: select
+                required: true
+                options:
+                  values: [trajet, marche, velo, bateau, vol, nuit, repas]
+              - { name: value, label: Valeur, type: string, required: true, description: "Ex. « Transfert 2 h (100 km) »." }
+          - name: photo
+            label: Photo
+            type: select
+            options:
+              values:${vals(OPT_PHOTOS, 16)}
+      - { name: nights, label: Hébergement nuit par nuit, type: string, list: true }
+      - { name: included, label: Le prix comprend, type: string, list: true }
+      - { name: excluded, label: Le prix ne comprend pas, type: string, list: true }
+
+  - name: avis
+    label: Avis
+    type: file
+    path: content/reviews.json
+    format: json
+    fields:
+      - name: reviews
+        label: Avis
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{author} — {rating}/5" }
+        fields:
+          - { name: author, label: Auteur, type: string, required: true }
+          - { name: city, label: Ville, type: string, required: true }
+          - { name: date, label: Date de départ, type: date, required: true, options: { format: "yyyy-MM-dd" } }
+          - { name: rating, label: Note sur 5, type: number, required: true, options: { min: 1, max: 5, step: 1 } }
+          - { name: body, label: Texte, type: text, required: true }
+          - { name: title, label: Titre, type: string }
+          # Référence vivante vers la collection des circuits : la liste se met
+          # à jour toute seule, là où Sveltia demande un menu figé au build.
+          - name: trip
+            label: Voyage concerné
+            type: reference
+            options:
+              collection: circuits
+              value: "{fields.slug}"
+              label: "{fields.name} — {fields.days} j"
+              search: "name,slug"
+          - { name: featured, label: Afficher sur la page d'accueil, type: boolean }
+
+  - name: site
+    label: Agence et coordonnées
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: name, label: Nom, type: string, required: true }
+      - { name: legalName, label: Raison sociale, type: string, required: true }
+      - { name: url, label: URL du site, type: string, required: true }
+      - { name: locale, label: Locale, type: string, hidden: true }
+      - { name: lang, label: Langue, type: string, hidden: true }
+      - { name: tagline, label: Phrase de positionnement, type: string, required: true }
+      - { name: founded, label: En activité depuis, type: string, required: true }
+      - { name: license, label: Licence tour-opérateur international, type: string, required: true, description: "Affichée sur le site et déclarée à Google : doit être exacte." }
+      - { name: membership, label: Autorité de tutelle, type: string, required: true }
+      - { name: phone, label: Téléphone (technique), type: string, required: true }
+      - { name: phoneDisplay, label: Téléphone affiché, type: string, required: true }
+      - { name: phoneAlt, label: Second numéro, type: string, required: true }
+      - { name: whatsapp, label: WhatsApp, type: string, required: true }
+      - { name: email, label: E-mail, type: string, required: true }
+      - name: address
+        label: Adresse
+        type: object
+        fields:
+          - { name: street, label: Rue, type: string, required: true }
+          - { name: city, label: Ville, type: string, required: true }
+          - { name: region, label: Région, type: string, required: true }
+          - { name: postalCode, label: Code postal, type: string, required: true }
+          - { name: country, label: Code pays, type: string, required: true }
+          - { name: countryName, label: Pays, type: string, required: true }
+      - name: geo
+        label: Coordonnées
+        type: object
+        fields:
+          - { name: lat, label: Latitude, type: number, required: true }
+          - { name: lng, label: Longitude, type: number, required: true }
+      - name: hours
+        label: Horaires d'ouverture
+        type: object
+        fields:
+          - { name: opens, label: Ouverture, type: string, required: true }
+          - { name: closes, label: Fermeture, type: string, required: true }
+          - { name: days, label: Jours, type: string, list: true }
+      - name: social
+        label: Réseaux
+        type: object
+        fields:
+          - { name: facebook, label: Facebook, type: string, required: true }
+          - { name: instagram, label: Instagram, type: string, required: true }
+      - { name: languages, label: Langues de travail, type: string, list: true }
+      - { name: responseTime, label: Délai de réponse, type: string, required: true }
+      - { name: currency, label: Devise, type: string, hidden: true }
+      - name: team
+        label: Équipe
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{name} — {role}" }
+        fields:
+          - { name: name, label: Nom, type: string, required: true }
+          - { name: role, label: Fonction, type: string, required: true }
+
+  - name: faq
+    label: Questions fréquentes
+    type: file
+    path: content/faq.json
+    format: json
+    fields:
+      - name: faq
+        label: Questions
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{q}" }
+        fields:
+          - { name: q, label: Question, type: string, required: true }
+          - { name: a, label: Réponse, type: text, required: true, description: "Commencer par l'information directe, puis la nuance." }
+
+  - name: regions
+    label: Les trois régions
+    type: file
+    path: content/regions.json
+    format: json
+    fields:
+      - name: regions
+        label: Régions
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{name}" }
+        fields:
+          - { name: id, label: Identifiant, type: string, required: true }
+          - { name: name, label: Nom, type: string, required: true }
+          - { name: subtitle, label: Sous-titre, type: string, required: true }
+          - { name: feel, label: Phrase sensorielle, type: text, required: true }
+          - { name: summary, label: Description, type: text, required: true }
+          - { name: highlights, label: Étapes phares, type: string, list: true }
+          - { name: duration, label: Durée conseillée, type: string, required: true }
+          - { name: route, label: Lien, type: string, required: true, description: "Doit mener à une page existante : la construction échoue sinon." }
+          - name: photo
+            label: Photo
+            type: select
+            required: true
+            options:
+              values:${vals(OPT_PHOTOS, 16)}
+
+  - name: envies
+    label: Par envie
+    type: file
+    path: content/envies.json
+    format: json
+    fields:
+      - name: envies
+        label: Envies
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{title}" }
+        fields:
+          - { name: route, label: Lien, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true }
+          - { name: line, label: Phrase, type: text, required: true }
+          - name: photo
+            label: Photo
+            type: select
+            required: true
+            options:
+              values:${vals(OPT_PHOTOS, 16)}
+
+settings:
+  content:
+    merge: true
+`;
+
+/* .pages.yml est versionné — Pages CMS le lit dans le dépôt GitHub, pas sur
+   le site déployé. Un changement qui reste sur le disque sans être committé
+   laisse le CMS travailler sur une description périmée du contenu : d'où
+   l'avertissement, bien visible mais non bloquant. */
+const chemin = path.join(ROOT, ".pages.yml");
+const ancien = existsSync(chemin) ? readFileSync(chemin, "utf8") : "";
+writeFileSync(chemin, pages);
+if (ancien !== pages) {
+  console.warn(
+    "\ncms : ⚠️  .pages.yml a changé — il doit être committé, sinon Pages CMS\n" +
+      "      continuera de lire l'ancienne version depuis GitHub.\n",
+  );
+}
+
 console.log(
-  `cms : config.yml généré — ${photos.length} photos, ${lieux.length} lieux, ` +
-    `${circuits.length} circuits en listes de choix`,
+  `cms : config.yml + .pages.yml générés — ${photos.length} photos, ` +
+    `${lieux.length} lieux, ${circuits.length} circuits en listes de choix`,
 );

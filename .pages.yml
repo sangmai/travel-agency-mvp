@@ -1,0 +1,330 @@
+# ⚠️ FICHIER GÉNÉRÉ — ne pas modifier à la main.
+# Source : scripts/make-cms-config.mjs. Contrairement au config.yml de
+# Sveltia, celui-ci est versionné : Pages CMS le lit dans le dépôt GitHub,
+# pas sur le site déployé. S'il n'est pas à jour, la construction échoue.
+
+media:
+  - name: photos
+    label: Photographies
+    input: assets/photos
+    output: /photos/v
+    categories: [image]
+    rename: safe
+
+content:
+  - name: circuits
+    label: Circuits
+    type: collection
+    path: content/itineraries
+    format: json
+    filename: "{fields.slug}.json"
+    subfolders: false
+    view:
+      fields: [name, days, priceFrom, region]
+      sort: [days, priceFrom, name]
+    fields:
+      - { name: slug, label: Identifiant d'URL, type: string, required: true, pattern: "^[a-z0-9-]+$", description: "Sans accent ni espace. Change l'adresse de la page." }
+      - { name: code, label: Code voyage, type: string, required: true }
+      - { name: name, label: Nom, type: string, required: true }
+      - { name: tagline, label: Sous-titre, type: string, required: true }
+      - { name: days, label: Durée (jours), type: number, required: true, options: { min: 1, step: 1 } }
+      - { name: priceFrom, label: Prix à partir de (€), type: number, required: true, options: { min: 0, step: 10 }, description: "Par personne, hors vols. Ce prix part aussi dans les données structurées Google." }
+      - name: niveau
+        label: Niveau
+        type: select
+        required: true
+        options:
+          values: [Facile, Facile à modéré, Modéré, Modéré à soutenu]
+      - { name: confort, label: Hébergement, type: string, required: true }
+      - { name: type, label: Type de voyage, type: string, required: true }
+      - { name: region, label: Régions, type: string, required: true }
+      - { name: saison, label: Meilleure saison, type: string, required: true }
+      - { name: groupe, label: Groupe, type: string, required: true }
+      - name: photo
+        label: Photo
+        type: select
+        required: true
+        options:
+          values:
+            - { name: "hagiang", label: "hagiang" }
+            - { name: "halong", label: "halong" }
+            - { name: "rizieres", label: "rizieres" }
+            - { name: "hoian", label: "hoian" }
+            - { name: "mekong", label: "mekong" }
+            - { name: "hanoi", label: "hanoi" }
+            - { name: "ninhbinh", label: "ninhbinh" }
+            - { name: "hue", label: "hue" }
+            - { name: "marche", label: "marche" }
+            - { name: "phuquoc", label: "phuquoc" }
+            - { name: "phongnha", label: "phongnha" }
+            - { name: "trek", label: "trek" }
+            - { name: "cuisine", label: "cuisine" }
+      - { name: intro, label: Chapô, type: text, required: true }
+      - { name: pitch, label: Accroche (page d'accueil), type: text, required: true }
+      - { name: audience, label: Pour qui, type: string, required: true }
+      - { name: tag, label: Étiquette, type: string, description: "Ex. « Le plus demandé ». Laisser vide si aucune." }
+      - { name: plus, label: Les plus, type: string, list: true }
+      - name: stops
+        label: Étapes du parcours
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{place}" }
+        fields:
+          - name: place
+            label: Lieu
+            type: select
+            required: true
+            options:
+              values:
+                - { name: "hanoi", label: "Hanoï (hanoi)" }
+                - { name: "ninh-binh", label: "Ninh Binh (ninh-binh)" }
+                - { name: "lan-ha", label: "Baie de Lan Ha (lan-ha)" }
+                - { name: "ha-long", label: "Baie d'Halong (ha-long)" }
+                - { name: "pu-luong", label: "Pu Luong (pu-luong)" }
+                - { name: "mai-chau", label: "Mai Chau (mai-chau)" }
+                - { name: "ha-giang", label: "Ha Giang (ha-giang)" }
+                - { name: "dong-van", label: "Dong Van (dong-van)" }
+                - { name: "cao-bang", label: "Cao Bang (cao-bang)" }
+                - { name: "ban-gioc", label: "Ban Gioc (ban-gioc)" }
+                - { name: "ba-be", label: "Ba Be (ba-be)" }
+                - { name: "sapa", label: "Sapa (sapa)" }
+                - { name: "phong-nha", label: "Phong Nha (phong-nha)" }
+                - { name: "hue", label: "Hué (hue)" }
+                - { name: "da-nang", label: "Da Nang (da-nang)" }
+                - { name: "hoi-an", label: "Hoi An (hoi-an)" }
+                - { name: "hcmc", label: "Hô Chi Minh-Ville (hcmc)" }
+                - { name: "can-tho", label: "Can Tho (can-tho)" }
+                - { name: "chau-doc", label: "Chau Doc (chau-doc)" }
+                - { name: "phu-quoc", label: "Phu Quoc (phu-quoc)" }
+                - { name: "con-dao", label: "Con Dao (con-dao)" }
+                - { name: "phnom-penh", label: "Phnom Penh (phnom-penh)" }
+                - { name: "siem-reap", label: "Siem Reap (siem-reap)" }
+          - { name: label, label: Libellé affiché, type: string, description: "Seulement s'il diffère du nom du lieu." }
+      - name: program
+        label: Programme jour par jour
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "Jour {n} — {title}" }
+        fields:
+          - { name: n, label: Jour, type: string, required: true, description: "« 3 », ou « 8-9 » pour deux journées décrites ensemble." }
+          - { name: title, label: Titre, type: string, required: true }
+          - { name: body, label: Texte, type: text, required: true }
+          - name: facts
+            label: Données pratiques
+            type: object
+            list:
+              collapsible: { collapsed: true, summary: "{key} · {value}" }
+            fields:
+              - name: key
+                label: Type
+                type: select
+                required: true
+                options:
+                  values: [trajet, marche, velo, bateau, vol, nuit, repas]
+              - { name: value, label: Valeur, type: string, required: true, description: "Ex. « Transfert 2 h (100 km) »." }
+          - name: photo
+            label: Photo
+            type: select
+            options:
+              values:
+                - { name: "hagiang", label: "hagiang" }
+                - { name: "halong", label: "halong" }
+                - { name: "rizieres", label: "rizieres" }
+                - { name: "hoian", label: "hoian" }
+                - { name: "mekong", label: "mekong" }
+                - { name: "hanoi", label: "hanoi" }
+                - { name: "ninhbinh", label: "ninhbinh" }
+                - { name: "hue", label: "hue" }
+                - { name: "marche", label: "marche" }
+                - { name: "phuquoc", label: "phuquoc" }
+                - { name: "phongnha", label: "phongnha" }
+                - { name: "trek", label: "trek" }
+                - { name: "cuisine", label: "cuisine" }
+      - { name: nights, label: Hébergement nuit par nuit, type: string, list: true }
+      - { name: included, label: Le prix comprend, type: string, list: true }
+      - { name: excluded, label: Le prix ne comprend pas, type: string, list: true }
+
+  - name: avis
+    label: Avis
+    type: file
+    path: content/reviews.json
+    format: json
+    fields:
+      - name: reviews
+        label: Avis
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{author} — {rating}/5" }
+        fields:
+          - { name: author, label: Auteur, type: string, required: true }
+          - { name: city, label: Ville, type: string, required: true }
+          - { name: date, label: Date de départ, type: date, required: true, options: { format: "yyyy-MM-dd" } }
+          - { name: rating, label: Note sur 5, type: number, required: true, options: { min: 1, max: 5, step: 1 } }
+          - { name: body, label: Texte, type: text, required: true }
+          - { name: title, label: Titre, type: string }
+          # Référence vivante vers la collection des circuits : la liste se met
+          # à jour toute seule, là où Sveltia demande un menu figé au build.
+          - name: trip
+            label: Voyage concerné
+            type: reference
+            options:
+              collection: circuits
+              value: "{fields.slug}"
+              label: "{fields.name} — {fields.days} j"
+              search: "name,slug"
+          - { name: featured, label: Afficher sur la page d'accueil, type: boolean }
+
+  - name: site
+    label: Agence et coordonnées
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: name, label: Nom, type: string, required: true }
+      - { name: legalName, label: Raison sociale, type: string, required: true }
+      - { name: url, label: URL du site, type: string, required: true }
+      - { name: locale, label: Locale, type: string, hidden: true }
+      - { name: lang, label: Langue, type: string, hidden: true }
+      - { name: tagline, label: Phrase de positionnement, type: string, required: true }
+      - { name: founded, label: En activité depuis, type: string, required: true }
+      - { name: license, label: Licence tour-opérateur international, type: string, required: true, description: "Affichée sur le site et déclarée à Google : doit être exacte." }
+      - { name: membership, label: Autorité de tutelle, type: string, required: true }
+      - { name: phone, label: Téléphone (technique), type: string, required: true }
+      - { name: phoneDisplay, label: Téléphone affiché, type: string, required: true }
+      - { name: phoneAlt, label: Second numéro, type: string, required: true }
+      - { name: whatsapp, label: WhatsApp, type: string, required: true }
+      - { name: email, label: E-mail, type: string, required: true }
+      - name: address
+        label: Adresse
+        type: object
+        fields:
+          - { name: street, label: Rue, type: string, required: true }
+          - { name: city, label: Ville, type: string, required: true }
+          - { name: region, label: Région, type: string, required: true }
+          - { name: postalCode, label: Code postal, type: string, required: true }
+          - { name: country, label: Code pays, type: string, required: true }
+          - { name: countryName, label: Pays, type: string, required: true }
+      - name: geo
+        label: Coordonnées
+        type: object
+        fields:
+          - { name: lat, label: Latitude, type: number, required: true }
+          - { name: lng, label: Longitude, type: number, required: true }
+      - name: hours
+        label: Horaires d'ouverture
+        type: object
+        fields:
+          - { name: opens, label: Ouverture, type: string, required: true }
+          - { name: closes, label: Fermeture, type: string, required: true }
+          - { name: days, label: Jours, type: string, list: true }
+      - name: social
+        label: Réseaux
+        type: object
+        fields:
+          - { name: facebook, label: Facebook, type: string, required: true }
+          - { name: instagram, label: Instagram, type: string, required: true }
+      - { name: languages, label: Langues de travail, type: string, list: true }
+      - { name: responseTime, label: Délai de réponse, type: string, required: true }
+      - { name: currency, label: Devise, type: string, hidden: true }
+      - name: team
+        label: Équipe
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{name} — {role}" }
+        fields:
+          - { name: name, label: Nom, type: string, required: true }
+          - { name: role, label: Fonction, type: string, required: true }
+
+  - name: faq
+    label: Questions fréquentes
+    type: file
+    path: content/faq.json
+    format: json
+    fields:
+      - name: faq
+        label: Questions
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{q}" }
+        fields:
+          - { name: q, label: Question, type: string, required: true }
+          - { name: a, label: Réponse, type: text, required: true, description: "Commencer par l'information directe, puis la nuance." }
+
+  - name: regions
+    label: Les trois régions
+    type: file
+    path: content/regions.json
+    format: json
+    fields:
+      - name: regions
+        label: Régions
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{name}" }
+        fields:
+          - { name: id, label: Identifiant, type: string, required: true }
+          - { name: name, label: Nom, type: string, required: true }
+          - { name: subtitle, label: Sous-titre, type: string, required: true }
+          - { name: feel, label: Phrase sensorielle, type: text, required: true }
+          - { name: summary, label: Description, type: text, required: true }
+          - { name: highlights, label: Étapes phares, type: string, list: true }
+          - { name: duration, label: Durée conseillée, type: string, required: true }
+          - { name: route, label: Lien, type: string, required: true, description: "Doit mener à une page existante : la construction échoue sinon." }
+          - name: photo
+            label: Photo
+            type: select
+            required: true
+            options:
+              values:
+                - { name: "hagiang", label: "hagiang" }
+                - { name: "halong", label: "halong" }
+                - { name: "rizieres", label: "rizieres" }
+                - { name: "hoian", label: "hoian" }
+                - { name: "mekong", label: "mekong" }
+                - { name: "hanoi", label: "hanoi" }
+                - { name: "ninhbinh", label: "ninhbinh" }
+                - { name: "hue", label: "hue" }
+                - { name: "marche", label: "marche" }
+                - { name: "phuquoc", label: "phuquoc" }
+                - { name: "phongnha", label: "phongnha" }
+                - { name: "trek", label: "trek" }
+                - { name: "cuisine", label: "cuisine" }
+
+  - name: envies
+    label: Par envie
+    type: file
+    path: content/envies.json
+    format: json
+    fields:
+      - name: envies
+        label: Envies
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{title}" }
+        fields:
+          - { name: route, label: Lien, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true }
+          - { name: line, label: Phrase, type: text, required: true }
+          - name: photo
+            label: Photo
+            type: select
+            required: true
+            options:
+              values:
+                - { name: "hagiang", label: "hagiang" }
+                - { name: "halong", label: "halong" }
+                - { name: "rizieres", label: "rizieres" }
+                - { name: "hoian", label: "hoian" }
+                - { name: "mekong", label: "mekong" }
+                - { name: "hanoi", label: "hanoi" }
+                - { name: "ninhbinh", label: "ninhbinh" }
+                - { name: "hue", label: "hue" }
+                - { name: "marche", label: "marche" }
+                - { name: "phuquoc", label: "phuquoc" }
+                - { name: "phongnha", label: "phongnha" }
+                - { name: "trek", label: "trek" }
+                - { name: "cuisine", label: "cuisine" }
+
+settings:
+  content:
+    merge: true
