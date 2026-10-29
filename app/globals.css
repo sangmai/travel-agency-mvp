@@ -85,9 +85,16 @@ a {
   text-decoration: none;
 }
 
+/* `height: auto` est indissociable de `max-width: 100%`. Nos images portent
+   un attribut `height` — nécessaire pour réserver la place et éviter le
+   décalage de mise en page — et sans cette ligne, le navigateur l'applique à
+   la lettre dès que la largeur est contrainte : une photo de 1800 × 1200
+   placée dans une colonne de 516 px s'affichait en 516 × 1200, étirée.
+   Les composants qui recadrent volontairement imposent leur propre hauteur. */
 img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 :focus-visible {
@@ -2343,6 +2350,21 @@ img {
   color: #fff;
   font-size: 0.8rem;
   font-weight: 700;
+}
+
+/* Photo dans la grille « parcours ». .parcours__map porte le fond bleuté et
+   les proportions de la carte : y mettre une photo était un contresens. */
+.parcours__photo {
+  margin: 0;
+  border-radius: var(--r);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.parcours__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .parcours__note {

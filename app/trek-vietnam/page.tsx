@@ -194,7 +194,7 @@ export default async function Trek() {
         <section className="sec sec--sand">
           <div className="wrap wrap--wide">
             <div className="parcours">
-              <figure className="parcours__map">
+              <figure className="parcours__photo">
                 <Photo id="trek" role="half" />
               </figure>
               <div className="parcours__txt">

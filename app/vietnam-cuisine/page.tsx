@@ -156,7 +156,7 @@ export default async function Cuisine() {
         <section className="sec">
           <div className="wrap wrap--wide">
             <div className="parcours">
-              <figure className="parcours__map">
+              <figure className="parcours__photo">
                 <Photo id="marche" role="half" />
               </figure>
               <div className="parcours__txt">

@@ -12,7 +12,8 @@
     "images": "node scripts/make-images.mjs",
     "contrast": "node scripts/check-contrast.mjs",
     "cms": "node scripts/make-cms-config.mjs && node scripts/check-cms.mjs",
-    "gbp": "node scripts/make-gbp-sheet.mjs"
+    "gbp": "node scripts/make-gbp-sheet.mjs",
+    "images:check": "node scripts/check-images.mjs"
   },
   "dependencies": {
     "next": "15.5.4",
