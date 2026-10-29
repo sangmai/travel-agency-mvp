@@ -1,0 +1,35 @@
+{
+  "slug": "vietnam-ou-thailande",
+  "title": "Vietnam ou Thaïlande : lequel choisir ?",
+  "description": "La Thaïlande pour les plages et un premier voyage en Asie, le Vietnam pour les paysages et le dépaysement. Climat, budget, saisons : le comparatif détaillé.",
+  "ogTitle": "Vietnam ou Thaïlande ?",
+  "ogDescription": "Deux pays voisins, deux voyages opposés. Climat, budget, plages, dépaysement : ce qui les sépare vraiment.",
+  "photo": "rizieres",
+  "photoAlt": "Rizières en terrasses du nord du Vietnam",
+  "faq": [
+    {
+      "q": "Vietnam ou Thaïlande pour un premier voyage en Asie ?",
+      "a": "La Thaïlande, si vous voyagez seul et sans guide : les infrastructures touristiques y sont plus denses, l'anglais plus répandu, et les liaisons entre sites mieux rodées. Le Vietnam demande davantage d'organisation, ce qui est précisément la raison pour laquelle il se fait le plus souvent avec une agence locale — et pourquoi il laisse un souvenir plus fort à ceux qui franchissent le pas."
+    },
+    {
+      "q": "Lequel est le moins cher ?",
+      "a": "Le Vietnam, de 10 à 20 % en dessous sur l'hébergement et la restauration à qualité comparable. Un repas de rue y coûte 1,50 à 2,50 €, une chambre de charme 60 à 110 €. L'écart se resserre sur les circuits privés avec guide francophone, moins nombreux au Vietnam donc mieux rémunérés. Sur le vol depuis la France, les deux destinations se valent."
+    },
+    {
+      "q": "Peut-on combiner les deux en un seul voyage ?",
+      "a": "Oui, à partir de trois semaines, et en acceptant de ne faire qu'une partie de chaque pays. En dessous, la combinaison coûte trois à quatre jours en transferts et formalités pour effleurer les deux. Un Nord Vietnam de dix jours suivi d'une semaine dans le sud thaïlandais est le format qui fonctionne le mieux : montagnes puis plages, et les saisons y concordent de décembre à mars."
+    },
+    {
+      "q": "Les saisons sont-elles les mêmes ?",
+      "a": "Non, et c'est souvent ce qui tranche. La Thaïlande est au mieux de novembre à mars, saison sèche sur presque tout le pays. Le Vietnam s'étire sur 1 650 km et couvre trois climats : mars et avril sont les seuls mois où ses trois régions sont sèches en même temps. Un départ en juillet favorise nettement le Vietnam du Sud et du Centre, un départ en janvier la Thaïlande."
+    },
+    {
+      "q": "Quel pays pour les plages ?",
+      "a": "La Thaïlande, sans discussion. Ses îles du Sud — Krabi, Koh Lanta, Koh Samui — offrent une eau plus claire, des fonds plus riches et une offre balnéaire sans équivalent au Vietnam. Phu Quoc et Con Dao sont de belles îles, mais la plage n'est pas ce que le Vietnam fait de mieux : ses paysages sont dans les terres, pas sur ses côtes."
+    },
+    {
+      "q": "Quel pays pour la randonnée et les montagnes ?",
+      "a": "Le Vietnam, nettement. Les rizières en terrasses de Sapa, Pu Luong et Mu Cang Chai, la boucle de Ha Giang le long de la frontière chinoise, les villages d'ethnies minoritaires du Grand Nord n'ont pas d'équivalent thaïlandais. Le nord de la Thaïlande, autour de Chiang Mai, offre de belles marches mais sur un relief plus doux et un étagement moins spectaculaire."
+    }
+  ]
+}

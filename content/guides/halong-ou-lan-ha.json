@@ -1,0 +1,35 @@
+{
+  "slug": "halong-ou-lan-ha",
+  "title": "Baie d'Halong ou baie de Lan Ha ?",
+  "description": "Lan Ha, dans neuf cas sur dix : même massif karstique, moins de cent bateaux au lieu de cinq cents, et la baignade en plus. Comparatif et saisons.",
+  "ogTitle": "Halong ou Lan Ha : laquelle choisir ?",
+  "ogDescription": "Même paysage, deux fréquentations. Pourquoi nous programmons Lan Ha, et dans quels cas Halong reste le bon choix.",
+  "photo": "halong",
+  "photoAlt": "Îlots calcaires émergeant de la brume, baie de Lan Ha",
+  "faq": [
+    {
+      "q": "Quelle différence entre la baie d'Halong et la baie de Lan Ha ?",
+      "a": "Aucune géologiquement : c'est le même massif calcaire, Lan Ha en étant le prolongement sud, au large de l'île de Cat Ba. La différence est la fréquentation. Halong concentre plusieurs centaines de jonques sur quelques itinéraires balisés ; Lan Ha en compte quelques dizaines sur une surface comparable, avec des plages où l'on peut nager — ce qui est interdit sur la majeure partie d'Halong."
+    },
+    {
+      "q": "Peut-on se baigner en baie d'Halong ?",
+      "a": "Très peu, et rarement là où l'on voudrait. La baignade est restreinte sur la plus grande partie d'Halong pour des raisons de trafic et de qualité d'eau. Lan Ha compte en revanche une centaine de petites plages de sable accessibles depuis le bateau, et l'eau y est plus claire. De mai à septembre, elle avoisine 28 °C."
+    },
+    {
+      "q": "Combien de nuits passer sur place ?",
+      "a": "Une seule, à bord. C'est la seule étape de nos circuits où nous conseillons une nuit unique : la baie se vit en vingt-quatre heures, du coucher de soleil depuis le pont au kayak du petit matin, avant l'arrivée des autres bateaux. Deux nuits n'ajoutent qu'une répétition, sauf si vous tenez à l'escalade ou au parc national de Cat Ba."
+    },
+    {
+      "q": "Faut-il éviter la baie en hiver ?",
+      "a": "Non, mais il faut savoir ce qu'on y trouve. De décembre à février, la baie est prise dans une brume qui efface les pitons lointains, et beaucoup de voyageurs la trouvent plus belle que le plein soleil. En revanche il fait 15 à 18 °C, la baignade est exclue, et la capitainerie peut annuler une sortie en cas de coup de vent — à prévoir dans le programme plutôt qu'à découvrir sur place."
+    },
+    {
+      "q": "La baie d'Halong est-elle encore propre ?",
+      "a": "Elle s'est nettement améliorée depuis les campagnes de ramassage et l'interdiction des gobelets plastiques à bord, mais la densité de bateaux reste son problème : plusieurs centaines d'embarcations sur des routes identiques concentrent bruit, carburant et déchets. Lan Ha, moins fréquentée, en souffre moins — ce qui est une raison de plus de l'y préférer tant que c'est vrai."
+    },
+    {
+      "q": "Quelle est la meilleure heure pour voir la baie ?",
+      "a": "Entre six et huit heures du matin. La lumière est rasante, la brume se lève sur l'eau, et les bateaux de croisière ne sont pas encore en mouvement. C'est l'avantage principal d'une nuit à bord sur une excursion à la journée depuis Hanoï : celle-ci vous fait arriver à midi, au pire moment."
+    }
+  ]
+}

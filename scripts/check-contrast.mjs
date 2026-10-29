@@ -41,7 +41,7 @@ try {
 
 const BASE = process.argv[2] ?? "http://localhost:8787";
 const PAGES = ["/", "/circuit-vietnam/", "/circuit-vietnam/vietnam-du-nord-au-sud/", "/visa-vietnam/",
-  "/nord-ou-sud-vietnam/", "/quand-partir-au-vietnam/", "/budget-voyage-vietnam/", "/itineraire-vietnam/", "/que-faire-au-vietnam/", "/agence-de-voyage-vietnam/", "/credits-photos/", "/merci/"];
+  "/nord-ou-sud-vietnam/", "/quand-partir-au-vietnam/", "/budget-voyage-vietnam/", "/itineraire-vietnam/", "/que-faire-au-vietnam/", "/agence-de-voyage-vietnam/", "/halong-ou-lan-ha/", "/agence-locale-ou-tour-operateur/", "/vietnam-ou-thailande/", "/vietnam-cuisine/", "/credits-photos/", "/merci/"];
 const b = await chromium.launch();
 let total = 0;
 for (const w of [1440, 390]) {

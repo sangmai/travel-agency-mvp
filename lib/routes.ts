@@ -26,7 +26,7 @@ export const ROUTES: Route[] = [
   { path: "/circuit-prive-vietnam", label: "Circuit privé", group: "envies", published: false },
   { path: "/trek-vietnam", label: "Trek et randonnée", group: "envies", published: false },
   { path: "/vietnam-hors-sentiers", label: "Hors des sentiers battus", group: "envies", published: false },
-  { path: "/vietnam-cuisine", label: "Cuisine et marchés", group: "envies", published: false },
+  { path: "/vietnam-cuisine", label: "Cuisine et marchés", group: "envies", published: true },
 
   { path: "/quand-partir-au-vietnam", label: "Quand partir", group: "preparer", published: true },
   { path: "/budget-voyage-vietnam", label: "Budget du voyage", group: "preparer", published: true },
@@ -36,9 +36,9 @@ export const ROUTES: Route[] = [
   { path: "/que-faire-au-vietnam", label: "Que faire au Vietnam", group: "preparer", published: true },
 
   { path: "/nord-ou-sud-vietnam", label: "Nord ou Sud ?", group: "comparer", published: true },
-  { path: "/vietnam-ou-thailande", label: "Vietnam ou Thaïlande ?", group: "comparer", published: false },
-  { path: "/agence-locale-ou-tour-operateur", label: "Agence locale ou TO ?", group: "comparer", published: false },
-  { path: "/halong-ou-lan-ha", label: "Halong ou Lan Ha ?", group: "comparer", published: false },
+  { path: "/vietnam-ou-thailande", label: "Vietnam ou Thaïlande ?", group: "comparer", published: true },
+  { path: "/agence-locale-ou-tour-operateur", label: "Agence locale ou TO ?", group: "comparer", published: true },
+  { path: "/halong-ou-lan-ha", label: "Halong ou Lan Ha ?", group: "comparer", published: true },
   { path: "/avis", label: "Nos avis clients", group: "comparer", published: false },
   { path: "/carnets-de-voyage", label: "Carnets de voyage", group: "comparer", published: false },
   { path: "/agence-de-voyage-vietnam", label: "Qui sommes-nous", group: "agence", published: true },

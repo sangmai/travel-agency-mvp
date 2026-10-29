@@ -1,0 +1,35 @@
+{
+  "slug": "agence-locale-ou-tour-operateur",
+  "title": "Agence locale ou tour-opérateur ?",
+  "description": "L'agence locale opère elle-même et coûte 20 à 35 % de moins. Le tour-opérateur inclut les vols et la garantie APST. Comparatif honnête, limites comprises.",
+  "ogTitle": "Agence locale ou tour-opérateur français ?",
+  "ogDescription": "Ce que chacun fait réellement, ce qu'il coûte, et le cas où le tour-opérateur reste le bon choix.",
+  "photo": "marche",
+  "photoAlt": "Marché de rue au Vietnam",
+  "faq": [
+    {
+      "q": "Qu'est-ce qu'une agence locale, exactement ?",
+      "a": "Une agence immatriculée dans le pays de destination, qui conçoit et exécute elle-même les voyages qu'elle vend : elle réserve les hôtels, emploie ou missionne les guides, et dispose de ses propres véhicules ou prestataires. Un tour-opérateur français, lui, achète ces prestations à une agence locale — souvent la même — et les revend avec sa marge."
+    },
+    {
+      "q": "Pourquoi est-ce moins cher ?",
+      "a": "Parce qu'il y a un intermédiaire de moins. À prestations identiques — même hôtel, même guide, même véhicule — l'écart constaté va de 20 à 35 %. Ce n'est pas une remise : c'est la marge d'intermédiation qui disparaît. En contrepartie, l'agence locale ne vend pas de forfait avec vol inclus et ne relève pas du droit français."
+    },
+    {
+      "q": "Quels sont les risques d'une agence locale ?",
+      "a": "Le principal est l'absence de garantie financière française. L'APST, qui rembourse les clients d'une agence immatriculée Atout France en cas de défaillance, ne couvre pas une agence vietnamienne. La parade est vérifiable : exiger le numéro de licence de tour-opérateur international, délivré par l'administration vietnamienne, et ne jamais verser d'acompte à qui ne le communique pas."
+    },
+    {
+      "q": "Comment vérifier qu'une agence locale est sérieuse ?",
+      "a": "Quatre signes se vérifient en dix minutes. Une licence de tour-opérateur international affichée, de la forme NN-NNN/AAAA/TCDL-GP LHQT. Une adresse physique, pas seulement une boîte mail. Des interlocuteurs nommés. Et des avis que vous pouvez retrouver sur une plateforme tierce, pas seulement sur le site de l'agence."
+    },
+    {
+      "q": "Dans quel cas vaut-il mieux un tour-opérateur français ?",
+      "a": "Si la garantie APST est déterminante pour vous, si vous voulez un forfait unique vol compris, ou si vous préférez un interlocuteur soumis au droit français en cas de litige. Ce sont des raisons légitimes, et nous le disons aux voyageurs qui nous posent la question : un tour-opérateur immatriculé Atout France reste alors le choix adapté."
+    },
+    {
+      "q": "Qui s'occupe de moi en cas de problème sur place ?",
+      "a": "Avec une agence locale, l'équipe qui a réservé votre hôtel, dans le même fuseau horaire que vous. Un vol intérieur annulé ou un hébergement décevant se traite dans l'heure parce que la décision se prend sur place. Avec un tour-opérateur, la demande remonte à une hotline française, puis redescend au réceptif — avec cinq à six heures de décalage à chaque aller-retour."
+    }
+  ]
+}

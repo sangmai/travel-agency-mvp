@@ -1,0 +1,35 @@
+{
+  "slug": "vietnam-cuisine",
+  "title": "Cuisine du Vietnam : que manger, et où",
+  "description": "Trois régions, trois cuisines : le Nord sobre et bouillons, le Centre épicé et impérial, le Sud sucré et métissé. Plats, marchés et prix réels.",
+  "ogTitle": "La cuisine vietnamienne, région par région",
+  "ogDescription": "Pourquoi le phở du Nord n'a rien à voir avec celui du Sud, et où manger quoi.",
+  "photo": "cuisine",
+  "photoAlt": "Cuisine de rue au Vietnam",
+  "faq": [
+    {
+      "q": "Quelle est la différence entre la cuisine du Nord, du Centre et du Sud ?",
+      "a": "Le Nord est le plus sobre : peu de sucre, peu de piment, des bouillons longs et l'aneth comme herbe maîtresse — c'est la cuisine du phở et du bún chả. Le Centre est le plus épicé, héritage de la cour impériale de Hué : petites portions, beaucoup de plats, piment présent partout. Le Sud est le plus sucré et le plus métissé, marqué par les influences khmère, chinoise et française, avec lait de coco et profusion d'herbes fraîches."
+    },
+    {
+      "q": "Où manger un vrai phở ?",
+      "a": "Le matin, à Hanoï, dans une échoppe qui ne sert que cela. Le phở est un petit-déjeuner au Vietnam, pas un dîner : les meilleures adresses ouvrent à six heures et ferment quand le bouillon est épuisé, souvent avant midi. Un bol coûte 1,50 à 2,50 €. Celui du Sud, plus sucré, s'accompagne d'une assiette d'herbes et de pousses de soja que le Nord ne sert pas."
+    },
+    {
+      "q": "La cuisine de rue est-elle sans danger ?",
+      "a": "Oui, à condition de choisir une échoppe fréquentée. Le critère n'est pas la propreté apparente mais la rotation : là où les habitants font la queue, tout est préparé dans la journée. Évitez plutôt les buffets tièdes, les jus avec de la glace pilée d'origine inconnue et les crudités dans les établissements vides. Nos guides emmènent systématiquement les voyageurs manger dans la rue dès le premier soir."
+    },
+    {
+      "q": "Peut-on manger végétarien au Vietnam ?",
+      "a": "Oui, et plus facilement qu'on ne le croit. La tradition bouddhiste a donné naissance à une cuisine végétarienne complète, signalée par le mot « chay » : com chay, phở chay. Les pagodes servent souvent des repas chay le midi. L'écueil est le nuoc mam, la saumure de poisson, présente dans presque toutes les sauces : il faut le signaler explicitement, et nous le faisons figurer sur le carnet de route remis aux guides."
+    },
+    {
+      "q": "Quels plats goûter absolument ?",
+      "a": "Au Nord, le bún chả — porc grillé au charbon, nouilles de riz, bouillon tiède — et le chả cá, poisson au curcuma et à l'aneth. Au Centre, le bún bò Huế, soupe épicée au bœuf et à la citronnelle, et le cao lầu de Hoi An, dont les nouilles ne se font qu'avec l'eau d'un puits de la ville. Au Sud, le bánh xèo, crêpe croustillante à la farine de riz, et le hủ tiếu, soupe de nouilles du delta."
+    },
+    {
+      "q": "Faut-il réserver des cours de cuisine ?",
+      "a": "Un seul suffit, et de préférence à Hoi An, où la plupart commencent par le marché puis une traversée en barque jusqu'au village maraîcher de Tra Que. Comptez 25 à 40 € par personne pour une demi-journée. Au-delà d'un cours, le gain décroît vite : ce que l'on retient d'un voyage culinaire tient davantage aux repas pris avec les guides qu'aux ateliers."
+    }
+  ]
+}
