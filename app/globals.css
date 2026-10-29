@@ -2759,3 +2759,23 @@ img {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+/* WhatsApp : le canal principal d'une agence vietnamienne vers la France.
+   Traité comme un lien, pas comme une pastille flottante — celle-ci
+   demanderait du JavaScript et masquerait du contenu sur mobile. */
+.hdr__wa {
+  color: var(--jade-2);
+  font-size: 0.86rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hdr__wa:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1080px) {
+  .hdr__wa {
+    display: none;
+  }
+}

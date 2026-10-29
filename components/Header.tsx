@@ -18,6 +18,17 @@ const NAV = [
 
 const tel = (phone: string) => `tel:${phone.replace(/\s/g, "")}`;
 
+/**
+ * WhatsApp est le canal principal entre une agence vietnamienne et une
+ * clientèle française : gratuit depuis l'étranger, et le seul qui reste
+ * joignable pendant le voyage. Le numéro figurait dans le contenu depuis le
+ * début sans qu'aucun lien ne permette de l'utiliser.
+ *
+ * Le message pré-rempli évite le blanc devant lequel beaucoup renoncent.
+ */
+const wa = (numero: string, texte: string) =>
+  `https://wa.me/${numero.replace(/\D/g, "")}?text=${encodeURIComponent(texte)}`;
+
 export async function Header() {
   const site = await getSite();
 
@@ -38,6 +49,13 @@ export async function Header() {
 
         <div className="hdr__end">
           <a className="hdr__tel" href={tel(site.phone)}>{site.phoneDisplay}</a>
+          <a
+            className="hdr__wa"
+            href={wa(site.whatsapp, "Bonjour, je prépare un voyage au Vietnam.")}
+            rel="noopener"
+          >
+            WhatsApp
+          </a>
           <a className="btn btn--amber btn--sm" href="/#devis">Devis gratuit</a>
         </div>
       </div>
@@ -50,7 +68,9 @@ export async function MobileBar() {
   const site = await getSite();
   return (
     <div className="bar">
-      <a href={tel(site.phone)}>Appeler</a>
+      <a href={wa(site.whatsapp, "Bonjour, je prépare un voyage au Vietnam.")} rel="noopener">
+        WhatsApp
+      </a>
       <a href="/#devis">Demander un devis gratuit</a>
     </div>
   );

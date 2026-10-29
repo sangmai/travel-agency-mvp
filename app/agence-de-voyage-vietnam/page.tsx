@@ -128,8 +128,18 @@ export default async function Agence() {
                   `${site.address.street}, ${site.address.city}, ${site.address.countryName}`,
                 ],
                 [
-                  "Téléphone et WhatsApp",
+                  "Téléphone",
                   <a key="t" href={`tel:${site.phone}`}>{site.phoneDisplay}</a>,
+                ],
+                [
+                  "WhatsApp",
+                  <a
+                    key="w"
+                    href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`}
+                    rel="noopener"
+                  >
+                    {site.whatsapp}
+                  </a>,
                 ],
                 ["Second numéro", site.phoneAlt],
                 ["E-mail", <a key="e" href={`mailto:${site.email}`}>{site.email}</a>],
