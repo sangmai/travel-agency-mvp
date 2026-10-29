@@ -159,6 +159,17 @@ export type Site = {
   reviewSource: { name: string; url: string; rating: number; count: number; note: string };
   responseTime: string;
   currency: string;
+  /**
+   * Outils de mesure. Chaque champ vide désactive l'outil correspondant :
+   * rien n'est chargé, aucune balise n'est écrite.
+   *
+   * `searchConsole` ne coûte rien à la page — une balise meta, aucun script.
+   * `ga4` en coûte beaucoup : environ 30 Ko de script, des cookies, et donc
+   * en France une demande de consentement préalable. Ne le renseigner qu'en
+   * ayant posé la bannière correspondante.
+   * `cloudflare` est l'alternative sans cookie ni bannière.
+   */
+  mesure: { searchConsole: string; ga4: string; cloudflare: string };
   /* Pas de `rating` : une note agrégée ne se déclare pas, elle se calcule
      depuis des avis réels — `aggregate()` s'en charge. Le champ portait une
      moyenne inventée sur un nombre d'avis inventé, publiée en données

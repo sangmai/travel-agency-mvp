@@ -222,6 +222,31 @@ database, nội dung versioned trong git, rollback bằng `git revert`. Và
 Decap**, nên nếu thất vọng thì đổi sang Decap chỉ là thay thẻ `<script>` trong
 `public/admin/index.html` và dựng thêm một Worker OAuth. Hàng rào bảo hiểm rẻ.
 
+### Search Console và thống kê
+
+Ba trường trong `content/site.json` → `mesure`. **Để trống là tắt hẳn** — không
+script nào được nạp, không thẻ nào được viết.
+
+| trường | chi phí | cần banner đồng ý? |
+|---|---|---|
+| `searchConsole` | một thẻ meta | không |
+| `cloudflare` | ~1,5 Ko, không cookie | **không** |
+| `ga4` | ~30 Ko + cookie | **có** |
+
+**Search Console**: Google cho một chuỗi xác minh → dán vào `searchConsole`,
+build, deploy, bấm Verify. Khi đã có domain riêng thì nên xác minh **bằng bản
+ghi DNS TXT** thay vì thẻ meta — nó bao cả subdomain và sống sót qua mọi lần
+làm lại site. Xong nhớ nộp `/sitemap.xml`.
+
+**GA4 trong bối cảnh Pháp**: nó đặt cookie và chuyển dữ liệu cá nhân. CNIL bắt
+buộc **xin đồng ý trước khi nạp**. Điền `ga4` mà chưa có banner là vi phạm —
+nên trường này cố ý để trống.
+
+Site hiện tải **141 Ko JavaScript** (brotli) cho một trang không có component
+tương tác nào — đó là runtime cơ bản của Next App Router. GA4 cộng thêm ~30 Ko
+và một banner che nội dung. Với MVP, **Cloudflare Web Analytics** cho gần đủ
+thứ cần (lượt xem, nguồn đến, quốc gia, Core Web Vitals) mà không cần banner.
+
 ### Kiểm tra ảnh có bị méo không
 
 ```bash

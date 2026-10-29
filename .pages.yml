@@ -283,6 +283,13 @@ content:
           - { name: note, label: Classement, type: string, required: true }
       - { name: responseTime, label: Délai de réponse, type: string, required: true }
       - { name: currency, label: Devise, type: string, hidden: true }
+      - name: mesure
+        label: Outils de mesure
+        type: object
+        fields:
+          - { name: searchConsole, label: Code Search Console, type: string, description: "Balise meta fournie par Google. Aucun script, aucun cookie." }
+          - { name: ga4, label: Identifiant GA4, type: string, description: "⚠️ Pose des cookies : consentement obligatoire en France avant chargement." }
+          - { name: cloudflare, label: Jeton Cloudflare Web Analytics, type: string, description: "Sans cookie ni bannière." }
       - name: team
         label: Équipe
         type: object

@@ -287,6 +287,15 @@ ${select("trip", "Voyage concerné", OPT_CIRCUITS, 14, ["required: false"])}
               - { name: note, label: Classement, widget: string }
           - { name: responseTime, label: Délai de réponse, widget: string }
           - { name: currency, label: Devise, widget: hidden }
+          - name: mesure
+            label: Outils de mesure
+            widget: object
+            collapsed: true
+            hint: "Un champ vide désactive l'outil : rien n'est chargé, aucune balise n'est écrite."
+            fields:
+              - { name: searchConsole, label: Code Search Console, widget: string, required: false, hint: "Le contenu de la balise meta fournie par Google. Ne coûte rien à la page. Dès que le site aura son domaine propre, préférer la vérification par DNS." }
+              - { name: ga4, label: Identifiant GA4, widget: string, required: false, hint: "⚠️ GA4 pose des cookies. En France il ne doit se charger qu'après consentement explicite : ne renseigner ce champ qu'une fois la bannière en place." }
+              - { name: cloudflare, label: Jeton Cloudflare Web Analytics, widget: string, required: false, hint: "Sans cookie ni donnée personnelle, donc sans bannière. Environ 1,5 Ko contre 30 Ko pour GA4." }
           - name: team
             label: Équipe
             widget: list
@@ -644,6 +653,13 @@ content:
           - { name: note, label: Classement, type: string, required: true }
       - { name: responseTime, label: Délai de réponse, type: string, required: true }
       - { name: currency, label: Devise, type: string, hidden: true }
+      - name: mesure
+        label: Outils de mesure
+        type: object
+        fields:
+          - { name: searchConsole, label: Code Search Console, type: string, description: "Balise meta fournie par Google. Aucun script, aucun cookie." }
+          - { name: ga4, label: Identifiant GA4, type: string, description: "⚠️ Pose des cookies : consentement obligatoire en France avant chargement." }
+          - { name: cloudflare, label: Jeton Cloudflare Web Analytics, type: string, description: "Sans cookie ni bannière." }
       - name: team
         label: Équipe
         type: object

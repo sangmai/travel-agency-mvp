@@ -54,6 +54,11 @@
   },
   "responseTime": "48 h",
   "currency": "EUR",
+  "mesure": {
+    "searchConsole": "",
+    "ga4": "",
+    "cloudflare": ""
+  },
   "team": [
     {
       "name": "Truong Dinh Tran",

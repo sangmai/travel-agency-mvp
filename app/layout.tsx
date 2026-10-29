@@ -103,11 +103,55 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const m = siteJson.mesure;
+
   return (
     <html
       lang={siteJson.lang}
       className={`${display.variable} ${body.variable}`}
     >
+      <head>
+        {/* Search Console : une balise meta, aucun script, aucun cookie.
+            Dès que le site aura son propre domaine, préférer la
+            vérification par enregistrement DNS TXT — elle couvre tous les
+            sous-domaines et survit à une refonte du site. */}
+        {m.searchConsole && (
+          <meta name="google-site-verification" content={m.searchConsole} />
+        )}
+
+        {/* Cloudflare Web Analytics : pas de cookie, pas de donnée
+            personnelle, donc pas de bannière de consentement à poser en
+            France. Environ 1,5 Ko, contre 30 Ko pour GA4. */}
+        {m.cloudflare && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${m.cloudflare}"}`}
+          />
+        )}
+
+        {/* ⚠️ GA4 pose des cookies et transfère des données personnelles.
+            En France, il ne doit se charger qu'APRÈS consentement explicite :
+            renseigner cette clé sans avoir posé de bannière expose à une
+            sanction de la CNIL. Le champ est volontairement vide. */}
+        {m.ga4 && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${m.ga4}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html:
+                  `window.dataLayer=window.dataLayer||[];` +
+                  `function gtag(){dataLayer.push(arguments)}` +
+                  `gtag('js',new Date());` +
+                  `gtag('config','${m.ga4}',{anonymize_ip:true});`,
+              }}
+            />
+          </>
+        )}
+      </head>
       <body>
         <a className="skip" href="#contenu">
           Aller au contenu principal
