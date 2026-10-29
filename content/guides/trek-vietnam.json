@@ -1,0 +1,35 @@
+{
+  "slug": "trek-vietnam",
+  "title": "Trek au Vietnam : où marcher, et quand",
+  "description": "Pu Luong pour une première marche, Ha Giang pour le spectaculaire, Sapa pour les terrasses. Niveaux réels, dénivelés, saisons et nuits chez l'habitant.",
+  "ogTitle": "Trek et randonnée au Vietnam",
+  "ogDescription": "Cinq massifs, leur difficulté réelle et la bonne saison pour chacun.",
+  "photo": "trek",
+  "photoAlt": "Randonnée dans les rizières en terrasses du nord du Vietnam",
+  "faq": [
+    {
+      "q": "Faut-il être sportif pour marcher au Vietnam ?",
+      "a": "Non, pour l'immense majorité des itinéraires. Les marches du Nord se font sur des sentiers agricoles entre villages, trois à cinq heures par jour, avec 300 à 600 mètres de dénivelé — l'équivalent d'une randonnée de moyenne montagne en France. Ce qui surprend n'est pas la pente mais l'humidité : à 80 % d'hygrométrie, un effort modéré se ressent davantage."
+    },
+    {
+      "q": "Où marcher pour une première fois ?",
+      "a": "À Pu Luong, à quatre heures de route de Hanoï. Mêmes rizières en terrasses qu'à Sapa, relief plus doux, sentiers bien tracés entre villages thaï blancs, et une fraction des visiteurs. Trois jours y suffisent pour deux belles marches et une nuit en maison sur pilotis. C'est l'étape que nous proposons en premier à qui veut marcher sans s'engager sur une semaine."
+    },
+    {
+      "q": "Sapa vaut-il encore le détour ?",
+      "a": "Oui, à condition de quitter la ville. Sapa même s'est beaucoup construite et ses abords sont saturés, mais les vallées de Muong Hoa et de Ta Van gardent leurs terrasses et leurs villages hmong et dao. La règle est simple : dormir chez l'habitant dans la vallée plutôt qu'à l'hôtel en ville, et marcher tôt. Mu Cang Chai, plus au sud, offre les mêmes paysages avec encore moins de monde."
+    },
+    {
+      "q": "Quand marcher dans le Nord ?",
+      "a": "De septembre à novembre, puis de mars à mai. L'automne est le plus sûr : ciel dégagé, sentiers secs, et les terrasses dorées de mi-septembre à début octobre. Le printemps est beau aussi, un peu plus brumeux. L'été, de juin à août, rend les pistes glissantes et les sangsues actives ; l'hiver, de décembre à février, reste marchable mais sous 10 °C et dans une brume qui ferme les panoramas."
+    },
+    {
+      "q": "Peut-on dormir chez l'habitant ?",
+      "a": "Oui, et c'est ce que les voyageurs citent le plus au retour. Les homestays du Nord sont des maisons sur pilotis où l'on dort sur des matelas au sol sous moustiquaire, dans une pièce commune ou une chambre séparée selon les familles. Le repas est préparé devant vous. Sanitaires simples, eau chaude souvent, électricité parfois intermittente — à savoir avant, pas sur place."
+    },
+    {
+      "q": "Quel est le trek le plus difficile ?",
+      "a": "L'ascension du Fansipan par le sentier, deux jours et 1 600 mètres de dénivelé depuis Tram Ton, pour atteindre le plus haut sommet d'Indochine à 3 143 mètres. Il demande une vraie condition physique et ne présente d'intérêt que par temps clair — un téléphérique mène au même sommet en vingt minutes. Hang En, dans le parc de Phong Nha, est plus exigeant encore mais pour une tout autre raison : deux jours de marche en forêt et une nuit sous tente à l'intérieur d'une grotte."
+    }
+  ]
+}

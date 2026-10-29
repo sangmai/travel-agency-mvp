@@ -56,6 +56,8 @@ import gHalongOuLanHa from "@/content/guides/halong-ou-lan-ha.json";
 import gAgenceLocaleOuTourOperateur from "@/content/guides/agence-locale-ou-tour-operateur.json";
 import gVietnamOuThailande from "@/content/guides/vietnam-ou-thailande.json";
 import gVietnamCuisine from "@/content/guides/vietnam-cuisine.json";
+import gCarteVietnam from "@/content/guides/carte-vietnam.json";
+import gTrekVietnam from "@/content/guides/trek-vietnam.json";
 import nordSud from "@/content/itineraries/vietnam-du-nord-au-sud.json";
 import montagnes from "@/content/itineraries/montagnes-et-baies-du-nord.json";
 import famille from "@/content/itineraries/vietnam-en-famille.json";
@@ -70,7 +72,7 @@ import signature from "@/content/itineraries/vietnam-collection-signature.json";
 const TRIPS = [nordSud, montagnes, famille, cambodge, horsSentiers, signature] as Trip[];
 
 /* Les pages guides : une entrée par page, même forme pour toutes. */
-const GUIDES: Guide[] = [gQuandPartirAuVietnam, gBudgetVoyageVietnam, gVisaVietnam, gNordOuSudVietnam, gItineraireVietnam, gQueFaireAuVietnam, gAgenceDeVoyageVietnam, gHalongOuLanHa, gAgenceLocaleOuTourOperateur, gVietnamOuThailande, gVietnamCuisine];
+const GUIDES: Guide[] = [gQuandPartirAuVietnam, gBudgetVoyageVietnam, gVisaVietnam, gNordOuSudVietnam, gItineraireVietnam, gQueFaireAuVietnam, gAgenceDeVoyageVietnam, gHalongOuLanHa, gAgenceLocaleOuTourOperateur, gVietnamOuThailande, gVietnamCuisine, gCarteVietnam, gTrekVietnam];
 
 export const source = {
   site: async (): Promise<Site> => siteJson,

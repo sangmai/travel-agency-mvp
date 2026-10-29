@@ -24,7 +24,7 @@ export const ROUTES: Route[] = [
   { path: "/voyage-luxe-vietnam", label: "Voyage de luxe", group: "envies", published: false },
   { path: "/voyage-noces-vietnam", label: "Voyage de noces", group: "envies", published: false },
   { path: "/circuit-prive-vietnam", label: "Circuit privé", group: "envies", published: false },
-  { path: "/trek-vietnam", label: "Trek et randonnée", group: "envies", published: false },
+  { path: "/trek-vietnam", label: "Trek et randonnée", group: "envies", published: true },
   { path: "/vietnam-hors-sentiers", label: "Hors des sentiers battus", group: "envies", published: false },
   { path: "/vietnam-cuisine", label: "Cuisine et marchés", group: "envies", published: true },
 
@@ -32,7 +32,7 @@ export const ROUTES: Route[] = [
   { path: "/budget-voyage-vietnam", label: "Budget du voyage", group: "preparer", published: true },
   { path: "/visa-vietnam", label: "Visa et formalités", group: "preparer", published: true },
   { path: "/itineraire-vietnam", label: "Idées d'itinéraires", group: "preparer", published: true },
-  { path: "/carte-vietnam", label: "Carte du Vietnam", group: "preparer", published: false },
+  { path: "/carte-vietnam", label: "Carte du Vietnam", group: "preparer", published: true },
   { path: "/que-faire-au-vietnam", label: "Que faire au Vietnam", group: "preparer", published: true },
 
   { path: "/nord-ou-sud-vietnam", label: "Nord ou Sud ?", group: "comparer", published: true },

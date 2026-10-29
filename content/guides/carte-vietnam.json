@@ -1,0 +1,35 @@
+{
+  "slug": "carte-vietnam",
+  "title": "Carte du Vietnam : les étapes et les distances",
+  "description": "1 650 km du nord au sud, trois régions, 23 étapes situées. Distances réelles, temps de trajet par la route et par avion, et ce que cela impose à un itinéraire.",
+  "ogTitle": "Carte du Vietnam, étape par étape",
+  "ogDescription": "Où se trouve quoi, à quelle distance, et combien de temps pour y aller.",
+  "photo": "ninhbinh",
+  "photoAlt": "Pitons calcaires de Ninh Binh",
+  "faq": [
+    {
+      "q": "Quelle est la distance du nord au sud du Vietnam ?",
+      "a": "Environ 1 650 kilomètres à vol d'oiseau entre Ha Giang, à la frontière chinoise, et la pointe de Ca Mau. Par la route, la nationale 1 qui longe la côte en fait près de 2 300. C'est cette longueur qui explique les trois climats du pays, et pourquoi un circuit du nord au sud demande au moins deux vols intérieurs pour rester supportable."
+    },
+    {
+      "q": "Combien de temps pour aller de Hanoï à Hô Chi Minh-Ville ?",
+      "a": "Deux heures et quart en avion, pour 40 à 110 € selon la saison. En train, la Réunification met trente à trente-cinq heures. Par la route, comptez trois jours pleins. Sur un circuit de quinze jours, le vol n'est pas un luxe mais la condition pour que le voyage reste un voyage et non un transfert continu."
+    },
+    {
+      "q": "Où se trouve la baie d'Halong par rapport à Hanoï ?",
+      "a": "À 165 kilomètres à l'est, soit 2 h 30 par l'autoroute. La baie de Lan Ha, que nous lui préférons, demande une trentaine de minutes de plus car l'embarquement se fait à Cat Ba. Les deux se font en aller-retour depuis Hanoï, mais la nuit à bord change tout : elle donne accès au petit matin, quand les autres bateaux ne sont pas encore sortis."
+    },
+    {
+      "q": "Quelles sont les distances entre les étapes classiques ?",
+      "a": "Hanoï–Ninh Binh 95 km, soit 2 h. Hanoï–baie de Lan Ha 185 km, 3 h. Hué–Hoi An 130 km par le col des Nuages, 3 h avec les arrêts. Hô Chi Minh-Ville–Can Tho 170 km, 3 h 30. Ce sont des temps réels, embouteillages de sortie de ville compris, et non des calculs de distance divisés par une vitesse moyenne."
+    },
+    {
+      "q": "Faut-il prendre le train au Vietnam ?",
+      "a": "Sur un seul tronçon, et pour lui-même : Hué–Da Nang, deux heures et demie qui longent la côte et traversent le col des Nuages. C'est l'un des plus beaux trajets ferroviaires d'Asie, et il coûte moins de 10 €. Sur les longues distances en revanche, le train est lent et peu confortable comparé à l'avion, pour un gain de prix qui ne justifie pas trente heures."
+    },
+    {
+      "q": "Quelles régions sont les plus éloignées des circuits classiques ?",
+      "a": "Ha Giang et Cao Bang, au nord, à 300 et 280 kilomètres de Hanoï mais sur des routes de montagne qui demandent six à sept heures. Phong Nha, au centre, à 450 kilomètres de Hué. Con Dao, au sud, qui ne s'atteint qu'en avion. Toutes valent le détour dès que le séjour dépasse quinze jours ; aucune ne tient dans un circuit de douze."
+    }
+  ]
+}

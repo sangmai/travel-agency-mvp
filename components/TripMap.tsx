@@ -57,7 +57,19 @@ function frame(pts: { x: number; y: number }[]) {
   return { x0, y0, x1, y1, w: x1 - x0, h: y1 - y0 };
 }
 
-export function TripMap({ stops }: { stops: ResolvedStop[] }) {
+/**
+ * `route` relie les étapes dans l'ordre du programme. La carte du pays
+ * réutilise la même projection et le même placement de noms, mais sans
+ * tracé : y relier vingt-trois lieux dessinerait un parcours qui n'existe
+ * pas.
+ */
+export function TripMap({
+  stops,
+  route = true,
+}: {
+  stops: ResolvedStop[];
+  route?: boolean;
+}) {
   const pts = stops.map((s) => ({ label: s.map, ...project(s.lon, s.lat) }));
   const view = frame(pts);
   const { x0, y0, w, h } = view;
@@ -148,12 +160,14 @@ export function TripMap({ stops }: { stops: ResolvedStop[] }) {
       ))}
 
       {/* Pointillé : le trait relie des étapes, il ne décrit pas la route. */}
-      <polyline
-        points={pts.map((p) => `${r1(p.x)},${r1(p.y)}`).join(" ")}
-        className="tripmap__route"
-        strokeWidth={r1(stroke * 1.4)}
-        strokeDasharray={`${r1(6 * k)} ${r1(5 * k)}`}
-      />
+      {route && (
+        <polyline
+          points={pts.map((p) => `${r1(p.x)},${r1(p.y)}`).join(" ")}
+          className="tripmap__route"
+          strokeWidth={r1(stroke * 1.4)}
+          strokeDasharray={`${r1(6 * k)} ${r1(5 * k)}`}
+        />
+      )}
 
       {/* Noms avant pastilles : si un halo mord sur un repère, c'est le
           repère qui doit rester net. */}
