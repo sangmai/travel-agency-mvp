@@ -222,6 +222,21 @@ database, nội dung versioned trong git, rollback bằng `git revert`. Và
 Decap**, nên nếu thất vọng thì đổi sang Decap chỉ là thay thẻ `<script>` trong
 `public/admin/index.html` và dựng thêm một Worker OAuth. Hàng rào bảo hiểm rẻ.
 
+### Kiểm tra ảnh có bị méo không
+
+```bash
+PLAYWRIGHT_PATH=/tmp/pw/node_modules/playwright/index.mjs npm run images:check -- <url>
+```
+
+Ảnh bị kéo giãn **không làm build đỏ và không sai kiểu** — nó vẫn hiện, chỉ là
+méo. Chỉ đo trong trình duyệt thật mới thấy: so tỉ lệ hiển thị với tỉ lệ gốc
+của file. Phần cắt ảnh có chủ đích (`object-fit: cover`) được bỏ qua.
+
+Nguyên nhân từng gặp: reset ảnh toàn cục khai `max-width: 100%` mà thiếu
+`height: auto`. Ảnh của site có thuộc tính `height` (để giữ chỗ, tránh nhảy
+layout), nên trình duyệt áp đúng con số đó khi chiều rộng bị bó — một ảnh
+1800×1200 đặt trong cột 516px hiện ra 516×1200.
+
 ### Kiểm tra tương phản
 
 ```bash

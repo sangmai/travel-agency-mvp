@@ -14,6 +14,23 @@
  *
  * Sort en code 1 s'il reste une image déformée.
  */
+/* playwright n'est pas dans package.json : son installation télécharge des
+   navigateurs, et Cloudflare installe les dépendances de développement à
+   chaque build. Même chargement que scripts/check-contrast.mjs. */
+let chromium;
+try {
+  ({ chromium } = await import(process.env.PLAYWRIGHT_PATH || "playwright"));
+} catch {
+  console.error(
+    "playwright est introuvable.\n\n" +
+      "  mkdir -p /tmp/pw && cd /tmp/pw && npm i playwright\n" +
+      "  npx playwright install chromium\n\n" +
+      "puis, depuis ce dépôt :\n" +
+      "  PLAYWRIGHT_PATH=/tmp/pw/node_modules/playwright/index.mjs npm run images:check -- <url>",
+  );
+  process.exit(2);
+}
+
 const BASE = process.argv[2] ?? "http://localhost:8787";
 const PAGES = ["/", "/circuit-vietnam/", "/circuit-vietnam/vietnam-du-nord-au-sud/", "/que-faire-au-vietnam/",
   "/trek-vietnam/", "/vietnam-cuisine/", "/carte-vietnam/", "/credits-photos/"];
