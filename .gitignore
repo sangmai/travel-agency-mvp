@@ -34,3 +34,6 @@ public/photos/og/
 
 # Configuration du CMS, générée au build depuis le contenu.
 public/admin/config.yml
+
+# Extensions de l outillage, pas du site.
+claude-seo/
