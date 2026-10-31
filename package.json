@@ -13,7 +13,8 @@
     "contrast": "node scripts/check-contrast.mjs",
     "cms": "node scripts/make-cms-config.mjs && node scripts/check-cms.mjs",
     "gbp": "node scripts/make-gbp-sheet.mjs",
-    "images:check": "node scripts/check-images.mjs"
+    "images:check": "node scripts/check-images.mjs",
+    "seo": "python3 scripts/check-seo.py"
   },
   "dependencies": {
     "next": "15.5.4",

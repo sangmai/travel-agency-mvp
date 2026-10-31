@@ -1,19 +1,54 @@
-import re, json, ssl, socket, http.client
+#!/usr/bin/env python3
+"""
+Audit de référencement, en explorant le site déployé.
+
+Suit tous les liens internes depuis la racine, puis vérifie sur chaque page :
+titre et description dans les limites d'affichage, un seul h1, pas de saut de
+niveau, canonique cohérente avec l'URL, vignette de partage, et concordance
+entre les questions balisées en FAQPage et les <details> rendus — une FAQ
+déclarée mais absente du rendu viole les règles de Google.
+
+Compte aussi les tableaux : c'est le format qu'un moteur génératif reprend le
+plus volontiers.
+
+    python3 scripts/check-seo.py
+
+Les requêtes passent par l'adresse IP en forçant l'en-tête Host : le
+résolveur local de certaines machines garde en mémoire l'absence d'un
+domaine récemment créé.
+"""
+import http.client
+import json
+import re
+import socket
+import ssl
 from collections import defaultdict
 
 HOST, IP = "voyagevietnam-surmesure.com", "172.67.194.172"
 ctx = ssl.create_default_context()
 
-def get(path):
+def get(path, gzip=False):
     """Contourne le résolveur local, qui garde l'absence du domaine en cache."""
     c = http.client.HTTPSConnection(IP, 443, context=ctx, timeout=25)
     c.sock = None
     c._create_connection = lambda *a, **k: socket.create_connection((IP, 443), 25)
     c.host = HOST
-    c.request("GET", path, headers={"Host": HOST, "User-Agent": "Mozilla/5.0 (audit)"})
+    h = {"Host": HOST, "User-Agent": "Mozilla/5.0 (audit)"}
+    if gzip:
+        # Sans cette en-tête, l'origine ne compresse pas et `content-encoding`
+        # paraît absent alors qu'il ne l'est jamais pour un vrai navigateur.
+        h["Accept-Encoding"] = "gzip"
+    c.request("GET", path, headers=h)
     r = c.getresponse()
-    body = r.read().decode("utf-8", "replace")
-    st, hdrs = r.status, dict(r.getheaders())
+    raw = r.read()
+    if r.getheader("content-encoding") == "gzip":
+        import gzip
+        raw = gzip.decompress(raw)
+    body = raw.decode("utf-8", "replace")
+    # Les noms d'en-têtes ne sont pas sensibles à la casse, mais getheaders()
+    # rend la casse du serveur : sans normalisation, une recherche en
+    # minuscules rate la moitié des réponses.
+    st, hdrs = r.status, {k.lower(): v for k, v in r.getheaders()}
     c.close()
     return st, body, hdrs
 
@@ -100,7 +135,27 @@ print(f"  au sitemap mais non liées : {len([l for l in locs if l not in atteint
 print(f"  liées mais hors sitemap   : {len([a for a in atteintes if a not in locs])}")
 
 # --- en-têtes -------------------------------------------------------------
+#
+# Ce contrôle annonçait « absent » pour des en-têtes bel et bien servis :
+# il n'envoyait pas Accept-Encoding, et lisait des réponses de cache. Un
+# contrôle qui produit des faux négatifs vaut moins que pas de contrôle.
 print("\n=== EN-TÊTES ===")
-st, _, hd = get("/")
-for k in ("content-encoding", "cache-control", "strict-transport-security", "x-content-type-options", "content-security-policy"):
-    print(f"  {k:<28} {hd.get(k, '— absent')}")
+_, _, hd = get("/", gzip=True)
+
+ATTENDUS = {
+    "content-encoding": "compression",
+    "cache-control": "politique de cache",
+    "strict-transport-security": "HSTS",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "politique de référent",
+    "permissions-policy": "politique de permissions",
+}
+
+manquants = 0
+for cle, quoi in ATTENDUS.items():
+    valeur = hd.get(cle)
+    if valeur is None:
+        manquants += 1
+    print(f"  {quoi:<26} {valeur or '— absent'}")
+
+print(f"\n  → {manquants} en-tête(s) manquant(s)")
