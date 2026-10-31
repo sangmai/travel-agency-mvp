@@ -67,16 +67,19 @@ inventée serait un faux signal de fraîcheur, c'est-à-dire exactement ce que c
 critère cherche à mesurer. `/carte-vietnam/` est la seule à porter deux dates
 distinctes, publiée le 29 et révisée le 31.
 
-L'état précédent, pour mémoire :
+Pourquoi cela comptait : selon l'étude SE Ranking citée par la référence de ce
+guide (1,3 million de citations), un contenu de moins de trois mois est
+environ trois fois plus cité, et une page laissée six mois sans mise à jour
+perd son éligibilité. Une page qu'un moteur ne peut pas dater ne peut pas être
+jugée récente.
 
-C'est la lacune la plus coûteuse du site. Selon l'étude SE Ranking citée par
-la référence de ce guide (1,3 million de citations), un contenu de moins de
-trois mois est environ trois fois plus cité, et une page laissée six mois sans
-mise à jour perd son éligibilité. Sans date, un moteur ne peut pas en juger.
+Le cas le plus net était `/visa-vietnam/`, qui affichait « Vérifié le
+28 octobre 2026 » dans son texte sans le déclarer nulle part.
 
-Le cas le plus net est `/visa-vietnam/` : la page affiche en clair « Vérifié
-le 28 octobre 2026 » dans son texte, mais ce fait n'est déclaré nulle part en
-données structurées.
+Ce que cela n'achète pas : une date fraîche ne rend pas un contenu meilleur.
+Le levier ne devient réel que si quelqu'un relit effectivement les pages et
+déplace `dateModified` à cette occasion — une date qu'on avance sans rouvrir
+le texte est le même mensonge que celle qu'on invente.
 
 ## Signaux d'auteur — partiellement corrigé
 
