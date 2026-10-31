@@ -101,7 +101,7 @@ backend:
   branch: main
   # Sans ceci, le CMS s'adresse à api.netlify.com, qui ne répond que pour les
   # sites hébergés chez Netlify. Le relais vit dans worker/auth.ts.
-  base_url: https://travel-agency-mvp.maisang90dn.workers.dev
+  base_url: https://voyagevietnam-surmesure.com
   commit_messages:
     create: 'Ajout {{collection}} "{{slug}}"'
     update: 'Modif {{collection}} "{{slug}}"'

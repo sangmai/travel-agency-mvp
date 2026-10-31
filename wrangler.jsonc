@@ -4,6 +4,13 @@
   "main": "worker/index.ts",
   "compatibility_date": "2026-01-01",
 
+  /* Le sous-domaine workers.dev est désactivé : il servait la même chose que
+     le domaine définitif, sans redirection ni canonique propre. Trois URL
+     pour un même contenu, c'est du contenu dupliqué — et c'était celle-ci
+     que les canoniques désignaient. La couper vaut mieux qu'une redirection
+     à entretenir. */
+  "workers_dev": false,
+
   "assets": {
     "directory": "./out",
     "binding": "ASSETS",
