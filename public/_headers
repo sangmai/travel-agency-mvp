@@ -1,0 +1,17 @@
+# En-têtes appliqués par le service de fichiers statiques de Cloudflare.
+# Ils ne pèsent rien sur le rendu et ne changent pas le contenu : ce sont des
+# garde-fous que les navigateurs appliquent, et que les outils d'audit
+# vérifient.
+
+/*
+  # Force le HTTPS pour deux ans, sous-domaines compris. À ne poser qu'une
+  # fois le certificat sûr : un navigateur qui a vu cet en-tête refusera
+  # ensuite toute connexion en clair, y compris pour corriger une erreur.
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+  # Empêche un navigateur de deviner un type MIME et d'exécuter comme script
+  # un fichier servi comme texte.
+  X-Content-Type-Options: nosniff
+  # Transmet l'origine aux sites tiers, jamais le chemin complet.
+  Referrer-Policy: strict-origin-when-cross-origin
+  # Rien dans ce site n'a besoin de ces capteurs.
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
