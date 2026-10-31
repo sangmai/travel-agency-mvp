@@ -198,6 +198,15 @@ export type Guide = {
   ogDescription: string;
   photo: PhotoId;
   photoAlt: string;
+  /** Dates tirées de l'historique du dépôt, au format AAAA-MM-JJ. Une date
+   *  inventée est un signal de fraîcheur mensonger — exactement ce que le
+   *  critère cherche à mesurer. */
+  datePublished: string;
+  dateModified: string;
+  /** Nom d'une personne de l'équipe, ou vide. Vide signifie que l'agence
+   *  publie en son nom : c'est ce que déclare alors le JSON-LD. Nommer
+   *  quelqu'un est une affirmation sur qui a écrit la page et qui en répond. */
+  author: string;
   faq: Faq[];
 };
 

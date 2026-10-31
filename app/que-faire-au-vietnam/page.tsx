@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Photo } from "@/components/Photo";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getTrips, tripUrl, TRIP_BASE, type PlaceId, getGuide } from "@/lib/content";
 
@@ -174,6 +175,7 @@ export default async function QueFaire() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/que-faire-au-vietnam/#faq`,
@@ -221,6 +223,7 @@ export default async function QueFaire() {
               souvent aux listes, et c&apos;est ce qui décide d&apos;un
               itinéraire.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

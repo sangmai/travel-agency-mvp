@@ -3,6 +3,7 @@ import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb, orgId } from "@/components/JsonLd";
 import { getComparison, getSite, getGuide } from "@/lib/content";
 
@@ -64,6 +65,7 @@ export default async function Agence() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "AboutPage",
         "@id": `${site.url}/agence-de-voyage-vietnam/#page`,
@@ -107,6 +109,7 @@ export default async function Agence() {
               au Cambodge. Cette page réunit ce qui se vérifie avant de verser
               un acompte à une agence située à l&apos;autre bout du monde.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

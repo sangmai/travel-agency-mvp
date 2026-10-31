@@ -3,6 +3,7 @@ import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getGuide } from "@/lib/content";
 
@@ -66,6 +67,7 @@ export default async function Visa() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/visa-vietnam/#faq`,
@@ -102,6 +104,7 @@ export default async function Visa() {
               passeport doit être valable <b>au moins six mois à la date
               d&apos;entrée</b> — pas à la date du retour.
             </p>
+            <GuideMeta guide={guide} />
             <p className="maj">
               Vérifié le {VERIFIE_LE} auprès du{" "}
               <a className="lnk" href={SOURCE} rel="noopener">

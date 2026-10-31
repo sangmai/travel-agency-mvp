@@ -3,6 +3,7 @@ import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
@@ -89,6 +90,7 @@ export default async function Itineraire() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/itineraire-vietnam/#faq`,
@@ -136,6 +138,7 @@ export default async function Itineraire() {
               Cambodge devient une addition cohérente. Voici ce que chaque durée
               permet — et ce à quoi elle oblige à renoncer.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

@@ -3,6 +3,7 @@ import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getGuide, getSite } from "@/lib/content";
 
@@ -54,6 +55,7 @@ export default async function VietnamOuThailande() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/vietnam-ou-thailande/#faq`,
@@ -88,6 +90,7 @@ export default async function VietnamOuThailande() {
               accorde donc à la Thaïlande ce qui lui revient, parce qu&apos;une
               comparaison qui ne concède rien ne sert à personne.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

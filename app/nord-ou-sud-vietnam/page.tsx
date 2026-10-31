@@ -3,6 +3,7 @@ import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
@@ -118,6 +119,7 @@ export default async function NordOuSud() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/nord-ou-sud-vietnam/#faq`,
@@ -155,6 +157,7 @@ export default async function NordOuSud() {
               quand le Nord est à 15 °C sous le crachin et que le delta du
               Mékong est au plus beau. Voici le détail, critère par critère.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

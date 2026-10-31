@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Photo } from "@/components/Photo";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
 
@@ -96,6 +97,7 @@ export default async function Trek() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/trek-vietnam/#faq`,
@@ -130,6 +132,7 @@ export default async function Trek() {
               marche occasionnellement. Le mot « trek » recouvre ici des réalités
               très différentes — voici les chiffres plutôt que les adjectifs.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

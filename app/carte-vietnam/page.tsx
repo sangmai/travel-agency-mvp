@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { TripMap } from "@/components/TripMap";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getGuide, getSite, getTrips, resolveStops, tripUrl, TRIP_BASE } from "@/lib/content";
 
@@ -84,6 +85,7 @@ export default async function CarteVietnam() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/carte-vietnam/#faq`,
@@ -134,6 +136,7 @@ export default async function CarteVietnam() {
               qu&apos;on veut traverser le pays en quinze jours. Voici les{" "}
               {lieux.length} étapes que nous programmons, situées.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

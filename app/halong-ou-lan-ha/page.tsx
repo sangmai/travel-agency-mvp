@@ -3,6 +3,7 @@ import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
 
@@ -103,6 +104,7 @@ export default async function HalongOuLanHa() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/halong-ou-lan-ha/#faq`,
@@ -138,6 +140,7 @@ export default async function HalongOuLanHa() {
               deux points</b> : l&apos;accès est plus court depuis Hanoï, et le
               choix de bateaux bien plus large. Voici le détail.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

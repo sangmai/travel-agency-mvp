@@ -194,6 +194,9 @@ ${select("photo", "Photo", OPT_PHOTOS, 10, ["required: false"])}
       - { name: ogDescription, label: Description de partage, widget: text }
 ${select("photo", "Photo de partage", OPT_PHOTOS, 6)}
       - { name: photoAlt, label: Description de la photo, widget: string }
+      - { name: datePublished, label: Date de publication, widget: datetime, date_format: YYYY-MM-DD, time_format: false, picker_utc: true }
+      - { name: dateModified, label: Dernière mise à jour, widget: datetime, date_format: YYYY-MM-DD, time_format: false, picker_utc: true, hint: "À changer à chaque relecture de fond. Un contenu récent est nettement plus cité par les moteurs génératifs ; une date qui n'a pas bougé depuis six mois les en écarte." }
+      - { name: author, label: Auteur, widget: string, required: false, hint: "Nom d'une personne de l'équipe. Laisser vide signifie que l'agence publie en son nom — ne nommer quelqu'un que s'il a réellement écrit ou relu la page." }
       - name: faq
         label: Questions fréquentes
         widget: list
@@ -550,6 +553,9 @@ content:
         options:
           values:${vals(OPT_PHOTOS, 12)}
       - { name: photoAlt, label: Description de la photo, type: string, required: true }
+      - { name: datePublished, label: Date de publication, type: date, required: true, options: { format: "yyyy-MM-dd" } }
+      - { name: dateModified, label: Dernière mise à jour, type: date, required: true, options: { format: "yyyy-MM-dd" }, description: "À changer à chaque relecture de fond : un contenu récent est nettement plus cité." }
+      - { name: author, label: Auteur, type: string, description: "Laisser vide = l'agence publie en son nom. Ne nommer quelqu'un que s'il a réellement écrit ou relu la page." }
       - name: faq
         label: Questions fréquentes
         type: object

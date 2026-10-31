@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { BudgetTable } from "@/components/Budget";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
@@ -90,6 +91,7 @@ export default async function BudgetPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/budget-voyage-vietnam/#faq`,
@@ -130,6 +132,7 @@ export default async function BudgetPage() {
               donner des fourchettes vérifiables plutôt qu&apos;un « sur devis »
               qui n&apos;aide personne à décider.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

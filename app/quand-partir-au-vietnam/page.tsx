@@ -3,6 +3,7 @@ import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SeasonTable } from "@/components/WhenToGo";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
@@ -66,6 +67,7 @@ export default async function QuandPartir() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/quand-partir-au-vietnam/#faq`,
@@ -106,6 +108,7 @@ export default async function QuandPartir() {
               n&apos;existe donc pas de mauvaise période — seulement un
               itinéraire à accorder au mois choisi.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

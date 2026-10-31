@@ -2779,3 +2779,10 @@ img {
     display: none;
   }
 }
+
+/* Ligne de publication des pages guides. */
+.guide__meta {
+  color: var(--ink-3);
+  font-size: 0.88rem;
+  margin-top: 1.1rem;
+}

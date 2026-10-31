@@ -3,6 +3,7 @@ import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getComparison, getGuide, getSite } from "@/lib/content";
 
@@ -60,6 +61,7 @@ export default async function AgenceOuTO() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/agence-locale-ou-tour-operateur/#faq`,
@@ -100,6 +102,7 @@ export default async function AgenceOuTO() {
               locale, et c&apos;est précisément pour cela que cette page dit
               aussi quand l&apos;autre choix est le bon.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 

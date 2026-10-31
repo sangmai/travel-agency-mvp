@@ -180,6 +180,9 @@ content:
             - { name: "trek", label: "trek" }
             - { name: "cuisine", label: "cuisine" }
       - { name: photoAlt, label: Description de la photo, type: string, required: true }
+      - { name: datePublished, label: Date de publication, type: date, required: true, options: { format: "yyyy-MM-dd" } }
+      - { name: dateModified, label: Dernière mise à jour, type: date, required: true, options: { format: "yyyy-MM-dd" }, description: "À changer à chaque relecture de fond : un contenu récent est nettement plus cité." }
+      - { name: author, label: Auteur, type: string, description: "Laisser vide = l'agence publie en son nom. Ne nommer quelqu'un que s'il a réellement écrit ou relu la page." }
       - name: faq
         label: Questions fréquentes
         type: object

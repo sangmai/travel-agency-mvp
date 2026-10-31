@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Photo } from "@/components/Photo";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
+import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
 import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
 
@@ -73,6 +74,7 @@ export default async function Cuisine() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      articleNode(guide, site),
       {
         "@type": "FAQPage",
         "@id": `${site.url}/vietnam-cuisine/#faq`,
@@ -108,6 +110,7 @@ export default async function Cuisine() {
               d&apos;herbes et de pousses de soja. C&apos;est la conséquence
               directe de 1 650 kilomètres et de trois climats.
             </p>
+            <GuideMeta guide={guide} />
           </div>
         </section>
 
