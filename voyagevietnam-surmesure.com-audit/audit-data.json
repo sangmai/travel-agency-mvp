@@ -1,0 +1,280 @@
+{
+  "summary": {
+    "health_score": 85,
+    "business_type": "Local Service — agence de voyage (TravelAgency, adresse physique Da Nang)",
+    "audit_date": "2026-10-31",
+    "domain_age_days": 4,
+    "pages_crawled": 22,
+    "pages_indexable": 21,
+    "top_findings": [
+      "Avis Tripadvisor balisés en review de l'organisation : hors politique Google sur les avis tiers",
+      "Aucune durée de cache : tout est servi en max-age=0, y compris les fichiers à empreinte",
+      "Identité du site non tranchée (vitrine de Jasmin ou marque d'apport distincte)",
+      "Aucune donnée de terrain : Search Console non vérifiée, CrUX vide",
+      "image et logo absents du nœud TravelAgency"
+    ],
+    "quick_wins": [
+      "Retirer le nœud review du JSON-LD en gardant les citations visibles et sourcées",
+      "Ajouter des règles de cache dans public/_headers (immutable pour /_next/static uniquement)",
+      "Ajouter image et logo au nœud TravelAgency depuis les images OG déjà générées",
+      "Mailler /agence-de-voyage-vietnam/ depuis plus de deux pages",
+      "Règle de redirection Cloudflare www vers apex en 301"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 90,
+      "weight": 22,
+      "what_works": [
+        "22 pages explorées, zéro lien interne cassé",
+        "21 URL au sitemap, toutes en 200 sans redirection intermédiaire",
+        "Six en-têtes de sécurité et compression présents, aucun manquant",
+        "robots.txt déclare le sitemap, aucun robot d'IA bloqué",
+        "/credits-photos/ absente du sitemap : correct, la page porte noindex"
+      ],
+      "findings": [
+        {
+          "title": "Aucune durée de cache sur aucune ressource",
+          "severity": "High",
+          "description": "public/_headers ne contient aucune règle de cache, donc Cloudflare applique public, max-age=0, must-revalidate à tout : HTML, CSS, JS et 78 variantes d'images. Les fichiers /_next/static/ portent pourtant une empreinte dans leur nom (058c8b23a5094280.css), ce qui rend un cache long sans risque. Lighthouse le confirme indépendamment : audit « Use efficient cache lifetimes », score 0,5.",
+          "recommendation": "Ajouter deux règles distinctes dans public/_headers. /_next/static/* peut prendre max-age=31536000, immutable sans risque car le nom change avec le contenu. /photos/* ne porte PAS d'empreinte (hagiang-1920.webp garde son nom si l'image change) : un cache long y servirait l'ancienne image pendant des mois. Les deux cas ne se traitent pas pareil."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 78,
+      "weight": 23,
+      "what_works": [
+        "28 486 mots sur 21 pages, moyenne de 1 356",
+        "Zéro page sous 300 mots",
+        "Zéro page sans lien entrant",
+        "Treize guides avec datePublished et dateModified réels, tirés de l'historique du dépôt"
+      ],
+      "findings": [
+        {
+          "title": "Aucun auteur nommé sur les treize guides",
+          "severity": "Medium",
+          "description": "L'author des nœuds Article renvoie au nœud organisation, pas à une Person. Choix délibéré et défendable — nommer quelqu'un qui n'a pas relu la page serait un faux signal — mais le critère « expérience » d'E-E-A-T n'a alors rien à mesurer.",
+          "recommendation": "Le champ existe dans le CMS et attend un nom. Le JSON-LD bascule tout seul vers Person. Dépend de la décision d'identité."
+        },
+        {
+          "title": "Contenu de démonstration encore publié",
+          "severity": "Medium",
+          "description": "Six itinéraires, story.json et treize photos Wikimedia n'ont pas été remplacés. Sans impact SEO tant qu'il n'y a pas de trafic ; impact immédiat le jour où un prospect lit une page circuit.",
+          "recommendation": "Remplacer avant de prendre de vrais clients."
+        },
+        {
+          "title": "/agence-de-voyage-vietnam/ ne reçoit que deux liens internes",
+          "severity": "Medium",
+          "description": "C'est la page qui porte la requête de marque et la requête locale, donc celle qui devrait recevoir le plus de liens. Toutes les autres pages sont correctement maillées.",
+          "recommendation": "Ajouter des liens contextuels depuis les guides et la page d'accueil."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 93,
+      "weight": 20,
+      "what_works": [
+        "Aucune réserve sur les 21 pages indexables",
+        "Titres sous 60 caractères, descriptions entre 110 et 165",
+        "Un seul h1 par page, aucune hiérarchie de titres sautée",
+        "Canonique cohérente avec l'URL sur toutes les pages",
+        "Aucun titre ni aucune description en double"
+      ],
+      "findings": []
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 72,
+      "weight": 10,
+      "what_works": [
+        "Graphe riche : 19 BreadcrumbList, 14 FAQPage, 13 Article, 6 TouristTrip, 3 Person",
+        "Toutes les références @id internes se résolvent",
+        "Aucun JSON-LD invalide sur l'ensemble du site",
+        "aggregateRating volontairement absent après retrait d'une note inventée"
+      ],
+      "findings": [
+        {
+          "title": "Avis Tripadvisor balisés comme avis de l'organisation",
+          "severity": "Critical",
+          "description": "Deux avis repris de Tripadvisor sont déclarés en review sur le nœud TravelAgency, comme s'ils avaient été recueillis par le site. Google demande que les avis balisés en données structurées soient recueillis directement par le site. C'est le type de balisage qui déclenche une action manuelle « données structurées trompeuses ». Par ailleurs l'avis d'Alain V. porte sur un voyage au Laos et au Cambodge, et date de février 2017 — neuf ans.",
+          "recommendation": "Retirer le nœud review du JSON-LD. Garder les citations visibles sur la page avec attribution claire et lien vers Tripadvisor : c'est le balisage qui pose problème, pas la citation. Retirer l'avis Laos/Cambodge, hors sujet. Corriger site.json, où reviewSource annonce 3 avis alors que 2 sont publiés. Ne pas remettre aggregateRating."
+        },
+        {
+          "title": "image et logo absents du nœud TravelAgency",
+          "severity": "Medium",
+          "description": "Les deux sont des propriétés recommandées pour LocalBusiness et servent à Google pour les panneaux de connaissance.",
+          "recommendation": "Les fichiers existent déjà : scripts/make-images.mjs produit des images OG en 1200 × 630."
+        }
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 88,
+      "weight": 10,
+      "what_works": [
+        "Performance 93 mobile / 98 bureau sur l'accueil, 95 / 100 sur /carte-vietnam/",
+        "Accessibilité, bonnes pratiques et SEO à 100 partout",
+        "CLS à 0 sur toutes les pages mesurées",
+        "TBT de 30 ms — le site n'est pas bloqué par son JavaScript",
+        "Hero déjà optimisé : eager, fetchPriority high, dimensions déclarées, préchargé dans le head"
+      ],
+      "findings": [
+        {
+          "title": "LCP mobile de 3,1 s sur la page d'accueil",
+          "severity": "Low",
+          "description": "L'élément LCP est la photo du hero. Toutes les bonnes pratiques de chargement sont déjà appliquées ; le coût est le poids. Un mobile courant (390 pt, DPR 3) reçoit la variante 1280, soit 158,4 Ko. Résultat contre-intuitif : /carte-vietnam/, avec sa carte SVG de 17 Ko en ligne, est plus rapide (LCP 2,0 s) parce qu'elle n'a pas de grande photo au-dessus de la ligne de flottaison.",
+          "recommendation": "Ne rien changer pour l'instant. CrUX ne renvoie encore rien pour ce domaine (404, trafic insuffisant, normal à quatre jours). Le LCP de laboratoire n'est pas le LCP réel. Reprendre la mesure dans 4 à 6 semaines de trafic réel avant d'optimiser."
+        },
+        {
+          "title": "270 ms de JavaScript inutilisé",
+          "severity": "Low",
+          "description": "Concentrés sur deux fragments : 255-a7ba37dca2f1fa.js (20,9 Ko inutiles sur 44,5) et 4bd1b696-c023c6e3521b1417.js (20,7 sur 54,3). Audit « Legacy JavaScript » à 0,5 : polyfills pour des navigateurs que la cible française n'utilise plus.",
+          "recommendation": "Faible priorité : le TBT mesuré est de 30 ms, donc l'impact ressenti est marginal."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 80,
+      "weight": 10,
+      "what_works": [
+        "Rendu serveur intégral : les réponses des FAQ sont dans le HTML même repliées (details natifs)",
+        "27 tableaux — le format le plus repris en réponse générative",
+        "Réponse directe en tête de chaque page, 65 à 76 mots",
+        "Tous les robots d'IA autorisés, aucune règle restrictive",
+        "85 questions balisées, 85 details rendus : concordance exacte"
+      ],
+      "findings": [
+        {
+          "title": "Présence de marque quasi nulle",
+          "severity": "Medium",
+          "description": "Aucune présence sur Wikipedia, Reddit, YouTube ni LinkedIn. Trois avis Tripadvisor et une fiche Petit Futé. Les mentions de marque corrèlent trois fois plus fortement avec les citations d'IA que les backlinks (Ahrefs, 75 000 marques, décembre 2025) ; YouTube est le signal le plus corrélé (environ 0,737).",
+          "recommendation": "Aucune ligne de code ne corrige cela. Par ordre de corrélation : YouTube, Reddit, LinkedIn. Pour Reddit, participer et non publier."
+        },
+        {
+          "title": "llms.txt servi mais sans effet sur Google",
+          "severity": "Info",
+          "description": "Google indique explicitement que llms.txt n'aide ni ne nuit au référencement. Il reste en place parce qu'il ne coûte rien.",
+          "recommendation": "Ne le présenter comme levier dans aucun plan."
+        },
+        {
+          "title": "Balisage FAQPage conservé sans bénéfice SERP",
+          "severity": "Info",
+          "description": "Google a retiré les résultats enrichis de FAQ pour tous les sites le 7 mai 2026. Les 85 questions gardent leur valeur par leur texte, lisible dans le HTML même replié.",
+          "recommendation": "Le conserver ne nuit pas. Ne pas le compter comme levier."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 92,
+      "weight": 5,
+      "what_works": [
+        "76 img dans main, toutes avec un alt correct",
+        "Six largeurs WebP, floutage 16 px, images OG 1200 × 630 générées au build",
+        "Chaîne contrôlée par scripts/check-images.mjs",
+        "alt vide sur le fond de la section devis : correct, l'image est marquée decorative"
+      ],
+      "findings": [
+        {
+          "title": "7,1 Mo de variantes générées, variante hero à 314 Ko",
+          "severity": "Low",
+          "description": "hagiang-1920.webp pèse 314,4 Ko et hagiang-1280.webp 158,4 Ko. Seule cette dernière est réellement servie aux mobiles courants.",
+          "recommendation": "À arbitrer seulement après obtention des données CrUX réelles."
+        }
+      ]
+    }
+  ],
+  "not_measurable": [
+    {"donnee": "CrUX / données de terrain", "etat": "absente", "raison": "404 — trafic Chrome insuffisant, normal à quatre jours"},
+    {"donnee": "Search Console", "etat": "non vérifiée", "raison": "aucun TXT DNS, aucune balise meta servie"},
+    {"donnee": "Positions réelles", "etat": "inconnues", "raison": "aucune propriété, aucun outil de suivi"},
+    {"donnee": "Trafic organique", "etat": "inconnu", "raison": "GA4 et Cloudflare Analytics non branchés"},
+    {"donnee": "Backlinks", "etat": "non mesurés", "raison": "aucune clé Moz ou Bing configurée"},
+    {"donnee": "Citations IA", "etat": "non mesurées", "raison": "aucun outil de suivi de citation branché"}
+  ],
+  "non_findings": [
+    "Description de 69 caractères sur /credits-photos/ : la page porte noindex, la description ne sera jamais affichée",
+    "/credits-photos/ absente du sitemap : correct, une page noindex n'a rien à y faire",
+    "alt vide dans QuoteForm.tsx:23 : l'image est marquée decorative, alt vide est la valeur correcte",
+    "Render-blocking requests, Network dependency tree, LCP breakdown : audits insight de Lighthouse 13, informatifs, aucun élément listé",
+    "label-content-name-mismatch : aucun élément listé, et un score d'accessibilité de 100 serait impossible avec une vraie violation axe"
+  ],
+  "business_risk": {
+    "title": "Identité du site non tranchée",
+    "severity": "High",
+    "description": "Le site parle à la première personne au nom de Jasmin Travel — licence 48-049/2015/TCDL-GP LHQT, adresse à Da Nang, trois membres d'équipe nommés, avis de l'agence. Le modèle décrit est celui d'un apporteur d'affaires : le client contracte et paie Jasmin, qui opère le voyage, contre commission. Pour la chaîne financière et opérationnelle, « sans intermédiaire » reste exact, mais quatorze affirmations à la première personne supposent une autorisation que rien n'atteste.",
+    "options": [
+      "Option A — le site est la vitrine francophone de Jasmin. Demande une autorisation écrite pour la licence, les personnes et les avis.",
+      "Option B — marque d'apport distincte, Jasmin nommé comme partenaire opérateur. Demande de réécrire les quatorze affirmations et site.json."
+    ],
+    "blocks": ["Nommer un auteur réel", "Page à propos crédible", "Demander des avis en son nom propre"]
+  },
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Semaine 1",
+        "items": [
+          "Retirer le nœud review du JSON-LD, garder les citations visibles et sourcées, retirer l'avis Laos/Cambodge, corriger reviewSource dans site.json",
+          "Vérifier Search Console par TXT DNS (propriété sc-domain), puis nommer le sitemap",
+          "Ajouter des règles de cache dans public/_headers, en traitant /_next/static et /photos différemment",
+          "Trancher l'identité du site : option A ou option B"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Semaines 2-3",
+        "items": [
+          "Ajouter image et logo au nœud TravelAgency",
+          "Mailler /agence-de-voyage-vietnam/ depuis plus de deux pages",
+          "Brancher Cloudflare Web Analytics (champ mesure.cloudflare déjà câblé)",
+          "Règle de redirection Cloudflare www vers apex en 301"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Mois 2",
+        "items": [
+          "Remplacer les six itinéraires, story.json et les treize photos Wikimedia",
+          "Nommer un auteur réel sur les guides (dépend de la décision d'identité)",
+          "Rédiger la politique de confidentialité",
+          "Vérifier le domaine chez Resend et changer DEVIS_FROM",
+          "Construire la présence de marque : YouTube, puis Reddit, puis LinkedIn"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "En continu",
+        "items": [
+          "Reprendre CrUX dans 4 à 6 semaines de trafic réel avant toute optimisation du LCP",
+          "Relecture trimestrielle des guides, en ne déplaçant dateModified qu'à cette occasion",
+          "Rejouer scripts/check-seo.py après chaque déploiement"
+        ]
+      }
+    ]
+  },
+  "do_not": [
+    "Ne pas compter sur llms.txt : Google indique qu'il n'aide ni ne nuit",
+    "Ne pas compter sur FAQPage : les résultats enrichis de FAQ ont été retirés pour tous les sites le 7 mai 2026",
+    "Ne pas utiliser l'Indexing API : réservée à JobPosting et BroadcastEvent",
+    "Ne pas remettre aggregateRating tant qu'aucun avis n'est recueilli par le site",
+    "Ne pas optimiser le LCP avant d'avoir des données de terrain"
+  ],
+  "method": {
+    "crawl": "Suivi de tous les liens internes depuis la racine, 22 pages",
+    "performance": "API PageSpeed Insights, Lighthouse 13.6.0, mobile et bureau",
+    "field_data": "API CrUX — aucune donnée disponible pour ce domaine",
+    "headers_and_weights": "Mesurés sur les réponses réelles, avec Accept-Encoding",
+    "structured_data": "JSON-LD extrait et analysé page par page",
+    "subagents": "Aucun — exécution séquentielle inline"
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": null
+  }
+}
