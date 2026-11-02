@@ -1,22 +1,22 @@
-/* Jasmine Travel — papier chaud, vert laque, ambre.
-   Les photos fournissent la saturation ; l'interface reste discrète. */
+/* Jasmine Travel — warm paper, lacquer green, amber.
+   The photographs supply the saturation; the interface stays quiet. */
 
 :root {
   /* — Couleur ------------------------------------------------------------ */
   --paper: #f7f4ef; /* fond de page, papier chaud */
   --paper-2: #ffffff;
-  --sand: #ece4d7; /* bandes alternées, aplats */
+  --sand: #ece4d7; /* alternating bands, flat fills */
   --line: #ded4c3;
 
-  --ink: #241e18; /* encre chaude, pas un noir bleuté */
+  --ink: #241e18; /* warm ink, not a blue-leaning black */
   --ink-2: #554b41; /* texte secondaire */
-  --ink-3: #6f6358; /* légendes, étiquettes */
+  --ink-3: #6f6358; /* captions, labels */
 
   --jade: #1b4238; /* laque profonde : bandes sombres */
   --jade-2: #2c6354;
 
-  --amber: #b85c12; /* l'accent : lumière de lanterne */
-  --amber-deep: #8e4409; /* même accent, pour le petit texte */
+  --amber: #b85c12; /* the accent: lantern light */
+  --amber-deep: #8e4409; /* same accent, for small text */
   --amber-soft: #f6e7d6;
 
   /* Sur fond sombre (jade, photo) les tons ci-dessus tombent sous 3:1. */
@@ -85,12 +85,12 @@ a {
   text-decoration: none;
 }
 
-/* `height: auto` est indissociable de `max-width: 100%`. Nos images portent
-   un attribut `height` — nécessaire pour réserver la place et éviter le
-   décalage de mise en page — et sans cette ligne, le navigateur l'applique à
-   la lettre dès que la largeur est contrainte : une photo de 1800 × 1200
-   placée dans une colonne de 516 px s'affichait en 516 × 1200, étirée.
-   Les composants qui recadrent volontairement imposent leur propre hauteur. */
+/* `height: auto` is inseparable from `max-width: 100%`. Our images carry a
+   `height` attribute — needed to reserve the space and avoid layout shift —
+   and without this line the browser applies it literally as soon as the width
+   is constrained: an 1800 × 1200 photo placed in a 516px column rendered at
+   516 × 1200, stretched. Components that deliberately crop impose their own
+   height. */
 img {
   display: block;
   max-width: 100%;
@@ -161,8 +161,8 @@ img {
 .d3 {
   font-family: var(--display);
   font-weight: 600;
-  /* 1.1 et non 0.95 : les accents des capitales françaises (Hué, Hanoï, À)
-     dépassent la hauteur d'ascendante et seraient rognés plus serré. */
+  /* 1.1 rather than 0.95: accents on French capitals (Hué, Hanoï, À) rise
+     above the ascender height and would be clipped at anything tighter. */
   line-height: 1.1;
   letter-spacing: -0.018em;
   text-wrap: balance;
@@ -453,9 +453,9 @@ img {
 }
 
 /* HERO
-   Pleine image. Le texte repose sur un voile sombre dégradé depuis le bas :
-   c'est ce qui garantit la lisibilité quelle que soit la photo qu'on y mettra
-   plus tard — ne pas le retirer en changeant d'image. */
+   Full-bleed image. The text sits on a dark veil gradating from the bottom:
+   that is what guarantees legibility whatever photo is dropped in later — do
+   not remove it when changing the image. */
 
 .hero {
   position: relative;
@@ -479,10 +479,10 @@ img {
   object-fit: cover;
 }
 
-/* Deux voiles superposés. Le vertical assoit le bandeau de preuves ; le
-   latéral assombrit la colonne de texte en laissant respirer la droite de
-   l'image. Sans le second, un ciel clair rend l'avant-titre illisible —
-   et ce sera le cas de la moitié des photos qu'on mettra ici ensuite. */
+/* Two stacked veils. The vertical one anchors the proof strip; the lateral one
+   darkens the text column while letting the right of the image breathe. Without
+   the second, a bright sky makes the kicker unreadable — and that will be the
+   case for half the photos put here later. */
 .hero__veil {
   position: absolute;
   inset: 0;
@@ -539,7 +539,7 @@ img {
   margin-top: 2.2rem;
 }
 
-/* Légende de lieu : convention de photographie de voyage, pas d'instrument. */
+/* Place caption: travel-photography convention, not camera metadata. */
 .caption {
   position: absolute;
   z-index: 2;
@@ -560,8 +560,9 @@ img {
   color: var(--amber-light);
 }
 
-/* Sous 900 px, le titre occupe toute la largeur et passait sous la légende.
-   Celle-ci est une coquetterie : elle disparaît plutôt que de gêner. */
+/* Below 900px the title takes the full width and used to run under the
+   caption. The caption is a flourish: it disappears rather than get in the
+   way. */
 @media (max-width: 900px) {
   .caption {
     display: none;
@@ -609,7 +610,7 @@ img {
   }
 }
 
-/* Entrée : le voile se lève et le titre monte. Un seul moment, au chargement. */
+/* Entrance: the veil lifts and the title rises. One moment only, on load. */
 @keyframes rise {
   from {
     opacity: 0;
@@ -649,9 +650,9 @@ img {
   animation-delay: 0.6s;
 }
 
-/* RÉGIONS
-   Grille décalée : la photo déborde la colonne de texte et alterne de côté.
-   Une rangée de trois cartes identiques aurait l'air d'un catalogue. */
+/* REGIONS
+   Offset grid: the photo overruns the text column and alternates sides. A row
+   of three identical cards would look like a catalogue. */
 
 .rgn {
   display: grid;
@@ -747,10 +748,9 @@ img {
   }
 }
 
-/* CARNET
-   Bandeau d'ambiance plein cadre. Pas d'argumentaire : des images et des
-   noms de lieux. C'est le moment de la page où l'on donne envie, pas où
-   l'on explique. */
+/* DIARY
+   Full-bleed mood strip. No pitch: images and place names. This is the moment
+   in the page where you create desire, not where you explain. */
 
 .carnet {
   background: var(--jade);
@@ -771,8 +771,8 @@ img {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-inline: var(--gutter);
-  /* Sans cela, l'accrochage au défilement aligne la première vignette sur le
-     bord du conteneur et mange la marge au chargement. */
+  /* Without this, scroll snapping aligns the first thumbnail to the container
+     edge and eats the margin on load. */
   scroll-padding-inline: var(--gutter);
   padding-bottom: 0.75rem;
   -webkit-overflow-scrolling: touch;
@@ -791,8 +791,8 @@ img {
   margin: 0;
 }
 
-/* Une vignette sur deux est plus haute : une bande d'images toutes de même
-   format se lit comme une planche-contact, pas comme un carnet. */
+/* Every other thumbnail is taller: a strip of images all the same format reads
+   like a contact sheet, not like a diary. */
 .shot:nth-child(even) {
   aspect-ratio: 1 / 1;
   align-self: center;
@@ -829,10 +829,10 @@ img {
   margin-top: 2px;
 }
 
-/* CIRCUITS
-   Une liste, pas une grille de cartes : six itinéraires se comparent en
-   lisant une colonne, comme un tableau de départs. La vignette donne l'envie,
-   la colonne de droite donne le prix. */
+/* ITINERARIES
+   A list, not a card grid: six itineraries are compared by reading down one
+   column, like a departures board. The thumbnail creates the desire, the right
+   column gives the price. */
 
 .trips {
   border-top: 1px solid var(--line);
@@ -978,9 +978,9 @@ img {
   }
 }
 
-/* PROCESSUS
-   La numérotation est légitime ici, et seulement ici : ces quatre étapes
-   forment une séquence réelle, où l'ordre porte une information utile. */
+/* PROCESS
+   Numbering is legitimate here, and only here: these four steps form a real
+   sequence, where the order carries useful information. */
 
 .flow {
   display: grid;
@@ -1090,9 +1090,9 @@ img {
   padding-left: 1.1rem;
 }
 
-/* Barres de saison : la longueur dit la qualité, le mot la confirme. Un
-   pastillage coloré obligerait à décoder une légende, et deviendrait illisible
-   sans perception des couleurs. */
+/* Season bars: the length states the quality, the word confirms it. Coloured
+   dots would force the reader to decode a legend, and would become unreadable
+   without colour perception. */
 .season {
   display: flex;
   align-items: center;
@@ -1183,7 +1183,7 @@ img {
   }
 }
 
-/* CONSEILLÈRE */
+/* TRAVEL ADVISER */
 
 .who {
   display: grid;
@@ -1269,7 +1269,7 @@ img {
   color: var(--amber-deep);
 }
 
-/* Le « + » : deux filets partageant exactement le même centre. */
+/* The "+": two rules sharing exactly the same centre. */
 .faq summary::after {
   content: "";
   position: absolute;
@@ -1301,9 +1301,9 @@ img {
   font-size: 0.98rem;
 }
 
-/* DEVIS
-   Posé sur une photo : la demande de devis est le moment où l'on se projette
-   dans le voyage, pas où l'on remplit un dossier. */
+/* QUOTE FORM
+   Set on a photograph: requesting a quote is the moment you picture yourself on
+   the trip, not the moment you fill in paperwork. */
 
 .devis {
   position: relative;
@@ -1490,10 +1490,10 @@ img {
   color: #fff;
 }
 
-/* Blanc opaque, et non à 95 % : sur l'ambre, les 5 % de transparence
-   laissaient remonter le fond et faisaient tomber le rapport à 4,25:1, sous
-   le seuil AA. En plein, il est de 4,55:1 — la marge est mince, donc
-   éclaircir --amber casserait ce paragraphe. */
+/* Opaque white, not 95%: over amber, the 5% transparency let the background
+   bleed through and dropped the contrast ratio to 4.25:1, below the AA
+   threshold. At full opacity it is 4.55:1 — the margin is thin, so lightening
+   --amber would break this paragraph. */
 .close p {
   margin: 0.9rem auto 0;
   max-width: 34rem;
@@ -1638,7 +1638,7 @@ img {
   }
 }
 
-/* CRÉDITS PHOTO */
+/* PHOTO CREDITS */
 
 .credits {
   display: grid;
@@ -1666,15 +1666,14 @@ img {
   text-decoration: underline;
 }
 
-/* ENVIES
-   Entrée par l'envie. Grille de six portes, image en haut, une phrase
-   concrète en dessous. La carte entière est cliquable ; l'image se rapproche
-   légèrement au survol, ce qui suffit à signaler qu'il y a quelque chose
-   derrière. */
+/* TRAVEL THEMES
+   Entry by desire. A grid of six doors, image on top, one concrete sentence
+   below. The whole card is clickable; the image moves in slightly on hover,
+   which is enough to signal there is something behind it. */
 
-/* RÉCIT
-   Un carnet raconté, en pleine page. Mise en page éditoriale plutôt que
-   bloc marketing : grande image, exergue, paragraphes courants. */
+/* STORY
+   A diary told at full page width. Editorial layout rather than a marketing
+   block: large image, pull quote, running paragraphs. */
 
 .recit__grid {
   display: grid;
@@ -1750,7 +1749,7 @@ img {
   }
 }
 
-/* Ligne sensorielle des régions : une image concrète avant les faits. */
+/* Sensory line for the regions: a concrete image before the facts. */
 .rgn__feel {
   font-family: var(--display);
   font-size: clamp(1.05rem, 1.6vw, 1.22rem);
@@ -1761,9 +1760,9 @@ img {
   margin-top: 0.9rem;
 }
 
-/* FICHES VOYAGE
-   Liste des circuits et fiche détaillée. Structure reprise de Terres
-   d'Aventure : les critères de décision sont visibles avant le texte. */
+/* TRIP PAGES
+   Itinerary list and detail page. Structure borrowed from Terres d'Aventure:
+   the decision criteria are visible before the prose. */
 
 /* Fil d'Ariane */
 .fil {
@@ -1831,7 +1830,7 @@ img {
   margin-bottom: 1.5rem;
 }
 
-/* --------------------------------------------------- en-tête de la fiche */
+/* ------------------------------------------------------ trip page header */
 
 .trip-hero {
   position: relative;
@@ -1852,9 +1851,9 @@ img {
   object-fit: cover;
 }
 
-/* Un seul voile. Deux voiles superposés se composent en opacité — 0,9 et 0,7
-   donnent 0,97, et la photo disparaît. Celui-ci couvre la colonne de texte et
-   laisse la droite de l'image lisible. */
+/* A single veil. Two stacked veils compose in opacity — 0.9 and 0.7 give 0.97,
+   and the photo vanishes. This one covers the text column and leaves the right
+   of the image readable. */
 .trip-hero__veil {
   position: absolute;
   inset: 0;
@@ -1896,7 +1895,7 @@ img {
   max-width: 44rem;
 }
 
-/* Bandeau de critères : durée, niveau, confort, saison, groupe, note. */
+/* Criteria strip: duration, difficulty, comfort, season, group size, rating. */
 .specs {
   display: grid;
   grid-template-columns: repeat(6, auto);
@@ -1999,9 +1998,9 @@ img {
   border-color: var(--amber);
 }
 
-/* Les sections qui suivent la barre d'ancres doivent réserver sa hauteur,
-   sinon un clic sur « Budget » place le titre dessous. Le sélecteur de
-   voisinage général limite la règle aux pages qui ont cette barre. */
+/* Sections following the anchor bar must reserve its height, otherwise
+   clicking "Budget" puts the heading underneath it. The general sibling
+   selector limits the rule to pages that actually have the bar. */
 .ancres ~ section[id] {
   scroll-margin-top: calc(var(--hdr) + 3.6rem);
 }
@@ -2091,7 +2090,7 @@ img {
   max-width: 44rem;
 }
 
-/* Les données chiffrées de la journée : c'est ce qui engage l'agence. */
+/* The day's hard numbers: this is what commits the agency. */
 .jour__facts {
   display: flex;
   flex-wrap: wrap;
@@ -2215,7 +2214,7 @@ img {
   }
 }
 
-/* -------------------------------------------------------- hébergement */
+/* ------------------------------------------------------- accommodation */
 
 .nuits {
   display: grid;
@@ -2237,10 +2236,10 @@ img {
   }
 }
 
-/* PARCOURS
-   Carte de l'itinéraire et liste des étapes, côte à côte. La carte est un
-   SVG calculé au build (components/TripMap.tsx) : aucune tuile, aucun
-   script, aucun appel réseau — elle est dans le HTML servi. */
+/* ROUTE
+   Itinerary map and list of stops, side by side. The map is an SVG computed at
+   build time (components/TripMap.tsx): no tiles, no script, no network call —
+   it sits in the served HTML. */
 
 .parcours {
   display: grid;
@@ -2264,9 +2263,9 @@ img {
   display: block;
   width: 100%;
   height: auto;
-  /* Plafond de hauteur : le SVG se contente alors de « meet » et se centre,
-     les bandes latérales prenant le fond de la figure — qui est la couleur
-     de la mer, donc le raccord ne se voit pas. */
+  /* Height ceiling: the SVG then settles for "meet" and centres itself, the
+     side bands taking the figure's background — which is the sea colour, so
+     the join is invisible. */
   max-height: 620px;
 }
 
@@ -2305,12 +2304,11 @@ img {
   text-anchor: middle;
 }
 
-/* Nom de l'étape — toponyme vietnamien (Hanoi, Hue, Saigon), cf. lib/places.ts.
-   Le halo est un contour de la couleur du papier tracé SOUS le remplissage
-   (`paint-order`), pour que le nom reste lisible qu'il tombe sur la terre, sur
-   la mer ou sur le trait du parcours : 10,2:1 sur la terre, 8,5:1 sur la mer.
-   L'épaisseur du contour est passée en attribut, puisqu'elle suit l'échelle
-   du cadrage. */
+/* Stop name — Vietnamese place name (Hanoi, Hue, Saigon), cf. lib/places.ts.
+   The halo is a paper-coloured stroke drawn UNDER the fill (`paint-order`), so
+   the name stays readable whether it falls on land, on sea or on the route
+   line: 10.2:1 over land, 8.5:1 over sea. The stroke width is passed as an
+   attribute, since it follows the framing scale. */
 .tripmap__label {
   fill: var(--jade);
   stroke: var(--paper);
@@ -2352,8 +2350,9 @@ img {
   font-weight: 700;
 }
 
-/* Photo dans la grille « parcours ». .parcours__map porte le fond bleuté et
-   les proportions de la carte : y mettre une photo était un contresens. */
+/* Photo inside the "parcours" grid. .parcours__map carries the blue-tinted
+   background and the map's proportions: putting a photo in it was a
+   misreading. */
 .parcours__photo {
   margin: 0;
   border-radius: var(--r);
@@ -2383,10 +2382,10 @@ img {
   }
 }
 
-/* TUILES
-   Une seule définition pour les deux grilles de tuiles — « par envie » sur la
-   page d'accueil et la liste des circuits — qui portaient auparavant des
-   blocs de déclarations identiques sous deux noms. */
+/* TILES
+   One definition for both tile grids — "by theme" on the home page and the
+   itinerary list — which previously carried identical declaration blocks under
+   two different names. */
 
 .tiles {
   display: grid;
@@ -2441,7 +2440,7 @@ img {
   flex: 1;
 }
 
-/* La ligne qui permet d'écarter un voyage sans l'ouvrir. */
+/* The row that lets you rule a trip out without opening it. */
 .tile__facts {
   display: flex;
   flex-wrap: wrap;
@@ -2488,8 +2487,8 @@ img {
 
 /* UTILITAIRES */
 
-/* Étiquette ambre : « Le plus demandé », « Patrimoine impérial »… Elle
-   existait en trois exemplaires sous trois noms. */
+/* Amber label: "Le plus demandé", "Patrimoine impérial"… It existed in three
+   copies under three names. */
 .badge {
   display: inline-block;
   font-size: 0.68rem;
@@ -2507,7 +2506,7 @@ img {
   top: 1rem;
 }
 
-/* Prix « à partir de », identique dans la liste, la carte et la fiche. */
+/* "From" price, identical in the list, the card and the trip page. */
 .price span {
   display: block;
   font-size: 0.7rem;
@@ -2551,7 +2550,7 @@ img {
   text-transform: none;
 }
 
-/* Cadre d'image en couverture — l'échafaudage était écrit neuf fois. */
+/* Cover image frame — the scaffolding was written out nine times. */
 .fig {
   position: relative;
   margin: 0;
@@ -2560,8 +2559,8 @@ img {
   background: var(--sand);
 }
 
-/* Fond sombre pour les cadres dont la légende est en blanc : si l'image ne
-   charge pas, le texte doit rester lisible sur le fond de remplacement. */
+/* Dark background for frames whose caption is white: if the image fails to
+   load, the text must stay readable against the fallback. */
 .fig--dark {
   background: var(--jade-2);
 }
@@ -2592,22 +2591,20 @@ img {
   margin-top: 2rem;
 }
 
-/* Honeypot. `display:none` et non un déport hors écran : le remplissage
-   automatique de Chrome traite un champ déporté comme visible et y écrit
-   volontiers, ce qui faisait passer de vrais visiteurs pour des robots — leur
-   demande était alors silencieusement jetée, et ils voyaient la page de
-   remerciement malgré tout.
+/* Honeypot. `display:none` rather than an off-screen offset: Chrome's autofill
+   treats an offset field as visible and happily writes into it, which made real
+   visitors look like bots — their request was then silently discarded, and they
+   saw the thank-you page regardless.
 
-   Un robot qui lit le HTML sans appliquer la feuille de style remplit ce champ
-   quand même, et c'est l'immense majorité d'entre eux. Les deux erreurs
-   possibles ne coûtent pas le même prix : laisser passer un spam est une
-   nuisance, jeter la demande d'un client est une vente perdue dont personne
-   n'est averti. */
+   A bot reading the HTML without applying the stylesheet fills this field
+   anyway, and that is the vast majority of them. The two possible mistakes do
+   not cost the same: letting spam through is a nuisance, discarding a
+   customer's request is a lost sale nobody is told about. */
 .trap {
   display: none;
 }
 
-/* Visible des seuls lecteurs d'écran. */
+/* Visible to screen readers only. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -2620,7 +2617,7 @@ img {
   border: 0;
 }
 
-/* Pages guides : blocs éditoriaux et liste de circuits par saison. */
+/* Guide pages: editorial blocks and a season-by-season itinerary list. */
 .guide {
   display: grid;
   gap: 1.6rem;
@@ -2657,10 +2654,10 @@ img {
   padding: 0;
 }
 
-/* La liste pose un fond clair à l'intérieur d'une bande sombre. Sans rétablir
-   explicitement les couleurs d'encre, tout ce qu'elle contient hérite de
-   celles de la bande — clair sur clair, soit 1,35:1. Les sélecteurs sont
-   préfixés par .sec--jade pour l'emporter sur ses propres règles de descendance. */
+/* The list lays a light background inside a dark band. Without explicitly
+   restoring the ink colours, everything it contains inherits the band's — light
+   on light, i.e. 1.35:1. The selectors are prefixed with .sec--jade so they win
+   over its own descendant rules. */
 .sec--jade .saison-liste li,
 .saison-liste li {
   align-items: center;
@@ -2698,7 +2695,7 @@ img {
   color: var(--ink-3);
 }
 
-/* Mention de mise à jour sur les pages à contenu périssable. */
+/* Updated-on line for pages whose content perishes. */
 .maj {
   border-left: 2px solid var(--amber);
   color: var(--ink-2);
@@ -2726,7 +2723,7 @@ img {
   position: absolute;
 }
 
-/* Équipe : des noms et des fonctions, sur la bande sombre. */
+/* Team: names and roles, on the dark band. */
 .equipe {
   display: grid;
   gap: 0.8rem;
@@ -2752,7 +2749,7 @@ img {
   font-size: 0.92rem;
 }
 
-/* Provenance d'un avis : discrète, mais toujours cliquable. */
+/* A review's provenance: discreet, but always clickable. */
 .rev__src {
   color: var(--amber-deep);
   font-size: 0.82rem;
@@ -2760,9 +2757,9 @@ img {
   text-underline-offset: 2px;
 }
 
-/* WhatsApp : le canal principal d'une agence vietnamienne vers la France.
-   Traité comme un lien, pas comme une pastille flottante — celle-ci
-   demanderait du JavaScript et masquerait du contenu sur mobile. */
+/* WhatsApp: the main channel from a Vietnamese agency to France. Treated as a
+   link, not as a floating bubble — a bubble would demand JavaScript and hide
+   content on mobile. */
 .hdr__wa {
   color: var(--jade-2);
   font-size: 0.86rem;

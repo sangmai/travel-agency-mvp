@@ -9,14 +9,14 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getTrips, tripUrl, TRIP_BASE, type PlaceId, getGuide } from "@/lib/content";
 
 /**
- * Requête très large, donc très disputée. L'angle qui nous distingue n'est pas
- * la liste — tout le monde cite la baie d'Halong — mais la durée conseillée et
- * ce que chaque étape demande réellement : c'est ce qu'une agence sur place
- * sait et qu'un comparateur ne peut pas inventer.
+ * A very broad query, therefore a heavily contested one. What sets us apart is
+ * not the list — everybody cites Halong bay — but the recommended duration and
+ * what each stop really demands: that is what an agency on the ground knows and
+ * a comparison site cannot invent.
  *
- * Chaque expérience renvoie vers le circuit qui passe réellement par ce lieu,
- * calculé depuis les étapes du contenu. Un circuit retiré du CMS ne laisse
- * donc pas de lien pendant derrière lui.
+ * Every experience links to the itinerary that genuinely passes through that
+ * place, computed from the content's stops. An itinerary removed from the CMS
+ * therefore leaves no dangling link behind it.
  */
 
 type Experience = {
@@ -159,15 +159,14 @@ export default async function QueFaire() {
   const guide = await getGuide("que-faire-au-vietnam");
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
 
-  /* Le lien de chaque expérience vient des étapes réelles des circuits : si
-     plus aucun ne passe par ce lieu, la carte renvoie vers la liste plutôt
-     que vers une page qui ne le propose pas.
+  /* Each experience's link comes from the itineraries' real stops: if none
+     passes through that place any more, the card points at the list rather than
+     at a page that does not offer it.
 
-     Parmi ceux qui conviennent, le plus court l'emporte. Prendre le premier
-     venu renvoyait sept cartes sur onze vers la même traversée de quinze
-     jours : un circuit de dix jours centré sur le Nord répond mieux à « que
-     faire à Ninh Binh », et le maillage interne cesse de se concentrer sur
-     une seule fiche. */
+     Among those that qualify, the shortest wins. Taking the first match sent
+     seven cards out of eleven to the same fifteen-day crossing: a ten-day trip
+     centred on the North answers "que faire à Ninh Binh" better, and the
+     internal linking stops concentrating on a single page. */
   const parDuree = [...trips].sort((a, b) => a.days - b.days);
   const circuitPour = (lieu: PlaceId) =>
     parDuree.find((t) => t.stops.some((s) => s.place === lieu));

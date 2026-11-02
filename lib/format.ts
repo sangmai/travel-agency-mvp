@@ -1,13 +1,13 @@
 import siteJson from "@/content/site.json";
 
 /**
- * Mise en forme locale, construite une fois depuis content/site.json.
+ * Locale formatting, built once from content/site.json.
  *
- * Elle était auparavant instanciée cinq fois dans quatre fichiers, avec
- * « fr-FR » et « EUR » écrits en dur à chaque fois, pendant que la virgule
- * décimale des notes était bricolée par `.toFixed(1).replace(".", ",")` dans
- * cinq autres. Rassembler ces choix ici est aussi ce qui rend une seconde
- * langue possible sans parcourir les composants.
+ * It used to be instantiated five times across four files, with "fr-FR" and
+ * "EUR" hard-coded each time, while the decimal comma on ratings was hacked in
+ * with `.toFixed(1).replace(".", ",")` in five others. Gathering these choices
+ * here is also what makes a second language possible without walking through
+ * every component.
  */
 const { locale, currency } = siteJson;
 
@@ -29,5 +29,5 @@ const decimalFmt = new Intl.NumberFormat(locale.replace("_", "-"), {
 
 export const euro = (n: number) => euroFmt.format(n);
 export const monthYear = (iso: string) => monthYearFmt.format(new Date(iso));
-/** Note sur 5, virgule décimale comprise. */
+/** Rating out of 5, decimal comma included. */
 export const score = (n: number) => decimalFmt.format(n);

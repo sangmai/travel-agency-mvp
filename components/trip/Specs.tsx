@@ -2,13 +2,13 @@ import { score } from "@/lib/format";
 import type { Trip } from "@/lib/content";
 
 /**
- * Les critères de décision, décrits une fois.
+ * The decision criteria, described once.
  *
- * L'en-tête de la fiche et le tableau technique les affichaient chacun à la
- * main — cinq des neuf lignes du tableau répétaient mot pour mot les six
- * `<dt>/<dd>` du bandeau. Ils lisent désormais la même liste, chacun à sa
- * densité : `detail` quand le tableau veut une phrase plutôt qu'un mot,
- * `table: false` pour ce qui n'a pas sa place dans une fiche technique.
+ * The page header and the spec table each used to render them by hand — five of
+ * the table's nine rows repeated the banner's six `<dt>/<dd>` pairs word for
+ * word. They now read the same list, each at its own density: `detail` when the
+ * table wants a sentence rather than a word, `table: false` for what has no
+ * place in a spec sheet.
  */
 export type Spec = {
   label: string;
@@ -33,8 +33,8 @@ export function tripSpecs(trip: Trip, rating: { value: number; count: number }):
     { label: "Hébergement", value: trip.confort },
     { label: "Saison", value: trip.saison, tableLabel: "Meilleure saison" },
     { label: "Groupe", value: trip.groupe, tableLabel: "Taille du groupe" },
-    /* Pas de ligne « Avis » tant qu'il n'y en a aucun : « 0,0/5 (0) » se lit
-       comme une très mauvaise note, pas comme une absence de note. */
+    /* No "Avis" row while there are none: "0,0/5 (0)" reads as a terrible
+       rating, not as the absence of one. */
     ...(rating.count > 0
       ? [
           {

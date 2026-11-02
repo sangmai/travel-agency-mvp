@@ -9,10 +9,10 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
 
 /**
- * Sujet où le vocabulaire commercial ment le plus : « trek » désigne au
- * Vietnam aussi bien trois heures entre deux villages qu'une nuit sous tente
- * dans une grotte. La page donne donc des dénivelés et des durées, pas des
- * adjectifs — c'est ce qui permet à quelqu'un de savoir s'il en est capable.
+ * The subject where marketing vocabulary lies most: in Vietnam "trek" covers
+ * both three hours between two villages and a night under canvas in a cave. The
+ * page therefore gives elevation gains and durations, not adjectives — that is
+ * what lets someone know whether they are up to it.
  */
 
 const MASSIFS = [
@@ -89,8 +89,8 @@ export default async function Trek() {
   const guide = await getGuide("trek-vietnam");
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
 
-  /* Les circuits qui passent par un massif de marche, calculés depuis les
-     étapes : un circuit retiré du CMS ne laisse pas de lien derrière lui. */
+  /* The itineraries passing through a walking massif, computed from their
+     stops: an itinerary removed from the CMS leaves no link behind it. */
   const MARCHE = ["pu-luong", "sapa", "ha-giang", "ba-be", "cao-bang", "phong-nha", "mai-chau", "dong-van"];
   const concernes = trips.filter((t) => t.stops.some((s) => MARCHE.includes(s.place)));
 

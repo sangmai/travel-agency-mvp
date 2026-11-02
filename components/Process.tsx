@@ -2,8 +2,8 @@ import { SectionHead } from "./ui";
 import { Accent } from "@/lib/text";
 import { getProcess, getHome } from "@/lib/content";
 
-/** La numérotation est légitime ici, et seulement ici : ces étapes forment
- *  une séquence réelle où l'ordre porte une information utile. */
+/** Numbering is legitimate here, and only here: these steps form a real
+ *  sequence where the order carries useful information. */
 export async function Process() {
   const h = (await getHome()).process;
   const steps = await getProcess();

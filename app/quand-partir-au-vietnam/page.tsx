@@ -8,16 +8,15 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
 /**
- * « Quand partir au Vietnam » est la requête informationnelle la plus
- * volumineuse du marché français sur cette destination, et le point d'entrée
- * de la plupart des parcours d'achat. La page d'accueil en porte un résumé ;
- * ici le sujet est traité en entier, car une section d'accueil ne dispute
- * jamais le classement à une page dédiée.
+ * "Quand partir au Vietnam" is the highest-volume informational query in the
+ * French market for this destination, and the entry point of most purchase
+ * journeys. The home page carries a summary; here the subject is treated in
+ * full, because a home-page section never out-ranks a dedicated page.
  *
- * Chaque titre est suivi d'une réponse directe avant la nuance : c'est la
- * forme qu'un moteur génératif reprend. Les mois sont écrits en toutes
- * lettres plutôt qu'en plages (« de novembre à avril » plutôt que « nov-avr »)
- * pour que la phrase reste citable hors de son tableau.
+ * Every heading is followed by a direct answer before the nuance: that is the
+ * shape a generative engine picks up. Months are spelled out rather than given
+ * as ranges (French "de novembre a avril" rather than "nov-avr") so the sentence stays
+ * quotable outside its table.
  */
 
 const REGIONS = [

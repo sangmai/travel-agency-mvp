@@ -1,30 +1,28 @@
 #!/usr/bin/env node
 /**
- * Audit de contraste WCAG AA, en pilotant un vrai navigateur.
+ * WCAG AA contrast audit, driving a real browser.
  *
- * Les couleurs effectives ne se lisent pas dans la feuille de style : elles
- * dépendent de l'héritage et de la superposition des fonds. Deux pièges ont
- * déjà échappé à une lecture du CSS, et c'est ce script qui les a trouvés —
- * un bloc clair posé dans une bande sombre dont le texte héritait de la
- * bande, et un blanc à 95 % qui laissait remonter l'ambre.
+ * Effective colours cannot be read from the stylesheet: they depend on
+ * inheritance and on stacked backgrounds. Two traps already escaped a reading
+ * of the CSS, and this script is what found them — a light block laid inside a
+ * dark band whose text inherited the band's colour, and a 95% white that let
+ * the amber bleed through.
  *
- * Les fonds sont composés alpha comprise jusqu'à la première couche opaque.
- * Sans cela, un voile à 7 % est lu comme une couleur pleine et le script
- * invente des échecs qui n'existent pas.
+ * Backgrounds are composited, alpha included, down to the first opaque layer.
+ * Without that, a 7% veil is read as a solid colour and the script invents
+ * failures that do not exist.
  *
- *   npx playwright install chromium   # une fois
- *   node scripts/check-contrast.mjs [url-de-base]
+ *   npx playwright install chromium   # once
+ *   node scripts/check-contrast.mjs [base-url]
  *
- * Sort en code 1 s'il reste un échec, pour servir de garde en intégration.
+ * Exits 1 if any failure remains, so it can act as a CI gate.
  */
-/* playwright n'est pas dans package.json : son installation télécharge des
-   navigateurs, et Cloudflare installe les dépendances de développement à
-   chaque build. Quelques centaines de mégaoctets à chaque déploiement pour
-   un outil qui ne sert qu'à la relecture, cela ne se justifie pas.
+/* playwright is not in package.json: installing it downloads browsers, and
+   Cloudflare installs dev dependencies on every build. A few hundred megabytes
+   per deploy for a tool only used during review does not justify itself.
 
-   Il est donc chargé depuis l'endroit où il se trouve déjà, désigné par
-   PLAYWRIGHT_PATH. NODE_PATH ne sert à rien ici : les modules ES ne le
-   consultent pas. */
+   It is therefore loaded from wherever it already lives, pointed at by
+   PLAYWRIGHT_PATH. NODE_PATH is useless here: ES modules do not consult it. */
 let chromium;
 try {
   ({ chromium } = await import(process.env.PLAYWRIGHT_PATH || "playwright"));
@@ -52,7 +50,7 @@ for (const w of [1440, 390]) {
       const parse = (c) => { const n = c.match(/[\d.]+/g).map(Number); return { r:n[0], g:n[1], b:n[2], a: n[3] ?? 1 }; };
       const over = (f, bg) => ({ r: f.r*f.a + bg.r*(1-f.a), g: f.g*f.a + bg.g*(1-f.a), b: f.b*f.a + bg.b*(1-f.a), a: 1 });
       const lum = ({r,g,b}) => { const f = (v) => { v/=255; return v<=.03928 ? v/12.92 : ((v+.055)/1.055)**2.4; }; return .2126*f(r)+.7152*f(g)+.0722*f(b); };
-      // Compose toute la pile de fonds, alpha compris, jusqu'à une couche opaque.
+      // Composites the whole background stack, alpha included, down to an opaque layer.
       const bgOf = (el) => {
         const couches = []; let e = el;
         while (e) { const c = parse(getComputedStyle(e).backgroundColor); if (c.a > 0) { couches.push(c); if (c.a === 1) break; } e = e.parentElement; }

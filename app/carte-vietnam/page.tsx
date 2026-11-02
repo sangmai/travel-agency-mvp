@@ -9,14 +9,14 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getGuide, getSite, getTrips, resolveStops, tripUrl, TRIP_BASE } from "@/lib/content";
 
 /**
- * La carte est calculée au build depuis Natural Earth, puis rendue en SVG
- * inline : pas de tuiles, pas de bibliothèque, pas de requête au chargement.
- * C'est la seule page du site qu'un concurrent ne peut pas recopier sans
- * refaire le même travail — et une carte qui pèse quelques kilo-octets reste
- * lisible là où un fond de carte interactif demanderait du JavaScript.
+ * The map is computed at build time from Natural Earth, then rendered as inline
+ * SVG: no tiles, no library, no request on load. It is the only page on the site
+ * a competitor cannot copy without redoing the same work — and a map weighing a
+ * few kilobytes stays readable where an interactive base map would demand
+ * JavaScript.
  *
- * Même composant que les fiches voyage, sans le tracé : relier vingt-trois
- * lieux dessinerait un parcours qui n'existe pas.
+ * Same component as the trip pages, without the route line: joining twenty-three
+ * places would sketch a journey that does not exist.
  */
 
 const DISTANCES = [
@@ -75,8 +75,8 @@ export default async function CarteVietnam() {
   const guide = await getGuide("carte-vietnam");
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
 
-  /* Tous les lieux visités par au moins un circuit, du nord au sud. La carte
-     décrit donc ce que nous programmons réellement, pas un atlas. */
+  /* Every place visited by at least one itinerary, north to south. The map
+     therefore describes what we actually programme, not an atlas. */
   const ids = [...new Set(trips.flatMap((t) => t.stops.map((s) => s.place)))];
   const lieux = (await resolveStops(ids.map((place) => ({ place })))).sort(
     (a, b) => b.lat - a.lat,

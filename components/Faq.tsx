@@ -3,11 +3,11 @@ import { Accent } from "@/lib/text";
 import { getFaq, getHome } from "@/lib/content";
 
 /**
- * `<details>` natif : les réponses sont dans le HTML servi même repliées,
- * donc lisibles par les crawlers et les moteurs génératifs. Un accordéon
- * JavaScript qui n'injecte la réponse qu'au clic les rendrait invisibles.
+ * Native `<details>`: the answers sit in the served HTML even when collapsed,
+ * so crawlers and generative engines can read them. A JavaScript accordion that
+ * only injects the answer on click would make them invisible.
  *
- * Le balisage FAQPage (JsonLd.tsx) doit refléter ces questions mot pour mot.
+ * The FAQPage markup (JsonLd.tsx) must mirror these questions word for word.
  */
 export async function Faq() {
   const h = (await getHome()).faq;

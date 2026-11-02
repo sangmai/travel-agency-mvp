@@ -19,22 +19,22 @@ depuis la même source que le site, il n'y a donc rien à retaper.
 
 | Champ Google | Valeur exacte | Remarque |
 |---|---|---|
-| Nom de l'établissement | `Jasmin Travel` | Sans suffixe ni slogan : Google sanctionne le bourrage de mots-clés dans le nom. |
+| Nom de l'établissement | `Voyage Vietnam Sur Mesure` | Sans suffixe ni slogan : Google sanctionne le bourrage de mots-clés dans le nom. |
 | Catégorie principale | `Agence de voyages` | |
 | Catégorie secondaire | `Voyagiste` | |
 | Adresse | `270 Nguyen Luong Bang, Da Nang, Vietnam` | |
 | Code postal | `550000` | |
 | Téléphone | `+84 935 16 52 84` | Le même que sur le site, format international compris. |
-| Site web | `https://travel-agency-mvp.maisang90dn.workers.dev` | À mettre à jour le jour du passage au domaine définitif. |
+| Site web | `https://voyagevietnam-surmesure.com` | À mettre à jour le jour du passage au domaine définitif. |
 | Horaires | `09:00–18:00` | Ouvert lundi, mardi, mercredi, jeudi, vendredi. Fermé samedi et dimanche. |
 | Zone desservie | `Vietnam, Laos, Cambodge` | L'agence se déplace chez le client : déclarer la zone en plus de l'adresse. |
-| Année d'ouverture | `2015` | Correspond à la licence de tour-opérateur. |
+| Année d'ouverture | `undefined` | Correspond à la licence de tour-opérateur. |
 
 ## Description (750 caractères maximum)
 
-> Jasmin Travel est une agence de voyage locale francophone au Vietnam, installée à
+> undefined est une agence de voyage locale francophone au Vietnam, installée à
 > Da Nang et titulaire de la licence de tour-opérateur
-> international 48-049/2015/TCDL-GP LHQT. Nous concevons et opérons nous-mêmes des
+> international undefined. Nous concevons et opérons nous-mêmes des
 > circuits privés sur mesure au Vietnam, au Laos et au Cambodge, pour une
 > clientèle francophone. Pas d'intermédiaire entre vous et l'équipe qui
 > réserve les hôtels et missionne les guides : le même interlocuteur du
@@ -50,7 +50,7 @@ depuis la même source que le site, il n'y a donc rien à retaper.
 2. Basculer `reviewSource` de Tripadvisor vers Google dès que les avis y
    sont plus nombreux.
 3. Demander un avis après chaque voyage. C'est la seule façon d'en obtenir,
-   et la raison pour laquelle une agence en activité depuis 2015
+   et la raison pour laquelle une agence en activité depuis undefined
    n'en compte que 3 : personne n'a encore posé la
    question.
 
@@ -68,7 +68,7 @@ depuis la même source que le site, il n'y a donc rien à retaper.
 >
 > Et si quelque chose n'a pas été à la hauteur, dites-le-moi d'abord à moi.
 >
-> {prénom du conseiller}, Jasmin Travel
+> {prénom du conseiller}, Voyage Vietnam Sur Mesure
 
 Un lien direct, un message personnel, envoyé dans la semaine du retour. Ni
 relance, ni contrepartie : offrir quoi que ce soit contre un avis est

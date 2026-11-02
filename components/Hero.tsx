@@ -4,13 +4,13 @@ import { Accent, fill } from "@/lib/text";
 import { score } from "@/lib/format";
 
 /**
- * Pleine image : sur un site de voyage, la première chose à ressentir est
- * l'envie du lieu, pas la proposition commerciale.
+ * Full-bleed image: on a travel site the first thing to feel is the desire for
+ * the place, not the commercial proposition.
  *
- * Le H1 porte la requête cible (« voyager au Vietnam ») et le qualificatif qui
- * suit — « agence locale francophone » — est l'entité reprise par les moteurs
- * génératifs : il doit être identique dans le title, le H1, le JSON-LD,
- * llms.txt et la fiche Google.
+ * The H1 carries the target query ("voyager au Vietnam") and the qualifier that
+ * follows — "agence locale francophone" — is the entity generative engines pick
+ * up: it must be identical in the title, the H1, the JSON-LD, llms.txt and the
+ * Google Business Profile.
  */
 export async function Hero() {
   const [site, reviews] = await Promise.all([getSite(), getReviews()]);
@@ -18,14 +18,14 @@ export async function Hero() {
 
   const h = (await getHome()).hero;
 
-  /* La note vient de Tripadvisor, affichée telle quelle et vérifiable par le
-     lien de la section avis. Nous n'en calculons plus la moyenne nous-mêmes :
-     deux témoignages publiés ne font pas une note d'agence. */
+  /* The rating comes from Tripadvisor, shown as-is and verifiable through the
+     link in the reviews section. We no longer compute the average ourselves:
+     two published testimonials do not make an agency rating. */
   const vars = {
     note: score(site.reviewSource.rating),
     avis: site.reviewSource.count,
     delai: site.responseTime,
-    annee: site.founded,
+    annee: site.operator.founded,
     ville: site.address.city,
   };
   const t = (x: string) => fill(x, vars);

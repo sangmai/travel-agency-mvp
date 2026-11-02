@@ -8,12 +8,13 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getComparison, getGuide, getSite } from "@/lib/content";
 
 /**
- * Comparaison où nous sommes juge et partie. La page ne vaut donc que si
- * elle énonce ce qui joue contre nous — absence de garantie APST, pas de vol
- * inclus, droit vietnamien — et le cas où le tour-opérateur reste préférable.
+ * A comparison where we are both judge and party. The page is therefore worth
+ * something only if it states what works against us — no APST guarantee, no
+ * flights included, Vietnamese law — and the cases where the tour operator
+ * remains the better choice.
  *
- * C'est aussi ce qui la rend citable : un moteur génératif reprend plus
- * volontiers une comparaison qui concède que celle qui plaide.
+ * That is also what makes it citable: a generative engine picks up a comparison
+ * that concedes far more readily than one that pleads.
  */
 
 const VERIFIER = [
@@ -133,9 +134,10 @@ export default async function AgenceOuTO() {
               ))}
             </div>
             <p className="note">
-              Pour mémoire : {site.legalName}, {site.address.street},{" "}
-              {site.address.city}. Licence <b>{site.license}</b>, délivrée par
-              l&apos;{site.membership.toLowerCase()}.{" "}
+              Pour mémoire : vos voyages sont opérés par{" "}
+              {site.operator.legalName}, {site.address.street},{" "}
+              {site.address.city}. Licence <b>{site.operator.license}</b>,
+              délivrée par l&apos;{site.operator.membership.toLowerCase()}.{" "}
               <a className="lnk" href="/agence-de-voyage-vietnam">
                 Nos coordonnées complètes
               </a>

@@ -1,24 +1,24 @@
 import type { MetadataRoute } from "next";
 import { getSite } from "@/lib/content";
 
-/** Calculé une fois au build : le site est exporté en statique. */
+/** Computed once at build time: the site is exported statically. */
 export const dynamic = "force-static";
 
 /**
- * Les crawlers des moteurs génératifs sont autorisés comme tout le monde.
+ * Generative-engine crawlers are allowed like everyone else.
  *
- * Bloquer les crawlers de recherche en direct (OAI-SearchBot, PerplexityBot,
- * ChatGPT-User) rendrait le site incitable sans rien changer au classement
- * Google — ce n'est pas le même robot que ceux qui entraînent les modèles.
- * Pour restreindre, ajouter ici une règle nommant le robot.
+ * Blocking the live-search crawlers (OAI-SearchBot, PerplexityBot,
+ * ChatGPT-User) would make the site uncitable without changing anything in
+ * Google's ranking — they are not the same bots as the ones that train the
+ * models. To restrict, add a rule here naming the specific bot.
  *
- * /admin reste explorable à dessein : sa balise `noindex` est un signal plus
- * fort qu'un `Disallow`, mais encore faut-il que le robot puisse la lire. Un
- * `Disallow` l'empêcherait de voir la consigne et la page pourrait être
- * indexée depuis un lien externe.
+ * /admin stays crawlable on purpose: its `noindex` tag is a stronger signal
+ * than a `Disallow`, but the bot still has to be able to read it. A `Disallow`
+ * would stop it seeing the instruction, and the page could then be indexed from
+ * an external link.
  *
- * /auth et /callback sont les routes du relais OAuth : elles redirigent vers
- * GitHub et n'ont aucun contenu à explorer.
+ * /auth and /callback are the OAuth relay routes: they redirect to GitHub and
+ * have no content to crawl.
  */
 export default async function robots(): Promise<MetadataRoute.Robots> {
   const site = await getSite();

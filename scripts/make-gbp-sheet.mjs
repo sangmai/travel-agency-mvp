@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 /**
- * Fiche de saisie pour Google Business Profile, tirée de content/site.json.
+ * Data-entry sheet for Google Business Profile, taken from content/site.json.
  *
- * La cohérence du NAP — nom, adresse, téléphone — entre la fiche Google, le
- * pied de page et le JSON-LD est l'un des rares facteurs de référencement
- * local qui se vérifie à la lettre près. « 270 Nguyen Luong Bang » et
- * « 270, Nguyễn Lương Bằng » sont deux établissements différents pour un
- * moteur. Recopier à la main depuis le site, c'est introduire l'écart.
+ * NAP consistency — name, address, phone — between the Google listing, the
+ * footer and the JSON-LD is one of the few local-SEO factors verified to the
+ * letter. "270 Nguyen Luong Bang" and "270, Nguyễn Lương Bằng" are two
+ * different businesses to a search engine. Copying by hand from the site is how
+ * the discrepancy gets introduced.
  *
  *   node scripts/make-gbp-sheet.mjs
  *
- * Écrit docs/google-business-profile.md, à ouvrir en face du formulaire.
+ * Writes docs/google-business-profile.md, to be opened alongside the form.
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";

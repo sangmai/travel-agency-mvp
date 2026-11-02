@@ -23,11 +23,11 @@ import {
 import { euro, score } from "@/lib/format";
 
 /**
- * Modèle Terres d'Aventure : critères de décision → ancres → « les plus » →
- * programme chiffré → budget → hébergement → fiche technique → avis.
+ * Terres d'Aventure's model: decision criteria → anchors → "highlights" →
+ * day-by-day with hard numbers → budget → accommodation → spec sheet → reviews.
  *
- * Différence assumée : pas de calendrier de départs, ces voyages se composent
- * à vos dates — la section budget se termine donc sur une demande de devis.
+ * One deliberate difference: no departure calendar, these trips are built around
+ * your dates — so the budget section ends on a quote request.
  */
 const ANCRES = [
   { id: "les-plus", label: "Les plus" },
@@ -51,10 +51,10 @@ export async function generateMetadata({
   if (!trip) return {};
 
   return {
-    /* `absolute` retire le suffixe de marque : il coûte seize caractères, et
-       les titres dépassaient tous la soixantaine au-delà de laquelle Google
-       tronque. Sur une fiche produit, le nom du voyage et son prix valent
-       mieux que la marque, que `og:site_name` porte déjà. */
+    /* `absolute` drops the brand suffix: it costs sixteen characters, and the
+       titles were all overrunning the sixty beyond which Google truncates. On a
+       product page the trip name and its price are worth more than the brand,
+       which `og:site_name` already carries. */
     title: {
       absolute: `${trip.name} — ${trip.days} jours dès ${trip.priceFrom} €`,
     },
@@ -99,7 +99,7 @@ export default async function TripPage({
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
-      touristTripNode(trip, { site, stops: stops.map((s) => s.fr), reviews }),
+      touristTripNode(trip, { site, stops: stops.map((s) => s.fr) }),
       breadcrumb(site.url, [
         { name: "Accueil" },
         { name: "Circuits au Vietnam", path: TRIP_BASE },
@@ -170,9 +170,9 @@ export default async function TripPage({
               </ul>
             </div>
 
-            {/* Carte et liste côte à côte : la carte est un SVG calculé au
-                build, la liste porte la même information en texte — donc
-                lisible par un lecteur d'écran et par un crawler. */}
+            {/* Map and list side by side: the map is an SVG computed at build
+                time, the list carries the same information as text — readable by
+                a screen reader and by a crawler. */}
             <div className="parcours">
               <figure className="parcours__map">
                 <TripMap stops={stops} />
@@ -246,9 +246,9 @@ export default async function TripPage({
 
         <Tech code={trip.code} specs={specs} />
 
-        {/* Un circuit sans avis n'affiche pas une section vide notée 0,0 : il
-            n'affiche rien. L'ancre disparaît de la barre de navigation avec
-            elle, sinon elle mène dans le vide. */}
+        {/* A trip with no reviews does not show an empty section rated 0.0: it
+            shows nothing. The anchor disappears from the nav bar along with it,
+            otherwise it would lead nowhere. */}
         {reviews.length > 0 && (
         <section className="sec sec--sand" id="avis">
           <div className="wrap wrap--wide">

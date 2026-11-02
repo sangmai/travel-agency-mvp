@@ -2,11 +2,11 @@ import { Photo, photoCaption } from "./Photo";
 import { getCarnet, getPhotoMeta } from "@/lib/content";
 
 /**
- * La seule section qui n'argumente rien. Une page de voyage a besoin d'un
- * moment où elle cesse d'expliquer et laisse regarder.
+ * The only section that argues nothing. A travel page needs a moment where it
+ * stops explaining and simply lets you look.
  *
- * Défilement horizontal natif avec accroche, pas un carrousel : un carrousel
- * réclame du JavaScript, cache des images aux crawlers et impose son rythme.
+ * Native horizontal scroll with snap, not a carousel: a carousel demands
+ * JavaScript, hides images from crawlers and imposes its own pace.
  */
 export async function Gallery() {
   const ids = await getCarnet();

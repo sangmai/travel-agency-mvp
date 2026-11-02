@@ -4,10 +4,9 @@ import { Accent } from "@/lib/text";
 import { getEnvies, getHome } from "@/lib/content";
 
 /**
- * Entrée par l'envie, juste après le hero — c'est la question que le visiteur
- * se pose en arrivant (« est-ce que ce voyage est pour moi ? »), pas celle du
- * nombre de jours. Voyageurs du Monde, Original Travel et Jacada ouvrent tous
- * ainsi.
+ * Entry by desire, straight after the hero — that is the question a visitor
+ * arrives with ("is this trip for me?"), not the number of days. Voyageurs du
+ * Monde, Original Travel and Jacada all open this way.
  */
 export async function Envies() {
   const h = (await getHome()).envies;

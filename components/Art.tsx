@@ -31,13 +31,12 @@ export function Glyph({ className }: { className?: string }) {
 }
 
 /**
- * Portrait de la conseillère.
+ * Portrait of the travel adviser.
  *
- * ⚠️ Volontairement une silhouette dessinée, et non une photographie.
- * Les images de substitution du site montrent des passants photographiés
- * dans la rue : en coller une sous le nom d'une fondatrice reviendrait à
- * fabriquer une identité à partir du visage de quelqu'un. À remplacer par
- * la photo de la personne réelle, avec son accord.
+ * WARNING: deliberately a drawn silhouette, not a photograph. The site's
+ * placeholder images show passers-by photographed in the street: pasting one
+ * under a founder's name would mean fabricating an identity out of someone
+ * else's face. To be replaced by the real person's photo, with their consent.
  */
 export function Portrait() {
   return (

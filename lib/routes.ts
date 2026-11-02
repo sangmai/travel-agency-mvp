@@ -1,7 +1,7 @@
 /**
- * Table unique des routes : pied de page et sitemap y lisent tous deux.
- * `published` rend la mise en garde vérifiable — seules les routes publiées
- * entrent au sitemap.
+ * Single table of routes: both the footer and the sitemap read from it.
+ * `published` makes the guarantee checkable — only published routes reach the
+ * sitemap.
  */
 export type RouteGroup = "circuits" | "envies" | "preparer" | "comparer" | "agence" | "legal";
 
@@ -20,12 +20,12 @@ export const ROUTES: Route[] = [
   { path: "/circuit-vietnam-nord-sud", label: "Du Nord au Sud", group: "circuits", published: false },
   { path: "/circuit-vietnam-cambodge", label: "Vietnam et Cambodge", group: "circuits", published: false },
 
-  { path: "/voyage-vietnam-famille", label: "Voyage en famille", group: "envies", published: false },
-  { path: "/voyage-luxe-vietnam", label: "Voyage de luxe", group: "envies", published: false },
+  { path: "/voyage-vietnam-famille", label: "Voyage en famille", group: "envies", published: true },
+  { path: "/voyage-luxe-vietnam", label: "Voyage de luxe", group: "envies", published: true },
   { path: "/voyage-noces-vietnam", label: "Voyage de noces", group: "envies", published: false },
   { path: "/circuit-prive-vietnam", label: "Circuit privé", group: "envies", published: false },
   { path: "/trek-vietnam", label: "Trek et randonnée", group: "envies", published: true },
-  { path: "/vietnam-hors-sentiers", label: "Hors des sentiers battus", group: "envies", published: false },
+  { path: "/vietnam-hors-sentiers", label: "Hors des sentiers battus", group: "envies", published: true },
   { path: "/vietnam-cuisine", label: "Cuisine et marchés", group: "envies", published: true },
 
   { path: "/quand-partir-au-vietnam", label: "Quand partir", group: "preparer", published: true },
@@ -51,11 +51,11 @@ export const ROUTES: Route[] = [
 ];
 
 /**
- * Ne rend que ce qui existe. Le pied de page décrivait l'arborescence visée
- * plutôt que le site réel, et renvoyait vers vingt-huit pages absentes : pour
- * un moteur, un maillage qui mène à des 404 ne dessine pas une ambition, il
- * signale un site inachevé. Passer une route à `published: true` la fait
- * apparaître ici et au sitemap d'un seul geste.
+ * Returns only what exists. The footer used to describe the intended tree
+ * rather than the real site, and linked to twenty-eight missing pages: to a
+ * search engine, links leading to 404s do not sketch an ambition, they signal
+ * an unfinished site. Flipping a route to `published: true` makes it appear
+ * here and in the sitemap in one move.
  */
 export const routesIn = (group: RouteGroup) =>
   ROUTES.filter((r) => r.group === group && r.published);

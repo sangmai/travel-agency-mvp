@@ -1,17 +1,16 @@
 #!/usr/bin/env node
 /**
- * Fabrique public/admin/config.yml depuis le contenu.
+ * Builds public/admin/config.yml from the content.
  *
- * Trois champs — la photo d'un circuit, le lieu d'une étape, le voyage
- * concerné par un avis — attendent un identifiant exact. Ils étaient saisis
- * au clavier, avec la liste des valeurs valides recopiée dans une
- * info-bulle : « halong » tapé « ha-long » passe la saisie, casse la
- * construction, et la personne qui a corrigé un prix n'a aucun moyen de
- * relier les deux. Les listes de choix sont donc extraites du contenu lui-
- * même, ce qui rend la faute impossible et supprime une recopie de plus.
+ * Three fields — an itinerary's photo, a stop's place, the trip a review refers
+ * to — expect an exact identifier. They used to be typed by hand, with the list
+ * of valid values copied into a tooltip: "halong" typed as "ha-long" passes
+ * entry, breaks the build, and the person who corrected a price has no way of
+ * connecting the two. The option lists are therefore extracted from the content
+ * itself, which makes the mistake impossible and removes one more transcription.
  *
- * Le fichier produit n'est pas versionné : il se régénère au prebuild, comme
- * les variantes d'images.
+ * The generated file is not versioned: it is regenerated at prebuild, like the
+ * image variants.
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -27,12 +26,12 @@ const circuits = readdirSync(path.join(ROOT, "content/itineraries"))
   .sort((a, b) => a.days - b.days);
 
 /**
- * Champ « liste de choix » complet, indenté d'après la profondeur demandée.
+ * A complete select field, indented according to the requested depth.
  *
- * Un premier jet calculait l'indentation des options séparément de celle du
- * champ : les quatre listes imbriquées à des profondeurs différentes se sont
- * retrouvées décalées, et le YAML les lisait comme des champs sans nom. Ici
- * l'appelant ne donne qu'une profondeur, tout en découle.
+ * A first attempt computed the options' indentation separately from the
+ * field's: the four lists nested at different depths ended up misaligned, and
+ * YAML read them as unnamed fields. Here the caller supplies only a depth, and
+ * everything follows from it.
  */
 const select = (nom, label, options, prof, extra = []) => {
   const t = " ".repeat(prof);
@@ -46,8 +45,8 @@ const select = (nom, label, options, prof, extra = []) => {
   ].join("\n");
 };
 
-/* Un en-tête de section : trois champs, répétés douze fois. Les générer
-   évite douze copies qui divergeraient au premier changement de libellé. */
+/* A section heading: three fields, repeated twelve times. Generating them
+   avoids twelve copies that would diverge at the first label change. */
 const SECTIONS = [
   ["regions", "Les trois régions"], ["envies", "Par envie"],
   ["circuits", "Les circuits"], ["process", "Notre méthode"],
@@ -91,24 +90,24 @@ const OPT_LIEUX = lieux.map((l) => ({ label: `${l.fr} (${l.id})`, value: l.id })
 const OPT_CIRCUITS = circuits.map((c) => ({ label: `${c.name} — ${c.days} j`, value: c.slug }));
 
 const yml = `# ⚠️ FICHIER GÉNÉRÉ — ne pas modifier à la main.
-# Source : scripts/make-cms-config.mjs, exécuté au prebuild.
-# Les listes de choix ci-dessous sont extraites de content/ : ajouter une
-# photo ou un lieu les y fait apparaître sans toucher à ce fichier.
+# Source: scripts/make-cms-config.mjs, run at prebuild.
+# The option lists below are extracted from content/: adding a photo or a place
+# makes it appear here without touching this file.
 
 backend:
   name: github
   repo: sangmai/travel-agency-mvp
   branch: main
-  # Sans ceci, le CMS s'adresse à api.netlify.com, qui ne répond que pour les
-  # sites hébergés chez Netlify. Le relais vit dans worker/auth.ts.
+  # Without this, the CMS calls api.netlify.com, which only answers for sites
+  # hosted at Netlify. The relay lives in worker/auth.ts.
   base_url: https://voyagevietnam-surmesure.com
   commit_messages:
     create: 'Ajout {{collection}} "{{slug}}"'
     update: 'Modif {{collection}} "{{slug}}"'
     delete: 'Suppr {{collection}} "{{slug}}"'
 
-# La langue de l'interface suit celle du navigateur : un éditeur vietnamien
-# obtient le vietnamien sans rien régler.
+# The interface language follows the browser's: a Vietnamese editor gets
+# Vietnamese without configuring anything.
 media_folder: assets/photos
 public_folder: /photos/v
 
@@ -174,8 +173,8 @@ ${select("photo", "Photo", OPT_PHOTOS, 10, ["required: false"])}
       - { name: excluded, label: Le prix ne comprend pas, widget: list, collapsed: true, field: { name: item, label: Ligne, widget: string } }
 
   # --------------------------------------------------------------- guides --
-  # Une entrée par page guide. Les réponses y vieillissent — règles de visa,
-  # prix, saisons — alors que la mise en page, elle, ne bouge pas.
+  # One entry per guide page. The answers age there — visa rules, prices,
+  # seasons — while the layout does not move.
   - name: guides
     label: Pages guides
     label_singular: Page guide
@@ -239,15 +238,23 @@ ${select("trip", "Voyage concerné", OPT_CIRCUITS, 14, ["required: false"])}
         label: Agence et coordonnées
         file: content/site.json
         fields:
-          - { name: name, label: Nom, widget: string }
-          - { name: legalName, label: Raison sociale, widget: string }
+          - { name: name, label: Nom de la marque, widget: string, hint: "La marque portée par ce site. L'agence qui opère les voyages se renseigne plus bas." }
+          - { name: byline, label: Mention sous le nom, widget: string, hint: "« by Jasmin Travel ». Affichée sous le nom dans l'en-tête et le pied de page : c'est elle qui explique au visiteur la relation entre les deux sites." }
+          - name: operator
+            label: Agence qui opère les voyages
+            widget: object
+            hint: "Tout ce qui est ici appartient à l'agence partenaire, pas à ce site : la licence, la raison sociale, l'ancienneté. Le site le dit explicitement plutôt que de se l'attribuer."
+            fields:
+              - { name: name, label: Nom, widget: string }
+              - { name: legalName, label: Raison sociale, widget: string }
+              - { name: url, label: Site de l'agence, widget: string, hint: "Déclaré en données structurées pour qu'un moteur relie ce site à une entité déjà indexée." }
+              - { name: founded, label: En activité depuis, widget: string }
+              - { name: license, label: Licence tour-opérateur international, widget: string, hint: "Délivrée par l'administration vietnamienne. Affichée sur le site et déclarée à Google : doit être exacte, et attribuée à son titulaire." }
+              - { name: membership, label: Autorité de tutelle, widget: string }
           - { name: url, label: URL du site, widget: string }
           - { name: locale, label: Locale, widget: hidden }
           - { name: lang, label: Langue, widget: hidden }
           - { name: tagline, label: Phrase de positionnement, widget: string }
-          - { name: founded, label: En activité depuis, widget: string }
-          - { name: license, label: Licence tour-opérateur international, widget: string, hint: "Délivrée par l'administration vietnamienne. Affichée sur le site et déclarée à Google : doit être exacte." }
-          - { name: membership, label: Autorité de tutelle, widget: string }
           - { name: phone, label: Téléphone (format technique), widget: string }
           - { name: phoneDisplay, label: Téléphone affiché, widget: string }
           - { name: phoneAlt, label: Second numéro, widget: string }
@@ -309,9 +316,9 @@ ${select("trip", "Voyage concerné", OPT_CIRCUITS, 14, ["required: false"])}
               - { name: name, label: Nom, widget: string }
               - { name: role, label: Fonction, widget: string }
 
-          # Aucun champ « note globale ». Une note agrégée ne se saisit pas :
-          # elle se calcule depuis les avis publiés. Le champ qui existait ici
-          # a servi à déclarer à Google une moyenne inventée.
+          # No "overall rating" field. An aggregate score is not typed in: it is
+          # computed from the published reviews. The field that used to be here
+          # was used to declare an invented average to Google.
 
       - name: accueil
         label: Page d'accueil
@@ -410,23 +417,23 @@ ${select("photo", "Photo", OPT_PHOTOS, 14)}
               - { name: line, label: Phrase, widget: text, hint: "Concrète et sensorielle. « Un séjour inoubliable » ne fait rien imaginer." }
 ${select("photo", "Photo", OPT_PHOTOS, 14)}
 
-  # Pas de collection « photos » : content/photos.json est un objet à clés
-  # dynamiques, forme que le CMS ne sait pas éditer. Les crédits sont de toute
-  # façon écrits par scripts/fetch-photos.py, et une licence CC BY mal
-  # recopiée est un problème juridique, pas une coquille.
+  # No "photos" collection: content/photos.json is an object with dynamic keys,
+  # a shape the CMS cannot edit. The credits are written by
+  # scripts/fetch-photos.py anyway, and a mis-transcribed CC BY licence is a
+  # legal problem, not a typo.
 `;
 
 writeFileSync(path.join(ROOT, "public/admin/config.yml"), yml);
 
 /* ------------------------------------------------------------ Pages CMS --
  *
- * Configuration d'essai, pour comparer les deux outils sur le même contenu.
+ * A trial configuration, to compare the two tools on the same content.
  *
- * Deux différences de fonctionnement comptent ici. Pages CMS lit sa
- * configuration dans le dépôt GitHub et non sur le site déployé : .pages.yml
- * doit donc être versionné, là où le config.yml de Sveltia se régénère au
- * build et reste ignoré par git. Et il sait référencer une collection en
- * direct, ce qui évite de figer la liste des circuits dans un menu.
+ * Two behavioural differences matter here. Pages CMS reads its configuration
+ * from the GitHub repository rather than from the deployed site: .pages.yml
+ * must therefore be versioned, where Sveltia's config.yml is regenerated at
+ * build time and stays git-ignored. And it can reference a collection live,
+ * which avoids freezing the itinerary list into a menu.
  */
 const vals = (options, prof) =>
   options
@@ -434,9 +441,9 @@ const vals = (options, prof) =>
     .join("");
 
 const pages = `# ⚠️ FICHIER GÉNÉRÉ — ne pas modifier à la main.
-# Source : scripts/make-cms-config.mjs. Contrairement au config.yml de
-# Sveltia, celui-ci est versionné : Pages CMS le lit dans le dépôt GitHub,
-# pas sur le site déployé. S'il n'est pas à jour, la construction échoue.
+# Source: scripts/make-cms-config.mjs. Unlike Sveltia's config.yml, this one is
+# versioned: Pages CMS reads it from the GitHub repository, not from the
+# deployed site. If it is out of date, the build fails.
 
 media:
   - name: photos
@@ -583,8 +590,8 @@ content:
           - { name: rating, label: Note sur 5, type: number, required: true, options: { min: 1, max: 5, step: 1 } }
           - { name: body, label: Texte, type: text, required: true }
           - { name: title, label: Titre, type: string }
-          # Référence vivante vers la collection des circuits : la liste se met
-          # à jour toute seule, là où Sveltia demande un menu figé au build.
+          # Live reference to the itineraries collection: the list updates
+          # itself, where Sveltia requires a menu frozen at build time.
           - name: trip
             label: Voyage concerné
             type: reference
@@ -603,15 +610,23 @@ content:
     path: content/site.json
     format: json
     fields:
-      - { name: name, label: Nom, type: string, required: true }
-      - { name: legalName, label: Raison sociale, type: string, required: true }
+      - { name: name, label: Nom de la marque, type: string, required: true }
+      - { name: byline, label: Mention sous le nom, type: string, required: true, description: "« by Jasmin Travel » — explique la relation entre les deux sites." }
+      - name: operator
+        label: Agence qui opère les voyages
+        type: object
+        description: "Appartient à l'agence partenaire, pas à ce site."
+        fields:
+          - { name: name, label: Nom, type: string, required: true }
+          - { name: legalName, label: Raison sociale, type: string, required: true }
+          - { name: url, label: Site de l'agence, type: string, required: true }
+          - { name: founded, label: En activité depuis, type: string, required: true }
+          - { name: license, label: Licence tour-opérateur international, type: string, required: true, description: "Doit être exacte, et attribuée à son titulaire." }
+          - { name: membership, label: Autorité de tutelle, type: string, required: true }
       - { name: url, label: URL du site, type: string, required: true }
       - { name: locale, label: Locale, type: string, hidden: true }
       - { name: lang, label: Langue, type: string, hidden: true }
       - { name: tagline, label: Phrase de positionnement, type: string, required: true }
-      - { name: founded, label: En activité depuis, type: string, required: true }
-      - { name: license, label: Licence tour-opérateur international, type: string, required: true, description: "Affichée sur le site et déclarée à Google : doit être exacte." }
-      - { name: membership, label: Autorité de tutelle, type: string, required: true }
       - { name: phone, label: Téléphone (technique), type: string, required: true }
       - { name: phoneDisplay, label: Téléphone affiché, type: string, required: true }
       - { name: phoneAlt, label: Second numéro, type: string, required: true }
@@ -793,10 +808,10 @@ settings:
     merge: true
 `;
 
-/* .pages.yml est versionné — Pages CMS le lit dans le dépôt GitHub, pas sur
-   le site déployé. Un changement qui reste sur le disque sans être committé
-   laisse le CMS travailler sur une description périmée du contenu : d'où
-   l'avertissement, bien visible mais non bloquant. */
+/* .pages.yml is versioned — Pages CMS reads it from the GitHub repository, not
+   from the deployed site. A change left on disk without being committed leaves
+   the CMS working from a stale description of the content: hence the warning,
+   clearly visible but non-blocking. */
 const chemin = path.join(ROOT, ".pages.yml");
 const ancien = existsSync(chemin) ? readFileSync(chemin, "utf8") : "";
 writeFileSync(chemin, pages);

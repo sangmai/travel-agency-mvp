@@ -3,15 +3,26 @@ import { getSite } from "@/lib/content";
 import { routesIn, type RouteGroup } from "@/lib/routes";
 
 /**
- * Maillage interne. `routesIn` ne rend que les routes publiées, donc une
- * colonne vide disparaît d'elle-même au lieu d'afficher un titre sans liens.
+ * Internal linking. `routesIn` returns only published routes, so an empty
+ * column disappears on its own instead of showing a heading with no links.
+ *
+ * The type is a Record over every group except `legal`, which is rendered
+ * separately below. That is deliberate: this used to be an array, and the
+ * `agence` group was simply missing from it. The route was published, it was in
+ * the sitemap, and nothing failed — /agence-de-voyage-vietnam just received two
+ * internal links instead of twenty-one, which is a lot of lost weight for the
+ * page carrying the brand and local queries.
+ *
+ * Written as a Record, adding a group to RouteGroup without giving it a title
+ * stops compiling. A silent omission becomes a build error.
  */
-const COLUMNS: { title: string; group: RouteGroup }[] = [
-  { title: "Circuits", group: "circuits" },
-  { title: "Selon vos envies", group: "envies" },
-  { title: "Préparer", group: "preparer" },
-  { title: "Comparer", group: "comparer" },
-];
+const COLUMNS: Record<Exclude<RouteGroup, "legal">, string> = {
+  circuits: "Circuits",
+  envies: "Selon vos envies",
+  preparer: "Préparer",
+  comparer: "Comparer",
+  agence: "L'agence",
+};
 
 export async function Footer() {
   const site = await getSite();
@@ -25,21 +36,24 @@ export async function Footer() {
               <Glyph className="mark__glyph" />
               <span>
                 <span className="mark__name">{site.name}</span>
-                <span className="mark__sub">Agence locale · {site.address.city}</span>
+                <span className="mark__sub">{site.byline} · {site.address.city}</span>
               </span>
             </div>
 
             <p className="ftr__about">
-              {site.name} est une agence de voyage locale francophone basée à
-              {" "}{site.address.city}, titulaire de la licence de tour-opérateur
-              international {site.license}, spécialisée depuis {site.founded} dans
-              les circuits privés sur mesure au Vietnam, au Laos et au Cambodge.
+              {site.name} est la marque francophone de{" "}
+              <b>{site.operator.name}</b>, agence de voyage locale basée à{" "}
+              {site.address.city}, titulaire de la licence de tour-opérateur
+              international {site.operator.license} et spécialisée depuis{" "}
+              {site.operator.founded} dans les circuits privés sur mesure au
+              Vietnam, au Laos et au Cambodge. {site.operator.name} conçoit et
+              opère vos voyages, et c&apos;est avec elle que vous contractez.
             </p>
 
-            {/* NAP : doit être identique à Google Business Profile et au
-                JSON-LD — toute variation dilue le signal local. */}
+            {/* NAP: must be identical to the Google Business Profile and to
+                the JSON-LD — any variation dilutes the local signal. */}
             <address className="ftr__nap">
-              <b>{site.legalName}</b>
+              <b>{site.operator.legalName}</b>
               {site.address.street}
               <br />
               {site.address.city} {site.address.postalCode}, {site.address.countryName}
@@ -48,26 +62,28 @@ export async function Footer() {
               <br />
               <a href={`mailto:${site.email}`}>{site.email}</a>
               <br />
-              Licence {site.license}
+              Licence {site.operator.license}
             </address>
           </div>
 
-          {COLUMNS.map((col) => routesIn(col.group)).map((routes, i) =>
-            routes.length === 0 ? null : (
-              <nav key={COLUMNS[i].title} aria-label={COLUMNS[i].title}>
-                <h3>{COLUMNS[i].title}</h3>
+          {Object.entries(COLUMNS).map(([group, title]) => {
+            const routes = routesIn(group as RouteGroup);
+            if (routes.length === 0) return null;
+            return (
+              <nav key={group} aria-label={title}>
+                <h3>{title}</h3>
                 <ul>
                   {routes.map((r) => (
                     <li key={r.path}><a href={r.path}>{r.label}</a></li>
                   ))}
                 </ul>
               </nav>
-            ),
-          )}
+            );
+          })}
         </div>
 
         <div className="ftr__bot">
-          <p>© {site.founded}–2026 {site.legalName}</p>
+          <p>© 2026 {site.name} · voyages opérés par {site.operator.legalName}</p>
           <nav className="ftr__legal" aria-label="Informations légales">
             {routesIn("legal").map((r) => (
               <a key={r.path} href={r.path}>{r.label}</a>

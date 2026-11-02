@@ -1,15 +1,18 @@
 /**
- * Relais OAuth GitHub pour le CMS.
+ * GitHub OAuth relay for the CMS.
  *
- * Sveltia et Decap ne peuvent pas échanger eux-mêmes le code d'autorisation
- * contre un jeton : cela demande le secret client, qui n'a rien à faire dans
- * une page web. Il leur faut donc un tiers de confiance. Par défaut ils
- * s'adressent à api.netlify.com, qui ne répond que pour les sites hébergés
- * chez Netlify — d'où un bouton « Sign In with GitHub » inopérant ici.
+ * Sveltia and Decap cannot exchange the authorization code for a token
+ * themselves: that needs the client secret, which has no business living in a
+ * web page. So they need a trusted third party. By default they call
+ * api.netlify.com, which only answers for sites hosted at Netlify — hence a
+ * dead "Sign In with GitHub" button here.
  *
- * Plutôt qu'un second Worker à déployer et à surveiller, les deux routes
- * vivent dans celui qui sert déjà le site. Le secret reste côté serveur, et
- * `base_url` dans public/admin/config.yml pointe simplement vers ce domaine.
+ * Rather than a second Worker to deploy and watch, both routes live in the one
+ * already serving the site. The secret stays server-side, and `base_url` in
+ * public/admin/config.yml simply points at this domain.
+ *
+ * Text shown here is in English: these pages are seen by whoever maintains the
+ * site, never by a visitor.
  */
 
 export interface AuthEnv {
@@ -19,27 +22,27 @@ export interface AuthEnv {
 
 const COOKIE = "cms_oauth_state";
 
-/* GitHub n'accepte que ce dont le CMS a besoin : lire et écrire le dépôt,
-   et lire l'identité pour afficher qui publie. Une portée plus large serait
-   accordée à vie au jeton stocké dans le navigateur de l'éditeur. */
+/* GitHub is asked only for what the CMS needs: read and write the repository,
+   and read the identity to show who publishes. A broader scope would be granted
+   for the lifetime of the token stored in the editor's browser. */
 const SCOPE = "repo,user";
 
 function page(body: string): Response {
   return new Response(
-    `<!doctype html><html lang="fr"><head><meta charset="utf-8">` +
-      `<title>Authentification</title></head><body>${body}</body></html>`,
+    `<!doctype html><html lang="en"><head><meta charset="utf-8">` +
+      `<title>Authentication</title></head><body>${body}</body></html>`,
     { headers: { "content-type": "text/html; charset=utf-8" } },
   );
 }
 
 /**
- * Protocole hérité de Netlify CMS, que Sveltia respecte : la fenêtre surgie
- * signale qu'elle est prête, attend que l'ouvreur se manifeste, puis ne lui
- * renvoie le jeton qu'à l'origine d'où il a répondu.
+ * Protocol inherited from Netlify CMS, which Sveltia honours: the popup
+ * announces it is ready, waits for the opener to speak up, then returns the
+ * token only to the origin the opener answered from.
  */
 function remettre(provider: string, charge: string): Response {
   return page(
-    `<p>Authentification terminée, vous pouvez fermer cette fenêtre.</p>` +
+    `<p>Authentication complete. You can close this window.</p>` +
       `<script>(function(){` +
       `function r(e){` +
       `window.opener.postMessage(${JSON.stringify(`authorization:${provider}:`)}+${JSON.stringify(charge)},e.origin);` +
@@ -54,30 +57,30 @@ function echec(provider: string, raison: string): Response {
   return remettre(provider, `error:${JSON.stringify({ message: raison })}`);
 }
 
-/** Début du parcours : le CMS ouvre cette adresse dans une fenêtre surgie. */
+/** Start of the flow: the CMS opens this address in a popup window. */
 export function demarrer(request: Request, env: AuthEnv): Response {
   const url = new URL(request.url);
   const provider = url.searchParams.get("provider") ?? "github";
 
-  if (provider !== "github") return echec(provider, "Seul GitHub est pris en charge.");
+  if (provider !== "github") return echec(provider, "Only GitHub is supported.");
   if (!env.GITHUB_CLIENT_ID || !env.GITHUB_CLIENT_SECRET) {
     console.error(
-      "[cms] CONFIGURATION — GITHUB_CLIENT_ID ou GITHUB_CLIENT_SECRET manque. " +
-        "Créer une OAuth App sur GitHub, puis poser les deux en secrets du Worker.",
+      "[cms] CONFIGURATION — GITHUB_CLIENT_ID or GITHUB_CLIENT_SECRET is " +
+        "missing. Create an OAuth App on GitHub, then set both as Worker secrets.",
     );
-    return echec(provider, "Le CMS n'est pas encore configuré côté serveur.");
+    return echec(provider, "The CMS is not configured server-side yet.");
   }
 
-  /* Un relais OAuth ouvert à tous sert à monter des pages d'hameçonnage qui
-     empruntent ce domaine. Seule la page d'administration de ce site a une
-     raison d'appeler cette route. */
+  /* An OAuth relay open to everyone is used to build phishing pages that
+     borrow this domain. Only this site's admin page has any reason to call
+     this route. */
   const referer = request.headers.get("referer");
   if (referer && new URL(referer).host !== url.host) {
-    return echec(provider, "Origine non autorisée.");
+    return echec(provider, "Origin not allowed.");
   }
 
-  // Jeton anti-rejeu : GitHub nous le rendra tel quel, le cookie dira s'il
-  // s'agit bien du parcours que nous avons ouvert.
+  // Anti-replay token: GitHub hands it back unchanged, and the cookie tells us
+  // whether this is the flow we actually opened.
   const state = crypto.randomUUID().replaceAll("-", "");
 
   const authorize = new URL("https://github.com/login/oauth/authorize");
@@ -95,7 +98,7 @@ export function demarrer(request: Request, env: AuthEnv): Response {
   });
 }
 
-/** Retour de GitHub, avec un code à échanger contre un jeton. */
+/** Return from GitHub, carrying a code to exchange for a token. */
 export async function retour(request: Request, env: AuthEnv): Promise<Response> {
   const url = new URL(request.url);
   const provider = "github";
@@ -109,8 +112,8 @@ export async function retour(request: Request, env: AuthEnv): Promise<Response> 
     .find((c) => c.startsWith(`${COOKIE}=`))
     ?.slice(COOKIE.length + 1);
 
-  if (!code) return echec(provider, "GitHub n'a pas renvoyé de code.");
-  if (!state || state !== attendu) return echec(provider, "Session expirée, reprenez la connexion.");
+  if (!code) return echec(provider, "GitHub returned no code.");
+  if (!state || state !== attendu) return echec(provider, "Session expired, start the sign-in again.");
 
   const reponse = await fetch("https://github.com/login/oauth/access_token", {
     method: "POST",
@@ -123,14 +126,14 @@ export async function retour(request: Request, env: AuthEnv): Promise<Response> 
   });
 
   if (!reponse.ok) {
-    console.error("[cms] échange du code refusé par GitHub", { status: reponse.status });
-    return echec(provider, "GitHub a refusé l'échange du code.");
+    console.error("[cms] code exchange refused by GitHub", { status: reponse.status });
+    return echec(provider, "GitHub refused the code exchange.");
   }
 
   const data = (await reponse.json()) as { access_token?: string; error_description?: string };
   if (!data.access_token) {
-    console.error("[cms] aucun jeton dans la réponse de GitHub", { erreur: data.error_description });
-    return echec(provider, data.error_description ?? "Aucun jeton reçu.");
+    console.error("[cms] no token in GitHub's response", { error: data.error_description });
+    return echec(provider, data.error_description ?? "No token received.");
   }
 
   return remettre(provider, `success:${JSON.stringify({ provider, token: data.access_token })}`);

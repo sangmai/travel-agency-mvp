@@ -8,16 +8,16 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getGuide } from "@/lib/content";
 
 /**
- * La seule page du site où une erreur coûte un avion raté.
+ * The only page on the site where a mistake costs someone their flight.
  *
- * Deux conséquences sur la façon de l'écrire. D'abord la date de vérification
- * est écrite en dur et non calculée : un horodatage qui avance tout seul à
- * chaque build affirmerait une vérification qui n'a pas eu lieu. Ensuite la
- * source officielle est citée en toutes lettres plutôt que résumée, pour que
- * le lecteur puisse constater lui-même si la règle a bougé depuis.
+ * Two consequences for how it is written. First, the verification date is
+ * hard-coded rather than computed: a timestamp that advances on its own at every
+ * build would assert a check that never happened. Second, the official source is
+ * quoted in full rather than summarised, so the reader can see for themselves
+ * whether the rule has moved since.
  *
- * Les règles d'entrée au Vietnam ont changé trois fois depuis 2022. Cette
- * page doit être relue à chaque saison, pas écrite une fois pour toutes.
+ * Vietnam's entry rules have changed three times since 2022. This page must be
+ * re-read every season, not written once and forgotten.
  */
 const VERIFIE_LE = "28 octobre 2026";
 const SOURCE =

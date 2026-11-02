@@ -16,12 +16,18 @@ export async function Reviews() {
           title={<Accent>{fill(h.title, { note: score(site.reviewSource.rating), avis: site.reviewSource.count })}</Accent>}
           lede={h.lede}
         />
-        {/* L'agrégat est celui de la plateforme, repris tel quel et cliquable.
-            Le nombre est modeste et c'est ainsi : trois avis vérifiables valent
-            mieux qu'une moyenne flatteuse que personne ne peut recouper. */}
+        {/* The aggregate is the platform's, reused as-is and clickable. The
+            count is modest and that is fine: three verifiable reviews beat a
+            flattering average nobody can cross-check.
+
+            The wording says "sur Tripadvisor", not "avis publiés": the figure is
+            the platform's total, while this page quotes a subset. Claiming three
+            are published here when two are is the same category of small,
+            checkable lie this section exists to avoid. */}
         <p className="note">
           <b>{score(site.reviewSource.rating)}/5</b> sur{" "}
-          {site.reviewSource.count} avis publiés. {site.reviewSource.note}{" "}
+          {site.reviewSource.count} avis {site.reviewSource.name}.{" "}
+          {site.reviewSource.note}{" "}
           <a className="lnk" href={site.reviewSource.url} rel="noopener nofollow">
             Voir la page {site.reviewSource.name}
           </a>

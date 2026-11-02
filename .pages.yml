@@ -1,7 +1,7 @@
 # ⚠️ FICHIER GÉNÉRÉ — ne pas modifier à la main.
-# Source : scripts/make-cms-config.mjs. Contrairement au config.yml de
-# Sveltia, celui-ci est versionné : Pages CMS le lit dans le dépôt GitHub,
-# pas sur le site déployé. S'il n'est pas à jour, la construction échoue.
+# Source: scripts/make-cms-config.mjs. Unlike Sveltia's config.yml, this one is
+# versioned: Pages CMS reads it from the GitHub repository, not from the
+# deployed site. If it is out of date, the build fails.
 
 media:
   - name: photos
@@ -210,8 +210,8 @@ content:
           - { name: rating, label: Note sur 5, type: number, required: true, options: { min: 1, max: 5, step: 1 } }
           - { name: body, label: Texte, type: text, required: true }
           - { name: title, label: Titre, type: string }
-          # Référence vivante vers la collection des circuits : la liste se met
-          # à jour toute seule, là où Sveltia demande un menu figé au build.
+          # Live reference to the itineraries collection: the list updates
+          # itself, where Sveltia requires a menu frozen at build time.
           - name: trip
             label: Voyage concerné
             type: reference
@@ -230,15 +230,23 @@ content:
     path: content/site.json
     format: json
     fields:
-      - { name: name, label: Nom, type: string, required: true }
-      - { name: legalName, label: Raison sociale, type: string, required: true }
+      - { name: name, label: Nom de la marque, type: string, required: true }
+      - { name: byline, label: Mention sous le nom, type: string, required: true, description: "« by Jasmin Travel » — explique la relation entre les deux sites." }
+      - name: operator
+        label: Agence qui opère les voyages
+        type: object
+        description: "Appartient à l'agence partenaire, pas à ce site."
+        fields:
+          - { name: name, label: Nom, type: string, required: true }
+          - { name: legalName, label: Raison sociale, type: string, required: true }
+          - { name: url, label: Site de l'agence, type: string, required: true }
+          - { name: founded, label: En activité depuis, type: string, required: true }
+          - { name: license, label: Licence tour-opérateur international, type: string, required: true, description: "Doit être exacte, et attribuée à son titulaire." }
+          - { name: membership, label: Autorité de tutelle, type: string, required: true }
       - { name: url, label: URL du site, type: string, required: true }
       - { name: locale, label: Locale, type: string, hidden: true }
       - { name: lang, label: Langue, type: string, hidden: true }
       - { name: tagline, label: Phrase de positionnement, type: string, required: true }
-      - { name: founded, label: En activité depuis, type: string, required: true }
-      - { name: license, label: Licence tour-opérateur international, type: string, required: true, description: "Affichée sur le site et déclarée à Google : doit être exacte." }
-      - { name: membership, label: Autorité de tutelle, type: string, required: true }
       - { name: phone, label: Téléphone (technique), type: string, required: true }
       - { name: phoneDisplay, label: Téléphone affiché, type: string, required: true }
       - { name: phoneAlt, label: Second numéro, type: string, required: true }

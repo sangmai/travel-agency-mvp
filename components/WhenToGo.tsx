@@ -4,13 +4,12 @@ import { Accent } from "@/lib/text";
 import { getSeasons, getHome } from "@/lib/content";
 
 /**
- * « Quand partir au Vietnam » est l'une des requêtes informationnelles les
- * plus volumineuses du marché français, et la porte d'entrée de la plupart
- * des parcours d'achat.
+ * "Quand partir au Vietnam" is one of the highest-volume informational queries
+ * in the French market, and the entry point of most purchase journeys.
  *
- * Les conditions sont rendues par une barre dont la longueur dit la qualité,
- * doublée du mot : lisible d'un coup d'œil en balayant une colonne, et sans
- * dépendre de la perception des couleurs.
+ * Conditions are rendered as a bar whose length states the quality, doubled by
+ * the word itself: readable at a glance when scanning a column, and not
+ * dependent on colour perception.
  */
 const LEVELS: Record<string, { label: string; fill: number }> = {
   ideal: { label: "Idéal", fill: 1 },
@@ -35,9 +34,9 @@ function Season({ level }: { level: string }) {
 }
 
 /**
- * Le tableau seul, sans titre de section : la page d'accueil l'introduit par
- * un h2, la page guide par son h1. Dupliquer le rendu aurait laissé les deux
- * diverger au premier changement de barème.
+ * The table alone, with no section heading: the home page introduces it with an
+ * h2, the guide page with its h1. Duplicating the render would have let the two
+ * diverge at the first change of scale.
  */
 export async function SeasonTable({ note }: { note?: React.ReactNode }) {
   const rows = await getSeasons();

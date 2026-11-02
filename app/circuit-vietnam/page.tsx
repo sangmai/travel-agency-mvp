@@ -8,12 +8,11 @@ import { aggregate, getReviews, getSite, getTrips, tripUrl, TRIP_BASE } from "@/
 import { euro, score } from "@/lib/format";
 
 /**
- * Modèle Terres d'Aventure : chaque carte porte assez d'information pour être
- * écartée sans être ouverte.
+ * Terres d'Aventure's model: every card carries enough information to be ruled
+ * out without being opened.
  *
- * ⚠️ Terdav construit de vraies facettes indexables ; ici rien ne filtre
- * encore. Ces pages restent à produire — c'est elles qui apportent la longue
- * traîne.
+ * NOTE: Terdav builds real indexable facets; nothing filters here yet. Those
+ * pages remain to be produced — they are what brings the long tail.
  */
 export const metadata: Metadata = {
   title: "Circuits au Vietnam — 6 itinéraires",
@@ -34,7 +33,7 @@ export default async function CircuitsIndex() {
     trips.map(async (t) => aggregate(await getReviews({ trip: t.slug }))),
   );
 
-  // Un seul passage pour les trois bornes affichées dans le chapô.
+  // A single pass for the three bounds shown in the intro paragraph.
   const span = trips.reduce(
     (a, t) => ({
       min: Math.min(a.min, t.priceFrom),

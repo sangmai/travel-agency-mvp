@@ -1,22 +1,22 @@
 #!/usr/bin/env node
 /**
- * Vérifie qu'aucune image n'est étirée.
+ * Checks that no image is stretched.
  *
- * Une photo déformée ne casse ni le build ni le typage : elle s'affiche,
- * simplement de travers. Seule une mesure dans un vrai navigateur la révèle,
- * en comparant le rapport affiché au rapport naturel du fichier.
+ * A distorted photo breaks neither the build nor the types: it displays,
+ * simply askew. Only a measurement in a real browser reveals it, by comparing
+ * the rendered ratio against the file's natural ratio.
  *
- * Le recadrage volontaire — object-fit cover ou contain — est ignoré :
- * c'est un choix de mise en page, pas une déformation.
+ * Deliberate cropping — object-fit cover or contain — is ignored: that is a
+ * layout choice, not a distortion.
  *
  *   PLAYWRIGHT_PATH=/tmp/pw/node_modules/playwright/index.mjs \
- *     node scripts/check-images.mjs [url-de-base]
+ *     node scripts/check-images.mjs [base-url]
  *
- * Sort en code 1 s'il reste une image déformée.
+ * Exits 1 if any distorted image remains.
  */
-/* playwright n'est pas dans package.json : son installation télécharge des
-   navigateurs, et Cloudflare installe les dépendances de développement à
-   chaque build. Même chargement que scripts/check-contrast.mjs. */
+/* playwright is not in package.json: installing it downloads browsers, and
+   Cloudflare installs dev dependencies on every build. Loaded the same way as
+   scripts/check-contrast.mjs. */
 let chromium;
 try {
   ({ chromium } = await import(process.env.PLAYWRIGHT_PATH || "playwright"));
@@ -48,7 +48,7 @@ for (const p of PAGES) {
       const nat = img.naturalWidth / img.naturalHeight;
       const aff = b.width / b.height;
       const fit = getComputedStyle(img).objectFit;
-      // Déformée = ratio affiché ≠ ratio naturel SANS recadrage (cover/contain)
+      // Distorted = rendered ratio != natural ratio WITHOUT cropping (cover/contain)
       const deforme = fit === "fill" && Math.abs(nat - aff) / nat > 0.03;
       out.push({ deforme, fit, nat: +nat.toFixed(2), aff: +aff.toFixed(2),
                  src: img.currentSrc.split("/").pop(), cls: img.parentElement?.className || "" });

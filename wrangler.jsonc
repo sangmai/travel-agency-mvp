@@ -4,63 +4,91 @@
   "main": "worker/index.ts",
   "compatibility_date": "2026-01-01",
 
-  /* Le sous-domaine workers.dev est désactivé : il servait la même chose que
-     le domaine définitif, sans redirection ni canonique propre. Trois URL
-     pour un même contenu, c'est du contenu dupliqué — et c'était celle-ci
-     que les canoniques désignaient. La couper vaut mieux qu'une redirection
-     à entretenir. */
+  /* The workers.dev subdomain is disabled: it served the same thing as the
+     final domain, with no redirect and no canonical of its own. Three URLs for
+     one piece of content is duplicate content — and this was the one the
+     canonicals pointed at. Cutting it beats maintaining a redirect. */
   "workers_dev": false,
 
   "assets": {
     "directory": "./out",
     "binding": "ASSETS",
 
-    // Next exporte chaque page en <route>/index.html (trailingSlash: true).
-    // `auto-trailing-slash` sert /a-propos/ depuis a-propos/index.html et
-    // redirige /a-propos vers la forme avec barre — une seule URL par page,
-    // donc pas de contenu dupliqué aux yeux de Google.
+    // Next exports each page as <route>/index.html (trailingSlash: true).
+    // `auto-trailing-slash` serves /a-propos/ from a-propos/index.html and
+    // redirects /a-propos to the slashed form — one URL per page, so no
+    // duplicate content in Google's eyes.
     "html_handling": "auto-trailing-slash",
 
-    // Une adresse inconnue rend out/404.html avec un vrai statut 404, et non
-    // la page d'accueil en 200 : un crawler doit pouvoir faire la différence.
+    // An unknown address renders out/404.html with a real 404 status, not the
+    // home page with a 200: a crawler must be able to tell the difference.
     "not_found_handling": "404-page",
 
-    // Sans ceci, le formulaire de devis ne peut pas fonctionner dans un
-    // navigateur. L'envoi d'un formulaire est une requête de navigation
-    // (Sec-Fetch-Mode: navigate) ; le service de fichiers statiques les
-    // intercepte pour y répondre par une page HTML, et refuse par un 405 tout
-    // ce qui n'est pas un GET — sans jamais réveiller le Worker.
+    // Without this the quote form cannot work in a browser. Submitting a form
+    // is a navigation request (Sec-Fetch-Mode: navigate); the static-asset
+    // layer intercepts those to answer with an HTML page, and refuses anything
+    // that is not a GET with a 405 — without ever waking the Worker.
     //
-    // Le défaut est invisible en ligne de commande : aucun client HTTP
-    // n'envoie cet en-tête, donc le même POST passe parfaitement depuis curl
-    // et échoue depuis Chrome.
+    // The fault is invisible from the command line: no HTTP client sends that
+    // header, so the same POST passes perfectly from curl and fails from
+    // Chrome.
     "run_worker_first": ["/api/*", "/auth", "/callback"]
   },
 
-  // Le honeypot du formulaire arrête les robots naïfs ; ceci arrête quelqu'un
-  // qui vise la boîte de réception de l'agence ou le quota d'envoi gratuit.
+  // The form's honeypot stops naive bots; this stops someone aiming at the
+  // agency's inbox or at the free sending quota.
   "ratelimits": [
-    { "name": "DEVIS_LIMIT", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }
+    { "name": "DEVIS_LIMIT", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } },
+
+    // A separate and much wider limit: a click is ordinary where a form
+    // submission is not. It protects no real visitor, it only stops someone
+    // manufacturing a number in bursts — and a manufactured number would ruin
+    // the whole point of this ledger.
+    { "name": "CLIC_LIMIT", "namespace_id": "1002", "simple": { "limit": 30, "period": 60 } }
   ],
 
-  "vars": {
-    // Expéditeur. onboarding@resend.dev est l'adresse de test de Resend, la
-    // seule autorisée tant qu'aucun domaine n'est vérifié. À remplacer par
-    // « Jasmine Travel <devis@votre-domaine.fr> » une fois le domaine vérifié.
-    "DEVIS_FROM": "Jasmine Travel <onboarding@resend.dev>",
+  // Contact-intent ledger. To recreate it elsewhere:
+  //   npx wrangler d1 create travel-clics
+  // then apply the schema:
+  //   npx wrangler d1 execute travel-clics --remote --file=migrations/0001_contact_click.sql
+  //
+  // D1 rather than Analytics Engine because Analytics Engine keeps only 90
+  // days: a commission disagreement often concerns a quarter already closed,
+  // and a ledger that erases itself before the conversation is worthless.
+  "d1_databases": [
+    {
+      "binding": "CLICS",
+      "database_name": "travel-clics",
+      "database_id": "d68c217d-9e55-4899-a650-089315d2d0f7"
+    }
+  ],
 
-    // Boîte de réception des demandes — pas l'adresse publique du site.
-    // En mode test, Resend n'accepte comme destinataire que l'adresse du
-    // compte : la changer ici sans vérifier de domaine fait refuser tous les
-    // envois. Le voyageur, lui, n'est jamais destinataire, seulement Reply-To,
-    // ce que Resend autorise. C'est ce qui permet au formulaire de fonctionner
-    // pour de vrais visiteurs avant même d'avoir un domaine.
+  // 16:00 UTC = 23:00 in Vietnam. The digest therefore arrives at the end of
+  // the local day, once it is complete, rather than in the middle of it.
+  "triggers": {
+    "crons": ["0 16 * * *"]
+  },
+
+  "vars": {
+    // Sender. The domain is verified at Resend (DKIM at resend._domainkey,
+    // SPF on the send. subdomain), so mail now leaves under the site's own
+    // name instead of Resend's sandbox address.
+    "DEVIS_FROM": "Jasmin Travel <contact@voyagevietnam-surmesure.com>",
+
+    // Inbox for incoming requests. Deliberately the Gmail address directly,
+    // NOT contact@voyagevietnam-surmesure.com: that address is a Cloudflare
+    // Email Routing forward to this same mailbox, so routing a lead through it
+    // would add a hop — and a failure point — between a prospect and the only
+    // copy of their request. A displayed address and a delivery address do not
+    // have to be the same thing.
     "DEVIS_TO": "maisang90dn@gmail.com"
   },
 
-  // RESEND_API_KEY n'est pas ici : c'est un secret.
+  // RESEND_API_KEY is not here: it is a secret.
   //   npx wrangler secret put RESEND_API_KEY
-  // En local, le mettre dans .dev.vars (ignoré par git).
+  // Locally, put it in .dev.vars (git-ignored).
+  //
+  // Same for TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID, used by the daily digest.
 
   "observability": { "enabled": true }
 }

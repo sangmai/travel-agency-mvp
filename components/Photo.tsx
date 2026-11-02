@@ -2,17 +2,17 @@ import { getPhotoMeta, type PhotoId } from "@/lib/content";
 import manifest from "@/lib/image-manifest.json";
 
 /**
- * Chaque emplacement d'image, décrit une fois : un composant dit *où* l'image
- * est posée, pas comment la compresser.
+ * Every image slot, described once: a component says *where* the image sits,
+ * not how to compress it.
  *
- * `priority` n'est vrai que pour `hero` — c'est le LCP, et une seconde image
- * prioritaire ne ferait que lui disputer la bande passante.
+ * `priority` is true only for `hero` — that is the LCP element, and a second
+ * priority image would only compete with it for bandwidth.
  */
 const ROLES = {
   hero: { sizes: "100vw", priority: true },
 
-  /* Sous un voile opaque à 68-95 %, le détail ne se verra jamais : inutile
-     d'aller chercher la pleine largeur. */
+  /* Under a 68-95% opaque veil the detail will never be seen: no point
+     fetching the full width. */
   backdrop: { sizes: "min(100vw, 1100px)", priority: false },
 
   half: { sizes: "(max-width: 800px) 100vw, 50vw", priority: false },
@@ -21,8 +21,8 @@ const ROLES = {
     priority: false,
   },
 
-  /* `min()` reprend le clamp(230px, 27vw, 360px) du CSS : sans lui, un écran
-     large demandait 403 px pour un élément qui ne dépasse jamais 360. */
+  /* `min()` mirrors the CSS clamp(230px, 27vw, 360px): without it a wide
+     screen requested 403px for an element that never exceeds 360. */
   shot: { sizes: "(max-width: 700px) 60vw, min(28vw, 360px)", priority: false },
 
   thumb: { sizes: "(max-width: 560px) 100vw, 190px", priority: false },
@@ -42,7 +42,7 @@ export async function Photo({
 }: {
   id: PhotoId;
   role: PhotoRole;
-  /** Image de fond : masquée aux lecteurs d'écran, le texte posé dessus dit déjà tout. */
+  /** Backdrop image: hidden from screen readers, the text over it already says everything. */
   decorative?: boolean;
 }) {
   const meta = (await getPhotoMeta())[id];
@@ -70,7 +70,7 @@ export async function Photo({
   );
 }
 
-/** Légende « lieu · latitude », quand une image en porte une. */
+/** "place · latitude" caption, when an image carries one. */
 export async function photoCaption(id: PhotoId) {
   const meta = (await getPhotoMeta())[id];
   return meta.lat === null ? meta.place : `${meta.place} · ${meta.lat}°N`;

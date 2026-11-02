@@ -2,10 +2,23 @@ import { Glyph } from "./Art";
 import { getSite } from "@/lib/content";
 
 /**
- * Les ancres sont absolues et non relatives. L'en-tête est servi sur les
- * seize pages, mais ces sections n'existent que sur l'accueil : en écriture
- * relative, « #budget » ne menait nulle part depuis une fiche voyage ou une
- * page guide — soit quinze pages sur seize où le menu principal était inerte.
+ * The brand lockup carries the byline, in the header and the footer alike.
+ *
+ * "Voyage Vietnam Sur Mesure" on the first line, "by Jasmin Travel" on the
+ * second. That second line is the whole point of the split: a traveller who
+ * googles the agency finds two sites, and this is what tells them in one glance
+ * that both are legitimate and how they relate — instead of leaving them to
+ * wonder which one is real, two minutes before wiring three thousand euros.
+ *
+ * It must appear on every page, not only on the "about" page, because the
+ * question occurs wherever the visitor happens to land.
+ */
+
+/**
+ * The anchors are absolute, not relative. The header is served on all sixteen
+ * pages, but these sections exist only on the home page: written relatively,
+ * "#budget" led nowhere from a trip page or a guide page — fifteen pages out of
+ * sixteen where the main menu was dead.
  */
 const NAV = [
   { href: "/#regions", label: "Les régions" },
@@ -19,12 +32,12 @@ const NAV = [
 const tel = (phone: string) => `tel:${phone.replace(/\s/g, "")}`;
 
 /**
- * WhatsApp est le canal principal entre une agence vietnamienne et une
- * clientèle française : gratuit depuis l'étranger, et le seul qui reste
- * joignable pendant le voyage. Le numéro figurait dans le contenu depuis le
- * début sans qu'aucun lien ne permette de l'utiliser.
+ * WhatsApp is the main channel between a Vietnamese agency and French
+ * customers: free from abroad, and the only one that stays reachable during the
+ * trip. The number had been in the content from the start with no link making
+ * it usable.
  *
- * Le message pré-rempli évite le blanc devant lequel beaucoup renoncent.
+ * The pre-filled message removes the blank page many people give up in front of.
  */
 const wa = (numero: string, texte: string) =>
   `https://wa.me/${numero.replace(/\D/g, "")}?text=${encodeURIComponent(texte)}`;
@@ -35,11 +48,11 @@ export async function Header() {
   return (
     <header className="hdr">
       <div className="hdr__in">
-        <a className="mark" href="/" aria-label={`${site.name} — accueil`}>
+        <a className="mark" href="/" aria-label={`${site.name} ${site.byline} — accueil`}>
           <Glyph className="mark__glyph" />
           <span>
             <span className="mark__name">{site.name}</span>
-            <span className="mark__sub">Agence locale · {site.address.city}</span>
+            <span className="mark__sub">{site.byline} · {site.address.city}</span>
           </span>
         </a>
 
@@ -63,7 +76,7 @@ export async function Header() {
   );
 }
 
-/** Barre d'action fixe sur mobile — le trafic français est à ~70 % mobile. */
+/** Fixed action bar on mobile — French traffic is roughly 70% mobile. */
 export async function MobileBar() {
   const site = await getSite();
   return (

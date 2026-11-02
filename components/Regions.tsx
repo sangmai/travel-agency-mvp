@@ -4,8 +4,8 @@ import { Accent } from "@/lib/text";
 import { getRegions, getHome } from "@/lib/content";
 
 /**
- * Grille décalée, photo et texte alternant de côté : une rangée de cartes
- * identiques se lit comme un catalogue, pas comme une invitation.
+ * Offset grid, photo and text alternating sides: a row of identical cards reads
+ * like a catalogue, not like an invitation.
  */
 export async function Regions() {
   const h = (await getHome()).regions;

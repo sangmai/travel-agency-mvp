@@ -1,19 +1,19 @@
 /**
- * Fond de carte — tracés SVG générés, jamais dessinés à la main.
+ * Base map — generated SVG paths, never drawn by hand.
  *
- * Source : Natural Earth 50m (domaine public). Projection de Mercator sur
- * une emprise fixe couvrant le Vietnam et le Cambodge jusqu'à Angkor, puis
- * simplification de Douglas-Peucker dans l'espace écran.
+ * Source: Natural Earth 50m (public domain). Mercator projection over a fixed
+ * extent covering Vietnam and Cambodia as far as Angkor, then Douglas-Peucker
+ * simplification in screen space.
  *
- * ⚠️ Régénérer avec scripts/make-map.py ; ne pas retoucher à la main,
- * les points des étapes sont projetés depuis PROJECTION ci-dessous.
+ * WARNING: regenerate with scripts/make-map.py; do not touch by hand, the stop
+ * markers are projected from PROJECTION below.
  */
 
 /**
- * Contrat de projection complet : l'emprise, ses bornes DÉJÀ passées
- * en Mercator, et les dimensions du viewBox. Le TypeScript n'a donc
- * qu'une interpolation linéaire à faire — la formule de Mercator
- * n'existe qu'ici, au lieu d'être réimplémentée de l'autre côté.
+ * The complete projection contract: the extent, its bounds ALREADY run through
+ * Mercator, and the viewBox dimensions. TypeScript therefore has only a linear
+ * interpolation to do — the Mercator formula lives here alone, instead of being
+ * reimplemented on the other side.
  */
 export const PROJECTION = {
   lon0: 101.0, lon1: 110.4,
@@ -21,10 +21,10 @@ export const PROJECTION = {
   w: 600, h: 1092.2,
 };
 
-/** Un tracé et son cadre englobant [x0, y0, x1, y1]. */
+/** A path and its bounding box [x0, y0, x1, y1]. */
 export type Shape = { d: string; b: [number, number, number, number] };
 
-/** Pays voisins — contexte, tracés en retrait. */
+/** Neighbouring countries — context, drawn recessed. */
 export const NEIGHBOURS: Shape[] = [
   { d: "M445.1 172.5L431.4 162.4L405.4 165.6L400.3 158.6L386.9 152.9L381.1 143.9L361.5 140.1L360.9 122.1L354.5 115.1L354.3 104.1L369.0 84.9L353.7 76.0L337.0 79.5L328.6 71.7L309.1 75.0L290.3 64.6L272.9 45.6L246.7 60.1L242.3 75.8L235.4 81.9L225.1 83.2L215.2 90.1L200.6 83.5L194.9 86.8L187.8 101.4L167.2 84.7L159.1 98.1L146.8 85.9L136.4 101.3L126.5 107.8L116.8 98.2L93.9 86.9L72.0 112.6L65.4 108.4L53.7 111.9L45.2 105.1L33.5 121.2L38.5 139.4L47.0 150.6L46.1 185.7L51.2 191.2L46.5 196.6L34.6 191.3L15.8 193.8L12.6 171.5L5.1 155.5L-10.5 162.4L-25.2 175.0L-54.4 174.4L-60.0 160.5L-60.0 -60.0L660.0 -60.0L660.0 170.6L658.7 174.0L639.4 172.3L638.1 177.8L623.7 180.8L610.7 192.7L603.7 191.5L600.7 184.2L598.4 195.5L584.3 211.1L586.0 217.0L597.8 218.4L594.5 229.7L607.1 240.2L603.2 251.3L582.3 257.5L570.5 255.4L567.0 250.7L567.2 247.3L573.4 248.0L572.4 245.0L565.6 240.5L552.9 213.0L554.1 198.3L560.4 184.2L569.4 181.5L570.0 174.4L563.6 174.2L559.1 168.9L554.5 171.4L546.8 160.0L543.9 159.8L545.4 170.5L520.1 178.2L515.8 177.2L517.1 166.8L496.1 164.1L486.1 154.5L484.7 145.5L477.4 145.3L478.9 163.9L475.2 165.7L467.5 159.8L462.5 169.0L445.1 172.5Z", b: [-60.0, -60.0, 660.0, 257.5] },
   { d: "M631.2 276.0L639.2 298.8L627.0 305.4L615.4 323.5L603.3 360.2L577.6 376.5L578.8 380.4L562.7 383.8L555.5 393.1L543.8 395.8L491.6 374.5L487.4 349.4L489.3 322.6L528.3 291.7L522.0 291.2L527.5 283.4L543.4 281.9L552.2 276.5L579.8 275.9L585.4 271.8L596.4 272.8L599.5 277.1L599.6 271.4L612.0 277.0L616.1 266.1L631.2 276.0Z", b: [487.4, 266.1, 639.2, 395.8] },

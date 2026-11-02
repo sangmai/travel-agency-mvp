@@ -1,27 +1,27 @@
 /**
- * Point d'entrée Worker.
+ * Worker entry point.
  *
- * Les fichiers de out/ sont servis directement depuis l'edge sans passer par
- * ce code : il ne s'exécute que pour ce qui n'est pas un fichier, c'est-à-dire
- * le formulaire de devis et les adresses inconnues.
+ * Files in out/ are served straight from the edge without touching this code:
+ * it only runs for what is not a file — the quote form and unknown addresses.
  */
 import site from "../content/site.json";
 import { demarrer, retour, type AuthEnv } from "./auth";
+import { clic, record, digest, type ClicEnv } from "./clicks";
 
-interface Env extends AuthEnv {
-  /* Déclaré dans wrangler.jsonc. Sert out/, en appliquant les règles
-     `html_handling` et `not_found_handling` qui y sont configurées. */
+interface Env extends AuthEnv, ClicEnv {
+  /* Declared in wrangler.jsonc. Serves out/, applying the `html_handling`
+     and `not_found_handling` rules configured there. */
   ASSETS: { fetch(request: Request): Promise<Response> };
   DEVIS_LIMIT: { limit(options: { key: string }): Promise<{ success: boolean }> };
-  /* Secret, posé dans le tableau de bord Cloudflare — jamais dans le dépôt. */
+  /* Secret, set in the Cloudflare dashboard — never in the repository. */
   RESEND_API_KEY: string;
-  /* Expéditeur. Tant que le domaine n'est pas vérifié chez Resend, seule
-     l'adresse de test onboarding@resend.dev est acceptée. */
+  /* Sender. Until the domain is verified at Resend, only the test address
+     onboarding@resend.dev is accepted. */
   DEVIS_FROM: string;
-  /* Boîte où tombent les demandes. Distincte de l'adresse publique affichée
-     sur le site : une agence trie ses prospects ailleurs que son courrier
-     courant, et tant que le domaine n'est pas vérifié chez Resend, celle-ci
-     doit être l'adresse du compte Resend. */
+  /* Inbox where requests land. Distinct from the public address shown on the
+     site: an agency sorts prospects somewhere other than its day-to-day mail,
+     and until the domain is verified at Resend this must be the Resend
+     account's own address. */
   DEVIS_TO: string;
 }
 
@@ -32,16 +32,18 @@ function clean(value: FormDataEntryValue | null, max = 2000): string {
 }
 
 /**
- * Page de repli, servie quand la demande n'a pas pu partir. Mieux vaut un
- * message franc avec un numéro de téléphone qu'un « merci » qui ment : la
- * personne a rempli le formulaire, elle doit pouvoir nous joindre autrement.
+ * Fallback page, served when the request could not go out. A frank message
+ * with a phone number beats a "thank you" that lies: the person filled in the
+ * form, they must be able to reach us another way.
  *
- * Volontairement autonome — la feuille de style du site n'est pas chargée ici.
+ * Deliberately self-contained — the site stylesheet is not loaded here.
  *
- * `ref` est un code court affiché en bas de page. Il ne dit rien d'exploitable
- * à un visiteur ni à un attaquant, mais il distingue d'un coup d'œil une clé
- * absente d'une panne d'envoi — sans quoi la seule façon de savoir laquelle
- * des deux est en cause est d'ouvrir les journaux.
+ * The visible text stays in French: this page is read by visitors.
+ *
+ * `ref` is a short code shown at the foot of the page. It tells a visitor or an
+ * attacker nothing useful, but it distinguishes at a glance a missing key from
+ * a delivery failure — without it, the only way to know which is to open the
+ * logs.
  */
 function erreur(titre: string, message: string, status: number, ref?: string): Response {
   const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8">
@@ -64,9 +66,12 @@ ${ref ? `<small>réf. ${ref}</small>` : ""}</main></body></html>`;
   });
 }
 
-/* Les `select` du formulaire renvoient des codes. On n'en traduit que ceux
-   qui ne se lisent pas tels quels : si une option est ajoutée côté formulaire
-   sans l'être ici, l'e-mail affiche le code brut — lisible, pas cassé. */
+/* The form's `select` elements return codes. Only those that do not read as-is
+   are mapped: if an option is added on the form side and not here, the email
+   shows the raw code — readable, not broken.
+
+   The returned strings stay in French: they end up in the agency's email about
+   a French traveller. */
 function duree(code: string): string {
   if (!code) return "non précisée";
   if (code === "indecis") return "pas encore décidée";
@@ -80,7 +85,7 @@ function gamme(code: string): string {
 }
 
 function depart(mois: string): string {
-  // <input type="month"> renvoie « 2027-03 ».
+  // <input type="month"> returns "2027-03".
   const m = /^(\d{4})-(\d{2})$/.exec(mois);
   if (!m) return mois || "non précisé";
   return new Intl.DateTimeFormat("fr-FR", {
@@ -104,9 +109,12 @@ interface Demande {
 }
 
 /**
- * Corps en texte brut, pas en HTML : le projet du voyageur est du texte libre,
- * donc rien à échapper et aucune chance d'injecter du balisage dans la boîte
- * de réception. Et cela se lit aussi bien sur un téléphone.
+ * Plain-text body, not HTML: the traveller's project is free text, so there is
+ * nothing to escape and no chance of injecting markup into the inbox. It also
+ * reads just as well on a phone.
+ *
+ * Kept in French — it describes a French traveller's request and is forwarded
+ * as-is to the operator.
  */
 function courriel(d: Demande, page: string, recu: string): string {
   return [
@@ -130,17 +138,21 @@ function courriel(d: Demande, page: string, recu: string): string {
   ].join("\n");
 }
 
-async function devis(request: Request, env: Env): Promise<Response> {
+async function devis(
+  request: Request,
+  env: Env,
+  ctx: { waitUntil(p: Promise<unknown>): void },
+): Promise<Response> {
   const merci = new URL("/merci/", request.url);
   const form = await request.formData();
 
-  /* Honeypot : un champ invisible rempli signale un robot. On répond comme à
-     un humain pour ne pas lui indiquer qu'il a été détecté — ce qui rend la
-     prise silencieuse, et donc indétectable si elle se trompe de cible. D'où
-     la trace : une rafale de captures signifie soit une campagne de spam,
-     soit un piège qui attrape des clients. */
+  /* Honeypot: a filled-in invisible field means a bot. We answer exactly as we
+     would a human so it is not told it was caught — which makes the catch
+     silent, and therefore undetectable when it hits the wrong target. Hence the
+     log line: a burst of catches means either a spam campaign or a trap that is
+     catching customers. */
   if (clean(form.get("reference-interne"))) {
-    console.warn("[devis] honeypot — demande écartée sans envoi", {
+    console.warn("[quote] honeypot — request discarded without sending", {
       ip: request.headers.get("CF-Connecting-IP"),
       agent: request.headers.get("user-agent"),
     });
@@ -173,8 +185,8 @@ async function devis(request: Request, env: Env): Promise<Response> {
     );
   }
 
-  // Le honeypot arrête les robots naïfs, pas quelqu'un qui vise la boîte de
-  // réception ou le quota d'envoi. Cinq demandes par minute et par adresse IP.
+  // The honeypot stops naive bots, not someone aiming at the inbox or the
+  // sending quota. Five requests per minute per IP address.
   const ip = request.headers.get("CF-Connecting-IP") ?? "local";
   const { success } = await env.DEVIS_LIMIT.limit({ key: ip });
   if (!success) {
@@ -191,15 +203,15 @@ async function devis(request: Request, env: Env): Promise<Response> {
     timeZone: "Europe/Paris",
   }).format(new Date());
 
-  // Sans clé, inutile d'appeler Resend pour s'entendre répondre 401. Le cas
-  // n'a rien d'exotique : le secret se pose à la main dans le tableau de bord,
-  // il est donc absent au premier déploiement et après chaque rotation de clé.
+  // Without a key there is no point calling Resend only to be told 401. This is
+  // not an exotic case: the secret is set by hand in the dashboard, so it is
+  // missing on first deploy and after every key rotation.
   if (!env.RESEND_API_KEY) {
     console.error(
-      "[devis] CONFIGURATION — le secret RESEND_API_KEY n'est pas posé sur ce " +
-        "Worker, aucune demande ne peut partir. Tableau de bord Cloudflare → " +
-        "Settings → Variables and Secrets → type Secret.",
-      { demande: d },
+      "[quote] CONFIGURATION — the RESEND_API_KEY secret is not set on this " +
+        "Worker, no request can go out. Cloudflare dashboard → Settings → " +
+        "Variables and Secrets → type Secret.",
+      { request: d },
     );
     return erreur(
       "Votre demande n'est pas partie",
@@ -219,7 +231,7 @@ async function devis(request: Request, env: Env): Promise<Response> {
     body: JSON.stringify({
       from: env.DEVIS_FROM,
       to: [env.DEVIS_TO],
-      // L'agence répond en cliquant simplement sur « Répondre ».
+      // The agency replies by simply hitting "Reply".
       reply_to: `${d.prenom} ${d.nom} <${d.email}>`,
       subject: `Devis — ${d.prenom} ${d.nom}, ${voyageurs}${duree(d.duree)}`,
       text: courriel(d, request.headers.get("referer") ?? "page inconnue", recu),
@@ -227,23 +239,22 @@ async function devis(request: Request, env: Env): Promise<Response> {
   });
 
   if (!reponse.ok) {
-    /* Deux pannes très différentes se ressemblent vues d'ici : une clé
-       révoquée ou un destinataire refusé se répare en deux minutes, une
-       indisponibilité de Resend se subit. Les distinguer dans le journal
-       évite de chercher du mauvais côté.
+    /* Two very different failures look alike from here: a revoked key or a
+       refused recipient is fixed in two minutes, a Resend outage is merely
+       endured. Telling them apart in the log avoids searching the wrong side.
 
-       La demande est perdue pour l'agence si elle n'est écrite nulle part :
-       on la journalise intégralement, elle reste repêchable dans les logs
-       Cloudflare (onglet Logs du Worker, ou `npx wrangler tail`). */
+       The request is lost to the agency if it is written nowhere: we log it in
+       full, so it stays recoverable from the Cloudflare logs (the Worker's Logs
+       tab, or `npx wrangler tail`). */
     const config = reponse.status === 401 || reponse.status === 403;
     console.error(
       config
-        ? "[devis] CONFIGURATION — Resend refuse la clé ou le destinataire. " +
-            "Vérifier le secret RESEND_API_KEY (révoqué ? jamais posé ?) et " +
-            "que DEVIS_TO est bien l'adresse du compte Resend tant qu'aucun " +
-            "domaine n'y est vérifié."
-        : "[devis] ENVOI ÉCHOUÉ — panne côté Resend, demande à repêcher",
-      { status: reponse.status, resend: await reponse.text(), demande: d },
+        ? "[quote] CONFIGURATION — Resend rejects the key or the recipient. " +
+            "Check the RESEND_API_KEY secret (revoked? never set?) and that " +
+            "DEVIS_TO is the Resend account's own address while no domain is " +
+            "verified there."
+        : "[quote] SEND FAILED — Resend outage, request to recover from logs",
+      { status: reponse.status, resend: await reponse.text(), request: d },
     );
     return erreur(
       "Votre demande n'est pas partie",
@@ -253,11 +264,30 @@ async function devis(request: Request, env: Env): Promise<Response> {
     );
   }
 
+  /* Only now does it reach the ledger: a request counts only once it has
+     actually gone out. Counting earlier would inflate the figure with
+     honeypots, incomplete forms and delivery failures — and this ledger is
+     worth something only if every line matches something the operator really
+     received. */
+  /* The page is the one the form was submitted from — not /api/devis, which
+     would be the same value on every row and say nothing. */
+  let depuis = "/";
+  try {
+    depuis = new URL(request.headers.get("referer") ?? "/", request.url).pathname;
+  } catch {
+    /* Missing or unreadable Referer: "/" is an honest fallback. */
+  }
+  record(env, ctx, "quote", depuis, request);
+
   return Response.redirect(merci, 303);
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(
+    request: Request,
+    env: Env,
+    ctx: { waitUntil(p: Promise<unknown>): void },
+  ): Promise<Response> {
     const { pathname } = new URL(request.url);
 
     if (pathname === "/api/devis") {
@@ -267,14 +297,36 @@ export default {
           headers: { Allow: "POST" },
         });
       }
-      return devis(request, env);
+      return devis(request, env, ctx);
     }
 
-    // Relais OAuth du CMS. Les deux noms sont imposés par le CMS, qui les
-    // déduit de `base_url` dans public/admin/config.yml.
+    /* Click beacon. Answers 204 to everything, invalid bodies included: the
+       browser does not wait for the response, and a visible error would teach
+       nobody anything while advertising the measurement to whoever probes it. */
+    if (pathname === "/api/clic") {
+      if (request.method !== "POST") {
+        return new Response(null, { status: 405, headers: { Allow: "POST" } });
+      }
+      return clic(request, env, ctx);
+    }
+
+    // CMS OAuth relay. Both names are imposed by the CMS, which derives them
+    // from `base_url` in public/admin/config.yml.
     if (pathname === "/auth") return demarrer(request, env);
     if (pathname === "/callback") return retour(request, env);
 
     return env.ASSETS.fetch(request);
+  },
+
+  /* Daily digest. The schedule is set in wrangler.jsonc. Errors are absorbed
+     by `digest` itself: a scheduled job that fails loudly has nobody there to
+     hear it.
+
+     Worth knowing when testing this: a changed cron schedule takes roughly
+     three minutes to propagate at Cloudflare. Scheduling a test two minutes
+     out and concluding the handler is dead is a mistake that has already been
+     made here. */
+  async scheduled(_event: unknown, env: Env): Promise<void> {
+    await digest(env);
   },
 };

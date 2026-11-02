@@ -8,14 +8,14 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
 /**
- * Requête de comparaison, donc d'hésitation : celui qui la tape a déjà décidé
- * de partir et cherche à trancher. C'est le moment du parcours où une réponse
- * franche vaut mieux qu'un argumentaire.
+ * A comparison query, therefore a hesitation: whoever types it has already
+ * decided to go and is looking to settle it. This is the point in the journey
+ * where a frank answer beats a pitch.
  *
- * La page recommande donc explicitement le Nord dans la plupart des cas, au
- * lieu de renvoyer les deux dos à dos. Une comparaison qui ne tranche pas ne
- * sert ni le lecteur, ni le référencement : un moteur génératif reprend une
- * phrase qui conclut, pas une qui ménage.
+ * The page therefore explicitly recommends the North in most cases, rather than
+ * sending the two back to back. A comparison that does not decide serves
+ * neither the reader nor the ranking: a generative engine picks up a sentence
+ * that concludes, not one that hedges.
  */
 
 const CRITERES = [
@@ -229,10 +229,10 @@ export default async function NordOuSud() {
 
         <section className="sec sec--jade">
           <div className="wrap wrap--wide">
-            {/* Pas de filtre « circuits du Nord » : un seul de nos circuits
-                reste au Nord, les autres traversent. Afficher la région
-                couverte par chacun répond mieux à la question posée que de
-                ranger de force des parcours entiers dans une colonne. */}
+            {/* No "northern itineraries" filter: only one of our trips stays
+                in the North, the others cross the country. Showing the region
+                each one covers answers the question better than forcing whole
+                journeys into a column. */}
             <SectionHead
               kicker="Nos circuits"
               title="Et les régions que chacun couvre"

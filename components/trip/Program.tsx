@@ -3,11 +3,11 @@ import { SectionHead } from "@/components/ui";
 import type { Day } from "@/lib/content";
 
 /**
- * Chaque journée porte ses données chiffrées : c'est ce qui engage l'agence et
- * permet au lecteur de dire non.
+ * Each day carries its hard numbers: that is what commits the agency and lets
+ * the reader say no.
  *
- * Les libellés vivent ici, pas dans le contenu — ajouter « bateau » ou
- * « vol » ne demande qu'une entrée de plus.
+ * The labels live here, not in the content — adding "bateau" or "vol" only
+ * takes one more entry.
  */
 const LABELS: Record<string, string> = {
   trajet: "Trajet",

@@ -3,12 +3,12 @@ import { SectionHead } from "@/components/ui";
 import type { Spec } from "./Specs";
 
 /**
- * Fiche technique. Les lignes partagées avec l'en-tête viennent de
- * `tripSpecs` ; seules les trois propres au tableau sont écrites ici.
+ * Spec sheet. Rows shared with the page header come from `tripSpecs`; only the
+ * three specific to the table are written here.
  *
- * ⚠️ Terdav propose une fiche technique PDF téléchargeable, et c'est un vrai
- * facteur de conversion : le document circule par e-mail dans la famille
- * pendant la décision. Le bouton reste à brancher.
+ * NOTE: Terdav offers a downloadable PDF spec sheet, and it is a real
+ * conversion factor: the document circulates by email around the family while
+ * they decide. The button is still to be wired up.
  */
 export function Tech({ code, specs }: { code: string; specs: Spec[] }) {
   const rows: string[][] = [

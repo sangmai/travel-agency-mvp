@@ -8,15 +8,14 @@ import { breadcrumb, orgId } from "@/components/JsonLd";
 import { getComparison, getSite, getGuide } from "@/lib/content";
 
 /**
- * Page de confiance. C'est la seule du site qui parle de l'agence elle-même,
- * donc la seule où rien ne peut être inventé : un numéro de licence, une
- * adresse et des noms se vérifient en trente secondes, et une invention
- * découverte ici décrédibilise tout le reste.
+ * Trust page. It is the only one on the site that talks about the agency
+ * itself, and therefore the only one where nothing can be invented: a licence
+ * number, an address and names are verified in thirty seconds, and one
+ * invention discovered here discredits everything else.
  *
- * Elle ne contient par conséquent aucune histoire de fondation, aucune
- * biographie et aucun chiffre de notoriété — nous n'en avons pas de
- * vérifiable. Tout ce qui s'y trouve vient de content/site.json, qui reprend
- * ce que l'agence publie déjà.
+ * It consequently carries no founding story, no biography and no reputation
+ * figures — we have none that are verifiable. Everything on it comes from
+ * content/site.json, which mirrors what the agency already publishes.
  */
 
 const LIMITES = [
@@ -101,20 +100,22 @@ export default async function Agence() {
             <Fil items={[{ label: "Accueil", href: "/" }, { label: "Qui sommes-nous" }]} />
             <h1 className="d1">Une agence locale, au Vietnam</h1>
             <p className="lede">
-              <b>{site.legalName} est une agence de voyage francophone installée
-              à {site.address.city}, titulaire de la licence de tour-opérateur
-              international {site.license}</b>, délivrée par l&apos;
-              {site.membership.toLowerCase()}. Nous concevons et opérons
-              nous-mêmes des circuits privés sur mesure au Vietnam, au Laos et
-              au Cambodge. Cette page réunit ce qui se vérifie avant de verser
-              un acompte à une agence située à l&apos;autre bout du monde.
+              <b>{site.name} est la marque francophone de {site.operator.name},
+              agence de voyage installée à {site.address.city} et titulaire de la
+              licence de tour-opérateur international {site.operator.license}</b>,
+              délivrée par l&apos;{site.operator.membership.toLowerCase()}.{" "}
+              {site.operator.name} conçoit et opère elle-même les circuits
+              privés sur mesure au Vietnam, au Laos et au Cambodge&nbsp;: c&apos;est
+              avec elle que vous contractez et à elle que vous réglez. Cette page
+              réunit ce qui se vérifie avant de verser un acompte à une agence
+              située à l&apos;autre bout du monde.
             </p>
             <GuideMeta guide={guide} />
           </div>
         </section>
 
-        {/* Le NAP doit être identique ici, dans le pied de page, dans le
-            JSON-LD et sur la fiche Google : toute variation dilue le signal. */}
+        {/* The NAP must be identical here, in the footer, in the JSON-LD and on
+            the Google Business Profile: any variation dilutes the signal. */}
         <section className="sec">
           <div className="wrap">
             <h2 className="d2">Nos coordonnées, en clair</h2>
@@ -122,10 +123,17 @@ export default async function Agence() {
               caption="Informations légales et contact. Elles doivent correspondre exactement à celles de notre fiche Google et de nos documents contractuels."
               columns={["", "Détail"]}
               rows={[
-                ["Raison sociale", <b key="n">{site.legalName}</b>],
-                ["Licence tour-opérateur international", <b key="l">{site.license}</b>],
-                ["Autorité", site.membership],
-                ["En activité depuis", site.founded],
+                ["Marque du site", <b key="m">{site.name}</b>],
+                ["Agence qui opère les voyages", <b key="n">{site.operator.legalName}</b>],
+                ["Licence tour-opérateur international", <b key="l">{site.operator.license}</b>],
+                ["Autorité", site.operator.membership],
+                ["En activité depuis", site.operator.founded],
+                [
+                  "Site de l'agence",
+                  <a key="u" className="lnk" href={site.operator.url} rel="noopener">
+                    {site.operator.url.replace(/^https?:\/\//, "")}
+                  </a>,
+                ],
                 [
                   "Adresse",
                   `${site.address.street}, ${site.address.city}, ${site.address.countryName}`,

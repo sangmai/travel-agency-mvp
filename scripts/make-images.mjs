@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 /**
- * Génère les variantes d'images et leur manifeste.
+ * Generates the image variants and their manifest.
  *
- * Lancé par `prebuild`, donc aussi sur Cloudflare.
+ * Run by `prebuild`, so also on Cloudflare.
  *
- * Cloudflare n'a pas d'optimiseur d'images Next : plutôt que de payer
- * Cloudflare Images ou de servir des JPEG de 2000 px, on fabrique les
- * variantes au build. Elles sont servies comme n'importe quel fichier
- * statique, donc gratuitement et depuis l'edge.
+ * Cloudflare has no Next image optimizer: rather than paying for Cloudflare
+ * Images or serving 2000px JPEGs, the variants are produced at build time. They
+ * are served like any other static file, so for free and from the edge.
  *
- * Un seul format, WebP : universellement supporté et 25 à 30 % plus léger que
- * le JPEG. L'AVIF ferait mieux encore, mais obligerait à un <picture> avec
- * négociation de type pour les navigateurs qui ne le lisent pas — davantage de
- * pièces pour un gain marginal à cette échelle.
+ * One format only, WebP: universally supported and 25-30% lighter than JPEG.
+ * AVIF would do better still, but would force a <picture> with type negotiation
+ * for browsers that cannot read it — more moving parts for a marginal gain at
+ * this scale.
  */
 import { createHash } from "node:crypto";
 import { mkdirSync, readdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
@@ -20,25 +19,25 @@ import path from "node:path";
 import sharp from "sharp";
 
 const ROOT = path.join(import.meta.dirname, "..");
-/* Les sources vivent hors de public/ : sinon Next les copie telles quelles
-   dans le build et l'on déploierait 8,7 Mo de JPEG que personne ne demande. */
+/* The sources live outside public/: otherwise Next copies them verbatim into
+   the build and we would deploy 8.7 MB of JPEG nobody asks for. */
 const SRC = path.join(ROOT, "assets", "photos");
 const OUT = path.join(ROOT, "public", "photos", "v");
 const OG = path.join(ROOT, "public", "photos", "og");
 const MANIFEST = path.join(ROOT, "lib", "image-manifest.json");
 const META = path.join(ROOT, "content", "photos.json");
 
-/** Échelle commune ; les largeurs au-dessus de la source sont ignorées — on
- *  n'agrandit jamais une image. */
+/** Shared scale; widths above the source are skipped — we never upscale an
+ *  image. */
 const WIDTHS = [256, 384, 640, 960, 1280, 1920];
 const QUALITY = 74;
 
-/* Vignette de partage. 1200 × 630 est le format attendu par Facebook,
-   LinkedIn, X et WhatsApp ; en dessous de 600 px de large, plusieurs d'entre
-   eux dégradent l'aperçu en une petite icône.
-   En JPEG et non en WebP : certains aperçus — WhatsApp, Slack, plusieurs
-   clients de messagerie — ne lisent toujours pas le WebP, et une vignette
-   absente vaut moins qu'une vignette un peu plus lourde. */
+/* Share image. 1200 × 630 is the format Facebook, LinkedIn, X and WhatsApp
+   expect; below 600px wide, several of them degrade the preview to a small
+   icon.
+   JPEG rather than WebP: some preview renderers — WhatsApp, Slack, several mail
+   clients — still cannot read WebP, and a missing preview is worth less than a
+   slightly heavier one. */
 const OG_W = 1200;
 const OG_H = 630;
 
@@ -95,8 +94,8 @@ for (const [id, m] of Object.entries(meta)) {
     skipped++;
   }
 
-  // Vignette floue encodée en base64, affichée pendant le chargement. Next la
-  // fabriquait tout seul ; sans lui, seize pixels suffisent.
+  // Base64-encoded blur placeholder, shown while loading. Next used to make it
+  // on its own; without Next, sixteen pixels are enough.
   const blur = await sharp(file)
     .resize({ width: 16 })
     .webp({ quality: 40 })

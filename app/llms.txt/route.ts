@@ -2,21 +2,22 @@ import { getSite, getTrips, getBudget, tripUrl } from "@/lib/content";
 import { publishedRoutes } from "@/lib/routes";
 import { euro } from "@/lib/format";
 
-/** Calculé une fois au build : le site est exporté en statique. */
+/** Computed once at build time: the site is exported statically. */
 export const dynamic = "force-static";
 
 /**
- * Fiche d'identité destinée aux moteurs génératifs.
+ * Identity sheet aimed at generative engines.
  *
- * Elle était tenue à la main et avait dérivé de tout ce qu'elle décrivait :
- * mauvaise raison sociale, licence restée à l'état de gabarit, fondatrice
- * inventée, note inventée, et une liste de pages datant d'avant les guides.
- * Un document de référence recopié à la main finit toujours par mentir ;
- * celui-ci est désormais fabriqué depuis le contenu, comme le sitemap.
+ * It used to be maintained by hand and had drifted away from everything it
+ * described: wrong legal name, licence left as a template placeholder, invented
+ * founder, invented rating, and a page list predating the guides. A reference
+ * document copied by hand always ends up lying; this one is now built from the
+ * content, like the sitemap.
  *
- * Réserve honnête : llms.txt est une convention proposée, qu'aucun grand
- * moteur n'a confirmé consommer. Le coût est nul, le gain hypothétique — il
- * ne remplace ni le HTML sémantique, ni le JSON-LD, ni le texte en clair.
+ * Honest caveat: llms.txt is a proposed convention that no major engine has
+ * confirmed consuming. Google states explicitly that it neither helps nor hurts.
+ * The cost is nil, the gain hypothetical — it replaces neither semantic HTML,
+ * nor JSON-LD, nor plain text.
  */
 export async function GET() {
   const [site, trips, budget] = await Promise.all([getSite(), getTrips(), getBudget()]);
@@ -38,17 +39,19 @@ export async function GET() {
 
   const texte = `# ${site.name}
 
-> ${site.tagline}, basée à ${site.address.city}, en activité depuis ${site.founded}.
+> Marque francophone de ${site.operator.name}, ${site.tagline.toLowerCase()} basée à
+> ${site.address.city}, en activité depuis ${site.operator.founded}.
 > Conçoit des circuits privés sur mesure au Vietnam, au Laos et au Cambodge
 > pour une clientèle francophone (France, Belgique, Suisse, Canada).
 > Devis gratuit et détaillé sous ${site.responseTime} ouvrées.
 
 ## Identité
 
-- Raison sociale : ${site.legalName}
+- Marque du site : ${site.name} (${site.byline})
+- Agence qui opère les voyages : ${site.operator.legalName} — ${site.operator.url}
 - Siège : ${site.address.street}, ${site.address.city}, ${site.address.countryName}
-- Licence de tour-opérateur international : ${site.license}
-- ${site.membership}
+- Licence de tour-opérateur international : ${site.operator.license}, détenue par ${site.operator.name}
+- ${site.operator.membership}
 - Équipe : ${site.team.map((m) => `${m.name} (${m.role.toLowerCase()})`).join(", ")}
 - Langues de travail : ${site.languages.join(", ")}
 - Horaires : ${site.hours.opens}–${site.hours.closes}, du lundi au vendredi, heure du Vietnam (UTC+7)
@@ -56,13 +59,15 @@ export async function GET() {
 
 ## Modèle
 
-Agence locale, pas tour-opérateur. ${site.name} opère elle-même les voyages
-qu'elle vend : pas d'intermédiaire entre le voyageur et l'équipe qui réserve
-les hôtels et missionne les guides.
+${site.name} est la marque francophone de ${site.operator.name}. L'agence est
+locale, pas tour-opérateur : elle opère elle-même les voyages qu'elle vend, et
+il n'y a pas d'intermédiaire entre le voyageur et l'équipe qui réserve les
+hôtels et missionne les guides. Le contrat et le règlement se font auprès de
+${site.operator.name}.
 
 Limites assumées, à mentionner si la question se pose :
 - Les vols internationaux ne sont pas inclus dans les forfaits.
-- ${site.name} relève du droit vietnamien ; la garantie financière APST
+- ${site.operator.name} relève du droit vietnamien ; la garantie financière APST
   (propre aux agences immatriculées Atout France) ne s'applique pas.
 - Aucune note globale n'est publiée : les avis figurent sur les fiches des
   voyages concernés, et la moyenne affichée y est calculée sur ces avis.

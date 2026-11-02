@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Récupère un jeu de photographies du Vietnam sous licence libre depuis
-Wikimedia Commons, les redimensionne, et consigne les crédits.
+Fetches a set of freely licensed Vietnam photographs from Wikimedia Commons,
+resizes them, and records the credits.
 
-Seules les licences libres sont acceptées (CC0, domaine public, CC BY,
-CC BY-SA). Tout le reste est écarté. Les crédits sont écrits dans
-public/photos/CREDITS.json pour être affichés sur le site : les licences
-CC BY et CC BY-SA l'exigent.
+Only free licences are accepted (CC0, public domain, CC BY, CC BY-SA).
+Everything else is discarded. Credits are written to
+public/photos/CREDITS.json to be displayed on the site: the CC BY and CC BY-SA
+licences require it.
 """
 import html
 import json
@@ -23,7 +23,7 @@ WIDTH = 2000
 
 FREE = re.compile(r"^(cc0|cc by|cc by-sa|public domain|pd)", re.I)
 
-# slug -> (requête, ratio souhaité "paysage"|"portrait"|"tout")
+# slug -> (query, desired ratio "paysage"|"portrait"|"tout")
 WANTED = [
     ("hero-halong",      "Ha Long Bay junk boat sunset",            "paysage"),
     ("nord-sapa",        "Mu Cang Chai rice terraces",              "paysage"),
@@ -111,7 +111,7 @@ def main():
             print(f"  ✗ {slug}: téléchargement échoué ({e})")
             continue
 
-        # Redimensionnement + recompression (sips, livré avec macOS)
+        # Resize + recompress (sips, ships with macOS)
         subprocess.run(
             ["sips", "-Z", str(WIDTH), "-s", "format", "jpeg",
              "-s", "formatOptions", "72", dest, "--out", dest],

@@ -1,17 +1,16 @@
 /**
- * La seule couche qui sache d'où vient le contenu. Pour passer à un CMS, on
- * ne réécrit que ce fichier.
+ * The only layer that knows where content comes from. Moving to a CMS means
+ * rewriting this file and nothing else.
  *
- * Tout est asynchrone bien qu'un import JSON soit synchrone : sinon la
- * bascule toucherait chaque appelant au lieu de ce seul fichier.
+ * Everything is async even though a JSON import is synchronous: otherwise the
+ * switch would touch every caller instead of this one file.
  *
- * ⚠️ Les imports JSON sont typés à la compilation (`resolveJsonModule`), donc
- * une forme invalide casse le build. Cette garantie disparaît dès que la
- * source devient un `fetch` : il faudra alors valider ici, et nulle part
- * ailleurs.
+ * WARNING: JSON imports are typed at compile time (`resolveJsonModule`), so an
+ * invalid shape breaks the build. That guarantee disappears the moment the
+ * source becomes a `fetch`: validation will then belong here, and nowhere else.
  */
-/* Les listes éditées depuis le CMS sont enveloppées dans un objet racine :
-   Decap et Sveltia ne savent pas éditer un tableau au premier niveau. */
+/* Lists edited from the CMS are wrapped in a root object: Decap and Sveltia
+   cannot edit a top-level array. */
 import type {
   Guide,
   Home,
@@ -58,6 +57,9 @@ import gVietnamOuThailande from "@/content/guides/vietnam-ou-thailande.json";
 import gVietnamCuisine from "@/content/guides/vietnam-cuisine.json";
 import gCarteVietnam from "@/content/guides/carte-vietnam.json";
 import gTrekVietnam from "@/content/guides/trek-vietnam.json";
+import gVoyageVietnamFamille from "@/content/guides/voyage-vietnam-famille.json";
+import gVietnamHorsSentiers from "@/content/guides/vietnam-hors-sentiers.json";
+import gVoyageLuxeVietnam from "@/content/guides/voyage-luxe-vietnam.json";
 import nordSud from "@/content/itineraries/vietnam-du-nord-au-sud.json";
 import montagnes from "@/content/itineraries/montagnes-et-baies-du-nord.json";
 import famille from "@/content/itineraries/vietnam-en-famille.json";
@@ -66,13 +68,13 @@ import horsSentiers from "@/content/itineraries/vietnam-authentique-hors-sentier
 import signature from "@/content/itineraries/vietnam-collection-signature.json";
 
 /**
- * Ordre d'affichage par défaut. Un CMS fournirait ce classement ; en attendant
- * il est explicite ici plutôt que dépendant de l'ordre des imports.
+ * Default display order. A CMS would provide this ordering; until then it is
+ * explicit here rather than dependent on import order.
  */
 const TRIPS = [nordSud, montagnes, famille, cambodge, horsSentiers, signature] as Trip[];
 
-/* Les pages guides : une entrée par page, même forme pour toutes. */
-const GUIDES: Guide[] = [gQuandPartirAuVietnam, gBudgetVoyageVietnam, gVisaVietnam, gNordOuSudVietnam, gItineraireVietnam, gQueFaireAuVietnam, gAgenceDeVoyageVietnam, gHalongOuLanHa, gAgenceLocaleOuTourOperateur, gVietnamOuThailande, gVietnamCuisine, gCarteVietnam, gTrekVietnam];
+/* Guide pages: one entry per page, the same shape for all of them. */
+const GUIDES: Guide[] = [gQuandPartirAuVietnam, gBudgetVoyageVietnam, gVisaVietnam, gNordOuSudVietnam, gItineraireVietnam, gQueFaireAuVietnam, gAgenceDeVoyageVietnam, gHalongOuLanHa, gAgenceLocaleOuTourOperateur, gVietnamOuThailande, gVietnamCuisine, gCarteVietnam, gTrekVietnam, gVoyageVietnamFamille, gVietnamHorsSentiers, gVoyageLuxeVietnam];
 
 export const source = {
   site: async (): Promise<Site> => siteJson,

@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 /**
- * Vérifie que le CMS décrit exactement le contenu qu'il édite.
+ * Checks that the CMS describes exactly the content it edits.
  *
- * Sveltia et Decap réécrivent le fichier entier à partir des champs déclarés
- * dans config.yml. Un champ présent dans le JSON mais absent de la
- * configuration disparaît donc au premier enregistrement d'un éditeur — sans
- * message, et sans que personne fasse le lien entre « j'ai corrigé un numéro
- * de téléphone » et « le site ne se construit plus ».
+ * Sveltia and Decap rewrite the whole file from the fields declared in
+ * config.yml. A field present in the JSON but missing from the configuration
+ * therefore disappears the first time an editor saves — with no message, and
+ * with nobody connecting "I fixed a phone number" to "the site no longer
+ * builds".
  *
- * C'est arrivé : l'identité de l'agence a été refondue sans que config.yml
- * suive, et six champs dont l'équipe et les horaires n'attendaient qu'une
- * sauvegarde pour être effacés. D'où ce contrôle, lancé au prebuild.
+ * It happened: the agency identity was reworked without config.yml following,
+ * and six fields including the team and the opening hours were one save away
+ * from being wiped. Hence this check, run at prebuild.
  *
- * Il compare les noms, pas les types : l'objectif est d'empêcher une perte
- * de données, pas de valider la mise en forme.
+ * It compares names, not types: the goal is preventing data loss, not
+ * validating presentation.
  */
 import { readFileSync } from "node:fs";
 import path from "node:path";
@@ -25,17 +25,17 @@ const cfg = parse(readFileSync(path.join(ROOT, "public/admin/config.yml"), "utf8
 const lire = (rel) => JSON.parse(readFileSync(path.join(ROOT, rel), "utf8"));
 const ecarts = [];
 
-/** Noms déclarés à un niveau de la configuration. */
+/** Names declared at one level of the configuration. */
 const noms = (fields = []) => new Set(fields.map((f) => f.name));
 
 /**
- * Compare une valeur du contenu à sa déclaration. `chemin` sert uniquement au
- * message d'erreur.
+ * Compares a content value against its declaration. `chemin` is used only for
+ * the error message.
  */
 function comparer(valeur, champs, chemin, fichier) {
   if (Array.isArray(valeur)) {
-    // Liste d'objets : on compare la forme du premier élément. Une liste de
-    // chaînes se déclare avec `field` au singulier, dont le nom est libre.
+    // List of objects: we compare the shape of the first element. A list of
+    // strings is declared with a singular `field`, whose name is free.
     const premier = valeur[0];
     if (premier && typeof premier === "object") {
       const sous = champs?.fields ?? [];
@@ -54,10 +54,9 @@ function comparer(valeur, champs, chemin, fichier) {
       const sous = (Array.isArray(champs) ? champs : champs.fields).find((f) => f.name === cle);
       comparer(valeur[cle], sous, `${chemin}${cle}.`, fichier);
     }
-    /* L'inverse n'est signalé que pour les champs obligatoires : un champ
-       facultatif — une étiquette d'étape, la photo d'une journée — est
-       légitimement absent tant que personne ne l'a rempli. Les signaler
-       noierait le seul écart qui fasse perdre des données. */
+    /* The reverse is only reported for required fields: an optional one — a stop
+       label, a day's photo — is legitimately absent until somebody fills it in.
+       Reporting those would drown the one discrepancy that loses data. */
     const liste = Array.isArray(champs) ? champs : champs.fields;
     for (const d of declares) {
       const decl = liste.find((f) => f.name === d);
@@ -73,8 +72,8 @@ for (const collection of cfg.collections ?? []) {
     comparer(lire(f.file), f.fields, "", f.file);
   }
 
-  // Collection de dossier : on contrôle chaque fiche, les circuits pouvant
-  // diverger entre eux.
+  // Folder collection: every entry is checked, since itineraries can diverge
+  // from one another.
   if (collection.folder) {
     const { readdirSync } = await import("node:fs");
     for (const nom of readdirSync(path.join(ROOT, collection.folder))) {
@@ -86,13 +85,12 @@ for (const collection of cfg.collections ?? []) {
 
 /* ------------------------------------------------- Pages CMS ------------
  *
- * Mêmes contrôles de noms, sur la grammaire de Pages CMS : `type` et `list`
- * au lieu de `widget`.
+ * The same name checks, against Pages CMS's grammar: `type` and `list` instead
+ * of `widget`.
  *
- * Pas de contrôle de fraîcheur ici : le prebuild régénère .pages.yml juste
- * avant, donc une comparaison avec le disque serait toujours satisfaite. Le
- * fait qu'il doive être committé est signalé par le générateur lui-même, au
- * moment où il constate un changement.
+ * No freshness check here: prebuild regenerates .pages.yml just before, so a
+ * comparison against disk would always pass. The fact that it must be committed
+ * is reported by the generator itself, at the moment it sees a change.
  */
 const pcfg = parse(readFileSync(path.join(ROOT, ".pages.yml"), "utf8"));
 

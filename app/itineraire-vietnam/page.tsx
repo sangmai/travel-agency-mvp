@@ -8,12 +8,12 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
 /**
- * « Itinéraire Vietnam » se cherche presque toujours avec une durée accolée :
- * 10 jours, 2 semaines, 3 semaines. La page est donc organisée par durée et
- * non par région, et chaque durée dit aussi ce à quoi elle oblige à renoncer.
+ * "Itinéraire Vietnam" is almost always searched with a duration attached:
+ * 10 days, 2 weeks, 3 weeks. The page is therefore organised by duration rather
+ * than by region, and each duration also states what it forces you to give up.
  *
- * Les circuits viennent du contenu, jamais d'une liste écrite ici : ajouter
- * une fiche dans le CMS la fait apparaître au bon palier sans toucher au code.
+ * The itineraries come from content, never from a list written here: adding a
+ * trip in the CMS makes it appear at the right tier without touching code.
  */
 
 const DUREES = [

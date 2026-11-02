@@ -8,10 +8,10 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getGuide, getSite } from "@/lib/content";
 
 /**
- * Nous ne vendons pas la Thaïlande. Une comparaison écrite par une partie
- * prenante ne vaut donc que si elle accorde franchement à l'autre ce qui lui
- * revient — ici les plages, les infrastructures et la facilité d'un premier
- * voyage. C'est aussi la seule version qu'un moteur génératif reprendra.
+ * We do not sell Thailand. A comparison written by an interested party is
+ * therefore worth something only if it frankly grants the other side what is
+ * its due — here the beaches, the infrastructure and the ease of a first trip.
+ * It is also the only version a generative engine will pick up.
  */
 
 const CRITERES = [

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { euro, monthYear, score } from "@/lib/format";
 import type { Review } from "@/lib/content";
 
-/** En-tête de section — répété quatorze fois avant d'être extrait. */
+/** Section heading — repeated fourteen times before being extracted. */
 export function SectionHead({
   kicker,
   title,
@@ -21,7 +21,7 @@ export function SectionHead({
   );
 }
 
-/** Prix « à partir de … / pers. », identique dans la liste, la carte et la fiche. */
+/** "from … / person" price, identical in the list, the card and the trip page. */
 export function PriceFrom({
   amount,
   className,
@@ -40,7 +40,7 @@ export function PriceFrom({
   );
 }
 
-/** Avis. `showTitle` sur la page d'accueil, date de départ sur une fiche. */
+/** Review. `showTitle` on the home page, departure date on a trip page. */
 export function ReviewCard({
   review,
   showTitle,
@@ -60,8 +60,8 @@ export function ReviewCard({
         <br />
         {review.city}
         {departure ? ` · départ de ${monthYear(review.date)}` : ` · ${monthYear(review.date)}`}
-        {/* La provenance est affichée et cliquable : un témoignage que le
-            visiteur ne peut pas aller vérifier ne prouve rien. */}
+        {/* The provenance is shown and clickable: a testimonial the visitor
+            cannot go and verify proves nothing. */}
         {review.source && review.sourceUrl && (
           <>
             <br />
@@ -96,8 +96,8 @@ export function Fil({
 }
 
 /**
- * Bloc de clôture. Les deux appels ne diffèrent que par les deux phrases ;
- * l'appel à l'action est volontairement le même partout.
+ * Closing block. The two call sites differ only in their two sentences; the
+ * call to action is deliberately the same everywhere.
  */
 export function Closing({ title, body }: { title: string; body: string }) {
   return (
@@ -114,10 +114,10 @@ export function Closing({ title, body }: { title: string; body: string }) {
 }
 
 /**
- * Injection de données structurées.
+ * Structured-data injection.
  *
- * L'échappement de `<` est la partie qui compte : il empêche une chaîne de
- * contenu de refermer la balise `script`. Il était écrit trois fois.
+ * Escaping `<` is the part that matters: it stops a content string from closing
+ * the `script` tag. It used to be written three times.
  */
 export function JsonLd({ data }: { data: unknown }) {
   return (

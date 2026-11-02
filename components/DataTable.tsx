@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 
 /**
- * Tableau de données — quatre sections répétaient le même échafaudage
- * `tbl-wrap / table / caption / thead`.
+ * Data table — four sections were repeating the same
+ * `tbl-wrap / table / caption / thead` scaffolding.
  *
- * Les trois tableaux de la page d'accueil (comparatif, saisonnalité, budget)
- * sont du vrai `<table>` balisé, pas des `<div>` : c'est la condition pour
- * qu'un moteur génératif les reprenne dans une réponse.
+ * The home page's three tables (comparison, seasonality, budget) are real
+ * marked-up `<table>` elements, not `<div>`s: that is the condition for a
+ * generative engine to reuse them in an answer.
  */
 export function DataTable({
   caption,
@@ -16,7 +16,7 @@ export function DataTable({
 }: {
   caption: string;
   columns: string[];
-  /** Première cellule = en-tête de ligne (`<th scope="row">`). */
+  /** First cell = row header (`<th scope="row">`). */
   rows: ReactNode[][];
   note?: ReactNode;
 }) {

@@ -4,10 +4,10 @@ import { score } from "@/lib/format";
 import { tripUrl, type Trip } from "@/lib/content";
 
 /**
- * Carte d'un voyage dans la liste, sur le modèle de Terres d'Aventure : image,
- * titre, deux lignes, puis la ligne de critères qui permet d'écarter un voyage
- * sans l'ouvrir — durée, niveau, note. Sans elle, le visiteur doit ouvrir six
- * onglets pour faire son tri.
+ * A trip card in the list, modelled on Terres d'Aventure: image, title, two
+ * lines, then the criteria row that lets you rule a trip out without opening it
+ * — duration, difficulty, rating. Without it the visitor has to open six tabs
+ * to sort through them.
  */
 export function TripCard({
   trip,

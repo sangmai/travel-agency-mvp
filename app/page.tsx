@@ -44,19 +44,18 @@ export default async function Home() {
       touristTripNode(t, {
         site,
         stops: (await resolveStops(t.stops)).map((s) => s.fr),
-        reviews: await getReviews({ trip: t.slug }),
       }),
     ),
   );
 
   const graph = [
-    ...organisationNode(site, featured),
+    ...organisationNode(site),
     { "@type": "WebSite", "@id": siteId(site.url), url: site.url, name: site.name, inLanguage: "fr-FR" },
     {
       "@type": "WebPage",
       "@id": `${site.url}/#webpage`,
       url: site.url,
-      name: "Voyage Vietnam sur mesure — Jasmin Travel, agence locale francophone",
+      name: `${site.name} ${site.byline} — agence locale francophone au Vietnam`,
       isPartOf: { "@id": siteId(site.url) },
       inLanguage: "fr-FR",
       breadcrumb: breadcrumb(site.url, [{ name: "Accueil" }]),

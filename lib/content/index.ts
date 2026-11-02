@@ -1,8 +1,8 @@
 /**
- * API de contenu utilisée par les pages et les composants.
+ * Content API used by pages and components.
  *
- * Tout est asynchrone : voir source.ts pour la raison. Les composants
- * n'importent jamais `source` ni les JSON directement.
+ * Everything is async: see source.ts for why. Components never import `source`
+ * or the JSON files directly.
  */
 import { source } from "./source";
 import { ROUTES } from "../routes";
@@ -13,11 +13,11 @@ export type * from "./types";
 export const getSite = source.site;
 export const getHome = source.home;
 
-/** Lève si la page n'a pas de contenu : mieux vaut un build rouge qu'une
- *  page guide servie sans titre ni questions. */
+/** Throws when the page has no content: a red build beats a guide page served
+ *  with no title and no questions. */
 export async function getGuide(slug: string) {
   const g = (await source.guides()).find((x) => x.slug === slug);
-  if (!g) throw new Error(`content/guides/${slug}.json est introuvable.`);
+  if (!g) throw new Error(`content/guides/${slug}.json not found.`);
   return g;
 }
 export const getProcess = source.process;
@@ -30,16 +30,15 @@ export const getPhotoMeta = source.photos;
 export const getCarnet = source.carnet;
 
 /**
- * Les régions et les envies portent chacune un lien. Rien n'empêchait d'y
- * écrire l'adresse d'une page qui n'existe pas : la compilation passait, et
- * le visiteur tombait sur un 404 — un maillage interne vers des pages mortes
- * étant précisément ce qui fait passer un site pour inachevé aux yeux d'un
- * moteur.
+ * Regions and travel themes each carry a link. Nothing stopped anyone writing
+ * the address of a page that does not exist: compilation passed, and the
+ * visitor hit a 404 — internal links pointing at dead pages being precisely
+ * what makes a site look unfinished to a search engine.
  *
- * Le lien est donc vérifié au build contre les routes publiées et les fiches
- * voyage existantes. Un éditeur qui se trompe d'adresse dans le CMS obtient
- * un build rouge, ce qui se corrige, plutôt qu'une page morte en ligne, ce
- * qui ne se remarque pas.
+ * The link is therefore checked at build time against published routes and
+ * existing trips. An editor who mistypes an address in the CMS gets a red
+ * build, which gets fixed, rather than a dead page online, which goes
+ * unnoticed.
  */
 async function verifierLiens<T extends { route: string }>(
   entrees: T[],
@@ -56,8 +55,8 @@ async function verifierLiens<T extends { route: string }>(
     const chemin = e.route.replace(/\/$/, "") || "/";
     if (!connues.has(chemin)) {
       throw new Error(
-        `content/${fichier} renvoie vers « ${e.route} », qui n'existe pas.\n` +
-          `Adresses disponibles : ${[...connues].sort().join(", ")}`,
+        `content/${fichier} links to "${e.route}", which does not exist.\n` +
+          `Available addresses: ${[...connues].sort().join(", ")}`,
       );
     }
   }
@@ -89,15 +88,15 @@ export async function getReviews(opts: { trip?: string; featured?: boolean } = {
   );
 }
 
-/** Note moyenne et effectif — une seule implémentation pour les cartes,
- *  les fiches et le JSON-LD, qui la recalculaient chacun de leur côté. */
+/** Average rating and count — one implementation for the cards, the trip pages
+ *  and the JSON-LD, which each used to recompute it on their own. */
 export function aggregate(reviews: Review[]) {
   if (reviews.length === 0) return { value: 0, count: 0 };
   const sum = reviews.reduce((s, r) => s + r.rating, 0);
   return { value: Number((sum / reviews.length).toFixed(1)), count: reviews.length };
 }
 
-/** Lève si le lieu est inconnu : une carte amputée en silence serait pire. */
+/** Throws on an unknown place: a map silently missing a stop would be worse. */
 export async function resolveStops(stops: Stop[]) {
   const places = await source.places();
   const byId = new Map(places.map((p) => [p.id, p]));
@@ -105,7 +104,7 @@ export async function resolveStops(stops: Stop[]) {
     const place = byId.get(s.place);
     if (!place) {
       throw new Error(
-        `Lieu « ${s.place} » absent de content/places.json. Ajoutez ses coordonnées.`,
+        `Place "${s.place}" missing from content/places.json. Add its coordinates.`,
       );
     }
     return { ...place, label: s.label ?? place.fr };

@@ -1,32 +1,30 @@
 #!/usr/bin/env python3
 """
-Génère lib/map-shapes.ts — le fond de carte des fiches voyage.
+Generates lib/map-shapes.ts — the base map for the trip pages.
 
     cd scripts
     curl -o ne50.json https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson
     python3 make-map.py
 
-Source : Natural Earth 50m, domaine public. Le résultat est écrit en dur dans
-le dépôt : aucune bibliothèque cartographique, aucune tuile, aucun appel réseau
-à l'exécution. La carte vit dans le HTML servi.
+Source: Natural Earth 50m, public domain. The result is written into the
+repository: no mapping library, no tiles, no network call at runtime. The map
+lives in the served HTML.
 
-Deux partis pris :
+Three deliberate choices:
 
-1. La simplification de Douglas-Peucker opère DANS L'ESPACE ÉCRAN, pas en
-   degrés. La tolérance est donc en pixels du viewBox, ce qui donne un trait
-   d'une finesse homogène quelle que soit la latitude, et évite de transporter
-   des points que personne ne distinguera.
+1. Douglas-Peucker simplification operates IN SCREEN SPACE, not in degrees. The
+   tolerance is therefore in viewBox pixels, which gives an evenly fine line at
+   any latitude and avoids carrying points nobody will ever distinguish.
 
-2. La géométrie lointaine (Chine, Thaïlande) est rabattue sur le bord du
-   cadre. Elle est de toute façon rognée par le viewBox ; la porter entière
-   coûtait 16 Ko pour rien.
+2. Distant geometry (China, Thailand) is clamped to the frame edge. It is
+   clipped by the viewBox anyway; carrying it whole cost 16 KB for nothing.
 
-3. Chaque tracé est accompagné de son cadre englobant, pour que la carte
-   puisse écarter d'emblée ceux qui tombent hors du cadrage d'un voyage. Un
-   circuit limité au Nord embarquait sinon le Cambodge et tout le Sud.
+3. Every path comes with its bounding box, so the map can discard outright
+   those falling outside a trip's framing. Otherwise an itinerary confined to
+   the North dragged in Cambodia and the whole South.
 
-⚠️ lib/map/project.ts consomme PROJECTION et se contente d'interpoler : la
-formule de Mercator n'est écrite qu'ici.
+WARNING: lib/map/project.ts consumes PROJECTION and merely interpolates — the
+Mercator formula is written only here.
 """
 import json
 import math
@@ -39,7 +37,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "ne50.json")
 OUT = os.path.join(HERE, "..", "lib", "map-shapes.ts")
 
-# Emprise : tout le Vietnam, plus le Cambodge jusqu'à Angkor (103,9°E ; 13,4°N).
+# Extent: all of Vietnam, plus Cambodia as far as Angkor (103.9E, 13.4N).
 LON0, LON1, LAT0, LAT1 = 101.0, 110.4, 7.6, 24.0
 W = 600.0  # largeur du viewBox ; la hauteur en découle
 PAD = 60.0  # marge de rabattement au-delà du cadre
@@ -48,8 +46,8 @@ merc = lambda la: math.log(math.tan(math.pi / 4 + math.radians(max(-85, min(85, 
 MY0, MY1 = merc(LAT0), merc(LAT1)
 H = W * (MY1 - MY0) / ((LON1 - LON0) * math.pi / 180)
 
-# Tolérance de simplification (px) et taille minimale retenue (px), par pays.
-# Le Vietnam est le sujet : plus de détail. Les voisins sont du contexte.
+# Simplification tolerance (px) and minimum retained size (px), per country.
+# Vietnam is the subject: more detail. The neighbours are context.
 SPEC = {
     "VNM": (0.7, 6),
     "KHM": (1.6, 16),
@@ -130,21 +128,21 @@ def main():
 
     L = [
         "/**",
-        " * Fond de carte — tracés SVG générés, jamais dessinés à la main.",
+        " * Base map — generated SVG paths, never drawn by hand.",
         " *",
-        " * Source : Natural Earth 50m (domaine public). Projection de Mercator sur",
-        " * une emprise fixe couvrant le Vietnam et le Cambodge jusqu'à Angkor, puis",
-        " * simplification de Douglas-Peucker dans l'espace écran.",
+        " * Source: Natural Earth 50m (public domain). Mercator projection over a fixed",
+        " * extent covering Vietnam and Cambodia as far as Angkor, then Douglas-Peucker",
+        " * simplification in screen space.",
         " *",
-        " * ⚠️ Régénérer avec scripts/make-map.py ; ne pas retoucher à la main,",
-        " * les points des étapes sont projetés depuis PROJECTION ci-dessous.",
+        " * WARNING: regenerate with scripts/make-map.py; do not touch by hand, the stop",
+        " * markers are projected from PROJECTION below.",
         " */",
         "",
         "/**",
-        " * Contrat de projection complet : l'emprise, ses bornes DÉJÀ passées",
-        " * en Mercator, et les dimensions du viewBox. Le TypeScript n'a donc",
-        " * qu'une interpolation linéaire à faire — la formule de Mercator",
-        " * n'existe qu'ici, au lieu d'être réimplémentée de l'autre côté.",
+        " * The complete projection contract: the extent, its bounds ALREADY run through",
+        " * Mercator, and the viewBox dimensions. TypeScript therefore has only a linear",
+        " * interpolation to do — the Mercator formula lives here alone, instead of being",
+        " * reimplemented on the other side.",
         " */",
         "export const PROJECTION = {",
         f"  lon0: {LON0}, lon1: {LON1},",
@@ -152,10 +150,10 @@ def main():
         f"  w: {W:.0f}, h: {H:.1f},",
         "};",
         "",
-        "/** Un tracé et son cadre englobant [x0, y0, x1, y1]. */",
+        "/** A path and its bounding box [x0, y0, x1, y1]. */",
         "export type Shape = { d: string; b: [number, number, number, number] };",
         "",
-        "/** Pays voisins — contexte, tracés en retrait. */",
+        "/** Neighbouring countries — context, drawn recessed. */",
         "export const NEIGHBOURS: Shape[] = [",
     ]
     fmt = lambda p: f'  {{ d: "{p["d"]}", b: [{", ".join(str(v) for v in p["b"])}] }},'

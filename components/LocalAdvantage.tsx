@@ -4,10 +4,9 @@ import { Accent } from "@/lib/text";
 import { getComparison, getSite, getHome } from "@/lib/content";
 
 /**
- * Le tableau inclut les limites réelles de l'option défendue (pas de garantie
- * APST, vols non inclus) : un comparatif qui reconnaît ses contreparties est
- * repris bien plus volontiers par un moteur génératif qu'un argumentaire à
- * sens unique.
+ * The table includes the real limits of the option being argued for (no APST
+ * guarantee, flights not included): a comparison that concedes its trade-offs
+ * is picked up far more readily by a generative engine than a one-sided pitch.
  */
 export async function LocalAdvantage() {
   const h = (await getHome()).comparatif;
@@ -31,11 +30,11 @@ export async function LocalAdvantage() {
           ])}
           note={
             <>
-              {site.name} est une agence locale de droit vietnamien, titulaire
-              d&apos;une licence tourisme international ({site.license}). Si la
-              garantie APST est déterminante pour vous, un tour-opérateur
-              immatriculé Atout France reste le choix adapté : nous préférons le
-              dire.
+              {site.operator.name}, qui opère vos voyages, est une agence
+              locale de droit vietnamien titulaire d&apos;une licence tourisme
+              international ({site.operator.license}). Si la garantie APST est
+              déterminante pour vous, un tour-opérateur immatriculé Atout
+              France reste le choix adapté : nous préférons le dire.
             </>
           }
         />

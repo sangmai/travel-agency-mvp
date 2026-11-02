@@ -3,12 +3,12 @@ import { project } from "@/lib/map/project";
 import type { ResolvedStop } from "@/lib/content";
 
 /**
- * Carte de l'itinéraire : SVG calculé au build, sans bibliothèque
- * cartographique, sans tuiles et sans JavaScript. Elle est donc dans le HTML
- * servi, visible sans script et lisible par un crawler.
+ * Itinerary map: SVG computed at build time, with no mapping library, no tiles
+ * and no JavaScript. It therefore sits in the served HTML, visible without
+ * script and readable by a crawler.
  *
- * `aria-hidden` : la liste ordonnée des étapes publiée à côté dit la même
- * chose, en mieux pour un lecteur d'écran.
+ * `aria-hidden`: the ordered list of stops published next to it says the same
+ * thing, and says it better for a screen reader.
  */
 
 type Box = { x0: number; y0: number; x1: number; y1: number };
@@ -16,15 +16,15 @@ type Box = { x0: number; y0: number; x1: number; y1: number };
 const hits = (a: Box, b: Box) =>
   a.x0 < b.x1 && a.x1 > b.x0 && a.y0 < b.y1 && a.y1 > b.y0;
 
-/** Largeur approchée d'un texte. 0,52 em par caractère suffit : l'estimation
- *  ne sert qu'à éviter les chevauchements. */
+/** Approximate text width. 0.52 em per character is enough: the estimate only
+ *  serves to avoid overlaps. */
 const textWidth = (s: string, fs: number) => s.length * fs * 0.52;
 
 const r1 = (n: number) => Math.round(n * 10) / 10;
 
-/** Cadrage ajusté au voyage, avec correction seulement hors d'une plage de
- *  rapports acceptable : une carte large et courte se lit très bien, et
- *  imposer un rapport exact noyait les circuits compacts dans du vide. */
+/** Framing fitted to the trip, corrected only outside an acceptable range of
+ *  aspect ratios: a wide, short map reads perfectly well, and forcing an exact
+ *  ratio used to drown compact itineraries in empty space. */
 function frame(pts: { x: number; y: number }[]) {
   let minX = Infinity;
   let maxX = -Infinity;
@@ -58,10 +58,9 @@ function frame(pts: { x: number; y: number }[]) {
 }
 
 /**
- * `route` relie les étapes dans l'ordre du programme. La carte du pays
- * réutilise la même projection et le même placement de noms, mais sans
- * tracé : y relier vingt-trois lieux dessinerait un parcours qui n'existe
- * pas.
+ * `route` connects the stops in programme order. The country map reuses the
+ * same projection and the same label placement, but draws no path: joining
+ * twenty-three places there would sketch a journey that does not exist.
  */
 export function TripMap({
   stops,
@@ -74,21 +73,21 @@ export function TripMap({
   const view = frame(pts);
   const { x0, y0, w, h } = view;
 
-  /* Repères dimensionnés sur la plus grande dimension du cadre, pour garder
-     la même taille apparente quel que soit le zoom. */
+  /* Markers sized against the frame's larger dimension, to keep the same
+     apparent size whatever the zoom. */
   const k = Math.max(w, h) / 560;
   const r = 10 * k;
   const stroke = 2.2 * k;
   const fs = 13.5 * k;
   const gap = r * 0.7;
 
-  /* Les tracés entièrement hors cadrage ne sont pas rendus : un circuit
-     limité au Nord embarquait sinon le Cambodge et tout le Sud. */
+  /* Paths entirely outside the frame are not rendered: otherwise an itinerary
+     confined to the North dragged in Cambodia and the whole South. */
   const visible = (s: Shape) =>
     hits({ x0: s.b[0], y0: s.b[1], x1: s.b[2], y1: s.b[3] }, view);
 
-  /* Table de positions candidates hissée hors de la boucle : elle ne dépend
-     que de r, gap et fs, tous connus avant. */
+  /* Candidate position table hoisted out of the loop: it depends only on r,
+     gap and fs, all known beforehand. */
   const candidates = [
     { dx: r + gap, dy: fs * 0.36, anchor: "start" as const },
     { dx: -(r + gap), dy: fs * 0.36, anchor: "end" as const },
@@ -107,10 +106,10 @@ export function TripMap({
     b.y0 >= view.y0 + inset &&
     b.y1 <= view.y1 - inset;
 
-  /* Chaque nom essaie les huit positions et retient la première qui ne
-     chevauche rien ; l'étiquette posée devient obstacle pour les suivantes.
-     Glouton et parcouru dans l'ordre du programme, donc déterministe : le
-     même voyage produit la même carte à chaque build. */
+  /* Each label tries the eight positions and keeps the first that overlaps
+     nothing; a placed label then becomes an obstacle for the next ones. Greedy
+     and walked in programme order, therefore deterministic: the same trip
+     produces the same map on every build. */
   const obstacles: Box[] = pts.map((p) => ({
     x0: p.x - r * 1.15,
     y0: p.y - r * 1.15,
@@ -159,7 +158,7 @@ export function TripMap({
         <path key={s.d.slice(0, 24)} d={s.d} className="tripmap__land" />
       ))}
 
-      {/* Pointillé : le trait relie des étapes, il ne décrit pas la route. */}
+      {/* Dashed: the line joins stops, it does not describe the road. */}
       {route && (
         <polyline
           points={pts.map((p) => `${r1(p.x)},${r1(p.y)}`).join(" ")}
@@ -169,8 +168,8 @@ export function TripMap({
         />
       )}
 
-      {/* Noms avant pastilles : si un halo mord sur un repère, c'est le
-          repère qui doit rester net. */}
+      {/* Labels before markers: if a halo bites into a marker, it is the
+          marker that must stay crisp. */}
       {labels.map((l) => (
         <text
           key={`t${l.label}`}

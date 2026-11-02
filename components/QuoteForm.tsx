@@ -4,13 +4,13 @@ import { getSite, getHome } from "@/lib/content";
 import { Accent } from "@/lib/text";
 
 /**
- * Formulaire sans JavaScript : un `<form>` HTML qui poste vers worker/index.ts,
- * lequel envoie la demande par e-mail à l'agence. Il fonctionne si le JS ne
- * charge pas et ne coûte rien au LCP.
+ * JavaScript-free form: an HTML `<form>` posting to worker/index.ts, which
+ * emails the request to the agency. It works when JS fails to load and costs
+ * nothing at LCP.
  *
- * Les `name` des champs sont lus tels quels par le Worker : en renommer un ici
- * sans l'y renommer fait disparaître l'information de l'e-mail, sans que rien
- * n'échoue au build.
+ * Field `name` attributes are read verbatim by the Worker: renaming one here
+ * without renaming it there makes that information vanish from the email,
+ * without anything failing at build time.
  */
 
 export async function QuoteForm() {
@@ -100,10 +100,10 @@ export async function QuoteForm() {
                 />
               </div>
 
-              {/* Honeypot : invisible, doit rester vide. Le nom du champ ne
-                  doit évoquer aucune des catégories que le navigateur sait
-                  remplir seul — « societe » en était une, et Chrome y écrivait
-                  le nom de l'employeur du visiteur. */}
+              {/* Honeypot: invisible, must stay empty. The field name must not
+                  evoke any category the browser knows how to autofill —
+                  "societe" was one, and Chrome wrote the visitor's employer
+                  into it. */}
               <div aria-hidden="true" className="trap">
                 <label htmlFor="reference-interne">Ne pas remplir</label>
                 <input
@@ -115,13 +115,13 @@ export async function QuoteForm() {
                 />
               </div>
 
-              {/* ⚠️ AVANT MISE EN LIGNE — cette mention tient lieu d'information
-                  minimale ; le RGPD demande une politique de confidentialité
-                  accessible, nommant le responsable du traitement, la durée de
-                  conservation et la façon d'exercer ses droits. Le lien vers
-                  /politique-de-confidentialite a été retiré tant que la page
-                  n'existe pas : renvoyer une demande de consentement vers un
-                  404 est pire que ne pas la lier. */}
+              {/* WARNING — BEFORE GOING LIVE: this notice stands in as minimal
+                  information; the GDPR requires an accessible privacy policy
+                  naming the data controller, the retention period and how to
+                  exercise your rights. The link to
+                  /politique-de-confidentialite was removed while that page does
+                  not exist: pointing a consent request at a 404 is worse than
+                  not linking it at all. */}
               <label className="f f--consent" htmlFor="consentement">
                 <input id="consentement" name="consentement" type="checkbox" required />
                 <span>

@@ -4,13 +4,13 @@ import { Accent } from "@/lib/text";
 import { getBudget, getHome } from "@/lib/content";
 
 /**
- * Deuxième requête informationnelle du marché après la saisonnalité. Donner
- * des fourchettes précises plutôt qu'un « sur devis » est à la fois un facteur
- * de conversion et la condition pour être cité quand quelqu'un demande à une
- * IA combien coûte un voyage au Vietnam.
+ * The market's second informational query after seasonality. Giving precise
+ * ranges rather than "price on request" is both a conversion factor and the
+ * condition for being cited when someone asks an AI what a trip to Vietnam
+ * costs.
  */
-/** Le tableau seul : la page d'accueil l'introduit par un h2, la page guide
- *  par son h1. Une seule implémentation, donc un seul barème. */
+/** The table on its own: the home page introduces it with an h2, the guide page
+ *  with its h1. One implementation, therefore one set of figures. */
 export async function BudgetTable({ note }: { note?: React.ReactNode }) {
   const rows = await getBudget();
 

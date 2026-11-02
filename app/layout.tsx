@@ -4,8 +4,8 @@ import siteJson from "@/content/site.json";
 import "./globals.css";
 
 /**
- * Auto-hébergées par next/font : aucun appel à fonts.googleapis.com, donc pas
- * de requête bloquante au rendu ni de transfert vers un tiers (RGPD).
+ * Self-hosted by next/font: no call to fonts.googleapis.com, so no
+ * render-blocking request and no transfer to a third party (GDPR).
  */
 const display = Fraunces({
   subsets: ["latin", "latin-ext"],
@@ -23,21 +23,35 @@ const body = Plus_Jakarta_Sans({
 });
 
 /**
- * Title sous 60 caractères, sinon il est tronqué dans les SERP.
- * ⚠️ `metadataBase` doit viser le domaine de production : il sert de base aux
- * URL canoniques et Open Graph.
+ * Title under 60 characters, otherwise it is truncated in the SERP.
+ * WARNING: `metadataBase` must point at the production domain: it is the base
+ * for canonical and Open Graph URLs.
  */
 export const metadata: Metadata = {
   metadataBase: new URL(siteJson.url),
   title: {
-    default: "Voyage Vietnam sur mesure, agence locale | Jasmin Travel",
-    template: "%s | Jasmin Travel",
+    default: "Voyage Vietnam sur mesure, agence locale francophone",
+    /* No brand suffix, deliberately.
+     *
+     * "| Voyage Vietnam Sur Mesure" costs 27 characters and pushed twelve of
+     * the twenty-one titles past the ~60 Google displays, so they came back
+     * truncated mid-word. The previous suffix was twelve characters shorter and
+     * fitted; this brand name does not.
+     *
+     * A suffix buys brand recognition in the SERP — which is worth paying for
+     * once a brand is recognised. This one is days old with no search volume,
+     * so it would be paying truncation for nothing. The brand is still in the
+     * domain shown above the title, in the H1 and in the markup.
+     *
+     * Revisit when the brand has its own queries: at that point shorten the
+     * page titles instead, rather than letting the suffix push them over. */
+    template: "%s",
   },
-  /* Pas de note dans la description : celle qui y figurait — 4,9/5 sur 384
-     avis — était inventée, et c'est l'extrait que Google affiche. Le
-     numéro de licence la remplace : il se vérifie, lui. */
+  /* No rating in the description: the one that used to be there — 4.9/5 from
+     384 reviews — was invented, and this is the snippet Google displays. The
+     licence number replaces it: that one can be verified. */
   description:
-    `Agence locale francophone à ${siteJson.address.city}. Circuits privés sur mesure au Vietnam dès 870 €/pers., devis gratuit sous ${siteJson.responseTime}. Licence ${siteJson.license}.`,
+    `Circuits privés sur mesure au Vietnam dès 870 €/pers., devis gratuit sous ${siteJson.responseTime}. Opérés par ${siteJson.operator.name}, agence locale francophone à ${siteJson.address.city}.`,
   keywords: [
     "voyage vietnam",
     "voyage au vietnam",
@@ -48,7 +62,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: siteJson.name, url: siteJson.url }],
   creator: siteJson.name,
-  publisher: siteJson.legalName,
+  publisher: siteJson.name,
   applicationName: siteJson.name,
   alternates: {
     canonical: "/",
@@ -62,21 +76,21 @@ export const metadata: Metadata = {
     locale: siteJson.locale,
     url: siteJson.url,
     siteName: siteJson.name,
-    /* Sans vignette, Facebook, WhatsApp et LinkedIn affichent un rectangle
-       gris : un lien de voyage partagé sans image ne se clique pas. Les
-       vignettes sont fabriquées au build par scripts/make-images.mjs, en
-       1200 × 630 et en JPEG — plusieurs aperçus ne lisent pas le WebP. */
+    /* Without a preview image, Facebook, WhatsApp and LinkedIn show a grey
+       rectangle: a travel link shared without an image does not get clicked.
+       The images are produced at build time by scripts/make-images.mjs, at
+       1200 × 630 and in JPEG — several preview renderers cannot read WebP. */
     images: [{ url: "/photos/og/halong.jpg", width: 1200, height: 630, alt: "Baie d'Halong, Vietnam" }],
-    title: "Voyage Vietnam sur mesure — Jasmin Travel, agence locale francophone",
+    title: `Voyage Vietnam sur mesure — ${siteJson.name} ${siteJson.byline}`,
     description:
-      `Circuits privés au Vietnam conçus depuis ${siteJson.address.city} pour les voyageurs francophones. Itinéraire chiffré sous ${siteJson.responseTime}, retouches sans frais, guide francophone et chauffeur privé.`,
+      `Circuits privés au Vietnam conçus depuis ${siteJson.address.city} pour les voyageurs francophones, opérés par ${siteJson.operator.name}. Itinéraire chiffré sous ${siteJson.responseTime}, retouches sans frais, guide francophone et chauffeur privé.`,
   },
   twitter: {
     card: "summary_large_image",
     images: ["/photos/og/halong.jpg"],
-    title: "Voyage Vietnam sur mesure — Jasmin Travel",
+    title: `Voyage Vietnam sur mesure — ${siteJson.name}`,
     description:
-      `Agence locale francophone à ${siteJson.address.city}. Circuits privés dès 870 €/pers., devis gratuit sous ${siteJson.responseTime}.`,
+      `Circuits privés dès 870 €/pers., devis gratuit sous ${siteJson.responseTime}. Opérés par ${siteJson.operator.name}, agence locale francophone à ${siteJson.address.city}.`,
   },
   robots: {
     index: true,
@@ -90,7 +104,7 @@ export const metadata: Metadata = {
     },
   },
   category: "travel",
-  // ⚠️ À renseigner après création des propriétés correspondantes :
+  // TODO: fill in once the matching properties exist:
   // verification: { google: "…", other: { "facebook-domain-verification": "…" } },
 };
 
@@ -111,17 +125,16 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable}`}
     >
       <head>
-        {/* Search Console : une balise meta, aucun script, aucun cookie.
-            Dès que le site aura son propre domaine, préférer la
-            vérification par enregistrement DNS TXT — elle couvre tous les
-            sous-domaines et survit à une refonte du site. */}
+        {/* Search Console: one meta tag, no script, no cookie. Now that the
+            site has its own domain, prefer DNS TXT verification — it covers
+            every subdomain and survives a site rebuild. */}
         {m.searchConsole && (
           <meta name="google-site-verification" content={m.searchConsole} />
         )}
 
-        {/* Cloudflare Web Analytics : pas de cookie, pas de donnée
-            personnelle, donc pas de bannière de consentement à poser en
-            France. Environ 1,5 Ko, contre 30 Ko pour GA4. */}
+        {/* Cloudflare Web Analytics: no cookie, no personal data, so no
+            consent banner to put up in France. Roughly 1.5 KB, against 30 KB
+            for GA4. */}
         {m.cloudflare && (
           <script
             defer
@@ -130,10 +143,10 @@ export default function RootLayout({
           />
         )}
 
-        {/* ⚠️ GA4 pose des cookies et transfère des données personnelles.
-            En France, il ne doit se charger qu'APRÈS consentement explicite :
-            renseigner cette clé sans avoir posé de bannière expose à une
-            sanction de la CNIL. Le champ est volontairement vide. */}
+        {/* WARNING: GA4 sets cookies and transfers personal data. In France it
+            must only load AFTER explicit consent: filling this key in without
+            having put up a banner exposes you to a CNIL penalty. The field is
+            deliberately empty. */}
         {m.ga4 && (
           <>
             <script
@@ -157,6 +170,44 @@ export default function RootLayout({
           Aller au contenu principal
         </a>
         {children}
+
+        {/* Counts departures towards the operator — call, WhatsApp, email,
+            Facebook. Those visitors leave the site without a trace anywhere
+            else, and they are often the most decided ones.
+
+            No cookie, no identifier, no IP address stored: only the channel and
+            the page path are sent. So no consent banner to put up — and that is
+            deliberate, a banner would depress precisely what we are measuring.
+
+            `sendBeacon` rather than `fetch`: the browser leaves the page the
+            instant a `tel:` link is clicked, and an ordinary request would be
+            cancelled in flight. A beacon is guaranteed by the browser after the
+            page is gone.
+
+            Capture phase (`true`): the listener sits ahead of any handler that
+            might stop propagation.
+
+            Placed at the end of <body>: the site stays usable without
+            JavaScript, the links work regardless, only the measurement is lost.
+
+            The channel names must match the allow-list in worker/clicks.ts — a
+            mismatch is dropped silently, with a 204 and no row written. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              `addEventListener("click",function(e){` +
+              `var t=e.target,a=t&&t.closest&&t.closest("a[href]");if(!a)return;` +
+              `var h=a.getAttribute("href")||"",c="";` +
+              `if(h.indexOf("tel:")===0)c="phone";` +
+              `else if(h.indexOf("https://wa.me/")===0)c="whatsapp";` +
+              `else if(h.indexOf("mailto:")===0)c="email";` +
+              `else if(h.indexOf("facebook.com/")>0)c="facebook";` +
+              `if(!c||!navigator.sendBeacon)return;` +
+              `try{navigator.sendBeacon("/api/clic",JSON.stringify(` +
+              `{c:c,p:location.pathname}))}catch(_){}` +
+              `},true);`,
+          }}
+        />
       </body>
     </html>
   );

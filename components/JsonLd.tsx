@@ -1,13 +1,13 @@
-import { aggregate, tripUrl, type Review, type Site, type Trip } from "@/lib/content";
+import { tripUrl, type Site, type Trip } from "@/lib/content";
 
 /**
- * Un seul `@graph` dont les `@id` se référencent : c'est ce qui fait
- * comprendre à un moteur que l'agence, ses avis et ses circuits sont une même
- * entité.
+ * A single `@graph` whose `@id`s cross-reference each other: that is what makes
+ * a search engine understand the agency, its reviews and its trips are one and
+ * the same entity.
  *
- * ⚠️ Tout ce qui est déclaré ici doit être visible sur la page. Un
- * AggregateRating ou un prix balisé mais absent du rendu viole les règles
- * Google et expose à une action manuelle.
+ * WARNING: everything declared here must be visible on the page. An
+ * AggregateRating or a price marked up but absent from the render breaks
+ * Google's rules and invites a manual action.
  */
 export const orgId = (url: string) => `${url}/#organisation`;
 export const siteId = (url: string) => `${url}/#site`;
@@ -24,35 +24,31 @@ export function breadcrumb(url: string, trail: { name: string; path?: string }[]
   };
 }
 
-function reviewNodes(reviews: Review[]) {
-  return reviews.map((r) => ({
-    "@type": "Review",
-    author: { "@type": "Person", name: r.author },
-    datePublished: r.date,
-    ...(r.title ? { name: r.title } : {}),
-    reviewBody: r.body,
-    reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5, worstRating: 1 },
-  }));
-}
+/* No `Review` or `AggregateRating` anywhere in this graph, deliberately.
+ *
+ * Google requires reviews marked up as structured data to be collected by the
+ * site itself, not reused from a third party. Every review this project holds
+ * comes from Tripadvisor — so declaring them here as the agency's own, or
+ * computing an AggregateRating from them, is outside the rules. That is the
+ * class of markup that earns a manual action for "misleading structured data",
+ * and a manual action costs incomparably more than two review snippets gain.
+ *
+ * The reviews stay *visible* on the page, quoted with their author, their date
+ * and a link to the Tripadvisor page. Quoting an attributed review is
+ * legitimate; declaring it as first-party data is not. The distinction is the
+ * markup, not the text.
+ *
+ * What would make them declarable: reviews gathered by the site, from
+ * travellers who booked through it, stored with proof of collection.
+ */
 
-function ratingNode(value: number, count: number) {
-  return {
-    "@type": "AggregateRating",
-    ratingValue: value,
-    reviewCount: count,
-    bestRating: 5,
-    worstRating: 1,
-  };
-}
-
-/** `TouristTrip` décrit un itinéraire mieux qu'un `Product` générique, et
- *  porte le parcours comme suite de lieux — exploitable en réponse générative. */
+/** `TouristTrip` describes an itinerary better than a generic `Product`, and
+ *  carries the route as a sequence of places — usable in a generative answer. */
 export function touristTripNode(
   trip: Trip,
-  opts: { site: Site; stops: string[]; reviews: Review[] },
+  opts: { site: Site; stops: string[] },
 ) {
   const url = opts.site.url + tripUrl(trip.slug);
-  const agg = aggregate(opts.reviews);
 
   return {
     "@type": "TouristTrip",
@@ -61,7 +57,11 @@ export function touristTripNode(
     description: trip.intro,
     url,
     touristType: trip.audience,
-    provider: { "@id": orgId(opts.site.url) },
+    /* The operator, not the brand. `provider` names who actually delivers the
+       trip — and the traveller contracts and pays Jasmin Travel, who runs it.
+       This site sells; it does not operate. Naming the brand here would be the
+       one place the markup contradicts the commercial reality. */
+    provider: { "@id": operatorId(opts.site.url) },
     itinerary: {
       "@type": "ItemList",
       numberOfItems: opts.stops.length,
@@ -77,6 +77,11 @@ export function touristTripNode(
       priceCurrency: opts.site.currency,
       availability: "https://schema.org/InStock",
       url,
+      /* `seller` belongs on the Offer, not on the Trip — schema.org puts it
+         there and nowhere else. The brand sells, the operator delivers; both
+         are true and they are different facts, so both are declared, each on
+         the type that actually defines the property. */
+      seller: { "@id": orgId(opts.site.url) },
       priceSpecification: {
         "@type": "PriceSpecification",
         price: trip.priceFrom,
@@ -86,33 +91,82 @@ export function touristTripNode(
           "Prix à partir de, par personne, base deux voyageurs, hors vols internationaux.",
       },
     },
-    ...(agg.count > 0
-      ? { aggregateRating: ratingNode(agg.value, agg.count), review: reviewNodes(opts.reviews) }
-      : {}),
   };
 }
 
-export function organisationNode(site: Site, reviews: Review[]) {
+export const operatorId = (url: string) => `${url}/#operateur`;
+
+/**
+ * Two nodes, not one.
+ *
+ * `#organisation` is the brand this site publishes under. It owns the domain,
+ * the contact address and the editorial content — and nothing else.
+ *
+ * `#operateur` is Jasmin Travel: the licence, the office, the opening hours,
+ * the staff, the Tripadvisor profile. Everything a traveller would check
+ * before paying belongs here, because it is genuinely theirs.
+ *
+ * `parentOrganization` links the two. That is not decoration: the site says
+ * "by Jasmin Travel" in its header, and the markup has to say the same thing.
+ * Visible claim and declared claim agreeing is the whole point — a page that
+ * states one relationship and declares another is exactly what structured-data
+ * policy treats as misleading.
+ *
+ * Why this matters beyond tidiness: declaring Jasmin's licence and founding
+ * year on a node named after this site asserted that this site IS Jasmin
+ * Travel, at a second domain. Two domains asserting one business is a
+ * duplicate entity, and the engine keeps the older one.
+ */
+export function organisationNode(site: Site) {
   const personId = `${site.url}/#equipe`;
+  const op = site.operator;
 
   return [
     {
-      "@type": ["TravelAgency", "LocalBusiness"],
+      /* The brand: an Organization, not a TravelAgency. It holds no licence
+         and operates no trip, so claiming the more specific type would be a
+         claim it cannot support. */
+      "@type": "Organization",
       "@id": orgId(site.url),
       name: site.name,
-      legalName: site.legalName,
+      alternateName: `${site.name} ${site.byline}`,
       url: site.url,
+      description: `Marque francophone de ${op.name}, ${site.tagline.toLowerCase()} basée à ${site.address.city}. Circuits privés sur mesure au Vietnam, au Laos et au Cambodge.`,
+      email: site.email,
+      inLanguage: "fr-FR",
+      parentOrganization: { "@id": operatorId(site.url) },
+      /* `image` and `logo` are recommended and are what Google draws on for a
+         knowledge panel. Both point at the Open Graph image produced at build
+         time by scripts/make-images.mjs — a real file, 1200 x 630, already
+         served and already referenced by the page. */
+      image: `${site.url}/photos/og/halong.jpg`,
+      logo: {
+        "@type": "ImageObject",
+        url: `${site.url}/photos/og/halong.jpg`,
+        width: 1200,
+        height: 630,
+      },
+    },
+    {
+      /* The operator. `url` points at their own site, so an engine can resolve
+         this node to an entity it has already indexed rather than inferring a
+         new one. */
+      "@type": ["TravelAgency", "LocalBusiness"],
+      "@id": operatorId(site.url),
+      name: op.name,
+      legalName: op.legalName,
+      url: op.url,
       description: `${site.tagline} basée à ${site.address.city}, spécialisée dans les circuits privés sur mesure au Vietnam, au Laos et au Cambodge.`,
-      foundingDate: site.founded,
-      /* La licence est la seule garantie vérifiable qu'un voyageur français
-         puisse opposer à une agence établie hors d'Europe. */
+      foundingDate: op.founded,
+      /* The licence is the only verifiable guarantee a French traveller can
+         hold against an agency established outside Europe — and it belongs to
+         the operator, which is why it hangs here and not on the brand. */
       hasCredential: {
         "@type": "EducationalOccupationalCredential",
         credentialCategory: "Licence de tour-opérateur international",
-        identifier: site.license,
-        recognizedBy: { "@type": "Organization", name: site.membership },
+        identifier: op.license,
+        recognizedBy: { "@type": "Organization", name: op.membership },
       },
-      email: site.email,
       telephone: site.phone,
       priceRange: "€€–€€€",
       currenciesAccepted: site.currency,
@@ -134,25 +188,22 @@ export function organisationNode(site: Site, reviews: Review[]) {
         addressCountry: site.address.country,
       },
       geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
-      /* Les horaires déclarés s'affichent dans la fiche Google : annoncer une
-         plage pendant laquelle personne ne répond coûte l'appel. */
+      /* Declared hours show up in the Google Business Profile: announcing a
+         window during which nobody answers costs you the call. */
       openingHoursSpecification: {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: site.hours.days,
         opens: site.hours.opens,
         closes: site.hours.closes,
       },
-      /* Tous les profils publics vérifiés, pas seulement les réseaux. Il
-         existe une « Jasmine Tours Ha Giang » sans aucun rapport et bien
-         mieux référencée : ces liens disent à un moteur laquelle est
-         laquelle. */
-      sameAs: site.sameAs,
+      /* `sameAs` asserts "this is the same entity". These profiles are the
+         operator's, so they belong on the operator node — putting them on the
+         brand would claim the brand is Jasmin Travel, which is the confusion
+         this split exists to remove. An unrelated "Jasmine Tours Ha Giang"
+         also exists and ranks far better: these links tell an engine which is
+         which. */
+      sameAs: [...site.sameAs, op.url],
       employee: site.team.map((_, i) => ({ "@id": `${personId}-${i}` })),
-      /* Pas d'aggregateRating sur l'établissement. Une note agrégée doit
-         reposer sur des avis vérifiables ; celle qui figurait ici était une
-         moyenne inventée sur un nombre d'avis inventé. Les fiches voyage en
-         déclarent une, mais calculée depuis les avis réellement publiés. */
-      review: reviewNodes(reviews),
     },
     ...site.team.map((m, i) => ({
       "@type": "Person",
@@ -160,7 +211,7 @@ export function organisationNode(site: Site, reviews: Review[]) {
       name: m.name,
       jobTitle: m.role,
       knowsLanguage: site.languages,
-      worksFor: { "@id": orgId(site.url) },
+      worksFor: { "@id": operatorId(site.url) },
     })),
   ];
 }

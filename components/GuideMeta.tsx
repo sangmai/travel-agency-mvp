@@ -1,7 +1,7 @@
 import { getSite } from "@/lib/content";
 import type { Guide } from "@/lib/content";
 
-/** « 28 octobre 2026 » — le format que lit un visiteur, pas l'ISO. */
+/** "28 octobre 2026" — the form a visitor reads, not the ISO one. */
 export function dateFr(iso: string) {
   const [a, m, j] = iso.split("-").map(Number);
   return new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "UTC" })
@@ -9,15 +9,14 @@ export function dateFr(iso: string) {
 }
 
 /**
- * Ligne de publication affichée sous le titre.
+ * Publication line shown under the title.
  *
- * Elle existe pour deux lecteurs à la fois. Un visiteur qui consulte des
- * règles de visa ou des prix veut savoir de quand ils datent ; un moteur
- * génératif cite nettement plus volontiers un contenu récent, et écarte ce
- * qu'il ne peut pas dater.
+ * It exists for two readers at once. A visitor checking visa rules or prices
+ * wants to know how old they are; a generative engine cites recent content far
+ * more readily, and discards what it cannot date.
  *
- * La date de mise à jour n'est répétée que si elle diffère de la publication :
- * « publié et mis à jour le même jour » n'apprend rien.
+ * The updated date is repeated only when it differs from publication:
+ * "published and updated on the same day" teaches nobody anything.
  */
 export async function GuideMeta({ guide }: { guide: Guide }) {
   const site = await getSite();
@@ -44,9 +43,9 @@ export async function GuideMeta({ guide }: { guide: Guide }) {
 }
 
 /**
- * Nœud `Article` du JSON-LD. L'auteur est une `Person` quand l'agence a nommé
- * quelqu'un, l'organisation elle-même sinon — jamais un nom inventé pour
- * remplir un champ.
+ * The JSON-LD `Article` node. The author is a `Person` when the agency has
+ * named someone, the organisation itself otherwise — never a name invented to
+ * fill a field.
  */
 export function articleNode(guide: Guide, site: { url: string; name: string }) {
   const url = `${site.url}/${guide.slug}/`;

@@ -8,13 +8,13 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
 
 /**
- * Requête étroite, mais à très forte intention : celui qui la tape a déjà
- * choisi le Nord et compare deux produits presque identiques. Presque
- * personne n'écrit de page dédiée au sujet, alors que la réponse courte est
- * nette — c'est exactement le format qu'un moteur génératif reprend.
+ * A narrow query, but one of very high intent: whoever types it has already
+ * chosen the North and is comparing two near-identical products. Almost nobody
+ * writes a dedicated page on the subject, even though the short answer is clean
+ * — exactly the format a generative engine picks up.
  *
- * La page prend parti, et dit aussi quand elle a tort : la baie d'Halong
- * reste préférable dans deux cas précis, énoncés plus bas.
+ * The page takes a side, and also says when it is wrong: Halong bay remains
+ * preferable in two precise cases, set out below.
  */
 
 const CRITERES = [
@@ -95,8 +95,8 @@ export default async function HalongOuLanHa() {
   const guide = await getGuide("halong-ou-lan-ha");
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
 
-  /* Les circuits qui passent réellement par l'une des deux baies, calculés
-     depuis les étapes plutôt que listés à la main. */
+  /* The itineraries that genuinely pass through one of the two bays, computed
+     from their stops rather than listed by hand. */
   const concernes = trips.filter((t) =>
     t.stops.some((s) => s.place === "lan-ha" || s.place === "ha-long"),
   );

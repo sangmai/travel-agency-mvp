@@ -9,11 +9,11 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
 
 /**
- * La cuisine décide d'un voyage au Vietnam plus souvent que les paysages, et
- * c'est un sujet où les faits sont nombreux, courts et vérifiables — donc
- * très repris en réponse générative. L'angle qui nous distingue n'est pas la
- * liste des plats mais la géographie : pourquoi le même nom désigne deux
- * plats différents à 1 600 kilomètres d'écart.
+ * Food decides a trip to Vietnam more often than landscapes do, and it is a
+ * subject where the facts are numerous, short and verifiable — therefore widely
+ * reused in generative answers. What sets us apart is not the list of dishes but
+ * the geography: why the same name means two different dishes 1,600 kilometres
+ * apart.
  */
 
 const REGIONS = [

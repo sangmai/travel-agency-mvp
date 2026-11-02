@@ -4,9 +4,8 @@ import { Footer } from "@/components/Footer";
 import { getSite } from "@/lib/content";
 
 /**
- * Désindexée : aucune valeur de recherche, et elle polluerait les
- * statistiques de pages d'entrée. C'est en revanche la page sur laquelle
- * déclencher la conversion dans l'outil de mesure.
+ * Deindexed: no search value, and it would pollute landing-page statistics. It
+ * is, however, the page on which to fire the conversion in the analytics tool.
  */
 export const metadata: Metadata = {
   title: "Votre demande est bien arrivée",

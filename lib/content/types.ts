@@ -1,9 +1,8 @@
 /**
- * Le contrat de contenu : un CMS branché plus tard doit produire ces formes.
+ * The content contract: a CMS plugged in later must produce these shapes.
  *
- * Le contenu porte des valeurs, les composants décident de la présentation.
- * Une latitude est un nombre, pas « 21°N » ; un niveau de saison est une
- * valeur, pas un nom de classe CSS.
+ * Content carries values, components decide presentation. A latitude is a
+ * number, not "21°N"; a season level is a value, not a CSS class name.
  */
 
 export type PhotoId = string;
@@ -11,9 +10,9 @@ export type PlaceId = string;
 
 export type Place = {
   id: PlaceId;
-  /** Nom éditorial français. */
+  /** French editorial name. */
   fr: string;
-  /** Toponyme porté par la carte — ce que le voyageur lira sur place. */
+  /** Place name as shown on the map — what the traveller will read on site. */
   map: string;
   lat: number;
   lon: number;
@@ -28,9 +27,9 @@ export type PhotoMeta = {
 };
 
 /**
- * Une étape référence un lieu par identifiant, et peut porter son propre
- * libellé. « Croisière Halong privée » est ainsi un libellé posé sur la baie
- * de Lan Ha, et non un lieu inventé dans le répertoire.
+ * A stop references a place by id, and may carry its own label. "Croisière
+ * Halong privée" is therefore a label placed on Lan Ha bay, not an invented
+ * entry in the place directory.
  */
 export type Stop = { place: PlaceId; label?: string };
 
@@ -52,11 +51,11 @@ export type Review = {
   rating: number;
   body: string;
   title?: string;
-  /** Slug du voyage concerné. */
+  /** Slug of the trip concerned. */
   trip?: string;
-  /** D'où vient l'avis, et où le vérifier. Un témoignage que le visiteur ne
-   *  peut pas retrouver ailleurs ne vaut rien — et en publier d'invérifiables
-   *  est une pratique commerciale trompeuse. */
+  /** Where the review comes from, and where to verify it. A testimonial the
+   *  visitor cannot find elsewhere is worth nothing — and publishing
+   *  unverifiable ones is a deceptive commercial practice. */
   source?: string;
   sourceUrl?: string;
   /** Repris sur la page d'accueil. */
@@ -118,20 +117,51 @@ export type Story = {
   photo: PhotoId;
 };
 
+/**
+ * Two entities, deliberately separated.
+ *
+ * The brand is this website: a French-language sales channel with its own name,
+ * its own domain and its own contact address. The operator is Jasmin Travel:
+ * the licensed agency that runs the trips and contracts with the traveller.
+ *
+ * They used to be one object, which meant the site declared Jasmin's licence,
+ * founding year and legal name as its own — the same business asserted at two
+ * domains. For a traveller googling the agency before wiring three thousand
+ * euros, that reads as "which one is real?". For a search engine, two domains
+ * claiming identical NAP is a duplicate entity, and the older one wins.
+ *
+ * Keeping them apart is also what makes the commission traceable: a lead that
+ * arrives through this brand is attributable to it, where a lead that arrives
+ * through a second site called "Jasmin Travel" is attributable to nobody.
+ */
 export type Site = {
+  /** The brand carried by this site. Shown with `byline` underneath. */
   name: string;
-  legalName: string;
+  /** "by Jasmin Travel". The relationship is stated rather than hidden —
+   *  that single line is what removes the "which one is real?" moment. */
+  byline: string;
+  /** The agency that holds the licence, runs the trips, and with whom the
+   *  traveller contracts and pays. Everything in here belongs to them, and
+   *  the copy must say so rather than claim it. */
+  operator: {
+    name: string;
+    legalName: string;
+    /** Their own site. Declared in JSON-LD so an engine can resolve the
+     *  operator to a real, already-indexed entity instead of guessing. */
+    url: string;
+    founded: string;
+    /** International tour operator licence, issued by the Vietnamese tourism
+     *  administration. For a French traveller buying from a foreign agency it
+     *  is the only verifiable guarantee: it must be exact, displayed in full,
+     *  and attributed to its holder — not to this site. */
+    license: string;
+    membership: string;
+  };
   url: string;
   locale: string;
   lang: string;
   tagline: string;
-  founded: string;
-  /** Licence de tour-opérateur international, délivrée par l'administration
-   *  vietnamienne du tourisme. Pour un voyageur français qui achète à une
-   *  agence étrangère, c'est la seule garantie vérifiable : elle doit être
-   *  exacte, et elle est affichée en toutes lettres. */
-  license: string;
-  membership: string;
+  /** The operator's office line. Answered by their staff, not ours. */
   phone: string;
   phoneDisplay: string;
   phoneAlt: string;
@@ -148,47 +178,51 @@ export type Site = {
   geo: { lat: number; lng: number };
   hours: { opens: string; closes: string; days: string[] };
   social: { facebook: string; instagram: string };
-  /** Profils publics vérifiés — réseaux, plateformes d'avis, annuaires.
-   *  Sert à désambiguïser l'entité auprès des moteurs. */
+  /** Verified public profiles of the OPERATOR — social networks, review
+   *  platforms, directories. `sameAs` asserts "this is the same entity", so
+   *  these hang off the operator node in JSON-LD. Putting them on the brand
+   *  would claim the brand *is* Jasmin Travel, which is the confusion this
+   *  whole split exists to remove. */
   sameAs: string[];
   languages: string[];
-  /** Note agrégée publiée par un tiers, affichée avec son lien. Elle n'est
-   *  pas déclarée en aggregateRating : Google ne reconnaît pas la reprise
-   *  d'une note tierce comme la sienne, et une note d'établissement
-   *  auto-déclarée n'ouvre plus droit aux résultats enrichis. */
+  /** Aggregate rating published by a third party, shown with its link. It is
+   *  NOT declared as aggregateRating: Google does not recognise a third-party
+   *  score reused as your own, and a self-declared business rating no longer
+   *  qualifies for rich results. */
   reviewSource: { name: string; url: string; rating: number; count: number; note: string };
   responseTime: string;
   currency: string;
   /**
-   * Outils de mesure. Chaque champ vide désactive l'outil correspondant :
-   * rien n'est chargé, aucune balise n'est écrite.
+   * Measurement tools. An empty field disables the matching tool: nothing is
+   * loaded, no tag is written.
    *
-   * `searchConsole` ne coûte rien à la page — une balise meta, aucun script.
-   * `ga4` en coûte beaucoup : environ 30 Ko de script, des cookies, et donc
-   * en France une demande de consentement préalable. Ne le renseigner qu'en
-   * ayant posé la bannière correspondante.
-   * `cloudflare` est l'alternative sans cookie ni bannière.
+   * `searchConsole` costs the page nothing — one meta tag, no script.
+   * `ga4` costs a lot: roughly 30 KB of script, cookies, and therefore in
+   * France a prior consent request. Only fill it in once the matching banner
+   * is in place.
+   * `cloudflare` is the alternative with neither cookie nor banner.
    */
   mesure: { searchConsole: string; ga4: string; cloudflare: string };
-  /* Pas de `rating` : une note agrégée ne se déclare pas, elle se calcule
-     depuis des avis réels — `aggregate()` s'en charge. Le champ portait une
-     moyenne inventée sur un nombre d'avis inventé, publiée en données
-     structurées. C'est le genre de déclaration qui vaut une action manuelle
-     de Google, et qui ment au visiteur avant de lui vendre quoi que ce soit. */
+  /* No `rating`: an aggregate score is not declared, it is computed from real
+     reviews — `aggregate()` handles that. The field used to carry an invented
+     average over an invented review count, published as structured data. That
+     is the kind of declaration that earns a manual action from Google, and
+     that lies to the visitor before selling them anything. */
 
-  /** Les personnes réellement nommées par l'agence. Sans biographie : nous
-   *  n'en avons pas, et en écrire une reviendrait à l'inventer. */
+  /** The operator's staff — the people a traveller actually deals with. No
+   *  biography: we do not have one, and writing one would mean inventing it.
+   *  Declared in JSON-LD as `employee` of the operator, never of the brand. */
   team: { name: string; role: string }[];
 };
 
 /**
- * Page guide : tout ce qu'un éditeur doit pouvoir corriger sans toucher au
- * code. Les règles de visa changent, les prix bougent, les saisons se
- * précisent — ce sont les réponses qui vieillissent, pas la mise en page.
+ * Guide page: everything an editor must be able to correct without touching
+ * code. Visa rules change, prices move, seasons get sharper — it is the
+ * answers that age, not the layout.
  *
- * Les tableaux propres à chaque page (postes de budget, critères Nord/Sud,
- * expériences) restent dans le composant : leur forme est indissociable de
- * la colonne qui les affiche.
+ * Tables specific to each page (budget lines, North/South criteria,
+ * experiences) stay in the component: their shape is inseparable from the
+ * column that displays them.
  */
 export type Guide = {
   slug: string;
@@ -198,20 +232,20 @@ export type Guide = {
   ogDescription: string;
   photo: PhotoId;
   photoAlt: string;
-  /** Dates tirées de l'historique du dépôt, au format AAAA-MM-JJ. Une date
-   *  inventée est un signal de fraîcheur mensonger — exactement ce que le
-   *  critère cherche à mesurer. */
+  /** Dates taken from the repository history, in YYYY-MM-DD form. An invented
+   *  date is a lying freshness signal — exactly what the criterion is trying
+   *  to measure. */
   datePublished: string;
   dateModified: string;
-  /** Nom d'une personne de l'équipe, ou vide. Vide signifie que l'agence
-   *  publie en son nom : c'est ce que déclare alors le JSON-LD. Nommer
-   *  quelqu'un est une affirmation sur qui a écrit la page et qui en répond. */
+  /** Name of a team member, or empty. Empty means the agency publishes under
+   *  its own name: that is what the JSON-LD then declares. Naming someone is a
+   *  claim about who wrote the page and who answers for it. */
   author: string;
   faq: Faq[];
 };
 
-/** En-tête de section : « *mot* » donne l'accent ambre, « {cle} » une valeur
- *  du site (voir lib/text.tsx). */
+/** Section heading: "*word*" gives the amber accent, "{key}" a value from the
+ *  site content (see lib/text.tsx). */
 export type Head = { kicker: string; title: string; lede?: string };
 
 export type Home = {

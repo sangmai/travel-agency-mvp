@@ -1,17 +1,48 @@
-# En-têtes appliqués par le service de fichiers statiques de Cloudflare.
-# Ils ne pèsent rien sur le rendu et ne changent pas le contenu : ce sont des
-# garde-fous que les navigateurs appliquent, et que les outils d'audit
-# vérifient.
+# Headers applied by Cloudflare's static-asset layer.
+# They cost nothing at render time and change no content: they are guard rails
+# browsers enforce, and which audit tools check for.
 
 /*
-  # Force le HTTPS pour deux ans, sous-domaines compris. À ne poser qu'une
-  # fois le certificat sûr : un navigateur qui a vu cet en-tête refusera
-  # ensuite toute connexion en clair, y compris pour corriger une erreur.
+  # Forces HTTPS for two years, subdomains included. Only set this once the
+  # certificate is sound: a browser that has seen this header will then refuse
+  # any cleartext connection, including one meant to fix a mistake.
   Strict-Transport-Security: max-age=63072000; includeSubDomains
-  # Empêche un navigateur de deviner un type MIME et d'exécuter comme script
-  # un fichier servi comme texte.
+  # Stops a browser guessing a MIME type and executing a file served as text
+  # as if it were a script.
   X-Content-Type-Options: nosniff
-  # Transmet l'origine aux sites tiers, jamais le chemin complet.
+  # Sends the origin to third-party sites, never the full path.
   Referrer-Policy: strict-origin-when-cross-origin
-  # Rien dans ce site n'a besoin de ces capteurs.
+  # Nothing on this site needs these sensors.
   Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+
+# --------------------------------------------------------------- caching --
+#
+# Without these rules Cloudflare applies `max-age=0, must-revalidate` to
+# everything, so a returning visitor revalidates every file — CSS, JS and all
+# 78 image variants. Nothing is re-downloaded when unchanged, but each round
+# trip still costs a full latency. Lighthouse reports it as "Use efficient
+# cache lifetimes".
+#
+# The fix is NOT uniform, and that is the part to get right.
+
+# Next fingerprints these filenames (058c8b23a5094280.css). A change of content
+# is a change of name, so the old URL is never asked for again: a year with
+# `immutable` carries no risk, and `immutable` additionally tells the browser
+# not to revalidate even on a forced reload.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Photos carry NO fingerprint — hagiang-1920.webp keeps its name when the image
+# behind it is replaced. A year here would serve the old picture to every
+# previous visitor, for months, with no way to flush it.
+#
+# One day instead, plus `stale-while-revalidate`: a returning visitor gets the
+# cached file instantly while the browser refreshes it in the background. Worst
+# case a replaced photo is one day late; the alternative was revalidating on
+# every single visit.
+/photos/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# HTML keeps revalidating on every visit, deliberately. These pages carry
+# prices, visa rules and dates that must never be served stale from a local
+# cache — and revalidation of an unchanged page costs one 304, not a download.

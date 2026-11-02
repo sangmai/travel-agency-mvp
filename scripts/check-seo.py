@@ -1,21 +1,19 @@
 #!/usr/bin/env python3
 """
-Audit de référencement, en explorant le site déployé.
+SEO audit, by crawling the deployed site.
 
-Suit tous les liens internes depuis la racine, puis vérifie sur chaque page :
-titre et description dans les limites d'affichage, un seul h1, pas de saut de
-niveau, canonique cohérente avec l'URL, vignette de partage, et concordance
-entre les questions balisées en FAQPage et les <details> rendus — une FAQ
-déclarée mais absente du rendu viole les règles de Google.
+Follows every internal link from the root, then checks on each page: title and
+description within display limits, a single h1, no skipped heading level,
+canonical consistent with the URL, share image, and agreement between the
+questions marked up as FAQPage and the rendered <details> — a FAQ declared but
+absent from the render breaks Google's rules.
 
-Compte aussi les tableaux : c'est le format qu'un moteur génératif reprend le
-plus volontiers.
+Also counts tables: that is the format a generative engine reuses most readily.
 
     python3 scripts/check-seo.py
 
-Les requêtes passent par l'adresse IP en forçant l'en-tête Host : le
-résolveur local de certaines machines garde en mémoire l'absence d'un
-domaine récemment créé.
+Requests go through the IP address while forcing the Host header: the local
+resolver on some machines caches the absence of a recently created domain.
 """
 import http.client
 import json
@@ -28,15 +26,15 @@ HOST, IP = "voyagevietnam-surmesure.com", "172.67.194.172"
 ctx = ssl.create_default_context()
 
 def get(path, gzip=False):
-    """Contourne le résolveur local, qui garde l'absence du domaine en cache."""
+    """Bypasses the local resolver, which caches the domain's absence."""
     c = http.client.HTTPSConnection(IP, 443, context=ctx, timeout=25)
     c.sock = None
     c._create_connection = lambda *a, **k: socket.create_connection((IP, 443), 25)
     c.host = HOST
     h = {"Host": HOST, "User-Agent": "Mozilla/5.0 (audit)"}
     if gzip:
-        # Sans cette en-tête, l'origine ne compresse pas et `content-encoding`
-        # paraît absent alors qu'il ne l'est jamais pour un vrai navigateur.
+        # Without this header the origin does not compress and `content-encoding`
+        # looks absent, when it never is for a real browser.
         h["Accept-Encoding"] = "gzip"
     c.request("GET", path, headers=h)
     r = c.getresponse()
@@ -45,9 +43,9 @@ def get(path, gzip=False):
         import gzip
         raw = gzip.decompress(raw)
     body = raw.decode("utf-8", "replace")
-    # Les noms d'en-têtes ne sont pas sensibles à la casse, mais getheaders()
-    # rend la casse du serveur : sans normalisation, une recherche en
-    # minuscules rate la moitié des réponses.
+    # Header names are case-insensitive, but getheaders() returns the server's
+    # casing: without normalising, a lower-case lookup misses half the
+    # responses.
     st, hdrs = r.status, {k.lower(): v for k, v in r.getheaders()}
     c.close()
     return st, body, hdrs
@@ -72,7 +70,7 @@ print(f"=== CRAWL : {len(pages)} pages, {len(casses)} cassées ===")
 for p, s in casses: print(f"  ✗ {s} {p}")
 if not casses: print("  aucune ✓")
 
-# --- métadonnées ----------------------------------------------------------
+# --- metadata -------------------------------------------------------------
 print("\n=== MÉTADONNÉES ===")
 titres, descs, pb_total = defaultdict(list), defaultdict(list), 0
 for p, h in sorted(pages.items()):
@@ -101,7 +99,7 @@ for lbl, dd in [("TITRES", titres), ("DESCRIPTIONS", descs)]:
         print(f"  ⚠ {lbl} en double :")
         for k, v in dup.items(): print(f"    « {k[:46]} » → {v}")
 
-# --- données structurées --------------------------------------------------
+# --- structured data ------------------------------------------------------
 print("\n=== DONNÉES STRUCTURÉES (GEO) ===")
 tot = defaultdict(int)
 faq_q = det = tables = 0
@@ -134,11 +132,11 @@ atteintes = {f"https://{HOST}{p}".rstrip("/") + "/" for p in pages}
 print(f"  au sitemap mais non liées : {len([l for l in locs if l not in atteintes])}")
 print(f"  liées mais hors sitemap   : {len([a for a in atteintes if a not in locs])}")
 
-# --- en-têtes -------------------------------------------------------------
+# --- headers --------------------------------------------------------------
 #
-# Ce contrôle annonçait « absent » pour des en-têtes bel et bien servis :
-# il n'envoyait pas Accept-Encoding, et lisait des réponses de cache. Un
-# contrôle qui produit des faux négatifs vaut moins que pas de contrôle.
+# This check used to report "absent" for headers that were in fact served: it
+# did not send Accept-Encoding, and read cached responses. A check that produces
+# false negatives is worth less than no check at all.
 print("\n=== EN-TÊTES ===")
 _, _, hd = get("/", gzip=True)
 

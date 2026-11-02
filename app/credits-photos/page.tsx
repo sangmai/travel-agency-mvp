@@ -5,14 +5,14 @@ import { SectionHead } from "@/components/ui";
 import { getPhotoCredits } from "@/lib/content";
 
 /**
- * Les licences CC BY et CC BY-SA imposent de créditer l'auteur et de nommer
- * la licence : tant que des images de substitution figurent sur le site,
- * cette page doit rester en ligne et liée depuis le pied de page.
+ * The CC BY and CC BY-SA licences require crediting the author and naming the
+ * licence: as long as placeholder images remain on the site, this page must stay
+ * online and linked from the footer.
  */
 export const metadata: Metadata = {
   title: "Crédits photographiques",
-  /* Sans canonique propre, la page héritait de celle de la racine et se
-     déclarait donc comme étant la page d'accueil. */
+  /* Without its own canonical, the page inherited the root's and therefore
+     declared itself to be the home page. */
   alternates: { canonical: "/credits-photos" },
   description: "Auteurs, licences et sources des photographies utilisées sur le site.",
   robots: { index: false, follow: true },

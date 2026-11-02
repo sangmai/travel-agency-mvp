@@ -4,11 +4,12 @@ import { Accent } from "@/lib/text";
 import { getTrips, resolveStops, tripUrl, getHome } from "@/lib/content";
 
 /**
- * Une liste, pas une grille : six itinéraires se comparent en lisant une
- * colonne. Dans une grille, l'œil doit relire la même information six fois.
+ * A list, not a grid: six itineraries are compared by reading down one column.
+ * In a grid, the eye has to re-read the same information six times.
  *
- * Le prix est en texte brut, jamais dans une image — c'est ce qui permet le
- * rich snippet via le JSON-LD Offer et la citation par un moteur génératif.
+ * The price is plain text, never inside an image — that is what makes the rich
+ * snippet possible through the JSON-LD Offer, and what lets a generative engine
+ * quote it.
  */
 export async function Circuits() {
   const h = (await getHome()).circuits;

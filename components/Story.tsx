@@ -2,11 +2,11 @@ import { Photo, photoCaption } from "./Photo";
 import { getStory } from "@/lib/content";
 
 /**
- * Un carnet raconté par une personne nommée, pas une note sur cinq. Les deux
- * rassurent, mais seul le récit fait imaginer.
+ * A travel diary told by a named person, not a score out of five. Both
+ * reassure, but only the story makes you imagine.
  *
- * ⚠️ Contenu de démonstration : à remplacer par un vrai carnet, avec l'accord
- * écrit du voyageur.
+ * WARNING: demo content — to be replaced by a real diary, with the traveller's
+ * written consent.
  */
 export async function Story() {
   const r = await getStory();

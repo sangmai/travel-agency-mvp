@@ -9,12 +9,12 @@ import { breadcrumb } from "@/components/JsonLd";
 import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
 
 /**
- * Deuxième requête informationnelle du marché après la saisonnalité.
+ * The market's second informational query after seasonality.
  *
- * Le réflexe du métier est de répondre « sur devis ». C'est exactement ce qui
- * fait sortir une agence des réponses génératives : un modèle ne peut citer
- * que des chiffres. Donner des fourchettes engage, mais c'est la condition
- * pour exister sur la question que tout le monde pose en premier.
+ * The industry reflex is to answer "price on request". That is exactly what
+ * drops an agency out of generative answers: a model can only quote figures.
+ * Giving ranges commits you, but it is the condition for existing on the
+ * question everyone asks first.
  */
 
 const POSTES = [

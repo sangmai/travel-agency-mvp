@@ -2,24 +2,24 @@ import type { MetadataRoute } from "next";
 import { getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
 import { publishedRoutes } from "@/lib/routes";
 
-/** Calculé une fois au build : le site est exporté en statique. */
+/** Computed once at build time: the site is exported statically. */
 export const dynamic = "force-static";
 
 /**
- * Ne déclarer que ce qui est réellement publié : des URL absentes
- * produiraient des 404 en Search Console et gaspilleraient le budget de
- * crawl. Les fiches viennent du contenu et les autres routes de
- * lib/routes.ts, donc la liste reste juste sans intervention.
+ * Declare only what is genuinely published: missing URLs would produce 404s in
+ * Search Console and waste crawl budget. Trips come from the content and the
+ * other routes from lib/routes.ts, so the list stays correct without
+ * intervention.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [site, trips] = await Promise.all([getSite(), getTrips()]);
   const now = new Date();
 
-  /* `trailingSlash: true` fait que chaque page n'existe qu'avec une barre
-     finale, et c'est cette forme que portent les balises canoniques. Ici les
-     URL sont assemblées à la main, hors de cette normalisation : sans ce
-     rappel, le sitemap annoncerait des adresses qui redirigent, en
-     contradiction avec les canoniques des pages qu'il déclare. */
+  /* `trailingSlash: true` means every page exists only with a trailing slash,
+     and that is the form the canonical tags carry. Here the URLs are assembled
+     by hand, outside that normalisation: without this reminder the sitemap would
+     announce addresses that redirect, contradicting the canonicals of the very
+     pages it declares. */
   const url = (path: string) => `${site.url}${path.replace(/\/?$/, "/")}`;
 
   return [
