@@ -30,12 +30,22 @@ import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
  * reason the rest is worth reading.
  */
 
+/**
+ * Chaque ligne se relit dans content/seasons.json, colonne par colonne.
+ *
+ * Septembre a longtemps été noyé dans un « juillet à septembre » qui renvoyait
+ * vers la côte du Centre. C'était faux : le Centre y passe à « moyen » avec un
+ * risque de typhon, pendant que le Sud reste agité. Le mois n'a pas de bonne
+ * plage — mais c'est le meilleur mois du Nord, récolte du riz comprise. Le
+ * regrouper avec juillet et août cachait à la fois le risque et la réponse.
+ */
 const MOIS = [
   { quand: "Novembre à février", sud: "Idéal", ile: "Con Dao ou Phu Quoc", note: "La meilleure fenêtre. Mer calme, chaleur sèche, tout s'enchaîne.", bon: true },
   { quand: "Mars et avril", sud: "Idéal à bon", ile: "Con Dao ou Phu Quoc", note: "Les trois régions sont praticables en même temps — rare dans l'année.", bon: true },
-  { quand: "Mai et juin", sud: "Moyen", ile: "Côte du Centre", note: "Début de mousson au Sud. Les plages du Centre prennent le relais.", bon: true },
-  { quand: "Juillet à septembre", sud: "Moyen", ile: "Côte du Centre", note: "Mer agitée à Phu Quoc. C'est le seul moment où nous déconseillons l'île.", bon: false },
-  { quand: "Octobre", sud: "Bon", ile: "Con Dao ou Phu Quoc", note: "Le Sud redevient excellent, mais le Centre est en saison des pluies.", bon: true },
+  { quand: "Mai et juin", sud: "Moyen", ile: "Côte du Centre", note: "Début de mousson au Sud. Les plages du Centre sont alors à leur meilleur.", bon: true },
+  { quand: "Juillet et août", sud: "Moyen", ile: "Côte du Centre", note: "Mer agitée à Phu Quoc, le Centre prend le relais. Haute saison européenne : réservez quatre à six mois à l'avance.", bon: true },
+  { quand: "Septembre", sud: "Moyen", ile: "Finir au Nord", note: "Le seul mois sans bonne plage : mer agitée au Sud, risque de typhon au Centre. Le Nord, lui, est à son meilleur.", bon: false },
+  { quand: "Octobre", sud: "Bon", ile: "Con Dao ou Phu Quoc", note: "Le Sud redevient excellent, mais le Centre entre en saison des pluies.", bon: true },
 ];
 
 const RYTHME = [
@@ -111,10 +121,17 @@ export default async function VoyageDeNoces() {
           <div className="wrap">
             <Fil items={[{ label: "Accueil", href: "/" }, { label: "Voyage de noces" }]} />
             <h1 className="d1">Voyage de noces au Vietnam&nbsp;: la date décide de tout</h1>
+            {/* « lune de miel » et « voyage de noces » sont les deux formules
+                courantes en français ; la page n'employait que la seconde, et
+                le site entier ne contenait pas une fois la première. Elle entre
+                ici, dans la première phrase — pas dans un alt d'image, où elle
+                n'aurait décrit aucune photo et aurait été lue à voix haute aux
+                lecteurs d'écran à la place du contenu. */}
             <p className="lede">
-              <b>Vous ne choisissez pas vos dates — le mariage les fixe.</b>{" "}
-              C&apos;est la différence avec tous les autres voyages, et elle change
-              l&apos;ordre des questions. Le mois détermine l&apos;île où finir le
+              Une lune de miel ne se prépare pas comme les autres voyages&nbsp;:{" "}
+              <b>vous ne choisissez pas vos dates — le mariage les fixe.</b>{" "}
+              C&apos;est toute la différence, et elle change l&apos;ordre des
+              questions. Le mois détermine l&apos;île où finir le
               séjour, et c&apos;est la seule décision qui ne se rattrape pas sur
               place&nbsp;: de juillet à septembre, la mer est agitée à Phu Quoc.
               Tout le reste s&apos;ajuste autour.
@@ -137,9 +154,11 @@ export default async function VoyageDeNoces() {
               ])}
               note={
                 <>
-                  Aucune de ces périodes n&apos;est à écarter — seule
-                  l&apos;île change. Un mariage en août donne un très beau voyage
-                  qui finit sur la côte du Centre plutôt qu&apos;au large.{" "}
+                  Aucune de ces périodes n&apos;est à écarter — c&apos;est la
+                  fin du voyage qui change. Un mariage en août donne un très
+                  beau séjour qui s&apos;achève sur la côte du Centre plutôt
+                  qu&apos;au large&nbsp;; un mariage en septembre, un voyage qui
+                  finit à terre.{" "}
                   <a className="lnk" href="/quand-partir-au-vietnam">
                     Le calendrier mois par mois
                   </a>
@@ -149,7 +168,79 @@ export default async function VoyageDeNoces() {
           </div>
         </section>
 
+        {/* Les deux cellules du tableau qui ne renvoyaient vers rien.
+            « Côte du Centre » y apparaissait deux fois et « Finir au Nord »
+            une, sans qu'aucune des trois ne soit expliquée ailleurs sur la
+            page : une mariée de septembre lisait un nom de région et s'en
+            allait. Ces deux blocs sont la réponse, et les photos illustrent
+            les lieux dont ils parlent plutôt que l'idée de voyage de noces. */}
         <section className="sec sec--sand">
+          <div className="wrap wrap--wide">
+            <SectionHead
+              kicker="Mai à septembre"
+              title="Quand la mer ne suit pas, le voyage finit ailleurs"
+              lede="Cinq mois de l'année, les deux îles du Sud ne sont pas la bonne fin de séjour. Ce n'est pas une mauvaise nouvelle : c'est simplement une autre dernière étape, et elle se décide au moment de poser les dates, pas en arrivant."
+            />
+
+            <div className="parcours">
+              <figure className="parcours__photo">
+                <Photo id="hoian" role="half" />
+              </figure>
+              <div className="parcours__txt">
+                <h3 className="d3">La côte du Centre, de mai à août</h3>
+                <p>
+                  Quand le Sud entre en mousson, le Centre passe au mieux de son
+                  année&nbsp;: notre calendrier le donne <b>idéal de mai à
+                  juillet</b> et encore bon en août. C&apos;est la fenêtre où
+                  l&apos;on finit à Hoi An ou sur la côte voisine plutôt
+                  qu&apos;au large — et elle a un avantage que les îles
+                  n&apos;ont pas, celui d&apos;être sur l&apos;axe même du
+                  circuit, sans vol supplémentaire à caser.
+                </p>
+                <p>
+                  La fenêtre se referme net. En septembre le Centre retombe à
+                  moyen avec un risque de typhon, et en octobre nous le
+                  déconseillons&nbsp;: c&apos;est la saison des pluies, Hué et
+                  Hoi An peuvent être inondés. Un mariage début septembre et un
+                  mariage fin août ne donnent pas le même voyage.
+                </p>
+              </div>
+            </div>
+
+            <div className="parcours">
+              <figure className="parcours__photo">
+                <Photo id="rizieres" role="half" />
+              </figure>
+              <div className="parcours__txt">
+                <h3 className="d3">Septembre&nbsp;: finir au Nord, pas sur une plage</h3>
+                <p>
+                  Septembre est le seul mois de l&apos;année où aucune côte ne
+                  répond&nbsp;: la mer est agitée au Sud et le Centre est exposé
+                  aux typhons. Vendre une plage ce mois-là serait vendre quelque
+                  chose dont nous savons qu&apos;elle décevra.
+                </p>
+                <p>
+                  Le Nord, lui, y est au mieux de son année — il l&apos;est
+                  aussi en mars, en octobre et en novembre. Ce qui
+                  n&apos;appartient qu&apos;à septembre, c&apos;est <b>la
+                  récolte du riz</b>&nbsp;: les terrasses sont au vert maximal
+                  en août, et c&apos;est en septembre qu&apos;on les moissonne.
+                  Le voyage finit alors à terre, dans les vallées, au lieu de
+                  finir les pieds dans l&apos;eau. C&apos;est un arbitrage assumé, pas un lot de
+                  consolation — et c&apos;est la raison pour laquelle nous
+                  posons la question des dates avant toutes les autres.
+                </p>
+                <p className="note">
+                  <a className="lnk" href="/trek-vietnam">
+                    Marcher dans le Nord
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="sec">
           <div className="wrap wrap--wide">
             <div className="parcours">
               <figure className="parcours__photo">
@@ -180,7 +271,7 @@ export default async function VoyageDeNoces() {
           </div>
         </section>
 
-        <section className="sec">
+        <section className="sec sec--sand">
           <div className="wrap wrap--wide">
             <SectionHead
               kicker="Ce qui change vraiment"
@@ -206,7 +297,7 @@ export default async function VoyageDeNoces() {
           </div>
         </section>
 
-        <section className="sec sec--sand" id="faq">
+        <section className="sec" id="faq">
           <div className="wrap">
             <SectionHead
               kicker="Questions fréquentes"
