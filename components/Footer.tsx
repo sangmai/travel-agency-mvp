@@ -1,5 +1,5 @@
 import { Glyph } from "./Art";
-import { getSite } from "@/lib/content";
+import { getSite, getTrips, tripUrl } from "@/lib/content";
 import { routesIn, type RouteGroup } from "@/lib/routes";
 
 /**
@@ -25,7 +25,7 @@ const COLUMNS: Record<Exclude<RouteGroup, "legal">, string> = {
 };
 
 export async function Footer() {
-  const site = await getSite();
+  const [site, trips] = await Promise.all([getSite(), getTrips()]);
 
   return (
     <footer className="ftr">
@@ -76,6 +76,24 @@ export async function Footer() {
                   {routes.map((r) => (
                     <li key={r.path}><a href={r.path}>{r.label}</a></li>
                   ))}
+                  {/* The six itineraries, listed under "Circuits".
+
+                      They are content, not routes, so routesIn() never saw
+                      them — and the result was that the six selling pages had
+                      the fewest inbound links on the site: ten to thirteen
+                      source pages each, against twenty-four for every guide,
+                      which all get theirs from this very footer. The pages that
+                      sell were the hardest to reach.
+
+                      A reader looking for an itinerary in the footer expects to
+                      find the itineraries there, so this is not a link placed
+                      for a crawler. It happens to fix both. */}
+                  {group === "circuits" &&
+                    trips.map((t) => (
+                      <li key={t.slug}>
+                        <a href={tripUrl(t.slug)}>{t.name}</a>
+                      </li>
+                    ))}
                 </ul>
               </nav>
             );
