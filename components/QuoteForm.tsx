@@ -1,6 +1,6 @@
 import { Photo } from "./Photo";
 import { Check } from "./Art";
-import { getSite, getHome } from "@/lib/content";
+import { getSite, getHome, type Trip } from "@/lib/content";
 import { Accent } from "@/lib/text";
 
 /**
@@ -13,9 +13,33 @@ import { Accent } from "@/lib/text";
  * without anything failing at build time.
  */
 
-export async function QuoteForm() {
+/**
+ * `trip` turns the generic form into a trip-specific one.
+ *
+ * Until now the form existed on the home page only: all twenty-four other
+ * pages — including the six trip pages, which are the selling pages — sent the
+ * visitor back to /#devis. Someone who had just read the price and the
+ * day-by-day programme, at the highest point of intent, had to leave the page
+ * to act. That is the gap this prop closes.
+ *
+ * When a trip is passed, three things change and all three reduce typing: the
+ * duration select lands on the nearest matching option, the project field is
+ * pre-filled with the trip name, and a hidden field carries the slug so the
+ * email says which programme the request came from. The contact ledger already
+ * records the referring page, so attribution works either way — but the agency
+ * reading the email should not have to guess.
+ */
+export async function QuoteForm({ trip }: { trip?: Trip }) {
   const site = await getSite();
   const h = (await getHome()).devis;
+
+  /* La durée du circuit ramenée à l'option la plus proche du menu. Un circuit
+     de 13 jours tombe sur « environ 12 », pas sur « je ne sais pas » : le menu
+     propose des ordres de grandeur, pas des engagements. */
+  const DUREES = [10, 12, 15, 18];
+  const duree = trip
+    ? String(DUREES.reduce((a, b) => (Math.abs(b - trip.days) < Math.abs(a - trip.days) ? b : a)))
+    : "15";
 
   return (
     <section className="sec sec--jade devis" id="devis">
@@ -27,11 +51,19 @@ export async function QuoteForm() {
       <div className="wrap devis__in">
         <div className="quote">
           <div>
-            <p className="kicker">{h.kicker}</p>
+            <p className="kicker">{trip ? "Ce circuit, à vos dates" : h.kicker}</p>
             <h2 className="d2">
-              <Accent>{h.title}</Accent>
+              {trip ? (
+                <>Partir sur <em>{trip.name}</em></>
+              ) : (
+                <Accent>{h.title}</Accent>
+              )}
             </h2>
-            <p className="lede">{h.lede}</p>
+            <p className="lede">
+              {trip
+                ? `Ce programme de ${trip.days} jours est un point de départ : dites-nous vos dates et ce que vous voudriez changer, nous le réécrivons. Devis chiffré sous ${site.responseTime} ouvrées, gratuit et sans engagement.`
+                : h.lede}
+            </p>
 
             <div className="promises">
               {h.promises.map((p) => (
@@ -47,6 +79,10 @@ export async function QuoteForm() {
           </div>
 
           <form className="form" method="post" action="/api/devis">
+            {/* Le circuit d'où part la demande. Champ caché plutôt que texte
+                libre : le voyageur n'a rien à recopier, et l'agence lit le nom
+                exact du programme en haut de l'e-mail. */}
+            {trip && <input type="hidden" name="circuit" value={trip.name} />}
             <div className="form__grid">
               <div className="f">
                 <label htmlFor="prenom">Prénom</label>
@@ -70,7 +106,7 @@ export async function QuoteForm() {
               </div>
               <div className="f">
                 <label htmlFor="duree">Durée du séjour</label>
-                <select id="duree" name="duree" defaultValue="15">
+                <select id="duree" name="duree" defaultValue={duree}>
                   <option value="10">Environ 10 jours</option>
                   <option value="12">Environ 12 jours</option>
                   <option value="15">Environ 15 jours</option>
@@ -96,6 +132,7 @@ export async function QuoteForm() {
                 <textarea
                   id="projet"
                   name="projet"
+                  defaultValue={trip ? `Je m'intéresse au circuit « ${trip.name} ».\n\n` : undefined}
                   placeholder="Ce qui vous attire, ce que vous voulez éviter, les contraintes (enfants, mobilité, régime alimentaire)…"
                 />
               </div>

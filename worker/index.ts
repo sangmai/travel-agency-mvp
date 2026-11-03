@@ -96,6 +96,10 @@ function depart(mois: string): string {
 }
 
 interface Demande {
+  /* The trip the request came from, when the form was embedded on a trip page.
+     Empty from the home page. A field that exists in the form and not here
+     would vanish silently — the Worker reads `name` attributes verbatim. */
+  circuit: string;
   prenom: string;
   nom: string;
   email: string;
@@ -118,6 +122,7 @@ interface Demande {
  */
 function courriel(d: Demande, page: string, recu: string): string {
   return [
+    ...(d.circuit ? [`CIRCUIT : ${d.circuit}`, ""] : []),
     `${d.prenom} ${d.nom}`,
     d.email,
     d.telephone || "téléphone non communiqué",
@@ -160,6 +165,7 @@ async function devis(
   }
 
   const d: Demande = {
+    circuit: clean(form.get("circuit"), 120),
     prenom: clean(form.get("prenom"), 80),
     nom: clean(form.get("nom"), 80),
     email: clean(form.get("email"), 160),
@@ -233,7 +239,11 @@ async function devis(
       to: [env.DEVIS_TO],
       // The agency replies by simply hitting "Reply".
       reply_to: `${d.prenom} ${d.nom} <${d.email}>`,
-      subject: `Devis — ${d.prenom} ${d.nom}, ${voyageurs}${duree(d.duree)}`,
+      /* The trip name leads the subject when there is one: the agency sorts
+         its inbox by programme, not by surname. */
+      subject: d.circuit
+        ? `Devis ${d.circuit} — ${d.prenom} ${d.nom}, ${voyageurs}${duree(d.duree)}`
+        : `Devis — ${d.prenom} ${d.nom}, ${voyageurs}${duree(d.duree)}`,
       text: courriel(d, request.headers.get("referer") ?? "page inconnue", recu),
     }),
   });

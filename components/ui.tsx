@@ -99,13 +99,26 @@ export function Fil({
  * Closing block. The two call sites differ only in their two sentences; the
  * call to action is deliberately the same everywhere.
  */
-export function Closing({ title, body }: { title: string; body: string }) {
+export function Closing({
+  title,
+  body,
+  /* `/#devis` by default — correct on the seventeen pages that carry no form.
+     The eight that do pass "#devis" so the button scrolls instead of leaving a
+     page where the form is already a few hundred pixels below. Sending someone
+     back to the home page from directly above a form is the kind of detail that
+     reads as carelessness. */
+  href = "/#devis",
+}: {
+  title: string;
+  body: string;
+  href?: string;
+}) {
   return (
     <section className="sec close">
       <div className="wrap">
         <h2 className="d2">{title}</h2>
         <p>{body}</p>
-        <a className="btn" href="/#devis">
+        <a className="btn" href={href}>
           Demander mon devis gratuit
         </a>
       </div>

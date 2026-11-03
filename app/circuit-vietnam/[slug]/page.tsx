@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { QuoteForm } from "@/components/QuoteForm";
 import { Check } from "@/components/Art";
 import { Photo } from "@/components/Photo";
 import { TripMap } from "@/components/TripMap";
@@ -131,14 +132,22 @@ export default async function TripPage({
             />
 
             <p className="trip-hero__type">{trip.type}</p>
-            <h1 className="d1">{trip.name}</h1>
+            {/* Le pays est ajouté quand le nom du circuit ne le porte pas.
+                « Montagnes et baies du Nord » pouvait désigner n'importe quel
+                pays d'Asie lu hors contexte — et un H1 se lit souvent hors
+                contexte, dans une page de résultats. Règle plutôt que
+                correction ponctuelle : un circuit ajouté demain sans « Vietnam »
+                dans son nom hérite du même traitement. */}
+            <h1 className="d1">
+              {/vietnam/i.test(trip.name) ? trip.name : `${trip.name}, Vietnam`}
+            </h1>
             <p className="trip-hero__tag">{trip.tagline}</p>
 
             <SpecList specs={specs} />
 
             <div className="trip-hero__buy">
               <PriceFrom amount={trip.priceFrom} className="price--lg" note="hors vols internationaux" />
-              <a className="btn btn--amber" href="/#devis">Demander un devis gratuit</a>
+              <a className="btn btn--amber" href="#devis">Demander un devis gratuit</a>
               <span className="trip-hero__code">Code voyage {trip.code}</span>
             </div>
           </div>
@@ -224,7 +233,7 @@ export default async function TripPage({
             </div>
 
             <p className="cta-row">
-              <a className="btn btn--amber" href="/#devis">
+              <a className="btn btn--amber" href="#devis">
                 Recevoir le devis détaillé sous {site.responseTime}
               </a>
             </p>
@@ -267,9 +276,11 @@ export default async function TripPage({
         )}
 
         <Closing
+          href="#devis"
           title="Ce voyage, à votre main"
           body="Une étape en plus, un hôtel différent, deux jours de moins : dites ce que vous voulez changer, nous refaisons le devis sans frais."
         />
+        <QuoteForm trip={trip} />
       </main>
 
       <Footer />
