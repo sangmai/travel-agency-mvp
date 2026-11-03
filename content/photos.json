@@ -154,5 +154,29 @@
       "licence": "CC BY 2.0",
       "page": "https://commons.wikimedia.org/wiki/File:Street_Food_-_Hanoi_-_Vietnam_(15852884012).jpg"
     }
+  },
+  "tet-fleurs": {
+    "file": "tet-fleurs.jpg",
+    "alt": "Étals de fleurs jaunes au marché du Tết à Đông Hà, dans la province de Quảng Trị",
+    "place": "Marché aux fleurs du Tết, Đông Hà",
+    "lat": 17,
+    "credit": {
+      "title": "Chợ hoa Đông Hà, Tết năm 2018, hoa vàng (8).jpg",
+      "author": "Phương Huy",
+      "licence": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3ACh%E1%BB%A3_hoa_%C4%90%C3%B4ng_H%C3%A0%2C_T%E1%BA%BFt_n%C4%83m_2018%2C_hoa_v%C3%A0ng_%288%29.jpg"
+    }
+  },
+  "tet-banh": {
+    "file": "tet-banh.jpg",
+    "alt": "Famille vietnamienne confectionnant des bánh tét, gâteaux de riz gluant du Nouvel An",
+    "place": "Préparation des bánh tét avant le Tết",
+    "lat": null,
+    "credit": {
+      "title": "Tet holiday in Vietnam.jpg",
+      "author": "This is Thảo",
+      "licence": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3ATet_holiday_in_Vietnam.jpg"
+    }
   }
 }

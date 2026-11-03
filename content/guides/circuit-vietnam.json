@@ -1,0 +1,38 @@
+{
+  "slug": "circuit-vietnam",
+  "title": "Circuits au Vietnam — 6 itinéraires privés sur mesure",
+  "description": "Six circuits privés de 10 à 18 jours, dès 870 €/pers. Ce qui les sépare, ce que le prix comprend, et comment choisir entre eux.",
+  "ogTitle": "Nos circuits au Vietnam",
+  "ogDescription": "Six itinéraires privés comparés ligne à ligne : durée, région, niveau, hébergement, prix. Et ce que le prix comprend vraiment.",
+  "photo": "trek",
+  "photoAlt": "Randonnée dans les rizières en terrasses du nord du Vietnam",
+  "datePublished": "2026-10-28",
+  "dateModified": "2026-11-03",
+  "author": "",
+  "faq": [
+    {
+      "q": "Ces circuits sont-ils figés ?",
+      "a": "Non, aucun. Ce sont des points de départ : la durée, l'ordre des étapes, la gamme d'hébergement et le rythme se réajustent avant le départ, sans frais de modification. Un circuit de quinze jours devient douze ou dix-huit, une étape se remplace par une autre, une nuit en jonque se change pour deux nuits à terre. C'est la différence concrète entre un circuit privé et un départ en groupe à date fixe."
+    },
+    {
+      "q": "À partir de combien de voyageurs ?",
+      "a": "Deux. Les prix affichés sont par personne sur une base de deux voyageurs en chambre double, et ils baissent à mesure que le groupe grandit : le guide et le véhicule se partagent. Pour une personne seule, le supplément chambre individuelle s'ajoute et le coût du guide ne se divise pas — comptez une majoration sensible, que nous chiffrons au devis plutôt que de l'annoncer en pourcentage."
+    },
+    {
+      "q": "Pourquoi n'y a-t-il pas de dates de départ ?",
+      "a": "Parce que ce ne sont pas des départs en groupe. Vous partez à vos dates, avec votre guide et votre chauffeur. Cela supprime la contrainte du calendrier, mais aussi la possibilité de partager les coûts avec des inconnus : un circuit privé coûte plus qu'un départ garanti à vingt personnes. Si ce partage vous intéresse, un tour-opérateur à départs fixes répond mieux."
+    },
+    {
+      "q": "Combien de temps à l'avance faut-il réserver ?",
+      "a": "Deux à trois mois suffisent pour la plupart des périodes. Comptez quatre mois pour un départ entre octobre et avril, qui est la haute saison, et pour tout voyage chevauchant le Tết — la seule date de l'année où nous refusons parfois des demandes faute de disponibilités. En dernière minute, un départ reste souvent possible : c'est l'hébergement qui limite, pas l'organisation."
+    },
+    {
+      "q": "Que se passe-t-il si quelque chose change sur place ?",
+      "a": "Une assistance téléphonique locale fonctionne 7j/7 pendant tout le séjour, et elle est incluse dans tous les circuits. Un vol intérieur annulé, une route coupée par la mousson, un hôtel qui ne tient pas sa promesse : le programme se refait sur place, par quelqu'un qui est dans le même fuseau horaire que vous. C'est la raison principale de passer par une agence locale plutôt que de tout réserver soi-même."
+    },
+    {
+      "q": "Les vols internationaux sont-ils compris ?",
+      "a": "Non, et c'est une différence importante avec un forfait de tour-opérateur français. Nos prix s'entendent à l'arrivée au Vietnam. Comptez 600 à 950 € pour un Paris–Hanoï aller-retour selon la saison. Vous gardez la main sur la compagnie, l'escale et le moment de l'achat, ce qui permet souvent d'économiser — mais vous portez aussi le risque si un vol est annulé."
+    }
+  ]
+}

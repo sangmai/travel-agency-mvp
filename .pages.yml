@@ -59,6 +59,8 @@ content:
             - { name: "phongnha", label: "phongnha" }
             - { name: "trek", label: "trek" }
             - { name: "cuisine", label: "cuisine" }
+            - { name: "tet-fleurs", label: "tet-fleurs" }
+            - { name: "tet-banh", label: "tet-banh" }
       - { name: intro, label: Chapô, type: text, required: true }
       - { name: pitch, label: Accroche (page d'accueil), type: text, required: true }
       - { name: audience, label: Pour qui, type: string, required: true }
@@ -140,6 +142,8 @@ content:
                 - { name: "phongnha", label: "phongnha" }
                 - { name: "trek", label: "trek" }
                 - { name: "cuisine", label: "cuisine" }
+                - { name: "tet-fleurs", label: "tet-fleurs" }
+                - { name: "tet-banh", label: "tet-banh" }
       - { name: nights, label: Hébergement nuit par nuit, type: string, list: true }
       - { name: included, label: Le prix comprend, type: string, list: true }
       - { name: excluded, label: Le prix ne comprend pas, type: string, list: true }
@@ -179,6 +183,8 @@ content:
             - { name: "phongnha", label: "phongnha" }
             - { name: "trek", label: "trek" }
             - { name: "cuisine", label: "cuisine" }
+            - { name: "tet-fleurs", label: "tet-fleurs" }
+            - { name: "tet-banh", label: "tet-banh" }
       - { name: photoAlt, label: Description de la photo, type: string, required: true }
       - { name: datePublished, label: Date de publication, type: date, required: true, options: { format: "yyyy-MM-dd" } }
       - { name: dateModified, label: Dernière mise à jour, type: date, required: true, options: { format: "yyyy-MM-dd" }, description: "À changer à chaque relecture de fond : un contenu récent est nettement plus cité." }
@@ -475,6 +481,8 @@ content:
                 - { name: "phongnha", label: "phongnha" }
                 - { name: "trek", label: "trek" }
                 - { name: "cuisine", label: "cuisine" }
+                - { name: "tet-fleurs", label: "tet-fleurs" }
+                - { name: "tet-banh", label: "tet-banh" }
 
   - name: envies
     label: Par envie
@@ -510,6 +518,8 @@ content:
                 - { name: "phongnha", label: "phongnha" }
                 - { name: "trek", label: "trek" }
                 - { name: "cuisine", label: "cuisine" }
+                - { name: "tet-fleurs", label: "tet-fleurs" }
+                - { name: "tet-banh", label: "tet-banh" }
 
 settings:
   content:

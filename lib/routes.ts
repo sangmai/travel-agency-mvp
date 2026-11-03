@@ -29,6 +29,7 @@ export const ROUTES: Route[] = [
   { path: "/vietnam-cuisine", label: "Cuisine et marchés", group: "envies", published: true },
 
   { path: "/quand-partir-au-vietnam", label: "Quand partir", group: "preparer", published: true },
+  { path: "/tet-vietnam", label: "Tết, le Nouvel An", group: "preparer", published: true },
   { path: "/budget-voyage-vietnam", label: "Budget du voyage", group: "preparer", published: true },
   { path: "/visa-vietnam", label: "Visa et formalités", group: "preparer", published: true },
   { path: "/itineraire-vietnam", label: "Idées d'itinéraires", group: "preparer", published: true },

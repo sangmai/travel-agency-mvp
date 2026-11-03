@@ -167,5 +167,31 @@
       1800
     ],
     "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwAgCdASoQAAwAA4BaJQBdgMXr1f7y3N1FUAD+6kXXdGrY6/jaqcXFYOluv55hWXmYoFtXbgMv8Tsfo9tIS0RN1MKKdMwQkdBcOT/nstj3S4u+BsOfPuEn5twPNEU+roAn8sfTNw3AAA=="
+  },
+  "tet-fleurs": {
+    "w": 2000,
+    "h": 1500,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAABQAgCdASoQAAwAA4BaJbACdAYqXky1DHG9Y4gA/uo5nPgQVh+zel2CiiIRD+VsPrzzmR9l8mfilaCAPhLYhHX++GOY7feubS+Gr73LRoGX0pnMbS/nDuq/fZ9kfuXj/y5TQlMjv1mU1kjyUK9nzT0n5/UhME1hoQiCnZKAAAA="
+  },
+  "tet-banh": {
+    "w": 2000,
+    "h": 1305,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwAgCdASoQAAoAA4BaJYgCdAfwIuAn4Z1/gAD+ilr7tZBqWJM88788WVUf5yUmEzi6MLlbl6LEFhDel2ncTbYFUwO26LxmwwiT3d1BzCmr0fVw1LdFhAyDjfoEJ0z5P2cj8jhBgAA="
   }
 }
