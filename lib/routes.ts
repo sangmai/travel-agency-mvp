@@ -22,7 +22,7 @@ export const ROUTES: Route[] = [
 
   { path: "/voyage-vietnam-famille", label: "Voyage en famille", group: "envies", published: true },
   { path: "/voyage-luxe-vietnam", label: "Voyage de luxe", group: "envies", published: true },
-  { path: "/voyage-noces-vietnam", label: "Voyage de noces", group: "envies", published: false },
+  { path: "/voyage-noces-vietnam", label: "Voyage de noces", group: "envies", published: true },
   { path: "/circuit-prive-vietnam", label: "Circuit privé", group: "envies", published: false },
   { path: "/trek-vietnam", label: "Trek et randonnée", group: "envies", published: true },
   { path: "/vietnam-hors-sentiers", label: "Hors des sentiers battus", group: "envies", published: true },
