@@ -15,6 +15,10 @@ export const getHome = source.home;
 
 /** Throws when the page has no content: a red build beats a guide page served
  *  with no title and no questions. */
+/** Toutes les pages guides. `getGuide` en isole une ; le sitemap les veut
+ *  toutes, pour lire leur date de modification réelle. */
+export const getGuides = source.guides;
+
 export async function getGuide(slug: string) {
   const g = (await source.guides()).find((x) => x.slug === slug);
   if (!g) throw new Error(`content/guides/${slug}.json not found.`);
