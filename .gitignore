@@ -37,3 +37,6 @@ public/admin/config.yml
 
 # Extensions de l outillage, pas du site.
 claude-seo/
+
+# Redirections, générées au build depuis lib/routes.ts et content/itineraries/.
+public/_redirects
