@@ -19,11 +19,25 @@ export type Spec = {
 };
 
 export function tripSpecs(trip: Trip, rating: { value: number; count: number }): Spec[] {
+  /* Les Français cherchent autant « 2 semaines » que « 15 jours », et aucune
+     fiche ne portait le mot : le produit qui répond exactement à la requête
+     n'employait pas le vocabulaire de la requête. Approximation assumée — on
+     dit « deux semaines » pour quatorze comme pour quinze jours, et personne
+     ne compte. Sous dix jours, la formule ne se dit pas. */
+  const semaines =
+    trip.days >= 20 ? "trois semaines"
+    : trip.days >= 17 ? "près de trois semaines"
+    : trip.days >= 13 ? "deux semaines"
+    : trip.days >= 10 ? "une dizaine de jours"
+    : null;
+
   return [
     {
       label: "Durée",
       value: `${trip.days} jours`,
-      detail: `${trip.days} jours, soit ${trip.days - 1} nuits sur place`,
+      detail: semaines
+        ? `${trip.days} jours, soit ${trip.days - 1} nuits sur place — ${semaines} au Vietnam.`
+        : `${trip.days} jours, soit ${trip.days - 1} nuits sur place`,
     },
     {
       label: "Niveau",

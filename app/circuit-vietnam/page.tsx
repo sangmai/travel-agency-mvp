@@ -284,16 +284,11 @@ export default async function CircuitsIndex() {
           </div>
         </section>
 
-        <section className="sec sec--jade">
-          <div className="wrap">
-            <SectionHead
-              kicker="Vous hésitez encore"
-              title={<>Décrivez-nous votre projet, <em>nous ferons le tri</em></>}
-              lede={`Dates approximatives, durée, nombre de voyageurs, ce qui vous attire et ce que vous voulez éviter. Vous recevez sous ${site.responseTime} un itinéraire chiffré, modifiable autant de fois qu'il le faudra.`}
-            />
-            <a className="btn btn--amber" href="#devis">Demander mon devis gratuit</a>
-          </div>
-        </section>
+        {/* Le bloc « Vous hésitez encore » vivait ici, au-dessus du
+            formulaire : deux sections sec--jade l'une sur l'autre, donc un
+            seul long aplat vert avec un bouton inutile au milieu, qui faisait
+            défiler jusqu'au formulaire déjà visible. Son texte disait ce que
+            dit le chapô du formulaire. */}
         <QuoteForm />
       </main>
 

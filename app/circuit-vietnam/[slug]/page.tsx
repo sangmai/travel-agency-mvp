@@ -9,7 +9,7 @@ import { TripMap } from "@/components/TripMap";
 import { Program } from "@/components/trip/Program";
 import { SpecList, tripSpecs } from "@/components/trip/Specs";
 import { Tech } from "@/components/trip/Tech";
-import { Closing, Fil, JsonLd, PriceFrom, ReviewCard, SectionHead } from "@/components/ui";
+import { Fil, JsonLd, PriceFrom, ReviewCard, SectionHead } from "@/components/ui";
 import { breadcrumb, touristTripNode } from "@/components/JsonLd";
 import {
   aggregate,
@@ -138,8 +138,22 @@ export default async function TripPage({
                 contexte, dans une page de résultats. Règle plutôt que
                 correction ponctuelle : un circuit ajouté demain sans « Vietnam »
                 dans son nom hérite du même traitement. */}
+            {/* Le pays et la durée sont ajoutés quand le nom du circuit ne les
+                porte pas. « Montagnes et baies du Nord » pouvait désigner
+                n'importe quel pays d'Asie lu hors contexte — et un H1 se lit
+                souvent hors contexte, dans une page de résultats.
+
+                La durée vient de ce que les gens tapent : « circuit vietnam 12
+                jours » est une requête, et le <title> la portait déjà alors que
+                le H1 ne la confirmait pas. Quelqu'un qui clique sur un titre
+                annonçant douze jours doit retrouver douze jours en haut de la
+                page, pas seulement dans un bandeau de caractéristiques.
+
+                Règle plutôt que correction ponctuelle : un circuit ajouté
+                demain hérite du même traitement. */}
             <h1 className="d1">
               {/vietnam/i.test(trip.name) ? trip.name : `${trip.name}, Vietnam`}
+              {` — ${trip.days} jours`}
             </h1>
             <p className="trip-hero__tag">{trip.tagline}</p>
 
@@ -275,11 +289,12 @@ export default async function TripPage({
         </section>
         )}
 
-        <Closing
-          href="#devis"
-          title="Ce voyage, à votre main"
-          body="Une étape en plus, un hôtel différent, deux jours de moins : dites ce que vous voulez changer, nous refaisons le devis sans frais."
-        />
+        {/* Pas de bloc Closing ici. Il en portait un, « Ce voyage, à votre
+            main », dont le bouton descendait de trois cents pixels jusqu'au
+            formulaire placé juste en dessous — et dont le texte répétait le
+            chapô de ce formulaire. Deux appels à l'action qui se suivent en
+            disant la même chose s'affaiblissent l'un l'autre. L'argument qu'il
+            portait, les modifications sans frais, est passé dans le chapô. */}
         <QuoteForm trip={trip} />
       </main>
 

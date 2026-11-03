@@ -61,7 +61,7 @@ export async function QuoteForm({ trip }: { trip?: Trip }) {
             </h2>
             <p className="lede">
               {trip
-                ? `Ce programme de ${trip.days} jours est un point de départ : dites-nous vos dates et ce que vous voudriez changer, nous le réécrivons. Devis chiffré sous ${site.responseTime} ouvrées, gratuit et sans engagement.`
+                ? `Ce programme de ${trip.days} jours est un point de départ. Une étape en plus, un hôtel différent, deux jours de moins : dites ce que vous voulez changer, nous refaisons le devis sans frais. Réponse chiffrée sous ${site.responseTime} ouvrées.`
                 : h.lede}
             </p>
 
