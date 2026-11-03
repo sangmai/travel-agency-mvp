@@ -2591,6 +2591,17 @@ img {
   margin-top: 2rem;
 }
 
+/* Bouton isolé, centré sous une liste. Le .btn est en inline-flex, donc
+   text-align suffit — pas besoin de marges automatiques.
+
+   Modificateur plutôt que changement de .cta-row : onze pages guides portent
+   déjà cette classe avec un bouton aligné à gauche, dans le fil du texte.
+   Centrer partout d'un coup changerait onze mises en page qu'on ne regarde
+   pas. */
+.cta-row--center {
+  text-align: center;
+}
+
 /* Honeypot. `display:none` rather than an off-screen offset: Chrome's autofill
    treats an offset field as visible and happily writes into it, which made real
    visitors look like bots — their request was then silently discarded, and they

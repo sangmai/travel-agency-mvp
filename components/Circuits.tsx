@@ -1,7 +1,7 @@
 import { Photo } from "./Photo";
 import { PriceFrom, SectionHead } from "./ui";
 import { Accent } from "@/lib/text";
-import { getTrips, resolveStops, tripUrl, getHome } from "@/lib/content";
+import { getTrips, resolveStops, tripUrl, getHome, TRIP_BASE } from "@/lib/content";
 
 /**
  * A list, not a grid: six itineraries are compared by reading down one column.
@@ -60,6 +60,21 @@ export async function Circuits() {
           Prix par personne, base deux voyageurs, en gamme confort à charme, hors
           vols internationaux Paris–Hanoï (comptez 600 à 950 € selon la saison).
           Un devis ferme, nominatif et détaillé vous est adressé sous 48 heures.
+        </p>
+
+        {/* Eleven pages that list trips end with this button; the home page did
+            not. The only route from here to /circuit-vietnam was the footer —
+            and the hero's "voir les circuits et les prix" scrolls to this very
+            section rather than opening the list, so a visitor who wanted to
+            compare properly had nowhere obvious to go.
+
+            The listing page carries the comparison table, the inclusions and
+            the FAQ: it answers the questions this section raises and cannot
+            answer in six cards. */}
+        <p className="cta-row cta-row--center">
+          <a className="btn btn--amber" href={TRIP_BASE}>
+            Comparer les six circuits
+          </a>
         </p>
       </div>
     </section>
