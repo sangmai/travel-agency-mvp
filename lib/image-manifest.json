@@ -130,8 +130,8 @@
     "blur": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAAAwAgCdASoQAAsAA4BaJbACdAEf7/91rFRloAD+wk2Ujy2UuDCwDsck7hsgK4v5USg4eoH3xYN2aOLqlzmLL6K1gElvezB/gUtiEpbbSlrT8hU+TkALVJ+4/NDoySDfRwwEeF/I4Hw8QaCFAAA="
   },
   "phuquoc": {
-    "w": 2000,
-    "h": 1333,
+    "w": 2880,
+    "h": 1620,
     "widths": [
       256,
       384,
@@ -140,7 +140,7 @@
       1280,
       1920
     ],
-    "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAsAA4BaJYgCdAELzXcmIAD+6DeNepFhjkNH27Is0cyA0OE6bGKLmoPQ5qwHOdtUwXUVbfFGnKAA"
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoQAAkAA4BaJbACdAD0WD/dCAAA/vBBwb2E30PyBDHZvFeE+5WdROkaIxgsg29u3d06DhxS5zfVGuqQHx3ckNDKDrAAAA=="
   },
   "phongnha": {
     "w": 2000,
