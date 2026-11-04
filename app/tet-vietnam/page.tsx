@@ -49,6 +49,20 @@ const TETS = [
   { annee: 2031, date: "2031-01-23", libelle: "jeudi 23 janvier 2031", animal: "Cochon · Tân Hợi", chine: null },
 ];
 
+/**
+ * Last day of the festival: mùng 3, so the start date plus two.
+ *
+ * Computed in UTC on purpose. Parsing "2027-02-06" without the explicit Z
+ * makes a date in the build machine's local zone, and a build running west of
+ * Greenwich would then round the result back to mùng 2. The dates themselves
+ * are cut at UTC+7 upstream, where the Vietnamese calendar is defined.
+ */
+function finDuTet(debut: string): string {
+  const d = new Date(`${debut}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + 2);
+  return d.toISOString().slice(0, 10);
+}
+
 const JOURS = [
   {
     quand: "J-10 à J-1",
@@ -132,15 +146,38 @@ export default async function TetVietnam() {
       /* The next Tết declared as an Event. A date a generative engine can read
          without parsing prose — and the fact most often asked for on this
          subject. `eventAttendanceMode` and a location are required for the type
-         to validate; the location is the country, which is literally true. */
+         to validate; the location is the country, which is literally true.
+
+         ## What Search Console asks for, and what it gets
+
+         Google reports five recommended fields as missing here. Three were
+         added because they can be stated truthfully: `image` (the page's own
+         Tết photograph), `endDate`, and a country-level `address`.
+         `endDate` covers the three days this page already calls "les trois
+         jours creux" — mùng 1, 2 and 3 — which is the festival itself, not the
+         public holiday whose length the Vietnamese government sets year by
+         year, and which we therefore cannot know for 2027 and beyond.
+
+         `organizer` and `performer` are deliberately left out and must stay
+         out. Nobody organises the lunar new year of a country, and nobody
+         performs it. Naming this agency in either field to silence a warning
+         would put a false claim in machine-readable form on the one page whose
+         value is that its dates are correct. Two permanent non-critical
+         warnings are the right price for that. */
       {
         "@type": "Event",
         "@id": `${site.url}/tet-vietnam/#tet-${prochain.annee}`,
         name: `Tết ${prochain.annee} — Nouvel An vietnamien`,
         startDate: prochain.date,
+        endDate: finDuTet(prochain.date),
+        image: `${site.url}/photos/og/${guide.photo}.jpg`,
         eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
         eventStatus: "https://schema.org/EventScheduled",
-        location: { "@type": "Country", name: "Vietnam" },
+        location: {
+          "@type": "Country",
+          name: "Vietnam",
+          address: { "@type": "PostalAddress", addressCountry: "VN" },
+        },
         description: `Premier jour de l'année lunaire vietnamienne, année du ${prochain.animal.split(" · ")[0]}.`,
         url: `${site.url}/tet-vietnam/`,
       },
