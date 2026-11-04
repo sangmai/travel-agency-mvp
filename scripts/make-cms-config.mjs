@@ -282,7 +282,8 @@ ${select("trip", "Voyage concerné", OPT_CIRCUITS, 14, ["required: false"])}
               - { name: closes, label: Fermeture, widget: string }
               - { name: days, label: Jours, widget: list, field: { name: day, label: Jour, widget: string } }
           - { name: social, label: Réseaux, widget: object, collapsed: true, fields: [{ name: facebook, label: Facebook, widget: string }, { name: instagram, label: Instagram, widget: string }] }
-          - { name: sameAs, label: Profils publics vérifiés, widget: list, collapsed: true, field: { name: url, label: Adresse, widget: string }, hint: "Réseaux, plateformes d'avis, annuaires. Ces liens disent aux moteurs quelle entreprise nous sommes — utile quand une homonyme mieux référencée existe." }
+          - { name: sameAs, label: Profils vérifiés — Jasmin Travel, widget: list, collapsed: true, field: { name: url, label: Adresse, widget: string }, hint: "Profils de l'OPÉRATEUR. Réseaux, plateformes d'avis, annuaires. Ces liens disent aux moteurs quelle entreprise nous sommes — utile quand une homonyme mieux référencée existe." }
+          - { name: brandSameAs, label: Profils vérifiés — la marque, widget: list, collapsed: true, field: { name: url, label: Adresse, widget: string }, hint: "Profils ouverts au nom de la marque. À ne pas mélanger avec ceux de Jasmin Travel : chaque liste déclare une entité différente aux moteurs." }
           - { name: languages, label: Langues de travail, widget: list, field: { name: langue, label: Langue, widget: string } }
           - name: reviewSource
             label: Note publiée par un tiers
@@ -661,7 +662,8 @@ content:
         fields:
           - { name: facebook, label: Facebook, type: string, required: true }
           - { name: instagram, label: Instagram, type: string, required: true }
-      - { name: sameAs, label: Profils publics vérifiés, type: string, list: true, description: "Réseaux, plateformes d'avis, annuaires. Désambiguïse l'entreprise auprès des moteurs." }
+      - { name: sameAs, label: Profils vérifiés — Jasmin Travel, type: string, list: true, description: "Profils de l'OPÉRATEUR : réseaux, plateformes d'avis, annuaires." }
+      - { name: brandSameAs, label: Profils vérifiés — la marque, type: string, list: true, description: "Profils ouverts au nom de la marque. À ne pas mélanger avec ceux de Jasmin Travel : chaque liste déclare une entité différente." }
       - { name: languages, label: Langues de travail, type: string, list: true }
       - name: reviewSource
         label: Note publiée par un tiers

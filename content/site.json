@@ -42,7 +42,7 @@
     ]
   },
   "social": {
-    "facebook": "https://www.facebook.com/jasmintraveldanang",
+    "facebook": "https://www.facebook.com/voyagevietnamsurmesure",
     "instagram": "https://www.instagram.com/jasmintravel_vietnam"
   },
   "languages": [
@@ -83,5 +83,8 @@
     "https://www.instagram.com/jasmintravel_vietnam",
     "https://www.tripadvisor.fr/Attraction_Review-g298085-d11631318-Reviews-Jasmin_Travel-Da_Nang.html",
     "https://www.petitfute.co.uk/v45017-da-nang/c1122-voyage-transports/c747-tours-operateurs/2032689-jasmin-travel.html"
+  ],
+  "brandSameAs": [
+    "https://www.facebook.com/voyagevietnamsurmesure"
   ]
 }

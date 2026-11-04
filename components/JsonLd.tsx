@@ -135,6 +135,13 @@ export function organisationNode(site: Site) {
       email: site.email,
       inLanguage: "fr-FR",
       parentOrganization: { "@id": operatorId(site.url) },
+      /* The brand's own profiles, kept apart from the operator's `sameAs`
+         further down. Both lists mean "this is the same entity", so they
+         cannot be pooled: the Facebook page opened under the brand name
+         identifies the brand, and Jasmin Travel's page identifies Jasmin.
+         Pooling them would assert the two are one — the exact confusion the
+         brand/operator split was built to remove. */
+      sameAs: site.brandSameAs,
       /* `image` and `logo` are recommended and are what Google draws on for a
          knowledge panel. Both point at the Open Graph image produced at build
          time by scripts/make-images.mjs — a real file, 1200 x 630, already

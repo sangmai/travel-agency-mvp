@@ -184,6 +184,16 @@ export type Site = {
    *  would claim the brand *is* Jasmin Travel, which is the confusion this
    *  whole split exists to remove. */
   sameAs: string[];
+  /** Verified public profiles of the BRAND itself — today the Facebook page
+   *  opened under the brand name, tomorrow whatever else it earns. Separate
+   *  from `sameAs` for the same reason `sameAs` exists: these identify
+   *  "Voyage Vietnam Sur Mesure", not Jasmin Travel, and each list hangs off
+   *  its own node. Merging them would tell an engine the two are one entity.
+   *
+   *  The footer link in `social.facebook` and this list point at the same page
+   *  but answer different questions — one is where to click, the other is who
+   *  the brand is. */
+  brandSameAs: string[];
   languages: string[];
   /** Aggregate rating published by a third party, shown with its link. It is
    *  NOT declared as aggregateRating: Google does not recognise a third-party
