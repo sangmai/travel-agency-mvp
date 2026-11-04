@@ -39,8 +39,8 @@
     "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADQAQCdASoQAAwAA4BaJQBOgCKdPf8QgAD+TT6ZV3bfIXRk4jvEXa6RHgmN3gedHhUiMrzU8rio/LDfSVRuNFQRR0t00EG7YAA="
   },
   "hoian": {
-    "w": 2000,
-    "h": 1500,
+    "w": 9486,
+    "h": 6324,
     "widths": [
       256,
       384,
@@ -49,7 +49,7 @@
       1280,
       1920
     ],
-    "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoQAAwAA4BaJZgCdAEf/iE4BNuYAP7zN8IduHAlLrbrsq/tSRPA8I40UsvyZ+F1N2uD3eaIGT84JbpCXuzciopC+LOjoXXwYz9AAA=="
+    "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAsAA4BaJQBOgMWWkWnCakAA/t2P1HbD/cNmv54Z8Cvd3WtgWzj9ZCw/HM39RtSLjfWeN1gdTYK7AwnaW0P3YqSKAMflWjAGsXjT6RxMsvWAc4MAAA=="
   },
   "hoian-noces": {
     "w": 7952,
