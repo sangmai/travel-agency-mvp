@@ -14,6 +14,7 @@ export type Route = {
 
 export const ROUTES: Route[] = [
   { path: "/circuit-vietnam", label: "Tous nos circuits", group: "circuits", published: true },
+  { path: "/circuit-vietnam-15-jours", label: "Circuit de 15 jours", group: "circuits", published: true },
   { path: "/circuit-nord-vietnam", label: "Circuit Nord Vietnam", group: "circuits", published: false },
   { path: "/circuit-centre-vietnam", label: "Circuit Centre Vietnam", group: "circuits", published: false },
   { path: "/circuit-sud-vietnam", label: "Circuit Sud Vietnam", group: "circuits", published: false },
