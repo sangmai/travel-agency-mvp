@@ -1,14 +1,14 @@
 {
   "hagiang": {
     "file": "hagiang.jpg",
-    "alt": "Village et rizières en terrasses au pied des montagnes de Ha Giang, au nord du Vietnam",
+    "alt": "Rizières en terrasses et hameaux de montagne sous les brumes du matin, dans la province de Ha Giang, au nord du Vietnam",
     "place": "Ha Giang",
     "lat": 23,
     "credit": {
-      "title": "Ha Giang Loop",
-      "author": "Quang Nguyen Vinh",
+      "title": "Rizières en terrasses, Ha Giang",
+      "author": "",
       "licence": "Pexels",
-      "page": "https://www.pexels.com/photo/ha-giang-loop-27404283/"
+      "page": "https://www.pexels.com/photo/4732430/"
     }
   },
   "halong": {
@@ -25,14 +25,14 @@
   },
   "rizieres": {
     "file": "nord-rizieres.jpg",
-    "alt": "Rizières en terrasses et montagnes de la vallée de Sapa, au nord du Vietnam",
-    "place": "Vallée de Sapa",
-    "lat": 22,
+    "alt": "Rizières en terrasses mûrissantes et hameaux dispersés à Hoang Su Phi, dans la province de Ha Giang",
+    "place": "Hoang Su Phi, Ha Giang",
+    "lat": 23,
     "credit": {
-      "title": "Rice terraces in Sapa, Vietnam.jpg",
-      "author": "Eerin25",
-      "licence": "CC0",
-      "page": "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_Sapa,_Vietnam.jpg"
+      "title": "View of Fields and Hills",
+      "author": "",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/view-of-fields-and-hills-5749467/"
     }
   },
   "hoian": {
@@ -61,14 +61,14 @@
   },
   "mekong": {
     "file": "sud-mekong.jpg",
-    "alt": "Barques chargées de marchandises au marché flottant de Cai Rang, dans le delta du Mékong",
+    "alt": "Le marché flottant de Cai Rang vu du ciel, barques chargées de fruits sur l'eau ocre du Mékong",
     "place": "Marché flottant de Cai Rang",
     "lat": 10,
     "credit": {
-      "title": "Cai Rang Floating Market 3.jpg",
-      "author": "Christophe95",
-      "licence": "CC BY-SA 4.0",
-      "page": "https://commons.wikimedia.org/wiki/File:Cai_Rang_Floating_Market_3.jpg"
+      "title": "Cai Rang Floating Market Aerial View in Cần Thơ",
+      "author": "",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/cai-rang-floating-market-aerial-view-in-c-n-th-32607908/"
     }
   },
   "hanoi": {
@@ -109,14 +109,14 @@
   },
   "marche": {
     "file": "marche.jpg",
-    "alt": "Marchande de fruits coiffée du chapeau conique, dans une rue vietnamienne",
-    "place": "Scène de rue",
+    "alt": "Étal de poissons séchés et de condiments sur un marché vietnamien, prix affichés en dongs",
+    "place": "Marché couvert",
     "lat": null,
     "credit": {
-      "title": "Vietnamese woman.jpg",
-      "author": "ZAC",
-      "licence": "CC BY 2.0",
-      "page": "https://commons.wikimedia.org/wiki/File:Vietnamese_woman.jpg"
+      "title": "Vibrant Vietnamese Market with Dried Goods Display",
+      "author": "",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/vibrant-vietnamese-market-with-dried-goods-display-30872460/"
     }
   },
   "phuquoc": {
