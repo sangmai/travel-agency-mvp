@@ -1,7 +1,7 @@
 {
   "hagiang": {
-    "w": 2000,
-    "h": 1248,
+    "w": 4800,
+    "h": 3200,
     "widths": [
       256,
       384,
@@ -10,11 +10,11 @@
       1280,
       1920
     ],
-    "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAABQAgCdASoQAAoAA4BaJZACdH8AGERPyQ7jihAA/tYrb2nle9I9g09ZDp4aPWybDwMo6Wmx2j49wHcIM4OEciJCZ4rfwN356XDbmWbIf2zxiGVopAKp4TB40++AAA=="
+    "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoQAAsAA4BaJbACdAEQ7ISK4AD9wCWgjFQFZdYhNYga84xRfNlg+foeFOQhfRnONzD9L70PdmVnCO9JEK3u3Rrb1vjOnI0PbUiPR705IFl2Bm0VgAA="
   },
   "halong": {
-    "w": 2200,
-    "h": 1466,
+    "w": 4000,
+    "h": 3000,
     "widths": [
       256,
       384,
@@ -23,7 +23,7 @@
       1280,
       1920
     ],
-    "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAACQAQCdASoQAAsAA4BaJZwAAosQ8QAA/tYrjIw0/RzYO3f3rXVO77G7MeXsbA8BL0mb1pBkKzS9B2lhY/CuE3sOEAA="
+    "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwAgCdASoQAAwAA4BaJZgCdAEfZSW2y61gAAD+tVqF/7NKyEPeA5VzaSEJzxTIC0gy8r6gH8Fj5aYuVrkyKAk8hf+VhSjtin3RerVSJSqQEYwG5Ju60IAA"
   },
   "rizieres": {
     "w": 2000,

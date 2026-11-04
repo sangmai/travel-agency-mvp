@@ -1,26 +1,26 @@
 {
   "hagiang": {
     "file": "hagiang.jpg",
-    "alt": "Pitons karstiques du plateau de Dong Van, dans la province de Ha Giang, au nord du Vietnam",
-    "place": "Plateau de Dong Van, Ha Giang",
+    "alt": "Village et rizières en terrasses au pied des montagnes de Ha Giang, au nord du Vietnam",
+    "place": "Ha Giang",
     "lat": 23,
     "credit": {
-      "title": "SaPhin HaGiang Vietnam.JPG",
-      "author": "BacLuong at Vietnamese Wikipedia",
-      "licence": "Public domain",
-      "page": "https://commons.wikimedia.org/wiki/File:SaPhin_HaGiang_Vietnam.JPG"
+      "title": "Ha Giang Loop",
+      "author": "Quang Nguyen Vinh",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/ha-giang-loop-27404283/"
     }
   },
   "halong": {
     "file": "hero-halong.jpg",
-    "alt": "Îlots calcaires de la baie d'Halong émergeant de la brume, au nord du Vietnam",
+    "alt": "Îlots calcaires de la baie d'Halong vus du ciel, un bateau isolé sur l'eau turquoise, au nord du Vietnam",
     "place": "Baie d'Halong",
     "lat": 20,
     "credit": {
-      "title": "Ha Long Bay, Vietnam, Islands.jpg",
-      "author": "Vyacheslav Argenberg",
-      "licence": "CC BY 4.0",
-      "page": "https://commons.wikimedia.org/wiki/File:Ha_Long_Bay,_Vietnam,_Islands.jpg"
+      "title": "Aerial View of the Ha Long Bay in Vietnam",
+      "author": "Quang Nguyen Vinh",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/aerial-view-of-the-ha-long-bay-in-vietnam-6871874/"
     }
   },
   "rizieres": {

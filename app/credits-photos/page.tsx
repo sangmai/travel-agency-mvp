@@ -31,7 +31,7 @@ export default async function Credits() {
             <SectionHead
               kicker="Mentions"
               title="Crédits photographiques"
-              lede="Les photographies actuellement en ligne proviennent de Wikimedia Commons et sont publiées sous licence libre. Elles tiennent lieu d'images de substitution le temps de la mise au point du site, et seront remplacées par les photographies de l'agence. Les personnes qui y figurent sont des passants photographiés dans l'espace public : elles ne sont ni membres de l'équipe, ni clientes."
+              lede="Les photographies en ligne proviennent de Wikimedia Commons et de Pexels. Les premières imposent de nommer l'auteur et la licence, les secondes non : elles sont créditées ici quand même, parce qu'une photographie a un auteur que la licence l'exige ou pas. Elles tiennent lieu d'images de substitution le temps de la mise au point du site, et seront remplacées par les photographies de l'agence. Les personnes qui y figurent sont des passants photographiés dans l'espace public : elles ne sont ni membres de l'équipe, ni clientes."
             />
             <div className="credits">
               {photos.map((p) => (
