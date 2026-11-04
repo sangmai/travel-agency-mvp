@@ -37,10 +37,21 @@ export default async function Credits() {
               {photos.map((p) => (
                 <div className="credit" key={p.id}>
                   <b>{p.credit.title}</b>
-                  {p.credit.author} · {p.credit.licence}
+                  {/* L'auteur n'est pas toujours connu : Pexels n'impose aucune
+                      attribution, et certains envois n'en portent pas. Sans ce
+                      test la ligne commençait par un « · » orphelin. */}
+                  {p.credit.author ? `${p.credit.author} · ` : ""}
+                  {p.credit.licence}
                   <br />
+                  {/* Le libellé suivait la source, pas le lien : il annonçait
+                      Wikimedia Commons pour des photographies hébergées chez
+                      Pexels. Un intitulé de lien qui nomme la mauvaise
+                      destination est un défaut d'accessibilité avant d'être une
+                      inexactitude. */}
                   <a href={p.credit.page} rel="noopener nofollow">
-                    Page du fichier sur Wikimedia Commons
+                    {p.credit.page.includes("pexels.com")
+                      ? "Page de la photographie sur Pexels"
+                      : "Page du fichier sur Wikimedia Commons"}
                   </a>
                 </div>
               ))}

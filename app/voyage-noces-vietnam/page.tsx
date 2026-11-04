@@ -183,8 +183,14 @@ export default async function VoyageDeNoces() {
             />
 
             <div className="parcours">
+              {/* `hoian-noces` et non `hoian` : la photographie générique de la
+                  ville sert partout ailleurs, y compris sur le circuit en
+                  famille. Celle-ci montre deux personnes seules dans la rue au
+                  petit matin, ce qui est exactement le sujet de cette page —
+                  et c'est aussi l'image de partage que les réseaux afficheront
+                  quand quelqu'un enverra le lien à son futur conjoint. */}
               <figure className="parcours__photo">
-                <Photo id="hoian" role="half" />
+                <Photo id="hoian-noces" role="half" />
               </figure>
               <div className="parcours__txt">
                 <h3 className="d3">La côte du Centre, de mai à août</h3>

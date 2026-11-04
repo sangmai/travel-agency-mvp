@@ -51,6 +51,19 @@
     ],
     "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoQAAwAA4BaJZgCdAEf/iE4BNuYAP7zN8IduHAlLrbrsq/tSRPA8I40UsvyZ+F1N2uD3eaIGT84JbpCXuzciopC+LOjoXXwYz9AAA=="
   },
+  "hoian-noces": {
+    "w": 7952,
+    "h": 5304,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAABwAgCdASoQAAsAA4BaJbACdAYvrnbIfiZHI8twAPw65EjTkN029oaJlcLZXYvDToPj9zVSEy/LtleTHJ1DoDu7UK/3oCZ3TJn2VOTmURTYy4Wh8ZI6T41eWIoTaUUNw5ToyGghvsJPk58y0uTDOli0AAA="
+  },
   "mekong": {
     "w": 2000,
     "h": 1500,

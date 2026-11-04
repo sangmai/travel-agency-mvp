@@ -50,6 +50,7 @@ content:
             - { name: "halong", label: "halong" }
             - { name: "rizieres", label: "rizieres" }
             - { name: "hoian", label: "hoian" }
+            - { name: "hoian-noces", label: "hoian-noces" }
             - { name: "mekong", label: "mekong" }
             - { name: "hanoi", label: "hanoi" }
             - { name: "ninhbinh", label: "ninhbinh" }
@@ -133,6 +134,7 @@ content:
                 - { name: "halong", label: "halong" }
                 - { name: "rizieres", label: "rizieres" }
                 - { name: "hoian", label: "hoian" }
+                - { name: "hoian-noces", label: "hoian-noces" }
                 - { name: "mekong", label: "mekong" }
                 - { name: "hanoi", label: "hanoi" }
                 - { name: "ninhbinh", label: "ninhbinh" }
@@ -174,6 +176,7 @@ content:
             - { name: "halong", label: "halong" }
             - { name: "rizieres", label: "rizieres" }
             - { name: "hoian", label: "hoian" }
+            - { name: "hoian-noces", label: "hoian-noces" }
             - { name: "mekong", label: "mekong" }
             - { name: "hanoi", label: "hanoi" }
             - { name: "ninhbinh", label: "ninhbinh" }
@@ -473,6 +476,7 @@ content:
                 - { name: "halong", label: "halong" }
                 - { name: "rizieres", label: "rizieres" }
                 - { name: "hoian", label: "hoian" }
+                - { name: "hoian-noces", label: "hoian-noces" }
                 - { name: "mekong", label: "mekong" }
                 - { name: "hanoi", label: "hanoi" }
                 - { name: "ninhbinh", label: "ninhbinh" }
@@ -510,6 +514,7 @@ content:
                 - { name: "halong", label: "halong" }
                 - { name: "rizieres", label: "rizieres" }
                 - { name: "hoian", label: "hoian" }
+                - { name: "hoian-noces", label: "hoian-noces" }
                 - { name: "mekong", label: "mekong" }
                 - { name: "hanoi", label: "hanoi" }
                 - { name: "ninhbinh", label: "ninhbinh" }

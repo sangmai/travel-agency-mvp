@@ -47,6 +47,18 @@
       "page": "https://commons.wikimedia.org/wiki/File:Lanterns_in_Hoi_An_2.jpg"
     }
   },
+  "hoian-noces": {
+    "file": "hoian-noces.jpg",
+    "alt": "Couple marchant main dans la main dans une rue de la vieille ville de Hoi An, au petit matin, sous les lanternes rouges",
+    "place": "Vieille ville de Hoi An",
+    "lat": 15,
+    "credit": {
+      "title": "Couple Holding Hands While Running on the Street",
+      "author": "",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/couple-holding-hands-while-running-on-the-street-13955124/"
+    }
+  },
   "mekong": {
     "file": "sud-mekong.jpg",
     "alt": "Barques chargées de marchandises au marché flottant de Cai Rang, dans le delta du Mékong",
