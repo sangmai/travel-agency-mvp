@@ -11,6 +11,7 @@ import { SpecList, tripSpecs } from "@/components/trip/Specs";
 import { Tech } from "@/components/trip/Tech";
 import { Fil, JsonLd, PriceFrom, ReviewCard, SectionHead } from "@/components/ui";
 import { breadcrumb, touristTripNode } from "@/components/JsonLd";
+import { tripFaq } from "@/lib/trip-faq";
 import {
   aggregate,
   getReviews,
@@ -87,11 +88,16 @@ export default async function TripPage({
   const trip = await getTrip(slug);
   if (!trip) notFound();
 
-  const [site, stops, reviews] = await Promise.all([
+  const [site, stops, reviews, tous] = await Promise.all([
     getSite(),
     resolveStops(trip.stops),
     getReviews({ trip: slug }),
+    getTrips(),
   ]);
+
+  /* Une seule source pour la FAQ visible et pour le balisage : impossible que
+     l'un dise ce que l'autre n'affiche pas. */
+  const faq = tripFaq(trip, tous, site.responseTime);
 
   const rating = aggregate(reviews);
   const specs = tripSpecs(trip, rating);
@@ -101,6 +107,20 @@ export default async function TripPage({
     "@context": "https://schema.org",
     "@graph": [
       touristTripNode(trip, { site, stops: stops.map((s) => s.fr) }),
+      {
+        /* Les résultats enrichis FAQ ont été retirés par Google pour tous les
+           sites le 7 mai 2026 : il n'y a plus d'étoiles à gagner ici. Le
+           balisage reste déclaré parce qu'il donne aux moteurs de réponse des
+           questions-réponses délimitées — et parce que les six questions sont
+           visibles plus bas, ce qui est la condition pour le déclarer. */
+        "@type": "FAQPage",
+        "@id": `${url}#faq`,
+        mainEntity: faq.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
       breadcrumb(site.url, [
         { name: "Accueil" },
         { name: "Circuits au Vietnam", path: TRIP_BASE },
@@ -295,6 +315,24 @@ export default async function TripPage({
             chapô de ce formulaire. Deux appels à l'action qui se suivent en
             disant la même chose s'affaiblissent l'un l'autre. L'argument qu'il
             portait, les modifications sans frais, est passé dans le chapô. */}
+        <section className="sec" id="faq">
+          <div className="wrap">
+            <SectionHead
+              kicker="Questions fréquentes"
+              title="Ce qu'on nous demande sur ce circuit"
+              lede="Les réponses sont dans le HTML même repliées : un lecteur d'écran comme un moteur les trouve sans ouvrir quoi que ce soit."
+            />
+            <div className="faq">
+              {faq.map((f) => (
+                <details key={f.q}>
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <QuoteForm trip={trip} />
       </main>
 
