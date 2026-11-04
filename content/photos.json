@@ -157,14 +157,14 @@
   },
   "cuisine": {
     "file": "envie-cuisine.jpg",
-    "alt": "Échoppe de cuisine de rue dans le vieux quartier de Hanoï, marmites et tabourets sur le trottoir",
-    "place": "Cuisine de rue, Hanoï",
-    "lat": 21,
+    "alt": "Bánh tráng nướng sur le gril : galette de riz garnie d'œuf, de ciboule et de crevettes séchées, cuisine de rue vietnamienne",
+    "place": "Cuisine de rue",
+    "lat": null,
     "credit": {
-      "title": "Street Food - Hanoi - Vietnam (15852884012).jpg",
-      "author": "Esin Üstün from Istanbul, Turkey",
-      "licence": "CC BY 2.0",
-      "page": "https://commons.wikimedia.org/wiki/File:Street_Food_-_Hanoi_-_Vietnam_(15852884012).jpg"
+      "title": "Food on Stainless Grill",
+      "author": "",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/food-on-stainless-grill-13417795/"
     }
   },
   "tet-fleurs": {

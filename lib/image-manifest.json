@@ -169,17 +169,17 @@
     "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACwAQCdASoQAAsAA4BaJQAAKY9zrEAAAPoJRab1MlfpSNa1sUn0PhMcKmi3MFEUPd21+Csds2zfWnEH0zHz+z+qiLqmrfVY/b+BLrQAAAA="
   },
   "cuisine": {
-    "w": 1800,
-    "h": 1350,
+    "w": 6000,
+    "h": 4000,
     "widths": [
       256,
       384,
       640,
       960,
       1280,
-      1800
+      1920
     ],
-    "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwAgCdASoQAAwAA4BaJQBdgMXr1f7y3N1FUAD+6kXXdGrY6/jaqcXFYOluv55hWXmYoFtXbgMv8Tsfo9tIS0RN1MKKdMwQkdBcOT/nstj3S4u+BsOfPuEn5twPNEU+roAn8sfTNw3AAA=="
+    "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAwAgCdASoQAAsAA4BaJbACdAEO5NP8OOU6AAD+0f7OJcN54TNjvEqDPsqMYPuDj1kmkWPB2dD2QnkvJ5scM/9ZZotUATVoQ+p8O0yMhRrZx9PFv06l/goxREXlmEgpAAA="
   },
   "tet-fleurs": {
     "w": 2000,
