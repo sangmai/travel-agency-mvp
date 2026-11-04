@@ -53,7 +53,15 @@ export async function Footer() {
             {/* NAP: must be identical to the Google Business Profile and to
                 the JSON-LD — any variation dilutes the local signal. */}
             <address className="ftr__nap">
+              {/* Le <br/> est indispensable : JSX supprime tout blanc contenant
+                  un retour à la ligne entre deux expressions, si bien que sans
+                  lui le rendu collait « Jasmin Travel270 Nguyen Luong Bang ».
+                  Un espace littéral suffirait à l'œil mais pas au sens — la
+                  raison sociale est une ligne, la rue en est une autre, et ce
+                  bloc doit se lire comme la fiche Google à laquelle il doit
+                  être identique. */}
               <b>{site.operator.legalName}</b>
+              <br />
               {site.address.street}
               <br />
               {site.address.city} {site.address.postalCode}, {site.address.countryName}
