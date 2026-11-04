@@ -97,14 +97,14 @@
   },
   "hue": {
     "file": "hue.jpg",
-    "alt": "La porte du Midi de la citadelle impériale de Hué, au centre du Vietnam",
-    "place": "Citadelle de Hué",
+    "alt": "Pavillon de bois à toit de tuiles orangées posé sur un lac, dans un jardin impérial de Hué, au centre du Vietnam",
+    "place": "Hué",
     "lat": 16,
     "credit": {
-      "title": "Meridian Gate, Hue (I).jpg",
-      "author": "Supanut Arunoprayote",
-      "licence": "CC BY 4.0",
-      "page": "https://commons.wikimedia.org/wiki/File:Meridian_Gate,_Hue_(I).jpg"
+      "title": "Serene Pavilion on Lake in Hue Vietnam",
+      "author": "",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/serene-pavilion-on-lake-in-hue-vietnam-36605975/"
     }
   },
   "marche": {
