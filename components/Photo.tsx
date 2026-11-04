@@ -21,13 +21,31 @@ const ROLES = {
     priority: false,
   },
 
-  /* `min()` mirrors the CSS clamp(230px, 27vw, 360px): without it a wide
-     screen requested 403px for an element that never exceeds 360. */
-  shot: { sizes: "(max-width: 700px) 60vw, min(28vw, 360px)", priority: false },
+  /**
+   * `shot` and `story` both sit in PORTRAIT boxes — 3/4 and 1/1 for the
+   * carnet, 4/5 for the story — while every photograph on the site is
+   * landscape. With `object-fit: cover` the browser scales the image until it
+   * fills the *height*, then crops the sides: the file it needs is far wider
+   * than the box.
+   *
+   * These two previously declared the box width alone, and the carnet came out
+   * visibly soft. The arithmetic: a 360px-wide box at 3/4 is 480px tall; a 3:2
+   * photograph covering it is 720px wide before cropping, 1440 on a 2× screen.
+   * `sizes` said 360, the browser fetched the 384 variant and stretched it.
+   *
+   * The factor is source ratio ÷ box ratio — about 2 for both (1.5 ÷ 0.75,
+   * 1.5 ÷ 0.8). Hence the doubled values below. They look wrong next to the
+   * CSS until you remember `sizes` describes the file to fetch, not the
+   * element to draw.
+   *
+   * `min()` still mirrors the CSS clamp(230px, 27vw, 360px), doubled: without
+   * it a wide screen asked for more than the element can ever use.
+   */
+  shot: { sizes: "(max-width: 700px) 120vw, min(56vw, 720px)", priority: false },
 
   thumb: { sizes: "(max-width: 560px) 100vw, 190px", priority: false },
   day: { sizes: "(max-width: 1000px) 100vw, 260px", priority: false },
-  story: { sizes: "(max-width: 900px) 100vw, 46vw", priority: false },
+  story: { sizes: "(max-width: 900px) 200vw, 92vw", priority: false },
 } as const;
 
 export type PhotoRole = keyof typeof ROLES;
