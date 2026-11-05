@@ -8,8 +8,12 @@ import site from "../content/site.json";
 import { demarrer, retour, type AuthEnv } from "./auth";
 import { clic, record, digest, type ClicEnv } from "./clicks";
 import { envoyerAccuse } from "./accuse";
+import {
+  enregistrerLead, marquerRepondu, anonymiserAnciens, adresses,
+  type LeadEnv,
+} from "./leads";
 
-interface Env extends AuthEnv, ClicEnv {
+interface Env extends AuthEnv, ClicEnv, LeadEnv {
   /* Declared in wrangler.jsonc. Serves out/, applying the `html_handling`
      and `not_found_handling` rules configured there. */
   ASSETS: { fetch(request: Request): Promise<Response> };
@@ -290,6 +294,22 @@ async function devis(
   }
   record(env, ctx, "quote", depuis, request);
 
+  /* The lead ledger, which the click ledger cannot be: this row carries a name
+     and an address, and exists to hold `answered_at` later. Written on
+     waitUntil like everything else here — the traveller is owed a redirect, not
+     a database round-trip. */
+  ctx.waitUntil(
+    enregistrerLead(env, {
+      email: d.email,
+      prenom: d.prenom,
+      nom: d.nom,
+      circuit: d.circuit,
+      duree: d.duree,
+      voyageurs: d.voyageurs,
+      page: depuis,
+    }),
+  );
+
   /* The traveller's own copy, sent after the agency's — never before, and never
      instead. It leaves on waitUntil so the redirect to /merci is not held while
      Resend answers: the person who just clicked should see the thank-you page
@@ -349,5 +369,59 @@ export default {
      made here. */
   async scheduled(_event: unknown, env: Env): Promise<void> {
     await digest(env);
+    /* Retention sweep. Erases the name and the address of anyone who wrote in
+       more than a year ago, leaving the two timestamps that are the actual
+       measurement. Runs after the digest so a failure here cannot cost the
+       daily figures. */
+    await anonymiserAnciens(env);
+  },
+
+  /**
+   * Inbound mail, and the only moment this system learns an outcome.
+   *
+   * Cloudflare Email Routing is pointed at this Worker for one address. When
+   * the agency writes to a traveller and copies that address, the message
+   * arrives here: every address in the To and Cc headers is pulled out, and any
+   * pending lead held by one of them is stamped answered.
+   *
+   * It deliberately does nothing else — no storing of the message, no reading
+   * of its body. What is needed is the fact that a reply left and when; the
+   * contents belong to the two people writing to each other.
+   *
+   * Set-up is a dashboard step, not a binding: Email Routing → Routes → add the
+   * follow-up address → Send to a Worker → this one. Until that route exists
+   * this handler is never called, and nothing else breaks.
+   */
+  async email(
+    message: {
+      from: string;
+      headers: { get(name: string): string | null };
+      forward(to: string): Promise<void>;
+    },
+    env: Env,
+  ): Promise<void> {
+    const destinataires = [
+      ...adresses(message.headers.get("to")),
+      ...adresses(message.headers.get("cc")),
+    ];
+    let marques = 0;
+    for (const e of destinataires) {
+      marques += await marquerRepondu(env, e, message.from);
+    }
+    console.log("[lead] inbound copy", {
+      from: message.from,
+      recipients: destinataires.length,
+      marked: marques,
+    });
+
+    /* The copy still reaches the human it was always going to reach. Dropping
+       it here would make the measurement cost a mailbox. */
+    if (env.DEVIS_TO) {
+      try {
+        await message.forward(env.DEVIS_TO);
+      } catch (e) {
+        console.warn("[lead] forward failed", { error: String(e) });
+      }
+    }
   },
 };

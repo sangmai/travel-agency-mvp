@@ -34,16 +34,17 @@
  * hosted elsewhere — useful, and far too coarse to single anyone out.
  */
 import site from "../content/site.json";
+import { resumeLeads } from "./leads";
 
 /* Minimal interfaces, in the same spirit as the rest of the Worker: the project
    does not pull in @cloudflare/workers-types, so we declare exactly what we
    call and nothing more. */
-interface D1Statement {
+export interface D1Statement {
   bind(...values: unknown[]): D1Statement;
   run(): Promise<unknown>;
   all<T>(): Promise<{ results: T[] }>;
 }
-interface D1 {
+export interface D1 {
   prepare(sql: string): D1Statement;
 }
 
@@ -269,6 +270,8 @@ export async function digest(env: ClicEnv): Promise<void> {
   /* A day with no contact is not an anomaly on a new site. Saying so in one
      line beats a table of zeros, and beats silence — silence cannot tell
      "nothing to report" apart from "the job stopped running". */
+  const resume = await resumeLeads(env);
+
   const body = [
     `<b>${escape(site.name)} — site contacts</b>`,
     "",
@@ -283,6 +286,10 @@ export async function digest(env: ClicEnv): Promise<void> {
     "</pre>",
     pages.length > 0 ? "\nPages driving contact this month:" : "",
     ...pages.map((p) => `· ${escape(p.page)} — ${p.n}`),
+    /* The only line here that reports an outcome rather than an intention:
+       everything above counts people who knocked, this one counts the ones
+       still waiting for the door to open. */
+    resume ? `\n${escape(resume)}` : "",
   ]
     .filter((l) => l !== "")
     .join("\n");
