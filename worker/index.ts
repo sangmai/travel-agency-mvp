@@ -7,6 +7,7 @@
 import site from "../content/site.json";
 import { demarrer, retour, type AuthEnv } from "./auth";
 import { clic, record, digest, type ClicEnv } from "./clicks";
+import { envoyerAccuse } from "./accuse";
 
 interface Env extends AuthEnv, ClicEnv {
   /* Declared in wrangler.jsonc. Serves out/, applying the `html_handling`
@@ -288,6 +289,16 @@ async function devis(
     /* Missing or unreadable Referer: "/" is an honest fallback. */
   }
   record(env, ctx, "quote", depuis, request);
+
+  /* The traveller's own copy, sent after the agency's — never before, and never
+     instead. It leaves on waitUntil so the redirect to /merci is not held while
+     Resend answers: the person who just clicked should see the thank-you page
+     immediately, not watch a spinner because a second mail is in flight.
+
+     Its failures are swallowed inside envoyerAccuse for the same reason this
+     call sits below `record`: by this point the request has reached the agency
+     and the ledger. Nothing that happens next is allowed to undo that. */
+  ctx.waitUntil(envoyerAccuse(d, env));
 
   return Response.redirect(merci, 303);
 }
