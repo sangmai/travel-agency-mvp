@@ -32,7 +32,19 @@
     // The fault is invisible from the command line: no HTTP client sends that
     // header, so the same POST passes perfectly from curl and fails from
     // Chrome.
-    "run_worker_first": ["/api/*", "/auth", "/callback"]
+    //
+    // It used to be an allow-list of three routes. Every other address was
+    // answered by the asset layer without the Worker ever running, which is why
+    // `Accept: text/markdown` could not be honoured: the code deciding it was
+    // never reached. The list is now an exclude-list, so pages pass through the
+    // Worker and the bulk — build output and photographs, which have nothing to
+    // negotiate — still does not.
+    //
+    // The cost is one Worker invocation per page view, and the risk is that an
+    // exception there is now a blank site rather than a blank header. Both
+    // worker/markdown.ts entry points therefore catch and fall back to the
+    // untouched asset.
+    "run_worker_first": ["/*", "!/_next/*", "!/photos/*", "!/admin/*"]
   },
 
   // The form's honeypot stops naive bots; this stops someone aiming at the

@@ -8,6 +8,7 @@ import site from "../content/site.json";
 import { demarrer, retour, type AuthEnv } from "./auth";
 import { clic, record, digest, type ClicEnv } from "./clicks";
 import { envoyerAccuse } from "./accuse";
+import { markdown, page } from "./markdown";
 import {
   enregistrerLead, marquerRepondu, anonymiserAnciens, adresses,
   type LeadEnv,
@@ -356,7 +357,13 @@ export default {
     if (pathname === "/auth") return demarrer(request, env);
     if (pathname === "/callback") return retour(request, env);
 
-    return env.ASSETS.fetch(request);
+    /* One address, two representations. `markdown` answers only when the client
+       explicitly named text/markdown; otherwise `page` serves the HTML and
+       advertises the Markdown twin in a Link header. */
+    const md = await markdown(request, env);
+    if (md) return md;
+
+    return page(request, env);
   },
 
   /* Daily digest. The schedule is set in wrangler.jsonc. Errors are absorbed

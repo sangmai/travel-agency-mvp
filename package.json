@@ -6,6 +6,7 @@
     "dev": "next dev",
     "prebuild": "node scripts/make-cms-config.mjs && node scripts/check-cms.mjs && node scripts/check-tet.mjs && node scripts/make-redirects.mjs && node scripts/make-icons.mjs && node scripts/make-images.mjs",
     "build": "next build",
+    "postbuild": "node scripts/make-markdown.mjs",
     "start": "next start",
     "deploy": "npm run build && wrangler deploy && node scripts/indexnow.mjs",
     "lint": "next lint",
