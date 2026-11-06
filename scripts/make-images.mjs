@@ -14,7 +14,15 @@
  * this scale.
  */
 import { createHash } from "node:crypto";
-import { mkdirSync, readdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
+import {
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+  existsSync,
+  statSync,
+  unlinkSync,
+} from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 
@@ -61,6 +69,21 @@ if (orphans.length) {
 const manifest = {};
 let written = 0;
 let skipped = 0;
+let removed = 0;
+
+/**
+ * A derivative is current when it exists *and* is younger than its source.
+ *
+ * The check used to be `existsSync` alone, which cached on the file name and
+ * nothing else. Replacing a photograph while keeping its id — the ordinary way
+ * to swap an image — rewrote only the widths that happened not to exist yet:
+ * a 1800px source replaced by a 2560px one produced a single new 1920 variant
+ * and left 256 through 1280 holding the previous picture. The manifest showed
+ * the new dimensions, the page looked right on a wide screen, and every phone
+ * was served the old photograph. Nothing failed, which is what made it bad.
+ */
+const perime = (dest, src) =>
+  !existsSync(dest) || statSync(dest).mtimeMs < statSync(src).mtimeMs;
 
 for (const [id, m] of Object.entries(meta)) {
   const file = path.join(SRC, m.file);
@@ -75,7 +98,7 @@ for (const [id, m] of Object.entries(meta)) {
 
   for (const w of widths) {
     const dest = path.join(OUT, `${id}-${w}.webp`);
-    if (existsSync(dest)) {
+    if (!perime(dest, file)) {
       skipped++;
       continue;
     }
@@ -83,8 +106,25 @@ for (const [id, m] of Object.entries(meta)) {
     written++;
   }
 
+  /* A taller source shifts the top width — 1800 becomes 1920 — and the old
+     variant stops being referenced without stopping being deployed. Sweep the
+     widths this id no longer declares, or the bucket keeps every size the
+     photograph has ever had. */
+  /* The suffix must be digits, not merely anything: `rizieres-` is also the
+     start of `rizieres-enfants-256.webp`, and so are `hoian-`/`hoian-noces`
+     and `halong-`/`halong-baie`. A prefix test here would delete another
+     photograph's variants. */
+  const sien = new RegExp(`^${id}-(\\d+)\\.webp$`);
+  const gardees = new Set(widths.map((w) => `${id}-${w}.webp`));
+  for (const f of readdirSync(OUT)) {
+    if (sien.test(f) && !gardees.has(f)) {
+      unlinkSync(path.join(OUT, f));
+      removed++;
+    }
+  }
+
   const og = path.join(OG, `${id}.jpg`);
-  if (!existsSync(og)) {
+  if (perime(og, file)) {
     await sharp(file)
       .resize({ width: OG_W, height: OG_H, fit: "cover", position: "attention" })
       .jpeg({ quality: 82, mozjpeg: true })
@@ -116,5 +156,7 @@ if (next !== prev) writeFileSync(MANIFEST, next);
 const hash = createHash("sha1").update(next).digest("hex").slice(0, 7);
 console.log(
   `images : ${Object.keys(manifest).length} photos, ${written} variantes écrites, ` +
-    `${skipped} déjà présentes — manifeste ${hash}${next === prev ? " (inchangé)" : ""}`,
+    `${skipped} à jour` +
+    (removed ? `, ${removed} périmées supprimées` : "") +
+    ` — manifeste ${hash}${next === prev ? " (inchangé)" : ""}`,
 );

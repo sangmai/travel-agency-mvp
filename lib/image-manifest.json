@@ -156,17 +156,17 @@
     "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACQAQCdASoQAAsAA4BaJQAAQucj8IAA/vS09n1s5rH0r0lheZUkm/9mL8Csvalct41p3KSSvJTGU01UHSCQouogf+2tcFyf4AA="
   },
   "trek": {
-    "w": 1800,
-    "h": 1200,
+    "w": 2560,
+    "h": 1664,
     "widths": [
       256,
       384,
       640,
       960,
       1280,
-      1800
+      1920
     ],
-    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACwAQCdASoQAAsAA4BaJQAAKY9zrEAAAPoJRab1MlfpSNa1sUn0PhMcKmi3MFEUPd21+Csds2zfWnEH0zHz+z+qiLqmrfVY/b+BLrQAAAA="
+    "blur": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAoAA4BaJQBOgB4UFeoNgAD+0cqDvjOf9j1L6uyIADe3KcfuzMTl3ovtf/LQvwk5azsXlxgAAA=="
   },
   "cuisine": {
     "w": 6000,
