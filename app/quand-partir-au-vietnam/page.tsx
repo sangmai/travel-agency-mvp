@@ -116,6 +116,14 @@ export default async function QuandPartir() {
           <div className="wrap">
             <h2 className="d2">Les douze mois, région par région</h2>
             <SeasonTable />
+            <p className="note">
+              Une saison échappe à ce tableau parce qu&apos;elle ne dure que
+              quinze jours : la moisson des terrasses du Nord, dorées de la
+              mi-septembre au début octobre et en eau de mai à la mi-juin.{" "}
+              <a className="lnk" href="/rizieres-vietnam">
+                Les deux saisons des rizières, massif par massif
+              </a>
+            </p>
             <Bande id="rizieres" />
           </div>
         </section>
