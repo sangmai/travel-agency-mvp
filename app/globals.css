@@ -327,22 +327,29 @@ img {
   border-width: 1px;
 }
 
+/* Lien de prose, souligné.
+ *
+ * `inline`, et non `inline-flex` : une boîte inline-flex est atomique, elle ne
+ * peut pas se couper entre deux lignes. Avec `nowrap` en plus, « ministère de
+ * l'Europe et des Affaires étrangères » dépassait de 17 px le paragraphe sur un
+ * écran de 360 px. En `inline`, le lien se coupe comme du texte et la bordure
+ * se redessine sous chaque fragment — ce qu'une boîte flex ne sait pas faire :
+ * elle n'aurait souligné que la dernière ligne.
+ *
+ * Le `gap` qui disparaît ici n'a jamais rien espacé : il attendait une flèche
+ * qui n'est jamais venue, et un seul nœud de texte ne fait qu'un élément flex.
+ * Mesuré au survol : 182,6 px avant comme après. */
 .lnk {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
   font-size: 0.88rem;
   font-weight: 700;
   color: var(--amber-deep);
   border-bottom: 2px solid var(--amber-soft);
   padding-bottom: 2px;
-  transition: border-color 0.18s, gap 0.18s;
-  white-space: nowrap;
+  transition: border-color 0.18s;
 }
 
 .lnk:hover {
   border-color: var(--amber);
-  gap: 0.65rem;
 }
 
 .sec--jade .lnk {
@@ -983,7 +990,11 @@ img {
   color: var(--ink-3);
 }
 
+/* Seul lien du site posé sur sa propre ligne, sous le prix. `inline-block` lui
+ * rend la marge haute qu'un élément inline ignore ; « Voir le détail → » tient
+ * sur une ligne partout, donc la bordure reste d'un seul tenant. */
 .trip__price .lnk {
+  display: inline-block;
   margin-top: 0.65rem;
 }
 
