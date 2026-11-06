@@ -258,5 +258,18 @@
       1920
     ],
     "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACQAQCdASoQAAkAA4BaJbACdAEOgwAA/vH+TtVrMYKkxAtiJUuGY5oiNjKhjOLJTE09yl8zYW8UvaBrqobrJ0BBCf7v1fzH0fYAAA=="
+  },
+  "sarrasin": {
+    "w": 2560,
+    "h": 1707,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAAsAA4BaJZACdAELjOn4wtlwAP70/Ukr6dtiYm5W9f43hh6Jy+O2YaAn1+m/UrRBQr6zEgpvtz3Yx0bPs6MwGxhYnCuvTIINAAAA"
   }
 }

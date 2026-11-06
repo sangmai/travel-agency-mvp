@@ -209,12 +209,15 @@ export default async function Rizieres() {
               columns={["Floraison", "Où", "Quand", "Ce que cela donne"]}
               rows={FLEURS}
             />
-            {/* No photograph here on purpose. The only Ha Giang image in the
-                library shows terraces, and the paragraph above says the Dong
-                Van plateau has almost none — a picture contradicting the
-                sentence it illustrates costs more than an empty section. A
-                buckwheat field on the karst would earn its place; nothing else
-                will. */}
+            {/* Buckwheat in flower, which is what this section is about, and
+                what the alt text says — no province. Pexels states no location
+                for it and its own tags name three that contradict each other,
+                so the picture is evidence of the plant and the season, not of
+                the place. It stays below the table rather than beside the
+                paragraph for that reason: next to the sentence about the Dong
+                Van karst, a ridge of green hills would have read as a claim
+                about Dong Van. */}
+            <Bande id="sarrasin" />
           </div>
         </section>
 

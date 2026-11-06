@@ -238,5 +238,17 @@
       "licence": "Pexels",
       "page": "https://www.pexels.com/photo/children-playing-in-rice-fields-of-quy-nh-n-30248856/"
     }
+  },
+  "sarrasin": {
+    "file": "sarrasin.jpg",
+    "alt": "Champ de sarrasin en fleur au lever du jour, grappes blanches et roses sur une crête des montagnes du nord du Vietnam",
+    "place": "Nord du Vietnam",
+    "lat": null,
+    "credit": {
+      "title": "Pink Flowers in Bloom",
+      "author": "Duc Anh Nguyen",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/pink-flowers-in-bloom-8289959/"
+    }
   }
 }
