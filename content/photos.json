@@ -190,5 +190,53 @@
       "licence": "CC BY-SA 4.0",
       "page": "https://commons.wikimedia.org/wiki/File%3ATet_holiday_in_Vietnam.jpg"
     }
+  },
+  "thailande": {
+    "file": "thailande.jpg",
+    "alt": "Le Grand Palais de Bangkok, toits dorés et flèches ciselées sous un ciel clair",
+    "place": "Grand Palais, Bangkok",
+    "lat": 14,
+    "credit": {
+      "title": "Ornate Buildings of a Bangkok Grand Palace",
+      "author": "",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/ornate-buildings-of-a-bangkok-grand-palace-19041654/"
+    }
+  },
+  "halong-baie": {
+    "file": "halong-baie.jpg",
+    "alt": "Pitons calcaires boisés et jonques de croisière dans la lumière voilée de la baie d'Halong",
+    "place": "Baie d'Halong",
+    "lat": 20,
+    "credit": {
+      "title": "Vịnh Hạ Long",
+      "author": "",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/v-nh-h-long-27454425/"
+    }
+  },
+  "jonque-pont": {
+    "file": "jonque-pont.jpg",
+    "alt": "Pont supérieur et petite piscine d'une jonque de croisière, îlots calcaires en arrière-plan",
+    "place": "Baie d'Halong",
+    "lat": 20,
+    "credit": {
+      "title": "Swimming Pool on Ship",
+      "author": "",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/swimming-pool-on-ship-6877624/"
+    }
+  },
+  "rizieres-enfants": {
+    "file": "rizieres-enfants.jpg",
+    "alt": "Enfants courant dans une rizière mûre en fin de journée, près de Quy Nhon, au centre du Vietnam",
+    "place": "Quy Nhon",
+    "lat": 14,
+    "credit": {
+      "title": "Children Playing in Rice Fields of Quy Nhơn",
+      "author": "",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/children-playing-in-rice-fields-of-quy-nh-n-30248856/"
+    }
   }
 }

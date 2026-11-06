@@ -2626,6 +2626,52 @@ img {
   background: var(--jade-2);
 }
 
+/* A photograph on its own between two sections, on the pages whose argument is
+   carried entirely by prose. Wide and shallow on a desktop so it separates two
+   blocks of text rather than interrupting them; closer to square on a phone,
+   where a 16/9 band of a landscape photograph shows almost nothing. */
+.bande {
+  aspect-ratio: 16 / 9;
+  margin-block: clamp(2rem, 4vw, 3.5rem);
+}
+
+@media (max-width: 700px) {
+  .bande {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+/* Two bands abreast, for the page that weighs one region against another. The
+   margin moves to the row so the pair reads as one object. */
+.bande-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-block: clamp(2rem, 4vw, 3.5rem);
+}
+
+.bande-duo .bande {
+  margin-block: 0;
+  aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 700px) {
+  .bande-duo {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bande figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 3rem 1.2rem 0.9rem;
+  background: linear-gradient(to top, rgba(12, 10, 8, 0.8), transparent);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
 .fig img,
 .tile__fig img,
 .hero__img img,

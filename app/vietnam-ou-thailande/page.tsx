@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Bande } from "@/components/Bande";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
@@ -112,6 +113,8 @@ export default async function VietnamOuThailande() {
             />
           </div>
         </section>
+
+        <Bande id="thailande" />
 
         <section className="sec sec--sand">
           <div className="wrap">

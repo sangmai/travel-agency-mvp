@@ -206,5 +206,57 @@
       1920
     ],
     "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwAgCdASoQAAoAA4BaJYgCdAfwIuAn4Z1/gAD+ilr7tZBqWJM88788WVUf5yUmEzi6MLlbl6LEFhDel2ncTbYFUwO26LxmwwiT3d1BzCmr0fVw1LdFhAyDjfoEJ0z5P2cj8jhBgAA="
+  },
+  "thailande": {
+    "w": 3868,
+    "h": 2667,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAABwAgCdASoQAAsAA4BaJaACdH8AgoicufgjTuZcAP7wRf2RfOu53b1PJf0EePSvH8mwgh2gLH2kfBBSurrjQg5aUQIjwyNuI8GGRllDrdoc1RRKUtWaCpaqQQAAAA=="
+  },
+  "halong-baie": {
+    "w": 6282,
+    "h": 4189,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAsAA4BaJQBdgB6CdQ47U3AA/rgnw5b0kDzPPo+7razNWSj3hz+MtldlGfwRDOCuRekyGcFEvIRX6YStKkaMF5XP2Un8UK6uho83KATCAAAA"
+  },
+  "jonque-pont": {
+    "w": 5898,
+    "h": 3932,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAQCdASoQAAsAA4BaJYgCdAEDHw67rKQA/gu6Ijrx7sDyCv3Tbu/T6SVrfHKe4WoKPLe/7Hh1SZVYacEWZ38VL7WuVLXUyb8OJJ71epBBztr914IDFhtttsmbejQ6A3X1jULEAAA="
+  },
+  "rizieres-enfants": {
+    "w": 4000,
+    "h": 2250,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACQAQCdASoQAAkAA4BaJbACdAEOgwAA/vH+TtVrMYKkxAtiJUuGY5oiNjKhjOLJTE09yl8zYW8UvaBrqobrJ0BBCf7v1fzH0fYAAA=="
   }
 }

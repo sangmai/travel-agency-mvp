@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Bande } from "@/components/Bande";
 import { SeasonTable } from "@/components/WhenToGo";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
@@ -117,6 +118,8 @@ export default async function QuandPartir() {
             <SeasonTable />
           </div>
         </section>
+
+        <Bande id="rizieres" />
 
         <section className="sec sec--sand">
           <div className="wrap">

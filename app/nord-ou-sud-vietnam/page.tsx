@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Bande } from "@/components/Bande";
 import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
@@ -186,6 +187,8 @@ export default async function NordOuSud() {
             />
           </div>
         </section>
+
+        <Bande id="hagiang" second="mekong" />
 
         <section className="sec sec--sand">
           <div className="wrap">

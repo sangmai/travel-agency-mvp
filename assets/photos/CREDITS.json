@@ -94,5 +94,29 @@
     "auteur": "",
     "licence": "Pexels",
     "page": "https://www.pexels.com/photo/couple-holding-hands-while-running-on-the-street-13955124/"
+  },
+  "thailande": {
+    "title": "Ornate Buildings of a Bangkok Grand Palace",
+    "auteur": "",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/ornate-buildings-of-a-bangkok-grand-palace-19041654/"
+  },
+  "halong-baie": {
+    "title": "Vịnh Hạ Long",
+    "auteur": "",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/v-nh-h-long-27454425/"
+  },
+  "jonque-pont": {
+    "title": "Swimming Pool on Ship",
+    "auteur": "",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/swimming-pool-on-ship-6877624/"
+  },
+  "rizieres-enfants": {
+    "title": "Children Playing in Rice Fields of Quy Nhơn",
+    "auteur": "",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/children-playing-in-rice-fields-of-quy-nh-n-30248856/"
   }
 }

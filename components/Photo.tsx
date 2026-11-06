@@ -43,6 +43,10 @@ const ROLES = {
    */
   shot: { sizes: "(max-width: 700px) 120vw, min(56vw, 720px)", priority: false },
 
+  /* Standalone band between two sections. Never priority: the LCP element is
+     the hero, and a second image asking for the same bandwidth only delays it. */
+  bande: { sizes: "(max-width: 1240px) 100vw, 1200px", priority: false },
+
   thumb: { sizes: "(max-width: 560px) 100vw, 190px", priority: false },
   day: { sizes: "(max-width: 1000px) 100vw, 260px", priority: false },
   story: { sizes: "(max-width: 900px) 200vw, 92vw", priority: false },
