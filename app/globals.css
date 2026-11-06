@@ -1808,10 +1808,6 @@ img {
   max-width: 38rem;
 }
 
-.recit__txt .lnk {
-  margin-top: 0.75rem;
-}
-
 @media (max-width: 900px) {
   .recit__grid {
     grid-template-columns: 1fr;
