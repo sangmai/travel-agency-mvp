@@ -1,4 +1,4 @@
-import { getSite, getTrips, getBudget, tripUrl } from "@/lib/content";
+import { getSite, getTrips, getBudget, getGuides, tripUrl } from "@/lib/content";
 import { publishedRoutes } from "@/lib/routes";
 import { euro } from "@/lib/format";
 
@@ -20,7 +20,12 @@ export const dynamic = "force-static";
  * nor JSON-LD, nor plain text.
  */
 export async function GET() {
-  const [site, trips, budget] = await Promise.all([getSite(), getTrips(), getBudget()]);
+  const [site, trips, budget, guides] = await Promise.all([
+    getSite(),
+    getTrips(),
+    getBudget(),
+    getGuides(),
+  ]);
   const u = (path: string) => `${site.url}${path.replace(/\/?$/, "/")}`;
 
   const prix = [...trips]
@@ -32,9 +37,17 @@ export async function GET() {
     .map((b) => `${b.gamme.toLowerCase()} ${b.perDay}`)
     .join(", ");
 
+  /* The footer label — "Quand partir" — names the page; the guide description
+     says what it answers. A machine choosing which of twenty-one pages holds
+     the answer to a question can do it from the second and not from the first,
+     so the description is used wherever one exists. */
+  const parChemin = new Map(guides.map((g) => [`/${g.slug}`, g]));
   const pages = publishedRoutes()
     .filter((r) => r.path !== "/credits-photos")
-    .map((r) => `- [${r.label}](${u(r.path)})`)
+    .map((r) => {
+      const g = parChemin.get(r.path);
+      return g ? `- [${g.title}](${u(r.path)}) : ${g.description}` : `- [${r.label}](${u(r.path)})`;
+    })
     .join("\n");
 
   const texte = `# ${site.name}
@@ -95,7 +108,13 @@ Vols Paris–Vietnam : 600 à 950 € selon la saison.
   Au-delà, e-visa de 90 jours à entrées multiples. Passeport valable six mois
   à la date d'entrée.
 - Rizières en terrasses : en eau de mai à juin, dorées de mi-septembre à
-  début octobre. Elles n'existent qu'au Nord.
+  début octobre. Elles n'existent qu'au Nord. Pu Luong, plus bas que les
+  autres massifs, donne deux moissons par an — début juin et fin septembre.
+- Une vallée n'est jamais dorée d'un seul tenant : chaque famille moissonne
+  sa parcelle quand elle est prête, et les dates se déplacent d'une à deux
+  semaines selon l'année.
+- Sarrasin en fleur sur le plateau de Dong Van, au nord de Ha Giang : de fin
+  octobre à début décembre, blanc puis rose puis violet.
 - Distance Nord-Sud : 1 650 km.
 
 ## Contact
