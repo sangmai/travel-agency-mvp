@@ -160,10 +160,9 @@ export default async function Itineraire() {
                 </>
               }
             />
+            <Bande id="ninhbinh" />
           </div>
         </section>
-
-        <Bande id="ninhbinh" />
 
         <section className="sec sec--sand">
           <div className="wrap">

@@ -116,10 +116,9 @@ export default async function QuandPartir() {
           <div className="wrap">
             <h2 className="d2">Les douze mois, région par région</h2>
             <SeasonTable />
+            <Bande id="rizieres" />
           </div>
         </section>
-
-        <Bande id="rizieres" />
 
         <section className="sec sec--sand">
           <div className="wrap">

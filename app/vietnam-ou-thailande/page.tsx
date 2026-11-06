@@ -111,10 +111,9 @@ export default async function VietnamOuThailande() {
                 </>
               }
             />
+            <Bande id="thailande" />
           </div>
         </section>
-
-        <Bande id="thailande" />
 
         <section className="sec sec--sand">
           <div className="wrap">

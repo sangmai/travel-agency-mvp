@@ -180,10 +180,9 @@ export default async function VoyageEnFamille() {
                 </>
               }
             />
+            <Bande id="rizieres-enfants" />
           </div>
         </section>
-
-        <Bande id="rizieres-enfants" />
 
         <section className="sec sec--sand">
           <div className="wrap">

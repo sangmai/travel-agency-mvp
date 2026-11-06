@@ -1,56 +1,53 @@
-import { Photo, photoCaption } from "./Photo";
+import { Photo } from "./Photo";
 import type { PhotoId } from "@/lib/content";
 
 /**
- * A photograph standing on its own between two sections.
+ * A photograph closing the section whose argument it illustrates.
  *
- * ## Why this exists rather than another `parcours`
+ * ## What the first attempt got wrong
  *
- * Thirteen pages carried no image at all. The obvious fix was the `parcours`
- * block used elsewhere — image left, prose right — but that block holds a whole
- * section: a heading, a lede, a list. Fitting one to a page that is already
- * written means either restructuring an argument that works, or inventing text
- * to sit beside a picture. The second is how pages fill up with sentences
- * nobody needed.
+ * It was a full-width band between two sections: 1344 × 756 on a desktop,
+ * against 518 × 389 for every other photograph on the site and a prose column
+ * of about 660. Two and a half times wider than anything around it, floating in
+ * the gap between two bands of colour, attached to no heading. It read as a
+ * foreign object because it was one — the only image here obeying none of the
+ * rules the rest of the page follows.
  *
- * This takes neither. The photograph sits between two existing sections and
- * says what it is, nothing more.
+ * The site already has a grammar for pictures and it is consistent: every
+ * landscape image is 4/3, and every one of them is bounded by something — a
+ * column beside text, a card, a scrolling rail. The hero is the single
+ * exception, and that is the point of a hero. A second full-bleed image does
+ * not add a second bold moment; it spends the first one.
  *
- * ## The caption is the whole point
+ * So this now sits inside the section it belongs to, at the width of the prose
+ * above it, in the same 4/3 as everything else. Nothing new was invented: the
+ * fix was to stop breaking the system that was already there.
  *
- * Without one this would be decoration, and decoration on a page that argues
- * from figures is noise. `photoCaption` prints the place and its latitude —
- * "Baie d'Halong · 20°N" — the same line the gallery uses, and one that tells
- * someone planning a route something a pretty image alone does not.
+ * ## No caption
  *
- * ## Two of them, on a page that compares
- *
- * /nord-ou-sud-vietnam weighs one half of the country against the other. A
- * single photograph there would argue for whichever half it showed, which is
- * the quiet way an image contradicts the text beside it. `second` puts the two
- * side by side, each captioned with its own latitude — 23°N against 10°N,
- * which is the comparison the page is about.
+ * The first version printed "Quy Nhon · 14°N" under each photograph. Latitude
+ * earns its place in the gallery, where place and position are the whole
+ * content. Here it was two facts joined by a middle dot under a picture that
+ * needs neither — the kind of chrome that appears on a page regardless of what
+ * the page is about. Belonging to a section does the work the caption was
+ * pretending to do, and the alt text still carries the description.
  */
-export async function Bande({
-  id,
-  second,
-}: {
-  id: PhotoId;
-  second?: PhotoId;
-}) {
-  const ids = second ? ([id, second] as const) : ([id] as const);
-  const legendes = await Promise.all(ids.map(photoCaption));
-
-  return (
-    <div className="wrap wrap--wide">
-      <div className={second ? "bande-duo" : undefined}>
-        {ids.map((pid, i) => (
-          <figure className="fig bande" key={pid}>
-            <Photo id={pid} role="bande" />
-            <figcaption>{legendes[i]}</figcaption>
-          </figure>
-        ))}
+export function Bande({ id, second }: { id: PhotoId; second?: PhotoId }) {
+  if (second) {
+    return (
+      <div className="bande-duo">
+        <figure className="fig bande">
+          <Photo id={id} role="bande" />
+        </figure>
+        <figure className="fig bande">
+          <Photo id={second} role="bande" />
+        </figure>
       </div>
-    </div>
+    );
+  }
+  return (
+    <figure className="fig bande">
+      <Photo id={id} role="bande" />
+    </figure>
   );
 }

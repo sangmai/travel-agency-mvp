@@ -169,10 +169,9 @@ export default async function HorsSentiers() {
                 </>
               }
             />
+            <Bande id="trek" />
           </div>
         </section>
-
-        <Bande id="trek" />
 
         <section className="sec sec--sand">
           <div className="wrap">

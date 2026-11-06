@@ -149,10 +149,9 @@ export default async function BudgetPage() {
                 </>
               }
             />
+            <Bande id="marche" />
           </div>
         </section>
-
-        <Bande id="marche" />
 
         <section className="sec sec--sand">
           <div className="wrap">

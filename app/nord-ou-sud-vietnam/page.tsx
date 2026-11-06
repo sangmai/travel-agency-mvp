@@ -185,10 +185,9 @@ export default async function NordOuSud() {
                 </>
               }
             />
+            <Bande id="hagiang" second="mekong" />
           </div>
         </section>
-
-        <Bande id="hagiang" second="mekong" />
 
         <section className="sec sec--sand">
           <div className="wrap">

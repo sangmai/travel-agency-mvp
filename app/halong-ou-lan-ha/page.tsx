@@ -163,10 +163,9 @@ export default async function HalongOuLanHa() {
                 </>
               }
             />
+            <Bande id="halong-baie" />
           </div>
         </section>
-
-        <Bande id="halong-baie" />
 
         <section className="sec sec--sand">
           <div className="wrap">

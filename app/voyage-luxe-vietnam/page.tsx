@@ -177,10 +177,9 @@ export default async function VoyageDeLuxe() {
                 </>
               }
             />
+            <Bande id="jonque-pont" />
           </div>
         </section>
-
-        <Bande id="jonque-pont" />
 
         <section className="sec sec--sand">
           <div className="wrap">
