@@ -138,6 +138,12 @@ img {
   background: var(--sand);
 }
 
+/* The scroll shadows on a table cover themselves with the band they sit on;
+   on the sand bands that colour is not the page colour. */
+.sec--sand .tbl-wrap {
+  --tbl-bg: var(--sand);
+}
+
 .sec--jade {
   background: var(--jade);
   color: var(--on-dark-2);
@@ -443,12 +449,41 @@ img {
   }
 }
 
+/* The header overflowed every phone, and the page scrolled sideways with it.
+   Measured at 390 px wide: 18 (gutter) + 297 (.mark) + 32 (gap) + 122 (button)
+   = 469, against a 390 px viewport. At 360 px the page was 109 px too wide.
+
+   `.mark` carried `flex-shrink: 0`, so it never gave ground — and it grew when
+   the brand took its longer name, "Voyage Vietnam Sur Mesure" over "by Jasmin
+   Travel · Da Nang". A rule written when the name was short turned a content
+   change into a layout break, silently, on every page at once.
+
+   Three cuts, smallest first: the tagline goes (0.6 rem uppercase at 0.16em
+   tracking is the widest thing here for the least read), the name loses a
+   fraction of its size, and the mark is finally allowed to shrink and wrap
+   rather than push. The byline survives in the footer of every page. */
 @media (max-width: 640px) {
   .hdr__tel {
     display: none;
   }
   .hdr__end {
     margin-left: auto;
+    flex-shrink: 0;
+  }
+  .hdr__in {
+    gap: 1rem;
+  }
+  .mark {
+    flex-shrink: 1;
+    /* Without this a flex item refuses to go below its content width, which is
+       what made every rule above it powerless. */
+    min-width: 0;
+  }
+  .mark__name {
+    font-size: 1.02rem;
+  }
+  .mark__sub {
+    display: none;
   }
 }
 
@@ -1023,8 +1058,23 @@ img {
 
 /* TABLEAUX */
 
+/* A table narrower than 640px scrolls inside this box rather than widening the
+   page. That part worked; what was missing was any sign that it scrolls. On a
+   390px phone the last column arrived as "La", "Le", "De" — cut mid-word, with
+   nothing to suggest the rest was one swipe away. It read as a broken table.
+
+   The shadows below are attached to the scroll position: `local` backgrounds
+   move with the content and `scroll` ones stay put, so each edge shadow shows
+   only while there is something past it, and fades out on arrival. The cover
+   colour has to match whatever band the table sits on, hence the variable. */
 .tbl-wrap {
+  --tbl-bg: var(--paper);
   overflow-x: auto;
+  background:
+    linear-gradient(to right, var(--tbl-bg) 30%, transparent) left center / 2.5rem 100% no-repeat local,
+    linear-gradient(to left, var(--tbl-bg) 30%, transparent) right center / 2.5rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgba(28, 25, 20, 0.13), transparent) left center / 0.9rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgba(28, 25, 20, 0.13), transparent) right center / 0.9rem 100% no-repeat scroll;
   border-top: 2px solid var(--ink);
 }
 
@@ -1035,8 +1085,19 @@ img {
   min-width: 640px;
 }
 
+/* The caption belongs to the table, so it inherits the table's 640px and
+   scrolls away with it: on a phone it was cut mid-word — "reprises de notre
+   calend…" — and the reader had to swipe sideways to finish a sentence that
+   explains the table rather than continuing it.
+
+   Sticky at the left edge pins it in view while the columns move underneath,
+   and the width cap lets it wrap inside the screen instead of running past it.
+   It stays a <caption>, so the table keeps its accessible name. */
 .tbl caption {
   caption-side: bottom;
+  position: sticky;
+  left: 0;
+  max-width: calc(100vw - 2 * var(--gutter));
   text-align: left;
   padding-top: 0.9rem;
   font-size: 0.83rem;
