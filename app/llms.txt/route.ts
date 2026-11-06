@@ -5,6 +5,10 @@ import { euro } from "@/lib/format";
 /** Computed once at build time: the site is exported statically. */
 export const dynamic = "force-static";
 
+/** Lowers the first letter only. `toLowerCase()` on the whole tagline wrote
+ *  "au vietnam", which is the one spelling this file must never ship. */
+const minuscule = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
+
 /**
  * Identity sheet aimed at generative engines.
  *
@@ -34,7 +38,10 @@ export async function GET() {
     .join("\n");
 
   const gammes = budget
-    .map((b) => `${b.gamme.toLowerCase()} ${b.perDay}`)
+    /* "Confort", "Charme", "Signature" are the names of the ranges, not
+       adjectives: lower-casing them turned a named tier into a vague one in
+       the file whose whole job is to be quoted verbatim. */
+    .map((b) => `${b.gamme} ${b.perDay}`)
     .join(", ");
 
   /* The footer label — "Quand partir" — names the page; the guide description
@@ -52,7 +59,7 @@ export async function GET() {
 
   const texte = `# ${site.name}
 
-> Marque francophone de ${site.operator.name}, ${site.tagline.toLowerCase()} basée à
+> Marque francophone de ${site.operator.name}, ${minuscule(site.tagline)} basée à
 > ${site.address.city}, en activité depuis ${site.operator.founded}.
 > Conçoit des circuits privés sur mesure au Vietnam, au Laos et au Cambodge
 > pour une clientèle francophone (France, Belgique, Suisse, Canada).
