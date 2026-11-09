@@ -6,7 +6,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
+import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide, lien} from "@/lib/content";
 
 /**
  * "Itinéraire Vietnam" is almost always searched with a duration attached:
@@ -154,7 +154,7 @@ export default async function Itineraire() {
                 <>
                   Ces paliers valent pour un circuit privé, où l&apos;on ne perd
                   pas de temps à attendre le reste du groupe.{" "}
-                  <a className="lnk" href="/quand-partir-au-vietnam">
+                  <a className="lnk" href="/quand-partir-au-vietnam/">
                     La saison modifie aussi le parcours
                   </a>
                 </>
@@ -201,7 +201,7 @@ export default async function Itineraire() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
             </p>
           </div>
         </section>

@@ -258,7 +258,7 @@ export default async function Rizieres() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href="/quand-partir-au-vietnam">
+              <a className="btn btn--amber" href="/quand-partir-au-vietnam/">
                 Le calendrier des douze mois
               </a>
             </p>

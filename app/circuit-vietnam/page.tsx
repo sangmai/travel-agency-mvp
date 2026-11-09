@@ -164,7 +164,7 @@ export default async function CircuitsIndex() {
                 <>
                   Le tableau sert à écarter, pas à choisir&nbsp;: trois lignes
                   éliminées, il reste deux programmes à ouvrir.{" "}
-                  <a className="lnk" href="/itineraire-vietnam">
+                  <a className="lnk" href="/itineraire-vietnam/">
                     Quelle durée pour quel itinéraire
                   </a>
                 </>
@@ -202,7 +202,7 @@ export default async function CircuitsIndex() {
               Chaque fiche détaille en plus ce qui lui est propre. Nous listons
               les exclusions aussi précisément que les inclusions&nbsp;: un devis
               qui ne dit pas ce qu&apos;il ne couvre pas n&apos;est pas un devis.{" "}
-              <a className="lnk" href="/budget-voyage-vietnam">
+              <a className="lnk" href="/budget-voyage-vietnam/">
                 Le budget réel d&apos;un voyage
               </a>
             </p>
@@ -223,7 +223,7 @@ export default async function CircuitsIndex() {
                   C&apos;est la question qui élimine le plus. Dix jours imposent
                   une seule région, quinze permettent la traversée, trois
                   semaines ouvrent le Cambodge. Tout le reste en découle.{" "}
-                  <a className="lnk" href="/itineraire-vietnam">
+                  <a className="lnk" href="/itineraire-vietnam/">
                     Ce qui tient selon la durée
                   </a>
                 </p>
@@ -235,7 +235,7 @@ export default async function CircuitsIndex() {
                   n&apos;ont pas la même saison. Trancher avant de regarder les
                   programmes évite de comparer des voyages qui ne se comparent
                   pas.{" "}
-                  <a className="lnk" href="/nord-ou-sud-vietnam">
+                  <a className="lnk" href="/nord-ou-sud-vietnam/">
                     Nord ou Sud, le détail
                   </a>
                 </p>
@@ -246,7 +246,7 @@ export default async function CircuitsIndex() {
                   Le Vietnam s&apos;étire sur 1 650 kilomètres et n&apos;a pas
                   une saison mais trois, décalées. Vos dates peuvent écarter une
                   région entière — mieux vaut le savoir avant.{" "}
-                  <a className="lnk" href="/quand-partir-au-vietnam">
+                  <a className="lnk" href="/quand-partir-au-vietnam/">
                     Le calendrier des trois régions
                   </a>
                 </p>
@@ -257,7 +257,7 @@ export default async function CircuitsIndex() {
                   Entre 55 et 300 € par jour et par personne selon la gamme. Ce
                   n&apos;est pas un détail de confort&nbsp;: c&apos;est le poste
                   qui fait varier le budget du simple au quintuple.{" "}
-                  <a className="lnk" href="/voyage-luxe-vietnam">
+                  <a className="lnk" href="/voyage-luxe-vietnam/">
                     Ce que l&apos;écart achète
                   </a>
                 </p>

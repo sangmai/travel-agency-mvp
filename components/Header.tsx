@@ -1,5 +1,5 @@
 import { Glyph } from "./Art";
-import { getSite } from "@/lib/content";
+import { getSite, lien} from "@/lib/content";
 
 /**
  * The brand lockup carries the byline, in the header and the footer alike.
@@ -57,7 +57,7 @@ export async function Header() {
         </a>
 
         <nav className="hdr__nav" aria-label="Navigation principale">
-          {NAV.map((i) => <a key={i.href} href={i.href}>{i.label}</a>)}
+          {NAV.map((i) => <a key={i.href} href={lien(i.href)}>{i.label}</a>)}
         </nav>
 
         <div className="hdr__end">

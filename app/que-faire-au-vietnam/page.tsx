@@ -6,7 +6,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getSite, getTrips, tripUrl, TRIP_BASE, type PlaceId, getGuide } from "@/lib/content";
+import { getSite, getTrips, tripUrl, TRIP_BASE, type PlaceId, getGuide, lien} from "@/lib/content";
 
 /**
  * A very broad query, therefore a heavily contested one. What sets us apart is
@@ -238,7 +238,7 @@ export default async function QueFaire() {
                 const circuit = circuitPour(e.lieu);
                 return (
                   <li className="tile" key={e.lieu + e.titre}>
-                    <a href={circuit ? tripUrl(circuit.slug) : TRIP_BASE}>
+                    <a href={circuit ? tripUrl(circuit.slug) : lien(TRIP_BASE)}>
                       <span className="tile__fig">
                         <Photo id={e.photo} role="card" />
                       </span>
@@ -275,7 +275,7 @@ export default async function QueFaire() {
                   Additionnées, ces durées dépassent trois semaines : c&apos;est
                   voulu. Personne ne fait tout en un voyage, et vouloir le faire
                   est la façon la plus sûre de n&apos;en garder que la fatigue.{" "}
-                  <a className="lnk" href="/itineraire-vietnam">
+                  <a className="lnk" href="/itineraire-vietnam/">
                     Les itinéraires par durée
                   </a>
                 </>

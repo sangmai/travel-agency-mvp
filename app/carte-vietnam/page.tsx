@@ -6,7 +6,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getGuide, getSite, getTrips, resolveStops, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getGuide, getSite, getTrips, resolveStops, tripUrl, TRIP_BASE, lien} from "@/lib/content";
 
 /**
  * The map is computed at build time from Natural Earth, then rendered as inline
@@ -185,7 +185,7 @@ export default async function CarteVietnam() {
                   Au-delà de cinq heures de route, nous proposons presque
                   toujours un vol intérieur : 40 à 110 € le trajet contre une
                   journée entière rendue au voyage.{" "}
-                  <a className="lnk" href="/itineraire-vietnam">
+                  <a className="lnk" href="/itineraire-vietnam/">
                     Ce qui tient selon la durée
                   </a>
                 </>
@@ -251,7 +251,7 @@ export default async function CarteVietnam() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
             </p>
           </div>
         </section>

@@ -39,7 +39,7 @@ export async function Advisor() {
         </ul>
 
         <p className="cta-row">
-          <a className="lnk" href="/agence-de-voyage-vietnam">
+          <a className="lnk" href="/agence-de-voyage-vietnam/">
             Qui nous sommes, en détail
           </a>
         </p>

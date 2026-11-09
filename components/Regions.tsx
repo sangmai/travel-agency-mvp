@@ -1,7 +1,7 @@
 import { Photo, photoCaption } from "./Photo";
 import { SectionHead } from "./ui";
 import { Accent } from "@/lib/text";
-import { getRegions, getHome } from "@/lib/content";
+import { getRegions, getHome, lien} from "@/lib/content";
 
 /**
  * Offset grid, photo and text alternating sides: a row of identical cards reads
@@ -35,7 +35,7 @@ export async function Regions() {
 
               <div className="rgn__foot">
                 <span>Durée conseillée · {r.duration}</span>
-                <a className="lnk" href={r.route}>
+                <a className="lnk" href={lien(r.route)}>
                   Nos circuits dans {r.name.toLowerCase()} →
                 </a>
               </div>

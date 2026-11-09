@@ -6,7 +6,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE, lien} from "@/lib/content";
 
 /**
  * The subject where marketing vocabulary lies most: in Vietnam "trek" covers
@@ -154,7 +154,7 @@ export default async function Trek() {
                   Ce qui surprend n&apos;est pas la pente mais
                   l&apos;humidité : à 80 % d&apos;hygrométrie, un effort modéré
                   se ressent nettement plus qu&apos;en Europe.{" "}
-                  <a className="lnk" href="/quand-partir-au-vietnam">
+                  <a className="lnk" href="/quand-partir-au-vietnam/">
                     Le calendrier des trois régions
                   </a>
                 </>
@@ -260,7 +260,7 @@ export default async function Trek() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
             </p>
           </div>
         </section>

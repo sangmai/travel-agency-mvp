@@ -6,7 +6,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE, lien} from "@/lib/content";
 
 /**
  * A guide, not a product listing.
@@ -174,7 +174,7 @@ export default async function VoyageEnFamille() {
                   Le seuil de six ans n&apos;a rien de réglementaire : c&apos;est
                   l&apos;âge à partir duquel un enfant raconte son voyage au
                   retour. En dessous, il le vit, mais ne le garde pas.{" "}
-                  <a className="lnk" href="/itineraire-vietnam">
+                  <a className="lnk" href="/itineraire-vietnam/">
                     Les durées d&apos;itinéraire en général
                   </a>
                 </>
@@ -205,7 +205,7 @@ export default async function VoyageEnFamille() {
                   Trois heures est le seuil au-delà duquel une journée bascule :
                   en deçà, le trajet est une transition ; au-delà, il devient la
                   journée elle-même.{" "}
-                  <a className="lnk" href="/carte-vietnam">
+                  <a className="lnk" href="/carte-vietnam/">
                     Toutes les distances du pays
                   </a>
                 </>
@@ -310,7 +310,7 @@ export default async function VoyageEnFamille() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
             </p>
           </div>
         </section>

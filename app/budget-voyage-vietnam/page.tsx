@@ -7,7 +7,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
+import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide, lien} from "@/lib/content";
 
 /**
  * The market's second informational query after seasonality.
@@ -209,7 +209,7 @@ export default async function BudgetPage() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
             </p>
           </div>
         </section>

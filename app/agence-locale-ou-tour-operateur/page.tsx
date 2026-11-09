@@ -138,7 +138,7 @@ export default async function AgenceOuTO() {
               {site.operator.legalName}, {site.address.street},{" "}
               {site.address.city}. Licence <b>{site.operator.license}</b>,
               délivrée par l&apos;{site.operator.membership.toLowerCase()}.{" "}
-              <a className="lnk" href="/agence-de-voyage-vietnam">
+              <a className="lnk" href="/agence-de-voyage-vietnam/">
                 Nos coordonnées complètes
               </a>
             </p>

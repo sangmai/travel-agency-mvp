@@ -6,7 +6,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getGuide, getSite, getTrips, getBudget, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getGuide, getSite, getTrips, getBudget, tripUrl, TRIP_BASE, lien} from "@/lib/content";
 
 /**
  * The page a luxury agency would write as a mood board. This one prices the
@@ -171,7 +171,7 @@ export default async function VoyageDeLuxe() {
                 <>
                   Deux postes concentrent l&apos;essentiel de la différence. Le
                   reste se discute, et une partie ne se discute même pas.{" "}
-                  <a className="lnk" href="/budget-voyage-vietnam">
+                  <a className="lnk" href="/budget-voyage-vietnam/">
                     Le barème complet des trois gammes
                   </a>
                 </>
@@ -218,7 +218,7 @@ export default async function VoyageDeLuxe() {
                   attendre son tour, le mouillage choisi plutôt que subi&nbsp;:
                   c&apos;est le poste où l&apos;argent se transforme le plus
                   directement en expérience.{" "}
-                  <a className="lnk" href="/halong-ou-lan-ha">
+                  <a className="lnk" href="/halong-ou-lan-ha/">
                     Quelle baie choisir
                   </a>
                 </p>
@@ -257,7 +257,7 @@ export default async function VoyageDeLuxe() {
               Mettez le budget sur la jonque et sur la plage, restez en bon 4★
               dans les villes. C&apos;est exactement ce que le sur-mesure permet
               et qu&apos;un forfait ne permet pas.{" "}
-              <a className="lnk" href="/agence-locale-ou-tour-operateur">
+              <a className="lnk" href="/agence-locale-ou-tour-operateur/">
                 Agence locale ou tour-opérateur
               </a>
             </p>
@@ -302,7 +302,7 @@ export default async function VoyageDeLuxe() {
                 ))}
               </ul>
               <p className="cta-row">
-                <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+                <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
               </p>
             </div>
           </section>

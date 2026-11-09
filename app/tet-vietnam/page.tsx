@@ -266,7 +266,7 @@ export default async function TetVietnam() {
                   La fenêtre à viser est donc J-10 à J-1&nbsp;: l&apos;atmosphère
                   sans les fermetures. Pour {prochain.annee}, cela veut dire
                   rentrer avant le {prochain.libelle.replace(/^\w+ /, "")}.{" "}
-                  <a className="lnk" href="/quand-partir-au-vietnam">
+                  <a className="lnk" href="/quand-partir-au-vietnam/">
                     Le calendrier des trois régions
                   </a>
                 </>
@@ -348,7 +348,7 @@ export default async function TetVietnam() {
                   eux-mêmes montent fortement&nbsp;; les villes du Nord beaucoup
                   moins. L&apos;écart peut dépasser celui des vols, et il se
                   prévoit mal sans connaître la destination.{" "}
-                  <a className="lnk" href="/budget-voyage-vietnam">
+                  <a className="lnk" href="/budget-voyage-vietnam/">
                     Le barème des trois gammes
                   </a>
                 </p>

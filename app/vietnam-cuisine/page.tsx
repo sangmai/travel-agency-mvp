@@ -6,7 +6,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE, lien} from "@/lib/content";
 
 /**
  * Food decides a trip to Vietnam more often than landscapes do, and it is a
@@ -149,7 +149,7 @@ export default async function Cuisine() {
                   La restauration est le poste où l&apos;on dépense le moins au
                   Vietnam et dont on se souvient le plus. Comptez 10 à 25 € par
                   jour et par personne, tout compris.{" "}
-                  <a className="lnk" href="/budget-voyage-vietnam">Le budget détaillé</a>
+                  <a className="lnk" href="/budget-voyage-vietnam/">Le budget détaillé</a>
                 </>
               }
             />
@@ -222,7 +222,7 @@ export default async function Cuisine() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
             </p>
           </div>
         </section>

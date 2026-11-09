@@ -74,7 +74,7 @@ export async function WhenToGo() {
               selon les années : fête magnifique, mais hausse des tarifs et sites
               bondés pendant une semaine. Nous vous indiquons la date exacte de
               votre année de départ dans le devis.{" "}
-              <a className="lnk" href="/quand-partir-au-vietnam">Le guide complet</a>
+              <a className="lnk" href="/quand-partir-au-vietnam/">Le guide complet</a>
             </>
           }
         />

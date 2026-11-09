@@ -1,7 +1,7 @@
 import { Photo } from "./Photo";
 import { SectionHead } from "./ui";
 import { Accent } from "@/lib/text";
-import { getEnvies, getHome } from "@/lib/content";
+import { getEnvies, getHome, lien} from "@/lib/content";
 
 /**
  * Entry by desire, straight after the hero — that is the question a visitor
@@ -24,7 +24,7 @@ export async function Envies() {
         <ul className="tiles">
           {envies.map((e) => (
             <li className="tile" key={e.route}>
-              <a href={e.route}>
+              <a href={lien(e.route)}>
                 <span className="tile__fig">
                   <Photo id={e.photo} role="card" />
                 </span>

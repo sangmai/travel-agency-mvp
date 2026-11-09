@@ -1,5 +1,5 @@
 import { Glyph } from "./Art";
-import { getSite, getTrips, tripUrl } from "@/lib/content";
+import { getSite, getTrips, tripUrl, lien} from "@/lib/content";
 import { routesIn, type RouteGroup } from "@/lib/routes";
 
 /**
@@ -82,7 +82,7 @@ export async function Footer() {
                 <h3>{title}</h3>
                 <ul>
                   {routes.map((r) => (
-                    <li key={r.path}><a href={r.path}>{r.label}</a></li>
+                    <li key={r.path}><a href={lien(r.path)}>{r.label}</a></li>
                   ))}
                   {/* The six itineraries, listed under "Circuits".
 
@@ -112,7 +112,7 @@ export async function Footer() {
           <p>© 2026 {site.name} · voyages opérés par {site.operator.legalName}</p>
           <nav className="ftr__legal" aria-label="Informations légales">
             {routesIn("legal").map((r) => (
-              <a key={r.path} href={r.path}>{r.label}</a>
+              <a key={r.path} href={lien(r.path)}>{r.label}</a>
             ))}
             <a href={site.social.facebook} rel="noopener">Facebook</a>
             <a href={site.social.instagram} rel="noopener">Instagram</a>

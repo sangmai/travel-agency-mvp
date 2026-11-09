@@ -6,7 +6,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE, lien} from "@/lib/content";
 
 /**
  * A narrow query, but one of very high intent: whoever types it has already
@@ -157,7 +157,7 @@ export default async function HalongOuLanHa() {
                   Les deux baies partagent le classement Unesco depuis
                   l&apos;extension de 2000 : choisir Lan Ha ne revient pas à
                   renoncer au site classé.{" "}
-                  <a className="lnk" href="/quand-partir-au-vietnam">
+                  <a className="lnk" href="/quand-partir-au-vietnam/">
                     Le calendrier des trois régions
                   </a>
                 </>
@@ -253,7 +253,7 @@ export default async function HalongOuLanHa() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
             </p>
           </div>
         </section>

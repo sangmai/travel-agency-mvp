@@ -48,11 +48,17 @@ async function verifierLiens<T extends { route: string }>(
   entrees: T[],
   fichier: string,
 ): Promise<T[]> {
+  /* Identities, not links: the bare form, which is what lib/routes.ts stores
+     and what the content files are written with. `tripUrl` belongs on the other
+     side of that line — it produces the address a browser follows, slash
+     included — so composing the slug here keeps the two from drifting into each
+     other, which is exactly what broke the build when tripUrl gained its
+     slash. */
   const connues = new Set<string>([
     "/",
     TRIP_BASE,
     ...ROUTES.filter((r) => r.published).map((r) => r.path),
-    ...(await source.trips()).map((t) => tripUrl(t.slug)),
+    ...(await source.trips()).map((t) => `${TRIP_BASE}/${t.slug}`),
   ]);
 
   for (const e of entrees) {
@@ -122,8 +128,25 @@ export async function getPhotoCredits() {
   return Object.entries(photos).map(([id, p]) => ({ id, ...p }));
 }
 
+/**
+ * Canonical form of an internal address.
+ *
+ * `trailingSlash: true` means every page exists at one address and one only,
+ * the one ending in a slash — that is the form the canonical tags and the
+ * sitemap declare. The links did not: all thirty-eight of them pointed at the
+ * bare form, which answers 301. Every visitor paid a round trip, and Google
+ * discovered twenty-eight redirecting addresses it had been handed by the site
+ * itself, then reported them back as "Page with redirect".
+ *
+ * Paths used as identifiers — the keys in lib/routes.ts, TRIP_BASE — keep their
+ * bare form, because that is what they are compared against. The slash belongs
+ * to the href, so it is added here, at the moment an address becomes a link.
+ */
+export const lien = (path: string) =>
+  path === "/" || /[#?]/.test(path) ? path : path.replace(/\/?$/, "/");
+
 /** URL publique d'une fiche voyage. */
 export const TRIP_BASE = "/circuit-vietnam";
-export const tripUrl = (slug: string) => `${TRIP_BASE}/${slug}`;
+export const tripUrl = (slug: string) => lien(`${TRIP_BASE}/${slug}`);
 
 export type { PhotoId, PlaceId };

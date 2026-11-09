@@ -47,7 +47,7 @@ export async function Budget() {
               émettons. Trois leviers les font bouger : la saison, la gamme
               d&apos;hébergement et le nombre de vols intérieurs retenus face aux
               trajets par la route.{" "}
-              <a className="lnk" href="/budget-voyage-vietnam">Détail poste par poste</a>
+              <a className="lnk" href="/budget-voyage-vietnam/">Détail poste par poste</a>
             </>
           }
         />

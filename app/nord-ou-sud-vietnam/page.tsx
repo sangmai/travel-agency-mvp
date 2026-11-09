@@ -6,7 +6,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
+import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide, lien} from "@/lib/content";
 
 /**
  * A comparison query, therefore a hesitation: whoever types it has already
@@ -179,7 +179,7 @@ export default async function NordOuSud() {
                   Le Centre — Hué, Hoi An, Da Nang — n&apos;entre pas dans ce
                   comparatif parce qu&apos;il ne se choisit pas contre les deux
                   autres : il se traverse entre les deux.{" "}
-                  <a className="lnk" href="/quand-partir-au-vietnam">
+                  <a className="lnk" href="/quand-partir-au-vietnam/">
                     Le calendrier des trois régions
                   </a>
                 </>
@@ -252,7 +252,7 @@ export default async function NordOuSud() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
             </p>
           </div>
         </section>

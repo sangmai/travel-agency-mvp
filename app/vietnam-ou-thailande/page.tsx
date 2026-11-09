@@ -107,7 +107,7 @@ export default async function VietnamOuThailande() {
                   Les deux pays se rejoignent sur l&apos;essentiel : vol
                   d&apos;environ treize heures depuis Paris, décalage de cinq à
                   six heures, et aucune obligation vaccinale.{" "}
-                  <a className="lnk" href="/visa-vietnam">Les formalités pour le Vietnam</a>
+                  <a className="lnk" href="/visa-vietnam/">Les formalités pour le Vietnam</a>
                 </>
               }
             />
@@ -130,7 +130,7 @@ export default async function VietnamOuThailande() {
                 <>
                   Un départ en janvier favorise nettement la Thaïlande ; un
                   départ en mars ou avril, le Vietnam.{" "}
-                  <a className="lnk" href="/quand-partir-au-vietnam">
+                  <a className="lnk" href="/quand-partir-au-vietnam/">
                     Le détail mois par mois
                   </a>
                 </>

@@ -1,7 +1,7 @@
 import { Photo } from "./Photo";
 import { PriceFrom, SectionHead } from "./ui";
 import { Accent } from "@/lib/text";
-import { getTrips, resolveStops, tripUrl, getHome, TRIP_BASE } from "@/lib/content";
+import { getTrips, resolveStops, tripUrl, getHome, TRIP_BASE, lien} from "@/lib/content";
 
 /**
  * A list, not a grid: six itineraries are compared by reading down one column.
@@ -72,7 +72,7 @@ export async function Circuits() {
             the FAQ: it answers the questions this section raises and cannot
             answer in six cards. */}
         <p className="cta-row cta-row--center">
-          <a className="btn btn--amber" href={TRIP_BASE}>
+          <a className="btn btn--amber" href={lien(TRIP_BASE)}>
             Comparer les six circuits
           </a>
         </p>

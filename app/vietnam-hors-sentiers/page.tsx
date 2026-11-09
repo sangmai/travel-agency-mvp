@@ -6,7 +6,7 @@ import { DataTable } from "@/components/DataTable";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE, lien} from "@/lib/content";
 
 /**
  * The subject where marketing vocabulary is emptiest. Every agency in the
@@ -163,7 +163,7 @@ export default async function HorsSentiers() {
                   Le niveau 1 est presque toujours le bon arbitrage, et c&apos;est
                   rarement celui qu&apos;on vend : changer de baie ne coûte rien
                   et divise la fréquentation par dix.{" "}
-                  <a className="lnk" href="/halong-ou-lan-ha">
+                  <a className="lnk" href="/halong-ou-lan-ha/">
                     Halong ou Lan Ha, le détail
                   </a>
                 </>
@@ -194,7 +194,7 @@ export default async function HorsSentiers() {
                   Comptez deux à trois jours de plus qu&apos;un circuit classique
                   de même ambition. Ce sont des jours de route, pas de visite —
                   un programme hors des sentiers en huit jours n&apos;existe pas.{" "}
-                  <a className="lnk" href="/carte-vietnam">
+                  <a className="lnk" href="/carte-vietnam/">
                     Toutes les distances du pays
                   </a>
                 </>
@@ -255,7 +255,7 @@ export default async function HorsSentiers() {
                   les routes de Dong Van et de Cao Bang. Sur un itinéraire sans
                   alternative, cela signifie un programme refait sur place.
                   Octobre et novembre sont les deux meilleurs mois.{" "}
-                  <a className="lnk" href="/quand-partir-au-vietnam">
+                  <a className="lnk" href="/quand-partir-au-vietnam/">
                     Le calendrier des trois régions
                   </a>
                 </p>
@@ -301,7 +301,7 @@ export default async function HorsSentiers() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
             </p>
           </div>
         </section>

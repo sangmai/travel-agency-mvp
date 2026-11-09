@@ -1,3 +1,4 @@
+import { lien } from "@/lib/content";
 import type { ReactNode } from "react";
 import { euro, monthYear, score } from "@/lib/format";
 import type { Review } from "@/lib/content";
@@ -88,7 +89,7 @@ export function Fil({
       {items.map((it, i) => (
         <span key={it.label}>
           {i > 0 && <span aria-hidden="true">›</span>}
-          {it.href ? <a href={it.href}>{it.label}</a> : it.label}
+          {it.href ? <a href={lien(it.href)}>{it.label}</a> : it.label}
         </span>
       ))}
     </nav>
@@ -118,7 +119,7 @@ export function Closing({
       <div className="wrap">
         <h2 className="d2">{title}</h2>
         <p>{body}</p>
-        <a className="btn" href={href}>
+        <a className="btn" href={lien(href)}>
           Demander mon devis gratuit
         </a>
       </div>

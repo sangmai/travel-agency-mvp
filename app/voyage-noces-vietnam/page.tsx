@@ -7,7 +7,7 @@ import { QuoteForm } from "@/components/QuoteForm";
 import { Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE, lien} from "@/lib/content";
 
 /**
  * The angle no other page on this site uses: honeymooners do not choose their
@@ -159,7 +159,7 @@ export default async function VoyageDeNoces() {
                   beau séjour qui s&apos;achève sur la côte du Centre plutôt
                   qu&apos;au large&nbsp;; un mariage en septembre, un voyage qui
                   finit à terre.{" "}
-                  <a className="lnk" href="/quand-partir-au-vietnam">
+                  <a className="lnk" href="/quand-partir-au-vietnam/">
                     Le calendrier mois par mois
                   </a>
                 </>
@@ -237,7 +237,7 @@ export default async function VoyageDeNoces() {
                   posons la question des dates avant toutes les autres.
                 </p>
                 <p className="note">
-                  <a className="lnk" href="/trek-vietnam">
+                  <a className="lnk" href="/trek-vietnam/">
                     Marcher dans le Nord
                   </a>
                 </p>
@@ -268,7 +268,7 @@ export default async function VoyageDeNoces() {
                 <p className="note">
                   Les deux ne s&apos;atteignent qu&apos;en avion, ce qui ajoute une
                   demi-journée au programme.{" "}
-                  <a className="lnk" href="/carte-vietnam">
+                  <a className="lnk" href="/carte-vietnam/">
                     Les distances du pays
                   </a>
                 </p>
@@ -296,7 +296,7 @@ export default async function VoyageDeNoces() {
               Le détail poste par poste de ce que l&apos;écart de gamme achète —
               et des trois endroits où il n&apos;achète presque rien — est sur la
               page consacrée au haut de gamme.{" "}
-              <a className="lnk" href="/voyage-luxe-vietnam">
+              <a className="lnk" href="/voyage-luxe-vietnam/">
                 Ce que l&apos;écart achète
               </a>
             </p>
@@ -340,7 +340,7 @@ export default async function VoyageDeNoces() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Comparer les six circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Comparer les six circuits</a>
             </p>
           </div>
         </section>

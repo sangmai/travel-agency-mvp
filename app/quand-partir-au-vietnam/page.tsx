@@ -6,7 +6,7 @@ import { SeasonTable } from "@/components/WhenToGo";
 import { Closing, Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide } from "@/lib/content";
+import { getSite, getTrips, tripUrl, TRIP_BASE, getGuide, lien} from "@/lib/content";
 
 /**
  * "Quand partir au Vietnam" is the highest-volume informational query in the
@@ -120,7 +120,7 @@ export default async function QuandPartir() {
               Une saison échappe à ce tableau parce qu&apos;elle ne dure que
               quinze jours : la moisson des terrasses du Nord, dorées de la
               mi-septembre au début octobre et en eau de mai à la mi-juin.{" "}
-              <a className="lnk" href="/rizieres-vietnam">
+              <a className="lnk" href="/rizieres-vietnam/">
                 Les deux saisons des rizières, massif par massif
               </a>
             </p>
@@ -185,7 +185,7 @@ export default async function QuandPartir() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Voir tous les circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Voir tous les circuits</a>
             </p>
           </div>
         </section>

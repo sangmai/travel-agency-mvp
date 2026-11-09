@@ -8,7 +8,7 @@ import { QuoteForm } from "@/components/QuoteForm";
 import { Fil, JsonLd, PriceFrom, SectionHead } from "@/components/ui";
 import { GuideMeta, articleNode } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getGuide, getSite, getTrips, tripUrl, TRIP_BASE, lien} from "@/lib/content";
 import { euro } from "@/lib/format";
 
 /**
@@ -203,7 +203,7 @@ export default async function CircuitQuinzeJours() {
                   )}
                 </p>
                 <p className="note">
-                  <a className="lnk" href="/nord-ou-sud-vietnam">
+                  <a className="lnk" href="/nord-ou-sud-vietnam/">
                     Nord ou Sud, si vous devez choisir
                   </a>
                 </p>
@@ -237,7 +237,7 @@ export default async function CircuitQuinzeJours() {
             <p className="note">
               Le détail poste par poste — hébergement, guide, chauffeur, vols
               intérieurs, repas, visa — est sur la page consacrée au budget.{" "}
-              <a className="lnk" href="/budget-voyage-vietnam">
+              <a className="lnk" href="/budget-voyage-vietnam/">
                 Ce que coûte vraiment un voyage au Vietnam
               </a>
             </p>
@@ -266,7 +266,7 @@ export default async function CircuitQuinzeJours() {
             <p className="note">
               Il n&apos;existe pas de mauvaise période pour le Vietnam, seulement
               un itinéraire à adapter au mois choisi.{" "}
-              <a className="lnk" href="/quand-partir-au-vietnam">
+              <a className="lnk" href="/quand-partir-au-vietnam/">
                 Le calendrier mois par mois, région par région
               </a>
             </p>
@@ -310,7 +310,7 @@ export default async function CircuitQuinzeJours() {
               ))}
             </ul>
             <p className="cta-row">
-              <a className="btn btn--amber" href={TRIP_BASE}>Comparer les six circuits</a>
+              <a className="btn btn--amber" href={lien(TRIP_BASE)}>Comparer les six circuits</a>
             </p>
           </div>
         </section>
