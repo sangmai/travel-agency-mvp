@@ -50,6 +50,12 @@ const versMd = (pathname: string) => {
    the representation it wants. */
 const estUnePage = (pathname: string) => !/\.[a-z0-9]+$/i.test(pathname);
 
+/** The inverse of `versMd`: `/visa-vietnam.md` → `/visa-vietnam/`, `/index.md` → `/`. */
+const versPage = (pathname: string) => {
+  const nu = pathname.replace(/\.md$/, "");
+  return nu === "/index" ? "/" : `${nu}/`;
+};
+
 /**
  * Returns the Markdown representation when the client asked for it, `null`
  * otherwise — in which case the caller serves the page as usual.
@@ -110,7 +116,40 @@ export async function page(request: Request, env: AssetsEnv): Promise<Response> 
 
   try {
     const url = new URL(request.url);
-    if (!estUnePage(url.pathname) || !reponse.ok) return reponse;
+    if (!reponse.ok) return reponse;
+
+    /**
+     * A `.md` fetched at its own address is the same page in another format,
+     * and nothing told Google so.
+     *
+     * The negotiated answer carried a canonical from the start; this one did
+     * not, while every HTML page advertises it through a `rel="alternate"`
+     * header — so the crawler was being walked to thirty files that looked like
+     * thirty new pages saying exactly what the existing ones say. The next
+     * Search Console report would have been "Duplicate without user-selected
+     * canonical", thirty times.
+     *
+     * A canonical rather than a noindex: this is an alternate representation,
+     * the case the HTTP header form of rel=canonical exists for, and it folds
+     * the address into the page instead of discarding it. Blocking the files in
+     * robots.txt would have been worse still — they exist for the crawlers that
+     * would then be unable to read them.
+     */
+    if (url.pathname.endsWith(".md")) {
+      const entetes = new Headers(reponse.headers);
+      entetes.set("content-type", "text/markdown; charset=utf-8");
+      entetes.set(
+        "link",
+        `<${new URL(versPage(url.pathname), url.origin).href}>; rel="canonical"`,
+      );
+      return new Response(reponse.body, {
+        status: reponse.status,
+        statusText: reponse.statusText,
+        headers: entetes,
+      });
+    }
+
+    if (!estUnePage(url.pathname)) return reponse;
 
     const entetes = new Headers(reponse.headers);
     entetes.append("vary", "Accept");
