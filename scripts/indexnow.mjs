@@ -117,12 +117,26 @@ const reponse = await fetch(ENDPOINT, {
   }),
 });
 
-/* 200 accepted, 202 accepted while the key file is still being verified.
-   Anything else leaves the state file untouched, so the next run retries the
-   same URLs instead of believing they were announced. */
+/**
+ * 200 accepted, 202 accepted while the key file is still being verified.
+ *
+ * Anything else leaves the state file untouched, so the next run retries the
+ * same URLs instead of believing they were announced — and it does not fail.
+ * This step runs after `wrangler deploy` in `npm run deploy`: throwing here
+ * returned a non-zero exit code for a deployment that had already succeeded,
+ * which reads as "the deploy failed" to anybody and to any CI. Announcing a
+ * release is not the release.
+ *
+ * Silence would be worse than a wrong exit code, so the refusal is printed in
+ * full and will be printed again on every deploy until it is dealt with.
+ */
 if (reponse.status !== 200 && reponse.status !== 202) {
   const corps = await reponse.text().catch(() => "");
-  throw new Error(`IndexNow a répondu ${reponse.status} ${reponse.statusText}. ${corps.slice(0, 300)}`);
+  console.error(
+    `indexnow : refus ${reponse.status} ${reponse.statusText} — ${corps.slice(0, 300)}\n` +
+      `  ${changees.length} URL non annoncée(s) ; elles seront reproposées au prochain déploiement.`,
+  );
+  process.exit(0);
 }
 
 writeFileSync(
