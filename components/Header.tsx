@@ -48,7 +48,16 @@ export async function Header() {
   return (
     <header className="hdr">
       <div className="hdr__in">
-        <a className="mark" href="/" aria-label={`${site.name} ${site.byline} — accueil`}>
+        {/* The accessible name has to contain the visible one, or voice control
+            fails on the words the user can actually read: the label said
+            "… by Jasmin Travel — accueil" while the line underneath also showed
+            "· Da Nang". Built from the same three pieces rendered below so the
+            two cannot drift apart again. */}
+        <a
+          className="mark"
+          href="/"
+          aria-label={`${site.name} ${site.byline} · ${site.address.city} — accueil`}
+        >
           <Glyph className="mark__glyph" />
           <span>
             <span className="mark__name">{site.name}</span>
