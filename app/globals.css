@@ -2982,11 +2982,14 @@ ol.art__liste {
   text-transform: uppercase;
 }
 
-/* Index. One column until there is a second article to put beside the first. */
+/* Index.
+   `auto-fill` and not `auto-fit`: with `auto-fit` a lone article stretches
+   across the whole row and its photograph becomes a billboard. `auto-fill`
+   keeps the empty tracks, so one card is the same width as one of three. */
 .art__index {
   display: grid;
   gap: clamp(1.2rem, 3vw, 2rem);
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   list-style: none;
   margin: 0;
   padding: 0;
@@ -3033,13 +3036,6 @@ ol.art__liste {
   margin: 0;
 }
 
-@media (min-width: 900px) {
-  /* Two columns of text would be unreadable; the picture takes the side. */
-  .art__index a {
-    grid-template-columns: 38% 1fr;
-  }
-
-  .art__index a > div {
-    padding: 1.4rem 1.4rem 1.4rem 0;
-  }
-}
+/* The picture stays on top at every width. Putting it beside the text needed
+   the card to be wide, and a card is only wide when it is alone — which is the
+   one case that should not decide the layout of the other two. */

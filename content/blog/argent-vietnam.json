@@ -1,0 +1,226 @@
+{
+  "slug": "argent-vietnam",
+  "title": "Argent au Vietnam : payer, retirer et donner un pourboire",
+  "description": "Combien d'espèces emporter, où la carte passe et où elle s'arrête, comment retirer sans payer trois fois les frais, et ce qui se donne en pourboire.",
+  "ogTitle": "Argent au Vietnam : payer, retirer, donner un pourboire",
+  "ogDescription": "Le dong a beaucoup de zéros et deux billets se ressemblent dangereusement. Ce qu'il faut savoir avant de payer quoi que ce soit.",
+  "photo": "marche",
+  "photoAlt": "Étal de poissons séchés et de condiments sur un marché vietnamien, prix affichés en dongs",
+  "datePublished": "2026-11-10",
+  "dateModified": "2026-11-10",
+  "author": "",
+  "chapo": "Le dong a beaucoup de zéros, deux billets se ressemblent, et la carte s'arrête à la sortie des villes.",
+  "lede": "**Comptez 15 à 30 € par jour et par personne en espèces, et retirez sur place plutôt que de changer en France.** Le Vietnam reste un pays où l'on paie en liquide dès qu'on quitte les hôtels et les restaurants des villes, et la seule vraie difficulté tient au nombre de zéros : deux billets se ressemblent, et c'est toujours le même qui coûte cher.",
+  "sections": [
+    {
+      "h2": "Combien d'espèces prévoir par jour",
+      "blocs": [
+        {
+          "p": "**De 15 à 30 € par jour et par personne**, si vos nuits et vos transferts sont déjà réglés. Cette fourchette couvre les déjeuners, les dîners, les boissons et quelques achats — c'est le chiffre que nous donnons dans nos devis, et il est détaillé poste par poste sur notre page [budget](/budget-voyage-vietnam/)."
+        },
+        {
+          "p": "Dans le bas de la fourchette, on mange là où mangent les Vietnamiens : un bún chả à Hanoï, un bánh mì de rue, un café dans la ruelle. Dans le haut, on dîne dans des restaurants de vieille ville avec une carte en français et une bouteille de vin, qui coûte à elle seule davantage qu'un repas entier ailleurs."
+        },
+        {
+          "p": "Le poste qui déborde le plus souvent n'est aucun des deux : ce sont les boissons. Une bière locale coûte très peu, un cocktail dans un bar d'hôtel coûte le prix européen, et l'écart se creuse sans qu'on le remarque."
+        }
+      ]
+    },
+    {
+      "h2": "Lire les billets sans se tromper",
+      "blocs": [
+        {
+          "p": "**Le piège tient en deux billets : le 20 000 et le 500 000 dongs sont tous les deux bleus.** Le second vaut vingt-cinq fois le premier, et c'est l'erreur que tout le monde commet une fois, en général le premier jour, en payant un taxi."
+        },
+        {
+          "p": "Le taux de change bouge d'une année sur l'autre ; ce qui ne bouge pas, c'est le nombre de zéros. Les coupures courantes vont de 1 000 à 500 000 dongs, et les plus grosses sont en polymère, lisse et glissant — deux billets se collent facilement l'un à l'autre dans un portefeuille."
+        },
+        {
+          "tableau": {
+            "legende": "Les coupures et ce qu'on en fait",
+            "colonnes": [
+              "Billet",
+              "Couleur dominante",
+              "Usage courant"
+            ],
+            "lignes": [
+              [
+                "1 000 – 5 000",
+                "Gris, rouge, bleu pâle",
+                "Appoint, parking, toilettes publiques"
+              ],
+              [
+                "10 000",
+                "Brun-jaune",
+                "Un café de rue, un trajet court"
+              ],
+              [
+                "20 000",
+                "Bleu",
+                "Un bánh mì, une bière locale"
+              ],
+              [
+                "50 000",
+                "Rose",
+                "Un repas de rue complet"
+              ],
+              [
+                "100 000",
+                "Vert",
+                "Un déjeuner au restaurant"
+              ],
+              [
+                "200 000",
+                "Brun-rouge",
+                "Un dîner, une course en taxi longue"
+              ],
+              [
+                "500 000",
+                "Bleu-vert",
+                "Le billet à vérifier deux fois"
+              ]
+            ],
+            "note": "Au moindre doute, lisez le nombre de zéros plutôt que la couleur. En pleine lumière les deux bleus se distinguent ; dans un taxi de nuit, beaucoup moins."
+          }
+        },
+        {
+          "p": "Un réflexe utile : gardez les grosses coupures séparées des petites, dans une autre poche. Cela évite l'erreur au moment de payer, et cela évite aussi de sortir une liasse entière devant un étal."
+        }
+      ]
+    },
+    {
+      "h2": "Retirer sur place, et pas trois fois",
+      "blocs": [
+        {
+          "p": "**Retirez au Vietnam plutôt que de changer des euros en France : le taux y est systématiquement meilleur.** Les distributeurs sont partout dans les villes, à l'aéroport comme dans les rues commerçantes, et ils acceptent les cartes Visa et Mastercard sans difficulté."
+        },
+        {
+          "p": "La chose à comprendre, c'est que les frais se paient par retrait, pas au montant. La banque vietnamienne prélève une commission fixe à chaque opération, et votre banque française en ajoute souvent une. Retirer quatre fois une petite somme coûte donc quatre fois les frais ; retirer une fois le maximum autorisé n'en coûte qu'une."
+        },
+        {
+          "ul": [
+            "**Retirez le plafond de l'appareil en une fois.** Il varie selon la banque vietnamienne, de deux à plusieurs millions de dongs par opération.",
+            "**Prévenez votre banque avant le départ.** Un premier retrait à dix mille kilomètres déclenche encore des blocages automatiques chez certains établissements.",
+            "**Refusez la conversion proposée à l'écran.** Quand le distributeur propose de débiter en euros plutôt qu'en dongs, il applique son propre taux, qui n'est jamais le bon. Choisissez toujours la devise locale.",
+            "**Emportez une seconde carte**, d'un autre réseau, rangée ailleurs. Un distributeur qui avale une carte un dimanche est une mauvaise journée, pas un voyage gâché."
+          ]
+        },
+        {
+          "p": "Les bureaux de change officiels et les banques pratiquent des taux corrects ; les réceptions d'hôtel prennent une marge, parfois lourde. Si vous changez malgré tout des euros sur place, faites-le en ville et non à l'aéroport."
+        }
+      ]
+    },
+    {
+      "h2": "Où la carte passe, et où elle s'arrête",
+      "blocs": [
+        {
+          "p": "**Les cartes passent dans les hôtels et les restaurants des villes, beaucoup moins dans les campagnes et sur les marchés.** C'est la ligne de partage, et elle recoupe assez exactement la carte des étapes d'un circuit."
+        },
+        {
+          "p": "Concrètement : à Hanoï, Hué, Hoi An, Saïgon, vous payez par carte presque partout où il y a une porte et une enseigne. Dès que vous êtes à Pu Luong, à Ha Giang, dans le delta ou sur un marché flottant, c'est espèces, sans exception."
+        },
+        {
+          "p": "Deux réserves. Beaucoup de commerces ajoutent une surcharge de l'ordre de 3 % pour un paiement par carte, affichée ou non ; demandez avant. Et l'American Express est très peu acceptée — si c'est votre seule carte, prévoyez une Visa ou une Mastercard en complément."
+        },
+        {
+          "p": "Les dollars américains circulent dans certains contextes touristiques, mais vous y perdez au change. La seule occasion où ils sont réellement nécessaires est le visa cambodgien, à régler en espèces et en dollars à la frontière, comme nous l'expliquons dans l'article sur [la combinaison Vietnam-Cambodge](/blog/vietnam-cambodge-combiner/)."
+        }
+      ]
+    },
+    {
+      "h2": "Le pourboire : qui, combien, quand",
+      "blocs": [
+        {
+          "p": "**Rien n'est obligatoire, et l'usage existe pour le guide et le chauffeur.** Nous le disons sans détour, parce que le silence sur ce point met les voyageurs mal à l'aise au dernier jour, quand il est trop tard pour demander."
+        },
+        {
+          "tableau": {
+            "legende": "Les ordres de grandeur pratiqués",
+            "colonnes": [
+              "Qui",
+              "Montant",
+              "Quand"
+            ],
+            "lignes": [
+              [
+                "Guide",
+                "3 à 5 € par jour et par voyageur",
+                "En fin de circuit, ou en fin d'étape s'il change"
+              ],
+              [
+                "Chauffeur",
+                "La moitié du guide",
+                "Même moment"
+              ],
+              [
+                "Restaurant",
+                "Rien d'attendu",
+                "Arrondir si le service a été remarquable"
+              ],
+              [
+                "Hôtel",
+                "20 000 à 50 000 dongs",
+                "Au porteur, si vous avez des bagages lourds"
+              ],
+              [
+                "Taxi",
+                "Rien",
+                "Arrondir au billet supérieur suffit"
+              ]
+            ],
+            "note": "Les pourboires ne figurent dans aucun de nos devis et ne sont jamais prélevés par l'agence : ils vont directement à la personne concernée."
+          }
+        },
+        {
+          "p": "La forme compte autant que le montant. Un pourboire se donne dans une enveloppe ou plié dans la main, en fin de parcours, à la personne elle-même. Le tendre devant le groupe ou le laisser sur une table n'a pas le même sens."
+        },
+        {
+          "p": "Et s'il faut une règle simple : donnez si l'on vous a appris quelque chose. Un guide qui a passé la journée à répondre à vos questions a fait son métier ; celui qui vous a emmené manger là où il mange lui-même a fait autre chose."
+        }
+      ]
+    },
+    {
+      "h2": "Ce qu'il vaut mieux éviter",
+      "blocs": [
+        {
+          "ul": [
+            "**Changer de l'argent dans la rue.** Le taux annoncé est toujours meilleur que celui des banques, et c'est précisément le signe.",
+            "**Payer en dollars par facilité.** Le taux appliqué au comptoir vous coûte plus cher que la commission d'un retrait.",
+            "**Emporter des euros en grande quantité.** Ils se changent moins bien que les dollars et vous font porter du liquide sans raison.",
+            "**Accepter un billet déchiré ou scotché.** Les commerçants les refusent, et vous vous retrouverez à le garder.",
+            "**Négocier au centime sur un marché.** Marchander fait partie de l'échange ; s'acharner pour l'équivalent de vingt centimes ne vous grandit pas et se voit."
+          ]
+        },
+        {
+          "p": "Dernier point, rarement dit : les prix affichés dans les commerces de ville sont fermes, comme en France. Le marchandage concerne les marchés et les souvenirs, pas un restaurant ni une pharmacie."
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Faut-il changer des euros avant de partir au Vietnam ?",
+      "a": "Non, sauf à vouloir un petit matelas de secours. Le taux obtenu en France est moins avantageux que celui d'un retrait sur place, et les distributeurs sont nombreux dès l'aéroport. Si vous préférez arriver avec du liquide, une centaine d'euros changés en France suffit largement à couvrir les premières heures."
+    },
+    {
+      "q": "Combien d'argent liquide prévoir par jour au Vietnam ?",
+      "a": "De 15 à 30 € par jour et par personne lorsque l'hébergement, les transferts et le guide sont déjà réglés. Le bas de la fourchette correspond à des repas de rue et de petits restaurants ; le haut à des dîners en vieille ville avec des boissons. Les achats et les excursions facultatives s'ajoutent à ce budget."
+    },
+    {
+      "q": "Peut-on payer par carte bancaire partout au Vietnam ?",
+      "a": "Dans les villes, oui, dans la plupart des hôtels et des restaurants. Dans les campagnes, sur les marchés et dans les villages de montagne, non : il faut des espèces. Beaucoup de commerces ajoutent une surcharge d'environ 3 % pour un paiement par carte, et l'American Express est très peu acceptée — prévoyez une Visa ou une Mastercard."
+    },
+    {
+      "q": "Quel est le pourboire d'usage pour un guide au Vietnam ?",
+      "a": "Entre 3 et 5 € par jour et par voyageur pour le guide, environ la moitié pour le chauffeur, remis en fin de circuit. Rien n'est obligatoire et les pourboires ne figurent dans aucun de nos devis : ils vont directement à la personne, jamais à l'agence. Si votre guide change à chaque étape, le pourboire se donne à la fin de chaque étape."
+    },
+    {
+      "q": "Pourquoi les billets de 20 000 et 500 000 dongs se confondent-ils ?",
+      "a": "Parce qu'ils sont tous deux de dominante bleue, de taille voisine et imprimés sur le même polymère lisse. Le 500 000 vaut vingt-cinq fois le 20 000. En pleine lumière la différence se voit ; dans un taxi le soir ou au fond d'un sac, beaucoup moins. Le réflexe à prendre est de compter les zéros plutôt que de regarder la couleur."
+    },
+    {
+      "q": "Le distributeur propose de débiter en euros : faut-il accepter ?",
+      "a": "Non. Cette conversion dite dynamique applique le taux de l'opérateur du distributeur, qui est systématiquement défavorable. Choisissez toujours d'être débité en dongs et laissez votre banque faire la conversion. Le même conseil vaut pour les terminaux de paiement en magasin."
+    }
+  ]
+}
