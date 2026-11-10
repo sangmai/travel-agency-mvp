@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getGuides, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { getArticles, getGuides, getSite, getTrips, tripUrl, articleUrl, TRIP_BASE } from "@/lib/content";
 import { publishedRoutes } from "@/lib/routes";
 
 /** Computed once at build time: the site is exported statically. */
@@ -27,7 +27,12 @@ export const dynamic = "force-static";
  * precise date we cannot source would be the same lie in the other direction.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [site, trips, guides] = await Promise.all([getSite(), getTrips(), getGuides()]);
+  const [site, trips, guides, articles] = await Promise.all([
+    getSite(),
+    getTrips(),
+    getGuides(),
+    getArticles(),
+  ]);
   const now = new Date();
 
   /* slug -> real modification date, for the pages that have one. */
@@ -63,6 +68,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "weekly" as const,
         priority: r.path === TRIP_BASE ? 0.9 : 0.6,
       })),
+    /* Articles carry a real dateModified, like the guides: an article is dated
+       by nature, and that date is half the reason it exists. */
+    ...articles.map((a) => ({
+      url: url(articleUrl(a.slug)),
+      lastModified: new Date(a.dateModified),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     ...trips.map((t) => ({
       url: url(tripUrl(t.slug)),
       lastModified: now,

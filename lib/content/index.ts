@@ -24,6 +24,18 @@ export async function getGuide(slug: string) {
   if (!g) throw new Error(`content/guides/${slug}.json not found.`);
   return g;
 }
+/** Blog posts, newest first — the order they are declared in. */
+export const getArticles = source.articles;
+
+export async function getArticle(slug: string) {
+  const a = (await source.articles()).find((x) => x.slug === slug);
+  if (!a) throw new Error(`content/blog/${slug}.json not found.`);
+  return a;
+}
+
+export const BLOG_BASE = "/blog";
+export const articleUrl = (slug: string) => lien(`${BLOG_BASE}/${slug}`);
+
 export const getProcess = source.process;
 export const getComparison = source.comparison;
 export const getSeasons = source.seasons;

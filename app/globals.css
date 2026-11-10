@@ -2896,3 +2896,150 @@ img {
   font-size: 0.88rem;
   margin-top: 1.1rem;
 }
+
+/* ARTICLES ------------------------------------------------------------------
+   The blog reuses the site's existing vocabulary — .sec, .wrap, .d2, .fig, .faq,
+   .tbl — and adds only what an article needs and no page had: a contents list,
+   a pull quote with its source, and the index card. */
+
+/* Contents. Numbered because an article is read in order, unlike a guide's
+   sections, which are consulted. */
+.art__sommaire {
+  border-left: 3px solid var(--amber-soft);
+  margin-top: clamp(1.6rem, 3vw, 2.2rem);
+  padding-left: 1.1rem;
+}
+
+.art__sommaire ol {
+  /* A global reset strips list markers; an article's contents is the one place
+     the numbers carry meaning, because the sections are read in order. */
+  color: var(--ink-2);
+  counter-reset: sommaire;
+  font-size: 0.92rem;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.art__sommaire li::before {
+  color: var(--amber-deep);
+  content: counter(sommaire) ". ";
+  counter-increment: sommaire;
+  font-variant-numeric: tabular-nums;
+}
+
+.art__sommaire li {
+  margin-bottom: 0.35rem;
+}
+
+.art__sommaire a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.art__sommaire a:hover {
+  color: var(--amber-deep);
+  text-decoration: underline;
+}
+
+/* Body lists. Wider spacing than a card list: these carry sentences, not
+   labels. */
+.art__liste {
+  list-style: disc;
+  margin: 1.2rem 0 1.4rem;
+  max-width: 44rem;
+  padding-left: 1.3rem;
+}
+
+ol.art__liste {
+  list-style: decimal;
+}
+
+.art__liste li {
+  margin-bottom: 0.7rem;
+}
+
+.art__cite {
+  border-left: 3px solid var(--amber);
+  margin: 1.8rem 0;
+  max-width: 42rem;
+  padding-left: 1.3rem;
+}
+
+.art__cite blockquote {
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.art__cite figcaption {
+  color: var(--ink-3);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+}
+
+/* Index. One column until there is a second article to put beside the first. */
+.art__index {
+  display: grid;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.art__index a {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  color: inherit;
+  display: grid;
+  gap: 1.1rem;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.18s;
+}
+
+.art__index a:hover {
+  border-color: var(--amber-soft);
+}
+
+.art__index a > div {
+  padding: 0 1.3rem 1.4rem;
+}
+
+.art__index .fig {
+  aspect-ratio: 3 / 2;
+  margin: 0;
+}
+
+.art__index time {
+  color: var(--ink-3);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.art__index h2 {
+  margin: 0.4rem 0 0.6rem;
+}
+
+.art__index p {
+  color: var(--ink-2);
+  margin: 0;
+}
+
+@media (min-width: 900px) {
+  /* Two columns of text would be unreadable; the picture takes the side. */
+  .art__index a {
+    grid-template-columns: 38% 1fr;
+  }
+
+  .art__index a > div {
+    padding: 1.4rem 1.4rem 1.4rem 0;
+  }
+}

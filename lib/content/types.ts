@@ -254,6 +254,51 @@ export type Guide = {
   faq: Faq[];
 };
 
+/**
+ * A blog post.
+ *
+ * ## Why the body is data and not a component
+ *
+ * The guide pages each have their own layout, written in TSX, because each one
+ * argues differently — a comparison table, a map, a month-by-month grid. An
+ * article does not: it is headings and paragraphs and the occasional table, and
+ * the twentieth one must not require a twentieth React file. So the body is
+ * described here and rendered by one component.
+ *
+ * Inline, two conventions and no HTML: `**gras**` and `[texte](/adresse/)`.
+ * Links are what an article is for — every one of them is a page of this site
+ * being pointed at from a page that ranks for something else.
+ */
+export type Bloc =
+  | { p: string }
+  | { ul: string[] }
+  | { ol: string[] }
+  | { citation: string; source?: string }
+  | { tableau: { legende?: string; colonnes: string[]; lignes: string[][]; note?: string } }
+  | { photo: PhotoId };
+
+export type Section = { h2: string; blocs: Bloc[] };
+
+export type Article = {
+  slug: string;
+  title: string;
+  description: string;
+  ogTitle: string;
+  ogDescription: string;
+  photo: PhotoId;
+  photoAlt: string;
+  datePublished: string;
+  dateModified: string;
+  author: string;
+  /** One sentence naming the subject, shown on the index and under the title. */
+  chapo: string;
+  /** Opening paragraph: the answer before the argument. */
+  lede: string;
+  /** Minutes, for the index. Computed at build time, never guessed. */
+  sections: Section[];
+  faq: Faq[];
+};
+
 /** Section heading: "*word*" gives the amber accent, "{key}" a value from the
  *  site content (see lib/text.tsx). */
 export type Head = { kicker: string; title: string; lede?: string };

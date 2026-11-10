@@ -27,6 +27,7 @@ import type {
   Step,
   Story,
   Trip,
+  Article,
 } from "./types";
 
 import siteJson from "@/content/site.json";
@@ -65,6 +66,7 @@ import gCircuitVietnam from "@/content/guides/circuit-vietnam.json";
 import gVoyageNocesVietnam from "@/content/guides/voyage-noces-vietnam.json";
 import gCircuitVietnam15Jours from "@/content/guides/circuit-vietnam-15-jours.json";
 import gRizieresVietnam from "@/content/guides/rizieres-vietnam.json";
+import aVietnamCambodge from "@/content/blog/vietnam-cambodge-combiner.json";
 import nordSud from "@/content/itineraries/vietnam-du-nord-au-sud.json";
 import montagnes from "@/content/itineraries/montagnes-et-baies-du-nord.json";
 import famille from "@/content/itineraries/vietnam-en-famille.json";
@@ -81,6 +83,10 @@ const TRIPS = [nordSud, montagnes, famille, cambodge, horsSentiers, signature] a
 /* Guide pages: one entry per page, the same shape for all of them. */
 const GUIDES: Guide[] = [gQuandPartirAuVietnam, gBudgetVoyageVietnam, gVisaVietnam, gNordOuSudVietnam, gItineraireVietnam, gQueFaireAuVietnam, gAgenceDeVoyageVietnam, gHalongOuLanHa, gAgenceLocaleOuTourOperateur, gVietnamOuThailande, gVietnamCuisine, gCarteVietnam, gTrekVietnam, gVoyageVietnamFamille, gVietnamHorsSentiers, gVoyageLuxeVietnam, gTetVietnam, gCircuitVietnam, gVoyageNocesVietnam, gCircuitVietnam15Jours, gRizieresVietnam];
 
+/* Articles, newest first: the index shows them in that order and the sitemap
+   reads their real modification date. */
+const ARTICLES: Article[] = [aVietnamCambodge];
+
 export const source = {
   site: async (): Promise<Site> => siteJson,
   places: async (): Promise<Place[]> => placesJson,
@@ -94,6 +100,7 @@ export const source = {
   budget: async (): Promise<BudgetRow[]> => budgetJson,
   faq: async (): Promise<Faq[]> => faqJson.faq,
   guides: async (): Promise<Guide[]> => GUIDES,
+  articles: async (): Promise<Article[]> => ARTICLES,
   home: async (): Promise<Home> => homeJson,
   reviews: async (): Promise<Review[]> => reviewsJson.reviews,
   story: async (): Promise<Story> => storyJson,
