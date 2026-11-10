@@ -1,4 +1,12 @@
-import { getSite, getTrips, getBudget, getGuides, tripUrl } from "@/lib/content";
+import {
+  getSite,
+  getTrips,
+  getBudget,
+  getGuides,
+  getArticles,
+  tripUrl,
+  articleUrl,
+} from "@/lib/content";
 import { publishedRoutes } from "@/lib/routes";
 import { euro } from "@/lib/format";
 
@@ -24,11 +32,12 @@ const minuscule = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
  * nor JSON-LD, nor plain text.
  */
 export async function GET() {
-  const [site, trips, budget, guides] = await Promise.all([
+  const [site, trips, budget, guides, articles] = await Promise.all([
     getSite(),
     getTrips(),
     getBudget(),
     getGuides(),
+    getArticles(),
   ]);
   const u = (path: string) => `${site.url}${path.replace(/\/?$/, "/")}`;
 
@@ -49,6 +58,13 @@ export async function GET() {
      the answer to a question can do it from the second and not from the first,
      so the description is used wherever one exists. */
   const parChemin = new Map(guides.map((g) => [`/${g.slug}`, g]));
+  /* Articles carry their date, which is the only reason the blog exists next
+     to twenty-two guide pages: a guide revised in place looks the same from
+     outside whether it changed yesterday or never. */
+  const billets = articles
+    .map((a) => `- [${a.title}](${u(articleUrl(a.slug))}) — ${a.datePublished} : ${a.description}`)
+    .join("\n");
+
   const pages = publishedRoutes()
     .filter((r) => r.path !== "/credits-photos")
     .map((r) => {
@@ -129,6 +145,10 @@ Vols Paris–Vietnam : 600 à 950 € selon la saison.
 - E-mail : ${site.email}
 - Téléphone et WhatsApp : ${site.phoneDisplay}
 - Demande de devis : ${site.url}/#devis
+
+## Articles
+
+${billets}
 
 ## Pages
 
