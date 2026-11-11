@@ -38,7 +38,21 @@ import path from "node:path";
 const ROOT = path.join(import.meta.dirname, "..");
 const OUT = path.join(ROOT, "out");
 const ETAT = path.join(ROOT, "scripts", "indexnow-state.json");
-const CLE = "ab7c1c8c68d2c3e22663aaaabc775d68";
+/**
+ * The key this host is already known by.
+ *
+ * Do not generate a new one. A key file was published long before this script
+ * existed, Bing has the host associated with it, and a freshly minted key — even
+ * correctly served at its own address — is answered with 403
+ * UserForbiddedToAccessSite. That is exactly what happened here: the new key was
+ * accepted once with a 202 (meaning "pending key validation"), then refused on
+ * every subsequent call. Tested side by side against the same endpoint and the
+ * same URL: this key 200, the other 403.
+ *
+ * public/_indexnow-README.txt says the rest. The key is not a secret; it proves
+ * control of the domain and nothing more.
+ */
+const CLE = "1c55ade1958b5b70c3ddf63a8c09f1bf";
 const ENDPOINT = "https://api.indexnow.org/IndexNow";
 
 const essai = process.argv.includes("--dry-run");
