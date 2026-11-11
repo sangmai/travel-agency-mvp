@@ -87,13 +87,24 @@
     // name instead of Resend's sandbox address.
     "DEVIS_FROM": "Jasmin Travel <contact@voyagevietnam-surmesure.com>",
 
-    // Inbox for incoming requests. Deliberately the Gmail address directly,
-    // NOT contact@voyagevietnam-surmesure.com: that address is a Cloudflare
-    // Email Routing forward to this same mailbox, so routing a lead through it
-    // would add a hop — and a failure point — between a prospect and the only
-    // copy of their request. A displayed address and a delivery address do not
-    // have to be the same thing.
-    "DEVIS_TO": "maisang90dn@gmail.com"
+    // Inbox for incoming requests.
+    //
+    // This was the Gmail address directly, and for a good reason at the time:
+    // contact@ was then a Cloudflare Email Routing rule forwarding to that same
+    // Gmail, so sending a lead through it added a hop and a failure point
+    // between a prospect and the only copy of their request, and bought nothing.
+    //
+    // That stopped being true on 11 November 2026. contact@ is now a real
+    // mailbox at the domain's own host, with its own storage, and it keeps a
+    // copy while forwarding to the Gmail. The hop now buys the one thing the
+    // Gmail could never give: a record that can be handed over. The day the
+    // agency answers its own leads, or someone is hired to, they get the mailbox
+    // and its history — not the owner's personal account.
+    //
+    // The forward is what keeps the phone notifications, so nothing is lost on
+    // the way in. If it is ever switched off, leads still arrive — they simply
+    // stop appearing on the phone.
+    "DEVIS_TO": "contact@voyagevietnam-surmesure.com"
   },
 
   // RESEND_API_KEY is not here: it is a secret.

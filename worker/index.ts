@@ -267,8 +267,9 @@ async function devis(
       config
         ? "[quote] CONFIGURATION — Resend rejects the key or the recipient. " +
             "Check the RESEND_API_KEY secret (revoked? never set?) and that " +
-            "DEVIS_TO is the Resend account's own address while no domain is " +
-            "verified there."
+            "DEVIS_TO is an address Resend is allowed to deliver to. The " +
+            "sandbox restriction this used to describe ended when the domain " +
+            "was verified at Resend."
         : "[quote] SEND FAILED — Resend outage, request to recover from logs",
       { status: reponse.status, resend: await reponse.text(), request: d },
     );
