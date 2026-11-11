@@ -242,7 +242,20 @@ async function devis(
     },
     body: JSON.stringify({
       from: env.DEVIS_FROM,
-      to: [env.DEVIS_TO],
+      /**
+       * Several recipients, separated by commas.
+       *
+       * One address was a single point of failure, and routing it through the
+       * agency mailbox proved it: sent from contact@ to contact@ through an
+       * outside relay, the notification tripped the host's anti-spoofing rule
+       * and landed in Junk. Sent only to the Gmail, it never reaches the
+       * mailbox that can be handed over.
+       *
+       * So both. The Gmail is the one that must arrive and does; the agency
+       * mailbox keeps the copy. If a filter swallows one of them, the lead
+       * still exists in the other — and in the lead table either way.
+       */
+      to: env.DEVIS_TO.split(",").map((a) => a.trim()).filter(Boolean),
       // The agency replies by simply hitting "Reply".
       reply_to: `${d.prenom} ${d.nom} <${d.email}>`,
       /* The trip name leads the subject when there is one: the agency sorts
