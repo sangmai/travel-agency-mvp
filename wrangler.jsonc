@@ -87,6 +87,17 @@
     // name instead of Resend's sandbox address.
     "DEVIS_FROM": "Jasmin Travel <contact@voyagevietnam-surmesure.com>",
 
+    // Sender of the internal notification only — the traveller's confirmation
+    // keeps DEVIS_FROM above, because that is the address printed on the site.
+    //
+    // info@ is deliberately an address that no longer exists as a mailbox: the
+    // agency account was renamed to contact@. The point is to find out whether
+    // the host's "sender may be impersonated" rule keys on the domain, which it
+    // owns and which no address here escapes, or on whether the local part is
+    // one of its mailboxes. If this still lands in Junk, the answer is the
+    // domain, and this variable goes back to contact@.
+    "NOTIF_FROM": "Jasmin Travel <info@voyagevietnam-surmesure.com>",
+
     // Where a request lands. Two addresses, comma-separated.
     //
     // It was the Gmail alone, for a reason that was sound at the time: contact@

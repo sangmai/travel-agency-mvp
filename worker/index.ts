@@ -21,13 +21,29 @@ interface Env extends AuthEnv, ClicEnv, LeadEnv {
   DEVIS_LIMIT: { limit(options: { key: string }): Promise<{ success: boolean }> };
   /* Secret, set in the Cloudflare dashboard — never in the repository. */
   RESEND_API_KEY: string;
-  /* Sender. Until the domain is verified at Resend, only the test address
-     onboarding@resend.dev is accepted. */
+  /* Sender shown to the traveller, on the confirmation they receive. This is
+     the address printed across the site, so it has to be the one that exists
+     and the one replies reach. */
   DEVIS_FROM: string;
-  /* Inbox where requests land. Distinct from the public address shown on the
-     site: an agency sorts prospects somewhere other than its day-to-day mail,
-     and until the domain is verified at Resend this must be the Resend
-     account's own address. */
+
+  /**
+   * Sender of the internal notification only. Optional: falls back to
+   * DEVIS_FROM.
+   *
+   * It exists because the two mails have different readers. The traveller's
+   * confirmation must come from the published address; the notification is read
+   * by one person who already knows where it came from, so its From is free to
+   * be whatever gets it past a filter.
+   *
+   * Currently used to test a guess: the agency's host rejects contact@ → contact@
+   * as impersonation, and the question is whether its rule keys on the domain —
+   * in which case no address here helps — or on whether the local part is a real
+   * mailbox, in which case an address that is not one slips through.
+   */
+  NOTIF_FROM?: string;
+  /* Where requests land — one address, or several separated by commas. Two are
+     configured: the one that has to arrive and the one that can be handed over.
+     See wrangler.jsonc for why neither is enough alone. */
   DEVIS_TO: string;
 }
 
@@ -241,7 +257,7 @@ async function devis(
       "content-type": "application/json",
     },
     body: JSON.stringify({
-      from: env.DEVIS_FROM,
+      from: env.NOTIF_FROM || env.DEVIS_FROM,
       /**
        * Several recipients, separated by commas.
        *
