@@ -2942,6 +2942,22 @@ img {
   text-decoration: underline;
 }
 
+/* Corps d'article.
+   Le reset global met `margin: 0` sur tout `p`, et les pages guides remettent
+   l'espacement par leurs propres classes. Les articles n'en avaient aucune : les
+   paragraphes se touchaient, sur neuf articles, et la colonne de texte courait
+   sur 1 124 px — soit près du double d'une mesure lisible. Les 44 rem sont ceux
+   que `.art__liste` et `.bande` appliquent déjà ; le corps s'y aligne au lieu
+   d'inventer une troisième largeur. */
+.art__corps > p {
+  margin-bottom: 1.1rem;
+  max-width: 44rem;
+}
+
+.art__corps > h2 {
+  margin-bottom: 1.1rem;
+}
+
 /* Body lists. Wider spacing than a card list: these carry sentences, not
    labels. */
 .art__liste {

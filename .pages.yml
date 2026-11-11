@@ -70,6 +70,10 @@ content:
             - { name: "jonque-halong", label: "jonque-halong" }
             - { name: "hanoi-matin", label: "hanoi-matin" }
             - { name: "hue-porte", label: "hue-porte" }
+            - { name: "angkor", label: "angkor" }
+            - { name: "mekong-barque", label: "mekong-barque" }
+            - { name: "hanoi-opera", label: "hanoi-opera" }
+            - { name: "hue-citadelle", label: "hue-citadelle" }
       - { name: intro, label: Chapô, type: text, required: true }
       - { name: pitch, label: Accroche (page d'accueil), type: text, required: true }
       - { name: audience, label: Pour qui, type: string, required: true }
@@ -162,6 +166,10 @@ content:
                 - { name: "jonque-halong", label: "jonque-halong" }
                 - { name: "hanoi-matin", label: "hanoi-matin" }
                 - { name: "hue-porte", label: "hue-porte" }
+                - { name: "angkor", label: "angkor" }
+                - { name: "mekong-barque", label: "mekong-barque" }
+                - { name: "hanoi-opera", label: "hanoi-opera" }
+                - { name: "hue-citadelle", label: "hue-citadelle" }
       - { name: nights, label: Hébergement nuit par nuit, type: string, list: true }
       - { name: included, label: Le prix comprend, type: string, list: true }
       - { name: excluded, label: Le prix ne comprend pas, type: string, list: true }
@@ -212,6 +220,10 @@ content:
             - { name: "jonque-halong", label: "jonque-halong" }
             - { name: "hanoi-matin", label: "hanoi-matin" }
             - { name: "hue-porte", label: "hue-porte" }
+            - { name: "angkor", label: "angkor" }
+            - { name: "mekong-barque", label: "mekong-barque" }
+            - { name: "hanoi-opera", label: "hanoi-opera" }
+            - { name: "hue-citadelle", label: "hue-citadelle" }
       - { name: photoAlt, label: Description de la photo, type: string, required: true }
       - { name: datePublished, label: Date de publication, type: date, required: true, options: { format: "yyyy-MM-dd" } }
       - { name: dateModified, label: Dernière mise à jour, type: date, required: true, options: { format: "yyyy-MM-dd" }, description: "À changer à chaque relecture de fond : un contenu récent est nettement plus cité." }
@@ -520,6 +532,10 @@ content:
                 - { name: "jonque-halong", label: "jonque-halong" }
                 - { name: "hanoi-matin", label: "hanoi-matin" }
                 - { name: "hue-porte", label: "hue-porte" }
+                - { name: "angkor", label: "angkor" }
+                - { name: "mekong-barque", label: "mekong-barque" }
+                - { name: "hanoi-opera", label: "hanoi-opera" }
+                - { name: "hue-citadelle", label: "hue-citadelle" }
 
   - name: envies
     label: Par envie
@@ -566,6 +582,10 @@ content:
                 - { name: "jonque-halong", label: "jonque-halong" }
                 - { name: "hanoi-matin", label: "hanoi-matin" }
                 - { name: "hue-porte", label: "hue-porte" }
+                - { name: "angkor", label: "angkor" }
+                - { name: "mekong-barque", label: "mekong-barque" }
+                - { name: "hanoi-opera", label: "hanoi-opera" }
+                - { name: "hue-citadelle", label: "hue-citadelle" }
 
 settings:
   content:

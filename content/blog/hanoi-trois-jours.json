@@ -31,6 +31,9 @@
             "**Le café à l'œuf**, inventé ici pendant la pénurie de lait des années 1940 : un jaune d'œuf battu au sucre, posé sur un café noir brûlant.",
             "**La rue du train de Phung Hung**, où les convois passent à un mètre des tables. Les accès sont régulièrement fermés puis rouverts par la police : à vérifier le jour même."
           ]
+        },
+        {
+          "photo": "hanoi"
         }
       ]
     },
@@ -65,6 +68,9 @@
         },
         {
           "p": "Un mot sur le mausolée de Hô Chi Minh : il ouvre le matin seulement, ferme plusieurs mois par an, impose une file et un code vestimentaire. Nous ne le programmons pas d'office. Si vous y tenez, dites-le avant que l'itinéraire soit fixé."
+        },
+        {
+          "photo": "hanoi-opera"
         }
       ]
     },
@@ -137,6 +143,9 @@
         },
         {
           "p": "La règle pratique est celle de toute la ville : mangez là où il y a du monde et où la cuisson se fait devant vous. Ce qui attend sous une vitrine à température ambiante est le seul vrai point d'attention, et nous le détaillons dans l'article sur [la santé](/blog/sante-vietnam/)."
+        },
+        {
+          "photo": "cuisine"
         }
       ]
     },

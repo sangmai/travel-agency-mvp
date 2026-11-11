@@ -142,5 +142,29 @@
     "auteur": "nhavantuonglai",
     "licence": "Pexels",
     "page": "https://www.pexels.com/photo/36737920/"
+  },
+  "angkor": {
+    "title": "Panoramic view of the Angkor Wat, Siem Reap, Cambodia",
+    "auteur": "Serg Alesenko",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/15890550/"
+  },
+  "mekong-barque": {
+    "title": "Traditional Vendor on a Riverboat in Vietnam",
+    "auteur": "Micha Höfer",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/38592789/"
+  },
+  "hanoi-opera": {
+    "title": "Front view of the historic Hanoi Opera House",
+    "auteur": "Nguyen Ngoc Tien",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/33763583/"
+  },
+  "hue-citadelle": {
+    "title": "Imperial City Gate in Hue Under Blue Sky",
+    "auteur": "Jeffry Surianto",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/34861581/"
   }
 }

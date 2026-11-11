@@ -15,17 +15,46 @@
     {
       "h2": "Combien de jours faut-il vraiment",
       "blocs": [
-        { "p": "**Dix-huit jours est le format honnête.** Le Vietnam seul demande déjà quinze jours pour être traversé du nord au sud sans courir, comme l'explique notre page sur [la durée d'un itinéraire](/itineraire-vietnam/). Le Cambodge, lui, ne se résume pas à Angkor : Phnom Penh mérite une journée pleine, et le site d'Angkor en demande trois si l'on veut autre chose que la photo au lever du soleil." },
-        { "p": "Ce qui se passe quand on comprime, concrètement : à quinze jours, on supprime le Centre du Vietnam, c'est-à-dire Hué et Hoi An. À douze, on renonce au Nord, donc à la baie et à Hanoï. Le voyage devient alors Saïgon, le delta, Angkor — ce qui est cohérent, mais ne s'appelle plus « Vietnam et Cambodge »." },
+        {
+          "p": "**Dix-huit jours est le format honnête.** Le Vietnam seul demande déjà quinze jours pour être traversé du nord au sud sans courir, comme l'explique notre page sur [la durée d'un itinéraire](/itineraire-vietnam/). Le Cambodge, lui, ne se résume pas à Angkor : Phnom Penh mérite une journée pleine, et le site d'Angkor en demande trois si l'on veut autre chose que la photo au lever du soleil."
+        },
+        {
+          "p": "Ce qui se passe quand on comprime, concrètement : à quinze jours, on supprime le Centre du Vietnam, c'est-à-dire Hué et Hoi An. À douze, on renonce au Nord, donc à la baie et à Hanoï. Le voyage devient alors Saïgon, le delta, Angkor — ce qui est cohérent, mais ne s'appelle plus « Vietnam et Cambodge »."
+        },
         {
           "tableau": {
             "legende": "Ce que chaque durée permet réellement",
-            "colonnes": ["Durée", "Vietnam", "Cambodge", "Verdict"],
+            "colonnes": [
+              "Durée",
+              "Vietnam",
+              "Cambodge",
+              "Verdict"
+            ],
             "lignes": [
-              ["12 jours", "Sud uniquement", "Angkor, 2 jours", "Possible, mais ce n'est plus une traversée"],
-              ["15 jours", "Nord et Sud, sans le Centre", "Angkor, 2 jours", "Le Centre manque, et c'est ce qu'on regrette"],
-              ["18 jours", "Nord, Centre et Sud", "Phnom Penh et Angkor, 3 jours", "Le format qui tient debout"],
-              ["21 jours et plus", "Avec une île ou Ha Giang", "Battambang ou la côte", "Du confort, plus une nécessité"]
+              [
+                "12 jours",
+                "Sud uniquement",
+                "Angkor, 2 jours",
+                "Possible, mais ce n'est plus une traversée"
+              ],
+              [
+                "15 jours",
+                "Nord et Sud, sans le Centre",
+                "Angkor, 2 jours",
+                "Le Centre manque, et c'est ce qu'on regrette"
+              ],
+              [
+                "18 jours",
+                "Nord, Centre et Sud",
+                "Phnom Penh et Angkor, 3 jours",
+                "Le format qui tient debout"
+              ],
+              [
+                "21 jours et plus",
+                "Avec une île ou Ha Giang",
+                "Battambang ou la côte",
+                "Du confort, plus une nécessité"
+              ]
             ],
             "note": "Les durées comptent les jours de voyage, pas les nuits sur place : un vol Paris–Hanoï arrive le lendemain du départ."
           }
@@ -35,40 +64,100 @@
     {
       "h2": "La fenêtre où les deux pays sont au sec",
       "blocs": [
-        { "p": "**De novembre à mars, et c'est la seule.** C'est le point que presque personne ne vérifie avant de réserver, et celui qui décide de la réussite du voyage." },
-        { "p": "Le Cambodge est simple : une saison sèche de novembre à avril, une saison des pluies de mai à octobre. À Angkor, la pluie ne ferme rien mais elle change tout — les douves débordent, les chemins de latérite deviennent glissants, et les après-midi se passent à l'abri." },
-        { "p": "Le Vietnam, lui, n'a pas une saison mais trois, parce que le pays s'étire sur 1 650 kilomètres. Le détail est dans notre [calendrier mois par mois](/quand-partir-au-vietnam/), mais la partie qui compte ici tient en une phrase : le Centre est sec quand le Nord et le Sud sont humides, et l'inverse." },
+        {
+          "p": "**De novembre à mars, et c'est la seule.** C'est le point que presque personne ne vérifie avant de réserver, et celui qui décide de la réussite du voyage."
+        },
+        {
+          "p": "Le Cambodge est simple : une saison sèche de novembre à avril, une saison des pluies de mai à octobre. À Angkor, la pluie ne ferme rien mais elle change tout — les douves débordent, les chemins de latérite deviennent glissants, et les après-midi se passent à l'abri."
+        },
+        {
+          "p": "Le Vietnam, lui, n'a pas une saison mais trois, parce que le pays s'étire sur 1 650 kilomètres. Le détail est dans notre [calendrier mois par mois](/quand-partir-au-vietnam/), mais la partie qui compte ici tient en une phrase : le Centre est sec quand le Nord et le Sud sont humides, et l'inverse."
+        },
         {
           "tableau": {
             "legende": "Les quatre climats à faire coïncider",
-            "colonnes": ["Période", "Nord Vietnam", "Centre Vietnam", "Sud Vietnam", "Cambodge"],
+            "colonnes": [
+              "Période",
+              "Nord Vietnam",
+              "Centre Vietnam",
+              "Sud Vietnam",
+              "Cambodge"
+            ],
             "lignes": [
-              ["Novembre – décembre", "Idéal", "Pluies et typhons", "Idéal", "Idéal"],
-              ["Janvier – février", "Frais et brumeux", "Correct", "Idéal", "Idéal"],
-              ["Mars", "Idéal", "Idéal", "Chaud et sec", "Chaud, encore sec"],
-              ["Avril – mai", "Correct", "Idéal", "Très chaud", "Jusqu'à 40 °C"],
-              ["Juin – octobre", "Chaud et humide", "Idéal", "Averses quotidiennes", "Saison des pluies"]
+              [
+                "Novembre – décembre",
+                "Idéal",
+                "Pluies et typhons",
+                "Idéal",
+                "Idéal"
+              ],
+              [
+                "Janvier – février",
+                "Frais et brumeux",
+                "Correct",
+                "Idéal",
+                "Idéal"
+              ],
+              [
+                "Mars",
+                "Idéal",
+                "Idéal",
+                "Chaud et sec",
+                "Chaud, encore sec"
+              ],
+              [
+                "Avril – mai",
+                "Correct",
+                "Idéal",
+                "Très chaud",
+                "Jusqu'à 40 °C"
+              ],
+              [
+                "Juin – octobre",
+                "Chaud et humide",
+                "Idéal",
+                "Averses quotidiennes",
+                "Saison des pluies"
+              ]
             ],
             "note": "Novembre et décembre sont la meilleure fenêtre malgré les pluies du Centre : elles se contournent en abrégeant Hué, ce que mars ne permet pas avec la chaleur cambodgienne."
           }
         },
-        { "p": "Mars est le compromis le plus équilibré des quatre régions à la fois. Novembre et décembre restent les mois les plus demandés parce que le Nord y est au plus beau et le Cambodge au plus sec, le prix étant qu'il faut traiter le Centre avec prudence." }
+        {
+          "p": "Mars est le compromis le plus équilibré des quatre régions à la fois. Novembre et décembre restent les mois les plus demandés parce que le Nord y est au plus beau et le Cambodge au plus sec, le prix étant qu'il faut traiter le Centre avec prudence."
+        }
       ]
     },
     {
       "h2": "Passer la frontière par le fleuve, pas par l'avion",
       "blocs": [
-        { "p": "**La plupart des circuits relient les deux pays par un vol Saïgon–Siem Reap d'une heure.** C'est rapide, et c'est là que le voyage perd sa cohérence : on quitte un delta pour atterrir à côté d'un temple, sans rien voir de ce qu'il y a entre les deux." },
-        { "p": "L'autre route suit le Mékong. Depuis Chau Doc, à l'extrême ouest du delta vietnamien, un bateau rapide remonte le fleuve jusqu'à Phnom Penh. Les formalités se font sur un ponton, d'un côté puis de l'autre, et l'on voit le Cambodge arriver par l'eau : les maisons sur pilotis changent de forme, les filets changent de taille, et la frontière devient une chose qu'on traverse plutôt qu'une file d'attente dans un aéroport." },
-        { "p": "C'est la raison pour laquelle notre circuit place Chau Doc juste après le marché flottant de Cai Rang. La journée a une logique fluviale : on quitte les barques de gros du delta le matin, on passe la frontière l'après-midi." },
-        { "citation": "Le passage de frontière Vietnam–Cambodge en bateau rapide sur le Mékong, et les formalités comprises.", "source": "Circuit Vietnam et Cambodge, 18 jours" },
-        { "p": "Deux réserves honnêtes. Le trajet dure la demi-journée, bagages compris, ce qui est plus long qu'un vol ; et le niveau du fleuve en fin de saison sèche peut imposer un transfert routier partiel. Les deux se savent à l'avance, pas sur le ponton." }
+        {
+          "p": "**La plupart des circuits relient les deux pays par un vol Saïgon–Siem Reap d'une heure.** C'est rapide, et c'est là que le voyage perd sa cohérence : on quitte un delta pour atterrir à côté d'un temple, sans rien voir de ce qu'il y a entre les deux."
+        },
+        {
+          "p": "L'autre route suit le Mékong. Depuis Chau Doc, à l'extrême ouest du delta vietnamien, un bateau rapide remonte le fleuve jusqu'à Phnom Penh. Les formalités se font sur un ponton, d'un côté puis de l'autre, et l'on voit le Cambodge arriver par l'eau : les maisons sur pilotis changent de forme, les filets changent de taille, et la frontière devient une chose qu'on traverse plutôt qu'une file d'attente dans un aéroport."
+        },
+        {
+          "p": "C'est la raison pour laquelle notre circuit place Chau Doc juste après le marché flottant de Cai Rang. La journée a une logique fluviale : on quitte les barques de gros du delta le matin, on passe la frontière l'après-midi."
+        },
+        {
+          "citation": "Le passage de frontière Vietnam–Cambodge en bateau rapide sur le Mékong, et les formalités comprises.",
+          "source": "Circuit Vietnam et Cambodge, 18 jours"
+        },
+        {
+          "p": "Deux réserves honnêtes. Le trajet dure la demi-journée, bagages compris, ce qui est plus long qu'un vol ; et le niveau du fleuve en fin de saison sèche peut imposer un transfert routier partiel. Les deux se savent à l'avance, pas sur le ponton."
+        },
+        {
+          "photo": "mekong-barque"
+        }
       ]
     },
     {
       "h2": "Les formalités, pays par pays",
       "blocs": [
-        { "p": "**Pour les Français, le Vietnam est dispensé de visa jusqu'à 45 jours ; le Cambodge ne l'est pas.** Les deux points sont indépendants l'un de l'autre, et c'est le second qui se règle sur place." },
+        {
+          "p": "**Pour les Français, le Vietnam est dispensé de visa jusqu'à 45 jours ; le Cambodge ne l'est pas.** Les deux points sont indépendants l'un de l'autre, et c'est le second qui se règle sur place."
+        },
         {
           "ul": [
             "**Vietnam** — dispense de visa pour les ressortissants français, séjours de 45 jours maximum, jours d'entrée et de sortie compris. Le détail et les cas particuliers sont sur notre page [visa et formalités](/visa-vietnam/).",
@@ -77,14 +166,20 @@
             "**Photo d'identité** — en prévoir deux, format classique : la frontière cambodgienne les demande encore sur papier."
           ]
         },
-        { "p": "Un e-visa cambodgien existe et s'obtient en ligne avant le départ. Il est valable aux grands postes-frontières et à l'aéroport, mais pas toujours au poste fluvial — c'est la raison pour laquelle nous laissons le visa se prendre sur place sur cet itinéraire plutôt que de le faire payer deux fois." }
+        {
+          "p": "Un e-visa cambodgien existe et s'obtient en ligne avant le départ. Il est valable aux grands postes-frontières et à l'aéroport, mais pas toujours au poste fluvial — c'est la raison pour laquelle nous laissons le visa se prendre sur place sur cet itinéraire plutôt que de le faire payer deux fois."
+        }
       ]
     },
     {
       "h2": "Ce que trois jours à Angkor changent",
       "blocs": [
-        { "p": "**Angkor n'est pas un monument, c'est une ville de quatre cents kilomètres carrés.** Une journée permet d'en voir trois temples et d'en garder le souvenir d'une foule. Trois jours permettent d'y revenir aux heures où il n'y a personne, ce qui est une autre expérience du même endroit." },
-        { "p": "Le pass trois jours est compris dans le circuit, ce qui n'est pas anodin : c'est l'un des postes que les programmes courts suppriment en premier, parce qu'il coûte nettement plus cher que le pass d'une journée et qu'il n'apparaît pas dans le prix d'appel." },
+        {
+          "p": "**Angkor n'est pas un monument, c'est une ville de quatre cents kilomètres carrés.** Une journée permet d'en voir trois temples et d'en garder le souvenir d'une foule. Trois jours permettent d'y revenir aux heures où il n'y a personne, ce qui est une autre expérience du même endroit."
+        },
+        {
+          "p": "Le pass trois jours est compris dans le circuit, ce qui n'est pas anodin : c'est l'un des postes que les programmes courts suppriment en premier, parce qu'il coûte nettement plus cher que le pass d'une journée et qu'il n'apparaît pas dans le prix d'appel."
+        },
         {
           "ul": [
             "**Le grand circuit** — Angkor Vat, le Bayon et ses visages, la terrasse des Éléphants. La journée que tout le monde fait, et qu'il faut faire.",
@@ -92,16 +187,29 @@
             "**Un lever et un coucher de soleil** — pas le même jour, et pas au même endroit. Le lever sur Angkor Vat se partage avec deux mille personnes ; le coucher depuis Pre Rup, avec beaucoup moins."
           ]
         },
-        { "p": "La chaleur commande le rythme : entre onze heures et quinze heures, en saison sèche, le site se vide pour une bonne raison. Un programme honnête prévoit la coupure plutôt que de la découvrir." }
+        {
+          "p": "La chaleur commande le rythme : entre onze heures et quinze heures, en saison sèche, le site se vide pour une bonne raison. Un programme honnête prévoit la coupure plutôt que de la découvrir."
+        },
+        {
+          "photo": "angkor"
+        }
       ]
     },
     {
       "h2": "Ce que cela coûte",
       "blocs": [
-        { "p": "**À partir de 1 740 € par personne pour dix-huit jours, hors vols internationaux.** Le prix suppose deux voyageurs partageant une chambre, des hôtels 3★ et 4★, un guide francophone à chaque étape et un véhicule privé avec chauffeur." },
-        { "p": "Ce qui s'ajoute, et qu'il faut compter avant de comparer : les vols Paris–Hanoï et retour, entre 600 et 950 € selon la saison ; le visa cambodgien, 30 USD ; l'assurance ; les repas libres et les boissons ; le supplément chambre individuelle. Notre page [budget](/budget-voyage-vietnam/) détaille les fourchettes poste par poste." },
-        { "p": "Un point de comparaison utile : le même nombre de jours au Vietnam seul coûte moins cher au jour le jour, parce que le vol intérieur et le bateau de frontière s'ajoutent ici. Le Cambodge n'est pas un pays plus cher ; c'est le fait de relier deux pays qui l'est." },
-        { "p": "Les tarifs sont ceux de [notre circuit Vietnam et Cambodge](/circuit-vietnam/vietnam-et-cambodge/), que nous opérons nous-mêmes depuis Da Nang. Il sert de base : les étapes, la durée et la gamme d'hôtels se modifient avant départ." }
+        {
+          "p": "**À partir de 1 740 € par personne pour dix-huit jours, hors vols internationaux.** Le prix suppose deux voyageurs partageant une chambre, des hôtels 3★ et 4★, un guide francophone à chaque étape et un véhicule privé avec chauffeur."
+        },
+        {
+          "p": "Ce qui s'ajoute, et qu'il faut compter avant de comparer : les vols Paris–Hanoï et retour, entre 600 et 950 € selon la saison ; le visa cambodgien, 30 USD ; l'assurance ; les repas libres et les boissons ; le supplément chambre individuelle. Notre page [budget](/budget-voyage-vietnam/) détaille les fourchettes poste par poste."
+        },
+        {
+          "p": "Un point de comparaison utile : le même nombre de jours au Vietnam seul coûte moins cher au jour le jour, parce que le vol intérieur et le bateau de frontière s'ajoutent ici. Le Cambodge n'est pas un pays plus cher ; c'est le fait de relier deux pays qui l'est."
+        },
+        {
+          "p": "Les tarifs sont ceux de [notre circuit Vietnam et Cambodge](/circuit-vietnam/vietnam-et-cambodge/), que nous opérons nous-mêmes depuis Da Nang. Il sert de base : les étapes, la durée et la gamme d'hôtels se modifient avant départ."
+        }
       ]
     }
   ],

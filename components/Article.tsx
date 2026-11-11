@@ -114,7 +114,7 @@ export function Corps({ sections }: { sections: Section[] }) {
     <>
       {sections.map((s) => (
         <section className="sec" key={s.h2}>
-          <div className="wrap">
+          <div className="wrap art__corps">
             {/* The id lets the table of contents and any external citation
                 address a section rather than the whole page. */}
             <h2 className="d2" id={ancre(s.h2)}>

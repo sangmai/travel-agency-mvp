@@ -286,5 +286,53 @@
       "licence": "Pexels",
       "page": "https://www.pexels.com/photo/36737920/"
     }
+  },
+  "angkor": {
+    "file": "angkor.jpg",
+    "alt": "Les cinq tours d'Angkor Vat vues depuis l'allée d'entrée, encadrées de palmiers à sucre, à Siem Reap au Cambodge",
+    "place": "Siem Reap",
+    "lat": 13,
+    "credit": {
+      "title": "Panoramic view of the Angkor Wat, Siem Reap, Cambodia",
+      "author": "Serg Alesenko",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/15890550/"
+    }
+  },
+  "mekong-barque": {
+    "file": "mekong-barque.jpg",
+    "alt": "Marchande en chapeau conique poussant à la perche sa barque chargée de marchandises sur une eau ocre, devant un village flottant",
+    "place": "Delta du Mékong",
+    "lat": 10,
+    "credit": {
+      "title": "Traditional Vendor on a Riverboat in Vietnam",
+      "author": "Micha Höfer",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/38592789/"
+    }
+  },
+  "hanoi-opera": {
+    "file": "hanoi-opera.jpg",
+    "alt": "Façade de l'opéra de Hanoï, copie réduite du Palais Garnier achevée en 1911, sous un ciel dégagé",
+    "place": "Hanoï",
+    "lat": 21,
+    "credit": {
+      "title": "Front view of the historic Hanoi Opera House",
+      "author": "Nguyen Ngoc Tien",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/33763583/"
+    }
+  },
+  "hue-citadelle": {
+    "file": "hue-citadelle.jpg",
+    "alt": "Entrée monumentale de la cité impériale de Hué, toits de tuiles vernissées et longue esplanade, sous un ciel bleu",
+    "place": "Hué",
+    "lat": 16,
+    "credit": {
+      "title": "Imperial City Gate in Hue Under Blue Sky",
+      "author": "Jeffry Surianto",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/34861581/"
+    }
   }
 }

@@ -15,56 +15,119 @@
     {
       "h2": "Ce qu'était Hué avant",
       "blocs": [
-        { "p": "**La capitale du Vietnam pendant cent quarante-trois ans.** De 1802 à 1945, la dynastie des Nguyen y règne sur un pays unifié pour la première fois dans ses frontières actuelles — et c'est à Hué, pas à Hanoï ni à Saïgon, que se décidait tout." },
-        { "p": "La ville a été construite comme une démonstration : une citadelle de dix kilomètres de remparts, copiée sur le modèle chinois mais orientée selon la géomancie locale ; à l'intérieur, la Cité impériale ; à l'intérieur de celle-ci, la Cité pourpre interdite, réservée à l'empereur, à sa famille et aux eunuques. Trois enceintes emboîtées, chacune plus fermée que la précédente." },
-        { "p": "La dernière abdication a lieu en 1945, celle de Bao Dai. L'ensemble est classé au patrimoine mondial de l'Unesco en 1993 — la première inscription vietnamienne, et elle concerne un site dont la plus grande partie avait déjà disparu." }
+        {
+          "p": "**La capitale du Vietnam pendant cent quarante-trois ans.** De 1802 à 1945, la dynastie des Nguyen y règne sur un pays unifié pour la première fois dans ses frontières actuelles — et c'est à Hué, pas à Hanoï ni à Saïgon, que se décidait tout."
+        },
+        {
+          "p": "La ville a été construite comme une démonstration : une citadelle de dix kilomètres de remparts, copiée sur le modèle chinois mais orientée selon la géomancie locale ; à l'intérieur, la Cité impériale ; à l'intérieur de celle-ci, la Cité pourpre interdite, réservée à l'empereur, à sa famille et aux eunuques. Trois enceintes emboîtées, chacune plus fermée que la précédente."
+        },
+        {
+          "p": "La dernière abdication a lieu en 1945, celle de Bao Dai. L'ensemble est classé au patrimoine mondial de l'Unesco en 1993 — la première inscription vietnamienne, et elle concerne un site dont la plus grande partie avait déjà disparu."
+        }
       ]
     },
     {
       "h2": "1968, et ce que la bataille a emporté",
       "blocs": [
-        { "p": "**La bataille de Hué dure du 31 janvier au 2 mars 1968**, pendant l'offensive du Têt. C'est le plus long combat urbain de la guerre, et il se déroule en grande partie à l'intérieur des remparts." },
-        { "p": "Les chiffres que l'on cite varient selon les sources, mais l'ordre de grandeur ne varie pas : de la Cité pourpre interdite, qui comptait plus de cent cinquante édifices, il subsiste aujourd'hui une dizaine de bâtiments majeurs. Le reste — pavillons, galeries, résidences, bibliothèques — a brûlé ou a été soufflé." },
-        { "p": "C'est pour cette raison que l'on traverse, à l'intérieur de la Cité impériale, de grandes surfaces d'herbe rase entre deux portes monumentales. Elles ne sont pas des jardins : ce sont des emplacements. Un visiteur qui l'ignore conclut que le site est pauvre. Un visiteur qui le sait regarde l'herbe." },
-        { "citation": "Sans quelqu'un pour dire ce qui manque et pourquoi, on visite un chantier. Avec, on comprend ce que le pays a perdu en 1968.", "source": "Faut-il un guide au Vietnam" },
-        { "p": "La restauration se poursuit depuis les années 1990, bâtiment par bâtiment, avec les techniques et les matériaux d'origine. Certains pavillons sont rouverts depuis peu ; d'autres sont sous bâche. Hué est un site vivant au sens le plus littéral : il n'est pas fini, et il ne le sera pas de votre vivant." }
+        {
+          "p": "**La bataille de Hué dure du 31 janvier au 2 mars 1968**, pendant l'offensive du Têt. C'est le plus long combat urbain de la guerre, et il se déroule en grande partie à l'intérieur des remparts."
+        },
+        {
+          "p": "Les chiffres que l'on cite varient selon les sources, mais l'ordre de grandeur ne varie pas : de la Cité pourpre interdite, qui comptait plus de cent cinquante édifices, il subsiste aujourd'hui une dizaine de bâtiments majeurs. Le reste — pavillons, galeries, résidences, bibliothèques — a brûlé ou a été soufflé."
+        },
+        {
+          "p": "C'est pour cette raison que l'on traverse, à l'intérieur de la Cité impériale, de grandes surfaces d'herbe rase entre deux portes monumentales. Elles ne sont pas des jardins : ce sont des emplacements. Un visiteur qui l'ignore conclut que le site est pauvre. Un visiteur qui le sait regarde l'herbe."
+        },
+        {
+          "citation": "Sans quelqu'un pour dire ce qui manque et pourquoi, on visite un chantier. Avec, on comprend ce que le pays a perdu en 1968.",
+          "source": "Faut-il un guide au Vietnam"
+        },
+        {
+          "p": "La restauration se poursuit depuis les années 1990, bâtiment par bâtiment, avec les techniques et les matériaux d'origine. Certains pavillons sont rouverts depuis peu ; d'autres sont sous bâche. Hué est un site vivant au sens le plus littéral : il n'est pas fini, et il ne le sera pas de votre vivant."
+        },
+        {
+          "photo": "hue-citadelle"
+        }
       ]
     },
     {
       "h2": "Ce qu'il faut voir, et dans quel ordre",
       "blocs": [
-        { "p": "**La citadelle le matin à l'ouverture, les tombeaux l'après-midi.** L'ordre n'est pas négociable en saison chaude : il n'y a pas d'ombre dans la Cité impériale." },
+        {
+          "p": "**La citadelle le matin à l'ouverture, les tombeaux l'après-midi.** L'ordre n'est pas négociable en saison chaude : il n'y a pas d'ombre dans la Cité impériale."
+        },
         {
           "tableau": {
             "legende": "Deux journées à Hué, telles que nous les programmons",
-            "colonnes": ["Moment", "Lieu", "Pourquoi ce moment"],
+            "colonnes": [
+              "Moment",
+              "Lieu",
+              "Pourquoi ce moment"
+            ],
             "lignes": [
-              ["Jour 1, matin", "Citadelle et Cité pourpre interdite", "À l'ouverture, avant les groupes et avant la chaleur"],
-              ["Jour 1, après-midi", "Tombeau de Tu Duc", "En barque sur la rivière des Parfums, à l'ombre des pins"],
-              ["Jour 1, soir", "Rive de la rivière, bateau-dragon", "La ville se regarde depuis l'eau"],
-              ["Jour 2, matin", "Tombeau de Khai Dinh", "Le plus tardif, le plus chargé, le plus photographié"],
-              ["Jour 2, après-midi", "Pagode Thien Mu, ou départ", "Sur la route du col des Nuages vers Hoi An"]
+              [
+                "Jour 1, matin",
+                "Citadelle et Cité pourpre interdite",
+                "À l'ouverture, avant les groupes et avant la chaleur"
+              ],
+              [
+                "Jour 1, après-midi",
+                "Tombeau de Tu Duc",
+                "En barque sur la rivière des Parfums, à l'ombre des pins"
+              ],
+              [
+                "Jour 1, soir",
+                "Rive de la rivière, bateau-dragon",
+                "La ville se regarde depuis l'eau"
+              ],
+              [
+                "Jour 2, matin",
+                "Tombeau de Khai Dinh",
+                "Le plus tardif, le plus chargé, le plus photographié"
+              ],
+              [
+                "Jour 2, après-midi",
+                "Pagode Thien Mu, ou départ",
+                "Sur la route du col des Nuages vers Hoi An"
+              ]
             ],
             "note": "Avec des enfants, nous raccourcissons la citadelle à l'essentiel : la porte du Midi, la salle du trône, la Cité pourpre interdite. Une heure trente au lieu de trois."
           }
         },
-        { "p": "Les deux tombeaux ne se ressemblent pas, et c'est pour cela qu'on les fait tous les deux. Tu Duc, qui régna trente-cinq ans au XIXᵉ siècle, s'est fait construire une résidence de retraite autant qu'une sépulture : lac, pavillon de poésie, pins. Khai Dinh, mort en 1925, a fait bâtir la sienne en béton, incrustée de porcelaine et de verre cassé, dans un style franco-vietnamien que l'on trouve laid ou fascinant mais jamais tiède." },
-        { "p": "Il y a sept tombeaux impériaux en tout, répartis sur une quinzaine de kilomètres. En voir deux est un choix, pas une concession : au troisième, la distinction s'émousse." }
+        {
+          "p": "Les deux tombeaux ne se ressemblent pas, et c'est pour cela qu'on les fait tous les deux. Tu Duc, qui régna trente-cinq ans au XIXᵉ siècle, s'est fait construire une résidence de retraite autant qu'une sépulture : lac, pavillon de poésie, pins. Khai Dinh, mort en 1925, a fait bâtir la sienne en béton, incrustée de porcelaine et de verre cassé, dans un style franco-vietnamien que l'on trouve laid ou fascinant mais jamais tiède."
+        },
+        {
+          "p": "Il y a sept tombeaux impériaux en tout, répartis sur une quinzaine de kilomètres. En voir deux est un choix, pas une concession : au troisième, la distinction s'émousse."
+        },
+        {
+          "photo": "hue"
+        }
       ]
     },
     {
       "h2": "Deux nuits, et pourquoi pas une",
       "blocs": [
-        { "p": "**Deux nuits, c'est-à-dire une journée pleine et deux demi-journées.** C'est le format de nos circuits, et le calcul est simple." },
-        { "p": "La citadelle demande trois heures si l'on écoute, les tombeaux une demi-journée, et l'arrivée se fait rarement tôt — on vient de Hanoï par le train de nuit ou par un vol d'une heure dix. Une seule nuit force à choisir entre la citadelle et les tombeaux, c'est-à-dire entre le pouvoir et sa mise en scène." },
-        { "p": "Le départ, lui, est une étape en soi : la route côtière du col des Nuages vers Hoi An, avec l'arrêt à la lagune de Lang Co, et sur certains itinéraires le sanctuaire cham de My Son. Cette journée-là n'est pas du transport, et il ne faut pas la compter comme telle." },
-        { "p": "Le choix du train de nuit depuis Hanoï mérite d'être connu : il part en soirée, arrive en milieu de matinée, et supprime à la fois un vol et une nuit d'hôtel. Nous le programmons en cabine climatisée à quatre couchettes dans le circuit [du Nord au Sud](/circuit-vietnam/vietnam-du-nord-au-sud/)." }
+        {
+          "p": "**Deux nuits, c'est-à-dire une journée pleine et deux demi-journées.** C'est le format de nos circuits, et le calcul est simple."
+        },
+        {
+          "p": "La citadelle demande trois heures si l'on écoute, les tombeaux une demi-journée, et l'arrivée se fait rarement tôt — on vient de Hanoï par le train de nuit ou par un vol d'une heure dix. Une seule nuit force à choisir entre la citadelle et les tombeaux, c'est-à-dire entre le pouvoir et sa mise en scène."
+        },
+        {
+          "p": "Le départ, lui, est une étape en soi : la route côtière du col des Nuages vers Hoi An, avec l'arrêt à la lagune de Lang Co, et sur certains itinéraires le sanctuaire cham de My Son. Cette journée-là n'est pas du transport, et il ne faut pas la compter comme telle."
+        },
+        {
+          "p": "Le choix du train de nuit depuis Hanoï mérite d'être connu : il part en soirée, arrive en milieu de matinée, et supprime à la fois un vol et une nuit d'hôtel. Nous le programmons en cabine climatisée à quatre couchettes dans le circuit [du Nord au Sud](/circuit-vietnam/vietnam-du-nord-au-sud/)."
+        }
       ]
     },
     {
       "h2": "La cuisine impériale, qui n'est pas une légende",
       "blocs": [
-        { "p": "**Hué a sa propre cuisine, et c'est la plus codifiée du pays.** Elle vient de la cour, où l'on servait des repas de dizaines de plats en très petites portions, présentés comme des objets." },
+        {
+          "p": "**Hué a sa propre cuisine, et c'est la plus codifiée du pays.** Elle vient de la cour, où l'on servait des repas de dizaines de plats en très petites portions, présentés comme des objets."
+        },
         {
           "ul": [
             "**Le bún bò Huế** — la soupe emblématique, au bœuf et à la citronnelle, plus relevée et plus charnue que le phở du Nord. Elle se mange le matin.",
@@ -74,16 +137,26 @@
             "**Le repas de mandarin**, reconstitution de la table impériale. Touristique mais honnête quand la maison est sérieuse ; nous le programmons dans la gamme Signature."
           ]
         },
-        { "p": "Le Centre est la région la plus épicée du pays, et Hué en est le sommet. Le détail des trois cuisines régionales est sur notre page [cuisine](/vietnam-cuisine/)." }
+        {
+          "p": "Le Centre est la région la plus épicée du pays, et Hué en est le sommet. Le détail des trois cuisines régionales est sur notre page [cuisine](/vietnam-cuisine/)."
+        }
       ]
     },
     {
       "h2": "Quand y aller, et le piège d'octobre",
       "blocs": [
-        { "p": "**De février à août, et surtout pas en octobre-novembre.** Hué est l'illustration parfaite du fait que le Centre inverse le calendrier du reste du pays." },
-        { "p": "Sa saison des pluies va de septembre à décembre et culmine en octobre et novembre, au moment précis où le Nord est au plus beau. C'est le piège classique d'un circuit Nord-Sud en automne : on part pour Ha Giang doré et on arrive à Hué sous l'eau, parfois les pieds dedans — la ville est traversée par la rivière des Parfums et les crues y sont régulières." },
-        { "p": "Un itinéraire d'octobre doit donc raccourcir le Centre, ou l'aborder par l'intérieur des terres. Le tableau des douze mois, région par région, est sur notre page [quand partir](/quand-partir-au-vietnam/)." },
-        { "p": "À l'inverse, de février à avril, Hué est à son meilleur : la brume du matin monte de la rivière, la chaleur reste supportable, et la citadelle à l'ouverture est presque vide." }
+        {
+          "p": "**De février à août, et surtout pas en octobre-novembre.** Hué est l'illustration parfaite du fait que le Centre inverse le calendrier du reste du pays."
+        },
+        {
+          "p": "Sa saison des pluies va de septembre à décembre et culmine en octobre et novembre, au moment précis où le Nord est au plus beau. C'est le piège classique d'un circuit Nord-Sud en automne : on part pour Ha Giang doré et on arrive à Hué sous l'eau, parfois les pieds dedans — la ville est traversée par la rivière des Parfums et les crues y sont régulières."
+        },
+        {
+          "p": "Un itinéraire d'octobre doit donc raccourcir le Centre, ou l'aborder par l'intérieur des terres. Le tableau des douze mois, région par région, est sur notre page [quand partir](/quand-partir-au-vietnam/)."
+        },
+        {
+          "p": "À l'inverse, de février à avril, Hué est à son meilleur : la brume du matin monte de la rivière, la chaleur reste supportable, et la citadelle à l'ouverture est presque vide."
+        }
       ]
     }
   ],

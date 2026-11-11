@@ -310,5 +310,57 @@
       1920
     ],
     "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAsAA4BaJQBOj+ABEsUOCAAA/vF5DWW6DxpVwXHZz5smrOIaVoGacsdAgBx+8H31f2lu92Ayg9vk/ZvGFZ7D+QETRV+E4UvSUCBZnfffldrwc+rAAA=="
+  },
+  "angkor": {
+    "w": 2560,
+    "h": 1707,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoQAAsAA4BaJbACdH8AEiLDeRUDAAD5QjsM0Ult3oM/JmRKx79B6aFBvEQyDwHaogO95E7UHfdSHR2w4ShYe0/6cce9h1gyb+MpZXIwU1EMzbZjxi5zQoAA"
+  },
+  "mekong-barque": {
+    "w": 2560,
+    "h": 1714,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACwAQCdASoQAAsAA4BaJYwAAt9zTFYAAP2cXgdZK2t4Po9pgI+KdW6ptW3OS33SkLjOFRpSEX2HBLnH3J6B4AAA"
+  },
+  "hanoi-opera": {
+    "w": 2560,
+    "h": 1707,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAQCdASoQAAsAA4BaJagCdAEOY4zzgAD+PrLuLG1VZ3sWEA1Ghrfaq5Zvlu97wkqYJNFep2qSNFErh2iXk1dDraDz82D++fWMAA=="
+  },
+  "hue-citadelle": {
+    "w": 2560,
+    "h": 1707,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAABwAgCdASoQAAsAA4BaJbACdGuAt/8DcAtSLw4AAP4zPBq99JX3wDYMM3YytZR0dqZ7CmgXMPdUW+neOj9D29duMq0WO9DBGXwaNCfec2gAAA=="
   }
 }
