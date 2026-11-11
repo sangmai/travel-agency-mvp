@@ -72,6 +72,9 @@ import aGuideVietnam from "@/content/blog/guide-vietnam.json";
 import aSanteVietnam from "@/content/blog/sante-vietnam.json";
 import aAssuranceVietnam from "@/content/blog/assurance-vietnam.json";
 import aInternetVietnam from "@/content/blog/internet-vietnam.json";
+import aNuitJonque from "@/content/blog/nuit-jonque-baie.json";
+import aHanoi from "@/content/blog/hanoi-trois-jours.json";
+import aHue from "@/content/blog/hue-cite-imperiale.json";
 import nordSud from "@/content/itineraries/vietnam-du-nord-au-sud.json";
 import montagnes from "@/content/itineraries/montagnes-et-baies-du-nord.json";
 import famille from "@/content/itineraries/vietnam-en-famille.json";
@@ -91,6 +94,9 @@ const GUIDES: Guide[] = [gQuandPartirAuVietnam, gBudgetVoyageVietnam, gVisaVietn
 /* Articles, newest first: the index shows them in that order and the sitemap
    reads their real modification date. */
 const ARTICLES: Article[] = [
+  aHue,
+  aHanoi,
+  aNuitJonque,
   aInternetVietnam,
   aAssuranceVietnam,
   aSanteVietnam,

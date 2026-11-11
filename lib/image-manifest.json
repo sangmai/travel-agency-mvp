@@ -271,5 +271,44 @@
       1920
     ],
     "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAAsAA4BaJZACdAELjOn4wtlwAP70/Ukr6dtiYm5W9f43hh6Jy+O2YaAn1+m/UrRBQr6zEgpvtz3Yx0bPs6MwGxhYnCuvTIINAAAA"
+  },
+  "jonque-halong": {
+    "w": 2560,
+    "h": 1707,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAsAA4BaJZQCdAEWwYF/EAgAAP7XLtRl5KRkzubaYDRtUu9TPIdnALJ788YmnnODZyGDB0iqZEfscs1Om4OxCZd09D5WH9OSbi9iKgAAAA=="
+  },
+  "hanoi-matin": {
+    "w": 2560,
+    "h": 1440,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoQAAkAA4BaJZwAD4fvuB4Bq+SAAP7CtqGpauqd9o6vvpVTm4HrcWrRxrHWRYuftwaTBN3RY0sIX0BlIHM1rNMt0TzooCAA"
+  },
+  "hue-porte": {
+    "w": 2560,
+    "h": 1707,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAsAA4BaJQBOj+ABEsUOCAAA/vF5DWW6DxpVwXHZz5smrOIaVoGacsdAgBx+8H31f2lu92Ayg9vk/ZvGFZ7D+QETRV+E4UvSUCBZnfffldrwc+rAAA=="
   }
 }
