@@ -1,0 +1,209 @@
+{
+  "slug": "internet-vietnam",
+  "title": "Internet au Vietnam : carte SIM, eSIM et couverture réelle",
+  "description": "La 4G est partout, rapide et presque gratuite. Carte SIM locale ou eSIM, ce qu'il faut pour l'activer, et les quelques endroits où le réseau s'arrête vraiment.",
+  "ogTitle": "Internet au Vietnam : SIM, eSIM et couverture",
+  "ogDescription": "Une carte SIM locale coûte moins qu'un café en France et marche mieux qu'en France. Où, comment, et ce qu'il faut sur soi pour l'acheter.",
+  "photo": "jonque-pont",
+  "photoAlt": "Pont supérieur et petite piscine d'une jonque de croisière, îlots calcaires en arrière-plan",
+  "datePublished": "2026-11-11",
+  "dateModified": "2026-11-11",
+  "author": "",
+  "chapo": "La 4G couvre le pays mieux que bien des campagnes françaises, et coûte quelques euros le mois.",
+  "lede": "**Achetez une carte SIM locale ou activez une eSIM : la 4G vietnamienne est rapide, couvre presque tout le pays et coûte quelques euros pour un mois.** Le roaming depuis la France revient à dix ou vingt fois ce prix pour un service inférieur, et le wifi des hôtels suffit rarement dès qu'on sort de sa chambre. Un passeport et dix minutes à l'aéroport règlent la question pour tout le séjour.",
+  "sections": [
+    {
+      "h2": "SIM physique ou eSIM : laquelle choisir",
+      "blocs": [
+        {
+          "p": "**L'eSIM si votre téléphone la gère, la SIM physique sinon.** La différence n'est pas la qualité du réseau — c'est le même — mais le moment où vous êtes connecté."
+        },
+        {
+          "p": "Une eSIM s'achète et s'active avant le départ, depuis chez vous : vous atterrissez connecté, ce qui change la première heure, celle où l'on cherche son chauffeur et où la famille attend un message. Une SIM physique s'achète à l'arrivée, coûte généralement moins cher, et demande un passage au comptoir."
+        },
+        {
+          "tableau": {
+            "legende": "Les deux formules, en pratique",
+            "colonnes": [
+              "",
+              "eSIM",
+              "SIM physique"
+            ],
+            "lignes": [
+              [
+                "Quand",
+                "Avant le départ, depuis la France",
+                "À l'arrivée, aéroport ou boutique"
+              ],
+              [
+                "Connecté dès",
+                "L'atterrissage",
+                "Après le passage au comptoir"
+              ],
+              [
+                "Prix",
+                "Un peu plus cher",
+                "Le moins cher"
+              ],
+              [
+                "Numéro vietnamien",
+                "Pas toujours fourni",
+                "Oui, utile pour les taxis et les réservations"
+              ],
+              [
+                "Votre numéro français",
+                "Conservé en parallèle",
+                "Il faut changer de carte, ou un double SIM"
+              ],
+              [
+                "Condition",
+                "Téléphone compatible eSIM",
+                "Passeport au nom de l'acheteur"
+              ]
+            ],
+            "note": "Le numéro vietnamien n'est pas un détail : certaines applications de VTC et certains restaurants rappellent pour confirmer, et un numéro étranger complique l'échange."
+          }
+        },
+        {
+          "p": "Notre conseil, si vous hésitez : une eSIM pour arriver connecté, et une SIM physique achetée le lendemain en ville si vous voulez un numéro local. Les deux coûtent ensemble moins qu'une journée de roaming."
+        }
+      ]
+    },
+    {
+      "h2": "Acheter une carte SIM sur place",
+      "blocs": [
+        {
+          "p": "**Il faut votre passeport, et l'achat prend dix minutes.** L'enregistrement de la carte au nom du titulaire est obligatoire au Vietnam : un vendeur qui ne vous le demande pas vend une carte qui peut être coupée."
+        },
+        {
+          "p": "Les trois opérateurs nationaux sont Viettel, Vinaphone et Mobifone. Viettel a historiquement la meilleure couverture dans les zones de montagne ; les trois se valent dans les villes et sur le littoral. Cela compte si votre circuit passe par Ha Giang ou Pu Luong, dont la position et l'éloignement se lisent sur notre [carte du Vietnam](/carte-vietnam/)."
+        },
+        {
+          "ul": [
+            "**À l'aéroport**, les comptoirs sont dans le hall d'arrivée, après la douane. Pratique, un peu plus cher, et le vendeur installe la carte pour vous.",
+            "**En boutique officielle**, en ville, le même forfait coûte moins cher. Cherchez l'enseigne de l'opérateur, pas une échoppe de téléphonie.",
+            "**Demandez un forfait « touristique » de 30 jours** : ils existent chez les trois opérateurs et incluent une quantité de données que vous n'épuiserez pas.",
+            "**Vérifiez avant de quitter le comptoir** que la 4G fonctionne et que vous pouvez passer un appel. C'est le moment de le faire."
+          ]
+        },
+        {
+          "p": "Ne faites pas sauter votre forfait français pendant ce temps : gardez-le actif en veille pour recevoir les SMS de votre banque, qui arrivent par le réseau français et pas par la carte locale. C'est le motif n° 1 de blocage de carte bancaire en voyage."
+        }
+      ]
+    },
+    {
+      "h2": "Où le réseau s'arrête vraiment",
+      "blocs": [
+        {
+          "p": "**Dans les baies, dans les grottes, et sur deux ou trois cols de montagne. Nulle part ailleurs.**"
+        },
+        {
+          "p": "La couverture vietnamienne surprend les voyageurs français : on capte dans des villages de rizières, au milieu du delta, sur un bateau du marché flottant. Les zones blanches existent, mais elles sont courtes et identifiables à l'avance."
+        },
+        {
+          "tableau": {
+            "legende": "Les étapes où l'on perd le réseau",
+            "colonnes": [
+              "Étape",
+              "Ce qui se passe",
+              "Ce qu'il faut faire"
+            ],
+            "lignes": [
+              [
+                "Nuit en jonque, baie de Lan Ha",
+                "Réseau faible ou nul une partie de la nuit",
+                "Prévenir les proches avant d'embarquer"
+              ],
+              [
+                "Grottes de Phong Nha",
+                "Rien sous terre, évidemment",
+                "Télécharger la carte avant"
+              ],
+              [
+                "Cols du plateau de Dong Van",
+                "Coupures de quelques kilomètres",
+                "Viettel capte le mieux"
+              ],
+              [
+                "Villages chez l'habitant, Pu Luong",
+                "Wifi de la maison d'hôtes, souvent lent",
+                "Suffit pour un message, pas pour une visio"
+              ],
+              [
+                "Train de nuit Hanoï–Hué",
+                "Intermittent toute la nuit",
+                "Rien à faire, et c'est reposant"
+              ]
+            ],
+            "note": "Dans tous ces cas, votre guide dispose d'un téléphone professionnel et notre numéro d'assistance reste joignable depuis l'hôtel ou le bateau."
+          }
+        },
+        {
+          "p": "Téléchargez la carte du pays dans Google Maps avant de partir — la fonction hors ligne couvre une région entière et rend les coupures indolores."
+        }
+      ]
+    },
+    {
+      "h2": "Les applications qui servent réellement",
+      "blocs": [
+        {
+          "p": "**Une pour se déplacer, une pour traduire, une pour payer. Le reste est optionnel.**"
+        },
+        {
+          "ul": [
+            "**Grab** — l'équivalent local d'Uber, pour les voitures comme pour les motos-taxis. Le prix est fixé à l'avance, ce qui supprime la négociation et le compteur truqué, et le paiement se fait en espèces ou par carte — voir [payer au Vietnam](/blog/argent-vietnam/). C'est l'application la plus utile du voyage.",
+            "**Google Traduction**, avec le vietnamien téléchargé hors ligne. La fonction appareil photo, pointée sur un menu ou une notice de médicament, fait un travail étonnant.",
+            "**Google Maps hors ligne**, carte téléchargée avant le départ.",
+            "**Une application de messagerie** : Zalo est au Vietnam ce que WhatsApp est en France, et c'est souvent par là que votre chauffeur vous enverra sa position."
+          ]
+        },
+        {
+          "p": "Ce qui ne sert pas : les applications de change, les traducteurs payants, les guides hors ligne. Votre guide sur place fait mieux, et c'est précisément ce qu'on explique dans l'article [faut-il un guide au Vietnam](/blog/guide-vietnam/)."
+        }
+      ]
+    },
+    {
+      "h2": "Le wifi, et pourquoi il ne suffit pas",
+      "blocs": [
+        {
+          "p": "**Le wifi est partout — hôtels, cafés, restaurants de rue, bateaux — et il est gratuit.** Un petit restaurant de quartier affiche son mot de passe sur le mur, et personne ne vous demandera de consommer pour l'obtenir."
+        },
+        {
+          "p": "Pourquoi cela ne remplace pas une carte SIM : vous en avez besoin dehors, pas dedans. Appeler un Grab sous la pluie, vérifier une adresse en marchant, retrouver quelqu'un sur un marché — ce sont les moments où le wifi de l'hôtel ne sert à rien."
+        },
+        {
+          "p": "Un mot sur la sécurité, sans dramatiser : les réseaux publics vietnamiens ne sont ni meilleurs ni pires qu'ailleurs. Évitez simplement de consulter vos comptes bancaires depuis le wifi d'un café, et préférez vos données mobiles pour ce genre d'opération — ce qui est encore une raison d'avoir une carte locale."
+        },
+        {
+          "p": "Enfin, pour les voyageurs qui travaillent : le débit en 4G est largement suffisant pour une visioconférence, et meilleur que le wifi de bien des hôtels. Si une réunion compte pendant votre séjour, faites-la en partage de connexion plutôt qu'en wifi."
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Faut-il acheter une carte SIM au Vietnam ?",
+      "a": "Oui, c'est la solution la moins chère et la plus confortable. Un forfait touristique de 30 jours coûte quelques euros chez Viettel, Vinaphone ou Mobifone et inclut bien plus de données que vous n'en consommerez. Le roaming depuis la France revient à dix ou vingt fois ce prix pour un service inférieur. L'alternative est une eSIM activée avant le départ, un peu plus chère mais qui vous fait atterrir connecté."
+    },
+    {
+      "q": "Que faut-il pour acheter une carte SIM vietnamienne ?",
+      "a": "Votre passeport, et rien d'autre. L'enregistrement de la carte au nom du titulaire est obligatoire au Vietnam : si un vendeur ne vous le demande pas, la carte risque d'être désactivée. L'achat prend une dizaine de minutes, au comptoir de l'aéroport ou dans une boutique officielle de l'opérateur, où le même forfait coûte moins cher."
+    },
+    {
+      "q": "La 4G fonctionne-t-elle partout au Vietnam ?",
+      "a": "Presque. On capte dans les villages de rizières, au milieu du delta et jusque sur les barques du marché flottant. Les zones sans réseau sont courtes et connues : une partie de la nuit en jonque dans la baie, sous terre à Phong Nha, quelques kilomètres sur les cols du plateau de Dong Van, et par intermittence dans le train de nuit. Viettel couvre le mieux la montagne."
+    },
+    {
+      "q": "Faut-il garder son forfait français actif ?",
+      "a": "Oui, en veille, sans activer le roaming data. Les codes de validation de votre banque arrivent par SMS sur le réseau français et non sur la carte vietnamienne, et ne pas les recevoir est le premier motif de blocage de carte bancaire en voyage. Un téléphone double SIM, ou une eSIM locale en parallèle de votre carte française, règle la question."
+    },
+    {
+      "q": "Quelles applications installer avant de partir au Vietnam ?",
+      "a": "Grab pour les voitures et les motos-taxis, avec un prix fixé à l'avance qui supprime toute négociation. Google Traduction avec le vietnamien téléchargé hors ligne, dont la fonction appareil photo déchiffre les menus et les notices. Google Maps avec la carte du pays en hors ligne. Et Zalo, la messagerie que tout le monde utilise au Vietnam, souvent celle par laquelle votre chauffeur enverra sa position."
+    },
+    {
+      "q": "Le wifi des hôtels suffit-il ?",
+      "a": "Pour envoyer des messages le soir, oui : il est partout et gratuit, y compris dans les petits restaurants. Mais vous avez besoin d'internet dehors — appeler un Grab, vérifier une adresse en marchant, retrouver quelqu'un sur un marché — et c'est là que le wifi ne sert à rien. Pour une visioconférence, la 4G est souvent plus rapide que le wifi de l'hôtel."
+    }
+  ]
+}

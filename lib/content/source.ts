@@ -69,6 +69,9 @@ import gRizieresVietnam from "@/content/guides/rizieres-vietnam.json";
 import aVietnamCambodge from "@/content/blog/vietnam-cambodge-combiner.json";
 import aArgentVietnam from "@/content/blog/argent-vietnam.json";
 import aGuideVietnam from "@/content/blog/guide-vietnam.json";
+import aSanteVietnam from "@/content/blog/sante-vietnam.json";
+import aAssuranceVietnam from "@/content/blog/assurance-vietnam.json";
+import aInternetVietnam from "@/content/blog/internet-vietnam.json";
 import nordSud from "@/content/itineraries/vietnam-du-nord-au-sud.json";
 import montagnes from "@/content/itineraries/montagnes-et-baies-du-nord.json";
 import famille from "@/content/itineraries/vietnam-en-famille.json";
@@ -87,7 +90,14 @@ const GUIDES: Guide[] = [gQuandPartirAuVietnam, gBudgetVoyageVietnam, gVisaVietn
 
 /* Articles, newest first: the index shows them in that order and the sitemap
    reads their real modification date. */
-const ARTICLES: Article[] = [aGuideVietnam, aArgentVietnam, aVietnamCambodge];
+const ARTICLES: Article[] = [
+  aInternetVietnam,
+  aAssuranceVietnam,
+  aSanteVietnam,
+  aGuideVietnam,
+  aArgentVietnam,
+  aVietnamCambodge,
+];
 
 export const source = {
   site: async (): Promise<Site> => siteJson,
