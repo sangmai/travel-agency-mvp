@@ -8,19 +8,23 @@
  * owe nothing: clicks are intentions, and no commission was ever paid on an
  * intention.
  *
- * Two timestamps close the gap. `recorded_at` is written when the form is
- * submitted; `answered_at` when a message addressed to that same traveller is
- * seen leaving, because the agency copied our follow-up address on it. The
- * distance between them is the only number in this project that describes an
- * outcome.
+ * `recorded_at` is written when the form is submitted, and that is now the whole
+ * of it. The `answered_at` column was to be filled by an inbound-copy handler
+ * running on Cloudflare Email Routing; that was switched off on 11 November 2026
+ * so the domain's MX could point at the agency's own mail host, and nothing can
+ * write the column any more. It is left in place: the rows that have it keep it,
+ * and dropping a column to tidy a schema loses evidence to gain nothing.
+ *
+ * The measurement moved rather than disappeared. The agency mailbox is shared
+ * between the two parties, so every reply to a traveller sits in a Sent folder
+ * both can see — a plainer record than a timestamp inferred from a blind copy,
+ * and one that needs no code at all.
  *
  * ## Phase one measures, it does not chase
  *
  * No reminder is sent from here. Reminding enforces a service level that no
  * agreement defines yet, and automated nagging of a partner one meets daily
- * costs more than it collects. The record comes first: after a season it says
- * "fourteen requests, median four days, five never answered", and that sentence
- * is what makes the conversation about commission possible at all.
+ * costs more than it collects.
  */
 
 import type { D1 } from "./clicks";
@@ -42,8 +46,7 @@ export type NouveauLead = {
   page: string;
 };
 
-/** Addresses are compared, never displayed back: lower-casing at write time
- *  means the CC handler can match without guessing at the sender's casing. */
+/** Stored lower-cased, so someone who writes in twice is one address, not two. */
 const normaliser = (e: string) => e.trim().toLowerCase();
 
 /**
@@ -77,33 +80,6 @@ export async function enregistrerLead(
   }
 }
 
-/**
- * Marks every pending lead held by this traveller as answered.
- *
- * Plural on purpose: someone who wrote twice about two itineraries has two open
- * rows, and one reply closes the conversation, not half of it. Rows already
- * answered are left alone — the first reply is the one being measured, and a
- * later message must not quietly improve the record.
- */
-export async function marquerRepondu(
-  env: LeadEnv,
-  emailVoyageur: string,
-  par: string,
-): Promise<number> {
-  if (!env.CLICS) return 0;
-  try {
-    const r = (await env.CLICS.prepare(
-      "UPDATE lead SET answered_at = ?, answered_by = ? " +
-        "WHERE email = ? AND answered_at IS NULL",
-    )
-      .bind(new Date().toISOString(), par.slice(0, 160), normaliser(emailVoyageur))
-      .run()) as { meta?: { changes?: number } };
-    return r?.meta?.changes ?? 0;
-  } catch (e) {
-    console.error("[lead] answer update failed", { error: String(e) });
-    return 0;
-  }
-}
 
 /**
  * Retention. Erases the person, keeps the measurement.
@@ -139,6 +115,23 @@ export async function anonymiserAnciens(env: LeadEnv): Promise<number> {
 /**
  * One line for the daily digest.
  *
+ * It used to report how many requests were awaiting a reply. That number was
+ * fed by the inbound-copy handler, which ran on Cloudflare Email Routing — and
+ * Email Routing was switched off on 11 November 2026 so the domain's MX could
+ * point at the agency's own mail host. Nothing can set answered_at any more, so
+ * the figure would have read "all of them, still waiting" every night, for ever,
+ * and been wrong every night.
+ *
+ * A metric that is structurally always 100 % is worse than no metric: it is read
+ * once, disbelieved, and then the whole digest stops being read. So the line now
+ * says only what the table still knows — how many requests exist, and how many
+ * arrived today.
+ *
+ * The response time has not stopped being measurable; it has moved. The agency
+ * mailbox is shared, so every reply to a traveller sits in its Sent folder,
+ * visible to both parties. That is a better record than this column ever was,
+ * and it needs no instrumentation.
+ *
  * English, like every other line the bot sends: the digest is read by the
  * partner who asked for the source to stop speaking French to him. The site
  * stays French, the instrumentation does not.
@@ -147,19 +140,17 @@ export async function resumeLeads(env: LeadEnv): Promise<string> {
   if (!env.CLICS) return "";
   try {
     const { results } = await env.CLICS.prepare(
-      "SELECT " +
-        "COUNT(*) AS total, " +
-        "SUM(CASE WHEN answered_at IS NULL THEN 1 ELSE 0 END) AS attente, " +
-        "SUM(CASE WHEN answered_at IS NULL AND recorded_at < ? THEN 1 ELSE 0 END) AS tardifs " +
+      "SELECT COUNT(*) AS total, " +
+        "SUM(CASE WHEN recorded_at >= ? THEN 1 ELSE 0 END) AS recents " +
         "FROM lead",
     )
       .bind(new Date(Date.now() - 24 * 3600 * 1000).toISOString())
-      .all<{ total: number; attente: number; tardifs: number }>();
+      .all<{ total: number; recents: number }>();
     const r = results[0];
     if (!r || !r.total) return "";
     return (
-      `Requests: ${r.total} total, ${r.attente ?? 0} awaiting a reply` +
-      (r.tardifs ? `, ${r.tardifs} of them for over 24 h` : "")
+      `Requests: ${r.total} total` +
+      (r.recents ? `, ${r.recents} in the last 24 h` : ", none in the last 24 h")
     );
   } catch (e) {
     console.error("[lead] summary failed", { error: String(e) });
@@ -167,17 +158,3 @@ export async function resumeLeads(env: LeadEnv): Promise<string> {
   }
 }
 
-/**
- * Pulls every address out of a raw header, for the inbound copy.
- *
- * Deliberately crude: it looks for anything shaped like an address anywhere in
- * the line, rather than parsing RFC 5322 properly. Display names carry commas
- * and quoted strings carry anything at all, and a parser that is almost right
- * is worse here than one that over-collects — the addresses are only used to
- * look up a pending lead, so an extra one matches nothing and costs nothing.
- */
-export function adresses(entete: string | null): string[] {
-  if (!entete) return [];
-  const out = entete.match(/[\w.!#$%&'*+/=?^`{|}~-]+@[\w-]+(?:\.[\w-]+)+/g) ?? [];
-  return [...new Set(out.map(normaliser))];
-}

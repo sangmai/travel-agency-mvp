@@ -9,10 +9,7 @@ import { demarrer, retour, type AuthEnv } from "./auth";
 import { clic, record, digest, type ClicEnv } from "./clicks";
 import { envoyerAccuse } from "./accuse";
 import { markdown, page } from "./markdown";
-import {
-  enregistrerLead, marquerRepondu, anonymiserAnciens, adresses,
-  type LeadEnv,
-} from "./leads";
+import { enregistrerLead, anonymiserAnciens, type LeadEnv } from "./leads";
 
 interface Env extends AuthEnv, ClicEnv, LeadEnv {
   /* Declared in wrangler.jsonc. Serves out/, applying the `html_handling`
@@ -415,52 +412,20 @@ export default {
     await anonymiserAnciens(env);
   },
 
-  /**
-   * Inbound mail, and the only moment this system learns an outcome.
+  /* There is no `email()` handler any more.
    *
-   * Cloudflare Email Routing is pointed at this Worker for one address. When
-   * the agency writes to a traveller and copies that address, the message
-   * arrives here: every address in the To and Cc headers is pulled out, and any
-   * pending lead held by one of them is stamped answered.
+   * One lived here: Cloudflare Email Routing delivered a blind copy of the
+   * agency's replies, and it marked the matching lead answered. It was switched
+   * off on 11 November 2026 when the domain's MX moved to the agency's own mail
+   * host — a domain has one set of MX records, and they cannot be shared.
    *
-   * It deliberately does nothing else — no storing of the message, no reading
-   * of its body. What is needed is the fact that a reply left and when; the
-   * contents belong to the two people writing to each other.
+   * It is deleted rather than left in place. A handler that cannot fire is
+   * worse than none: the next person to wonder why response times stopped being
+   * recorded would read it, believe it runs, and go looking for the bug
+   * somewhere else entirely.
    *
-   * Set-up is a dashboard step, not a binding: Email Routing → Routes → add the
-   * follow-up address → Send to a Worker → this one. Until that route exists
-   * this handler is never called, and nothing else breaks.
+   * The measurement moved to the mailbox itself, which the two parties share:
+   * every reply sits in a Sent folder both can open. See worker/leads.ts.
    */
-  async email(
-    message: {
-      from: string;
-      headers: { get(name: string): string | null };
-      forward(to: string): Promise<void>;
-    },
-    env: Env,
-  ): Promise<void> {
-    const destinataires = [
-      ...adresses(message.headers.get("to")),
-      ...adresses(message.headers.get("cc")),
-    ];
-    let marques = 0;
-    for (const e of destinataires) {
-      marques += await marquerRepondu(env, e, message.from);
-    }
-    console.log("[lead] inbound copy", {
-      from: message.from,
-      recipients: destinataires.length,
-      marked: marques,
-    });
 
-    /* The copy still reaches the human it was always going to reach. Dropping
-       it here would make the measurement cost a mailbox. */
-    if (env.DEVIS_TO) {
-      try {
-        await message.forward(env.DEVIS_TO);
-      } catch (e) {
-        console.warn("[lead] forward failed", { error: String(e) });
-      }
-    }
-  },
 };
