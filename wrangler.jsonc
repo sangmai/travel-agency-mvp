@@ -87,6 +87,21 @@
     // name instead of Resend's sandbox address.
     "DEVIS_FROM": "Jasmin Travel <contact@voyagevietnam-surmesure.com>",
 
+    // Sender of the internal notification only — the traveller's confirmation
+    // keeps DEVIS_FROM above, because that is the address printed on the site.
+    //
+    // It was first set to info@ to test a guess: that the host's "sender may be
+    // impersonated" flag might key on whether the local part is one of its
+    // mailboxes, info@ having been renamed to contact@. It does not. info@ was
+    // flagged and filed as Junk exactly as contact@ was, so the rule keys on the
+    // domain the host owns, and nothing configured here can avoid it.
+    //
+    // info@ stays anyway, for a better reason than the one it arrived with: it
+    // is the only address that is never a person. contact@ carries real
+    // correspondence with travellers, so a mail rule matching it would catch
+    // their replies too. A rule matching info@ catches the machine and only the
+    // machine.
+    "NOTIF_FROM": "Jasmin Travel <info@voyagevietnam-surmesure.com>",
 
     // Where a request lands. Two addresses, comma-separated.
     //

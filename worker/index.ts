@@ -26,6 +26,23 @@ interface Env extends AuthEnv, ClicEnv, LeadEnv {
      and the one replies reach. */
   DEVIS_FROM: string;
 
+  /**
+   * Sender of the internal notification only. Optional: falls back to
+   * DEVIS_FROM.
+   *
+   * The two mails have different readers. The traveller's confirmation must
+   * come from the published address; the notification is read by one person who
+   * already knows where it came from, so its From is free.
+   *
+   * It is info@, an address that is deliberately not a mailbox — and that is the
+   * point. contact@ carries real correspondence, so a filter rule matching it
+   * would catch travellers' replies too. A rule matching info@ catches the
+   * machine and nothing else.
+   *
+   * It does not escape the host's impersonation flag: that was tested, and the
+   * rule keys on the domain, not on the local part. See wrangler.jsonc.
+   */
+  NOTIF_FROM?: string;
   /* Where requests land — one address, or several separated by commas. Two are
      configured: the one that has to arrive and the one that can be handed over.
      See wrangler.jsonc for why neither is enough alone. */
@@ -242,7 +259,7 @@ async function devis(
       "content-type": "application/json",
     },
     body: JSON.stringify({
-      from: env.DEVIS_FROM,
+      from: env.NOTIF_FROM || env.DEVIS_FROM,
       /**
        * Several recipients, separated by commas.
        *
