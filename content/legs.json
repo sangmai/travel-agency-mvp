@@ -74,7 +74,7 @@
         { "mode": "route", "hours": 5.5, "days": 1, "journee": "perdue",
           "note": "Autoroute CT05, dépose en centre-ville de Sapa. Trois heures de moins que le train.",
           "source": "daytripsvietnam.com 2026 : 5 h à 6 h" },
-        { "mode": "train-nuit", "hours": 9, "days": 0, "journee": "perdue", "nuit": true,
+        { "mode": "train-nuit", "hours": 9, "days": 0.25, "journee": "perdue", "nuit": true,
           "note": "Huit heures jusqu'à Lao Cai, puis 35 km de route. Contrairement au train de Hué, il ne supprime pas vraiment une journée : il faut encore monter à Sapa au petit matin. Deux fois le prix du bus.",
           "source": "daytripsvietnam.com 2026 et comparatifs d'opérateurs" }
       ]
@@ -110,7 +110,7 @@
         { "mode": "avion", "hours": 1.33, "days": 0.5, "journee": "perdue",
           "note": "Le choix par défaut pour rejoindre le Centre quand on ne veut pas du train de nuit.",
           "source": "Horaires des compagnies" },
-        { "mode": "train-nuit", "hours": 15.5, "days": 0, "journee": "perdue", "nuit": true,
+        { "mode": "train-nuit", "hours": 15.5, "days": 0.5, "journee": "perdue", "nuit": true,
           "note": "Plus long que Hué : on arrive en milieu de matinée, donc une demi-journée y passe quand même.",
           "source": "daytripsvietnam.com 2026 : 15 h à 16 h" }
       ]
@@ -118,7 +118,7 @@
     {
       "from": "hanoi", "to": "phong-nha",
       "modes": [
-        { "mode": "train-nuit", "hours": 10.8, "days": 0, "journee": "perdue", "nuit": true,
+        { "mode": "train-nuit", "hours": 10.8, "days": 0.25, "journee": "perdue", "nuit": true,
           "note": "Le SE3 arrive à Dong Hoi à 5 h 20, le SE1 à 7 h 45 — plus humain. Il reste 45 km jusqu'à Phong Nha. Les grottes ferment à 16 h.",
           "source": "Horaires SE1, SE3, SE19, chemins de fer vietnamiens" }
       ]

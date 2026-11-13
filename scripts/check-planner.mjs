@@ -27,8 +27,12 @@ for (const l of legs) {
   if (!ids.has(l.to)) fautes.push(`leg ${l.from}->${l.to}: unknown to`);
   if (!l.modes?.length) fautes.push(`leg ${l.from}->${l.to}: no mode`);
   for (const m of l.modes ?? []) {
-    if (m.nuit && m.days > 0)
-      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: sleeps aboard yet costs ${m.days} day`);
+    /* `nuit` and `days` are independent, and conflating them loses real
+       information. The Hanoï–Da Nang night train gives you a bed AND eats half
+       the next morning, because it arrives at eleven. What is impossible is a
+       mode you sleep through that also costs a WHOLE day. */
+    if (m.nuit && m.days >= 1)
+      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: sleeps aboard yet costs a whole day`);
     if (m.journee !== "perdue" && m.journee !== "vecue")
       fautes.push(`leg ${l.from}->${l.to} ${m.mode}: journee is "${m.journee}"`);
     if (!m.source || m.source === "a-confirmer")
