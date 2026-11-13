@@ -40,3 +40,6 @@ claude-seo/
 
 # Redirections, générées au build depuis lib/routes.ts et content/itineraries/.
 public/_redirects
+
+# Mockups de brainstorming, locaux et jetables.
+.superpowers/
