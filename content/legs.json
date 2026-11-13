@@ -63,9 +63,9 @@
     {
       "from": "ninh-binh", "to": "lan-ha",
       "modes": [
-        { "mode": "route", "hours": 3, "days": 0.5, "journee": "perdue",
-          "note": "Évite de remonter sur Hanoï. Enchaînement logique du Nord.",
-          "source": "a-confirmer" }
+        { "mode": "navette", "hours": 4.75, "days": 0.75, "journee": "perdue",
+          "note": "Plus long qu'il n'y paraît : 150 km jusqu'au bac de Dong Bai (3 h), une demi-heure de traversée, puis 40 minutes jusqu'à l'embarcadère de Beo. Départs à 7 h 30, 9 h et 14 h — pour embarquer sur une jonque à midi, il faut celui de 7 h 30, et c'est juste. Évite malgré tout de remonter sur Hanoï.",
+          "source": "Cat Ba Express et opérateurs de transfert, horaires 2026 : 4 h 30 à 5 h" }
       ]
     },
     {
@@ -127,8 +127,8 @@
       "from": "phong-nha", "to": "hue",
       "modes": [
         { "mode": "route", "hours": 4, "days": 0.5, "journee": "perdue",
-          "note": "Enchaînement naturel vers le sud après les grottes.",
-          "source": "a-confirmer" }
+          "note": "Environ 200 km. Enchaînement naturel vers le sud après les grottes, et le seul trajet raisonnable : il n'y a pas de train utile entre les deux.",
+          "source": "Opérateurs de transfert Phong Nha–Hué, 2026 : 3 h 30 à 4 h 30" }
       ]
     },
     {
@@ -140,9 +140,12 @@
         { "mode": "route-col", "hours": 3.5, "days": 0.5, "journee": "vecue",
           "note": "Par le col des Nuages. Une heure et demie de plus, et c'est la plus belle route du pays.",
           "source": "daytripsvietnam.com 2026 : 3 h et plus par le col" },
-        { "mode": "train", "hours": 2.5, "days": 0.25, "journee": "vecue",
-          "note": "Le train longe la côte au pied du col. Moins souple qu'une voiture, plus beau qu'un tunnel.",
-          "source": "a-confirmer" }
+        { "mode": "train", "hours": 2.6, "days": 0.25, "journee": "vecue",
+          "note": "La plus belle voie ferrée du pays : elle contourne le col au ras de l'eau, au-dessus de la baie de Lang Co. Le SE7 met 2 h 32 ; onze trains par jour. S'asseoir à droite en montant vers Hué, à gauche en descendant vers Da Nang.",
+          "source": "Horaires des chemins de fer vietnamiens 2026 : 2 h 28 à 3 h 58 selon le train" },
+        { "mode": "train-patrimoine", "hours": 3.4, "days": 0.5, "journee": "vecue",
+          "note": "Le train touristique HD1 et HD3, à 7 h 05 et 14 h 30, avec un arrêt à Lang Co. Plus lent que le SE7 et c'est le but.",
+          "source": "Horaires du train patrimoine Hué–Da Nang 2026 : 3 h à 3 h 45" }
       ]
     },
     {

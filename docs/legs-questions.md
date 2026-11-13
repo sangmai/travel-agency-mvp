@@ -13,17 +13,23 @@ trong đó **23 cái có nguồn công khai**. Còn lại ba.
 
 ---
 
-## Ba con số còn trống
+## Ba con số còn trống — đã tra xong
 
-Cả ba đều **tra được, không cần hỏi người** — chỉ là tôi chưa tìm thấy nguồn đủ
-chắc. Kiểm trên [12go.asia](https://12go.asia), [Baolau](https://baolau.com)
-hoặc Google Maps là xong.
+**27/27 phương tiện hiện đều có nguồn.** Và một trong ba ước lượng của tôi sai rõ:
 
-| Chặng | Phương tiện | Ước lượng hiện tại |
-|---|---|---|
-| Ninh Bình → Lan Hạ | ô tô | 3 h |
-| Phong Nha → Huế | ô tô | 4 h |
-| Huế → Đà Nẵng | tàu hoả | 2 h 30 |
+| Chặng | Tôi đoán | Thực tế | |
+|---|---|---|---|
+| Ninh Bình → Lan Hạ | 3 h | **4 h 30 – 5 h** | sai 60% |
+| Phong Nha → Huế | 4 h | 3 h 30 – 4 h 30 | đúng |
+| Huế → Đà Nẵng (tàu) | 2 h 30 | 2 h 28 – 3 h 58 | đúng |
+
+Chặng Ninh Bình → Lan Hạ hoá ra có ba đoạn: 150 km tới bến phà Đồng Bài (3 h),
+phà nửa tiếng, rồi 40 phút tới bến Bèo. **Và nó trả lời luôn một câu thuộc loại
+"ràng buộc giờ khởi hành"**: xe chạy 7 h 30, 9 h và 14 h — muốn lên du thuyền lúc
+12 h thì **bắt buộc chuyến 7 h 30**, mà vẫn sát nút.
+
+Tra ra thêm một phương tiện chưa biết: **tàu di sản HD1/HD3** Huế–Đà Nẵng, chạy
+7 h 05 và 14 h 30, dừng ở Lăng Cô. Chậm hơn SE7 và đó là chủ đích.
 
 ---
 
