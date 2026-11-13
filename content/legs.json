@@ -1,0 +1,192 @@
+{
+  "_": [
+    "Les trajets entre étapes, et surtout ce qu'ils coûtent en journées.",
+    "",
+    "`hours` se trouve dans un horaire. `days` ne se trouve nulle part, et c'est",
+    "le seul champ qui compte vraiment : le train de nuit Hanoï–Hué dure dix fois",
+    "plus longtemps que l'avion et coûte zéro journée, parce qu'on y dort et qu'il",
+    "remplace une nuit d'hôtel.",
+    "",
+    "`journee` distingue deux choses que les heures confondent : une journée",
+    "`perdue` dans un van sur l'autoroute, et une journée `vecue` sur le col des",
+    "Nuages, qui est le voyage et non le trajet. La jauge de rythme ne doit",
+    "pénaliser que la première.",
+    "",
+    "Chaque valeur porte sa source. Celles marquées `a-confirmer` sont des",
+    "estimations : elles s'affichent comme telles et le site invite à les corriger."
+  ],
+
+  "regles": [
+    {
+      "id": "sorties-de-ville",
+      "texte": "Compter 30 à 60 minutes de plus que l'horaire annoncé, aux entrées et sorties de Hanoï et de Hô Chi Minh-Ville.",
+      "source": "daytripsvietnam.com, atlas des temps de trajet 2026"
+    },
+    {
+      "id": "bus-couchettes",
+      "texte": "Sur la même autoroute, un bus-couchettes met 30 à 60 % de temps de plus qu'une voiture privée : ramassage en plusieurs points et pauses obligatoires.",
+      "source": "daytripsvietnam.com, atlas des temps de trajet 2026"
+    }
+  ],
+
+  "legs": [
+    {
+      "from": "hanoi", "to": "ninh-binh",
+      "modes": [
+        { "mode": "route", "hours": 1.6, "days": 0.25, "journee": "perdue",
+          "note": "Une matinée suffit. Ninh Binh se fait aussi à la journée depuis Hanoï.",
+          "source": "daytripsvietnam.com 2026 : 1 h 25 à 1 h 45" },
+        { "mode": "train", "hours": 2.25, "days": 0.5, "journee": "perdue",
+          "note": "Moins cher, plus lent, et la gare de Ninh Binh est excentrée.",
+          "source": "daytripsvietnam.com 2026" }
+      ]
+    },
+    {
+      "from": "hanoi", "to": "lan-ha",
+      "modes": [
+        { "mode": "navette-croisiere", "hours": 3.25, "days": 0.5, "journee": "perdue",
+          "note": "La navette ramasse à l'hôtel vers 8 h, arrive à l'embarcadère vers 11 h 30, embarquement vers midi. Au retour, débarquement vers 11 h 30. Une croisière « 1 nuit » occupe donc deux journées entières.",
+          "source": "Horaires publiés par les opérateurs de croisière, vérifiés sur plusieurs agences francophones" },
+        { "mode": "route", "hours": 3.25, "days": 0.5, "journee": "perdue",
+          "note": "Inclut le ferry ou la vedette vers Cat Ba.",
+          "source": "daytripsvietnam.com 2026 : 3 h à 3 h 30" }
+      ]
+    },
+    {
+      "from": "hanoi", "to": "ha-long",
+      "modes": [
+        { "mode": "route", "hours": 2.4, "days": 0.5, "journee": "perdue",
+          "note": "Plus rapide que Lan Ha, et c'est le seul avantage : la baie centrale est quatre fois plus fréquentée.",
+          "source": "daytripsvietnam.com 2026 : 2 h 15 à 2 h 30" }
+      ]
+    },
+    {
+      "from": "ninh-binh", "to": "lan-ha",
+      "modes": [
+        { "mode": "route", "hours": 3, "days": 0.5, "journee": "perdue",
+          "note": "Évite de remonter sur Hanoï. Enchaînement logique du Nord.",
+          "source": "a-confirmer" }
+      ]
+    },
+    {
+      "from": "hanoi", "to": "sapa",
+      "modes": [
+        { "mode": "route", "hours": 5.5, "days": 1, "journee": "perdue",
+          "note": "Autoroute CT05, dépose en centre-ville de Sapa. Trois heures de moins que le train.",
+          "source": "daytripsvietnam.com 2026 : 5 h à 6 h" },
+        { "mode": "train-nuit", "hours": 9, "days": 0.25, "journee": "perdue",
+          "note": "Huit heures jusqu'à Lao Cai, puis 35 km de route. Contrairement au train de Hué, il ne supprime pas vraiment une journée : il faut encore monter à Sapa au petit matin. Deux fois le prix du bus.",
+          "source": "daytripsvietnam.com 2026 et comparatifs d'opérateurs" }
+      ]
+    },
+    {
+      "from": "hanoi", "to": "ha-giang",
+      "modes": [
+        { "mode": "bus-nuit", "hours": 7, "days": 0, "journee": "perdue",
+          "note": "Départ entre 21 h et 23 h, arrivée au petit matin. Supprime une nuit d'hôtel, mais on ne dort pas aussi bien qu'en train.",
+          "source": "Opérateurs Hanoï–Ha Giang, horaires 2026" },
+        { "mode": "limousine", "hours": 5.75, "days": 1, "journee": "perdue",
+          "note": "Van de 9 à 16 places, plus rapide que le bus-couchettes.",
+          "source": "Opérateurs Hanoï–Ha Giang, horaires 2026 : 5 h 30 à 6 h" }
+      ]
+    },
+    {
+      "from": "hanoi", "to": "hue",
+      "modes": [
+        { "mode": "train-nuit", "hours": 12.6, "days": 0, "journee": "perdue",
+          "note": "Le SE3 part à 19 h 20 et arrive à 7 h 55. Dix fois plus long que l'avion et pourtant moins cher en journées : on y dort, et il remplace une nuit d'hôtel.",
+          "source": "Horaires SE3, chemins de fer vietnamiens (dsvn.vn)" },
+        { "mode": "avion", "hours": 1.25, "days": 0.5, "journee": "perdue",
+          "note": "Phu Bai est à 15 km de Hué. Avec les aéroports et les transferts, compter une demi-journée.",
+          "source": "Horaires des compagnies" },
+        { "mode": "route", "hours": 9.5, "days": 1, "journee": "perdue",
+          "note": "Déconseillé. Personne ne fait ce trajet en voiture.",
+          "source": "daytripsvietnam.com 2026 : 9 h à 10 h, « drive impractical »" }
+      ]
+    },
+    {
+      "from": "hanoi", "to": "da-nang",
+      "modes": [
+        { "mode": "avion", "hours": 1.33, "days": 0.5, "journee": "perdue",
+          "note": "Le choix par défaut pour rejoindre le Centre quand on ne veut pas du train de nuit.",
+          "source": "Horaires des compagnies" },
+        { "mode": "train-nuit", "hours": 15.5, "days": 0.5, "journee": "perdue",
+          "note": "Plus long que Hué : on arrive en milieu de matinée, donc une demi-journée y passe quand même.",
+          "source": "daytripsvietnam.com 2026 : 15 h à 16 h" }
+      ]
+    },
+    {
+      "from": "hanoi", "to": "phong-nha",
+      "modes": [
+        { "mode": "train-nuit", "hours": 10.8, "days": 0.25, "journee": "perdue",
+          "note": "Le SE3 arrive à Dong Hoi à 5 h 20, le SE1 à 7 h 45 — plus humain. Il reste 45 km jusqu'à Phong Nha. Les grottes ferment à 16 h.",
+          "source": "Horaires SE1, SE3, SE19, chemins de fer vietnamiens" }
+      ]
+    },
+    {
+      "from": "phong-nha", "to": "hue",
+      "modes": [
+        { "mode": "route", "hours": 4, "days": 0.5, "journee": "perdue",
+          "note": "Enchaînement naturel vers le sud après les grottes.",
+          "source": "a-confirmer" }
+      ]
+    },
+    {
+      "from": "hue", "to": "da-nang",
+      "modes": [
+        { "mode": "route-tunnel", "hours": 2, "days": 0.25, "journee": "perdue",
+          "note": "Par le tunnel de Hai Van. Rapide et sans intérêt.",
+          "source": "daytripsvietnam.com 2026" },
+        { "mode": "route-col", "hours": 3.5, "days": 0.5, "journee": "vecue",
+          "note": "Par le col des Nuages. Une heure et demie de plus, et c'est la plus belle route du pays.",
+          "source": "daytripsvietnam.com 2026 : 3 h et plus par le col" },
+        { "mode": "train", "hours": 2.5, "days": 0.25, "journee": "vecue",
+          "note": "Le train longe la côte au pied du col. Moins souple qu'une voiture, plus beau qu'un tunnel.",
+          "source": "a-confirmer" }
+      ]
+    },
+    {
+      "from": "da-nang", "to": "hoi-an",
+      "modes": [
+        { "mode": "route", "hours": 0.8, "days": 0, "journee": "perdue",
+          "note": "Quarante-cinq minutes. Ne compte pas comme une étape.",
+          "source": "daytripsvietnam.com 2026 : 45 à 50 min" }
+      ]
+    },
+    {
+      "from": "hue", "to": "hoi-an",
+      "modes": [
+        { "mode": "route-directe", "hours": 2.75, "days": 0.5, "journee": "perdue",
+          "note": "Par le tunnel, sans s'arrêter.",
+          "source": "daytripsvietnam.com 2026 : 2 h 30 à 3 h" },
+        { "mode": "route-col", "hours": 6, "days": 1, "journee": "vecue",
+          "note": "Par le col des Nuages avec trois ou quatre arrêts et un déjeuner à Lang Co. Ce n'est pas un transfert, c'est une journée d'excursion — et la journée n'est pas perdue pour autant.",
+          "source": "Agences francophones, itinéraires publiés : 5 h à 7 h selon les arrêts" }
+      ]
+    },
+    {
+      "from": "da-nang", "to": "hcmc",
+      "modes": [
+        { "mode": "avion", "hours": 1.33, "days": 0.5, "journee": "perdue",
+          "note": "Le seul mode raisonnable. Le train met plus de seize heures.",
+          "source": "Horaires des compagnies" }
+      ]
+    },
+    {
+      "from": "hue", "to": "hcmc",
+      "modes": [
+        { "mode": "avion", "hours": 1.5, "days": 0.5, "journee": "perdue",
+          "note": "Évite de redescendre sur Da Nang quand on termine par Hué.",
+          "source": "Horaires des compagnies" }
+      ]
+    },
+    {
+      "from": "hcmc", "to": "can-tho",
+      "modes": [
+        { "mode": "route", "hours": 2.75, "days": 0.5, "journee": "perdue",
+          "note": "189 km d'autoroute continue depuis l'ouverture du pont My Thuan 2. Can Tho est devenu faisable à la journée, ce qui n'était pas vrai il y a trois ans.",
+          "source": "daytripsvietnam.com 2026 : 2 h 30 à 3 h en continu" }
+      ]
+    }
+  ]
+}

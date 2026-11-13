@@ -1,102 +1,80 @@
-# 15 chặng — bảng hỏi
+# Những gì còn thiếu trong `content/legs.json`
 
-Mang theo khi gặp Jasmin, một bác tài, hoặc một hướng dẫn viên. Hỏi vài chặng
-một lần cũng được, không cần xong trong một buổi. **Hỏi vài người rồi đối chiếu
-tốt hơn hỏi một người.**
+Bản đầu của tài liệu này là một bảng 15 chặng để đi hỏi Jasmin hoặc một bác tài.
+**Tiền đề đó sai**, vì hai lý do chủ site chỉ ra:
 
-Cột **giờ** tôi đã điền ước lượng để người trả lời chỉ cần **gật hoặc sửa** —
-sửa một con số dễ hơn nghĩ ra một con số. **Mọi giá trị dưới đây đều là ước lượng
-của tôi, chưa tra lịch chính thức, chưa ai xác nhận.**
+- Bác tài chạy **theo tuyến**. Người chạy Huế–Đà Nẵng không biết Hà Nội–Hà Giang.
+  Không có một người nào nắm được cả 15 chặng.
+- Việt Nam không phải điểm đến mới với người Pháp. Họ đã đi mấy chục năm và
+  **viết lại rất nhiều** — dữ liệu này công khai, chỉ là chưa ai gom.
 
-Cột **mất ngày** là cột quan trọng nhất và là cột không tra được ở đâu cả.
-Nó trả lời: *rời đi và tới nơi lúc mấy giờ, và tới nơi còn làm được gì trong
-ngày không.*
-
-- `0` — không mất ngày nào (ngủ trên tàu, hoặc đi một loáng)
-- `0,5` — mất nửa ngày
-- `1` — mất trọn một ngày, tới nơi chỉ còn ăn tối rồi ngủ
+Đi tìm thì đúng như vậy. `content/legs.json` hiện có **16 chặng, 26 phương tiện**,
+trong đó **23 cái có nguồn công khai**. Còn lại ba.
 
 ---
 
-## Miền Bắc
+## Ba con số còn trống
 
-| # | Chặng | Phương tiện | Giờ (ước lượng) | Mất ngày? | Khách Pháp hay bất ngờ chuyện gì? |
-|---|---|---|---|---|---|
-| 1 | Hà Nội → Ninh Bình | ô tô | 2 h | | |
-| 2 | Hà Nội → Lan Hạ / Hạ Long | ô tô | 3 h | | |
-| 3 | Ninh Bình → Lan Hạ | ô tô | 3 h | | |
-| 4 | Hà Nội → Sapa | xe khách | 5 h 30 | | |
-| 4b| Hà Nội → Sapa | tàu đêm + ô tô | 8 h + 1 h | | |
-| 5 | Hà Nội → Hà Giang | xe khách | 6–7 h | | |
+Cả ba đều **tra được, không cần hỏi người** — chỉ là tôi chưa tìm thấy nguồn đủ
+chắc. Kiểm trên [12go.asia](https://12go.asia), [Baolau](https://baolau.com)
+hoặc Google Maps là xong.
 
-## Bắc → Trung
-
-| # | Chặng | Phương tiện | Giờ (ước lượng) | Mất ngày? | Khách Pháp hay bất ngờ chuyện gì? |
-|---|---|---|---|---|---|
-| 6 | Hà Nội → Huế | **tàu đêm** | 13 h | | |
-| 6b| Hà Nội → Huế | máy bay | 1 h 15 | | |
-| 7 | Hà Nội → Đà Nẵng | máy bay | 1 h 20 | | |
-| 8 | Hà Nội → Phong Nha | tàu đêm (Đồng Hới) | 10 h | | |
-| 9 | Phong Nha → Huế | ô tô | 4 h | | |
-
-## Miền Trung
-
-| # | Chặng | Phương tiện | Giờ (ước lượng) | Mất ngày? | Khách Pháp hay bất ngờ chuyện gì? |
-|---|---|---|---|---|---|
-| 10 | Huế → Đà Nẵng | ô tô, đèo Hải Vân | 2 h | | |
-| 10b| Huế → Đà Nẵng | tàu (ven biển) | 2 h 30 | | |
-| 11 | Đà Nẵng → Hội An | ô tô | 45 ph | | |
-| 12 | Huế → Hội An | ô tô, có dừng | 3 h | | |
-
-## Trung → Nam, và miền Nam
-
-| # | Chặng | Phương tiện | Giờ (ước lượng) | Mất ngày? | Khách Pháp hay bất ngờ chuyện gì? |
-|---|---|---|---|---|---|
-| 13 | Đà Nẵng → Sài Gòn | máy bay | 1 h 20 | | |
-| 14 | Huế → Sài Gòn | máy bay | 1 h 30 | | |
-| 15 | Sài Gòn → Cần Thơ | ô tô | 3 h 30 | | |
+| Chặng | Phương tiện | Ước lượng hiện tại |
+|---|---|---|
+| Ninh Bình → Lan Hạ | ô tô | 3 h |
+| Phong Nha → Huế | ô tô | 4 h |
+| Huế → Đà Nẵng | tàu hoả | 2 h 30 |
 
 ---
 
-# 5 câu phán đoán
+## Hai câu mà tìm kiếm *không* trả lời được
 
-Đây mới là phần đáng tiền. Bảng trên tra được; năm câu này thì không có ở đâu cả,
-và chúng là thứ sinh ra những lúc planner **nói không** — thứ duy nhất đối thủ
-không sao chép được.
+Đây mới là phần thật sự cần một người sống ở đó. Chỉ còn hai câu, không phải mười lăm.
 
-### 1. Chặng nào anh khuyên khách **đừng đi trong một ngày**?
+### 1. Mùa mưa làm chặng nào **lâu hơn hẳn hoặc đóng**?
 
-→ Sinh ra cảnh báo *« à ne pas faire d'une traite »*. Nghi Hà Nội → Đồng Văn,
-nhưng cần người xác nhận.
+`seasons.json` biết tháng nào miền nào mưa. Nó không biết mưa làm **đường nào**
+khó đi. Nghi Hà Giang (đường đèo) và Phong Nha (đường vào hang ngập), nhưng đó là
+phỏng đoán.
 
-### 2. Chặng nào **Google Maps sai nhiều nhất**?
+Giá trị: sinh ra cảnh báo chéo giữa mùa và chặng — thứ không ai khác có.
 
-→ Quyết định chỗ nào tin máy, chỗ nào phải ghi đè bằng số thật. Nghi đường đèo
-miền núi phía Bắc.
+### 2. Chỗ nào **không nên tới sau khi trời tối**?
 
-### 3. Chặng nào **tàu hoặc máy bay rõ ràng hơn ô tô, dù chậm hơn**?
-
-→ Đây là câu đẻ ra trường `days`. Tàu đêm Hà Nội–Huế lâu gấp mười lần máy bay
-nhưng có thể tốn **ít ngày hơn**, vì ngủ trên tàu và tiết kiệm một đêm khách sạn.
-Cần biết chặng nào nữa có tính chất đó.
-
-### 4. **Mùa mưa** có làm chặng nào khác hẳn không?
-
-→ `seasons.json` đã có mưa theo miền, nhưng không biết mưa làm đường nào **lâu
-hơn** hay **đóng**. Nghi Hà Giang và Phong Nha.
-
-### 5. Chỗ nào **không nên tới sau khi trời tối**?
-
-→ Ràng buộc giờ khởi hành, chứ không phải giờ di chuyển. Một chặng 6 tiếng mà
-phải tới trước 17 h thì thực tế ăn mất cả ngày.
+Đây là ràng buộc **giờ khởi hành**, không phải giờ di chuyển. Một chặng 6 tiếng
+mà bắt buộc phải tới trước 17 h thì thực tế ăn mất cả ngày, dù chỉ đi 6 tiếng.
+Không bảng giờ nào ghi điều này.
 
 ---
 
-# Sau khi điền xong
+## Những gì tìm kiếm đã trả lời thay
 
-Bảng này chuyển thành `content/legs.json` theo lược đồ ở §10 của spec. Mỗi con số
-mang theo nguồn của nó, và trên trang có link **« c'est faux ? »** để hướng dẫn
-viên sửa về sau.
+Ghi lại để khỏi đi hỏi lại:
 
-**Trang tĩnh đầu tiên chỉ cần 5–6 chặng**, không cần cả bảng. Điền được chừng nào
-dùng chừng đó.
+- **« Google sai ở đâu »** → vào/ra Hà Nội và Sài Gòn cộng thêm **30–60 phút** so
+  với giờ công bố.
+- **Một điều không ai nghĩ ra** → trên cùng tuyến cao tốc, **xe giường nằm lâu hơn
+  ô tô riêng 30–60%**, vì đón nhiều điểm và nghỉ bắt buộc.
+- **« Chặng nào đừng đi trong một ngày »** → Hà Nội–Huế đường bộ 9–10 h, nguồn ghi
+  thẳng *« drive impractical »*. Hà Nội–Sài Gòn đường bộ 26–30 h, *« almost no one
+  drives »*.
+- **« Tàu hơn máy bay ở đâu »** → Hà Nội–Huế, SE3 rời 19 h 20 tới 07 h 55, tốn
+  **0 ngày**. Nhưng Hà Nội–Sapa thì **không**: tàu tới Lào Cai còn 35 km đường núi,
+  nên không xoá được một ngày như tàu Huế.
+
+## Và một phát hiện làm đổi lược đồ
+
+Du thuyền Lan Hạ bán dưới nhãn **« 1 nuit »**. Thực tế: xe đón khách sạn **8 h**,
+tới bến **11 h 30**, lên tàu **12 h**; hôm sau trả tàu **11 h 30**.
+
+**Một đêm trên vịnh ăn mất hai ngày.** Đó chính là loại sự thật mà cột `hours`
+giấu đi và cột `days` phải nói ra.
+
+Cùng lúc, Huế → Hội An qua đèo Hải Vân mất 5–7 h — nhưng **ngày đó không mất**,
+nó là một ngày tham quan. Nên lược đồ có thêm trường `journee`:
+
+- `perdue` — ngồi trong xe trên cao tốc
+- `vecue` — đèo Hải Vân, tàu ven biển
+
+**Thước đo nhịp độ chỉ trừ điểm cho `perdue`.** Không có phân biệt này thì công cụ
+sẽ khuyên khách chui hầm để tiết kiệm 90 phút, và cướp mất con đường đẹp nhất nước.

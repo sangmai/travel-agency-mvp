@@ -216,17 +216,33 @@ Giờ không bằng ngày: tàu đêm lâu gấp mười lần máy bay nhưng t
 vì khách ngủ trên tàu và tiết kiệm một đêm khách sạn. Đó là thứ Camille tự tính
 không ra, và là thứ thước đo ngày (§5) cần để chạy.
 
-### Lấy ở đâu
+Thêm một trường nữa, sinh ra từ khảo sát: **`journee`**, phân biệt hai thứ mà số
+giờ gộp làm một.
+
+- `perdue` — ngồi trong xe trên cao tốc
+- `vecue` — đèo Hải Vân, tàu ven biển: *là* chuyến đi, không phải đường tới nó
+
+**Thước đo nhịp độ (§5) chỉ trừ điểm cho `perdue`.** Thiếu phân biệt này thì công
+cụ sẽ khuyên khách chui hầm Hải Vân để tiết kiệm 90 phút, và cướp mất con đường
+đẹp nhất nước.
+
+### Lấy ở đâu — và hoá ra không cần hỏi ai mấy
+
+Giả định ban đầu ("hỏi Jasmin hoặc một bác tài 15 câu") **sai**: bác tài chạy theo
+tuyến, không ai nắm cả 15 chặng. Và Việt Nam không phải điểm đến mới với người
+Pháp — dữ liệu này công khai từ lâu, chỉ chưa ai gom.
+
+`content/legs.json` hiện có **16 chặng, 26 phương tiện, 23 cái có nguồn công khai**.
 
 | Trường | Nguồn |
 |---|---|
-| `hours`, `mode` | Lịch đường sắt, lịch bay, 12go.asia, Baolau — đều công khai |
-| khoảng cách đường bộ | OSRM hoặc Google Directions, tính từ toạ độ đã có |
-| **`days`, `note`** | **Phán đoán — khoảng 15 câu hỏi cho Jasmin hoặc một bác tài** |
+| `hours`, `mode` | Lịch đường sắt (dsvn.vn), lịch bay, 12go.asia, Baolau, atlas thời gian di chuyển 2026 |
+| `days` | Suy ra từ **giờ khởi hành và giờ tới** — tra được, không phải đoán |
+| `note`, `journee` | Phần lớn suy ra từ nguồn; còn **2 câu** thật sự cần người |
 
-Jasmin không cần biết kỹ thuật và không cần nắm hết dữ liệu. Họ cần trả lời
-**15 câu cụ thể**, mỗi lần vài câu. Hỏi vài người rồi đối chiếu còn tốt hơn hỏi
-một người.
+Hai câu còn lại (chi tiết trong `docs/legs-questions.md`): **mùa mưa làm chặng nào
+đóng hay lâu hơn hẳn**, và **chỗ nào không nên tới sau khi trời tối** — câu thứ hai
+là ràng buộc giờ khởi hành, không bảng giờ nào ghi.
 
 ### Vòng đính chính
 
@@ -301,5 +317,6 @@ truy vấn chứa `sans agence`, `soi-même`, `indépendant`.
 
 1. **Mặc định bản *reposant*** (§5) — quyết định thương mại
 2. Ba điều kiện tiên quyết ở §12, nhất là **nói chuyện với Jasmin**
-3. **Ai trả lời 15 câu** về trường `days` và `note` (§10) — Jasmin, một bác tài
-   chạy tuyến, hay vài người rồi đối chiếu. Phần `hours` tôi tra được.
+3. ~~**Ai trả lời 15 câu**~~ — hết hạn. Khảo sát đã lấp 23/26 phương tiện từ nguồn
+   công khai. Còn **3 con số tra nốt trên 12go/Baolau** (tôi làm được) và **2 câu
+   cần người ở đó**: mùa mưa đóng chặng nào, và chỗ nào không nên tới sau khi tối.
