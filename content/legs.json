@@ -190,6 +190,46 @@
           "note": "189 km d'autoroute continue depuis l'ouverture du pont My Thuan 2. Can Tho est devenu faisable à la journée, ce qui n'était pas vrai il y a trois ans.",
           "source": "daytripsvietnam.com 2026 : 2 h 30 à 3 h en continu" }
       ]
+    },
+    {
+      "from": "lan-ha", "to": "hue",
+      "modes": [
+        { "mode": "navette-train-nuit", "hours": 15.85, "days": 0.5, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï : la navette quitte la jonque vers 11 h 30 et dépose vers 15 h, le train de nuit part à 19 h 20. La correspondance tient, sans marge.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route) et Hanoï–Hué (train de nuit), lignes ci-dessus" }
+      ]
+    },
+    {
+      "from": "lan-ha", "to": "hoi-an",
+      "modes": [
+        { "mode": "navette-avion", "hours": 5.38, "days": 1, "journee": "perdue",
+          "note": "Par Hanoï puis l'aéroport de Da Nang. Compter la journée entière : on débarque à 11 h 30 et on arrive à Hoi An le soir.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route), Hanoï–Da Nang (avion) et Da Nang–Hoi An (route)" }
+      ]
+    },
+    {
+      "from": "hoi-an", "to": "hcmc",
+      "modes": [
+        { "mode": "avion", "hours": 2.13, "days": 0.5, "journee": "perdue",
+          "note": "Par l'aéroport de Da Nang, à 45 minutes de Hoi An. Il n'existe pas d'aéroport à Hoi An.",
+          "source": "Somme de Da Nang–Hoi An (route) et Da Nang–Hô Chi Minh-Ville (avion)" }
+      ]
+    },
+    {
+      "from": "sapa", "to": "hue",
+      "modes": [
+        { "mode": "bus-train-nuit", "hours": 18.1, "days": 1, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï. Descendre de Sapa le matin pour attraper le train de nuit le soir même.",
+          "source": "Somme de Hanoï–Sapa (route) et Hanoï–Hué (train de nuit)" }
+      ]
+    },
+    {
+      "from": "ha-giang", "to": "hue",
+      "modes": [
+        { "mode": "limousine-train-nuit", "hours": 18.35, "days": 1, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï, en limousine le matin puis le train de nuit. Deux nuits de transport d'affilée si l'on arrive de Ha Giang par le bus de nuit — prévoir une journée à Hanoï entre les deux.",
+          "source": "Somme de Hanoï–Ha Giang (limousine) et Hanoï–Hué (train de nuit)" }
+      ]
     }
   ]
 }

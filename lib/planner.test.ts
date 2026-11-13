@@ -128,5 +128,48 @@ test("a day on the Hai Van pass is not counted against the traveller", () => {
   const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
     { place: "hue", nuits: 2 }, { place: "hoi-an", nuits: 3 },
   ] };
-  assert.equal(rythme(plan, legs).joursLibres, 5);
+  // Hué (2 nights) buys 1 free day, Hoi An (3 nights) buys 2: the vecue Hai
+  // Van leg plays no part either way, since joursLibres no longer looks at
+  // legs at all — only at nights per stop.
+  assert.equal(rythme(plan, legs).joursLibres, 3);
+});
+
+test("a leg we have no data for is named, never silently free", () => {
+  const legs: Leg[] = [
+    { from: "hanoi", to: "ninh-binh", modes: [
+      { mode: "route", hours: 1.6, days: 0.25, journee: "perdue", note: "", source: "x" },
+    ] },
+  ];
+  const plan: Plan = { jours: 10, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 },
+    { place: "ninh-binh", nuits: 2 },
+    { place: "hue", nuits: 4 },
+  ] };
+  const b = bilan(plan, legs);
+  // Ninh Binh → Hué is 700 km and we hold nothing on it. It must be reported.
+  assert.deepEqual(b.inconnus, ["ninh-binh → hue"]);
+  // And it must not have been counted as free daytime either.
+  assert.equal(b.joursPerdus, 0.25);
+});
+
+test("a plan whose every leg is known reports no unknowns", () => {
+  const legs: Leg[] = [
+    { from: "hanoi", to: "ninh-binh", modes: [
+      { mode: "route", hours: 1.6, days: 0.25, journee: "perdue", note: "", source: "x" },
+    ] },
+  ];
+  const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 2 },
+  ] };
+  assert.deepEqual(bilan(plan, legs).inconnus, []);
+});
+
+test("free days are the ones that do not involve a suitcase", () => {
+  const legs: Leg[] = [];
+  // Three nights somewhere buys two whole days there; one night buys none.
+  const plan: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 1 },
+    { place: "hoi-an", nuits: 5 },
+  ] };
+  assert.equal(rythme(plan, legs).joursLibres, 2 + 0 + 4);
 });

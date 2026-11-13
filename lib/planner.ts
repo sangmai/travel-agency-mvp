@@ -82,6 +82,15 @@ export type Bilan = {
   reste: number;
   /** Daytime eaten by transport, in days. Does not include `vecue` legs. */
   joursPerdus: number;
+  /**
+   * Legs the data holds nothing about, as `"from → to"`.
+   *
+   * They used to be skipped in silence, which made Lan Ha → Hué — seven hundred
+   * kilometres — cost nothing at all, and let the planner call a trip
+   * comfortable that had an unaccounted crossing of the country in it. Silence
+   * is the one answer a tool built to say no may never give.
+   */
+  inconnus: string[];
 };
 
 /** Legs are stored one way round; travellers go both. */
@@ -126,13 +135,19 @@ export function modeDefaut(leg: Leg): LegMode | null {
 export function bilan(plan: Plan, legs: Leg[]): Bilan {
   let nuitsPlacees = 0;
   let joursPerdus = 0;
+  const inconnus: string[] = [];
 
   for (const e of plan.etapes) nuitsPlacees += e.nuits;
 
   for (let i = 0; i < plan.etapes.length - 1; i++) {
-    const leg = trouverLeg(legs, plan.etapes[i].place, plan.etapes[i + 1].place);
+    const depuis = plan.etapes[i].place;
+    const vers = plan.etapes[i + 1].place;
+    const leg = trouverLeg(legs, depuis, vers);
     const m = leg ? modeDefaut(leg) : null;
-    if (!m) continue;
+    if (!m) {
+      inconnus.push(`${depuis} → ${vers}`);
+      continue;
+    }
     if (m.nuit) nuitsPlacees += 1;
     if (m.journee === "perdue") joursPerdus += m.days;
   }
@@ -143,6 +158,7 @@ export function bilan(plan: Plan, legs: Leg[]): Bilan {
     nuitsDisponibles,
     reste: nuitsDisponibles - nuitsPlacees,
     joursPerdus,
+    inconnus,
   };
 }
 
@@ -184,7 +200,12 @@ export function rythme(plan: Plan, legs: Leg[]): Rythme {
   }
 
   const etapes = plan.etapes.length;
-  const joursLibres = Math.max(0, Math.round(plan.jours - joursPerdus - 1));
+  /* A stop of N nights buys N−1 whole days there; a one-night stop buys none.
+     The previous formula subtracted travel from the trip length and returned
+     twelve or thirteen for every itinerary ever built, which would have printed
+     "13 journées sans bouger" above a seven-stop forced march and cost the
+     reader's trust in one line. */
+  const joursLibres = plan.etapes.reduce((n, e) => n + Math.max(0, e.nuits - 1), 0);
 
   return {
     etapes,
