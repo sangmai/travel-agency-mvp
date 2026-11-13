@@ -265,9 +265,11 @@ dựng phòng chờ sang trọng cho một nhà ga chưa có đường ray.
 2. **Đăng ký CJ / Klook / GetYourGuide ngay.** Miễn phí, mất thời gian duyệt, và
    **có thể bị từ chối** vì site quá mới. Nếu bị từ chối thì nhánh affiliate sụp
    và chỉ còn phần SEO. Phải biết trước khi viết code.
-3. **Nói chuyện với Jasmin.** Mở một khu hướng dẫn người Pháp đi Việt Nam *không
-   cần agency*, trên chính kênh giới thiệu khách cho họ, là chuyện phải nói trước.
-   Hai bên **vẫn chưa có thoả thuận hoa hồng bằng văn bản**.
+3. ~~**Nói chuyện với Jasmin trước.**~~ **Không còn là điều kiện chặn.** Chủ site
+   quyết định (13/11/2026) rằng Jasmin không có ý kiến về phần này và sẽ được
+   giải thích sau. Ghi lại ở đây để sau này đọc lại biết đó là một **lựa chọn có
+   ý thức**, không phải một chỗ bị bỏ sót. Rủi ro còn lại — hai bên vẫn chưa có
+   thoả thuận hoa hồng bằng văn bản — không thay đổi.
 
 ## 13. Làm sao biết nó thất bại
 
