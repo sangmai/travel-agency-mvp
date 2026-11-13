@@ -1552,8 +1552,8 @@ Give before asking.
 - Modify: `app/globals.css`
 
 **Interfaces:**
-- Consumes: `hebergement`, `experiences`, `LienPartenaire` from Task 7; `Plan`, `Etape` from Task 3.
-- Produces: `aReserver(place: string): string | null`.
+- Consumes: `experiences`, `LienPartenaire` from Task 7; `Plan`, `Etape` from Task 3. **Not `hebergement`** — see Step 5.
+- Produces: `aReserver(place: string): string | null`; `AFFILIE: boolean`.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1603,6 +1603,13 @@ export function aReserver(place: string): string | null {
       return null;
   }
 }
+
+/**
+ * Whether any affiliate account exists yet. False today, so the page prints no
+ * disclosure — claiming a commission we do not earn would be its own small lie,
+ * on a page whose whole argument is that it tells the truth.
+ */
+export const AFFILIE = Boolean(AID_BOOKING || AID_GETYOURGUIDE);
 ```
 
 - [ ] **Step 4: Run the test to verify it passes**
@@ -1615,7 +1622,7 @@ Expected: PASS — `# fail 0`
 Add the imports at the top of the file:
 
 ```tsx
-import { aReserver, experiences, hebergement } from "@/lib/booking";
+import { AFFILIE, aReserver, experiences } from "@/lib/booking";
 ```
 
 And insert this block **after** the `<ol className="plan__etapes">` list and
@@ -1680,7 +1687,7 @@ sold:
                       )),
                     )}
                   </ul>
-                  {experiences("x").some((x) => x.partenaire) && (
+                  {AFFILIE && (
                     <p className="plan__note">
                       Liens partenaires — nous percevons une commission, sans
                       surcoût pour vous.
@@ -1694,11 +1701,11 @@ sold:
       )}
 ```
 
-> `hebergement` stays imported but unused until a Booking affiliate id exists:
-> the accommodation links belong in "can wait", and printing them next to a
-> paragraph telling people not to hurry would contradict the paragraph. Leave
-> the import out until Task 10 of a future plan uses it — **and if your linter
-> rejects the unused import, remove it rather than inventing a use for it.**
+> **Do not import `hebergement` here.** It exists, it is tested, and nothing on
+> this page may call it: accommodation belongs in "ce qui peut attendre", and an
+> accommodation link printed beside a paragraph telling people not to hurry
+> would contradict the paragraph in the same breath. It waits for the day an
+> affiliate account exists and a separate decision is taken about where it goes.
 
 - [ ] **Step 6: Add the styles to `app/globals.css`**
 
