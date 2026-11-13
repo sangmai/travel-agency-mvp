@@ -29,10 +29,13 @@ for (const l of legs) {
   for (const m of l.modes ?? []) {
     /* `nuit` and `days` are independent, and conflating them loses real
        information. The Hanoï–Da Nang night train gives you a bed AND eats half
-       the next morning, because it arrives at eleven. What is impossible is a
-       mode you sleep through that also costs a WHOLE day. */
-    if (m.nuit && m.days >= 1)
-      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: sleeps aboard yet costs a whole day`);
+       the next morning, because it arrives at eleven. A composite leg can
+       legitimately cost a WHOLE day too — e.g. Sapa–Hué spends a full day on
+       the road to Hanoï before boarding the night train in the evening. What
+       is impossible is a mode that claims to cost MORE than a whole day while
+       also putting you to sleep in a bed for part of it. */
+    if (m.nuit && m.days > 1)
+      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: sleeps aboard yet costs more than a whole day`);
     if (m.journee !== "perdue" && m.journee !== "vecue")
       fautes.push(`leg ${l.from}->${l.to} ${m.mode}: journee is "${m.journee}"`);
     if (!m.source || m.source === "a-confirmer")
