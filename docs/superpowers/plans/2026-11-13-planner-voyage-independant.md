@@ -1794,6 +1794,213 @@ git commit -m "Tell them what to book, and what not to book yet"
 
 ---
 
+### Task 11: Stop costing an unknown leg at zero, and count the right free days
+
+Found by running the finished engine over the real `content/legs.json` rather
+than over the fixtures — which is the only reason it was found at all. Both
+defects are invisible to every test written so far.
+
+**Files:**
+- Modify: `content/legs.json`
+- Modify: `lib/planner.ts`
+- Modify: `lib/planner.test.ts`
+
+**Interfaces:**
+- Consumes: `Bilan`, `bilan`, `rythme` from Tasks 3 and 4.
+- Produces: `Bilan` gains `inconnus: string[]`. `Rythme.joursLibres` changes meaning.
+
+- [ ] **Step 1: Write the failing tests**
+
+Append to `lib/planner.test.ts`:
+
+```ts
+test("a leg we have no data for is named, never silently free", () => {
+  const legs: Leg[] = [
+    { from: "hanoi", to: "ninh-binh", modes: [
+      { mode: "route", hours: 1.6, days: 0.25, journee: "perdue", note: "", source: "x" },
+    ] },
+  ];
+  const plan: Plan = { jours: 10, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 },
+    { place: "ninh-binh", nuits: 2 },
+    { place: "hue", nuits: 4 },
+  ] };
+  const b = bilan(plan, legs);
+  // Ninh Binh → Hué is 700 km and we hold nothing on it. It must be reported.
+  assert.deepEqual(b.inconnus, ["ninh-binh → hue"]);
+  // And it must not have been counted as free daytime either.
+  assert.equal(b.joursPerdus, 0.25);
+});
+
+test("a plan whose every leg is known reports no unknowns", () => {
+  const legs: Leg[] = [
+    { from: "hanoi", to: "ninh-binh", modes: [
+      { mode: "route", hours: 1.6, days: 0.25, journee: "perdue", note: "", source: "x" },
+    ] },
+  ];
+  const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 2 },
+  ] };
+  assert.deepEqual(bilan(plan, legs).inconnus, []);
+});
+
+test("free days are the ones that do not involve a suitcase", () => {
+  const legs: Leg[] = [];
+  // Three nights somewhere buys two whole days there; one night buys none.
+  const plan: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 1 },
+    { place: "hoi-an", nuits: 5 },
+  ] };
+  assert.equal(rythme(plan, legs).joursLibres, 2 + 0 + 4);
+});
+```
+
+- [ ] **Step 2: Run the tests to verify they fail**
+
+Run: `node --test lib/planner.test.ts`
+Expected: FAIL — `inconnus` is undefined, and `joursLibres` returns the old formula's value.
+
+- [ ] **Step 3: Report unknown legs from `bilan`**
+
+In `lib/planner.ts`, add the field to `Bilan`:
+
+```ts
+  /**
+   * Legs the data holds nothing about, as `"from → to"`.
+   *
+   * They used to be skipped in silence, which made Lan Ha → Hué — seven hundred
+   * kilometres — cost nothing at all, and let the planner call a trip
+   * comfortable that had an unaccounted crossing of the country in it. Silence
+   * is the one answer a tool built to say no may never give.
+   */
+  inconnus: string[];
+```
+
+and rewrite the loop inside `bilan` to collect them:
+
+```ts
+export function bilan(plan: Plan, legs: Leg[]): Bilan {
+  let nuitsPlacees = 0;
+  let joursPerdus = 0;
+  const inconnus: string[] = [];
+
+  for (const e of plan.etapes) nuitsPlacees += e.nuits;
+
+  for (let i = 0; i < plan.etapes.length - 1; i++) {
+    const depuis = plan.etapes[i].place;
+    const vers = plan.etapes[i + 1].place;
+    const leg = trouverLeg(legs, depuis, vers);
+    const m = leg ? modeDefaut(leg) : null;
+    if (!m) {
+      inconnus.push(`${depuis} → ${vers}`);
+      continue;
+    }
+    if (m.nuit) nuitsPlacees += 1;
+    if (m.journee === "perdue") joursPerdus += m.days;
+  }
+
+  const nuitsDisponibles = plan.jours - 1;
+  return {
+    nuitsPlacees,
+    nuitsDisponibles,
+    reste: nuitsDisponibles - nuitsPlacees,
+    joursPerdus,
+    inconnus,
+  };
+}
+```
+
+- [ ] **Step 4: Count free days as days without a suitcase**
+
+In `rythme`, replace the `joursLibres` line with:
+
+```ts
+  /* A stop of N nights buys N−1 whole days there; a one-night stop buys none.
+     The previous formula subtracted travel from the trip length and returned
+     twelve or thirteen for every itinerary ever built, which would have printed
+     "13 journées sans bouger" above a seven-stop forced march and cost the
+     reader's trust in one line. */
+  const joursLibres = plan.etapes.reduce((n, e) => n + Math.max(0, e.nuits - 1), 0);
+```
+
+Leave the rest of `rythme` exactly as it is, including the three `tendu`
+thresholds. `joursLibres < 2` stays: it no longer fires for long trips, but it
+still catches a short one chopped into one-night stops.
+
+- [ ] **Step 5: Add the five missing legs to `content/legs.json`**
+
+Every itinerary that crosses the country passes through a hub, and these five
+pairs had no entry at all. The figures are **sums of legs already in this file**,
+not new research — each `source` says which, so the arithmetic can be rechecked.
+Append these to the `legs` array:
+
+```json
+    {
+      "from": "lan-ha", "to": "hue",
+      "modes": [
+        { "mode": "navette-train-nuit", "hours": 15.85, "days": 0.5, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï : la navette quitte la jonque vers 11 h 30 et dépose vers 15 h, le train de nuit part à 19 h 20. La correspondance tient, sans marge.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route) et Hanoï–Hué (train de nuit), lignes ci-dessus" }
+      ]
+    },
+    {
+      "from": "lan-ha", "to": "hoi-an",
+      "modes": [
+        { "mode": "navette-avion", "hours": 5.38, "days": 1, "journee": "perdue",
+          "note": "Par Hanoï puis l'aéroport de Da Nang. Compter la journée entière : on débarque à 11 h 30 et on arrive à Hoi An le soir.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route), Hanoï–Da Nang (avion) et Da Nang–Hoi An (route)" }
+      ]
+    },
+    {
+      "from": "hoi-an", "to": "hcmc",
+      "modes": [
+        { "mode": "avion", "hours": 2.13, "days": 0.5, "journee": "perdue",
+          "note": "Par l'aéroport de Da Nang, à 45 minutes de Hoi An. Il n'existe pas d'aéroport à Hoi An.",
+          "source": "Somme de Da Nang–Hoi An (route) et Da Nang–Hô Chi Minh-Ville (avion)" }
+      ]
+    },
+    {
+      "from": "sapa", "to": "hue",
+      "modes": [
+        { "mode": "bus-train-nuit", "hours": 18.1, "days": 1, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï. Descendre de Sapa le matin pour attraper le train de nuit le soir même.",
+          "source": "Somme de Hanoï–Sapa (route) et Hanoï–Hué (train de nuit)" }
+      ]
+    },
+    {
+      "from": "ha-giang", "to": "hue",
+      "modes": [
+        { "mode": "limousine-train-nuit", "hours": 18.35, "days": 1, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï, en limousine le matin puis le train de nuit. Deux nuits de transport d'affilée si l'on arrive de Ha Giang par le bus de nuit — prévoir une journée à Hanoï entre les deux.",
+          "source": "Somme de Hanoï–Ha Giang (limousine) et Hanoï–Hué (train de nuit)" }
+      ]
+    }
+```
+
+> `nuit: true` on three of them is correct and the validator permits it: each
+> ends with the night train, so a night is spent aboard, and each still costs
+> daytime — exactly the independence Task 1 had to be corrected to preserve.
+
+- [ ] **Step 6: Run the tests and the validator**
+
+Run: `node --test lib/planner.test.ts`
+Expected: PASS, **fourteen tests**, `# fail 0`.
+
+Run: `node scripts/check-planner.mjs`
+Expected: `[planner] 23 places, 21 legs, all sourced`
+
+Run: `npx tsc --noEmit`
+Expected: clean.
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add content/legs.json lib/planner.ts lib/planner.test.ts
+git commit -m "Refuse to price an unknown leg at zero"
+```
+
+---
+
 ## Out of scope for v1
 
 Named here so nobody adds them by reflex: an interactive map; user accounts; server-side plan storage; Booking's Demand API and in-page hotel cards; accommodation deep links (the "can wait" paragraph argues against them until an affiliate account exists); multi-language; and the Ha Giang loop's internal legs.
