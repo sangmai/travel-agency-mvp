@@ -84,3 +84,49 @@ test("an itinerary that does not fit reports a negative remainder", () => {
   ] };
   assert.equal(bilan(plan, LEGS).reste, -3);
 });
+
+import { rythme } from "./planner.ts";
+
+const LEGS_15: Leg[] = [
+  ...LEGS,
+  { from: "hanoi", to: "ninh-binh", modes: [{ mode: "route", hours: 1.6, days: 0.25, journee: "perdue", note: "", source: "x" }] },
+  { from: "ninh-binh", to: "lan-ha", modes: [{ mode: "navette", hours: 4.75, days: 0.75, journee: "perdue", note: "", source: "x" }] },
+  { from: "lan-ha", to: "hue", modes: [{ mode: "avion", hours: 1.5, days: 0.5, journee: "perdue", note: "", source: "x" }] },
+  { from: "hoi-an", to: "hcmc", modes: [{ mode: "avion", hours: 1.33, days: 0.5, journee: "perdue", note: "", source: "x" }] },
+  { from: "hcmc", to: "can-tho", modes: [{ mode: "route", hours: 2.75, days: 0.5, journee: "perdue", note: "", source: "x" }] },
+];
+
+test("a packed itinerary is reported as strained", () => {
+  const charge: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 1 },
+    { place: "lan-ha", nuits: 1 }, { place: "hue", nuits: 2 },
+    { place: "hoi-an", nuits: 3 }, { place: "hcmc", nuits: 2 },
+    { place: "can-tho", nuits: 2 },
+  ] };
+  const r = rythme(charge, LEGS_15);
+  assert.equal(r.etapes, 7);
+  assert.equal(r.changements, 6);
+  assert.equal(r.tendu, true);
+});
+
+test("a restful itinerary of the same length is not", () => {
+  const reposant: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 2 },
+    { place: "lan-ha", nuits: 1 }, { place: "hoi-an", nuits: 5 },
+    { place: "hcmc", nuits: 3 },
+  ] };
+  const r = rythme(reposant, LEGS_15);
+  assert.equal(r.etapes, 5);
+  assert.equal(r.changements, 4);
+  assert.equal(r.tendu, false);
+});
+
+test("a day on the Hai Van pass is not counted against the traveller", () => {
+  const legs: Leg[] = [{ from: "hue", to: "hoi-an", modes: [
+    { mode: "route-col", hours: 6, days: 1, journee: "vecue", note: "", source: "x" },
+  ] }];
+  const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hue", nuits: 2 }, { place: "hoi-an", nuits: 3 },
+  ] };
+  assert.equal(rythme(plan, legs).joursLibres, 5);
+});

@@ -145,3 +145,52 @@ export function bilan(plan: Plan, legs: Leg[]): Bilan {
     joursPerdus,
   };
 }
+
+export type Rythme = {
+  etapes: number;
+  /** Suitcases packed. One fewer than the number of étapes. */
+  changements: number;
+  heuresTransport: number;
+  /** Days with no transport at all. The point of a holiday. */
+  joursLibres: number;
+  tendu: boolean;
+};
+
+/**
+ * The second gauge, and the one no competitor has.
+ *
+ * An itinerary can fit its days exactly and still be a bad holiday: seven
+ * étapes in fifteen days means a suitcase every two mornings. Days are
+ * arithmetic; rhythm is whether the arithmetic was worth doing.
+ *
+ * Only `perdue` days count against the traveller. A day on the Hai Van pass IS
+ * the journey, and penalising it would push people through the tunnel to save
+ * ninety minutes and rob them of the best road in the country.
+ *
+ * The three thresholds are judgements, not measurements. They are set so that
+ * the two itineraries weighed during design fall on opposite sides, and they
+ * belong in one place so they can be argued with.
+ */
+export function rythme(plan: Plan, legs: Leg[]): Rythme {
+  let heuresTransport = 0;
+  let joursPerdus = 0;
+
+  for (let i = 0; i < plan.etapes.length - 1; i++) {
+    const leg = trouverLeg(legs, plan.etapes[i].place, plan.etapes[i + 1].place);
+    const m = leg ? modeDefaut(leg) : null;
+    if (!m) continue;
+    heuresTransport += m.hours;
+    if (m.journee === "perdue") joursPerdus += m.days;
+  }
+
+  const etapes = plan.etapes.length;
+  const joursLibres = Math.max(0, Math.round(plan.jours - joursPerdus - 1));
+
+  return {
+    etapes,
+    changements: Math.max(0, etapes - 1),
+    heuresTransport: Math.round(heuresTransport * 10) / 10,
+    joursLibres,
+    tendu: etapes - 1 > 5 || heuresTransport > 20 || joursLibres < 2,
+  };
+}
