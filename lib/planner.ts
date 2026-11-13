@@ -51,3 +51,80 @@ export function verdictSaison(
   const ligne = saisons.find((s) => s.month === mois);
   return ligne ? ligne[r] : "";
 }
+
+export type LegMode = {
+  mode: string;
+  hours: number;
+  days: number;
+  journee: "perdue" | "vecue";
+  nuit?: boolean;
+  note: string;
+  source: string;
+};
+
+export type Leg = { from: string; to: string; modes: LegMode[] };
+
+export type Etape = { place: string; nuits: number };
+
+export type Plan = {
+  jours: number;
+  mois: string;
+  voyageurs: number;
+  etapes: Etape[];
+};
+
+export type Bilan = {
+  /** Nights needing a bed, including nights spent aboard a train or bus. */
+  nuitsPlacees: number;
+  /** A trip of N days holds N − 1 nights. */
+  nuitsDisponibles: number;
+  /** Negative when the itinerary does not fit. */
+  reste: number;
+  /** Daytime eaten by transport, in days. Does not include `vecue` legs. */
+  joursPerdus: number;
+};
+
+/** Legs are stored one way round; travellers go both. */
+export function trouverLeg(legs: Leg[], a: string, b: string): Leg | null {
+  return (
+    legs.find(
+      (l) => (l.from === a && l.to === b) || (l.from === b && l.to === a),
+    ) ?? null
+  );
+}
+
+/**
+ * The mode a traveller is offered first: the one costing fewest days, ties
+ * broken by fewest hours. That ordering is what puts the Hanoï–Hué night train
+ * ahead of the plane despite taking ten times longer — it consumes no daytime
+ * and replaces a hotel night.
+ */
+export function modeDefaut(leg: Leg): LegMode | null {
+  if (!leg.modes.length) return null;
+  return [...leg.modes].sort(
+    (x, y) => x.days - y.days || x.hours - y.hours,
+  )[0];
+}
+
+export function bilan(plan: Plan, legs: Leg[]): Bilan {
+  let nuitsPlacees = 0;
+  let joursPerdus = 0;
+
+  for (const e of plan.etapes) nuitsPlacees += e.nuits;
+
+  for (let i = 0; i < plan.etapes.length - 1; i++) {
+    const leg = trouverLeg(legs, plan.etapes[i].place, plan.etapes[i + 1].place);
+    const m = leg ? modeDefaut(leg) : null;
+    if (!m) continue;
+    if (m.nuit) nuitsPlacees += 1;
+    if (m.journee === "perdue") joursPerdus += m.days;
+  }
+
+  const nuitsDisponibles = plan.jours - 1;
+  return {
+    nuitsPlacees,
+    nuitsDisponibles,
+    reste: nuitsDisponibles - nuitsPlacees,
+    joursPerdus,
+  };
+}

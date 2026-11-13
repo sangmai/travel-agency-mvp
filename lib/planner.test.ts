@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { region, verdictSaison } from "./planner.ts";
+import { region, verdictSaison, bilan, trouverLeg, modeDefaut } from "./planner.ts";
+import type { Leg, Plan } from "./planner.ts";
 
 test("region is read off the latitude, because Vietnam's climate is", () => {
   assert.equal(region(21.028), "nord");   // Hanoï
@@ -20,4 +21,48 @@ test("the season verdict comes from the month and the region", () => {
   assert.equal(verdictSaison(saisons, "Octobre", "centre"), "deconseille");
   assert.equal(verdictSaison(saisons, "Mars", "nord"), "ideal");
   assert.equal(verdictSaison(saisons, "Décembre", "nord"), "");
+});
+
+const LEGS: Leg[] = [
+  { from: "hanoi", to: "hue", modes: [
+    { mode: "train-nuit", hours: 12.6, days: 0, journee: "perdue", nuit: true, note: "", source: "x" },
+    { mode: "avion", hours: 1.25, days: 0.5, journee: "perdue", note: "", source: "x" },
+  ] },
+  { from: "hue", to: "hoi-an", modes: [
+    { mode: "route-directe", hours: 2.75, days: 0.5, journee: "perdue", note: "", source: "x" },
+  ] },
+];
+
+test("a leg is found in either direction", () => {
+  assert.equal(trouverLeg(LEGS, "hanoi", "hue")?.to, "hue");
+  assert.equal(trouverLeg(LEGS, "hue", "hanoi")?.to, "hue");
+  assert.equal(trouverLeg(LEGS, "hanoi", "sapa"), null);
+});
+
+test("the default mode is the one costing fewest days, then fewest hours", () => {
+  assert.equal(modeDefaut(LEGS[0])?.mode, "train-nuit");
+});
+
+test("a night train uses a night and no daytime", () => {
+  const plan: Plan = { jours: 10, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 },
+    { place: "hue", nuits: 2 },
+    { place: "hoi-an", nuits: 3 },
+  ] };
+  const b = bilan(plan, LEGS);
+  // 8 nights in beds + 1 aboard the train = 9, and a 10-day trip holds 9.
+  assert.equal(b.nuitsPlacees, 9);
+  assert.equal(b.nuitsDisponibles, 9);
+  assert.equal(b.reste, 0);
+  // Only Hué → Hoi An burns daytime.
+  assert.equal(b.joursPerdus, 0.5);
+});
+
+test("an itinerary that does not fit reports a negative remainder", () => {
+  const plan: Plan = { jours: 7, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 },
+    { place: "hue", nuits: 2 },
+    { place: "hoi-an", nuits: 3 },
+  ] };
+  assert.equal(bilan(plan, LEGS).reste, -3);
 });
