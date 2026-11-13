@@ -44,6 +44,8 @@ export const getFaq = source.faq;
 export const getStory = source.story;
 export const getPhotoMeta = source.photos;
 export const getCarnet = source.carnet;
+export const getLegs = () => source.legs();
+export const getPlaces = () => source.places();
 
 /**
  * Regions and travel themes each carry a link. Nothing stopped anyone writing

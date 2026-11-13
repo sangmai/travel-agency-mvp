@@ -16,6 +16,8 @@ export type Place = {
   map: string;
   lat: number;
   lon: number;
+  /** How long to stay. Derived from the six hand-written itineraries. */
+  nuits: { min: number; ideal: number };
 };
 
 export type PhotoMeta = {
@@ -324,3 +326,24 @@ export type Home = {
   devis: Head & { promises: { title: string; detail: string }[]; submit: string };
   closing: { title: string; body: string };
 };
+
+/** One way of getting between two étapes. */
+export type LegMode = {
+  mode: string;
+  hours: number;
+  /** Daytime this mode consumes, in days. A night train costs zero. */
+  days: number;
+  /** `perdue` is time in a van; `vecue` is the Hai Van pass, which IS the trip. */
+  journee: "perdue" | "vecue";
+  /** True when the mode carries its own bed, so it uses a night and no daytime. */
+  nuit?: boolean;
+  note: string;
+  source: string;
+};
+
+export type Leg = { from: PlaceId; to: PlaceId; modes: LegMode[] };
+
+/** A rule that applies to every leg, not to one of them. */
+export type Regle = { id: string; texte: string; source: string };
+
+export type LegsFile = { regles: Regle[]; legs: Leg[] };
