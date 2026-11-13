@@ -226,3 +226,61 @@ export function rythme(plan: Plan, legs: Leg[]): Rythme {
     tendu: etapes - 1 > 5 || heuresSubies > 20 || joursLibres < 2,
   };
 }
+
+export type Retrait = {
+  /** French label shown to the traveller. */
+  libelle: string;
+  places: string[];
+  /** Nights this would free. */
+  nuits: number;
+};
+
+const NOM_REGION: Record<Region, string> = {
+  nord: "le Nord",
+  centre: "le Centre",
+  sud: "le Sud",
+};
+
+/**
+ * What has to go, when the itinerary does not fit.
+ *
+ * This is the whole product. An agency configurator has no reason to tell
+ * anyone to do less, which is exactly why a tool that does is believed. It
+ * proposes and never applies: the traveller decides, and the options are
+ * ordered by how closely each one covers the shortfall, so the cheapest
+ * sacrifice is read first.
+ *
+ * Grouping is by region rather than by étape because that is how the loss is
+ * actually felt — nobody drops Hué and keeps Hoi An.
+ */
+export function retraits(
+  plan: Plan,
+  lieux: Lieu[],
+  manque: number,
+): Retrait[] {
+  if (manque <= 0) return [];
+
+  const par: Record<string, { places: string[]; nuits: number }> = {};
+  for (const e of plan.etapes) {
+    const lieu = lieux.find((l) => l.id === e.place);
+    if (!lieu) continue;
+    const r = region(lieu.lat);
+    par[r] ??= { places: [], nuits: 0 };
+    par[r].places.push(e.place);
+    par[r].nuits += e.nuits;
+  }
+
+  return Object.entries(par)
+    .map(([r, v]) => ({
+      libelle: `Retirer ${NOM_REGION[r as Region]}`,
+      places: v.places,
+      nuits: v.nuits,
+    }))
+    .sort((a, b) => {
+      // Options that cover the shortfall come first, smallest of them leading;
+      // those that fall short follow, largest first.
+      const sa = a.nuits >= manque, sb = b.nuits >= manque;
+      if (sa !== sb) return sa ? -1 : 1;
+      return sa ? a.nuits - b.nuits : b.nuits - a.nuits;
+    });
+}

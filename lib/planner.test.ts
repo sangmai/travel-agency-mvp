@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { region, verdictSaison, bilan, trouverLeg, modeDefaut } from "./planner.ts";
-import type { Leg, Plan } from "./planner.ts";
+import type { Leg, Plan, Lieu } from "./planner.ts";
 
 test("region is read off the latitude, because Vietnam's climate is", () => {
   assert.equal(region(21.028), "nord");   // Hanoï
@@ -182,4 +182,39 @@ test("free days are the ones that do not involve a suitcase", () => {
     { place: "hoi-an", nuits: 5 },
   ] };
   assert.equal(rythme(plan, legs).joursLibres, 2 + 0 + 4);
+});
+
+import { retraits } from "./planner.ts";
+
+const LIEUX: Lieu[] = [
+  { id: "hanoi", fr: "Hanoï", lat: 21.028, nuits: { min: 2, ideal: 3 } },
+  { id: "ninh-binh", fr: "Ninh Binh", lat: 20.254, nuits: { min: 1, ideal: 2 } },
+  { id: "hue", fr: "Hué", lat: 16.463, nuits: { min: 1, ideal: 2 } },
+  { id: "hoi-an", fr: "Hoi An", lat: 15.88, nuits: { min: 2, ideal: 4 } },
+  { id: "hcmc", fr: "Hô Chi Minh-Ville", lat: 10.823, nuits: { min: 1, ideal: 2 } },
+];
+
+test("the tool names what to drop, by region, and never decides alone", () => {
+  const plan: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 2 },
+    { place: "hue", nuits: 2 }, { place: "hoi-an", nuits: 5 },
+    { place: "hcmc", nuits: 3 },
+  ] };
+  const r = retraits(plan, LIEUX, 4);
+
+  // The Centre frees 7 nights, the South 3, the North 5 — all offered.
+  const centre = r.find((x) => x.libelle.includes("Centre"));
+  assert.ok(centre, "the Centre must be offered");
+  assert.equal(centre?.nuits, 7);
+  assert.deepEqual(centre?.places, ["hue", "hoi-an"]);
+
+  // Sorted by how well each fits the shortfall: smallest sufficient first.
+  assert.equal(r[0].nuits, 5);
+});
+
+test("nothing is proposed when nothing is missing", () => {
+  const plan: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 },
+  ] };
+  assert.deepEqual(retraits(plan, LIEUX, 0), []);
 });
