@@ -20,6 +20,13 @@
 - **The landing page is indexable; the generated plan view is not.** The plan lives in the URL hash, which crawlers do not index, so no extra `noindex` tag is needed — but never move plan state into a path or query string.
 - **Affiliate links are plain `<a href>`** — no script, no pixel, no iframe. This preserves the no-cookie architecture documented in `app/layout.tsx`. A disclosure line sits next to every affiliate block.
 - **TypeScript is `strict`.** No `any`, no non-null assertions.
+- **The `.ts` extension in an import belongs only in a test file.** Task 2 added
+  `allowImportingTsExtensions` to `tsconfig.json` because `node --test` requires
+  the explicit extension and the brief's test code uses it. That flag now permits
+  the style everywhere, which is a trap: application code written
+  `from "./foo.ts"` would compile here and rely on bundler-mode resolution to
+  survive. In `app/`, `components/` and non-test `lib/`, import without the
+  extension, as every existing file does.
 
 ---
 
