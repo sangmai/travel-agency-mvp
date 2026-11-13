@@ -39,8 +39,26 @@ test("a leg is found in either direction", () => {
   assert.equal(trouverLeg(LEGS, "hanoi", "sapa"), null);
 });
 
-test("the default mode is the one costing fewest days, then fewest hours", () => {
+test("the default mode is the one costing fewest days", () => {
   assert.equal(modeDefaut(LEGS[0])?.mode, "train-nuit");
+});
+
+test("at equal cost in days, a day worth living beats a quicker dull one", () => {
+  // The real Hué–Da Nang leg. Both cost a quarter-day; the tunnel is 36 minutes
+  // quicker and the coastal train is the finest railway in the country.
+  const hueDaNang: Leg = { from: "hue", to: "da-nang", modes: [
+    { mode: "route-tunnel", hours: 2, days: 0.25, journee: "perdue", note: "", source: "x" },
+    { mode: "train", hours: 2.6, days: 0.25, journee: "vecue", note: "", source: "x" },
+  ] };
+  assert.equal(modeDefaut(hueDaNang)?.mode, "train");
+});
+
+test("hours still break the tie when the days and the journée are equal", () => {
+  const leg: Leg = { from: "a", to: "b", modes: [
+    { mode: "lent", hours: 5, days: 0.5, journee: "perdue", note: "", source: "x" },
+    { mode: "rapide", hours: 2, days: 0.5, journee: "perdue", note: "", source: "x" },
+  ] };
+  assert.equal(modeDefaut(leg)?.mode, "rapide");
 });
 
 test("a night train uses a night and no daytime", () => {

@@ -93,16 +93,33 @@ export function trouverLeg(legs: Leg[], a: string, b: string): Leg | null {
   );
 }
 
+/** `vecue` sorts ahead of `perdue`. */
+const RANG_JOURNEE: Record<"vecue" | "perdue", number> = { vecue: 0, perdue: 1 };
+
 /**
- * The mode a traveller is offered first: the one costing fewest days, ties
- * broken by fewest hours. That ordering is what puts the Hanoï–Hué night train
- * ahead of the plane despite taking ten times longer — it consumes no daytime
- * and replaces a hotel night.
+ * The mode a traveller is offered first, decided on three levels in order:
+ * fewest days, then a day worth living over a day merely endured, then fewest
+ * hours.
+ *
+ * The first level is what puts the Hanoï–Hué night train ahead of the plane
+ * despite taking ten times longer: it consumes no daytime and replaces a hotel
+ * night.
+ *
+ * The second exists because sorting on hours alone sent travellers through the
+ * Hai Van tunnel. Tunnel and coastal train cost the same quarter-day; the
+ * tunnel is thirty-six minutes quicker and the train is the finest stretch of
+ * railway in the country. A tool optimising for speed would save the half-hour
+ * and quietly take the journey away, which is the exact failure the `journee`
+ * field was added to prevent — it was guarding the rhythm gauge, and the
+ * default mode walked into the trap behind its back.
  */
 export function modeDefaut(leg: Leg): LegMode | null {
   if (!leg.modes.length) return null;
   return [...leg.modes].sort(
-    (x, y) => x.days - y.days || x.hours - y.hours,
+    (x, y) =>
+      x.days - y.days ||
+      RANG_JOURNEE[x.journee] - RANG_JOURNEE[y.journee] ||
+      x.hours - y.hours,
   )[0];
 }
 
