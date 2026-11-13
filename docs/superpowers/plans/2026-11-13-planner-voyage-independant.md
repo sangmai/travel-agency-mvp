@@ -2001,6 +2001,147 @@ git commit -m "Refuse to price an unknown leg at zero"
 
 ---
 
+### Task 12: Give the rhythm gauge back the distinction Task 11 took from it
+
+Task 11 fixed `joursLibres` and, in doing so, removed the last place `rythme()`
+consulted `journee`. The gauge now penalises six hours on the Hai Van pass
+exactly as hard as six hours on a motorway — the precise failure the `journee`
+field was invented to prevent, rebuilt while repairing something else.
+`joursPerdus` is computed and never read, and the test named for the pass would
+pass identically if `journee` did not exist.
+
+**Files:**
+- Modify: `lib/planner.ts`
+- Modify: `lib/planner.test.ts`
+- Modify: `scripts/check-planner.mjs`
+
+**Interfaces:**
+- Consumes: `Rythme`, `rythme` from Task 4; `Leg`, `Plan` from Task 3.
+- Produces: `Rythme` gains `heuresSubies: number`; `tendu` keys on it instead of `heuresTransport`.
+
+- [ ] **Step 1: Replace the Hai Van test so it tests the pass again**
+
+In `lib/planner.test.ts`, replace the whole existing
+`test("a day on the Hai Van pass is not counted against the traveller", …)`
+block with:
+
+```ts
+test("a day on the Hai Van pass is not counted against the traveller", () => {
+  const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hue", nuits: 2 }, { place: "hoi-an", nuits: 3 },
+  ] };
+  const col: Leg[] = [{ from: "hue", to: "hoi-an", modes: [
+    { mode: "route-col", hours: 6, days: 1, journee: "vecue", note: "", source: "x" },
+  ] }];
+  const tunnel: Leg[] = [{ from: "hue", to: "hoi-an", modes: [
+    { mode: "route-tunnel", hours: 6, days: 1, journee: "perdue", note: "", source: "x" },
+  ] }];
+
+  // Six hours in a vehicle either way, and the traveller is told so either way.
+  assert.equal(rythme(plan, col).heuresTransport, 6);
+  assert.equal(rythme(plan, tunnel).heuresTransport, 6);
+
+  // But only the motorway is held against them.
+  assert.equal(rythme(plan, col).heuresSubies, 0);
+  assert.equal(rythme(plan, tunnel).heuresSubies, 6);
+
+  // Nights per stop are the same in both, so this must not move.
+  assert.equal(rythme(plan, col).joursLibres, 3);
+});
+```
+
+- [ ] **Step 2: Run the tests to verify the new one fails**
+
+Run: `node --test lib/planner.test.ts`
+Expected: FAIL — `heuresSubies` is `undefined`.
+
+- [ ] **Step 3: Add `heuresSubies` and retire the dead counter**
+
+In `lib/planner.ts`, add the field to `Rythme`, directly after `heuresTransport`:
+
+```ts
+  /**
+   * The hours held against the traveller: `perdue` only.
+   *
+   * `heuresTransport` is what to print — a traveller spending six hours on the
+   * col des Nuages did spend six hours in a car, and saying otherwise would be
+   * a lie. This is what to judge by, and the two differ by exactly the stretch
+   * of the trip that was the point of taking it.
+   */
+  heuresSubies: number;
+```
+
+and rewrite the body of `rythme`, dropping `joursPerdus`, which nothing reads
+once `joursLibres` is counted from nights:
+
+```ts
+export function rythme(plan: Plan, legs: Leg[]): Rythme {
+  let heuresTransport = 0;
+  let heuresSubies = 0;
+
+  for (let i = 0; i < plan.etapes.length - 1; i++) {
+    const leg = trouverLeg(legs, plan.etapes[i].place, plan.etapes[i + 1].place);
+    const m = leg ? modeDefaut(leg) : null;
+    if (!m) continue;
+    heuresTransport += m.hours;
+    if (m.journee === "perdue") heuresSubies += m.hours;
+  }
+
+  const etapes = plan.etapes.length;
+  /* A stop of N nights buys N−1 whole days there; a one-night stop buys none. */
+  const joursLibres = plan.etapes.reduce((n, e) => n + Math.max(0, e.nuits - 1), 0);
+  const arrondi = (h: number) => Math.round(h * 10) / 10;
+
+  return {
+    etapes,
+    changements: Math.max(0, etapes - 1),
+    heuresTransport: arrondi(heuresTransport),
+    heuresSubies: arrondi(heuresSubies),
+    joursLibres,
+    tendu: etapes - 1 > 5 || heuresSubies > 20 || joursLibres < 2,
+  };
+}
+```
+
+Leave the `changements` line and the three threshold values alone; only the
+hours the middle threshold reads have changed.
+
+- [ ] **Step 4: Fix the validator's invariant, which `days` could never express**
+
+In `scripts/check-planner.mjs`, replace the `m.nuit && m.days > 1` check and its
+comment with:
+
+```js
+    /* A mode that carries its own bed has to be long enough to sleep in.
+       The rule used to compare `days`, and broke the moment composite legs
+       arrived: Sapa → Hué is a day bus to Hanoï followed by the night train, so
+       it genuinely costs a whole day AND provides a bed. No threshold on `days`
+       can separate that from an error. Hours can: nobody sleeps a night in a
+       forty-five-minute hop. */
+    if (m.nuit && m.hours < 6)
+      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: ${m.hours} h is not a night`);
+```
+
+- [ ] **Step 5: Verify**
+
+Run: `node --test lib/planner.test.ts`
+Expected: PASS, **fourteen tests**, `# fail 0`.
+
+Run: `node scripts/check-planner.mjs`
+Expected: `[planner] 23 places, 21 legs, all sourced`
+
+Run: `npx tsc --noEmit`
+Expected: clean.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add lib/planner.ts lib/planner.test.ts scripts/check-planner.mjs
+git commit -m "Judge the hours endured, not the hours travelled"
+```
+
+---
+
 ## Out of scope for v1
 
 Named here so nobody adds them by reflex: an interactive map; user accounts; server-side plan storage; Booking's Demand API and in-page hotel cards; accommodation deep links (the "can wait" paragraph argues against them until an affiliate account exists); multi-language; and the Ha Giang loop's internal legs.
