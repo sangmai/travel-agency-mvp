@@ -178,22 +178,67 @@ Mức xáo trộn dự kiến — đo bằng lần thêm blog (commit `b9c23db`)
 **Hai dòng bị xoá.** Kiến trúc này được dựng để nuốt thêm khu mới mà không sửa
 cái đang chạy.
 
-## 10. Dữ liệu phải xây — và đây là con hào
+## 10. Dữ liệu
 
-`content/places.json` đã có **23 địa danh kèm toạ độ**. Thiếu: **ma trận di chuyển**
-cho ~30 cặp étape liền kề. Mỗi cặp cần:
+Con hào **không phải** kiến thức bản địa. Người làm Camino Ninja chưa đi hành
+hương lần nào; họ gom dữ liệu công khai mà chưa ai gom, rồi dựng vòng đính chính
+để người dùng nuôi nó. Booking có khách sạn, OSM có đường, đường sắt có lịch
+chạy — **chưa ai ghép lại để trả lời câu *« est-ce que ça rentre dans mes 15
+jours ? »***. Con hào là việc ghép và câu hỏi.
 
-- số giờ thực tế
-- phương tiện (đường bộ / tàu đêm / bay nội địa / thuyền)
-- **có ăn mất trọn một ngày không**
-- ghi chú thật (*« 8 h đường đèo, không nên đi một mạch »*)
+### Đã có sẵn trong repo
 
-Hiện repo chỉ có ba mẩu rời rạc trong văn xuôi (`6 h de route`, `4 h de route`,
-`2 h de route`).
+- `content/places.json` — **23 địa danh kèm toạ độ**
+- `content/seasons.json` — **ma trận 12 tháng × 3 miền hoàn chỉnh**, có xếp hạng
+  (`ideal` / `bon` / `moyen` / `deconseille`) và ghi chú. **Chiều mùa vụ coi như xong.**
 
-Google Maps cho khoảng cách. Nó không nói tàu đêm hơn 14 giờ ô tô.
-**Jasmin chạy những tuyến đó hằng tuần** — đó là thứ không aggregator nào có, và
-là lý do công cụ này có quyền tồn tại bên cạnh mọi blog du lịch khác.
+### Còn thiếu: `content/legs.json`
+
+Vì Việt Nam là một đường thẳng và khách đi theo một chiều, không cần ma trận đầy
+đủ — chỉ cần các chặng liền kề thực tế. Với tập địa danh v1 (Hà Nội, Ninh Bình,
+Lan Hạ, Sapa, Hà Giang, Phong Nha, Huế, Đà Nẵng, Hội An, Sài Gòn, Cần Thơ):
+**khoảng 15 chặng**, mỗi chặng 2–3 phương tiện cố định. Tổng ~38 dòng.
+
+```json
+{ "from": "hanoi", "to": "hue",
+  "modes": [
+    { "mode": "train-nuit", "hours": 13, "days": 0,
+      "note": "Départ 19 h, arrivée 8 h. Économise une nuit d'hôtel.",
+      "source": "Horaires officiels des chemins de fer" },
+    { "mode": "avion", "hours": 1.25, "days": 0.5,
+      "note": "Phu Bai est à 15 km de Hué. Avec les aéroports, comptez une demi-journée.",
+      "source": "Horaires compagnies" }
+  ] }
+```
+
+**Trường `days` là trường quan trọng nhất, và không nguồn công khai nào có nó.**
+Giờ không bằng ngày: tàu đêm lâu gấp mười lần máy bay nhưng tốn **ít ngày hơn**,
+vì khách ngủ trên tàu và tiết kiệm một đêm khách sạn. Đó là thứ Camille tự tính
+không ra, và là thứ thước đo ngày (§5) cần để chạy.
+
+### Lấy ở đâu
+
+| Trường | Nguồn |
+|---|---|
+| `hours`, `mode` | Lịch đường sắt, lịch bay, 12go.asia, Baolau — đều công khai |
+| khoảng cách đường bộ | OSRM hoặc Google Directions, tính từ toạ độ đã có |
+| **`days`, `note`** | **Phán đoán — khoảng 15 câu hỏi cho Jasmin hoặc một bác tài** |
+
+Jasmin không cần biết kỹ thuật và không cần nắm hết dữ liệu. Họ cần trả lời
+**15 câu cụ thể**, mỗi lần vài câu. Hỏi vài người rồi đối chiếu còn tốt hơn hỏi
+một người.
+
+### Vòng đính chính
+
+Mỗi chặng **hiển thị nguồn của con số** (*« 8 h — estimation Google Maps »*) kèm
+link **« c'est faux ? »**. Hướng dẫn viên của Jasmin chạy các tuyến đó hằng tuần
+và sửa được bằng một cú bấm. Ghi rõ nguồn cũng là một điểm khác biệt: không site
+du lịch nào làm, và nó tránh giả vờ có thẩm quyền mình chưa có.
+
+### Phạm vi thật của v1
+
+Trang tĩnh đầu tiên bao **một** lịch trình, tức **5–6 chặng**. Sáu con số, không
+phải 38. Bộ `legs.json` đầy đủ là việc của bước 4.
 
 ## 11. Thứ tự xây — ngược với trực giác
 
@@ -254,4 +299,5 @@ truy vấn chứa `sans agence`, `soi-même`, `indépendant`.
 
 1. **Mặc định bản *reposant*** (§5) — quyết định thương mại
 2. Ba điều kiện tiên quyết ở §12, nhất là **nói chuyện với Jasmin**
-3. Ai dựng **ma trận di chuyển** (§10) — anh, Jasmin, hay cả hai
+3. **Ai trả lời 15 câu** về trường `days` và `note` (§10) — Jasmin, một bác tài
+   chạy tuyến, hay vài người rồi đối chiếu. Phần `hours` tôi tra được.
