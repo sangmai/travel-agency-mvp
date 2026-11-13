@@ -94,7 +94,15 @@ Apply these values (keep each entry's existing `fr`, `map`, `lat`, `lon` untouch
 
 - [ ] **Step 2: Mark overnight modes in `content/legs.json`**
 
-A mode that carries its own bed consumes one of the traveller's nights and no daytime. Add `"nuit": true` to exactly these five modes, leaving every other field as it is:
+A mode that carries its own bed consumes one of the traveller's nights. It may
+*also* eat some daytime — the two are independent, and three of the five below
+already carry a non-zero `days` for good researched reasons. **Add `"nuit": true`
+and change nothing else. In particular do not touch `days`:** the Hanoï–Da Nang
+train keeps `0.5` because it arrives mid-morning, and its own `note` says so;
+zeroing it would make the file contradict itself and make the planner promise a
+free day it cannot deliver.
+
+Add `"nuit": true` to exactly these five modes:
 
 - `hanoi → ha-giang`, mode `bus-nuit`
 - `hanoi → hue`, mode `train-nuit`
@@ -198,8 +206,12 @@ for (const l of legs) {
   if (!ids.has(l.to)) fautes.push(`leg ${l.from}->${l.to}: unknown to`);
   if (!l.modes?.length) fautes.push(`leg ${l.from}->${l.to}: no mode`);
   for (const m of l.modes ?? []) {
-    if (m.nuit && m.days > 0)
-      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: sleeps aboard yet costs ${m.days} day`);
+    /* `nuit` and `days` are independent, and conflating them loses real
+       information. The Hanoï–Da Nang night train gives you a bed AND eats half
+       the next morning, because it arrives at eleven. What is impossible is a
+       mode you sleep through that also costs a WHOLE day. */
+    if (m.nuit && m.days >= 1)
+      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: sleeps aboard yet costs a whole day`);
     if (m.journee !== "perdue" && m.journee !== "vecue")
       fautes.push(`leg ${l.from}->${l.to} ${m.mode}: journee is "${m.journee}"`);
     if (!m.source || m.source === "a-confirmer")
