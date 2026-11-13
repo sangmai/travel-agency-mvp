@@ -122,16 +122,26 @@ test("a restful itinerary of the same length is not", () => {
 });
 
 test("a day on the Hai Van pass is not counted against the traveller", () => {
-  const legs: Leg[] = [{ from: "hue", to: "hoi-an", modes: [
-    { mode: "route-col", hours: 6, days: 1, journee: "vecue", note: "", source: "x" },
-  ] }];
   const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
     { place: "hue", nuits: 2 }, { place: "hoi-an", nuits: 3 },
   ] };
-  // Hué (2 nights) buys 1 free day, Hoi An (3 nights) buys 2: the vecue Hai
-  // Van leg plays no part either way, since joursLibres no longer looks at
-  // legs at all — only at nights per stop.
-  assert.equal(rythme(plan, legs).joursLibres, 3);
+  const col: Leg[] = [{ from: "hue", to: "hoi-an", modes: [
+    { mode: "route-col", hours: 6, days: 1, journee: "vecue", note: "", source: "x" },
+  ] }];
+  const tunnel: Leg[] = [{ from: "hue", to: "hoi-an", modes: [
+    { mode: "route-tunnel", hours: 6, days: 1, journee: "perdue", note: "", source: "x" },
+  ] }];
+
+  // Six hours in a vehicle either way, and the traveller is told so either way.
+  assert.equal(rythme(plan, col).heuresTransport, 6);
+  assert.equal(rythme(plan, tunnel).heuresTransport, 6);
+
+  // But only the motorway is held against them.
+  assert.equal(rythme(plan, col).heuresSubies, 0);
+  assert.equal(rythme(plan, tunnel).heuresSubies, 6);
+
+  // Nights per stop are the same in both, so this must not move.
+  assert.equal(rythme(plan, col).joursLibres, 3);
 });
 
 test("a leg we have no data for is named, never silently free", () => {

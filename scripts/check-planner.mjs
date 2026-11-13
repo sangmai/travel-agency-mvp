@@ -34,8 +34,14 @@ for (const l of legs) {
        the road to Hanoï before boarding the night train in the evening. What
        is impossible is a mode that claims to cost MORE than a whole day while
        also putting you to sleep in a bed for part of it. */
-    if (m.nuit && m.days > 1)
-      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: sleeps aboard yet costs more than a whole day`);
+    /* A mode that carries its own bed has to be long enough to sleep in.
+       The rule used to compare `days`, and broke the moment composite legs
+       arrived: Sapa → Hué is a day bus to Hanoï followed by the night train, so
+       it genuinely costs a whole day AND provides a bed. No threshold on `days`
+       can separate that from an error. Hours can: nobody sleeps a night in a
+       forty-five-minute hop. */
+    if (m.nuit && m.hours < 6)
+      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: ${m.hours} h is not a night`);
     if (m.journee !== "perdue" && m.journee !== "vecue")
       fautes.push(`leg ${l.from}->${l.to} ${m.mode}: journee is "${m.journee}"`);
     if (!m.source || m.source === "a-confirmer")

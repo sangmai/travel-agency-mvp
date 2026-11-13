@@ -167,6 +167,15 @@ export type Rythme = {
   /** Suitcases packed. One fewer than the number of étapes. */
   changements: number;
   heuresTransport: number;
+  /**
+   * The hours held against the traveller: `perdue` only.
+   *
+   * `heuresTransport` is what to print — a traveller spending six hours on the
+   * col des Nuages did spend six hours in a car, and saying otherwise would be
+   * a lie. This is what to judge by, and the two differ by exactly the stretch
+   * of the trip that was the point of taking it.
+   */
+  heuresSubies: number;
   /** Days with no transport at all. The point of a holiday. */
   joursLibres: number;
   tendu: boolean;
@@ -189,14 +198,14 @@ export type Rythme = {
  */
 export function rythme(plan: Plan, legs: Leg[]): Rythme {
   let heuresTransport = 0;
-  let joursPerdus = 0;
+  let heuresSubies = 0;
 
   for (let i = 0; i < plan.etapes.length - 1; i++) {
     const leg = trouverLeg(legs, plan.etapes[i].place, plan.etapes[i + 1].place);
     const m = leg ? modeDefaut(leg) : null;
     if (!m) continue;
     heuresTransport += m.hours;
-    if (m.journee === "perdue") joursPerdus += m.days;
+    if (m.journee === "perdue") heuresSubies += m.hours;
   }
 
   const etapes = plan.etapes.length;
@@ -206,12 +215,14 @@ export function rythme(plan: Plan, legs: Leg[]): Rythme {
      "13 journées sans bouger" above a seven-stop forced march and cost the
      reader's trust in one line. */
   const joursLibres = plan.etapes.reduce((n, e) => n + Math.max(0, e.nuits - 1), 0);
+  const arrondi = (h: number) => Math.round(h * 10) / 10;
 
   return {
     etapes,
     changements: Math.max(0, etapes - 1),
-    heuresTransport: Math.round(heuresTransport * 10) / 10,
+    heuresTransport: arrondi(heuresTransport),
+    heuresSubies: arrondi(heuresSubies),
     joursLibres,
-    tendu: etapes - 1 > 5 || heuresTransport > 20 || joursLibres < 2,
+    tendu: etapes - 1 > 5 || heuresSubies > 20 || joursLibres < 2,
   };
 }
