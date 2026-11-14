@@ -127,8 +127,12 @@ export function Planner({
           </div>
           <p className={r.tendu ? "plan__mal" : "plan__bien"}>
             {r.tendu
-              ? `Soutenu : ${r.changements} changements d'hôtel et ${r.heuresTransport} h de transport.`
-              : `Tranquille : ${r.joursLibres} journées sans bouger.`}
+              ? `Soutenu : ${r.changements} ${r.changements > 1 ? "changements" : "changement"} d'hôtel et ${r.heuresTransport} h de transport.`
+              : /* joursLibres cannot be 1 here today — "tranquille" needs at least
+                   two — but that is a coincidence of where the threshold in
+                   rythme() currently sits, not a property of this sentence, so it
+                   is pluralised like every other count in the component. */
+                `Tranquille : ${r.joursLibres} ${r.joursLibres > 1 ? "journées" : "journée"} sans bouger.`}
           </p>
         </div>
       </div>
