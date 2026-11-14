@@ -3055,3 +3055,33 @@ ol.art__liste {
 /* The picture stays on top at every width. Putting it beside the text needed
    the card to be wide, and a card is only wide when it is alone — which is the
    one case that should not decide the layout of the other two. */
+
+/* The planner. The two gauges carry the whole argument, so they are the only
+   place colour is used to mean something rather than to decorate. */
+.plan { border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem; }
+.plan__barre { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem; }
+.plan__barre label { display: flex; align-items: center; gap: .4rem; font-size: .9rem; }
+.plan__barre input { width: 4rem; }
+.plan__jauges { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem; }
+.plan__label { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; opacity: .65; }
+.plan__g { display: flex; gap: 2px; height: 14px; margin: .4rem 0; }
+.plan__g i { flex: 1; border-radius: 2px; background: rgba(128,128,128,.14); }
+.plan__g i.ok { background: #2f9e68; }
+.plan__g i.over { background: #d9534f; }
+.plan__bien { color: #2f9e68; font-size: .85rem; margin: 0; }
+.plan__mal { color: #d9534f; font-size: .85rem; margin: 0; }
+.plan__inconnu { border: 1px solid #cf9000; border-radius: 8px; padding: .9rem 1rem; margin: 1.25rem 0; }
+.plan__inconnu p { margin: 0 0 .4rem; }
+.plan__inconnu ul { margin: 0 0 .4rem; padding-left: 1.1rem; }
+.plan__coupe { border: 1px solid #d9534f; border-radius: 8px; padding: .9rem 1rem; margin: 1.25rem 0; }
+.plan__coupe p { margin: 0 0 .5rem; }
+.plan__coupe ul { list-style: none; margin: 0; padding: 0; }
+.plan__coupe li { margin-bottom: .35rem; }
+.plan__note { font-size: .82rem; opacity: .7; margin: .6rem 0 0; }
+.plan__etapes { list-style: none; margin: 1.25rem 0; padding: 0; }
+.plan__etapes li { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; padding: .5rem 0; border-bottom: 1px solid var(--line); }
+.plan__nuits { display: inline-flex; align-items: center; gap: .45rem; font-variant-numeric: tabular-nums; }
+.plan__saison { flex-basis: 100%; color: #cf9000; font-size: .82rem; font-style: normal; }
+.plan__x { margin-left: auto; font-size: .8rem; opacity: .7; }
+.plan__ajout > div { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
+.plan__ajout button { border: 1px solid var(--line); border-radius: 999px; padding: .3rem .8rem; font-size: .85rem; }
