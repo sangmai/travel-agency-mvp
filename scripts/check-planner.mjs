@@ -27,13 +27,6 @@ for (const l of legs) {
   if (!ids.has(l.to)) fautes.push(`leg ${l.from}->${l.to}: unknown to`);
   if (!l.modes?.length) fautes.push(`leg ${l.from}->${l.to}: no mode`);
   for (const m of l.modes ?? []) {
-    /* `nuit` and `days` are independent, and conflating them loses real
-       information. The Hanoï–Da Nang night train gives you a bed AND eats half
-       the next morning, because it arrives at eleven. A composite leg can
-       legitimately cost a WHOLE day too — e.g. Sapa–Hué spends a full day on
-       the road to Hanoï before boarding the night train in the evening. What
-       is impossible is a mode that claims to cost MORE than a whole day while
-       also putting you to sleep in a bed for part of it. */
     /* A mode that carries its own bed has to be long enough to sleep in.
        The rule used to compare `days`, and broke the moment composite legs
        arrived: Sapa → Hué is a day bus to Hanoï followed by the night train, so
