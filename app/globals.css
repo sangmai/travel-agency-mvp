@@ -3085,3 +3085,12 @@ ol.art__liste {
 .plan__x { margin-left: auto; font-size: .8rem; opacity: .7; }
 .plan__ajout > div { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
 .plan__ajout button { border: 1px solid var(--line); border-radius: 999px; padding: .3rem .8rem; font-size: .85rem; }
+.plan__suite { margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 1.25rem; }
+.plan__suite h3 { font-size: 1rem; margin: 1.25rem 0 .4rem; }
+.plan__suite section:first-child h3 { margin-top: 0; }
+.plan__urgent { border: 1px solid #cf9000; border-radius: 8px; padding: .7rem .9rem; margin-bottom: .6rem; }
+.plan__urgent p { margin: .25rem 0 0; font-size: .87rem; opacity: .8; }
+.plan__calme { border: 1px solid #2f9e68; border-radius: 8px; padding: .7rem .9rem; }
+.plan__calme p { margin: .25rem 0 0; font-size: .9rem; }
+.plan__liens { list-style: none; margin: .5rem 0 0; padding: 0; }
+.plan__liens li { padding: .3rem 0; }

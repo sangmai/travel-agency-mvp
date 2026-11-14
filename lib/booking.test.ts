@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { hebergement, experiences } from "./booking.ts";
+import { hebergement, experiences, aReserver } from "./booking.ts";
 
 test("an accommodation link carries the dates and the party", () => {
   const l = hebergement("Hoi An", "2027-03-12", "2027-03-15", 2);
@@ -21,4 +21,11 @@ test("experiences are linked, because they pay more than beds and are what peopl
   const e = experiences("Hoi An");
   assert.ok(e.length > 0);
   for (const x of e) assert.ok(x.url.startsWith("https://"));
+});
+
+test("only genuinely scarce places are flagged, and the reason is given", () => {
+  assert.match(aReserver("lan-ha") ?? "", /cabines/);
+  assert.match(aReserver("phong-nha") ?? "", /permis/);
+  assert.equal(aReserver("hanoi"), null);
+  assert.equal(aReserver("hoi-an"), null);
 });

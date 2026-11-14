@@ -20,6 +20,7 @@ import {
   bilan, rythme, retraits, encoder, decoder, region, verdictSaison,
 } from "@/lib/planner";
 import type { Etape, Leg, Lieu, Plan, SaisonRow } from "@/lib/planner";
+import { AFFILIE, aReserver, experiences } from "@/lib/booking";
 
 export type PlanBase = { nom: string; jours: number; etapes: Etape[] };
 
@@ -202,6 +203,76 @@ export function Planner({
           );
         })}
       </ol>
+
+      {b.reste >= 0 && plan.etapes.length > 1 && (
+        <div className="plan__suite">
+          {(() => {
+            const urgents = plan.etapes
+              .map((e) => ({ e, pourquoi: aReserver(e.place) }))
+              .filter((x): x is { e: Etape; pourquoi: string } => x.pourquoi !== null);
+
+            return (
+              <>
+                {urgents.length > 0 && (
+                  <section>
+                    <h3>À réserver maintenant</h3>
+                    <p className="plan__note">
+                      {urgents.length === 1
+                        ? "Une seule chose. Pas dix."
+                        : `${urgents.length} choses. Pas dix.`}
+                    </p>
+                    {urgents.map(({ e, pourquoi }) => (
+                      <div className="plan__urgent" key={e.place}>
+                        <b>{nom(e.place)}</b>
+                        <p>{pourquoi}</p>
+                      </div>
+                    ))}
+                  </section>
+                )}
+
+                <section className="plan__calme">
+                  <h3>Ce qui peut attendre</h3>
+                  <p>
+                    Vos hôtels à {plan.etapes.filter((e) => !aReserver(e.place))
+                      .slice(0, 3).map((e) => nom(e.place)).join(", ")} :
+                    rien ne presse. Ces villes ont des milliers de chambres.
+                    Réservez-les quand vos vols seront pris, pas avant.
+                  </p>
+                  <p className="plan__note">
+                    Ce plan reste à cette adresse. Revenez à ce moment-là.
+                  </p>
+                </section>
+
+                <section>
+                  <h3>Vos journées libres</h3>
+                  <p className="plan__note">
+                    Vous avez laissé de la place. Voici ce qu&apos;on y fait — ou
+                    rien, c&apos;est permis.
+                  </p>
+                  <ul className="plan__liens">
+                    {plan.etapes.slice(0, 3).flatMap((e) =>
+                      experiences(nom(e.place)).map((x) => (
+                        <li key={`${e.place}-${x.libelle}`}>
+                          <a href={x.url} target="_blank" rel="noopener nofollow sponsored">
+                            {x.libelle}
+                          </a>
+                          {x.partenaire && <small> · {x.partenaire}</small>}
+                        </li>
+                      )),
+                    )}
+                  </ul>
+                  {AFFILIE && (
+                    <p className="plan__note">
+                      Liens partenaires — nous percevons une commission, sans
+                      surcoût pour vous.
+                    </p>
+                  )}
+                </section>
+              </>
+            );
+          })()}
+        </div>
+      )}
 
       <div className="plan__ajout">
         <span className="plan__label">Ajouter une étape</span>

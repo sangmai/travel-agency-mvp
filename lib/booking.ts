@@ -72,3 +72,34 @@ export function experiences(ville: string): LienPartenaire[] {
     },
   ];
 }
+
+/**
+ * The short list of things that genuinely sell out, and why.
+ *
+ * An explicit list rather than a flag derived from the data, because the honest
+ * answer is short and saying so is the point: a tool that marks two items
+ * urgent is believed, and one that marks ten is a shop. Hanoï, Hoi An and
+ * Saïgon have thousands of rooms between them and belong in "can wait", which
+ * costs us most of the accommodation commission and buys the only thing that
+ * makes the rest of the page credible.
+ *
+ * Returns null for everywhere else — and null is the common case on purpose.
+ */
+export function aReserver(place: string): string | null {
+  switch (place) {
+    case "lan-ha":
+    case "ha-long":
+      return "Une trentaine de jonques, une quinzaine de cabines chacune. Elles partent deux mois à l'avance.";
+    case "phong-nha":
+      return "Les permis d'accès aux grottes sont limités en nombre chaque jour.";
+    default:
+      return null;
+  }
+}
+
+/**
+ * Whether any affiliate account exists yet. False today, so the page prints no
+ * disclosure — claiming a commission we do not earn would be its own small lie,
+ * on a page whose whole argument is that it tells the truth.
+ */
+export const AFFILIE = Boolean(AID_BOOKING || AID_GETYOURGUIDE);
