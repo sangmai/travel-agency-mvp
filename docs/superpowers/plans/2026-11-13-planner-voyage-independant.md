@@ -1247,8 +1247,8 @@ export function Planner({
               three-day trip of two single nights. */}
           <p className={r.tendu ? "plan__mal" : "plan__bien"}>
             {r.tendu
-              ? `Soutenu : ${r.changements} changement${r.changements > 1 ? "s" : ""} d'hôtel et ${r.heuresTransport} h de transport.`
-              : `Tranquille : ${r.joursLibres} journée${r.joursLibres > 1 ? "s" : ""} sans bouger.`}
+              ? `Soutenu : ${r.changements} ${r.changements > 1 ? "changements" : "changement"} d'hôtel et ${r.heuresTransport} h de transport.`
+              : `Tranquille : ${r.joursLibres} ${r.joursLibres > 1 ? "journées" : "journée"} sans bouger.`}
           </p>
         </div>
       </div>
