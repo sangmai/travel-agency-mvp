@@ -284,3 +284,41 @@ export function retraits(
       return sa ? a.nuits - b.nuits : b.nuits - a.nuits;
     });
 }
+
+/**
+ * The plan lives in the URL and nowhere else.
+ *
+ * A static export has no database to put it in, and that turns out to be the
+ * right answer rather than a constraint: a plan in the address bar is
+ * shareable, bookmarkable, and still there in six weeks when the traveller is
+ * finally ready to book — which matters, because affiliate cookies last about
+ * a day and the French book their hotels late.
+ *
+ * The format stays legible on purpose. Someone pasting it into a message can
+ * see it is their trip.
+ */
+export function encoder(plan: Plan): string {
+  const etapes = plan.etapes.map((e) => `${e.place}-${e.nuits}`).join(",");
+  return `${plan.jours}/${plan.mois}/${plan.voyageurs}/${etapes}`;
+}
+
+const ENTIER = /^\d+$/;
+
+export function decoder(s: string): Plan | null {
+  const parts = s.split("/");
+  if (parts.length !== 4) return null;
+  const [j, mois, v, etapesRaw] = parts;
+  if (!ENTIER.test(j) || !ENTIER.test(v) || !mois || !etapesRaw) return null;
+
+  const etapes: Etape[] = [];
+  for (const bout of etapesRaw.split(",")) {
+    const coupe = bout.lastIndexOf("-");
+    if (coupe < 1) return null;
+    const place = bout.slice(0, coupe);
+    const nuits = bout.slice(coupe + 1);
+    if (!place || !ENTIER.test(nuits)) return null;
+    etapes.push({ place, nuits: Number(nuits) });
+  }
+
+  return { jours: Number(j), mois, voyageurs: Number(v), etapes };
+}

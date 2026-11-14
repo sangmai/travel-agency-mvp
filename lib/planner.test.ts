@@ -218,3 +218,26 @@ test("nothing is proposed when nothing is missing", () => {
   ] };
   assert.deepEqual(retraits(plan, LIEUX, 0), []);
 });
+
+import { encoder, decoder } from "./planner.ts";
+
+test("a plan survives a round trip through the URL", () => {
+  const plan: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "hoi-an", nuits: 5 },
+  ] };
+  assert.deepEqual(decoder(encoder(plan)), plan);
+});
+
+test("the encoding is short and legible", () => {
+  assert.equal(
+    encoder({ jours: 15, mois: "Mars", voyageurs: 2, etapes: [{ place: "hanoi", nuits: 3 }] }),
+    "15/Mars/2/hanoi-3",
+  );
+});
+
+test("junk decodes to null rather than to a wrong plan", () => {
+  assert.equal(decoder(""), null);
+  assert.equal(decoder("15/Mars"), null);
+  assert.equal(decoder("quinze/Mars/2/hanoi-3"), null);
+  assert.equal(decoder("15/Mars/2/hanoi-zero"), null);
+});
