@@ -2224,6 +2224,217 @@ git commit -m "Judge the hours endured, not the hours travelled"
 
 ---
 
+### Task 13: Stop the planner calling the agency's own itineraries impossible
+
+Three Critical findings from the whole-branch review, plus the reachable
+Importants. All originate in the plan rather than in any implementer's work.
+
+**Files:**
+- Modify: the six files in `content/itineraries/`
+- Modify: `lib/content/types.ts`, `app/organiser-son-voyage-au-vietnam/page.tsx`
+- Modify: `lib/planner.ts`, `lib/planner.test.ts`
+- Modify: `components/Planner.tsx`
+- Modify: `content/legs.json`
+
+- [ ] **Step 1: Give every stop its real night count**
+
+`Stop` in `lib/content/types.ts` becomes:
+
+```ts
+export type Stop = { place: PlaceId; label?: string; nuits: number };
+```
+
+Then add `"nuits": N` to every entry of every `stops` array, using exactly these
+values — they are read out of each itinerary's own `nights` prose, and every row
+sums to `days − 1`:
+
+| file | stops in order, with nights |
+|---|---|
+| `montagnes-et-baies-du-nord` (10 j) | hanoi 4, ninh-binh 1, lan-ha 1, pu-luong 2, mai-chau 1 |
+| `vietnam-authentique-hors-sentiers` (12 j) | hanoi 2, ha-giang 1, dong-van 1, cao-bang 2, ban-gioc 1, ba-be 2, phong-nha 2 |
+| `vietnam-collection-signature` (14 j) | hanoi 2, lan-ha 1, hue 2, hoi-an 4, hcmc 1, con-dao 3 |
+| `vietnam-du-nord-au-sud` (15 j) | hanoi 3, ninh-binh 1, lan-ha 1, hue 1, hoi-an 3, hcmc 3, can-tho 2 |
+| `vietnam-en-famille` (13 j) | hanoi 2, lan-ha 1, ninh-binh 2, hue 2, **da-nang 0**, hoi-an 5 |
+| `vietnam-et-cambodge` (18 j) | hanoi 4, lan-ha 1, hue 1, hoi-an 2, hcmc 2, can-tho 1, chau-doc 1, phnom-penh 2, siem-reap 3 |
+
+`da-nang` really is zero: in the family trip you land there and drive to Hoi An
+the same day. It is a waypoint, not a night.
+
+- [ ] **Step 2: Build the bases from those numbers**
+
+In `app/organiser-son-voyage-au-vietnam/page.tsx`, replace the `bases` block:
+
+```tsx
+  /* The itineraries' own per-stop nights, not the generic ideal for each place.
+     Substituting the ideal inflated every base past its own budget — the page
+     opened by telling a visitor that the 14-day trip sold two clicks away needs
+     seventeen, and the figure went into the Markdown that llms.txt points AI
+     crawlers at. Stops with no night are waypoints, not étapes, and are dropped. */
+  const bases: PlanBase[] = [...trips]
+    .sort((a, b) => a.stops.length / a.days - b.stops.length / b.days)
+    .slice(0, 3)
+    .map((t) => ({
+      nom: t.name,
+      jours: t.days,
+      etapes: t.stops
+        .filter((s) => s.nuits > 0)
+        .map((s) => ({ place: s.place, nuits: s.nuits })),
+    }));
+```
+
+- [ ] **Step 3: Stop counting sleep as hours endured**
+
+Fifty lines above the tool the page says *« Le train de nuit Hanoï–Hué ne coûte
+aucune journée »*, and the tool then condemned the itinerary for taking it:
+`heuresSubies` summed the sleeper's full duration. In `lib/planner.ts`, inside
+`rythme`'s loop, replace the `heuresSubies` line with:
+
+```ts
+    /* A berth's hours are not endured, they are slept through. Counting them
+       made the gauge contradict the page's own headline advice — and `tendu`
+       fires on this number alone, so the Hanoï–Hué sleeper was by itself enough
+       to condemn a trip the design calls restful. Eight hours is the night; what
+       is left over is the morning that really is spent travelling. */
+    if (m.journee === "perdue") heuresSubies += m.nuit ? Math.max(0, m.hours - 8) : m.hours;
+```
+
+- [ ] **Step 4: Pin it with a test**
+
+Append to `lib/planner.test.ts`:
+
+```ts
+test("hours slept in a berth are not held against the traveller", () => {
+  const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 2 }, { place: "hue", nuits: 3 },
+  ] };
+  const nuit: Leg[] = [{ from: "hanoi", to: "hue", modes: [
+    { mode: "train-nuit", hours: 12.6, days: 0, journee: "perdue", nuit: true, note: "", source: "x" },
+  ] }];
+  const jour: Leg[] = [{ from: "hanoi", to: "hue", modes: [
+    { mode: "route", hours: 12.6, days: 1, journee: "perdue", note: "", source: "x" },
+  ] }];
+  // Both are twelve and a half hours in transit, and both say so.
+  assert.equal(rythme(plan, nuit).heuresTransport, 12.6);
+  assert.equal(rythme(plan, jour).heuresTransport, 12.6);
+  // Only the one spent awake counts against them.
+  assert.equal(rythme(plan, nuit).heuresSubies, 4.6);
+  assert.equal(rythme(plan, jour).heuresSubies, 12.6);
+});
+```
+
+- [ ] **Step 5: Refuse a hash that would hang the browser**
+
+`#99999999/Mars/2/hanoi-3` decodes happily today, and the gauge then builds a
+hundred million elements. In `lib/planner.ts`, inside `decoder`, after the
+existing `ENTIER` checks, add the range guards:
+
+```ts
+  const jours = Number(j);
+  const voyageurs = Number(v);
+  /* The URL is this feature's whole persistence mechanism, so it is also the
+     one input certain to arrive pasted, truncated and mangled. Syntax was
+     checked; magnitude was not, and the gauge renders one element per night. */
+  if (jours < 5 || jours > 30 || voyageurs < 1 || voyageurs > 12) return null;
+```
+
+and inside the étape loop, after `nuits` passes `ENTIER`:
+
+```ts
+    const n = Number(nuits);
+    if (n < 1 || n > 30) return null;
+```
+
+Use `jours`, `voyageurs` and `n` in the returned object rather than re-calling
+`Number`.
+
+- [ ] **Step 6: Three more junk strings in the decoder test**
+
+Append to the existing junk test's list of cases:
+
+```ts
+  assert.equal(decoder("99999999/Mars/2/hanoi-3"), null);
+  assert.equal(decoder("15/Mars/99/hanoi-3"), null);
+  assert.equal(decoder("15/Mars/2/hanoi-999"), null);
+```
+
+- [ ] **Step 7: Only offer places the planner knows how to reach**
+
+`components/Planner.tsx` offers every place not already in the plan, Phnom Penh
+and Siem Reap included, and `region()` reads latitude only — so adding Siem Reap
+produced one button cutting *Hué, Hoi An and Angkor* as a single "Centre".
+Replace the `absents` line with:
+
+```tsx
+  /* A place with no leg is a place the planner cannot cost, and the two
+     Cambodian entries have none. Offering them produced a single "remove the
+     Centre" button spanning two countries, because region() knows only
+     latitude and Siem Reap sits 0.4° above the boundary. */
+  const joignable = (id: string) =>
+    legs.some((l) => l.from === id || l.to === id);
+  const absents = lieux.filter(
+    (l) => joignable(l.id) && !plan.etapes.some((e) => e.place === l.id),
+  );
+```
+
+- [ ] **Step 8: Add the two legs the editorial itineraries need**
+
+Append to the `legs` array in `content/legs.json`:
+
+```json
+    {
+      "from": "hcmc", "to": "con-dao",
+      "modes": [
+        { "mode": "avion", "hours": 0.75, "days": 0.5, "journee": "perdue",
+          "note": "Quarante-cinq minutes de vol. Il n'y a pas d'autre moyen raisonnable de rejoindre l'île.",
+          "source": "Horaires des compagnies intérieures" }
+      ]
+    },
+    {
+      "from": "ninh-binh", "to": "hue",
+      "modes": [
+        { "mode": "train-nuit", "hours": 11.5, "days": 0.25, "journee": "perdue", "nuit": true,
+          "note": "Le Réunification s'arrête à Ninh Binh en soirée. On évite ainsi de remonter sur Hanoï.",
+          "source": "Horaires des chemins de fer vietnamiens, arrêt de Ninh Binh" }
+      ]
+    }
+```
+
+- [ ] **Step 9: Do not congratulate a visitor on room they have not left**
+
+`components/Planner.tsx` prints "Ça rentre exactement." at `reste === 0` and then
+opens the free-days section with "Vous avez laissé de la place." Gate that one
+section on `b.reste > 0`:
+
+```tsx
+                {b.reste > 0 && (
+                <section>
+                  <h3>Vos journées libres</h3>
+```
+
+and close it with `)}` after that section's `</section>`.
+
+- [ ] **Step 10: Verify**
+
+```
+node --test lib/planner.test.ts     → 23 tests, fail 0
+node scripts/check-planner.mjs      → 23 places, 23 legs, all sourced
+npx tsc --noEmit                    → clean
+npm run build                       → report the liens: and markdown: lines
+```
+
+Then open `http://localhost:3000/organiser-son-voyage-au-vietnam/` — a dev
+server is already running — and confirm the first paint no longer says
+*« Il vous manque »*, and that the result block below the étapes now renders.
+
+- [ ] **Step 11: Commit**
+
+```bash
+git add content/itineraries lib/content/types.ts app/organiser-son-voyage-au-vietnam/page.tsx lib/planner.ts lib/planner.test.ts components/Planner.tsx content/legs.json
+git commit -m "Stop the planner refusing the trips the agency actually sells"
+```
+
+---
+
 ## Out of scope for v1
 
 Named here so nobody adds them by reflex: an interactive map; user accounts; server-side plan storage; Booking's Demand API and in-page hotel cards; accommodation deep links (the "can wait" paragraph argues against them until an affiliate account exists); multi-language; and the Ha Giang loop's internal legs.
