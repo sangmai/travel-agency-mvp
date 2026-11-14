@@ -1724,6 +1724,7 @@ sold:
             const urgents = plan.etapes
               .map((e) => ({ e, pourquoi: aReserver(e.place) }))
               .filter((x): x is { e: Etape; pourquoi: string } => x.pourquoi !== null);
+            const calmes = plan.etapes.filter((e) => aReserver(e.place) === null);
 
             return (
               <>
@@ -1744,18 +1745,26 @@ sold:
                   </section>
                 )}
 
+                {/* Only when there is something that can in fact wait. An
+                    itinerary of nothing but scarce stops — Lan Ha, Ha Long,
+                    Phong Nha — is buildable, and would otherwise print
+                    "Vos hôtels à  : rien ne presse." with a hole where the
+                    cities should be. The honest answer there is to say nothing
+                    at all rather than to reassure about hotels nobody booked. */}
+                {calmes.length > 0 && (
                 <section className="plan__calme">
                   <h3>Ce qui peut attendre</h3>
                   <p>
-                    Vos hôtels à {plan.etapes.filter((e) => !aReserver(e.place))
-                      .slice(0, 3).map((e) => nom(e.place)).join(", ")} :
-                    rien ne presse. Ces villes ont des milliers de chambres.
-                    Réservez-les quand vos vols seront pris, pas avant.
+                    Vos hôtels à{" "}
+                    {calmes.slice(0, 3).map((e) => nom(e.place)).join(", ")}
+                    &nbsp;: rien ne presse. Ces villes ont des milliers de
+                    chambres. Réservez-les quand vos vols seront pris, pas avant.
                   </p>
                   <p className="plan__note">
                     Ce plan reste à cette adresse. Revenez à ce moment-là.
                   </p>
                 </section>
+                )}
 
                 <section>
                   <h3>Vos journées libres</h3>
