@@ -1248,6 +1248,32 @@ export function Planner({
         </div>
       </div>
 
+      {/* The legs we hold nothing on. They are excluded from every number above,
+          which makes those numbers optimistic, and saying so is the whole point
+          of collecting them — an engine that knows about seven hundred
+          unaccounted kilometres and lets the page stay quiet is worse than one
+          that never noticed. */}
+      {b.inconnus.length > 0 && (
+        <div className="plan__inconnu">
+          <p>
+            <b>
+              Nous ne connaissons pas encore{" "}
+              {b.inconnus.length === 1 ? "ce trajet" : "ces trajets"}&nbsp;:
+            </b>
+          </p>
+          <ul>
+            {b.inconnus.map((x) => {
+              const [a, z] = x.split(" → ");
+              return <li key={x}>{nom(a)} → {nom(z)}</li>;
+            })}
+          </ul>
+          <p className="plan__note">
+            Ils ne sont comptés ni en heures ni en journées. Les chiffres
+            ci-dessus sont donc optimistes.
+          </p>
+        </div>
+      )}
+
       {aRetirer.length > 0 && (
         <div className="plan__coupe">
           <p><b>Pour que ce voyage tienne, il faut retirer une étape.</b></p>
@@ -1322,6 +1348,9 @@ Append at the end of the file, following the existing `.art__*` block's conventi
 .plan__g i.over { background: #d9534f; }
 .plan__bien { color: #2f9e68; font-size: .85rem; margin: 0; }
 .plan__mal { color: #d9534f; font-size: .85rem; margin: 0; }
+.plan__inconnu { border: 1px solid #cf9000; border-radius: 8px; padding: .9rem 1rem; margin: 1.25rem 0; }
+.plan__inconnu p { margin: 0 0 .4rem; }
+.plan__inconnu ul { margin: 0 0 .4rem; padding-left: 1.1rem; }
 .plan__coupe { border: 1px solid #d9534f; border-radius: 8px; padding: .9rem 1rem; margin: 1.25rem 0; }
 .plan__coupe p { margin: 0 0 .5rem; }
 .plan__coupe ul { list-style: none; margin: 0; padding: 0; }
