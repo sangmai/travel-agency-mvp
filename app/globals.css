@@ -3072,7 +3072,9 @@ ol.art__liste {
 .plan__mal { color: #d9534f; font-size: .85rem; margin: 0; }
 .plan__inconnu { border: 1px solid #cf9000; border-radius: 8px; padding: .9rem 1rem; margin: 1.25rem 0; }
 .plan__inconnu p { margin: 0 0 .4rem; }
-.plan__inconnu ul { margin: 0 0 .4rem; padding-left: 1.1rem; }
+/* The global reset strips markers from every ul; this is one of the few lists
+   on the site that wants them, so they go back on explicitly. */
+.plan__inconnu ul { list-style: disc; margin: 0 0 .4rem; padding-left: 1.1rem; }
 .plan__coupe { border: 1px solid #d9534f; border-radius: 8px; padding: .9rem 1rem; margin: 1.25rem 0; }
 .plan__coupe p { margin: 0 0 .5rem; }
 .plan__coupe ul { list-style: none; margin: 0; padding: 0; }

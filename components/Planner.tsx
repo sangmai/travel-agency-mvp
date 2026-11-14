@@ -15,7 +15,7 @@
  * each adjustment costs.
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   bilan, rythme, retraits, encoder, decoder, region, verdictSaison,
 } from "@/lib/planner";
@@ -28,6 +28,10 @@ const MOIS = [
   "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
   "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre",
 ];
+
+/** The min/max attributes are native hints; a typed value ignores them. */
+const borne = (n: number, bas: number, haut: number) =>
+  Math.min(haut, Math.max(bas, n));
 
 export function Planner({
   lieux, legs, saisons, bases,
@@ -53,8 +57,21 @@ export function Planner({
   }, []);
 
   /* Write it back on every change, with replaceState so the back button still
-     leaves the page instead of walking through every edit. */
+     leaves the page instead of walking through every edit.
+     
+     The first commit is skipped deliberately. Both effects run in declaration
+     order within it, and this one's closure still holds the default plan — the
+     setPlan above is queued, not applied — so writing here would stamp the
+     default over a shared link's hash before it had been applied. The visitor
+     would see their own itinerary arrive a frame after the address bar said
+     otherwise, on a feature whose entire premise is that the plan lives in the
+     URL and nowhere else. */
+  const monte = useRef(false);
   useEffect(() => {
+    if (!monte.current) {
+      monte.current = true;
+      return;
+    }
     history.replaceState(null, "", "#" + encoder(plan));
   }, [plan]);
 
@@ -70,7 +87,11 @@ export function Planner({
     if (!lieu) return;
     setPlan({ ...plan, etapes: [...plan.etapes, { place: id, nuits: lieu.nuits.ideal }] });
   };
+  /* Never below one étape: the min and max on the inputs are native hints a
+     typed value walks straight past, and an itinerary of nothing is not an
+     itinerary the gauges can say anything true about. */
   const retirer = (i: number) =>
+    plan.etapes.length > 1 &&
     setPlan({ ...plan, etapes: plan.etapes.filter((_, k) => k !== i) });
   const nuits = (i: number, n: number) =>
     setPlan({
@@ -84,7 +105,8 @@ export function Planner({
         <label>
           Durée
           <input type="number" min={5} max={30} value={plan.jours}
-            onChange={(ev) => setPlan({ ...plan, jours: Number(ev.target.value) || 5 })} />
+            onChange={(ev) =>
+              setPlan({ ...plan, jours: borne(Number(ev.target.value) || 5, 5, 30) })} />
           jours
         </label>
         <label>
@@ -97,7 +119,8 @@ export function Planner({
         <label>
           Voyageurs
           <input type="number" min={1} max={12} value={plan.voyageurs}
-            onChange={(ev) => setPlan({ ...plan, voyageurs: Number(ev.target.value) || 1 })} />
+            onChange={(ev) =>
+              setPlan({ ...plan, voyageurs: borne(Number(ev.target.value) || 1, 1, 12) })} />
         </label>
       </div>
 
@@ -119,6 +142,13 @@ export function Planner({
           </p>
         </div>
 
+        {/* A single stop has no rhythm to judge, and saying so is better than
+            judging it anyway. `tendu` fires on `joursLibres < 2`, so a plan
+            emptied to one short étape would otherwise print
+            "Soutenu : 0 changement d'hôtel et 0 h de transport." — a sentence
+            contradicted by its own two numbers, on the page whose whole claim
+            is that its numbers are true. */}
+        {plan.etapes.length >= 2 && (
         <div>
           <span className="plan__label">Rythme</span>
           <div className="plan__g">
@@ -126,16 +156,19 @@ export function Planner({
               <i key={i} className={i < r.changements * 2 ? (r.tendu ? "over" : "ok") : "nil"} />
             ))}
           </div>
+          {/* Both sentences agree in number, and both carry the non-breaking
+              space French puts before a colon. These are the two most-rendered
+              sentences in the component; "1 changements" on a page that claims
+              to be written from Da Nang would undo more than it costs to
+              prevent. The space is written   rather than &nbsp; because
+              these are template literals, not JSX text. */}
           <p className={r.tendu ? "plan__mal" : "plan__bien"}>
             {r.tendu
-              ? `Soutenu : ${r.changements} ${r.changements > 1 ? "changements" : "changement"} d'hôtel et ${r.heuresTransport} h de transport.`
-              : /* joursLibres cannot be 1 here today — "tranquille" needs at least
-                   two — but that is a coincidence of where the threshold in
-                   rythme() currently sits, not a property of this sentence, so it
-                   is pluralised like every other count in the component. */
-                `Tranquille : ${r.joursLibres} ${r.joursLibres > 1 ? "journées" : "journée"} sans bouger.`}
+              ? `Soutenu : ${r.changements} ${r.changements > 1 ? "changements" : "changement"} d'hôtel et ${r.heuresTransport} h de transport.`
+              : `Tranquille : ${r.joursLibres} ${r.joursLibres > 1 ? "journées" : "journée"} sans bouger.`}
           </p>
         </div>
+        )}
       </div>
 
       {/* The legs we hold nothing on. They are excluded from every number above,
@@ -166,7 +199,10 @@ export function Planner({
 
       {aRetirer.length > 0 && (
         <div className="plan__coupe">
-          <p><b>Pour que ce voyage tienne, il faut retirer une étape.</b></p>
+          {/* Not "une étape": retraits() groups by region, so one button can
+              remove two or three stops at once, and promising a single cut
+              understates what pressing it does. */}
+          <p><b>Pour que ce voyage tienne, il faut alléger l&apos;itinéraire.</b></p>
           <ul>
             {aRetirer.map((x) => (
               <li key={x.libelle}>
@@ -179,7 +215,9 @@ export function Planner({
               </li>
             ))}
           </ul>
-          <p className="plan__note">Rien ne se décide tout seul : c&apos;est vous qui tranchez.</p>
+          <p className="plan__note">
+            Rien ne se décide tout seul&nbsp;: c&apos;est vous qui tranchez.
+          </p>
         </div>
       )}
 
