@@ -1240,10 +1240,15 @@ export function Planner({
               <i key={i} className={i < r.changements * 2 ? (r.tendu ? "over" : "ok") : "nil"} />
             ))}
           </div>
+          {/* Both sentences agree in number. "1 changements" on a page whose
+              whole credibility rests on sounding like someone who lives in
+              Vietnam would undo more than it costs to prevent — and one
+              changement is reachable, through the joursLibres threshold, on a
+              three-day trip of two single nights. */}
           <p className={r.tendu ? "plan__mal" : "plan__bien"}>
             {r.tendu
-              ? `Soutenu : ${r.changements} changements d'hôtel et ${r.heuresTransport} h de transport.`
-              : `Tranquille : ${r.joursLibres} journées sans bouger.`}
+              ? `Soutenu : ${r.changements} changement${r.changements > 1 ? "s" : ""} d'hôtel et ${r.heuresTransport} h de transport.`
+              : `Tranquille : ${r.joursLibres} journée${r.joursLibres > 1 ? "s" : ""} sans bouger.`}
           </p>
         </div>
       </div>
