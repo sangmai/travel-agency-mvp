@@ -78,7 +78,9 @@ export default async function CarteVietnam() {
   /* Every place visited by at least one itinerary, north to south. The map
      therefore describes what we actually programme, not an atlas. */
   const ids = [...new Set(trips.flatMap((t) => t.stops.map((s) => s.place)))];
-  const lieux = (await resolveStops(ids.map((place) => ({ place })))).sort(
+  /* nuits is irrelevant here — resolveStops only reads place and label — so 0
+     is a safe placeholder, not a claim about how long to stay. */
+  const lieux = (await resolveStops(ids.map((place) => ({ place, nuits: 0 })))).sort(
     (a, b) => b.lat - a.lat,
   );
 

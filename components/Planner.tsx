@@ -292,12 +292,18 @@ export function Planner({
                 </section>
                 )}
 
-                {b.reste > 0 && (
+                {/* Keyed on the free days, which is what the heading says, and
+                    not on `reste` — that is the night budget, and a plan can
+                    fit its nights exactly while still leaving a week of
+                    mornings with nothing booked. Gating on `reste` hid this
+                    section on an itinerary with seven free days. */}
+                {r.joursLibres > 0 && (
                 <section>
                   <h3>Vos journées libres</h3>
                   <p className="plan__note">
-                    Vous avez laissé de la place. Voici ce qu&apos;on y fait — ou
-                    rien, c&apos;est permis.
+                    {r.joursLibres} {r.joursLibres > 1 ? "journées" : "journée"}{" "}
+                    sans valise à faire. Voici ce qu&apos;on y fait — ou rien,
+                    c&apos;est permis.
                   </p>
                   <ul className="plan__liens">
                     {plan.etapes.slice(0, 3).flatMap((e) =>

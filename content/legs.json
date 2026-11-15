@@ -194,6 +194,9 @@
     {
       "from": "lan-ha", "to": "hue",
       "modes": [
+        { "mode": "navette-avion", "hours": 4.5, "days": 0.5, "journee": "perdue",
+          "note": "Débarquement en fin de matinée, retour sur Hanoï, vol en début de soirée. L'après-midi y passe, mais aucune nuit.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route) et Hanoï–Hué (avion), lignes ci-dessus" },
         { "mode": "navette-train-nuit", "hours": 15.85, "days": 0.5, "journee": "perdue", "nuit": true,
           "note": "Par Hanoï : la navette quitte la jonque vers 11 h 30 et dépose vers 15 h, le train de nuit part à 19 h 20. La correspondance tient, sans marge.",
           "source": "Somme de Hanoï–baie de Lan Ha (route) et Hanoï–Hué (train de nuit), lignes ci-dessus" }
@@ -242,9 +245,9 @@
     {
       "from": "ninh-binh", "to": "hue",
       "modes": [
-        { "mode": "train-nuit", "hours": 11.5, "days": 0.25, "journee": "perdue", "nuit": true,
-          "note": "Le Réunification s'arrête à Ninh Binh en soirée. On évite ainsi de remonter sur Hanoï.",
-          "source": "Horaires des chemins de fer vietnamiens, arrêt de Ninh Binh" }
+        { "mode": "route-avion", "hours": 2.85, "days": 0.5, "journee": "perdue",
+          "note": "Retour sur Hanoï en matinée, puis une heure dix de vol. On arrive à Hué en fin d'après-midi.",
+          "source": "Somme de Hanoï–Ninh Binh (route) et Hanoï–Hué (avion), lignes ci-dessus" }
       ]
     }
   ]

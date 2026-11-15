@@ -2435,6 +2435,112 @@ git commit -m "Stop the planner refusing the trips the agency actually sells"
 
 ---
 
+### Task 14: Let the itineraries fly to Hué, because that is what they do
+
+Task 13 closed the three-day gap and left a one-day one. Two causes, both mine.
+
+**My night table counted a train as a town.** The parser that read each
+itinerary's `nights` prose matched *« 1 nuit en train Hanoï–Hué »* to Hanoï,
+so Hanoï got one night too many — and `bilan()` then adds the transit night
+again from the leg data. Two accounting systems, one night counted twice.
+
+**And the leg data forced a sleeper on trips that fly.** The prose is explicit:
+signature day 4 is *« Retour sur Hanoï et vol vers Hué en début de soirée »*,
+en famille day 6 is *« Retour sur Hanoï en matinée et vol d'une heure dix vers
+Hué »*. Neither takes a night train; `lan-ha → hue` offered only one, and
+`ninh-binh → hue` offered only one because I invented it in Task 13 and gave it
+a source I never checked.
+
+**Files:** `content/itineraries/vietnam-du-nord-au-sud.json`,
+`content/itineraries/vietnam-et-cambodge.json`, `content/legs.json`, plus three
+files Task 13 left uncommitted.
+
+- [ ] **Step 1: Take the train night back out of Hanoï**
+
+In `content/itineraries/vietnam-du-nord-au-sud.json`, the `hanoi` stop becomes
+`"nuits": 2`. In `content/itineraries/vietnam-et-cambodge.json`, `"nuits": 3`.
+
+Both files carry a `« 1 nuit en train Hanoï–Hué »` line in `nights`; that night
+belongs to the leg, which already contributes it. After this, every one of the
+six files sums to **`days − 1` minus its transit nights**, which is the only
+accounting that does not double-count.
+
+- [ ] **Step 2: Give `lan-ha → hue` the flight the itineraries actually take**
+
+Add this mode to that leg's `modes` array, **before** the existing
+`navette-train-nuit`:
+
+```json
+        { "mode": "navette-avion", "hours": 4.5, "days": 0.5, "journee": "perdue",
+          "note": "Débarquement en fin de matinée, retour sur Hanoï, vol en début de soirée. L'après-midi y passe, mais aucune nuit.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route) et Hanoï–Hué (avion), lignes ci-dessus" },
+```
+
+It ties the sleeper on `days` and on `journee`, then wins on hours — 4.5 against
+15.85 — so `modeDefaut` offers it first. The sleeper stays available and stays
+true for anyone who wants it.
+
+- [ ] **Step 3: Replace the `ninh-binh → hue` sleeper with something checkable**
+
+Delete that leg's single `train-nuit` mode and put this in its place:
+
+```json
+        { "mode": "route-avion", "hours": 2.85, "days": 0.5, "journee": "perdue",
+          "note": "Retour sur Hanoï en matinée, puis une heure dix de vol. On arrive à Hué en fin d'après-midi.",
+          "source": "Somme de Hanoï–Ninh Binh (route) et Hanoï–Hué (avion), lignes ci-dessus" }
+```
+
+The entry being removed claimed *« Horaires des chemins de fer vietnamiens,
+arrêt de Ninh Binh »* as its source and I never opened a timetable — I inferred
+it from the Reunification passing through. A figure with a source nobody checked
+is worse in this file than no figure at all, because the whole page is built on
+the promise that every number says where it came from. The Reunification does
+stop at Ninh Binh; if someone reads the real timetable, the sleeper can come
+back with a real source.
+
+- [ ] **Step 4: Commit the three files Task 13 had to touch and could not commit**
+
+They are already in the working tree and all three are correct — they exist
+because `Stop.nuits` became required, which I failed to anticipate in Task 13's
+file list:
+
+- `app/carte-vietnam/page.tsx` — passes `nuits: 0` to `resolveStops`, which
+  reads only `place` and `label`. The comment says so.
+- `scripts/make-cms-config.mjs` — adds the field to both CMS schemas so an
+  editor can set it.
+- `.pages.yml` — the generated output of that script.
+
+Review them, then commit them with the rest.
+
+- [ ] **Step 5: Verify, including the thing that actually matters**
+
+```
+node --test lib/planner.test.ts   → 20 tests, fail 0
+node scripts/check-planner.mjs    → 23 places, 23 legs, all sourced
+npx tsc --noEmit                  → clean
+npm run build                     → report the liens: and markdown: lines
+```
+
+Then fetch `http://localhost:3000/organiser-son-voyage-au-vietnam/` from the dev
+server already running, and grep the HTML for `Il vous manque`. **It must not be
+there.** Expect *« Ça rentre exactement. »*, and the result block — *À réserver
+maintenant*, *Ce qui peut attendre* — present below the étapes.
+
+If `Il vous manque` is still in the output, stop and report the figures rather
+than adjusting a night count to make it disappear.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add content/itineraries/vietnam-du-nord-au-sud.json \
+        content/itineraries/vietnam-et-cambodge.json \
+        content/legs.json app/carte-vietnam/page.tsx \
+        scripts/make-cms-config.mjs .pages.yml
+git commit -m "Fly to Hue, as the itineraries say they do"
+```
+
+---
+
 ## Out of scope for v1
 
 Named here so nobody adds them by reflex: an interactive map; user accounts; server-side plan storage; Booking's Demand API and in-page hotel cards; accommodation deep links (the "can wait" paragraph argues against them until an affiliate account exists); multi-language; and the Ha Giang loop's internal legs.

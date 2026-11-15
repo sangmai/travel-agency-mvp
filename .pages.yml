@@ -115,6 +115,7 @@ content:
                 - { name: "phnom-penh", label: "Phnom Penh (phnom-penh)" }
                 - { name: "siem-reap", label: "Siem Reap (siem-reap)" }
           - { name: label, label: Libellé affiché, type: string, description: "Seulement s'il diffère du nom du lieu." }
+          - { name: nuits, label: Nuits, type: number, min: 0, description: "0 pour une étape traversée sans y dormir." }
       - name: program
         label: Programme jour par jour
         type: object

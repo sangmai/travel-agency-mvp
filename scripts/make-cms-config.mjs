@@ -150,6 +150,7 @@ ${select("photo", "Photo", OPT_PHOTOS, 6)}
         fields:
 ${select("place", "Lieu", OPT_LIEUX, 10)}
           - { name: label, label: Libellé affiché, widget: string, required: false, hint: "Seulement s'il diffère du nom du lieu." }
+          - { name: nuits, label: Nuits, widget: number, value_type: int, min: 0, hint: "0 pour une étape traversée sans y dormir." }
       - name: program
         label: Programme jour par jour
         widget: list
@@ -507,6 +508,7 @@ content:
             options:
               values:${vals(OPT_LIEUX, 16)}
           - { name: label, label: Libellé affiché, type: string, description: "Seulement s'il diffère du nom du lieu." }
+          - { name: nuits, label: Nuits, type: number, min: 0, description: "0 pour une étape traversée sans y dormir." }
       - name: program
         label: Programme jour par jour
         type: object
