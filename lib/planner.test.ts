@@ -1,6 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { region, verdictSaison, bilan, trouverLeg, modeDefaut } from "./planner.ts";
+import {
+  region, verdictSaison, bilan, trouverLeg, modeDefaut, rythme, retraits,
+  encoder, decoder,
+} from "./planner.ts";
 import type { Leg, Plan, Lieu } from "./planner.ts";
 
 test("region is read off the latitude, because Vietnam's climate is", () => {
@@ -72,8 +75,9 @@ test("a night train uses a night and no daytime", () => {
   assert.equal(b.nuitsPlacees, 9);
   assert.equal(b.nuitsDisponibles, 9);
   assert.equal(b.reste, 0);
-  // Only Hué → Hoi An burns daytime.
-  assert.equal(b.joursPerdus, 0.5);
+  // Only Hué → Hoi An is endured awake; the sleeper's hours are slept through.
+  // 12.6 − 8 of train, plus 2.75 of road, rounded to the tenth the page prints.
+  assert.equal(rythme(plan, LEGS).heuresSubies, 7.4);
 });
 
 test("an itinerary that does not fit reports a negative remainder", () => {
@@ -85,7 +89,6 @@ test("an itinerary that does not fit reports a negative remainder", () => {
   assert.equal(bilan(plan, LEGS).reste, -3);
 });
 
-import { rythme } from "./planner.ts";
 
 const LEGS_15: Leg[] = [
   ...LEGS,
@@ -158,8 +161,9 @@ test("a leg we have no data for is named, never silently free", () => {
   const b = bilan(plan, legs);
   // Ninh Binh → Hué is 700 km and we hold nothing on it. It must be reported.
   assert.deepEqual(b.inconnus, ["ninh-binh → hue"]);
-  // And it must not have been counted as free daytime either.
-  assert.equal(b.joursPerdus, 0.25);
+  // And it must not have been quietly counted as travelled either: only the
+  // known leg's hours may appear.
+  assert.equal(rythme(plan, legs).heuresSubies, 1.6);
 });
 
 test("a plan whose every leg is known reports no unknowns", () => {
@@ -184,7 +188,6 @@ test("free days are the ones that do not involve a suitcase", () => {
   assert.equal(rythme(plan, legs).joursLibres, 2 + 0 + 4);
 });
 
-import { retraits } from "./planner.ts";
 
 const LIEUX: Lieu[] = [
   { id: "hanoi", fr: "Hanoï", lat: 21.028, nuits: { min: 2, ideal: 3 } },
@@ -219,7 +222,6 @@ test("nothing is proposed when nothing is missing", () => {
   assert.deepEqual(retraits(plan, LIEUX, 0), []);
 });
 
-import { encoder, decoder } from "./planner.ts";
 
 test("a plan survives a round trip through the URL", () => {
   const plan: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
@@ -261,4 +263,26 @@ test("hours slept in a berth are not held against the traveller", () => {
   // Only the one spent awake counts against them.
   assert.equal(rythme(plan, nuit).heuresSubies, 4.6);
   assert.equal(rythme(plan, jour).heuresSubies, 12.6);
+});
+
+test("when no single region covers the shortfall, the biggest is offered first", () => {
+  const plan: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 2 },
+    { place: "hue", nuits: 2 }, { place: "hoi-an", nuits: 5 },
+    { place: "hcmc", nuits: 3 },
+  ] };
+  // nord 5, centre 7, sud 3 — none of them frees ten nights on its own.
+  const r = retraits(plan, LIEUX, 10);
+  assert.deepEqual(r.map((x) => x.nuits), [7, 5, 3]);
+});
+
+test("when every region covers it, the cheapest sacrifice is offered first", () => {
+  const plan: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 2 },
+    { place: "hue", nuits: 2 }, { place: "hoi-an", nuits: 5 },
+    { place: "hcmc", nuits: 3 },
+  ] };
+  // One night missing: all three would do, so the smallest leads.
+  const r = retraits(plan, LIEUX, 1);
+  assert.deepEqual(r.map((x) => x.nuits), [3, 5, 7]);
 });

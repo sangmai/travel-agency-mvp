@@ -29,3 +29,14 @@ test("only genuinely scarce places are flagged, and the reason is given", () => 
   assert.equal(aReserver("hanoi"), null);
   assert.equal(aReserver("hoi-an"), null);
 });
+
+test("a place name with an accent or an apostrophe survives the URL", () => {
+  /* Both are real values in content/places.json. A link that mangles them
+     sends a traveller to a broken search page, and nothing on our side fails. */
+  for (const ville of ["Hô Chi Minh-Ville", "Baie d'Halong", "Hué"]) {
+    const u = new URL(hebergement(ville, "2027-03-01", "2027-03-04", 2).url);
+    assert.equal(u.searchParams.get("ss"), ville);
+    const e = new URL(experiences(ville)[0].url);
+    assert.equal(e.searchParams.get("q"), ville);
+  }
+});

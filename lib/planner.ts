@@ -80,8 +80,6 @@ export type Bilan = {
   nuitsDisponibles: number;
   /** Negative when the itinerary does not fit. */
   reste: number;
-  /** Daytime eaten by transport, in days. Does not include `vecue` legs. */
-  joursPerdus: number;
   /**
    * Legs the data holds nothing about, as `"from → to"`.
    *
@@ -134,7 +132,6 @@ export function modeDefaut(leg: Leg): LegMode | null {
 
 export function bilan(plan: Plan, legs: Leg[]): Bilan {
   let nuitsPlacees = 0;
-  let joursPerdus = 0;
   const inconnus: string[] = [];
 
   for (const e of plan.etapes) nuitsPlacees += e.nuits;
@@ -149,7 +146,6 @@ export function bilan(plan: Plan, legs: Leg[]): Bilan {
       continue;
     }
     if (m.nuit) nuitsPlacees += 1;
-    if (m.journee === "perdue") joursPerdus += m.days;
   }
 
   const nuitsDisponibles = plan.jours - 1;
@@ -157,7 +153,6 @@ export function bilan(plan: Plan, legs: Leg[]): Bilan {
     nuitsPlacees,
     nuitsDisponibles,
     reste: nuitsDisponibles - nuitsPlacees,
-    joursPerdus,
     inconnus,
   };
 }

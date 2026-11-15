@@ -24,7 +24,12 @@ export type LienPartenaire = {
   partenaire: string | null;
 };
 
-/* Fill in once CJ, Klook and GetYourGuide have approved the account. */
+/* Fill in once CJ and GetYourGuide have approved the account.
+
+   Klook is not wired and is not named above for that reason: the spec prefers
+   it for experiences, at 6.5 % against GetYourGuide's 8 % on a deeper
+   Vietnamese catalogue, but adding a second partner is a decision with its own
+   disclosure and its own link shape, not a line in this file. */
 const AID_BOOKING = "";
 const AID_GETYOURGUIDE = "";
 
