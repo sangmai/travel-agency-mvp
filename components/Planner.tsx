@@ -280,11 +280,26 @@ export function Planner({
                 {calmes.length > 0 && (
                 <section className="plan__calme">
                   <h3>Ce qui peut attendre</h3>
+                  {/* The claim about thousands of rooms is gone. It was true of
+                      Hanoï and Saïgon and false of Con Dao, Ban Gioc, Pu Luong
+                      and Ba Be, every one of which can land in this sentence —
+                      and a reason that is false half the time is worse than no
+                      reason, on the one block whose job is to be believed.
+                      What decides urgency is the list above; this one needs no
+                      second justification of its own.
+
+                      Four names, then a count. Slicing to three said nothing
+                      about the rest, so an itinerary with six calm stops
+                      quietly reassured the visitor about half of them. */}
                   <p>
                     Vos hôtels à{" "}
-                    {calmes.slice(0, 3).map((e) => nom(e.place)).join(", ")}
-                    &nbsp;: rien ne presse. Ces villes ont des milliers de
-                    chambres. Réservez-les quand vos vols seront pris, pas avant.
+                    {calmes.slice(0, 4).map((e) => nom(e.place)).join(", ")}
+                    {calmes.length > 4 &&
+                      ` et ${calmes.length - 4} autre${
+                        calmes.length - 4 > 1 ? "s étapes" : " étape"
+                      }`}
+                    &nbsp;: rien ne presse. Réservez-les quand vos vols seront
+                    pris, pas avant.
                   </p>
                   <p className="plan__note">
                     Ce plan reste à cette adresse. Revenez à ce moment-là.
