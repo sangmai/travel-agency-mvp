@@ -74,7 +74,7 @@
         { "mode": "route", "hours": 5.5, "days": 1, "journee": "perdue",
           "note": "Autoroute CT05, dépose en centre-ville de Sapa. Trois heures de moins que le train.",
           "source": "daytripsvietnam.com 2026 : 5 h à 6 h" },
-        { "mode": "train-nuit", "hours": 9, "days": 0.25, "journee": "perdue",
+        { "mode": "train-nuit", "hours": 9, "days": 0.25, "journee": "perdue", "nuit": true,
           "note": "Huit heures jusqu'à Lao Cai, puis 35 km de route. Contrairement au train de Hué, il ne supprime pas vraiment une journée : il faut encore monter à Sapa au petit matin. Deux fois le prix du bus.",
           "source": "daytripsvietnam.com 2026 et comparatifs d'opérateurs" }
       ]
@@ -82,7 +82,7 @@
     {
       "from": "hanoi", "to": "ha-giang",
       "modes": [
-        { "mode": "bus-nuit", "hours": 7, "days": 0, "journee": "perdue",
+        { "mode": "bus-nuit", "hours": 7, "days": 0, "journee": "perdue", "nuit": true,
           "note": "Départ entre 21 h et 23 h, arrivée au petit matin. Supprime une nuit d'hôtel, mais on ne dort pas aussi bien qu'en train.",
           "source": "Opérateurs Hanoï–Ha Giang, horaires 2026" },
         { "mode": "limousine", "hours": 5.75, "days": 1, "journee": "perdue",
@@ -93,7 +93,7 @@
     {
       "from": "hanoi", "to": "hue",
       "modes": [
-        { "mode": "train-nuit", "hours": 12.6, "days": 0, "journee": "perdue",
+        { "mode": "train-nuit", "hours": 12.6, "days": 0, "journee": "perdue", "nuit": true,
           "note": "Le SE3 part à 19 h 20 et arrive à 7 h 55. Dix fois plus long que l'avion et pourtant moins cher en journées : on y dort, et il remplace une nuit d'hôtel.",
           "source": "Horaires SE3, chemins de fer vietnamiens (dsvn.vn)" },
         { "mode": "avion", "hours": 1.25, "days": 0.5, "journee": "perdue",
@@ -110,7 +110,7 @@
         { "mode": "avion", "hours": 1.33, "days": 0.5, "journee": "perdue",
           "note": "Le choix par défaut pour rejoindre le Centre quand on ne veut pas du train de nuit.",
           "source": "Horaires des compagnies" },
-        { "mode": "train-nuit", "hours": 15.5, "days": 0.5, "journee": "perdue",
+        { "mode": "train-nuit", "hours": 15.5, "days": 0.5, "journee": "perdue", "nuit": true,
           "note": "Plus long que Hué : on arrive en milieu de matinée, donc une demi-journée y passe quand même.",
           "source": "daytripsvietnam.com 2026 : 15 h à 16 h" }
       ]
@@ -118,7 +118,7 @@
     {
       "from": "hanoi", "to": "phong-nha",
       "modes": [
-        { "mode": "train-nuit", "hours": 10.8, "days": 0.25, "journee": "perdue",
+        { "mode": "train-nuit", "hours": 10.8, "days": 0.25, "journee": "perdue", "nuit": true,
           "note": "Le SE3 arrive à Dong Hoi à 5 h 20, le SE1 à 7 h 45 — plus humain. Il reste 45 km jusqu'à Phong Nha. Les grottes ferment à 16 h.",
           "source": "Horaires SE1, SE3, SE19, chemins de fer vietnamiens" }
       ]
@@ -189,6 +189,65 @@
         { "mode": "route", "hours": 2.75, "days": 0.5, "journee": "perdue",
           "note": "189 km d'autoroute continue depuis l'ouverture du pont My Thuan 2. Can Tho est devenu faisable à la journée, ce qui n'était pas vrai il y a trois ans.",
           "source": "daytripsvietnam.com 2026 : 2 h 30 à 3 h en continu" }
+      ]
+    },
+    {
+      "from": "lan-ha", "to": "hue",
+      "modes": [
+        { "mode": "navette-avion", "hours": 4.5, "days": 0.5, "journee": "perdue",
+          "note": "Débarquement en fin de matinée, retour sur Hanoï, vol en début de soirée. L'après-midi y passe, mais aucune nuit.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route) et Hanoï–Hué (avion), lignes ci-dessus" },
+        { "mode": "navette-train-nuit", "hours": 15.85, "days": 0.5, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï : la navette quitte la jonque vers 11 h 30 et dépose vers 15 h, le train de nuit part à 19 h 20. La correspondance tient, sans marge.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route) et Hanoï–Hué (train de nuit), lignes ci-dessus" }
+      ]
+    },
+    {
+      "from": "lan-ha", "to": "hoi-an",
+      "modes": [
+        { "mode": "navette-avion", "hours": 5.38, "days": 1, "journee": "perdue",
+          "note": "Par Hanoï puis l'aéroport de Da Nang. Compter la journée entière : on débarque à 11 h 30 et on arrive à Hoi An le soir.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route), Hanoï–Da Nang (avion) et Da Nang–Hoi An (route)" }
+      ]
+    },
+    {
+      "from": "hoi-an", "to": "hcmc",
+      "modes": [
+        { "mode": "avion", "hours": 2.13, "days": 0.5, "journee": "perdue",
+          "note": "Par l'aéroport de Da Nang, à 45 minutes de Hoi An. Il n'existe pas d'aéroport à Hoi An.",
+          "source": "Somme de Da Nang–Hoi An (route) et Da Nang–Hô Chi Minh-Ville (avion)" }
+      ]
+    },
+    {
+      "from": "sapa", "to": "hue",
+      "modes": [
+        { "mode": "bus-train-nuit", "hours": 18.1, "days": 1, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï. Descendre de Sapa le matin pour attraper le train de nuit le soir même.",
+          "source": "Somme de Hanoï–Sapa (route) et Hanoï–Hué (train de nuit)" }
+      ]
+    },
+    {
+      "from": "ha-giang", "to": "hue",
+      "modes": [
+        { "mode": "limousine-train-nuit", "hours": 18.35, "days": 1, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï, en limousine le matin puis le train de nuit. Deux nuits de transport d'affilée si l'on arrive de Ha Giang par le bus de nuit — prévoir une journée à Hanoï entre les deux.",
+          "source": "Somme de Hanoï–Ha Giang (limousine) et Hanoï–Hué (train de nuit)" }
+      ]
+    },
+    {
+      "from": "hcmc", "to": "con-dao",
+      "modes": [
+        { "mode": "avion", "hours": 0.75, "days": 0.5, "journee": "perdue",
+          "note": "Quarante-cinq minutes de vol. Il n'y a pas d'autre moyen raisonnable de rejoindre l'île.",
+          "source": "Horaires des compagnies intérieures" }
+      ]
+    },
+    {
+      "from": "ninh-binh", "to": "hue",
+      "modes": [
+        { "mode": "route-avion", "hours": 2.85, "days": 0.5, "journee": "perdue",
+          "note": "Retour sur Hanoï en matinée, puis une heure dix de vol. On arrive à Hué en fin d'après-midi.",
+          "source": "Somme de Hanoï–Ninh Binh (route) et Hanoï–Hué (avion), lignes ci-dessus" }
       ]
     }
   ]

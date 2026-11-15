@@ -23,22 +23,28 @@
   ],
   "stops": [
     {
-      "place": "hanoi"
+      "place": "hanoi",
+      "nuits": 2
     },
     {
-      "place": "lan-ha"
+      "place": "lan-ha",
+      "nuits": 1
     },
     {
-      "place": "ninh-binh"
+      "place": "ninh-binh",
+      "nuits": 2
     },
     {
-      "place": "hue"
+      "place": "hue",
+      "nuits": 2
     },
     {
-      "place": "da-nang"
+      "place": "da-nang",
+      "nuits": 0
     },
     {
-      "place": "hoi-an"
+      "place": "hoi-an",
+      "nuits": 5
     }
   ],
   "program": [

@@ -23,19 +23,24 @@
   ],
   "stops": [
     {
-      "place": "hanoi"
+      "place": "hanoi",
+      "nuits": 4
     },
     {
-      "place": "ninh-binh"
+      "place": "ninh-binh",
+      "nuits": 1
     },
     {
-      "place": "lan-ha"
+      "place": "lan-ha",
+      "nuits": 1
     },
     {
-      "place": "pu-luong"
+      "place": "pu-luong",
+      "nuits": 2
     },
     {
-      "place": "mai-chau"
+      "place": "mai-chau",
+      "nuits": 1
     }
   ],
   "program": [

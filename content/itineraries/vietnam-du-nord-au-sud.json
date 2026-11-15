@@ -24,26 +24,33 @@
   ],
   "stops": [
     {
-      "place": "hanoi"
+      "place": "hanoi",
+      "nuits": 2
     },
     {
-      "place": "ninh-binh"
+      "place": "ninh-binh",
+      "nuits": 1
     },
     {
-      "place": "lan-ha"
+      "place": "lan-ha",
+      "nuits": 1
     },
     {
-      "place": "hue"
+      "place": "hue",
+      "nuits": 1
     },
     {
-      "place": "hoi-an"
+      "place": "hoi-an",
+      "nuits": 3
     },
     {
-      "place": "hcmc"
+      "place": "hcmc",
+      "nuits": 3
     },
     {
       "place": "can-tho",
-      "label": "Delta du Mékong"
+      "label": "Delta du Mékong",
+      "nuits": 2
     }
   ],
   "program": [

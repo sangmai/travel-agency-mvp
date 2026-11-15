@@ -20,6 +20,13 @@
 - **The landing page is indexable; the generated plan view is not.** The plan lives in the URL hash, which crawlers do not index, so no extra `noindex` tag is needed — but never move plan state into a path or query string.
 - **Affiliate links are plain `<a href>`** — no script, no pixel, no iframe. This preserves the no-cookie architecture documented in `app/layout.tsx`. A disclosure line sits next to every affiliate block.
 - **TypeScript is `strict`.** No `any`, no non-null assertions.
+- **The `.ts` extension in an import belongs only in a test file.** Task 2 added
+  `allowImportingTsExtensions` to `tsconfig.json` because `node --test` requires
+  the explicit extension and the brief's test code uses it. That flag now permits
+  the style everywhere, which is a trap: application code written
+  `from "./foo.ts"` would compile here and rely on bundler-mode resolution to
+  survive. In `app/`, `components/` and non-test `lib/`, import without the
+  extension, as every existing file does.
 
 ---
 
@@ -94,7 +101,15 @@ Apply these values (keep each entry's existing `fr`, `map`, `lat`, `lon` untouch
 
 - [ ] **Step 2: Mark overnight modes in `content/legs.json`**
 
-A mode that carries its own bed consumes one of the traveller's nights and no daytime. Add `"nuit": true` to exactly these five modes, leaving every other field as it is:
+A mode that carries its own bed consumes one of the traveller's nights. It may
+*also* eat some daytime — the two are independent, and three of the five below
+already carry a non-zero `days` for good researched reasons. **Add `"nuit": true`
+and change nothing else. In particular do not touch `days`:** the Hanoï–Da Nang
+train keeps `0.5` because it arrives mid-morning, and its own `note` says so;
+zeroing it would make the file contradict itself and make the planner promise a
+free day it cannot deliver.
+
+Add `"nuit": true` to exactly these five modes:
 
 - `hanoi → ha-giang`, mode `bus-nuit`
 - `hanoi → hue`, mode `train-nuit`
@@ -198,8 +213,12 @@ for (const l of legs) {
   if (!ids.has(l.to)) fautes.push(`leg ${l.from}->${l.to}: unknown to`);
   if (!l.modes?.length) fautes.push(`leg ${l.from}->${l.to}: no mode`);
   for (const m of l.modes ?? []) {
-    if (m.nuit && m.days > 0)
-      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: sleeps aboard yet costs ${m.days} day`);
+    /* `nuit` and `days` are independent, and conflating them loses real
+       information. The Hanoï–Da Nang night train gives you a bed AND eats half
+       the next morning, because it arrives at eleven. What is impossible is a
+       mode you sleep through that also costs a WHOLE day. */
+    if (m.nuit && m.days >= 1)
+      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: sleeps aboard yet costs a whole day`);
     if (m.journee !== "perdue" && m.journee !== "vecue")
       fautes.push(`leg ${l.from}->${l.to} ${m.mode}: journee is "${m.journee}"`);
     if (!m.source || m.source === "a-confirmer")
@@ -396,8 +415,26 @@ test("a leg is found in either direction", () => {
   assert.equal(trouverLeg(LEGS, "hanoi", "sapa"), null);
 });
 
-test("the default mode is the one costing fewest days, then fewest hours", () => {
+test("the default mode is the one costing fewest days", () => {
   assert.equal(modeDefaut(LEGS[0])?.mode, "train-nuit");
+});
+
+test("at equal cost in days, a day worth living beats a quicker dull one", () => {
+  // The real Hué–Da Nang leg. Both cost a quarter-day; the tunnel is 36 minutes
+  // quicker and the coastal train is the finest railway in the country.
+  const hueDaNang: Leg = { from: "hue", to: "da-nang", modes: [
+    { mode: "route-tunnel", hours: 2, days: 0.25, journee: "perdue", note: "", source: "x" },
+    { mode: "train", hours: 2.6, days: 0.25, journee: "vecue", note: "", source: "x" },
+  ] };
+  assert.equal(modeDefaut(hueDaNang)?.mode, "train");
+});
+
+test("hours still break the tie when the days and the journée are equal", () => {
+  const leg: Leg = { from: "a", to: "b", modes: [
+    { mode: "lent", hours: 5, days: 0.5, journee: "perdue", note: "", source: "x" },
+    { mode: "rapide", hours: 2, days: 0.5, journee: "perdue", note: "", source: "x" },
+  ] };
+  assert.equal(modeDefaut(leg)?.mode, "rapide");
 });
 
 test("a night train uses a night and no daytime", () => {
@@ -476,16 +513,33 @@ export function trouverLeg(legs: Leg[], a: string, b: string): Leg | null {
   );
 }
 
+/** `vecue` sorts ahead of `perdue`. */
+const RANG_JOURNEE: Record<"vecue" | "perdue", number> = { vecue: 0, perdue: 1 };
+
 /**
- * The mode a traveller is offered first: the one costing fewest days, ties
- * broken by fewest hours. That ordering is what puts the Hanoï–Hué night train
- * ahead of the plane despite taking ten times longer — it consumes no daytime
- * and replaces a hotel night.
+ * The mode a traveller is offered first, decided on three levels in order:
+ * fewest days, then a day worth living over a day merely endured, then fewest
+ * hours.
+ *
+ * The first level is what puts the Hanoï–Hué night train ahead of the plane
+ * despite taking ten times longer: it consumes no daytime and replaces a hotel
+ * night.
+ *
+ * The second exists because sorting on hours alone sent travellers through the
+ * Hai Van tunnel. Tunnel and coastal train cost the same quarter-day; the
+ * tunnel is thirty-six minutes quicker and the train is the finest stretch of
+ * railway in the country. A tool optimising for speed would save the half-hour
+ * and quietly take the journey away, which is the exact failure the `journee`
+ * field was added to prevent — it was guarding the rhythm gauge, and the
+ * default mode walked into the trap behind its back.
  */
 export function modeDefaut(leg: Leg): LegMode | null {
   if (!leg.modes.length) return null;
   return [...leg.modes].sort(
-    (x, y) => x.days - y.days || x.hours - y.hours,
+    (x, y) =>
+      x.days - y.days ||
+      RANG_JOURNEE[x.journee] - RANG_JOURNEE[y.journee] ||
+      x.hours - y.hours,
   )[0];
 }
 
@@ -1076,7 +1130,7 @@ Create `components/Planner.tsx`:
  * each adjustment costs.
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   bilan, rythme, retraits, encoder, decoder, region, verdictSaison,
 } from "@/lib/planner";
@@ -1088,6 +1142,10 @@ const MOIS = [
   "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
   "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre",
 ];
+
+/** The min/max attributes are native hints; a typed value ignores them. */
+const borne = (n: number, bas: number, haut: number) =>
+  Math.min(haut, Math.max(bas, n));
 
 export function Planner({
   lieux, legs, saisons, bases,
@@ -1113,8 +1171,21 @@ export function Planner({
   }, []);
 
   /* Write it back on every change, with replaceState so the back button still
-     leaves the page instead of walking through every edit. */
+     leaves the page instead of walking through every edit.
+     
+     The first commit is skipped deliberately. Both effects run in declaration
+     order within it, and this one's closure still holds the default plan — the
+     setPlan above is queued, not applied — so writing here would stamp the
+     default over a shared link's hash before it had been applied. The visitor
+     would see their own itinerary arrive a frame after the address bar said
+     otherwise, on a feature whose entire premise is that the plan lives in the
+     URL and nowhere else. */
+  const monte = useRef(false);
   useEffect(() => {
+    if (!monte.current) {
+      monte.current = true;
+      return;
+    }
     history.replaceState(null, "", "#" + encoder(plan));
   }, [plan]);
 
@@ -1130,7 +1201,11 @@ export function Planner({
     if (!lieu) return;
     setPlan({ ...plan, etapes: [...plan.etapes, { place: id, nuits: lieu.nuits.ideal }] });
   };
+  /* Never below one étape: the min and max on the inputs are native hints a
+     typed value walks straight past, and an itinerary of nothing is not an
+     itinerary the gauges can say anything true about. */
   const retirer = (i: number) =>
+    plan.etapes.length > 1 &&
     setPlan({ ...plan, etapes: plan.etapes.filter((_, k) => k !== i) });
   const nuits = (i: number, n: number) =>
     setPlan({
@@ -1144,7 +1219,8 @@ export function Planner({
         <label>
           Durée
           <input type="number" min={5} max={30} value={plan.jours}
-            onChange={(ev) => setPlan({ ...plan, jours: Number(ev.target.value) || 5 })} />
+            onChange={(ev) =>
+              setPlan({ ...plan, jours: borne(Number(ev.target.value) || 5, 5, 30) })} />
           jours
         </label>
         <label>
@@ -1157,7 +1233,8 @@ export function Planner({
         <label>
           Voyageurs
           <input type="number" min={1} max={12} value={plan.voyageurs}
-            onChange={(ev) => setPlan({ ...plan, voyageurs: Number(ev.target.value) || 1 })} />
+            onChange={(ev) =>
+              setPlan({ ...plan, voyageurs: borne(Number(ev.target.value) || 1, 1, 12) })} />
         </label>
       </div>
 
@@ -1179,6 +1256,13 @@ export function Planner({
           </p>
         </div>
 
+        {/* A single stop has no rhythm to judge, and saying so is better than
+            judging it anyway. `tendu` fires on `joursLibres < 2`, so a plan
+            emptied to one short étape would otherwise print
+            "Soutenu : 0 changement d'hôtel et 0 h de transport." — a sentence
+            contradicted by its own two numbers, on the page whose whole claim
+            is that its numbers are true. */}
+        {plan.etapes.length >= 2 && (
         <div>
           <span className="plan__label">Rythme</span>
           <div className="plan__g">
@@ -1186,17 +1270,53 @@ export function Planner({
               <i key={i} className={i < r.changements * 2 ? (r.tendu ? "over" : "ok") : "nil"} />
             ))}
           </div>
+          {/* Both sentences agree in number, and both carry the non-breaking
+              space French puts before a colon. These are the two most-rendered
+              sentences in the component; "1 changements" on a page that claims
+              to be written from Da Nang would undo more than it costs to
+              prevent. The space is written   rather than &nbsp; because
+              these are template literals, not JSX text. */}
           <p className={r.tendu ? "plan__mal" : "plan__bien"}>
             {r.tendu
-              ? `Soutenu : ${r.changements} changements d'hôtel et ${r.heuresTransport} h de transport.`
-              : `Tranquille : ${r.joursLibres} journées sans bouger.`}
+              ? `Soutenu : ${r.changements} ${r.changements > 1 ? "changements" : "changement"} d'hôtel et ${r.heuresTransport} h de transport.`
+              : `Tranquille : ${r.joursLibres} ${r.joursLibres > 1 ? "journées" : "journée"} sans bouger.`}
           </p>
         </div>
+        )}
       </div>
+
+      {/* The legs we hold nothing on. They are excluded from every number above,
+          which makes those numbers optimistic, and saying so is the whole point
+          of collecting them — an engine that knows about seven hundred
+          unaccounted kilometres and lets the page stay quiet is worse than one
+          that never noticed. */}
+      {b.inconnus.length > 0 && (
+        <div className="plan__inconnu">
+          <p>
+            <b>
+              Nous ne connaissons pas encore{" "}
+              {b.inconnus.length === 1 ? "ce trajet" : "ces trajets"}&nbsp;:
+            </b>
+          </p>
+          <ul>
+            {b.inconnus.map((x) => {
+              const [a, z] = x.split(" → ");
+              return <li key={x}>{nom(a)} → {nom(z)}</li>;
+            })}
+          </ul>
+          <p className="plan__note">
+            Ils ne sont comptés ni en heures ni en journées. Les chiffres
+            ci-dessus sont donc optimistes.
+          </p>
+        </div>
+      )}
 
       {aRetirer.length > 0 && (
         <div className="plan__coupe">
-          <p><b>Pour que ce voyage tienne, il faut retirer une étape.</b></p>
+          {/* Not "une étape": retraits() groups by region, so one button can
+              remove two or three stops at once, and promising a single cut
+              understates what pressing it does. */}
+          <p><b>Pour que ce voyage tienne, il faut alléger l&apos;itinéraire.</b></p>
           <ul>
             {aRetirer.map((x) => (
               <li key={x.libelle}>
@@ -1209,7 +1329,9 @@ export function Planner({
               </li>
             ))}
           </ul>
-          <p className="plan__note">Rien ne se décide tout seul : c&apos;est vous qui tranchez.</p>
+          <p className="plan__note">
+            Rien ne se décide tout seul&nbsp;: c&apos;est vous qui tranchez.
+          </p>
         </div>
       )}
 
@@ -1268,6 +1390,11 @@ Append at the end of the file, following the existing `.art__*` block's conventi
 .plan__g i.over { background: #d9534f; }
 .plan__bien { color: #2f9e68; font-size: .85rem; margin: 0; }
 .plan__mal { color: #d9534f; font-size: .85rem; margin: 0; }
+.plan__inconnu { border: 1px solid #cf9000; border-radius: 8px; padding: .9rem 1rem; margin: 1.25rem 0; }
+.plan__inconnu p { margin: 0 0 .4rem; }
+/* The global reset strips markers from every ul; this is one of the few lists
+   on the site that wants them, so they go back on explicitly. */
+.plan__inconnu ul { list-style: disc; margin: 0 0 .4rem; padding-left: 1.1rem; }
 .plan__coupe { border: 1px solid #d9534f; border-radius: 8px; padding: .9rem 1rem; margin: 1.25rem 0; }
 .plan__coupe p { margin: 0 0 .5rem; }
 .plan__coupe ul { list-style: none; margin: 0; padding: 0; }
@@ -1552,8 +1679,8 @@ Give before asking.
 - Modify: `app/globals.css`
 
 **Interfaces:**
-- Consumes: `hebergement`, `experiences`, `LienPartenaire` from Task 7; `Plan`, `Etape` from Task 3.
-- Produces: `aReserver(place: string): string | null`.
+- Consumes: `experiences`, `LienPartenaire` from Task 7; `Plan`, `Etape` from Task 3. **Not `hebergement`** — see Step 5.
+- Produces: `aReserver(place: string): string | null`; `AFFILIE: boolean`.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1603,6 +1730,13 @@ export function aReserver(place: string): string | null {
       return null;
   }
 }
+
+/**
+ * Whether any affiliate account exists yet. False today, so the page prints no
+ * disclosure — claiming a commission we do not earn would be its own small lie,
+ * on a page whose whole argument is that it tells the truth.
+ */
+export const AFFILIE = Boolean(AID_BOOKING || AID_GETYOURGUIDE);
 ```
 
 - [ ] **Step 4: Run the test to verify it passes**
@@ -1615,7 +1749,7 @@ Expected: PASS — `# fail 0`
 Add the imports at the top of the file:
 
 ```tsx
-import { aReserver, experiences, hebergement } from "@/lib/booking";
+import { AFFILIE, aReserver, experiences } from "@/lib/booking";
 ```
 
 And insert this block **after** the `<ol className="plan__etapes">` list and
@@ -1629,6 +1763,7 @@ sold:
             const urgents = plan.etapes
               .map((e) => ({ e, pourquoi: aReserver(e.place) }))
               .filter((x): x is { e: Etape; pourquoi: string } => x.pourquoi !== null);
+            const calmes = plan.etapes.filter((e) => aReserver(e.place) === null);
 
             return (
               <>
@@ -1649,18 +1784,26 @@ sold:
                   </section>
                 )}
 
+                {/* Only when there is something that can in fact wait. An
+                    itinerary of nothing but scarce stops — Lan Ha, Ha Long,
+                    Phong Nha — is buildable, and would otherwise print
+                    "Vos hôtels à  : rien ne presse." with a hole where the
+                    cities should be. The honest answer there is to say nothing
+                    at all rather than to reassure about hotels nobody booked. */}
+                {calmes.length > 0 && (
                 <section className="plan__calme">
                   <h3>Ce qui peut attendre</h3>
                   <p>
-                    Vos hôtels à {plan.etapes.filter((e) => !aReserver(e.place))
-                      .slice(0, 3).map((e) => nom(e.place)).join(", ")} :
-                    rien ne presse. Ces villes ont des milliers de chambres.
-                    Réservez-les quand vos vols seront pris, pas avant.
+                    Vos hôtels à{" "}
+                    {calmes.slice(0, 3).map((e) => nom(e.place)).join(", ")}
+                    &nbsp;: rien ne presse. Ces villes ont des milliers de
+                    chambres. Réservez-les quand vos vols seront pris, pas avant.
                   </p>
                   <p className="plan__note">
                     Ce plan reste à cette adresse. Revenez à ce moment-là.
                   </p>
                 </section>
+                )}
 
                 <section>
                   <h3>Vos journées libres</h3>
@@ -1680,7 +1823,7 @@ sold:
                       )),
                     )}
                   </ul>
-                  {experiences("x").some((x) => x.partenaire) && (
+                  {AFFILIE && (
                     <p className="plan__note">
                       Liens partenaires — nous percevons une commission, sans
                       surcoût pour vous.
@@ -1694,11 +1837,11 @@ sold:
       )}
 ```
 
-> `hebergement` stays imported but unused until a Booking affiliate id exists:
-> the accommodation links belong in "can wait", and printing them next to a
-> paragraph telling people not to hurry would contradict the paragraph. Leave
-> the import out until Task 10 of a future plan uses it — **and if your linter
-> rejects the unused import, remove it rather than inventing a use for it.**
+> **Do not import `hebergement` here.** It exists, it is tested, and nothing on
+> this page may call it: accommodation belongs in "ce qui peut attendre", and an
+> accommodation link printed beside a paragraph telling people not to hurry
+> would contradict the paragraph in the same breath. It waits for the day an
+> affiliate account exists and a separate decision is taken about where it goes.
 
 - [ ] **Step 6: Add the styles to `app/globals.css`**
 
@@ -1729,6 +1872,671 @@ Run: `npm run dev`, open `/organiser-son-voyage-au-vietnam/` and confirm:
 ```bash
 git add lib/booking.ts lib/booking.test.ts components/Planner.tsx app/globals.css
 git commit -m "Tell them what to book, and what not to book yet"
+```
+
+---
+
+### Task 11: Stop costing an unknown leg at zero, and count the right free days
+
+Found by running the finished engine over the real `content/legs.json` rather
+than over the fixtures — which is the only reason it was found at all. Both
+defects are invisible to every test written so far.
+
+**Files:**
+- Modify: `content/legs.json`
+- Modify: `lib/planner.ts`
+- Modify: `lib/planner.test.ts`
+
+**Interfaces:**
+- Consumes: `Bilan`, `bilan`, `rythme` from Tasks 3 and 4.
+- Produces: `Bilan` gains `inconnus: string[]`. `Rythme.joursLibres` changes meaning.
+
+- [ ] **Step 1: Write the failing tests**
+
+Append to `lib/planner.test.ts`:
+
+```ts
+test("a leg we have no data for is named, never silently free", () => {
+  const legs: Leg[] = [
+    { from: "hanoi", to: "ninh-binh", modes: [
+      { mode: "route", hours: 1.6, days: 0.25, journee: "perdue", note: "", source: "x" },
+    ] },
+  ];
+  const plan: Plan = { jours: 10, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 },
+    { place: "ninh-binh", nuits: 2 },
+    { place: "hue", nuits: 4 },
+  ] };
+  const b = bilan(plan, legs);
+  // Ninh Binh → Hué is 700 km and we hold nothing on it. It must be reported.
+  assert.deepEqual(b.inconnus, ["ninh-binh → hue"]);
+  // And it must not have been counted as free daytime either.
+  assert.equal(b.joursPerdus, 0.25);
+});
+
+test("a plan whose every leg is known reports no unknowns", () => {
+  const legs: Leg[] = [
+    { from: "hanoi", to: "ninh-binh", modes: [
+      { mode: "route", hours: 1.6, days: 0.25, journee: "perdue", note: "", source: "x" },
+    ] },
+  ];
+  const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 2 },
+  ] };
+  assert.deepEqual(bilan(plan, legs).inconnus, []);
+});
+
+test("free days are the ones that do not involve a suitcase", () => {
+  const legs: Leg[] = [];
+  // Three nights somewhere buys two whole days there; one night buys none.
+  const plan: Plan = { jours: 15, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 3 }, { place: "ninh-binh", nuits: 1 },
+    { place: "hoi-an", nuits: 5 },
+  ] };
+  assert.equal(rythme(plan, legs).joursLibres, 2 + 0 + 4);
+});
+```
+
+- [ ] **Step 2: Run the tests to verify they fail**
+
+Run: `node --test lib/planner.test.ts`
+Expected: FAIL — `inconnus` is undefined, and `joursLibres` returns the old formula's value.
+
+- [ ] **Step 3: Report unknown legs from `bilan`**
+
+In `lib/planner.ts`, add the field to `Bilan`:
+
+```ts
+  /**
+   * Legs the data holds nothing about, as `"from → to"`.
+   *
+   * They used to be skipped in silence, which made Lan Ha → Hué — seven hundred
+   * kilometres — cost nothing at all, and let the planner call a trip
+   * comfortable that had an unaccounted crossing of the country in it. Silence
+   * is the one answer a tool built to say no may never give.
+   */
+  inconnus: string[];
+```
+
+and rewrite the loop inside `bilan` to collect them:
+
+```ts
+export function bilan(plan: Plan, legs: Leg[]): Bilan {
+  let nuitsPlacees = 0;
+  let joursPerdus = 0;
+  const inconnus: string[] = [];
+
+  for (const e of plan.etapes) nuitsPlacees += e.nuits;
+
+  for (let i = 0; i < plan.etapes.length - 1; i++) {
+    const depuis = plan.etapes[i].place;
+    const vers = plan.etapes[i + 1].place;
+    const leg = trouverLeg(legs, depuis, vers);
+    const m = leg ? modeDefaut(leg) : null;
+    if (!m) {
+      inconnus.push(`${depuis} → ${vers}`);
+      continue;
+    }
+    if (m.nuit) nuitsPlacees += 1;
+    if (m.journee === "perdue") joursPerdus += m.days;
+  }
+
+  const nuitsDisponibles = plan.jours - 1;
+  return {
+    nuitsPlacees,
+    nuitsDisponibles,
+    reste: nuitsDisponibles - nuitsPlacees,
+    joursPerdus,
+    inconnus,
+  };
+}
+```
+
+- [ ] **Step 4: Count free days as days without a suitcase**
+
+In `rythme`, replace the `joursLibres` line with:
+
+```ts
+  /* A stop of N nights buys N−1 whole days there; a one-night stop buys none.
+     The previous formula subtracted travel from the trip length and returned
+     twelve or thirteen for every itinerary ever built, which would have printed
+     "13 journées sans bouger" above a seven-stop forced march and cost the
+     reader's trust in one line. */
+  const joursLibres = plan.etapes.reduce((n, e) => n + Math.max(0, e.nuits - 1), 0);
+```
+
+Leave the rest of `rythme` exactly as it is, including the three `tendu`
+thresholds. `joursLibres < 2` stays: it no longer fires for long trips, but it
+still catches a short one chopped into one-night stops.
+
+- [ ] **Step 5: Add the five missing legs to `content/legs.json`**
+
+Every itinerary that crosses the country passes through a hub, and these five
+pairs had no entry at all. The figures are **sums of legs already in this file**,
+not new research — each `source` says which, so the arithmetic can be rechecked.
+Append these to the `legs` array:
+
+```json
+    {
+      "from": "lan-ha", "to": "hue",
+      "modes": [
+        { "mode": "navette-train-nuit", "hours": 15.85, "days": 0.5, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï : la navette quitte la jonque vers 11 h 30 et dépose vers 15 h, le train de nuit part à 19 h 20. La correspondance tient, sans marge.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route) et Hanoï–Hué (train de nuit), lignes ci-dessus" }
+      ]
+    },
+    {
+      "from": "lan-ha", "to": "hoi-an",
+      "modes": [
+        { "mode": "navette-avion", "hours": 5.38, "days": 1, "journee": "perdue",
+          "note": "Par Hanoï puis l'aéroport de Da Nang. Compter la journée entière : on débarque à 11 h 30 et on arrive à Hoi An le soir.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route), Hanoï–Da Nang (avion) et Da Nang–Hoi An (route)" }
+      ]
+    },
+    {
+      "from": "hoi-an", "to": "hcmc",
+      "modes": [
+        { "mode": "avion", "hours": 2.13, "days": 0.5, "journee": "perdue",
+          "note": "Par l'aéroport de Da Nang, à 45 minutes de Hoi An. Il n'existe pas d'aéroport à Hoi An.",
+          "source": "Somme de Da Nang–Hoi An (route) et Da Nang–Hô Chi Minh-Ville (avion)" }
+      ]
+    },
+    {
+      "from": "sapa", "to": "hue",
+      "modes": [
+        { "mode": "bus-train-nuit", "hours": 18.1, "days": 1, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï. Descendre de Sapa le matin pour attraper le train de nuit le soir même.",
+          "source": "Somme de Hanoï–Sapa (route) et Hanoï–Hué (train de nuit)" }
+      ]
+    },
+    {
+      "from": "ha-giang", "to": "hue",
+      "modes": [
+        { "mode": "limousine-train-nuit", "hours": 18.35, "days": 1, "journee": "perdue", "nuit": true,
+          "note": "Par Hanoï, en limousine le matin puis le train de nuit. Deux nuits de transport d'affilée si l'on arrive de Ha Giang par le bus de nuit — prévoir une journée à Hanoï entre les deux.",
+          "source": "Somme de Hanoï–Ha Giang (limousine) et Hanoï–Hué (train de nuit)" }
+      ]
+    }
+```
+
+> `nuit: true` on three of them is correct and the validator permits it: each
+> ends with the night train, so a night is spent aboard, and each still costs
+> daytime — exactly the independence Task 1 had to be corrected to preserve.
+
+- [ ] **Step 6: Run the tests and the validator**
+
+Run: `node --test lib/planner.test.ts`
+Expected: PASS, **fourteen tests**, `# fail 0`.
+
+Run: `node scripts/check-planner.mjs`
+Expected: `[planner] 23 places, 21 legs, all sourced`
+
+Run: `npx tsc --noEmit`
+Expected: clean.
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add content/legs.json lib/planner.ts lib/planner.test.ts
+git commit -m "Refuse to price an unknown leg at zero"
+```
+
+---
+
+### Task 12: Give the rhythm gauge back the distinction Task 11 took from it
+
+Task 11 fixed `joursLibres` and, in doing so, removed the last place `rythme()`
+consulted `journee`. The gauge now penalises six hours on the Hai Van pass
+exactly as hard as six hours on a motorway — the precise failure the `journee`
+field was invented to prevent, rebuilt while repairing something else.
+`joursPerdus` is computed and never read, and the test named for the pass would
+pass identically if `journee` did not exist.
+
+**Files:**
+- Modify: `lib/planner.ts`
+- Modify: `lib/planner.test.ts`
+- Modify: `scripts/check-planner.mjs`
+
+**Interfaces:**
+- Consumes: `Rythme`, `rythme` from Task 4; `Leg`, `Plan` from Task 3.
+- Produces: `Rythme` gains `heuresSubies: number`; `tendu` keys on it instead of `heuresTransport`.
+
+- [ ] **Step 1: Replace the Hai Van test so it tests the pass again**
+
+In `lib/planner.test.ts`, replace the whole existing
+`test("a day on the Hai Van pass is not counted against the traveller", …)`
+block with:
+
+```ts
+test("a day on the Hai Van pass is not counted against the traveller", () => {
+  const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hue", nuits: 2 }, { place: "hoi-an", nuits: 3 },
+  ] };
+  const col: Leg[] = [{ from: "hue", to: "hoi-an", modes: [
+    { mode: "route-col", hours: 6, days: 1, journee: "vecue", note: "", source: "x" },
+  ] }];
+  const tunnel: Leg[] = [{ from: "hue", to: "hoi-an", modes: [
+    { mode: "route-tunnel", hours: 6, days: 1, journee: "perdue", note: "", source: "x" },
+  ] }];
+
+  // Six hours in a vehicle either way, and the traveller is told so either way.
+  assert.equal(rythme(plan, col).heuresTransport, 6);
+  assert.equal(rythme(plan, tunnel).heuresTransport, 6);
+
+  // But only the motorway is held against them.
+  assert.equal(rythme(plan, col).heuresSubies, 0);
+  assert.equal(rythme(plan, tunnel).heuresSubies, 6);
+
+  // Nights per stop are the same in both, so this must not move.
+  assert.equal(rythme(plan, col).joursLibres, 3);
+});
+```
+
+- [ ] **Step 2: Run the tests to verify the new one fails**
+
+Run: `node --test lib/planner.test.ts`
+Expected: FAIL — `heuresSubies` is `undefined`.
+
+- [ ] **Step 3: Add `heuresSubies` and retire the dead counter**
+
+In `lib/planner.ts`, add the field to `Rythme`, directly after `heuresTransport`:
+
+```ts
+  /**
+   * The hours held against the traveller: `perdue` only.
+   *
+   * `heuresTransport` is what to print — a traveller spending six hours on the
+   * col des Nuages did spend six hours in a car, and saying otherwise would be
+   * a lie. This is what to judge by, and the two differ by exactly the stretch
+   * of the trip that was the point of taking it.
+   */
+  heuresSubies: number;
+```
+
+and rewrite the body of `rythme`, dropping `joursPerdus`, which nothing reads
+once `joursLibres` is counted from nights:
+
+```ts
+export function rythme(plan: Plan, legs: Leg[]): Rythme {
+  let heuresTransport = 0;
+  let heuresSubies = 0;
+
+  for (let i = 0; i < plan.etapes.length - 1; i++) {
+    const leg = trouverLeg(legs, plan.etapes[i].place, plan.etapes[i + 1].place);
+    const m = leg ? modeDefaut(leg) : null;
+    if (!m) continue;
+    heuresTransport += m.hours;
+    if (m.journee === "perdue") heuresSubies += m.hours;
+  }
+
+  const etapes = plan.etapes.length;
+  /* A stop of N nights buys N−1 whole days there; a one-night stop buys none. */
+  const joursLibres = plan.etapes.reduce((n, e) => n + Math.max(0, e.nuits - 1), 0);
+  const arrondi = (h: number) => Math.round(h * 10) / 10;
+
+  return {
+    etapes,
+    changements: Math.max(0, etapes - 1),
+    heuresTransport: arrondi(heuresTransport),
+    heuresSubies: arrondi(heuresSubies),
+    joursLibres,
+    tendu: etapes - 1 > 5 || heuresSubies > 20 || joursLibres < 2,
+  };
+}
+```
+
+Leave the `changements` line and the three threshold values alone; only the
+hours the middle threshold reads have changed.
+
+- [ ] **Step 4: Fix the validator's invariant, which `days` could never express**
+
+In `scripts/check-planner.mjs`, replace the `m.nuit && m.days > 1` check and its
+comment with:
+
+```js
+    /* A mode that carries its own bed has to be long enough to sleep in.
+       The rule used to compare `days`, and broke the moment composite legs
+       arrived: Sapa → Hué is a day bus to Hanoï followed by the night train, so
+       it genuinely costs a whole day AND provides a bed. No threshold on `days`
+       can separate that from an error. Hours can: nobody sleeps a night in a
+       forty-five-minute hop. */
+    if (m.nuit && m.hours < 6)
+      fautes.push(`leg ${l.from}->${l.to} ${m.mode}: ${m.hours} h is not a night`);
+```
+
+- [ ] **Step 5: Verify**
+
+Run: `node --test lib/planner.test.ts`
+Expected: PASS, **fourteen tests**, `# fail 0`.
+
+Run: `node scripts/check-planner.mjs`
+Expected: `[planner] 23 places, 21 legs, all sourced`
+
+Run: `npx tsc --noEmit`
+Expected: clean.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add lib/planner.ts lib/planner.test.ts scripts/check-planner.mjs
+git commit -m "Judge the hours endured, not the hours travelled"
+```
+
+---
+
+### Task 13: Stop the planner calling the agency's own itineraries impossible
+
+Three Critical findings from the whole-branch review, plus the reachable
+Importants. All originate in the plan rather than in any implementer's work.
+
+**Files:**
+- Modify: the six files in `content/itineraries/`
+- Modify: `lib/content/types.ts`, `app/organiser-son-voyage-au-vietnam/page.tsx`
+- Modify: `lib/planner.ts`, `lib/planner.test.ts`
+- Modify: `components/Planner.tsx`
+- Modify: `content/legs.json`
+
+- [ ] **Step 1: Give every stop its real night count**
+
+`Stop` in `lib/content/types.ts` becomes:
+
+```ts
+export type Stop = { place: PlaceId; label?: string; nuits: number };
+```
+
+Then add `"nuits": N` to every entry of every `stops` array, using exactly these
+values — they are read out of each itinerary's own `nights` prose, and every row
+sums to `days − 1`:
+
+| file | stops in order, with nights |
+|---|---|
+| `montagnes-et-baies-du-nord` (10 j) | hanoi 4, ninh-binh 1, lan-ha 1, pu-luong 2, mai-chau 1 |
+| `vietnam-authentique-hors-sentiers` (12 j) | hanoi 2, ha-giang 1, dong-van 1, cao-bang 2, ban-gioc 1, ba-be 2, phong-nha 2 |
+| `vietnam-collection-signature` (14 j) | hanoi 2, lan-ha 1, hue 2, hoi-an 4, hcmc 1, con-dao 3 |
+| `vietnam-du-nord-au-sud` (15 j) | hanoi 3, ninh-binh 1, lan-ha 1, hue 1, hoi-an 3, hcmc 3, can-tho 2 |
+| `vietnam-en-famille` (13 j) | hanoi 2, lan-ha 1, ninh-binh 2, hue 2, **da-nang 0**, hoi-an 5 |
+| `vietnam-et-cambodge` (18 j) | hanoi 4, lan-ha 1, hue 1, hoi-an 2, hcmc 2, can-tho 1, chau-doc 1, phnom-penh 2, siem-reap 3 |
+
+`da-nang` really is zero: in the family trip you land there and drive to Hoi An
+the same day. It is a waypoint, not a night.
+
+- [ ] **Step 2: Build the bases from those numbers**
+
+In `app/organiser-son-voyage-au-vietnam/page.tsx`, replace the `bases` block:
+
+```tsx
+  /* The itineraries' own per-stop nights, not the generic ideal for each place.
+     Substituting the ideal inflated every base past its own budget — the page
+     opened by telling a visitor that the 14-day trip sold two clicks away needs
+     seventeen, and the figure went into the Markdown that llms.txt points AI
+     crawlers at. Stops with no night are waypoints, not étapes, and are dropped. */
+  const bases: PlanBase[] = [...trips]
+    .sort((a, b) => a.stops.length / a.days - b.stops.length / b.days)
+    .slice(0, 3)
+    .map((t) => ({
+      nom: t.name,
+      jours: t.days,
+      etapes: t.stops
+        .filter((s) => s.nuits > 0)
+        .map((s) => ({ place: s.place, nuits: s.nuits })),
+    }));
+```
+
+- [ ] **Step 3: Stop counting sleep as hours endured**
+
+Fifty lines above the tool the page says *« Le train de nuit Hanoï–Hué ne coûte
+aucune journée »*, and the tool then condemned the itinerary for taking it:
+`heuresSubies` summed the sleeper's full duration. In `lib/planner.ts`, inside
+`rythme`'s loop, replace the `heuresSubies` line with:
+
+```ts
+    /* A berth's hours are not endured, they are slept through. Counting them
+       made the gauge contradict the page's own headline advice — and `tendu`
+       fires on this number alone, so the Hanoï–Hué sleeper was by itself enough
+       to condemn a trip the design calls restful. Eight hours is the night; what
+       is left over is the morning that really is spent travelling. */
+    if (m.journee === "perdue") heuresSubies += m.nuit ? Math.max(0, m.hours - 8) : m.hours;
+```
+
+- [ ] **Step 4: Pin it with a test**
+
+Append to `lib/planner.test.ts`:
+
+```ts
+test("hours slept in a berth are not held against the traveller", () => {
+  const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 2 }, { place: "hue", nuits: 3 },
+  ] };
+  const nuit: Leg[] = [{ from: "hanoi", to: "hue", modes: [
+    { mode: "train-nuit", hours: 12.6, days: 0, journee: "perdue", nuit: true, note: "", source: "x" },
+  ] }];
+  const jour: Leg[] = [{ from: "hanoi", to: "hue", modes: [
+    { mode: "route", hours: 12.6, days: 1, journee: "perdue", note: "", source: "x" },
+  ] }];
+  // Both are twelve and a half hours in transit, and both say so.
+  assert.equal(rythme(plan, nuit).heuresTransport, 12.6);
+  assert.equal(rythme(plan, jour).heuresTransport, 12.6);
+  // Only the one spent awake counts against them.
+  assert.equal(rythme(plan, nuit).heuresSubies, 4.6);
+  assert.equal(rythme(plan, jour).heuresSubies, 12.6);
+});
+```
+
+- [ ] **Step 5: Refuse a hash that would hang the browser**
+
+`#99999999/Mars/2/hanoi-3` decodes happily today, and the gauge then builds a
+hundred million elements. In `lib/planner.ts`, inside `decoder`, after the
+existing `ENTIER` checks, add the range guards:
+
+```ts
+  const jours = Number(j);
+  const voyageurs = Number(v);
+  /* The URL is this feature's whole persistence mechanism, so it is also the
+     one input certain to arrive pasted, truncated and mangled. Syntax was
+     checked; magnitude was not, and the gauge renders one element per night. */
+  if (jours < 5 || jours > 30 || voyageurs < 1 || voyageurs > 12) return null;
+```
+
+and inside the étape loop, after `nuits` passes `ENTIER`:
+
+```ts
+    const n = Number(nuits);
+    if (n < 1 || n > 30) return null;
+```
+
+Use `jours`, `voyageurs` and `n` in the returned object rather than re-calling
+`Number`.
+
+- [ ] **Step 6: Three more junk strings in the decoder test**
+
+Append to the existing junk test's list of cases:
+
+```ts
+  assert.equal(decoder("99999999/Mars/2/hanoi-3"), null);
+  assert.equal(decoder("15/Mars/99/hanoi-3"), null);
+  assert.equal(decoder("15/Mars/2/hanoi-999"), null);
+```
+
+- [ ] **Step 7: Only offer places the planner knows how to reach**
+
+`components/Planner.tsx` offers every place not already in the plan, Phnom Penh
+and Siem Reap included, and `region()` reads latitude only — so adding Siem Reap
+produced one button cutting *Hué, Hoi An and Angkor* as a single "Centre".
+Replace the `absents` line with:
+
+```tsx
+  /* A place with no leg is a place the planner cannot cost, and the two
+     Cambodian entries have none. Offering them produced a single "remove the
+     Centre" button spanning two countries, because region() knows only
+     latitude and Siem Reap sits 0.4° above the boundary. */
+  const joignable = (id: string) =>
+    legs.some((l) => l.from === id || l.to === id);
+  const absents = lieux.filter(
+    (l) => joignable(l.id) && !plan.etapes.some((e) => e.place === l.id),
+  );
+```
+
+- [ ] **Step 8: Add the two legs the editorial itineraries need**
+
+Append to the `legs` array in `content/legs.json`:
+
+```json
+    {
+      "from": "hcmc", "to": "con-dao",
+      "modes": [
+        { "mode": "avion", "hours": 0.75, "days": 0.5, "journee": "perdue",
+          "note": "Quarante-cinq minutes de vol. Il n'y a pas d'autre moyen raisonnable de rejoindre l'île.",
+          "source": "Horaires des compagnies intérieures" }
+      ]
+    },
+    {
+      "from": "ninh-binh", "to": "hue",
+      "modes": [
+        { "mode": "train-nuit", "hours": 11.5, "days": 0.25, "journee": "perdue", "nuit": true,
+          "note": "Le Réunification s'arrête à Ninh Binh en soirée. On évite ainsi de remonter sur Hanoï.",
+          "source": "Horaires des chemins de fer vietnamiens, arrêt de Ninh Binh" }
+      ]
+    }
+```
+
+- [ ] **Step 9: Do not congratulate a visitor on room they have not left**
+
+`components/Planner.tsx` prints "Ça rentre exactement." at `reste === 0` and then
+opens the free-days section with "Vous avez laissé de la place." Gate that one
+section on `b.reste > 0`:
+
+```tsx
+                {b.reste > 0 && (
+                <section>
+                  <h3>Vos journées libres</h3>
+```
+
+and close it with `)}` after that section's `</section>`.
+
+- [ ] **Step 10: Verify**
+
+```
+node --test lib/planner.test.ts     → 23 tests, fail 0
+node scripts/check-planner.mjs      → 23 places, 23 legs, all sourced
+npx tsc --noEmit                    → clean
+npm run build                       → report the liens: and markdown: lines
+```
+
+Then open `http://localhost:3000/organiser-son-voyage-au-vietnam/` — a dev
+server is already running — and confirm the first paint no longer says
+*« Il vous manque »*, and that the result block below the étapes now renders.
+
+- [ ] **Step 11: Commit**
+
+```bash
+git add content/itineraries lib/content/types.ts app/organiser-son-voyage-au-vietnam/page.tsx lib/planner.ts lib/planner.test.ts components/Planner.tsx content/legs.json
+git commit -m "Stop the planner refusing the trips the agency actually sells"
+```
+
+---
+
+### Task 14: Let the itineraries fly to Hué, because that is what they do
+
+Task 13 closed the three-day gap and left a one-day one. Two causes, both mine.
+
+**My night table counted a train as a town.** The parser that read each
+itinerary's `nights` prose matched *« 1 nuit en train Hanoï–Hué »* to Hanoï,
+so Hanoï got one night too many — and `bilan()` then adds the transit night
+again from the leg data. Two accounting systems, one night counted twice.
+
+**And the leg data forced a sleeper on trips that fly.** The prose is explicit:
+signature day 4 is *« Retour sur Hanoï et vol vers Hué en début de soirée »*,
+en famille day 6 is *« Retour sur Hanoï en matinée et vol d'une heure dix vers
+Hué »*. Neither takes a night train; `lan-ha → hue` offered only one, and
+`ninh-binh → hue` offered only one because I invented it in Task 13 and gave it
+a source I never checked.
+
+**Files:** `content/itineraries/vietnam-du-nord-au-sud.json`,
+`content/itineraries/vietnam-et-cambodge.json`, `content/legs.json`, plus three
+files Task 13 left uncommitted.
+
+- [ ] **Step 1: Take the train night back out of Hanoï**
+
+In `content/itineraries/vietnam-du-nord-au-sud.json`, the `hanoi` stop becomes
+`"nuits": 2`. In `content/itineraries/vietnam-et-cambodge.json`, `"nuits": 3`.
+
+Both files carry a `« 1 nuit en train Hanoï–Hué »` line in `nights`; that night
+belongs to the leg, which already contributes it. After this, every one of the
+six files sums to **`days − 1` minus its transit nights**, which is the only
+accounting that does not double-count.
+
+- [ ] **Step 2: Give `lan-ha → hue` the flight the itineraries actually take**
+
+Add this mode to that leg's `modes` array, **before** the existing
+`navette-train-nuit`:
+
+```json
+        { "mode": "navette-avion", "hours": 4.5, "days": 0.5, "journee": "perdue",
+          "note": "Débarquement en fin de matinée, retour sur Hanoï, vol en début de soirée. L'après-midi y passe, mais aucune nuit.",
+          "source": "Somme de Hanoï–baie de Lan Ha (route) et Hanoï–Hué (avion), lignes ci-dessus" },
+```
+
+It ties the sleeper on `days` and on `journee`, then wins on hours — 4.5 against
+15.85 — so `modeDefaut` offers it first. The sleeper stays available and stays
+true for anyone who wants it.
+
+- [ ] **Step 3: Replace the `ninh-binh → hue` sleeper with something checkable**
+
+Delete that leg's single `train-nuit` mode and put this in its place:
+
+```json
+        { "mode": "route-avion", "hours": 2.85, "days": 0.5, "journee": "perdue",
+          "note": "Retour sur Hanoï en matinée, puis une heure dix de vol. On arrive à Hué en fin d'après-midi.",
+          "source": "Somme de Hanoï–Ninh Binh (route) et Hanoï–Hué (avion), lignes ci-dessus" }
+```
+
+The entry being removed claimed *« Horaires des chemins de fer vietnamiens,
+arrêt de Ninh Binh »* as its source and I never opened a timetable — I inferred
+it from the Reunification passing through. A figure with a source nobody checked
+is worse in this file than no figure at all, because the whole page is built on
+the promise that every number says where it came from. The Reunification does
+stop at Ninh Binh; if someone reads the real timetable, the sleeper can come
+back with a real source.
+
+- [ ] **Step 4: Commit the three files Task 13 had to touch and could not commit**
+
+They are already in the working tree and all three are correct — they exist
+because `Stop.nuits` became required, which I failed to anticipate in Task 13's
+file list:
+
+- `app/carte-vietnam/page.tsx` — passes `nuits: 0` to `resolveStops`, which
+  reads only `place` and `label`. The comment says so.
+- `scripts/make-cms-config.mjs` — adds the field to both CMS schemas so an
+  editor can set it.
+- `.pages.yml` — the generated output of that script.
+
+Review them, then commit them with the rest.
+
+- [ ] **Step 5: Verify, including the thing that actually matters**
+
+```
+node --test lib/planner.test.ts   → 20 tests, fail 0
+node scripts/check-planner.mjs    → 23 places, 23 legs, all sourced
+npx tsc --noEmit                  → clean
+npm run build                     → report the liens: and markdown: lines
+```
+
+Then fetch `http://localhost:3000/organiser-son-voyage-au-vietnam/` from the dev
+server already running, and grep the HTML for `Il vous manque`. **It must not be
+there.** Expect *« Ça rentre exactement. »*, and the result block — *À réserver
+maintenant*, *Ce qui peut attendre* — present below the étapes.
+
+If `Il vous manque` is still in the output, stop and report the figures rather
+than adjusting a night count to make it disappear.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add content/itineraries/vietnam-du-nord-au-sud.json \
+        content/itineraries/vietnam-et-cambodge.json \
+        content/legs.json app/carte-vietnam/page.tsx \
+        scripts/make-cms-config.mjs .pages.yml
+git commit -m "Fly to Hue, as the itineraries say they do"
 ```
 
 ---

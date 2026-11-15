@@ -29,6 +29,7 @@ export const ROUTES: Route[] = [
   { path: "/vietnam-hors-sentiers", label: "Hors des sentiers battus", group: "envies", published: true },
   { path: "/vietnam-cuisine", label: "Cuisine et marchés", group: "envies", published: true },
 
+  { path: "/organiser-son-voyage-au-vietnam", label: "Organiser son voyage", group: "preparer", published: true },
   { path: "/quand-partir-au-vietnam", label: "Quand partir", group: "preparer", published: true },
   { path: "/rizieres-vietnam", label: "Rizières en terrasses", group: "preparer", published: true },
   { path: "/tet-vietnam", label: "Tết, le Nouvel An", group: "preparer", published: true },
