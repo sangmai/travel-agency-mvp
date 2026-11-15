@@ -240,4 +240,25 @@ test("junk decodes to null rather than to a wrong plan", () => {
   assert.equal(decoder("15/Mars"), null);
   assert.equal(decoder("quinze/Mars/2/hanoi-3"), null);
   assert.equal(decoder("15/Mars/2/hanoi-zero"), null);
+  assert.equal(decoder("99999999/Mars/2/hanoi-3"), null);
+  assert.equal(decoder("15/Mars/99/hanoi-3"), null);
+  assert.equal(decoder("15/Mars/2/hanoi-999"), null);
+});
+
+test("hours slept in a berth are not held against the traveller", () => {
+  const plan: Plan = { jours: 6, mois: "Mars", voyageurs: 2, etapes: [
+    { place: "hanoi", nuits: 2 }, { place: "hue", nuits: 3 },
+  ] };
+  const nuit: Leg[] = [{ from: "hanoi", to: "hue", modes: [
+    { mode: "train-nuit", hours: 12.6, days: 0, journee: "perdue", nuit: true, note: "", source: "x" },
+  ] }];
+  const jour: Leg[] = [{ from: "hanoi", to: "hue", modes: [
+    { mode: "route", hours: 12.6, days: 1, journee: "perdue", note: "", source: "x" },
+  ] }];
+  // Both are twelve and a half hours in transit, and both say so.
+  assert.equal(rythme(plan, nuit).heuresTransport, 12.6);
+  assert.equal(rythme(plan, jour).heuresTransport, 12.6);
+  // Only the one spent awake counts against them.
+  assert.equal(rythme(plan, nuit).heuresSubies, 4.6);
+  assert.equal(rythme(plan, jour).heuresSubies, 12.6);
 });

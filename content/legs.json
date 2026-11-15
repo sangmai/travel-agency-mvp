@@ -230,6 +230,22 @@
           "note": "Par Hanoï, en limousine le matin puis le train de nuit. Deux nuits de transport d'affilée si l'on arrive de Ha Giang par le bus de nuit — prévoir une journée à Hanoï entre les deux.",
           "source": "Somme de Hanoï–Ha Giang (limousine) et Hanoï–Hué (train de nuit)" }
       ]
+    },
+    {
+      "from": "hcmc", "to": "con-dao",
+      "modes": [
+        { "mode": "avion", "hours": 0.75, "days": 0.5, "journee": "perdue",
+          "note": "Quarante-cinq minutes de vol. Il n'y a pas d'autre moyen raisonnable de rejoindre l'île.",
+          "source": "Horaires des compagnies intérieures" }
+      ]
+    },
+    {
+      "from": "ninh-binh", "to": "hue",
+      "modes": [
+        { "mode": "train-nuit", "hours": 11.5, "days": 0.25, "journee": "perdue", "nuit": true,
+          "note": "Le Réunification s'arrête à Ninh Binh en soirée. On évite ainsi de remonter sur Hanoï.",
+          "source": "Horaires des chemins de fer vietnamiens, arrêt de Ninh Binh" }
+      ]
     }
   ]
 }

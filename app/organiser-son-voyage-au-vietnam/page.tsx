@@ -34,25 +34,20 @@ export default async function OrganiserSonVoyage() {
     getSite(), getPlaces(), getSeasons(), getLegs(), getTrips(),
   ]);
 
-  /* The bases are the hand-written itineraries, reduced to what the tool needs.
-     Starting from one of them is what keeps the output from reading like
-     machine output.
-
-     Sorted by fewest stops per day, so the gentlest itinerary is the one the
-     tool opens on. Every other configurator defaults to the fullest programme,
-     because more stops look like more value for the same price; defaulting to
-     the restful one is a commercial decision taken on purpose, and this sort is
-     where it lives. */
+  /* The itineraries' own per-stop nights, not the generic ideal for each place.
+     Substituting the ideal inflated every base past its own budget — the page
+     opened by telling a visitor that the 14-day trip sold two clicks away needs
+     seventeen, and the figure went into the Markdown that llms.txt points AI
+     crawlers at. Stops with no night are waypoints, not étapes, and are dropped. */
   const bases: PlanBase[] = [...trips]
     .sort((a, b) => a.stops.length / a.days - b.stops.length / b.days)
     .slice(0, 3)
     .map((t) => ({
       nom: t.name,
       jours: t.days,
-      etapes: t.stops.map((s) => {
-        const lieu = places.find((p) => p.id === s.place);
-        return { place: s.place, nuits: lieu?.nuits.ideal ?? 2 };
-      }),
+      etapes: t.stops
+        .filter((s) => s.nuits > 0)
+        .map((s) => ({ place: s.place, nuits: s.nuits })),
     }));
 
   const lieux = places.map((p) => ({

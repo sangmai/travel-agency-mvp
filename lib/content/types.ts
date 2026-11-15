@@ -33,7 +33,7 @@ export type PhotoMeta = {
  * Halong privée" is therefore a label placed on Lan Ha bay, not an invented
  * entry in the place directory.
  */
-export type Stop = { place: PlaceId; label?: string };
+export type Stop = { place: PlaceId; label?: string; nuits: number };
 
 export type FactKey = "trajet" | "marche" | "velo" | "bateau" | "vol" | "nuit" | "repas";
 export type Fact = { key: FactKey; value: string };

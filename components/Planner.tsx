@@ -80,7 +80,15 @@ export function Planner({
   const aRetirer = b.reste < 0 ? retraits(plan, lieux, -b.reste) : [];
   const nom = (id: string) => lieux.find((l) => l.id === id)?.fr ?? id;
 
-  const absents = lieux.filter((l) => !plan.etapes.some((e) => e.place === l.id));
+  /* A place with no leg is a place the planner cannot cost, and the two
+     Cambodian entries have none. Offering them produced a single "remove the
+     Centre" button spanning two countries, because region() knows only
+     latitude and Siem Reap sits 0.4° above the boundary. */
+  const joignable = (id: string) =>
+    legs.some((l) => l.from === id || l.to === id);
+  const absents = lieux.filter(
+    (l) => joignable(l.id) && !plan.etapes.some((e) => e.place === l.id),
+  );
 
   const ajouter = (id: string) => {
     const lieu = lieux.find((l) => l.id === id);
@@ -284,6 +292,7 @@ export function Planner({
                 </section>
                 )}
 
+                {b.reste > 0 && (
                 <section>
                   <h3>Vos journées libres</h3>
                   <p className="plan__note">
@@ -309,6 +318,7 @@ export function Planner({
                     </p>
                   )}
                 </section>
+                )}
               </>
             );
           })()}

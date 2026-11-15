@@ -23,32 +23,41 @@
   ],
   "stops": [
     {
-      "place": "hanoi"
+      "place": "hanoi",
+      "nuits": 4
     },
     {
-      "place": "lan-ha"
+      "place": "lan-ha",
+      "nuits": 1
     },
     {
-      "place": "hue"
+      "place": "hue",
+      "nuits": 1
     },
     {
-      "place": "hoi-an"
+      "place": "hoi-an",
+      "nuits": 2
     },
     {
       "place": "hcmc",
-      "label": "Saïgon"
+      "label": "Saïgon",
+      "nuits": 2
     },
     {
-      "place": "can-tho"
+      "place": "can-tho",
+      "nuits": 1
     },
     {
-      "place": "chau-doc"
+      "place": "chau-doc",
+      "nuits": 1
     },
     {
-      "place": "phnom-penh"
+      "place": "phnom-penh",
+      "nuits": 2
     },
     {
-      "place": "siem-reap"
+      "place": "siem-reap",
+      "nuits": 3
     }
   ],
   "program": [

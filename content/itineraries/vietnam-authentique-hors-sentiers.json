@@ -23,25 +23,32 @@
   ],
   "stops": [
     {
-      "place": "hanoi"
+      "place": "hanoi",
+      "nuits": 2
     },
     {
-      "place": "ha-giang"
+      "place": "ha-giang",
+      "nuits": 1
     },
     {
-      "place": "dong-van"
+      "place": "dong-van",
+      "nuits": 1
     },
     {
-      "place": "cao-bang"
+      "place": "cao-bang",
+      "nuits": 2
     },
     {
-      "place": "ban-gioc"
+      "place": "ban-gioc",
+      "nuits": 1
     },
     {
-      "place": "ba-be"
+      "place": "ba-be",
+      "nuits": 2
     },
     {
-      "place": "phong-nha"
+      "place": "phong-nha",
+      "nuits": 2
     }
   ],
   "program": [

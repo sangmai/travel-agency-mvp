@@ -205,7 +205,12 @@ export function rythme(plan: Plan, legs: Leg[]): Rythme {
     const m = leg ? modeDefaut(leg) : null;
     if (!m) continue;
     heuresTransport += m.hours;
-    if (m.journee === "perdue") heuresSubies += m.hours;
+    /* A berth's hours are not endured, they are slept through. Counting them
+       made the gauge contradict the page's own headline advice — and `tendu`
+       fires on this number alone, so the Hanoï–Hué sleeper was by itself enough
+       to condemn a trip the design calls restful. Eight hours is the night; what
+       is left over is the morning that really is spent travelling. */
+    if (m.journee === "perdue") heuresSubies += m.nuit ? Math.max(0, m.hours - 8) : m.hours;
   }
 
   const etapes = plan.etapes.length;
@@ -310,6 +315,13 @@ export function decoder(s: string): Plan | null {
   const [j, mois, v, etapesRaw] = parts;
   if (!ENTIER.test(j) || !ENTIER.test(v) || !mois || !etapesRaw) return null;
 
+  const jours = Number(j);
+  const voyageurs = Number(v);
+  /* The URL is this feature's whole persistence mechanism, so it is also the
+     one input certain to arrive pasted, truncated and mangled. Syntax was
+     checked; magnitude was not, and the gauge renders one element per night. */
+  if (jours < 5 || jours > 30 || voyageurs < 1 || voyageurs > 12) return null;
+
   const etapes: Etape[] = [];
   for (const bout of etapesRaw.split(",")) {
     const coupe = bout.lastIndexOf("-");
@@ -317,8 +329,10 @@ export function decoder(s: string): Plan | null {
     const place = bout.slice(0, coupe);
     const nuits = bout.slice(coupe + 1);
     if (!place || !ENTIER.test(nuits)) return null;
-    etapes.push({ place, nuits: Number(nuits) });
+    const n = Number(nuits);
+    if (n < 1 || n > 30) return null;
+    etapes.push({ place, nuits: n });
   }
 
-  return { jours: Number(j), mois, voyageurs: Number(v), etapes };
+  return { jours, mois, voyageurs, etapes };
 }
