@@ -325,6 +325,62 @@ export function Planner({
                   )}
                 </section>
                 )}
+
+                {/* The quote button sits here, at the friction point, and not in
+                    the page footer: this is the paragraph where a traveller
+                    reads that the night train cannot be booked from France and
+                    thinks "let the agency handle it". It carries the plan into
+                    the form, so the agency receives an itinerary rather than a
+                    blank request.
+
+                    The write is plain DOM because the form is deliberately
+                    JavaScript-free — it is a server component several hundred
+                    pixels below, and reaching it through the document is the
+                    only seam that does not make it depend on React. If the
+                    script never runs, the anchor still scrolls to a working
+                    form and the traveller describes the trip themselves, which
+                    is exactly what happens today. */}
+                <section className="plan__dur">
+                  <h3>Ce qui ne se réserve pas depuis la France</h3>
+                  <ul className="art__liste">
+                    <li>Les billets de train intérieurs — paiement par carte vietnamienne.</li>
+                    <li>Un chauffeur pour les étapes sans transport public.</li>
+                    <li>Un guide francophone, qui se trouve des mois à l&apos;avance.</li>
+                  </ul>
+                  <a
+                    className="plan__devis"
+                    href="#devis"
+                    onClick={() => {
+                      const projet = document.getElementById("projet");
+                      const vg = document.getElementById("voyageurs");
+                      if (projet instanceof HTMLTextAreaElement) {
+                        projet.value =
+                          `Mon plan : ${plan.jours} jours, départ en ${plan.mois.toLowerCase()}, ` +
+                          `${plan.voyageurs} ${plan.voyageurs > 1 ? "voyageurs" : "voyageur"}.\n\n` +
+                          plan.etapes
+                            .map((e) => `— ${nom(e.place)}, ${e.nuits} ${e.nuits > 1 ? "nuits" : "nuit"}`)
+                            .join("\n") +
+                          (b.inconnus.length
+                            ? "\n\nTrajets que je n'ai pas encore réglés :\n" +
+                              b.inconnus
+                                .map((x) => {
+                                  const [d, a] = x.split(" → ");
+                                  return `— ${nom(d)} → ${nom(a)}`;
+                                })
+                                .join("\n")
+                            : "") +
+                          "\n\nCe que je n'arrive pas à organiser moi-même :\n";
+                      }
+                      if (vg instanceof HTMLInputElement) vg.value = String(plan.voyageurs);
+                    }}
+                  >
+                    Faire chiffrer ce plan par notre agence, à Da Nang
+                  </a>
+                  <p className="plan__note">
+                    Gratuit, réponse sous 48 heures ouvrées. Votre plan part avec
+                    la demande&nbsp;: rien à retaper.
+                  </p>
+                </section>
               </>
             );
           })()}

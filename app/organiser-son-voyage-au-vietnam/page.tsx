@@ -5,6 +5,7 @@ import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { DataTable } from "@/components/DataTable";
 import { breadcrumb } from "@/components/JsonLd";
 import { Planner } from "@/components/Planner";
+import { QuoteForm } from "@/components/QuoteForm";
 import type { PlanBase } from "@/components/Planner";
 import { getSite, getPlaces, getSeasons, getLegs, getTrips } from "@/lib/content";
 
@@ -157,10 +158,16 @@ export default async function OrganiserSonVoyage() {
           </div>
         </section>
 
+        {/* The form lives on this page now, so the closing button scrolls
+            instead of leaving for the home page and dropping the hash —
+            which would have discarded the plan the visitor just built. */}
         <Closing
+          href="#devis"
           title="Il reste la part qui ne se réserve pas depuis la France."
           body="Les billets de train intérieurs demandent une carte vietnamienne, et un guide francophone en mars se trouve des mois à l'avance. Envoyez-nous votre plan : nous le chiffrons tel quel, et nous vous dirons franchement si la durée ne suffit pas. Devis gratuit, réponse sous 48 heures ouvrées."
         />
+
+        <QuoteForm />
       </main>
 
       <Footer />
