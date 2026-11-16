@@ -19,6 +19,7 @@ import type {
   Envie,
   Faq,
   LegsFile,
+  ExperiencesFile,
   PhotoMeta,
   Place,
   Region,
@@ -35,6 +36,7 @@ import siteJson from "@/content/site.json";
 import homeJson from "@/content/home.json";
 import placesJson from "@/content/places.json";
 import legsJson from "@/content/legs.json";
+import experiencesJson from "@/content/experiences.json";
 import photosJson from "@/content/photos.json";
 import regionsJson from "@/content/regions.json";
 import enviesJson from "@/content/envies.json";
@@ -121,6 +123,8 @@ export const source = {
   // import widens a mix of string values across the array to `string`, same
   // as `TRIPS` needs `as Trip[]` for `FactKey` above.
   legs: async (): Promise<LegsFile> => legsJson as LegsFile,
+  experiences: async (): Promise<ExperiencesFile> =>
+    experiencesJson as unknown as ExperiencesFile,
   budget: async (): Promise<BudgetRow[]> => budgetJson,
   faq: async (): Promise<Faq[]> => faqJson.faq,
   guides: async (): Promise<Guide[]> => GUIDES,

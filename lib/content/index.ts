@@ -45,6 +45,7 @@ export const getStory = source.story;
 export const getPhotoMeta = source.photos;
 export const getCarnet = source.carnet;
 export const getLegs = () => source.legs();
+export const getExperiences = () => source.experiences();
 export const getPlaces = () => source.places();
 
 /**

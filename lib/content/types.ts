@@ -347,3 +347,9 @@ export type Leg = { from: PlaceId; to: PlaceId; modes: LegMode[] };
 export type Regle = { id: string; texte: string; source: string };
 
 export type LegsFile = { regles: Regle[]; legs: Leg[] };
+
+/** One hand-picked activity. `url` is bare; lib/booking.ts adds the tracking. */
+export type Experience = { titre: string; url: string };
+
+/** Keyed by PlaceId. A place absent from the file falls back to a search. */
+export type ExperiencesFile = Record<string, Experience[]>;

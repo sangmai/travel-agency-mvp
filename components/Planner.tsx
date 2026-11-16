@@ -21,6 +21,7 @@ import {
 } from "@/lib/planner";
 import type { Etape, Leg, Lieu, Plan, SaisonRow } from "@/lib/planner";
 import { AFFILIE, aReserver, experiences } from "@/lib/booking";
+import type { Experience } from "@/lib/booking";
 
 export type PlanBase = { nom: string; jours: number; etapes: Etape[] };
 
@@ -34,12 +35,14 @@ const borne = (n: number, bas: number, haut: number) =>
   Math.min(haut, Math.max(bas, n));
 
 export function Planner({
-  lieux, legs, saisons, bases,
+  lieux, legs, saisons, bases, choisies,
 }: {
   lieux: Lieu[];
   legs: Leg[];
   saisons: SaisonRow[];
   bases: PlanBase[];
+  /** Hand-picked activities by place id. Absent places fall back to a search. */
+  choisies: Record<string, Experience[]>;
 }) {
   const [plan, setPlan] = useState<Plan>({
     jours: bases[0].jours,
@@ -90,10 +93,54 @@ export function Planner({
     (l) => joignable(l.id) && !plan.etapes.some((e) => e.place === l.id),
   );
 
+  /* Vietnam is a line, so a place's latitude is its position in an itinerary.
+     Appending put Baie d'Halong after Con Dao — a flight from an island off the
+     southern tip back to the far north, which nobody does, and which the
+     planner then reported as an unknown leg precisely because no such leg
+     exists, because nobody does it.
+
+     The direction is read from the plan rather than assumed. Most French
+     itineraries land in Hanoï and leave from Saïgon, but the reverse is a real
+     trip and the tool has no business quietly turning it round.
+
+     This works because the country is a line, and it stops working the moment
+     Cambodia is in scope: Siem Reap sits north of the Mekong delta and comes
+     after it. One more reason v1 offers only places that have legs. */
+  const latitude = (id: string) => lieux.find((l) => l.id === id)?.lat ?? 0;
+
+  const versLeSud = (etapes: Etape[]) =>
+    etapes.length < 2 ||
+    latitude(etapes[0].place) >= latitude(etapes[etapes.length - 1].place);
+
+  const ranger = (etapes: Etape[]) => {
+    const sud = versLeSud(etapes);
+    return [...etapes].sort((a, b) =>
+      sud ? latitude(b.place) - latitude(a.place)
+          : latitude(a.place) - latitude(b.place),
+    );
+  };
+
+  /* True when every étape already follows the one before it. The button that
+     offers to reorder stays hidden until it has something to fix — a plan
+     arriving from a shared link, or one edited by hand. */
+  const enOrdre = plan.etapes.every((e, i, t) => {
+    if (i === 0) return true;
+    const sud = versLeSud(t);
+    return sud
+      ? latitude(t[i - 1].place) >= latitude(e.place)
+      : latitude(t[i - 1].place) <= latitude(e.place);
+  });
+
   const ajouter = (id: string) => {
     const lieu = lieux.find((l) => l.id === id);
     if (!lieu) return;
-    setPlan({ ...plan, etapes: [...plan.etapes, { place: id, nuits: lieu.nuits.ideal }] });
+    const sud = versLeSud(plan.etapes);
+    const i = plan.etapes.findIndex((e) =>
+      sud ? latitude(e.place) < lieu.lat : latitude(e.place) > lieu.lat,
+    );
+    const etapes = [...plan.etapes];
+    etapes.splice(i === -1 ? etapes.length : i, 0, { place: id, nuits: lieu.nuits.ideal });
+    setPlan({ ...plan, etapes });
   };
   /* Never below one étape: the min and max on the inputs are native hints a
      typed value walks straight past, and an itinerary of nothing is not an
@@ -179,6 +226,22 @@ export function Planner({
         )}
       </div>
 
+      {/* Directly under the gauges, not at the foot of the list. Adding a stop
+          is the move this tool exists for, and the two numbers it changes sit
+          three centimetres above — press a chip and watch the day budget turn.
+          At the bottom the gauge was off-screen, so the consequence of the
+          click arrived only if the visitor scrolled back up to look for it. */}
+      <div className="plan__ajout">
+        <span className="plan__label">Ajouter une étape</span>
+        <div>
+          {absents.map((l) => (
+            <button type="button" key={l.id} onClick={() => ajouter(l.id)}>
+              + {l.fr} <small>{l.nuits.ideal} n</small>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* The legs we hold nothing on. They are excluded from every number above,
           which makes those numbers optimistic, and saying so is the whole point
           of collecting them — an engine that knows about seven hundred
@@ -229,6 +292,18 @@ export function Planner({
         </div>
       )}
 
+      {/* Only when there is something to put right. A plan built through the
+          chips is already in order, so this says nothing on the common path. */}
+      {!enOrdre && (
+        <button
+          type="button"
+          className="plan__ranger"
+          onClick={() => setPlan({ ...plan, etapes: ranger(plan.etapes) })}
+        >
+          Remettre les étapes {versLeSud(plan.etapes) ? "du nord au sud" : "du sud au nord"}
+        </button>
+      )}
+
       <ol className="plan__etapes">
         {plan.etapes.map((e, i) => {
           const lieu = lieux.find((l) => l.id === e.place);
@@ -238,7 +313,10 @@ export function Planner({
               <b>{nom(e.place)}</b>
               <span className="plan__nuits">
                 <button type="button" onClick={() => nuits(i, e.nuits - 1)} aria-label="Une nuit de moins">−</button>
-                {e.nuits} {e.nuits > 1 ? "nuits" : "nuit"}
+                {/* A span, not a bare text node: the padding that separates the
+                    count from the two buttons has to attach to something, and
+                    CSS cannot select text. */}
+                <span>{e.nuits} {e.nuits > 1 ? "nuits" : "nuit"}</span>
                 <button type="button" onClick={() => nuits(i, e.nuits + 1)} aria-label="Une nuit de plus">+</button>
               </span>
               {v === "deconseille" && (
@@ -321,8 +399,11 @@ export function Planner({
                     c&apos;est permis.
                   </p>
                   <ul className="plan__liens">
-                    {plan.etapes.slice(0, 3).flatMap((e) =>
-                      experiences(nom(e.place)).map((x) => (
+                    {/* Where the traveller actually has time, not the first
+                        three étapes of the list. A one-night stop has no free
+                        morning to fill, and offering it an excursion is noise. */}
+                    {plan.etapes.filter((e) => e.nuits > 1).flatMap((e) =>
+                      experiences(e.place, nom(e.place), choisies).map((x) => (
                         <li key={`${e.place}-${x.libelle}`}>
                           <a href={x.url} target="_blank" rel="noopener nofollow sponsored">
                             {x.libelle}
@@ -401,17 +482,6 @@ export function Planner({
           })()}
         </div>
       )}
-
-      <div className="plan__ajout">
-        <span className="plan__label">Ajouter une étape</span>
-        <div>
-          {absents.map((l) => (
-            <button type="button" key={l.id} onClick={() => ajouter(l.id)}>
-              + {l.fr} <small>{l.nuits.ideal} n</small>
-            </button>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

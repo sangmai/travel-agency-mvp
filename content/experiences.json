@@ -1,0 +1,37 @@
+{
+  "_": [
+    "Les activités choisies, par lieu. Tout lieu absent de ce fichier retombe",
+    "sur la page de recherche GetYourGuide, qui marche toujours : une liste",
+    "incomplète ne casse rien, elle convertit seulement moins bien.",
+    "",
+    "`url` est l'adresse NUE, sans partner_id ni cmp. lib/booking.ts les ajoute,",
+    "pour que l'identifiant ne vive qu'à un seul endroit du dépôt.",
+    "",
+    "Deux vendeurs. lib/booking.ts reconnaît le domaine et pose le suivi qui va",
+    "avec : paramètres sur l'adresse pour GetYourGuide, redirection par",
+    "affiliate.klook.com pour Klook. Le choix se fait activité par activité —",
+    "celui qui vend la meilleure version de cette excursion-là prend le lien.",
+    "",
+    "Pour en ajouter une : ouvrir l'activité sur le site du vendeur et copier",
+    "l'adresse de la page, pas le lien d'affiliation. Le titre est en français,",
+    "parce qu'il s'affiche tel quel.",
+    "",
+    "Une activité supprimée par son organisateur laisse un lien mort, et un lien",
+    "mort est pire qu'une page de recherche. scripts/check-experiences.mjs les",
+    "vérifie ; le lancer de temps en temps, et après chaque ajout."
+  ],
+
+  "hoi-an": [
+    {
+      "titre": "My Son et la montagne de Marbre",
+      "url": "https://www.getyourguide.com/hoi-an-l831/my-son-sanctuary-and-marble-mountain-t551707/"
+    }
+  ],
+
+  "da-nang": [
+    {
+      "titre": "Les collines de Ba Na et le pont d'Or",
+      "url": "https://www.klook.com/activity/13283-ba-na-hills-ticket-da-nang/"
+    }
+  ]
+}

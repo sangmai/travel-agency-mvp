@@ -7,7 +7,7 @@ import { breadcrumb } from "@/components/JsonLd";
 import { Planner } from "@/components/Planner";
 import { QuoteForm } from "@/components/QuoteForm";
 import type { PlanBase } from "@/components/Planner";
-import { getSite, getPlaces, getSeasons, getLegs, getTrips } from "@/lib/content";
+import { getSite, getPlaces, getSeasons, getLegs, getTrips, getExperiences } from "@/lib/content";
 
 /**
  * The planner, and the page that makes it findable.
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
 };
 
 export default async function OrganiserSonVoyage() {
-  const [site, places, seasons, legsFile, trips] = await Promise.all([
-    getSite(), getPlaces(), getSeasons(), getLegs(), getTrips(),
+  const [site, places, seasons, legsFile, trips, choisies] = await Promise.all([
+    getSite(), getPlaces(), getSeasons(), getLegs(), getTrips(), getExperiences(),
   ]);
 
   /* The itineraries' own per-stop nights, not the generic ideal for each place.
@@ -122,7 +122,8 @@ export default async function OrganiserSonVoyage() {
               title="Est-ce que votre voyage tient ?"
               lede="Ajoutez, retirez, changez le mois. La jauge vous dira la vérité avant l'agence."
             />
-            <Planner lieux={lieux} legs={legsFile.legs} saisons={seasons} bases={bases} />
+            <Planner lieux={lieux} legs={legsFile.legs} saisons={seasons} bases={bases}
+              choisies={choisies} />
           </div>
         </section>
 

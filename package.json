@@ -17,7 +17,8 @@
     "cms": "node scripts/make-cms-config.mjs && node scripts/check-cms.mjs",
     "gbp": "node scripts/make-gbp-sheet.mjs",
     "images:check": "node scripts/check-images.mjs",
-    "seo": "python3 scripts/check-seo.py"
+    "seo": "python3 scripts/check-seo.py",
+    "experiences": "node scripts/check-experiences.mjs"
   },
   "dependencies": {
     "next": "15.5.4",
