@@ -346,6 +346,18 @@ ${select("trip", "Voyage concerné", OPT_CIRCUITS, 14, ["required: false"])}
                   - { name: value, label: Valeur, widget: string, hint: "${HINT_ACCENT}" }
                   - { name: label, label: Légende, widget: string }
 ${SECTIONS.map(([c, l]) => headSveltia(c, l, 10)).join("\n")}
+          - name: planificateur
+            label: Aperçu du planificateur
+            widget: object
+            collapsed: true
+            fields:
+              - { name: kicker, label: Surtitre, widget: string }
+              - { name: title, label: Titre, widget: string, hint: "${HINT_ACCENT}" }
+              - { name: lede, label: Chapô, widget: text }
+              - { name: argument, label: Argument, widget: text }
+              - { name: force, label: Phrase forte, widget: string }
+              - { name: cta, label: Libellé du bouton, widget: string }
+              - { name: repli, label: Renvoi vers les circuits, widget: text, hint: "Renvoie le lecteur indécis vers les circuits plus haut. Ne pas supprimer : sans cette phrase la section envoie les clients ailleurs sans rien proposer en retour." }
           - name: devis
             label: Formulaire de devis
             widget: object
@@ -720,6 +732,17 @@ content:
               - { name: value, label: Valeur, type: string, required: true, description: "${HINT_ACCENT}" }
               - { name: label, label: Légende, type: string, required: true }
 ${SECTIONS.map(([c, l]) => headPages(c, l, 6)).join("\n")}
+      - name: planificateur
+        label: Aperçu du planificateur
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "${HINT_ACCENT}" }
+          - { name: lede, label: Chapô, type: text }
+          - { name: argument, label: Argument, type: text, required: true }
+          - { name: force, label: Phrase forte, type: string, required: true }
+          - { name: cta, label: Libellé du bouton, type: string, required: true }
+          - { name: repli, label: Renvoi vers les circuits, type: text, required: true, description: "Renvoie le lecteur indécis vers les circuits plus haut. Ne pas supprimer." }
       - name: devis
         label: Formulaire de devis
         type: object

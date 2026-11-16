@@ -41,6 +41,15 @@
     "title": "Des circuits éprouvés, *et aucun figé*",
     "lede": "Ceux que nos voyageurs réservent le plus souvent. Ils servent de point de départ, pas de produit fini : la durée, les étapes et la gamme d'hébergement se réajustent librement."
   },
+  "planificateur": {
+    "kicker": "Vous organisez vous-même ?",
+    "title": "Est-ce que votre voyage *tient vraiment* dans vos quinze jours ?",
+    "lede": "Ajoutez Sapa à notre circuit de quinze jours, et il n'y tient plus.",
+    "argument": "Notre planificateur vous le dit maintenant, pas sur place — et vous dit ce qu'il faut retirer. Gratuit, sans inscription, sans adresse e-mail.",
+    "force": "C'est le seul outil de ce site qui vous dira non.",
+    "cta": "Organiser mon voyage",
+    "repli": "Et si vous préférez qu'on s'en occupe, nos circuits sont juste au-dessus."
+  },
   "process": {
     "kicker": "Notre méthode",
     "title": "Comment naît votre voyage",
