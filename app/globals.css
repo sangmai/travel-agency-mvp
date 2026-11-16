@@ -18,6 +18,10 @@
   --amber: #b85c12; /* the accent: lantern light */
   --amber-deep: #8e4409; /* same accent, for small text */
   --amber-soft: #f6e7d6;
+  /* Le refus. L'ambre dit « attention », il fallait un ton pour « non » —
+     une brique chaude plutôt qu'un rouge d'alerte, qui jurerait sur le
+     papier. 6,2:1 sur --paper. */
+  --brique: #9d3b22;
 
   /* Sur fond sombre (jade, photo) les tons ci-dessus tombent sous 3:1. */
   --on-dark: #fbf8f3;
@@ -3056,49 +3060,293 @@ ol.art__liste {
    the card to be wide, and a card is only wide when it is alone — which is the
    one case that should not decide the layout of the other two. */
 
-/* The planner. The two gauges carry the whole argument, so they are the only
-   place colour is used to mean something rather than to decorate. */
-.plan { border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem; }
-.plan__barre { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem; }
-.plan__barre label { display: flex; align-items: center; gap: .4rem; font-size: .9rem; }
-.plan__barre input { width: 4rem; }
-.plan__jauges { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem; }
-.plan__label { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; opacity: .65; }
-.plan__g { display: flex; gap: 2px; height: 14px; margin: .4rem 0; }
-.plan__g i { flex: 1; border-radius: 2px; background: rgba(128,128,128,.14); }
-.plan__g i.ok { background: #2f9e68; }
-.plan__g i.over { background: #d9534f; }
-.plan__bien { color: #2f9e68; font-size: .85rem; margin: 0; }
-.plan__mal { color: #d9534f; font-size: .85rem; margin: 0; }
-.plan__inconnu { border: 1px solid #cf9000; border-radius: 8px; padding: .9rem 1rem; margin: 1.25rem 0; }
-.plan__inconnu p { margin: 0 0 .4rem; }
-/* The global reset strips markers from every ul; this is one of the few lists
-   on the site that wants them, so they go back on explicitly. */
-.plan__inconnu ul { list-style: disc; margin: 0 0 .4rem; padding-left: 1.1rem; }
-.plan__coupe { border: 1px solid #d9534f; border-radius: 8px; padding: .9rem 1rem; margin: 1.25rem 0; }
-.plan__coupe p { margin: 0 0 .5rem; }
-.plan__coupe ul { list-style: none; margin: 0; padding: 0; }
-.plan__coupe li { margin-bottom: .35rem; }
-.plan__note { font-size: .82rem; opacity: .7; margin: .6rem 0 0; }
-.plan__etapes { list-style: none; margin: 1.25rem 0; padding: 0; }
-.plan__etapes li { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; padding: .5rem 0; border-bottom: 1px solid var(--line); }
-.plan__nuits { display: inline-flex; align-items: center; gap: .45rem; font-variant-numeric: tabular-nums; }
-.plan__saison { flex-basis: 100%; color: #cf9000; font-size: .82rem; font-style: normal; }
-.plan__x { margin-left: auto; font-size: .8rem; opacity: .7; }
-.plan__ajout > div { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
-.plan__ajout button { border: 1px solid var(--line); border-radius: 999px; padding: .3rem .8rem; font-size: .85rem; }
-.plan__suite { margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 1.25rem; }
-.plan__suite h3 { font-size: 1rem; margin: 1.25rem 0 .4rem; }
-.plan__suite section:first-child h3 { margin-top: 0; }
-.plan__urgent { border: 1px solid #cf9000; border-radius: 8px; padding: .7rem .9rem; margin-bottom: .6rem; }
-.plan__urgent p { margin: .25rem 0 0; font-size: .87rem; opacity: .8; }
-.plan__calme { border: 1px solid #2f9e68; border-radius: 8px; padding: .7rem .9rem; }
-.plan__calme p { margin: .25rem 0 0; font-size: .9rem; }
-.plan__liens { list-style: none; margin: .5rem 0 0; padding: 0; }
-.plan__liens li { padding: .3rem 0; }
+.plan {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: clamp(1.1rem, 2.4vw, 1.75rem);
+}
 
-/* The quote button inside the planner's result. Deliberately the only filled
-   element in the block: everything around it informs, this one asks. */
-.plan__dur { border: 1px solid var(--line); border-radius: 8px; padding: .9rem 1rem; margin-top: 1.25rem; }
+/* — La barre de réglages ------------------------------------------------- */
+.plan__barre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1.4rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.plan__barre label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.plan__barre input,
+.plan__barre select {
+  font-family: inherit;
+  font-size: 0.97rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 0.45rem 0.6rem;
+  transition: border-color 0.16s, box-shadow 0.16s;
+}
+
+.plan__barre input { width: 4.2rem; font-variant-numeric: tabular-nums; }
+
+/* Le select natif porte le chrome du système et jure avec tout le reste.
+   On le remet à plat et on redessine la flèche, en --ink-3 pour qu'elle
+   reste discrète. */
+.plan__barre select {
+  appearance: none;
+  padding-right: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%236f6358' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+}
+
+.plan__barre input:focus,
+.plan__barre select:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px var(--amber-soft);
+  outline: none;
+}
+
+/* — Les deux jauges ------------------------------------------------------ */
+.plan__jauges {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+}
+
+.plan__label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.plan__g { display: flex; gap: 3px; height: 9px; margin: 0.5rem 0 0.45rem; }
+.plan__g i { flex: 1; border-radius: 1px; background: var(--sand); }
+.plan__g i.ok { background: var(--jade-2); }
+.plan__g i.over { background: var(--brique); }
+
+.plan__bien,
+.plan__mal { font-size: 0.86rem; margin: 0; }
+.plan__bien { color: var(--jade); }
+.plan__mal { color: var(--brique); font-weight: 600; }
+
+/* — Les blocs qui avertissent -------------------------------------------- */
+.plan__inconnu,
+.plan__coupe,
+.plan__urgent,
+.plan__calme,
+.plan__dur {
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  border-radius: var(--r);
+  padding: 0.9rem 1.1rem;
+}
+
+.plan__inconnu { border-left-color: var(--amber); margin: 0 0 1.25rem; }
+.plan__coupe   { border-left-color: var(--brique); margin: 0 0 1.25rem; background: var(--paper); }
+.plan__urgent  { border-left-color: var(--amber); margin-bottom: 0.6rem; }
+.plan__calme   { border-left-color: var(--jade-2); }
+.plan__dur     { border-left-color: var(--ink); margin-top: 1.5rem; background: var(--paper); }
+
+.plan__inconnu p, .plan__coupe p { margin: 0 0 0.45rem; }
+.plan__inconnu ul { list-style: disc; margin: 0 0 0.45rem; padding-left: 1.15rem; font-size: 0.9rem; }
+.plan__coupe ul { list-style: none; margin: 0.6rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.plan__coupe li { margin: 0; }
+
+/* Les options de retrait : ce sont les boutons qui comptent sur cette page,
+   alors ils ressemblent à des boutons. */
+.plan__coupe button {
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 1px solid var(--ink);
+  border-radius: var(--r);
+  padding: 0.5rem 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.16s, color 0.16s;
+}
+
+.plan__coupe button:hover { background: var(--ink); color: var(--paper); }
+
+.plan__note { font-size: 0.82rem; color: var(--ink-3); margin: 0.65rem 0 0; }
+
+/* — La liste des étapes -------------------------------------------------- */
+.plan__etapes { list-style: none; margin: 1.5rem 0; padding: 0; }
+
+.plan__etapes li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.plan__etapes li b {
+  font-family: var(--display);
+  font-size: 1.08rem;
+  font-weight: 400;
+  min-width: 9rem;
+}
+
+.plan__nuits {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.plan__nuits button {
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--ink-2);
+  background: none;
+  border: 0;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  transition: background-color 0.16s, color 0.16s;
+}
+
+.plan__nuits button:hover { background: var(--sand); color: var(--ink); }
+.plan__nuits > span { padding: 0 0.55rem; white-space: nowrap; }
+
+.plan__saison {
+  flex-basis: 100%;
+  color: var(--amber-deep);
+  font-size: 0.83rem;
+  font-style: normal;
+}
+
+/* Retirer est une sortie, pas une action : il se tient discret jusqu'au survol. */
+.plan__x {
+  margin-left: auto;
+  font-family: inherit;
+  font-size: 0.82rem;
+  color: var(--ink-3);
+  background: none;
+  border: 0;
+  padding: 0.3rem 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+  transition: color 0.16s, text-decoration-color 0.16s;
+}
+
+.plan__x:hover { color: var(--brique); text-decoration-color: currentColor; }
+
+/* — Ajouter une étape ---------------------------------------------------- */
+/* Remonté sous les jauges : c'est le geste pour lequel l'outil existe, et les
+   deux chiffres qu'il modifie sont juste au-dessus. En bas de page la jauge
+   était hors écran et la conséquence du clic n'arrivait jamais. D'où la
+   bordure : la barre de réglages, les jauges, l'ajout, puis le plan. */
+.plan__ajout {
+  border-top: 1px solid var(--line);
+  padding-top: 1.1rem;
+  margin-bottom: 1.4rem;
+}
+
+.plan__ajout > div { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.6rem; }
+
+.plan__ajout button {
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--jade);
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.28rem 0.78rem;
+  cursor: pointer;
+  transition: border-color 0.16s, background-color 0.16s;
+}
+
+.plan__ajout button:hover { border-color: var(--jade-2); background: var(--sand); }
+.plan__ajout button small { color: var(--ink-3); font-weight: 400; }
+
+/* — Ce qui suit le plan -------------------------------------------------- */
+.plan__suite { margin-top: 1.75rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+
+.plan__suite h3 {
+  font-family: var(--display);
+  font-size: 1.12rem;
+  font-weight: 400;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.plan__suite section:first-child h3 { margin-top: 0; }
+.plan__urgent p, .plan__calme p { margin: 0.3rem 0 0; font-size: 0.9rem; color: var(--ink-2); }
+.plan__urgent b { color: var(--amber-deep); }
+
+.plan__liens { list-style: none; margin: 0.6rem 0 0; padding: 0; }
+.plan__liens li { padding: 0.32rem 0; }
+.plan__liens small { color: var(--ink-3); }
+
 .plan__dur h3 { margin-top: 0; }
-.plan__devis { display: block; text-align: center; border: 1px solid currentColor; border-radius: 7px; padding: .7rem 1rem; font-weight: 600; margin-top: .75rem; }
+
+/* Le seul élément plein du bloc : tout le reste informe, celui-ci demande. */
+.plan__devis {
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+  background: var(--amber);
+  border: 1px solid transparent;
+  border-radius: var(--r);
+  padding: 0.8rem 1.2rem;
+  margin-top: 0.9rem;
+  transition: background-color 0.18s;
+}
+
+.plan__devis:hover { background: var(--amber-deep); }
+
+@media (max-width: 560px) {
+  .plan__barre { gap: 0.9rem 1.1rem; }
+  .plan__etapes li b { min-width: 100%; }
+  .plan__x { margin-left: 0; }
+}
+
+/* Proposé, jamais appliqué d'office — comme les retraits. Il n'apparaît que
+   si l'ordre est effectivement cassé. */
+.plan__ranger {
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--jade);
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.16s, background-color 0.16s;
+}
+
+.plan__ranger:hover { border-color: var(--jade-2); background: var(--sand); }
