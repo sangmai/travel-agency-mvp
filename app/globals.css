@@ -3350,3 +3350,45 @@ ol.art__liste {
 }
 
 .plan__ranger:hover { border-color: var(--jade-2); background: var(--sand); }
+
+/* The planner teaser. The gauge deliberately reuses .plan__g rather than
+   declaring its own: one gauge definition in the codebase means the home page
+   cannot drift away from what the real tool looks like. */
+.apercu {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+}
+@media (min-width: 56rem) {
+  .apercu {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+.apercu__demo {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.25rem;
+  background: var(--paper);
+}
+.apercu__compte {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.apercu__verdict {
+  color: var(--brique);
+  font-weight: 600;
+  margin: 0.6rem 0 0;
+}
+.apercu__force {
+  font-weight: 600;
+  margin: 1rem 0 1.25rem;
+}
+.apercu__repli {
+  font-size: 0.85rem;
+  color: var(--ink-3);
+  margin: 1rem 0 0;
+}
