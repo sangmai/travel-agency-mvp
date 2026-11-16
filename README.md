@@ -224,14 +224,28 @@ Decap**, nên nếu thất vọng thì đổi sang Decap chỉ là thay thẻ `<
 
 ### Search Console và thống kê
 
-Ba trường trong `content/site.json` → `mesure`. **Để trống là tắt hẳn** — không
-script nào được nạp, không thẻ nào được viết.
+Ba trường trong `content/site.json` → `mesure`. Để trống thì **trang này**
+không nạp script nào, không viết thẻ nào.
 
 | trường | chi phí | cần banner đồng ý? |
 |---|---|---|
 | `searchConsole` | một thẻ meta | không |
 | `cloudflare` | ~1,5 Ko, không cookie | **không** |
 | `ga4` | ~30 Ko + cookie | **có** |
+
+> ⚠️ **`cloudflare` rỗng KHÔNG có nghĩa là không có thống kê.** Web Analytics
+> đang chạy qua **Automatic setup**: Cloudflare tự tiêm beacon ở tầng edge, nên
+> nó không nằm trong HTML mà repo sinh ra. Kiểm bằng `curl` thường sẽ không
+> thấy gì — Cloudflare chỉ tiêm cho request trông giống trình duyệt:
+>
+> ```bash
+> curl -s https://voyagevietnam-surmesure.com/ \
+>   -H 'user-agent: Mozilla/5.0 … Chrome/131.0 Safari/537.36' | grep cf-beacon
+> ```
+>
+> **Đừng điền `cloudflare`** chừng nào Automatic còn bật: trang sẽ có hai
+> beacon và page view bị đếm gấp đôi. Muốn chuyển sang Manual thì phải tắt
+> Automatic trong dashboard **trước**.
 
 **Search Console**: Google cho một chuỗi xác minh → dán vào `searchConsole`,
 build, deploy, bấm Verify. Khi đã có domain riêng thì nên xác minh **bằng bản
