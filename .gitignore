@@ -43,3 +43,6 @@ public/_redirects
 
 # Mockups de brainstorming, locaux et jetables.
 .superpowers/
+
+# graphify knowledge graph (build artefact, rebuilt from the repo)
+graphify-out/
