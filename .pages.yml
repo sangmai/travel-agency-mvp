@@ -445,6 +445,17 @@ content:
           - { name: kicker, label: Surtitre, type: string, required: true }
           - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
           - { name: lede, label: Chapô, type: text }
+      - name: planificateur
+        label: Aperçu du planificateur
+        type: object
+        fields:
+          - { name: kicker, label: Surtitre, type: string, required: true }
+          - { name: title, label: Titre, type: string, required: true, description: "Un mot entre *astérisques* s'affiche en ambre et en italique. Entre accolades, {ville} {delai} {annee} {note} {avis} reprennent les valeurs du site." }
+          - { name: lede, label: Chapô, type: text }
+          - { name: argument, label: Argument, type: text, required: true }
+          - { name: force, label: Phrase forte, type: string, required: true }
+          - { name: cta, label: Libellé du bouton, type: string, required: true }
+          - { name: repli, label: Renvoi vers les circuits, type: text, required: true, description: "Renvoie le lecteur indécis vers les circuits plus haut. Ne pas supprimer." }
       - name: devis
         label: Formulaire de devis
         type: object

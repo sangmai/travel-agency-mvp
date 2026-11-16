@@ -317,6 +317,17 @@ export type Home = {
   regions: Head;
   envies: Head;
   circuits: Head;
+  /**
+   * The planner teaser. Carries more than a Head because the section argues:
+   * `force` is the one-line claim, `cta` the button, and `repli` the sentence
+   * that points an undecided reader back up to the circuits rather than away.
+   */
+  planificateur: Head & {
+    argument: string;
+    force: string;
+    cta: string;
+    repli: string;
+  };
   process: Head;
   comparatif: Head;
   saison: Head;

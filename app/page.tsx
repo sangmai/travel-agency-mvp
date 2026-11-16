@@ -4,6 +4,7 @@ import { Envies } from "@/components/Envies";
 import { Regions } from "@/components/Regions";
 import { Gallery } from "@/components/Gallery";
 import { Circuits } from "@/components/Circuits";
+import { Apercu } from "@/components/Apercu";
 import { Story } from "@/components/Story";
 import { Process } from "@/components/Process";
 import { LocalAdvantage } from "@/components/LocalAdvantage";
@@ -92,6 +93,10 @@ export default async function Home() {
         <Regions />
         <Gallery />
         <Circuits />
+        {/* Between the circuits and the carnet, which is both the right moment
+            in the funnel and the only slot that keeps the ground alternating:
+            Circuits is light, this is sand, Story is jade. */}
+        <Apercu />
         <Story />
         <Process />
         <LocalAdvantage />
