@@ -331,3 +331,30 @@ export function decoder(s: string): Plan | null {
 
   return { jours, mois, voyageurs, etapes };
 }
+
+/**
+ * What a numeric field should commit while the traveller is still typing.
+ *
+ * Returns null for "not a usable number yet — keep whatever is committed and
+ * let them carry on typing".
+ *
+ * The field used to clamp on every keystroke, which read as the input being
+ * broken: on the way to 15 the first keypress produced "1", below the minimum
+ * of 5, so the value was rewritten to 5 before the second digit arrived. The
+ * caret then sat after a digit nobody had typed and 15 was unreachable from
+ * the keyboard entirely — only the spinner arrows could reach most of the
+ * valid range.
+ *
+ * Clamping was the right instinct in the wrong place. `min` and `max` on the
+ * element are hints a typed value walks straight past, so the bound does have
+ * to be enforced in code; it just has to be enforced when the value is
+ * committed, not while it is being composed.
+ *
+ * The regex rather than Number() alone: Number("1e3") is 1000 and
+ * Number(" 12 ") is 12, neither of which anyone typed on purpose.
+ */
+export function saisie(brut: string, bas: number, haut: number): number | null {
+  if (!/^\d+$/.test(brut)) return null;
+  const n = Number(brut);
+  return n >= bas && n <= haut ? n : null;
+}

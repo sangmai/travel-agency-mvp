@@ -17,7 +17,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  bilan, rythme, retraits, encoder, decoder, region, verdictSaison,
+  bilan, rythme, retraits, encoder, decoder, region, verdictSaison, saisie,
 } from "@/lib/planner";
 import type { Etape, Leg, Lieu, Plan, SaisonRow } from "@/lib/planner";
 import { AFFILIE, aReserver, experiences } from "@/lib/booking";
@@ -30,9 +30,55 @@ const MOIS = [
   "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre",
 ];
 
-/** The min/max attributes are native hints; a typed value ignores them. */
-const borne = (n: number, bas: number, haut: number) =>
-  Math.min(haut, Math.max(bas, n));
+/**
+ * A number field the traveller can actually type in.
+ *
+ * Both fields are controlled, so whatever React holds is what the box shows.
+ * Clamping that value on every keystroke made the box fight the typist: on the
+ * way to 15, the lone "1" is below the minimum and was rewritten to 5 before
+ * the 5 could be typed. Most of the legal range was unreachable except by the
+ * spinner arrows.
+ *
+ * So a keystroke that does not yet make a usable number is kept as a draft and
+ * committed to nothing. `saisie` decides; leaving the field drops the draft,
+ * and the box falls back to the last value that was actually good.
+ */
+function Nombre({
+  label, suffixe, valeur, bas, haut, onCommit,
+}: {
+  label: string;
+  suffixe?: string;
+  valeur: number;
+  bas: number;
+  haut: number;
+  onCommit: (n: number) => void;
+}) {
+  const [brouillon, setBrouillon] = useState<string | null>(null);
+
+  return (
+    <label>
+      {label}
+      <input
+        type="number"
+        inputMode="numeric"
+        min={bas}
+        max={haut}
+        value={brouillon ?? String(valeur)}
+        onChange={(ev) => {
+          const brut = ev.target.value;
+          setBrouillon(brut);
+          const n = saisie(brut, bas, haut);
+          if (n !== null) onCommit(n);
+        }}
+        /* Dropping the draft here is what makes an abandoned half-entry
+           harmless: the box goes back to showing the committed value rather
+           than keeping "2" on screen while the plan was built from 14. */
+        onBlur={() => setBrouillon(null)}
+      />
+      {suffixe}
+    </label>
+  );
+}
 
 export function Planner({
   lieux, legs, saisons, bases, choisies,
@@ -157,13 +203,14 @@ export function Planner({
   return (
     <div className="plan">
       <div className="plan__barre">
-        <label>
-          Durée
-          <input type="number" min={5} max={30} value={plan.jours}
-            onChange={(ev) =>
-              setPlan({ ...plan, jours: borne(Number(ev.target.value) || 5, 5, 30) })} />
-          jours
-        </label>
+        <Nombre
+          label="Durée"
+          suffixe="jours"
+          valeur={plan.jours}
+          bas={5}
+          haut={30}
+          onCommit={(jours) => setPlan((p) => ({ ...p, jours }))}
+        />
         <label>
           Départ
           <select value={plan.mois}
@@ -171,12 +218,13 @@ export function Planner({
             {MOIS.map((m) => <option key={m}>{m}</option>)}
           </select>
         </label>
-        <label>
-          Voyageurs
-          <input type="number" min={1} max={12} value={plan.voyageurs}
-            onChange={(ev) =>
-              setPlan({ ...plan, voyageurs: borne(Number(ev.target.value) || 1, 1, 12) })} />
-        </label>
+        <Nombre
+          label="Voyageurs"
+          valeur={plan.voyageurs}
+          bas={1}
+          haut={12}
+          onCommit={(voyageurs) => setPlan((p) => ({ ...p, voyageurs }))}
+        />
       </div>
 
       <div className="plan__jauges">

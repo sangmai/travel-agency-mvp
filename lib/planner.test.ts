@@ -286,3 +286,37 @@ test("when every region covers it, the cheapest sacrifice is offered first", () 
   const r = retraits(plan, LIEUX, 1);
   assert.deepEqual(r.map((x) => x.nuits), [3, 5, 7]);
 });
+
+import { saisie } from "./planner.ts";
+
+test("a half-typed number is left alone instead of being clamped", () => {
+  // The bug: onChange clamped on every keystroke, so pressing "1" on the way
+  // to "15" rewrote the field to the minimum, 5. The caret then sat after a 5
+  // the traveller never typed, and 15 became unreachable from the keyboard.
+  assert.equal(saisie("1", 5, 30), null);
+  assert.equal(saisie("2", 5, 30), null);
+  assert.equal(saisie("", 5, 30), null);
+
+  // Once it is a number in range, it commits.
+  assert.equal(saisie("15", 5, 30), 15);
+  assert.equal(saisie("20", 5, 30), 20);
+  assert.equal(saisie("5", 5, 30), 5);
+  assert.equal(saisie("30", 5, 30), 30);
+});
+
+test("the field still refuses what the native min and max cannot", () => {
+  assert.equal(saisie("31", 5, 30), null);
+  assert.equal(saisie("99999999", 5, 30), null);
+  assert.equal(saisie("abc", 5, 30), null);
+  assert.equal(saisie("-4", 5, 30), null);
+  assert.equal(saisie("1.5", 5, 30), null);
+  // Number("1e3") is 1000; the regex is what keeps it out.
+  assert.equal(saisie("1e3", 5, 30), null);
+  assert.equal(saisie("007", 5, 30), 7);
+});
+
+test("the travellers field has its own bounds", () => {
+  assert.equal(saisie("1", 1, 12), 1);
+  assert.equal(saisie("", 1, 12), null);
+  assert.equal(saisie("13", 1, 12), null);
+});
