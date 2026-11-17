@@ -16,9 +16,7 @@ import { readFileSync } from "node:fs";
 const fichier = new URL("../content/experiences.json", import.meta.url);
 const data = JSON.parse(readFileSync(fichier, "utf8"));
 
-const activites = Object.entries(data)
-  .filter(([lieu]) => lieu !== "_")
-  .flatMap(([lieu, liste]) => liste.map((a) => ({ lieu, ...a })));
+const activites = data.activites ?? [];
 
 if (!activites.length) {
   console.log("[experiences] aucune activité choisie — tout retombe sur la recherche");

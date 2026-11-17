@@ -6,7 +6,7 @@
  */
 import { source } from "./source";
 import { ROUTES } from "../routes";
-import type { PhotoId, PlaceId, Review, Stop, Trip } from "./types";
+import type { Experience, PhotoId, PlaceId, Review, Stop, Trip } from "./types";
 
 export type * from "./types";
 
@@ -45,7 +45,20 @@ export const getStory = source.story;
 export const getPhotoMeta = source.photos;
 export const getCarnet = source.carnet;
 export const getLegs = () => source.legs();
-export const getExperiences = () => source.experiences();
+/**
+ * Activities grouped by place, which is what the planner asks for.
+ *
+ * The file holds a flat list because that is the only shape an editor can add
+ * a row to — see ExperiencesFile. Grouping here rather than in the page keeps
+ * the shape of the file a private matter of the content layer, which is the
+ * whole reason this module exists.
+ */
+export const getExperiences = async (): Promise<Record<string, Experience[]>> => {
+  const { activites } = await source.experiences();
+  const par: Record<string, Experience[]> = {};
+  for (const a of activites) (par[a.lieu] ??= []).push(a);
+  return par;
+};
 export const getPlaces = () => source.places();
 
 /**

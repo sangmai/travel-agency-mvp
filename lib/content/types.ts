@@ -360,7 +360,14 @@ export type Regle = { id: string; texte: string; source: string };
 export type LegsFile = { regles: Regle[]; legs: Leg[] };
 
 /** One hand-picked activity. `url` is bare; lib/booking.ts adds the tracking. */
-export type Experience = { titre: string; url: string };
+export type Experience = { lieu: PlaceId; titre: string; url: string };
 
-/** Keyed by PlaceId. A place absent from the file falls back to a search. */
-export type ExperiencesFile = Record<string, Experience[]>;
+/**
+ * A flat list, not a map keyed by place.
+ *
+ * The map was the natural shape for the planner and the one shape a CMS cannot
+ * edit: Sveltia writes the fields it is given and has no way to invent a key.
+ * `getExperiences()` groups by `lieu` on the way out, so the planner still
+ * receives what it wants and the editor gets a list they can add a row to.
+ */
+export type ExperiencesFile = { activites: Experience[] };

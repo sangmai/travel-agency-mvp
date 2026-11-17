@@ -135,6 +135,16 @@ lúc relay hỏng, không dùng làm đường chính.
 | FAQ trang chủ, vùng miền, envies | `content/*.json` |
 | **Trang chủ** | `content/home.json` — hero, 9 tiêu đề mục, form devis, bandeau cuối |
 | **7 trang guide** | `content/guides/*.json` — tiêu đề, mô tả SEO, ảnh share, **39 câu FAQ** |
+| **Activités partenaires** | `content/experiences.json` — lieu, titre, adresse |
+
+**Về Activités partenaires.** Dán **địa chỉ trần** của trang hoạt động trên
+GetYourGuide hoặc Klook, *không* phải link affiliate. `lib/booking.ts` nhận ra
+tên miền rồi tự gắn tracking: tham số cho GetYourGuide, chuyển hướng qua
+`affiliate.klook.com` cho Klook. Dán link affiliate vào đây sẽ bị tính hai lần.
+
+File là một **danh sách** chứ không phải object khoá theo lieu, vì CMS không
+tạo được khoá mới. `getExperiences()` gom theo lieu lúc đọc, nên planner không
+thấy khác biệt. Thêm xong thì chạy `npm run experiences` để chắc link còn sống.
 
 Hai quy ước để text sửa được từ CMS mà vẫn giữ định dạng và số liệu:
 
