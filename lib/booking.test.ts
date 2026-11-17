@@ -99,3 +99,21 @@ test("the search fallback goes to GetYourGuide, which the French know", () => {
   assert.match(x.url, /getyourguide\.com\/s\//);
   assert.equal(new URL(x.url).searchParams.get("q"), "Sapa");
 });
+
+import { tourIdGyg } from "./booking.ts";
+
+test("the activity number is read off the address, so a chosen tour can be shown with its photo", () => {
+  assert.equal(
+    tourIdGyg("https://www.getyourguide.com/hoi-an-l831/my-son-sanctuary-and-marble-mountain-t551707/"),
+    "551707",
+  );
+  assert.equal(tourIdGyg("https://www.getyourguide.com/x/y-t42"), "42");
+  assert.equal(tourIdGyg("https://www.getyourguide.com/x/y-t42/?ref=a"), "42");
+});
+
+test("anything that is not a GetYourGuide activity has no number, and says so", () => {
+  assert.equal(tourIdGyg("https://www.klook.com/activity/13283-ba-na-hills-ticket-da-nang/"), null);
+  assert.equal(tourIdGyg("https://www.getyourguide.com/s/?q=Hanoi"), null);
+  assert.equal(tourIdGyg("https://www.getyourguide.com/hoi-an-l831/"), null);
+  assert.equal(tourIdGyg(""), null);
+});

@@ -212,3 +212,25 @@ export function aReserver(place: string): string | null {
  * lie on a page whose whole argument is that it tells the truth.
  */
 export const AFFILIE = Boolean(AID_BOOKING || AID_GETYOURGUIDE);
+
+/**
+ * The GetYourGuide activity number, read off the address we already store.
+ *
+ * Their widget identifies an activity by number, not by URL — the dashboard's
+ * "Specific URLs" tab accepts addresses and converts them. The number is the
+ * last path segment's `t` suffix:
+ *
+ *   https://www.getyourguide.com/hoi-an-l831/my-son-…-t551707/  →  551707
+ *
+ * This is what lets a chosen activity be shown with its own photograph
+ * instead of a search that drifts: asked for "Saigon", their search returns
+ * ferries and airport transfers, which is their behaviour for a city name and
+ * not something a better spelling fixes.
+ *
+ * Returns null for Klook and for anything unrecognised, which is the honest
+ * answer — those stay text.
+ */
+export function tourIdGyg(url: string): string | null {
+  if (!url.includes("getyourguide.com")) return null;
+  return /-t(\d+)\/?(?:[?#]|$)/.exec(url)?.[1] ?? null;
+}

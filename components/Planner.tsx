@@ -20,7 +20,7 @@ import {
   bilan, rythme, retraits, encoder, decoder, region, verdictSaison, saisie,
 } from "@/lib/planner";
 import type { Etape, Leg, Lieu, Plan, SaisonRow } from "@/lib/planner";
-import { AFFILIE, PARTENAIRE_GYG, aReserver, experiences } from "@/lib/booking";
+import { AFFILIE, PARTENAIRE_GYG, aReserver, experiences, tourIdGyg } from "@/lib/booking";
 import type { Experience } from "@/lib/booking";
 
 export type PlanBase = { nom: string; jours: number; etapes: Etape[] };
@@ -103,7 +103,7 @@ function Nombre({
  */
 let scriptGygDemande = false;
 
-function CadreGyg({ ville }: { ville: string }) {
+function CadreGyg({ ville, tours }: { ville: string; tours: string[] }) {
   useEffect(() => {
     if (scriptGygDemande) return;
     scriptGygDemande = true;
@@ -115,17 +115,23 @@ function CadreGyg({ ville }: { ville: string }) {
 
   return (
     <div className="plan__gyg">
-      {/* Only attributes verified to render are set here. The dashboard also
-          offers a campaign tag; its attribute name was not confirmed, and an
-          attribute that silently does nothing is how the Klook link shape went
-          wrong once already. */}
+      {/* Every attribute here was read out of the widget's own source and seen
+          to render, rather than guessed from the dashboard.
+
+          `tour-ids` is what makes the chosen activity appear with its own
+          photograph. It matters more than it looks: asked for a city name
+          their search returns ferries and airport transfers — "Saigon" is no
+          better than "Hô Chi Minh-Ville" — so a stop we have chosen something
+          for shows that choice, and only a stop we have not falls back to the
+          search. */}
       <div
         data-gyg-widget="activities"
         data-gyg-href="https://widget.getyourguide.com/default/activities.frame"
         data-gyg-locale-code="fr-FR"
         data-gyg-number-of-items="3"
         data-gyg-partner-id={PARTENAIRE_GYG}
-        data-gyg-q={ville}
+        data-gyg-cmp="planificateur"
+        {...(tours.length ? { "data-gyg-tour-ids": tours.join(",") } : { "data-gyg-q": ville })}
       />
       <p className="plan__note">
         Proposé par GetYourGuide. Nous percevons une commission, sans surcoût
@@ -136,12 +142,12 @@ function CadreGyg({ ville }: { ville: string }) {
 }
 
 /** The button, until it is pressed. */
-function Activites({ ville }: { ville: string }) {
+function Activites({ ville, tours }: { ville: string; tours: string[] }) {
   const [ouvert, setOuvert] = useState(false);
-  if (ouvert) return <CadreGyg ville={ville} />;
+  if (ouvert) return <CadreGyg ville={ville} tours={tours} />;
   return (
     <button type="button" className="plan__voir" onClick={() => setOuvert(true)}>
-      Voir les activités à {ville}
+      {tours.length ? "Voir en images" : `Voir les activités à ${ville}`}
     </button>
   );
 }
@@ -164,16 +170,21 @@ function Activites({ ville }: { ville: string }) {
  * and a page that offers something everywhere is a shop.
  */
 function SousEtape({
-  place, nuits, ville, choisies,
+  place, nuits, ville, carte, choisies,
 }: {
   place: string;
   nuits: number;
+  /** French editorial name, for the sentences. */
   ville: string;
+  /** Real-world spelling, for the partner's search box. */
+  carte: string;
   choisies: Record<string, Experience[]>;
 }) {
   const pourquoi = aReserver(place);
   const propres = choisies[place] ?? [];
   const libre = nuits > 1;
+  /* Klook activities have no number and stay text; the widget is GetYourGuide's. */
+  const tours = propres.map((x) => tourIdGyg(x.url)).filter((x): x is string => x !== null);
 
   if (!pourquoi && propres.length === 0 && !libre) {
     /* A one-night stop with nothing scarce and nothing chosen. There is no
@@ -216,7 +227,7 @@ function SousEtape({
           costs nothing until it is pressed, so it can sit under a stop we have
           chosen nothing for — which is most of them — without the page turning
           into a catalogue. */}
-      {libre && <Activites ville={ville} />}
+      {libre && <Activites ville={carte} tours={tours} />}
     </div>
   );
 }
@@ -513,7 +524,8 @@ export function Planner({
               )}
               <button type="button" className="plan__x" onClick={() => retirer(i)}>Retirer</button>
               {b.reste >= 0 && <SousEtape place={e.place} nuits={e.nuits}
-                ville={nom(e.place)} choisies={choisies} />}
+                ville={nom(e.place)} carte={lieu?.map ?? nom(e.place)}
+                choisies={choisies} />}
             </li>
           );
         })}

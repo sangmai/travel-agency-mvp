@@ -23,6 +23,13 @@ export type SaisonRow = {
 export type Lieu = {
   id: string;
   fr: string;
+  /**
+   * The spelling a traveller meets in the real world — "Saigon", "Hue",
+   * "Lan Ha". The README adopted it for the map because road signs, airport
+   * boards and BOOKING SITES use it; a partner's search box is a booking site,
+   * so it is what goes to GetYourGuide too, rather than "Hô Chi Minh-Ville".
+   */
+  map: string;
   lat: number;
   nuits: { min: number; ideal: number };
 };

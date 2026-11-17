@@ -189,12 +189,15 @@ test("free days are the ones that do not involve a suitcase", () => {
 });
 
 
+/* `map` carries the spelling a traveller meets on a ticket or a booking site,
+   which is also what goes to a partner's search box. Hence Saigon beside
+   Hô Chi Minh-Ville. */
 const LIEUX: Lieu[] = [
-  { id: "hanoi", fr: "Hanoï", lat: 21.028, nuits: { min: 2, ideal: 3 } },
-  { id: "ninh-binh", fr: "Ninh Binh", lat: 20.254, nuits: { min: 1, ideal: 2 } },
-  { id: "hue", fr: "Hué", lat: 16.463, nuits: { min: 1, ideal: 2 } },
-  { id: "hoi-an", fr: "Hoi An", lat: 15.88, nuits: { min: 2, ideal: 4 } },
-  { id: "hcmc", fr: "Hô Chi Minh-Ville", lat: 10.823, nuits: { min: 1, ideal: 2 } },
+  { id: "hanoi", fr: "Hanoï", map: "Hanoi", lat: 21.028, nuits: { min: 2, ideal: 3 } },
+  { id: "ninh-binh", fr: "Ninh Binh", map: "Ninh Binh", lat: 20.254, nuits: { min: 1, ideal: 2 } },
+  { id: "hue", fr: "Hué", map: "Hue", lat: 16.463, nuits: { min: 1, ideal: 2 } },
+  { id: "hoi-an", fr: "Hoi An", map: "Hoi An", lat: 15.88, nuits: { min: 2, ideal: 4 } },
+  { id: "hcmc", fr: "Hô Chi Minh-Ville", map: "Saigon", lat: 10.823, nuits: { min: 1, ideal: 2 } },
 ];
 
 test("the tool names what to drop, by region, and never decides alone", () => {
