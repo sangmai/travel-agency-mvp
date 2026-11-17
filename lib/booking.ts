@@ -39,6 +39,13 @@ export type LienPartenaire = {
 const AID_BOOKING = "";
 const AID_GETYOURGUIDE = "GX9EJC1";
 
+/**
+ * The same identifier, for the one caller that cannot use a URL: GetYourGuide's
+ * activity widget takes it as a DOM attribute. Exported rather than copied so
+ * the account number still lives in exactly one place in the repository.
+ */
+export const PARTENAIRE_GYG = AID_GETYOURGUIDE;
+
 /* Klook needs two, and unlike GetYourGuide it does not take them as query
    parameters on its own pages at all: the link goes through a redirect on
    affiliate.klook.com carrying the destination in `k_site`. Both values and

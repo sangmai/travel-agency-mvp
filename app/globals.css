@@ -3418,3 +3418,15 @@ ol.art__liste {
   margin-left: auto; font-size: .68rem; letter-spacing: .06em;
   text-transform: uppercase; color: var(--ink-3);
 }
+
+/* Click-to-load: the button costs nothing, the frame costs a third party. */
+.plan__voir {
+  align-self: flex-start; font-size: .83rem; font-weight: 600;
+  color: var(--amber-deep); border: 1px dashed var(--line);
+  border-radius: 999px; padding: .3rem .8rem; background: none;
+}
+.plan__voir:hover { border-style: solid; border-color: var(--amber); }
+.plan__gyg { margin: .4rem 0 .2rem; }
+/* The widget sizes its own iframe; the floor stops the row collapsing while
+   it is still fetching, which would jump the itinerary under the cursor. */
+.plan__gyg > [data-gyg-widget] { min-height: 18rem; }

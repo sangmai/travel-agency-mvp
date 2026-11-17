@@ -20,7 +20,7 @@ import {
   bilan, rythme, retraits, encoder, decoder, region, verdictSaison, saisie,
 } from "@/lib/planner";
 import type { Etape, Leg, Lieu, Plan, SaisonRow } from "@/lib/planner";
-import { AFFILIE, aReserver, experiences } from "@/lib/booking";
+import { AFFILIE, PARTENAIRE_GYG, aReserver, experiences } from "@/lib/booking";
 import type { Experience } from "@/lib/booking";
 
 export type PlanBase = { nom: string; jours: number; etapes: Etape[] };
@@ -81,6 +81,72 @@ function Nombre({
 }
 
 /**
+ * GetYourGuide's activity widget, and the reason it is behind a button.
+ *
+ * The widget is the only way to show real photographs and live prices — it is
+ * what GetYourGuide offers and there is no feed to build our own cards from.
+ * But it is a third-party script in an iframe, and measured on a bare page it
+ * costs four requests to widget.getyourguide.com and a Set-Cookie, before the
+ * visitor has done anything at all. Today that number is zero, and "this site
+ * calls nobody" is an asset worth more than an image above the fold.
+ *
+ * So nothing loads until someone asks. A visitor who never presses the button
+ * is in exactly the architecture documented in app/layout.tsx; one who presses
+ * it has chosen to look at a shop. It is the same click-to-load pattern a
+ * French site uses for an embedded map, and it sidesteps the consent question
+ * for everyone who does not click.
+ *
+ * The script is fetched once per page. It installs its own observer, so a
+ * widget inserted later — the second étape the traveller opens — is picked up
+ * with no re-initialisation. That was measured, not assumed: without it the
+ * second button would have looked broken.
+ */
+let scriptGygDemande = false;
+
+function CadreGyg({ ville }: { ville: string }) {
+  useEffect(() => {
+    if (scriptGygDemande) return;
+    scriptGygDemande = true;
+    const s = document.createElement("script");
+    s.src = "https://widget.getyourguide.com/dist/pa.umd.production.min.js";
+    s.async = true;
+    document.body.appendChild(s);
+  }, []);
+
+  return (
+    <div className="plan__gyg">
+      {/* Only attributes verified to render are set here. The dashboard also
+          offers a campaign tag; its attribute name was not confirmed, and an
+          attribute that silently does nothing is how the Klook link shape went
+          wrong once already. */}
+      <div
+        data-gyg-widget="activities"
+        data-gyg-href="https://widget.getyourguide.com/default/activities.frame"
+        data-gyg-locale-code="fr-FR"
+        data-gyg-number-of-items="3"
+        data-gyg-partner-id={PARTENAIRE_GYG}
+        data-gyg-q={ville}
+      />
+      <p className="plan__note">
+        Proposé par GetYourGuide. Nous percevons une commission, sans surcoût
+        pour vous.
+      </p>
+    </div>
+  );
+}
+
+/** The button, until it is pressed. */
+function Activites({ ville }: { ville: string }) {
+  const [ouvert, setOuvert] = useState(false);
+  if (ouvert) return <CadreGyg ville={ville} />;
+  return (
+    <button type="button" className="plan__voir" onClick={() => setOuvert(true)}>
+      Voir les activités à {ville}
+    </button>
+  );
+}
+
+/**
  * What there is to book at one étape, directly under it.
  *
  * Three things can be true of a stop, and the block says whichever ones are:
@@ -109,24 +175,12 @@ function SousEtape({
   const propres = choisies[place] ?? [];
   const libre = nuits > 1;
 
-  if (!pourquoi && propres.length === 0) {
-    /* Nothing scarce and nothing chosen. Said once, quietly, rather than
-       padded out with a search link nobody asked for. */
+  if (!pourquoi && propres.length === 0 && !libre) {
+    /* A one-night stop with nothing scarce and nothing chosen. There is no
+       free morning to fill, so the honest line is the whole of it. */
     return (
       <p className="plan__rien">
         Rien d&apos;urgent ici&nbsp;: réservez quand vos vols seront pris.
-        {libre && (
-          <>
-            {" "}
-            <a
-              href={experiences(place, ville, {})[0].url}
-              target="_blank"
-              rel="noopener nofollow sponsored"
-            >
-              Voir ce qu&apos;on y fait
-            </a>
-          </>
-        )}
       </p>
     );
   }
@@ -153,6 +207,16 @@ function SousEtape({
           })}
         </ul>
       )}
+      {!pourquoi && propres.length === 0 && (
+        <p className="plan__rien">
+          Rien d&apos;urgent ici&nbsp;: réservez quand vos vols seront pris.
+        </p>
+      )}
+      {/* Offered wherever the traveller has a morning to spend. The button
+          costs nothing until it is pressed, so it can sit under a stop we have
+          chosen nothing for — which is most of them — without the page turning
+          into a catalogue. */}
+      {libre && <Activites ville={ville} />}
     </div>
   );
 }
