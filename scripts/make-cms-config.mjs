@@ -185,7 +185,8 @@ ${select("photo", "Photo", OPT_PHOTOS, 10, ["required: false"])}
     create: false
     delete: false
     identifier_field: title
-    summary: '{{title}} — {{faq.length}} questions'
+    # A summary may only name a field — there is no count transform.
+    summary: '{{title}}'
     fields:
       - { name: slug, label: Identifiant d'URL, widget: string, readonly: true, hint: "Lié au fichier de la page : ne pas modifier." }
       - { name: title, label: Titre de l'onglet, widget: string, hint: "Au-delà de 60 caractères, Google le tronque — suffixe de marque compris." }
