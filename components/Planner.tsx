@@ -80,6 +80,83 @@ function Nombre({
   );
 }
 
+/**
+ * What there is to book at one étape, directly under it.
+ *
+ * Three things can be true of a stop, and the block says whichever ones are:
+ * it sells out, somebody has chosen activities for it, or neither.
+ *
+ * The important property is what drives it. The cards appear because an
+ * activity was entered in the CMS for that place — not because the étape
+ * exists. So the commercial block grows when the catalogue grows, and stays
+ * flat when a traveller adds four more stops. Adding an étape never adds a
+ * reason to sell, which is what keeps "il vous dira non" true while the links
+ * sit two centimetres away.
+ *
+ * A place with nothing entered says so plainly instead of reaching for a
+ * search link: on a one-night stop there is no free morning to fill anyway,
+ * and a page that offers something everywhere is a shop.
+ */
+function SousEtape({
+  place, nuits, ville, choisies,
+}: {
+  place: string;
+  nuits: number;
+  ville: string;
+  choisies: Record<string, Experience[]>;
+}) {
+  const pourquoi = aReserver(place);
+  const propres = choisies[place] ?? [];
+  const libre = nuits > 1;
+
+  if (!pourquoi && propres.length === 0) {
+    /* Nothing scarce and nothing chosen. Said once, quietly, rather than
+       padded out with a search link nobody asked for. */
+    return (
+      <p className="plan__rien">
+        Rien d&apos;urgent ici&nbsp;: réservez quand vos vols seront pris.
+        {libre && (
+          <>
+            {" "}
+            <a
+              href={experiences(place, ville, {})[0].url}
+              target="_blank"
+              rel="noopener nofollow sponsored"
+            >
+              Voir ce qu&apos;on y fait
+            </a>
+          </>
+        )}
+      </p>
+    );
+  }
+
+  return (
+    <div className="plan__ici">
+      {pourquoi && (
+        <p className="plan__alerte">
+          <b>À réserver maintenant.</b> {pourquoi}
+        </p>
+      )}
+      {propres.length > 0 && (
+        <ul className="plan__cartes">
+          {propres.map((x) => {
+            const l = experiences(place, ville, { [place]: [x] })[0];
+            return (
+              <li key={x.url}>
+                <a href={l.url} target="_blank" rel="noopener nofollow sponsored">
+                  {l.libelle}
+                </a>
+                {l.partenaire && <small>{l.partenaire}</small>}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export function Planner({
   lieux, legs, saisons, bases, choisies,
 }: {
@@ -371,6 +448,8 @@ export function Planner({
                 <em className="plan__saison">En {plan.mois.toLowerCase()}, c&apos;est la saison des pluies ici.</em>
               )}
               <button type="button" className="plan__x" onClick={() => retirer(i)}>Retirer</button>
+              {b.reste >= 0 && <SousEtape place={e.place} nuits={e.nuits}
+                ville={nom(e.place)} choisies={choisies} />}
             </li>
           );
         })}
@@ -378,156 +457,72 @@ export function Planner({
 
       {b.reste >= 0 && plan.etapes.length > 1 && (
         <div className="plan__suite">
-          {(() => {
-            const urgents = plan.etapes
-              .map((e) => ({ e, pourquoi: aReserver(e.place) }))
-              .filter((x): x is { e: Etape; pourquoi: string } => x.pourquoi !== null);
-            const calmes = plan.etapes.filter((e) => aReserver(e.place) === null);
+          {/* The scarce items and the chosen activities now sit under their
+              own étape, where the traveller is looking when they wonder what
+              to do there. What is left here is the one line that must be said
+              once rather than per stop. */}
+          {AFFILIE && (
+            <p className="plan__note">
+              Liens partenaires — nous percevons une commission, sans surcoût
+              pour vous.
+            </p>
+          )}
 
-            return (
-              <>
-                {urgents.length > 0 && (
-                  <section>
-                    <h3>À réserver maintenant</h3>
-                    <p className="plan__note">
-                      {urgents.length === 1
-                        ? "Une seule chose. Pas dix."
-                        : `${urgents.length} choses. Pas dix.`}
-                    </p>
-                    {urgents.map(({ e, pourquoi }) => (
-                      <div className="plan__urgent" key={e.place}>
-                        <b>{nom(e.place)}</b>
-                        <p>{pourquoi}</p>
-                      </div>
-                    ))}
-                  </section>
-                )}
+        {/* The quote button sits here, at the friction point, and not in
+            the page footer: this is the paragraph where a traveller
+            reads that the night train cannot be booked from France and
+            thinks "let the agency handle it". It carries the plan into
+            the form, so the agency receives an itinerary rather than a
+            blank request.
 
-                {calmes.length > 0 && (
-                <section className="plan__calme">
-                  <h3>Ce qui peut attendre</h3>
-                  {/* The claim about thousands of rooms is gone. It was true of
-                      Hanoï and Saïgon and false of Con Dao, Ban Gioc, Pu Luong
-                      and Ba Be, every one of which can land in this sentence —
-                      and a reason that is false half the time is worse than no
-                      reason, on the one block whose job is to be believed.
-                      What decides urgency is the list above; this one needs no
-                      second justification of its own.
-
-                      Four names, then a count. Slicing to three said nothing
-                      about the rest, so an itinerary with six calm stops
-                      quietly reassured the visitor about half of them. */}
-                  <p>
-                    Vos hôtels à{" "}
-                    {calmes.slice(0, 4).map((e) => nom(e.place)).join(", ")}
-                    {calmes.length > 4 &&
-                      ` et ${calmes.length - 4} autre${
-                        calmes.length - 4 > 1 ? "s étapes" : " étape"
-                      }`}
-                    &nbsp;: rien ne presse. Réservez-les quand vos vols seront
-                    pris, pas avant.
-                  </p>
-                  <p className="plan__note">
-                    Ce plan reste à cette adresse. Revenez à ce moment-là.
-                  </p>
-                </section>
-                )}
-
-                {/* Keyed on the free days, which is what the heading says, and
-                    not on `reste` — that is the night budget, and a plan can
-                    fit its nights exactly while still leaving a week of
-                    mornings with nothing booked. Gating on `reste` hid this
-                    section on an itinerary with seven free days. */}
-                {r.joursLibres > 0 && (
-                <section>
-                  <h3>Vos journées libres</h3>
-                  <p className="plan__note">
-                    {r.joursLibres} {r.joursLibres > 1 ? "journées" : "journée"}{" "}
-                    sans valise à faire. Voici ce qu&apos;on y fait — ou rien,
-                    c&apos;est permis.
-                  </p>
-                  <ul className="plan__liens">
-                    {/* Where the traveller actually has time, not the first
-                        three étapes of the list. A one-night stop has no free
-                        morning to fill, and offering it an excursion is noise. */}
-                    {plan.etapes.filter((e) => e.nuits > 1).flatMap((e) =>
-                      experiences(e.place, nom(e.place), choisies).map((x) => (
-                        <li key={`${e.place}-${x.libelle}`}>
-                          <a href={x.url} target="_blank" rel="noopener nofollow sponsored">
-                            {x.libelle}
-                          </a>
-                          {x.partenaire && <small> · {x.partenaire}</small>}
-                        </li>
-                      )),
-                    )}
-                  </ul>
-                  {AFFILIE && (
-                    <p className="plan__note">
-                      Liens partenaires — nous percevons une commission, sans
-                      surcoût pour vous.
-                    </p>
-                  )}
-                </section>
-                )}
-
-                {/* The quote button sits here, at the friction point, and not in
-                    the page footer: this is the paragraph where a traveller
-                    reads that the night train cannot be booked from France and
-                    thinks "let the agency handle it". It carries the plan into
-                    the form, so the agency receives an itinerary rather than a
-                    blank request.
-
-                    The write is plain DOM because the form is deliberately
-                    JavaScript-free — it is a server component several hundred
-                    pixels below, and reaching it through the document is the
-                    only seam that does not make it depend on React. If the
-                    script never runs, the anchor still scrolls to a working
-                    form and the traveller describes the trip themselves, which
-                    is exactly what happens today. */}
-                <section className="plan__dur">
-                  <h3>Ce qui ne se réserve pas depuis la France</h3>
-                  <ul className="art__liste">
-                    <li>Les billets de train intérieurs — paiement par carte vietnamienne.</li>
-                    <li>Un chauffeur pour les étapes sans transport public.</li>
-                    <li>Un guide francophone, qui se trouve des mois à l&apos;avance.</li>
-                  </ul>
-                  <a
-                    className="plan__devis"
-                    href="#devis"
-                    onClick={() => {
-                      const projet = document.getElementById("projet");
-                      const vg = document.getElementById("voyageurs");
-                      if (projet instanceof HTMLTextAreaElement) {
-                        projet.value =
-                          `Mon plan : ${plan.jours} jours, départ en ${plan.mois.toLowerCase()}, ` +
-                          `${plan.voyageurs} ${plan.voyageurs > 1 ? "voyageurs" : "voyageur"}.\n\n` +
-                          plan.etapes
-                            .map((e) => `— ${nom(e.place)}, ${e.nuits} ${e.nuits > 1 ? "nuits" : "nuit"}`)
-                            .join("\n") +
-                          (b.inconnus.length
-                            ? "\n\nTrajets que je n'ai pas encore réglés :\n" +
-                              b.inconnus
-                                .map((x) => {
-                                  const [d, a] = x.split(" → ");
-                                  return `— ${nom(d)} → ${nom(a)}`;
-                                })
-                                .join("\n")
-                            : "") +
-                          "\n\nCe que je n'arrive pas à organiser moi-même :\n";
-                      }
-                      if (vg instanceof HTMLInputElement) vg.value = String(plan.voyageurs);
-                    }}
-                  >
-                    Faire chiffrer ce plan par notre agence, à Da Nang
-                  </a>
-                  <p className="plan__note">
-                    Gratuit, réponse sous 48 heures ouvrées. Votre plan part avec
-                    la demande&nbsp;: rien à retaper.
-                  </p>
-                </section>
-              </>
-            );
-          })()}
+            The write is plain DOM because the form is deliberately
+            JavaScript-free — it is a server component several hundred
+            pixels below, and reaching it through the document is the
+            only seam that does not make it depend on React. If the
+            script never runs, the anchor still scrolls to a working
+            form and the traveller describes the trip themselves, which
+            is exactly what happens today. */}
+        <section className="plan__dur">
+          <h3>Ce qui ne se réserve pas depuis la France</h3>
+          <ul className="art__liste">
+            <li>Les billets de train intérieurs — paiement par carte vietnamienne.</li>
+            <li>Un chauffeur pour les étapes sans transport public.</li>
+            <li>Un guide francophone, qui se trouve des mois à l&apos;avance.</li>
+          </ul>
+          <a
+            className="plan__devis"
+            href="#devis"
+            onClick={() => {
+              const projet = document.getElementById("projet");
+              const vg = document.getElementById("voyageurs");
+              if (projet instanceof HTMLTextAreaElement) {
+                projet.value =
+                  `Mon plan : ${plan.jours} jours, départ en ${plan.mois.toLowerCase()}, ` +
+                  `${plan.voyageurs} ${plan.voyageurs > 1 ? "voyageurs" : "voyageur"}.\n\n` +
+                  plan.etapes
+                    .map((e) => `— ${nom(e.place)}, ${e.nuits} ${e.nuits > 1 ? "nuits" : "nuit"}`)
+                    .join("\n") +
+                  (b.inconnus.length
+                    ? "\n\nTrajets que je n'ai pas encore réglés :\n" +
+                      b.inconnus
+                        .map((x) => {
+                          const [d, a] = x.split(" → ");
+                          return `— ${nom(d)} → ${nom(a)}`;
+                        })
+                        .join("\n")
+                    : "") +
+                  "\n\nCe que je n'arrive pas à organiser moi-même :\n";
+              }
+              if (vg instanceof HTMLInputElement) vg.value = String(plan.voyageurs);
+            }}
+          >
+            Faire chiffrer ce plan par notre agence, à Da Nang
+          </a>
+          <p className="plan__note">
+            Gratuit, réponse sous 48 heures ouvrées. Votre plan part avec
+            la demande&nbsp;: rien à retaper.
+          </p>
+        </section>
         </div>
       )}
     </div>

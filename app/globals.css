@@ -3195,7 +3195,9 @@ ol.art__liste {
 /* — La liste des étapes -------------------------------------------------- */
 .plan__etapes { list-style: none; margin: 1.5rem 0; padding: 0; }
 
-.plan__etapes li {
+/* Direct children only: the per-étape partner block nests a <ul> of its
+   own inside each row, and those <li> are cards, not itinerary rows. */
+.plan__etapes > li {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -3204,7 +3206,7 @@ ol.art__liste {
   border-bottom: 1px solid var(--line);
 }
 
-.plan__etapes li b {
+.plan__etapes > li > b {
   font-family: var(--display);
   font-size: 1.08rem;
   font-weight: 400;
@@ -3391,4 +3393,28 @@ ol.art__liste {
   font-size: 0.85rem;
   color: var(--ink-3);
   margin: 1rem 0 0;
+}
+
+/* What there is to book at one étape, directly under it. Indented so the row
+   above still reads as the étape and this reads as a consequence of it. */
+.plan__ici,
+.plan__rien { flex-basis: 100%; margin: .15rem 0 .1rem; padding-left: .1rem; }
+.plan__rien { font-size: .83rem; color: var(--ink-3); }
+.plan__rien a { color: var(--amber-deep); }
+.plan__alerte {
+  margin: 0 0 .45rem; padding: .5rem .7rem; font-size: .85rem;
+  border-left: 3px solid var(--brique); background: var(--paper);
+  border-radius: 0 6px 6px 0;
+}
+.plan__alerte b { color: var(--brique); }
+.plan__cartes { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.plan__cartes li {
+  display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap;
+  padding: .45rem .7rem; background: var(--paper);
+  border: 1px solid var(--line); border-radius: 6px;
+}
+.plan__cartes a { font-size: .9rem; font-weight: 600; }
+.plan__cartes small {
+  margin-left: auto; font-size: .68rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink-3);
 }
