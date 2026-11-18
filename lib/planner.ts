@@ -31,6 +31,8 @@ export type Lieu = {
    */
   map: string;
   lat: number;
+  /** Needed to put the étape on the map; the engine itself never reads it. */
+  lon: number;
   nuits: { min: number; ideal: number };
 };
 

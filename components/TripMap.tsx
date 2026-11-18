@@ -65,9 +65,23 @@ function frame(pts: { x: number; y: number }[]) {
 export function TripMap({
   stops,
   route = true,
+  inconnus,
 }: {
   stops: ResolvedStop[];
   route?: boolean;
+  /**
+   * Indices of the hops the planner has no travel data for: `i` marks the
+   * segment from stop `i` to stop `i + 1`.
+   *
+   * Left undefined — which is every trip sheet — the route stays one polyline,
+   * byte for byte what it was. Only the planner passes this, and only then is
+   * the line split into segments so the unaccounted ones can be greyed.
+   *
+   * Grey rather than a different dash: the line is ALREADY dashed, and that
+   * dash means "this joins two stops, it does not draw the road". A second
+   * meaning on the same signal would cost both.
+   */
+  inconnus?: ReadonlySet<number>;
 }) {
   const pts = stops.map((s) => ({ label: s.map, ...project(s.lon, s.lat) }));
   const view = frame(pts);
@@ -159,7 +173,7 @@ export function TripMap({
       ))}
 
       {/* Dashed: the line joins stops, it does not describe the road. */}
-      {route && (
+      {route && !inconnus && (
         <polyline
           points={pts.map((p) => `${r1(p.x)},${r1(p.y)}`).join(" ")}
           className="tripmap__route"
@@ -167,6 +181,26 @@ export function TripMap({
           strokeDasharray={`${r1(6 * k)} ${r1(5 * k)}`}
         />
       )}
+
+      {/* One line per hop, so the ones we cannot cost can say so. */}
+      {route &&
+        inconnus &&
+        pts.slice(0, -1).map((p, i) => (
+          <line
+            key={i}
+            x1={r1(p.x)}
+            y1={r1(p.y)}
+            x2={r1(pts[i + 1].x)}
+            y2={r1(pts[i + 1].y)}
+            className={
+              inconnus.has(i)
+                ? "tripmap__route tripmap__route--inconnu"
+                : "tripmap__route"
+            }
+            strokeWidth={r1(stroke * 1.4)}
+            strokeDasharray={`${r1(6 * k)} ${r1(5 * k)}`}
+          />
+        ))}
 
       {/* Labels before markers: if a halo bites into a marker, it is the
           marker that must stay crisp. */}

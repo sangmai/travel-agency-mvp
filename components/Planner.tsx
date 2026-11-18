@@ -4,9 +4,16 @@
  * The tool. A budget of days that visibly runs out.
  *
  * Not dropdowns — that is what Evaneos and Marco Vasco already sell, and a
- * fourth copy of it differentiates nothing. Not a map either: a map answers
- * "where is it", and the question a French traveller actually has is whether
- * their trip fits in the leave they have booked.
+ * fourth copy of it differentiates nothing. The gauges are the argument: the
+ * question a French traveller actually has is whether their trip fits in the
+ * leave they have booked.
+ *
+ * There is a map now, under the list, which the design once ruled out. The
+ * reason it ruled it out was that a map answers "where is it" and nobody was
+ * asking — true of thirteen famous places, false of twenty-one that include
+ * Dong Van, Ban Gioc and Ba Be. A traveller cannot judge an order they cannot
+ * see, and the button offering to sort the étapes north to south was asking
+ * them to do exactly that.
  *
  * It starts from a hand-written itinerary rather than an empty canvas. A
  * combinatorial generator would emit sequences with no prose, losing the voice
@@ -18,9 +25,11 @@
 import { useEffect, useRef, useState } from "react";
 import {
   bilan, rythme, retraits, encoder, decoder, region, verdictSaison, saisie,
+  trouverLeg, modeDefaut,
 } from "@/lib/planner";
 import type { Etape, Leg, Lieu, Plan, SaisonRow } from "@/lib/planner";
 import { AFFILIE, PARTENAIRE_GYG, aReserver, experiences, tourIdGyg } from "@/lib/booking";
+import { TripMap } from "./TripMap";
 import type { Experience } from "@/lib/booking";
 
 export type PlanBase = { nom: string; jours: number; etapes: Etape[] };
@@ -281,6 +290,17 @@ export function Planner({
   const aRetirer = b.reste < 0 ? retraits(plan, lieux, -b.reste) : [];
   const nom = (id: string) => lieux.find((l) => l.id === id)?.fr ?? id;
 
+  /* Which hops the map should grey out, by position rather than by name.
+     `bilan` reports them as "from → to", and the same pair can occur twice in
+     one itinerary — a loop that returns through Hanoï does exactly that — so
+     matching on the label would grey both crossings when only one is unknown.
+     Recomputed here from the same rule bilan uses. */
+  const segmentsInconnus = new Set<number>();
+  for (let i = 0; i < plan.etapes.length - 1; i++) {
+    const leg = trouverLeg(legs, plan.etapes[i].place, plan.etapes[i + 1].place);
+    if (!leg || !modeDefaut(leg)) segmentsInconnus.add(i);
+  }
+
   /* A place with no leg is a place the planner cannot cost, and the two
      Cambodian entries have none. Offering them produced a single "remove the
      Centre" button spanning two countries, because region() knows only
@@ -530,6 +550,40 @@ export function Planner({
           );
         })}
       </ol>
+
+      {/* Below the list, not beside it. Building the itinerary and checking it
+          are two steps, not one: the traveller composes, scrolls down to see
+          where they have just sent themselves, and scrolls back up if the
+          shape is wrong. Putting the map alongside would have served a
+          question nobody asks while still typing — and it would have needed
+          one layout for the phone and another for the desktop, where this
+          needs neither.
+
+          TripMap is a pure function of its props, with no hook and no effect,
+          so it redraws in the same render as the gauges: the frame, the label
+          placement and the route are all recomputed from the étapes alone. */}
+      {plan.etapes.length >= 2 && (
+        <figure className="plan__carte">
+          <TripMap
+            stops={plan.etapes.map((e) => {
+              const l = lieux.find((x) => x.id === e.place);
+              return {
+                id: e.place,
+                map: l?.map ?? nom(e.place),
+                lat: l?.lat ?? 0,
+                lon: l?.lon ?? 0,
+                label: nom(e.place),
+              };
+            }) as never}
+            inconnus={segmentsInconnus}
+          />
+          <figcaption className="plan__note">
+            {b.inconnus.length > 0
+              ? "Les segments gris sont les trajets dont nous n'avons pas la durée."
+              : "Le trait joint les étapes ; il ne dessine pas la route."}
+          </figcaption>
+        </figure>
+      )}
 
       {b.reste >= 0 && plan.etapes.length > 1 && (
         <div className="plan__suite">

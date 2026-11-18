@@ -3430,3 +3430,35 @@ ol.art__liste {
 /* The widget sizes its own iframe; the floor stops the row collapsing while
    it is still fetching, which would jump the itinerary under the cursor. */
 .plan__gyg > [data-gyg-widget] { min-height: 18rem; }
+
+/* The itinerary map, under the list it describes.
+   A FIXED height, not a ceiling: the frame's aspect ratio follows the trip, so
+   a map left to size itself swings about 500 px between a north-south run and
+   a compact loop — and on a phone, where it sits above nothing but below the
+   list, that swing would shove the page under the reader every time they added
+   a stop. The site holds CLS at 0 on every page and this is how it stays there.
+   The SVG settles for "meet" inside the box and centres itself; the bands left
+   over take the sea colour, so the join is invisible. */
+.plan__carte {
+  margin: 1.25rem 0 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--paper);
+}
+.plan__carte .tripmap {
+  height: 58vh;
+  max-height: 32rem;
+  min-height: 15rem;
+}
+.plan__carte figcaption {
+  padding: .5rem .7rem;
+  border-top: 1px solid var(--line);
+  margin: 0;
+}
+/* A hop with no travel data. Grey, not a different dash: the line is already
+   dashed, and that dash already means "joins two stops, does not draw the
+   road". Two meanings on one signal would cost both. */
+.tripmap__route--inconnu {
+  stroke: #9a9289;
+}

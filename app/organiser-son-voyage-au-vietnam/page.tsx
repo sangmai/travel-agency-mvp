@@ -52,7 +52,7 @@ export default async function OrganiserSonVoyage() {
     }));
 
   const lieux = places.map((p) => ({
-    id: p.id, fr: p.fr, map: p.map, lat: p.lat, nuits: p.nuits,
+    id: p.id, fr: p.fr, map: p.map, lat: p.lat, lon: p.lon, nuits: p.nuits,
   }));
 
   const jsonLd = {
