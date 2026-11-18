@@ -3,6 +3,7 @@ import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { DataTable } from "@/components/DataTable";
+import { Bande } from "@/components/Bande";
 import { breadcrumb } from "@/components/JsonLd";
 import { Planner } from "@/components/Planner";
 import { QuoteForm } from "@/components/QuoteForm";
@@ -112,6 +113,18 @@ export default async function OrganiserSonVoyage() {
                 avant.
               </li>
             </ol>
+
+            {/* The junk at anchor, placed under the three facts rather than at
+                the top of the page. It illustrates the least believable of
+                them — a "one night" cruise that eats two days — and the page
+                is the only one on the site that argued entirely in text.
+
+                Below the fold on purpose. This page scores 97 on mobile with
+                an LCP of 1.74 s precisely because it carries no image; a hero
+                photograph would become the LCP element and spend that. The
+                `bande` role is not priority, so it loads lazily and the number
+                stays where it is. */}
+            <Bande id="jonque-halong" />
           </div>
         </section>
 
