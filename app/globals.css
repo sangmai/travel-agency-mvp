@@ -26,6 +26,9 @@
      qu'un cadre à hauteur fixe laisse des bandes de chaque côté du SVG : si ces
      bandes ne sont pas exactement de cette couleur, le raccord se voit. */
   --mer: #d8e3e0;
+  /* Le trait de la mer : assez sombre pour se voir sur --mer, assez clair pour
+     ne pas concurrencer le tracé ambre, qui est le sujet. */
+  --mer-trait: #a9bdb8;
 
   /* Sur fond sombre (jade, photo) les tons ci-dessus tombent sous 3:1. */
   --on-dark: #fbf8f3;
@@ -3445,12 +3448,30 @@ ol.art__liste {
    over take the sea colour, so the join is invisible. */
 .plan__carte {
   margin: 1.25rem 0 0;
-  border: 1px solid var(--line);
+  /* Le trait de la mer plutôt que --line : --line est fait pour le papier et
+     disparaît sur le sable de la section comme sur la mer. La carte doit se
+     lire comme un objet posé sur la page. */
+  border: 1px solid var(--mer-trait);
   border-radius: 8px;
   overflow: hidden;
   /* La mer, pas le papier : le SVG est centré dans un cadre à hauteur fixe et
      les bandes qui restent doivent prolonger la carte, pas l'encadrer. */
   background: var(--mer);
+}
+
+/* Le cadre intérieur. Sans lui, mer et bandes ayant la même couleur, le tout
+   se lit comme un aplat : rien ne dit où commence la carte. Posé en
+   pseudo-élément pour ne toucher ni TripMap ni les six fiches voyage. */
+.plan__vue {
+  position: relative;
+}
+.plan__vue::after {
+  content: "";
+  position: absolute;
+  inset: .55rem;
+  border: 1px solid var(--mer-trait);
+  border-radius: 4px;
+  pointer-events: none;
 }
 .plan__carte .tripmap {
   height: 58vh;

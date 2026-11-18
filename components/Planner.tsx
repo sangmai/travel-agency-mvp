@@ -583,6 +583,11 @@ export function Planner({
           placement and the route are all recomputed from the étapes alone. */}
       {plan.etapes.length >= 2 && (
         <figure className="plan__carte">
+          {/* The SVG letterboxes inside a fixed-height box, so the drawn map
+              and the box are not the same rectangle. This wrapper is what the
+              inset frame hangs off: a border on the figure would sit at the
+              edge of the padding, which is not where the map is. */}
+          <div className="plan__vue">
           <TripMap
             stops={plan.etapes.map((e) => {
               const l = lieux.find((x) => x.id === e.place);
@@ -598,6 +603,7 @@ export function Planner({
             nuits={plan.etapes.map((e) => e.nuits)}
             onPick={versEtape}
           />
+          </div>
           <figcaption className="plan__note">
             {b.inconnus.length > 0
               ? "Les segments gris sont les trajets dont nous n'avons pas la durée."
