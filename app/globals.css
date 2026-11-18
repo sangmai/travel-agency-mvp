@@ -22,6 +22,10 @@
      une brique chaude plutôt qu'un rouge d'alerte, qui jurerait sur le
      papier. 6,2:1 sur --paper. */
   --brique: #9d3b22;
+  /* La mer des cartes. Déclarée ici et pas seulement dans .tripmap__sea parce
+     qu'un cadre à hauteur fixe laisse des bandes de chaque côté du SVG : si ces
+     bandes ne sont pas exactement de cette couleur, le raccord se voit. */
+  --mer: #d8e3e0;
 
   /* Sur fond sombre (jade, photo) les tons ci-dessus tombent sous 3:1. */
   --on-dark: #fbf8f3;
@@ -2342,7 +2346,7 @@ img {
 }
 
 .tripmap__sea {
-  fill: #d8e3e0;
+  fill: var(--mer);
 }
 
 .tripmap__neighbour {
@@ -3444,7 +3448,9 @@ ol.art__liste {
   border: 1px solid var(--line);
   border-radius: 8px;
   overflow: hidden;
-  background: var(--paper);
+  /* La mer, pas le papier : le SVG est centré dans un cadre à hauteur fixe et
+     les bandes qui restent doivent prolonger la carte, pas l'encadrer. */
+  background: var(--mer);
 }
 .plan__carte .tripmap {
   height: 58vh;
@@ -3455,6 +3461,9 @@ ol.art__liste {
   padding: .5rem .7rem;
   border-top: 1px solid var(--line);
   margin: 0;
+  /* Son propre fond : la légende n'est pas la carte, et --ink-3 sur la mer
+     tombe à 4,44 contre un seuil AA de 4,5. Mesuré, pas estimé. */
+  background: var(--paper);
 }
 /* A hop with no travel data. Grey, not a different dash: the line is already
    dashed, and that dash already means "joins two stops, does not draw the
