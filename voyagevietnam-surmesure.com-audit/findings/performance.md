@@ -1,64 +1,40 @@
-# Performance
+# Performance — 18 novembre 2026
 
-API PageSpeed Insights, Lighthouse 13.6.0.
+82/100 (31 octobre : 88). La seule catégorie en recul.
 
-| | `/` mobile | `/` bureau | `/carte-vietnam/` mobile | `/carte-vietnam/` bureau |
-|---|---|---|---|---|
-| Performance | 93 | 98 | **95** | **100** |
-| Accessibilité | 100 | 100 | 100 | 100 |
-| Bonnes pratiques | 100 | 100 | 100 | 100 |
-| SEO | 100 | 100 | 100 | 100 |
-| LCP | **3,1 s** | 1,0 s | 2,0 s | 0,3 s |
-| TBT | 30 ms | 50 ms | 31 ms | 0 ms |
-| CLS | 0 | 0 | 0 | 0 |
-| Speed Index | — | — | 4,6 s | 0,4 s |
+Lighthouse 13.6.0, API PageSpeed Insights. Trois exécutions sur l'accueil
+mobile pour séparer l'écart du bruit.
 
-## Un résultat contre-intuitif
+               perf          LCP      TBT   CLS
+    accueil    86 / 88 / 88  3,49 s   3 ms   0
+    bureau     99            0,82 s   0 ms   0
+    planner    97            1,74 s   8,5 ms 0
+    planner b. 100           0,53 s   0 ms   0
 
-`/carte-vietnam/` embarque une carte SVG de 17 Ko **en ligne** dans le HTML.
-Je la soupçonnais d'être la page la plus lourde du site. Elle est en fait **plus
-rapide que la page d'accueil** : le SVG en ligne ne coûte aucune requête, et la
-page n'a pas de grande photo au-dessus de la ligne de flottaison.
+31 octobre : accueil mobile 93, LCP 3,1 s. Le recul est réel. Le TBT de 76 ms
+du premier passage était du bruit (3 ms aux deux suivants).
 
-## Le LCP de la page d'accueil
+## Ce qui pèse, mesuré
 
-L'élément LCP est la photo du hero. Les bonnes pratiques sont **déjà toutes
-appliquées** :
+                    accueil   planner
+    requêtes          21        16
+    poids total      892 Ko   374 Ko
+    IMAGES           509 Ko     0
+    polices          220 Ko   220 Ko
+    scripts          115 Ko   121 Ko
 
-```
-loading="eager"   fetchPriority="high"   decoding="async"
-sizes="100vw"     width=2000 height=1248
-préchargement dans le <head> : oui
-```
+La page qui porte le plus de JavaScript obtient 97. Celle qui n'en porte
+presque pas obtient 87. La différence, ce sont 509 Ko d'images.
 
-Le coût est le poids, pas la stratégie :
+Deux postes identifiés : 12 Ko de CSS bloquant le rendu (179 ms) et un tiers
+nouveau depuis octobre — Cloudflare Web Analytics, 10,6 Ko, 11,6 ms de fil
+principal. Ensemble ils n'expliquent pas 400 ms.
 
-| Variante | Poids |
-|---|---|
-| `hagiang-640.webp` | 44,0 Ko |
-| `hagiang-960.webp` | 94,4 Ko |
-| `hagiang-1280.webp` | **158,4 Ko** ← mobile courant (390 pt, DPR 3) |
-| `hagiang-1920.webp` | 314,4 Ko |
+## CrUX
 
-**Ne pas optimiser maintenant.** CrUX renvoie `404 — chrome ux report data not
-found` pour ce domaine, ce qui est normal à quatre jours. Le LCP de laboratoire
-n'est pas le LCP réel : les utilisateurs français sur fibre ou 5G verront un
-chiffre très différent. Reprendre la mesure après 4 à 6 semaines de trafic.
+    18 novembre : No CrUX data for this origin.
+                  Insufficient Chrome traffic volume for eligibility.
 
-## Autres relevés
-
-- **JavaScript inutilisé : 270 ms** — `255-a7ba37dca2f1fa.js` (20,9 Ko inutiles
-  sur 44,5), `4bd1b696-c023c6e3521b1417.js` (20,7 sur 54,3)
-- **Legacy JavaScript**, score 0,5 — polyfills pour des navigateurs que la cible
-  française n'utilise plus
-
-Impact ressenti marginal : le TBT mesuré est de 30 ms.
-
-## Audits écartés
-
-« Render-blocking requests », « Network dependency tree » et « LCP breakdown »
-apparaissent en échec dans la sortie brute. Ce sont les audits *insight* de
-Lighthouse 13, purement informatifs, sans aucun élément listé.
-
-« label-content-name-mismatch » ne liste aucun élément non plus — et un score
-d'accessibilité de 100 serait impossible avec une vraie violation axe.
+Quatre semaines après l'audit qui disait « reprendre dans 4 à 6 semaines ».
+La réponse est qu'on ne sait toujours pas, et qu'on ne saura pas avant d'avoir
+du trafic. Ne pas optimiser le hero avant.

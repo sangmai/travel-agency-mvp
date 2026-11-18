@@ -1,389 +1,328 @@
-# Audit SEO complet — voyagevietnam-surmesure.com
+# Audit SEO — voyagevietnam-surmesure.com
 
-Audit du 31 octobre 2026. Domaine créé il y a quatre jours.
+Ré-audit du 18 novembre 2026. Le précédent date du 31 octobre ; la version
+intégrale reste dans l'historique git de ce fichier.
 
-Toutes les mesures de cette page ont été relevées sur le site déployé, pas sur
-le dépôt. Là où un chiffre vient d'un outil tiers, l'outil est nommé.
+Toutes les mesures ont été relevées sur le site déployé. Là où un chiffre vient
+d'un outil tiers, l'outil est nommé. Les mesures de performance ont été répétées
+trois fois : une seule exécution de Lighthouse ne distingue pas un écart d'un
+bruit de mesure.
 
 ---
 
 ## Synthèse
 
-**Score de santé SEO : 85/100**
+**Score de santé SEO : 90/100** — contre 85 le 31 octobre.
 
-| Catégorie | Poids | Note | Ce qui pèse |
-|---|---|---|---|
-| SEO technique | 22 % | 90 | En-têtes complets, zéro lien cassé ; cache mal réglé |
-| Qualité du contenu | 23 % | 78 | 1 356 mots de moyenne, zéro page mince ; auteur non nommé, contenu de démonstration |
-| SEO on-page | 20 % | 93 | Titres et descriptions propres, hiérarchie sans saut |
-| Données structurées | 10 % | 72 | Graphe riche et cohérent ; `image`/`logo` absents, balisage d'avis non conforme |
-| Performance | 10 % | 88 | 93–95 mobile, 98–100 bureau, CLS 0 ; durées de cache |
-| Préparation IA | 10 % | 80 | Rendu serveur intégral, 27 tableaux ; présence de marque nulle |
-| Images | 5 % | 92 | WebP, six largeurs, tous les `alt` corrects |
+| Catégorie | Poids | 31 oct | 18 nov | Ce qui a bougé |
+|---|---|---|---|---|
+| SEO technique | 22 % | 90 | **96** | Cache réglé, `www` redirigé, Search Console vérifiée |
+| Qualité du contenu | 23 % | 78 | **84** | Identité tranchée, +18 pages, nouvelle page outil |
+| SEO on-page | 20 % | 93 | **94** | 4 réserves sur 40 pages |
+| Données structurées | 10 % | 72 | **92** | Avis non conformes retirés, deux entités séparées |
+| Performance | 10 % | 88 | **82** | Mobile 93 → 87, LCP 3,1 → 3,5 s |
+| Préparation IA | 10 % | 80 | **84** | 217 FAQ, 55 tableaux, `Content-Signal` |
+| Images | 5 % | 92 | **90** | Poids du hero inchangé, davantage d'images |
 
-**Type d'activité détecté :** service local / agence de voyage (téléphone,
-adresse physique à Da Nang, `TravelAgency` balisé, zone desservie).
+### Les cinq points critiques du 31 octobre
 
-### Les cinq points à traiter en premier
+**Les cinq sont traités.** C'est le fait principal de ce ré-audit.
 
-1. **Le balisage d'avis n'est pas conforme à la politique de Google.** Deux avis
-   Tripadvisor sont déclarés en `review` de l'organisation comme s'ils avaient
-   été recueillis par le site.
-2. **Aucune ressource n'est mise en cache.** Tout est servi en
-   `max-age=0, must-revalidate`, y compris des fichiers dont le nom contient
-   déjà une empreinte.
-3. **L'identité du site reste non tranchée** (option A ou B). C'est le risque
-   le plus sérieux du projet, et il n'est pas technique.
-4. **Aucune donnée de terrain.** Pas de Search Console vérifiée, pas de CrUX.
-5. **`image` et `logo` absents** du nœud `TravelAgency`.
+| # | Point | État |
+|---|---|---|
+| 1 | Balisage d'avis non conforme | **Corrigé** — plus aucun nœud `Review`, plus d'`aggregateRating` |
+| 2 | Aucune durée de cache | **Corrigé**, et correctement : voir plus bas |
+| 3 | Identité non tranchée (A ou B) | **Tranchée** — option B, deux entités dans le graphe |
+| 4 | Search Console non vérifiée | **Vérifiée** par enregistrement TXT |
+| 5 | `image` / `logo` absents | **Présents** sur la marque ; absents sur l'opérateur, et c'est défendable |
 
-### Ce qui est déjà solide
+Le point 2.4 du plan précédent — rediriger `www` vers l'apex — est fait aussi :
+`https://www.voyagevietnam-surmesure.com/` renvoie `301`.
 
-- 22 pages explorées, **zéro lien interne cassé**
-- 21 URL au sitemap, **toutes répondent 200 sans redirection**
-- Six en-têtes de sécurité et de cache présents, **aucun manquant**
-- **Zéro page sous 300 mots** — 28 486 mots au total
-- 85 questions balisées en `FAQPage`, **85 `<details>` rendus** : concordance exacte
-- Accessibilité **100/100** sur mobile comme sur bureau
-- **CLS à 0** partout
+### Ce qui reste
+
+1. **Le LCP mobile a reculé** : 3,1 s → 3,5 s, score 93 → 87. Mesuré trois fois.
+2. **CrUX ne renvoie toujours rien**, quatre semaines après. Le trafic réel reste
+   sous le seuil d'éligibilité. C'est le vrai goulot, et il n'est pas technique.
+3. **`docs/google-business-profile.md` contient quatre fois `undefined`** — un
+   document destiné à être copié dans une fiche Google publique.
+4. Quatre réserves de métadonnées sur quarante pages.
 
 ---
 
-## 1. SEO technique — 90/100
+## 1. SEO technique — 96/100
 
-### Exploration et indexation
+### Exploration
 
 ```
-22 pages explorées         0 cassée
-21 URL au sitemap          0 hors domaine · 0 doublon · 0 sans slash final
-21/21 répondent 200        aucune redirection intermédiaire
-robots.txt                 Sitemap déclaré
+40 pages explorées        0 cassée
+39 URL au sitemap         0 hors domaine · 0 doublon
+liées mais hors sitemap   1  →  /credits-photos/, qui porte noindex : correct
+au sitemap mais non liées 0
 ```
 
-Une page est liée sans figurer au sitemap : `/credits-photos/`. **Ce n'est pas
-un défaut** — la page porte `noindex`, et une page `noindex` n'a rien à faire
-dans un sitemap. Même remarque pour sa méta-description de 69 caractères,
-relevée par le script : elle ne sera jamais affichée.
+### Le cache, et pourquoi il faut lire plus d'un en-tête
+
+Le correctif demandé le 31 octobre a été appliqué, et appliqué avec la nuance
+qui comptait — chaque type de ressource a la durée qui lui convient :
+
+| Ressource | Empreinte dans le nom | `Cache-Control` servi |
+|---|---|---|
+| HTML | non | `public, max-age=0, must-revalidate` |
+| `/_next/static/*.css` | **oui** | `public, max-age=31536000, immutable` |
+| `/photos/v/*.webp` | non | `public, max-age=86400, stale-while-revalidate=604800` |
+
+Les photos reçoivent une journée de cache plus une semaine de revalidation en
+arrière-plan, et non un an : leur nom ne change pas quand l'image change, ce qui
+était exactement l'avertissement du précédent audit.
+
+**Une mise en garde de méthode.** Le script d'exploration du dépôt ne lit que
+l'en-tête du document HTML. Il affiche donc `max-age=0, must-revalidate` et
+donne l'impression que rien n'a été corrigé. Lire ce seul en-tête a failli
+produire ici un constat faux ; il faut interroger une ressource de chaque type.
 
 ### En-têtes
 
-| En-tête | Valeur |
-|---|---|
-| `Strict-Transport-Security` | `max-age=63072000; includeSubDomains` |
-| `X-Content-Type-Options` | `nosniff` |
-| `Referrer-Policy` | `strict-origin-when-cross-origin` |
-| `Permissions-Policy` | `geolocation=(), microphone=(), camera=(), interest-cohort=()` |
-| `Content-Encoding` | `gzip` |
-| `Cache-Control` | `public, max-age=0, must-revalidate` ← **le problème** |
+Six en-têtes de sécurité et de cache présents, aucun manquant : `HSTS`
+(`max-age=63072000; includeSubDomains`), `X-Content-Type-Options`,
+`Referrer-Policy`, `Permissions-Policy`, `Content-Encoding: gzip`,
+`Cache-Control`.
 
-### Le défaut : aucune durée de cache
+### Hôtes et vérification
 
-Mesuré type par type, directement sur les réponses du site :
-
-| Ressource | Nom contient une empreinte | `Cache-Control` servi |
-|---|---|---|
-| HTML | non (normal) | `max-age=0, must-revalidate` |
-| `/_next/static/*.css` | **oui** (`058c8b23a5094280.css`) | `max-age=0, must-revalidate` |
-| `/_next/static/*.js` | **oui** | `max-age=0, must-revalidate` |
-| `/photos/v/*.webp` | non (`hagiang-1920.webp`) | `max-age=0, must-revalidate` |
-
-`public/_headers` ne contient aucune règle de cache, donc Cloudflare applique
-sa valeur par défaut à tout.
-
-Conséquence concrète : un visiteur qui revient revalide **chaque fichier** —
-CSS, JS, et les 78 variantes d'images. Le contenu n'est pas retéléchargé si
-rien n'a changé, mais chaque aller-retour coûte une latence complète. Sur un
-mobile en 4G depuis la France vers un edge Cloudflare, cela se chiffre en
-centaines de millisecondes par visite répétée.
-
-Lighthouse le relève indépendamment : audit **« Use efficient cache lifetimes »,
-score 0,5**.
-
-**Nuance importante sur le correctif.** Les fichiers `/_next/static/` portent
-une empreinte dans leur nom : un changement de contenu change le nom, donc
-`immutable` sur un an est sans risque. **Les photos n'en portent pas** :
-`hagiang-1920.webp` garde son nom si l'image est remplacée. Un cache d'un an
-sur les photos servirait l'ancienne image à tout visiteur déjà venu, parfois
-pendant des mois. Les deux cas ne se traitent pas pareil.
+- `www` → apex en `301`
+- Search Console vérifiée par TXT DNS (`google-site-verification=rUGy…`), soit
+  la voie recommandée : une propriété `sc-domain:` couvre les deux hôtes
 
 ---
 
-## 2. Qualité du contenu — 78/100
+## 2. Qualité du contenu — 84/100
 
 ```
-28 486 mots sur 21 pages     moyenne 1 356
-pages sous 300 mots          0
-pages sans lien entrant      0
+40 pages explorées         0 page sous 300 mots
+/organiser-son-voyage-au-vietnam/   1 500 mots
+217 questions FAQPage      217 <details> rendus — concordance exacte
+55 tableaux
 ```
 
-Le volume et la structure sont au-dessus de ce que fait la concurrence
-directe. Ce qui retient la note est ailleurs.
+Le site est passé de 22 à 40 pages depuis le dernier audit, dont une page
+outil et neuf articles de blog.
 
-### Auteur non nommé
+### L'identité est tranchée, et c'est le changement le plus important
 
-Les treize guides déclarent un `Article` avec `datePublished` et
-`dateModified` réels, tirés de l'historique du dépôt. Mais l'`author` renvoie
-au nœud `organisation`, pas à une `Person`.
+Le précédent audit appelait cela « le risque qui n'est pas technique » et le
+plaçait au-dessus de toute correction de balisage. L'option B a été retenue et
+réellement mise en œuvre, pas seulement déclarée :
 
-C'était un choix délibéré et il reste défendable : nommer quelqu'un qui n'a
-pas relu la page serait un faux signal, de la même famille que la fondatrice
-inventée retirée plus tôt. Mais tant que personne n'est nommé, le critère
+- la marque — *Voyage Vietnam Sur Mesure* — porte le site, le domaine et l'adresse
+  de contact ;
+- l'opérateur — *Jasmin Travel* — porte la licence, l'adresse physique et le
+  téléphone, avec son propre domaine ;
+- l'en-tête du site affiche « by Jasmin Travel · Da Nang ».
+
+La relation est donc énoncée plutôt que dissimulée, ce qui supprime le moment
+« laquelle des deux est réelle ? » pour un voyageur qui cherche l'agence avant
+de virer trois mille euros.
+
+### Ce qui retient encore la note
+
+L'`author` des guides renvoie au nœud organisation, pas à une `Person`. C'était
+un choix délibéré et il reste défendable — nommer quelqu'un qui n'a pas relu la
+page serait un faux signal — mais tant que personne n'est nommé, le critère
 « expérience » d'E-E-A-T n'a rien à mesurer.
 
-### Contenu de démonstration encore en place
+---
 
-Six itinéraires, `story.json` et treize photos Wikimedia n'ont pas été
-remplacés par du réel. Pour un site qui n'a pas encore de trafic, ce n'est pas
-urgent au sens SEO — mais cela le devient le jour où un prospect lit une page
-circuit.
+## 3. SEO on-page — 94/100
 
-### Un maillage interne à corriger
+Quatre réserves sur quarante pages :
 
-`/agence-de-voyage-vietnam/` ne reçoit que **deux liens internes**. C'est la
-page qui porte la requête de marque et la requête locale — celle qui devrait
-en recevoir le plus. Toutes les autres pages sont correctement maillées.
+| Page | Réserve |
+|---|---|
+| `/blog/` | pas d'`og:image` |
+| `/blog/internet-vietnam/` | description 174 caractères (limite ~165) |
+| `/voyage-noces-vietnam/` | description 167 caractères |
+| `/credits-photos/` | description 69 caractères — **sans objet**, la page est `noindex` |
+
+Trois corrections réelles, donc, toutes mineures.
 
 ---
 
-## 3. SEO on-page — 93/100
-
-Aucune réserve sur les 21 pages indexables : titres sous 60 caractères,
-descriptions entre 110 et 165, un seul `h1`, aucune hiérarchie de titres
-sautée, canonique cohérente avec l'URL, `og:image` présente partout.
-
-Aucun titre ni aucune description en double.
-
----
-
-## 4. Données structurées — 72/100
+## 4. Données structurées — 92/100
 
 ### Le graphe
 
 | Type | Occurrences |
 |---|---|
-| `BreadcrumbList` | 19 |
-| `FAQPage` | 14 |
-| `Article` | 13 |
+| `FAQPage` | 37 |
+| `BreadcrumbList` | 37 |
+| `Article` | 20 |
+| `BlogPosting` | 9 |
 | `TouristTrip` | 6 |
 | `ItemList` | 4 |
 | `Person` | 3 |
 | `TravelAgency` / `LocalBusiness` | 1 |
-| `WebSite`, `WebPage`, `CollectionPage`, `AboutPage` | 1 chacun |
+| `Organization`, `WebSite`, `WebPage`, `CollectionPage`, `AboutPage`, `Event`, `Blog` | 1 chacun |
 
-**Toutes les références `@id` internes se résolvent.** Aucun JSON-LD invalide
-sur l'ensemble du site.
+### Les deux entités
 
-### Le problème : le balisage des avis
+C'est le correctif de fond :
 
-Deux avis sont déclarés en `review` sur le nœud `TravelAgency` :
+```
+Organization        « Voyage Vietnam Sur Mesure »   image ✓  logo ✓
+  parentOrganization ─────────────────────────────┐
+TravelAgency        « Jasmin Travel »   ◀─────────┘
+                    hasCredential : licence de tour-opérateur international
+                    telephone ✓  address ✓  url : jasmin-travel.com
+```
 
-| Auteur | Date | Source réelle | Sujet |
-|---|---|---|---|
-| Frédéric D. | 2025-08-01 | Tripadvisor | Voyage de 15 jours au Vietnam |
-| Alain V. | 2017-02-01 | Tripadvisor | **Laos et Cambodge** |
+La licence est attribuée à son titulaire au lieu d'être revendiquée par le site.
+Aucun nœud `Review` ne subsiste, et `aggregateRating` est absent de toute la
+page.
 
-Trois choses distinctes ici, et il ne faut pas les confondre.
+### `image` et `logo` sur l'opérateur
 
-**La conformité.** Google demande que les avis balisés en données structurées
-soient recueillis directement par le site, pas repris d'une plateforme tierce.
-Reprendre des avis Tripadvisor et les déclarer comme avis de l'organisation
-sort du cadre. Le risque n'est pas théorique : c'est le type de balisage qui
-déclenche une action manuelle « données structurées trompeuses ».
-
-**La pertinence.** Le second avis parle d'un voyage au Laos et au Cambodge.
-Sur un site dont la promesse entière est le Vietnam, c'est un signal faible,
-et pour un lecteur humain, un signal franchement bizarre.
-
-**L'âge.** Février 2017 — neuf ans. Un avis de neuf ans ne porte presque rien.
-
-À noter également : `site.json` déclare `reviewSource` avec **3 avis** et une
-note de 4,7, alors que **2** sont publiés.
-
-`aggregateRating` reste absent, et c'est volontaire : la note agrégée inventée
-a été retirée plus tôt. Ne pas la remettre.
-
-### Champs recommandés absents
-
-`TravelAgency` ne déclare ni `image` ni `logo`. Les deux sont recommandés pour
-`LocalBusiness` et servent à Google pour les panneaux de connaissance. Les
-fichiers existent déjà — les images OG sont générées au build en 1200 × 630.
+Absents du nœud `TravelAgency`. Ils sont recommandés pour `LocalBusiness`, mais
+ce nœud décrit désormais **l'entreprise de Jasmin**, pas celle du site. Y mettre
+une photo libre de droits de la baie d'Halong reviendrait à illustrer l'agence
+d'un tiers avec une image qui n'est pas la sienne. À demander à Jasmin, ou à
+laisser vide — ce n'est pas un défaut à corriger seul.
 
 ---
 
-## 5. Performance — 88/100
+## 5. Performance — 82/100
 
-Lighthouse 13.6.0, via l'API PageSpeed Insights.
+Lighthouse 13.6.0 via l'API PageSpeed Insights. **Trois exécutions** sur la page
+d'accueil mobile, pour séparer l'écart du bruit.
 
-| | `/` mobile | `/` bureau | `/carte-vietnam/` mobile | `/carte-vietnam/` bureau |
+| | accueil mobile | accueil bureau | planner mobile | planner bureau |
 |---|---|---|---|---|
-| Performance | 93 | 98 | **95** | **100** |
+| Performance | **86 / 88 / 88** | 99 | **97** | **100** |
 | Accessibilité | 100 | 100 | 100 | 100 |
 | Bonnes pratiques | 100 | 100 | 100 | 100 |
 | SEO | 100 | 100 | 100 | 100 |
-| LCP | **3,1 s** | 1,0 s | **2,0 s** | 0,3 s |
-| TBT | 30 ms | 50 ms | 31 ms | 0 ms |
+| LCP | **3,5 s** | 0,82 s | **1,74 s** | 0,53 s |
+| TBT | 3 ms | 0 ms | 8,5 ms | 0 ms |
 | CLS | 0 | 0 | 0 | 0 |
-| Speed Index | — | — | 4,6 s | 0,4 s |
 
-**Un résultat contre-intuitif :** `/carte-vietnam/`, la page que je soupçonnais
-la plus lourde à cause de sa carte SVG de 17 Ko en ligne, est **plus rapide que
-la page d'accueil**. Le SVG en ligne ne coûte aucune requête, et la page n'a
-pas de grande photo au-dessus de la ligne de flottaison.
+Le 31 octobre : accueil mobile 93, LCP 3,1 s. **Le recul est réel**, pas un
+artefact : trois exécutions donnent 86/88/88 et un LCP stable à 3,49 s. Le TBT
+de 76 ms relevé au premier passage, lui, était du bruit — les deux suivants
+donnent 3 ms.
 
-### Le LCP de la page d'accueil
+### Ce qui pèse, mesuré
 
-L'élément LCP est la photo du hero. Toutes les bonnes pratiques sont déjà
-appliquées : `loading="eager"`, `fetchPriority="high"`, `decoding="async"`,
-`sizes="100vw"`, dimensions déclarées, et **préchargement dans le `<head>`**.
-
-Le coût est donc le poids, pas la stratégie de chargement :
-
-| Variante | Poids |
-|---|---|
-| `hagiang-640.webp` | 44,0 Ko |
-| `hagiang-960.webp` | 94,4 Ko |
-| `hagiang-1280.webp` | **158,4 Ko** ← ce que prend un mobile courant |
-| `hagiang-1920.webp` | 314,4 Ko |
-
-Un téléphone de 390 points en DPR 3 demande 1 170 px et reçoit donc la
-variante 1280. Sur le réseau bridé que simule Lighthouse, 158 Ko représentent à
-eux seuls près d'une seconde.
-
-**Avant de toucher à quoi que ce soit :** le LCP de laboratoire n'est pas le
-LCP réel. CrUX ne renvoie encore rien pour ce domaine (`404 — chrome ux report
-data not found`), ce qui est normal à quatre jours. Les utilisateurs français
-réels sur fibre ou 5G verront un chiffre très différent. Optimiser maintenant,
-c'est optimiser à l'aveugle.
-
-### Autres relevés
-
-- **JavaScript inutilisé** : 270 ms, concentrés sur deux fragments
-  (`255-a7ba…js`, 20,9 Ko inutiles sur 44,5 ; `4bd1b696-…js`, 20,7 sur 54,3)
-- **Legacy JavaScript** : score 0,5 — polyfills pour des navigateurs que la
-  cible française n'utilise plus
-
-Trois audits apparaissent en échec dans la sortie brute — « Render-blocking
-requests », « Network dependency tree », « LCP breakdown ». **Ce ne sont pas des
-échecs** : ce sont les audits *insight* de Lighthouse 13, purement informatifs,
-sans aucun élément listé. Même chose pour
-« label-content-name-mismatch », qui ne contient aucun élément — un score
-d'accessibilité de 100 serait impossible avec une vraie violation axe.
-
----
-
-## 6. Images — 92/100
-
-```
-76 <img> dans <main>        76 avec alt exploitable
-78 fichiers générés         7,1 Mo au total
-```
-
-Une image porte `alt=""` : le fond de la section devis
-(`QuoteForm.tsx:23`). Elle est explicitement marquée `decorative`, et
-**`alt=""` est la valeur correcte** pour une image de décor — un lecteur
-d'écran doit l'ignorer. Ce n'est pas un défaut.
-
-Chaîne de génération solide : six largeurs WebP, floutage 16 px pour le
-chargement progressif, images OG 1200 × 630 en JPEG, tout produit au build par
-`scripts/make-images.mjs` et contrôlé par `scripts/check-images.mjs`.
-
----
-
-## 7. Préparation à la recherche IA — 80/100
-
-Reprend l'analyse de `GEO-ANALYSIS.md` du 31 octobre, inchangée sur le fond.
-
-### Accès des robots
-
-`robots.txt` n'édicte aucune règle nommant un robot d'IA : tous passent par
-`User-agent: *`, qui autorise tout sauf `/api/`, `/merci`, `/auth`,
-`/callback`.
-
-| Robot | Capacité gouvernée | Accès |
+| | accueil mobile | planner mobile |
 |---|---|---|
-| `OAI-SearchBot` | citabilité ChatGPT Search | autorisé |
-| `GPTBot` | entraînement OpenAI | autorisé |
-| `Claude-SearchBot` | citabilité dans la recherche Claude | autorisé |
-| `ClaudeBot` | entraînement Anthropic | autorisé |
-| `PerplexityBot` | recherche Perplexity | autorisé |
-| `Googlebot` | Search, AI Overviews, AI Mode | autorisé |
-| `Google-Extended` | entraînement et ancrage Gemini | autorisé |
-| `Applebot` | Siri, Spotlight, Safari | autorisé |
+| Requêtes | 21 | 16 |
+| Poids total | 892 Ko | 374 Ko |
+| **Images** | **509 Ko** | **0** |
+| Polices | 220 Ko | 220 Ko |
+| Scripts | 115 Ko | 121 Ko |
 
-Rien à corriger. Ces lignes gouvernent des capacités distinctes et ne sont pas
-interchangeables : `Google-Extended` ne commande pas l'inclusion dans Google
-Search, et `ClaudeBot` ne commande pas la citabilité dans Claude.
+La page qui porte le plus de JavaScript — le planner, seul composant client du
+site — obtient **97**. Celle qui n'en porte presque pas obtient **87**. La
+différence entre les deux, ce sont 509 Ko d'images.
 
-### Citabilité
+Deux postes identifiés sur l'accueil :
 
-Rendu serveur intégral — les réponses des FAQ sont dans le HTML **même
-repliées**, parce qu'elles vivent dans des `<details>` natifs. Plusieurs robots
-d'IA lisent le HTML sans exécuter de JavaScript ; c'est ce qui compte le plus
-ici.
+- **CSS bloquant le rendu** : un fichier de 12 Ko, 179 ms d'attente ;
+- **un tiers nouveau depuis le dernier audit** : Cloudflare, 10,6 Ko,
+  11,6 ms de fil principal — la balise Web Analytics, injectée en « Automatic
+  setup » au niveau du proxy.
 
-**27 tableaux** sur l'ensemble du site : c'est le format le plus repris en
-réponse générative.
+Ces deux postes n'expliquent pas 400 ms à eux seuls. Le reste est le poids du
+hero, déjà analysé le 31 octobre, et l'instruction d'alors tient toujours.
 
-### Ce qui plafonne la note
+### Et c'est là que CrUX compte
 
-La présence de marque, et elle ne se corrige pas par du code : aucune présence
-sur Wikipedia, Reddit, YouTube ni LinkedIn. Trois avis Tripadvisor, une fiche
-Petit Futé. Les mentions de marque corrèlent trois fois plus fortement avec les
-citations d'IA que les backlinks (Ahrefs, 75 000 marques, décembre 2025).
+```
+CrUX, 18 novembre : No CrUX data for this origin.
+                    Insufficient Chrome traffic volume for eligibility.
+```
+
+Quatre semaines après le précédent audit, le site n'atteint toujours pas le
+seuil d'éligibilité. Le plan d'alors disait « reprendre dans 4 à 6 semaines,
+c'est à ce moment qu'on saura si le LCP de laboratoire correspond à quelque
+chose de réel ». La réponse est : **on ne sait toujours pas, et on ne saura pas
+avant d'avoir du trafic.**
+
+Optimiser le hero maintenant reviendrait toujours à optimiser à l'aveugle — avec
+cette fois une raison supplémentaire de s'abstenir : le goulot n'est pas la
+vitesse.
 
 ---
 
-## 8. Ce qui n'est pas mesurable aujourd'hui
+## 6. Préparation à la recherche IA — 84/100
 
-À dire franchement plutôt que de le combler par des estimations :
+- **217 questions** balisées `FAQPage`, **217 `<details>`** rendus : concordance
+  exacte. Les réponses sont dans le HTML même repliées, ce qui compte pour les
+  robots qui n'exécutent pas de JavaScript.
+- **55 tableaux**, le format le plus repris en réponse générative.
+- `robots.txt` déclare un en-tête **`Content-Signal: search=yes, ai-input=yes,
+  ai-train=no`** — une préférence, pas un contrôle d'accès, et le fichier le dit
+  lui-même.
+- Aucune règle ne nomme un robot d'IA : tous passent par `User-agent: *`.
+- `llms.txt` mentionne la nouvelle page outil.
+
+**Ce qui plafonne la note reste la présence de marque**, et aucune ligne de code
+ne la corrige.
+
+---
+
+## 7. Le tiers qui n'est chargé que sur demande
+
+Depuis le dernier audit, la page planner peut charger le widget d'activités de
+GetYourGuide. Mesuré sur une page nue, ce widget coûte quatre requêtes et un
+`Set-Cookie` avant toute interaction.
+
+Il est donc placé derrière un bouton. Vérifié sur la production : avant le clic,
+le HTML ne contient **ni script, ni balise `data-gyg`, ni requête tierce**. Le
+visiteur qui ne clique pas reste dans l'architecture sans cookie du site.
+
+C'est la bonne façon de l'intégrer, et cela mérite d'être noté parce que
+l'inverse — un widget chargé d'office — aurait coûté à la fois les Core Web
+Vitals et la question du consentement.
+
+---
+
+## 8. Un défaut hors du site, mais destiné à en sortir
+
+`docs/google-business-profile.md` contient **quatre fois la chaîne littérale
+`undefined`** : année d'ouverture, deux fois dans le texte de description, et
+le numéro de licence.
+
+Le fichier est généré par `scripts/make-gbp-sheet.mjs`, qui lit `site.founded`,
+`site.legalName` et `site.license` — trois champs déplacés dans `site.operator`
+lors de la séparation des deux entités, sans que le script suive.
+
+Ce document est fait pour être copié-collé dans une fiche Google publique. Le
+défaut quitte donc le dépôt dès que quelqu'un suit le document.
+
+---
+
+## 9. Ce qui n'est toujours pas mesurable
 
 | Donnée | État | Pourquoi |
 |---|---|---|
-| CrUX / données de terrain | **absente** | `404` — trafic Chrome insuffisant, normal à 4 jours |
-| Search Console | **non vérifiée** | aucun TXT, aucune balise meta sur le site |
-| Positions réelles | **inconnues** | pas de propriété, pas d'outil de suivi branché |
-| Trafic organique | **inconnu** | GA4 et Cloudflare Analytics non branchés |
+| CrUX / terrain | **absente** | trafic Chrome sous le seuil, à 18 jours du dernier essai |
+| Positions réelles | **inconnues** | Search Console vérifiée mais aucune clé API configurée ici |
+| Trafic organique | **partiel** | Cloudflare Web Analytics tourne ; pas d'accès API depuis ce poste |
 | Backlinks | **non mesurés** | aucune clé Moz / Bing configurée |
-| Citations IA | **non mesurées** | aucun outil de suivi de citation branché |
+| Citations IA | **non mesurées** | aucun outil de suivi branché |
 
-Les notes de cet audit décrivent donc une **préparation**, pas une visibilité
-constatée. Aucune des deux ne remplace l'autre.
-
----
-
-## 9. Le risque qui n'est pas technique
-
-Il faut le redire ici parce qu'un audit SEO qui l'omettrait serait incomplet.
-
-Le site parle à la première personne au nom de Jasmin Travel : « nous »,
-licence `48-049/2015/TCDL-GP LHQT`, adresse à Da Nang, trois membres d'équipe
-nommés, avis Tripadvisor de l'agence. Or le modèle décrit est celui d'un
-**apporteur d'affaires** — le client contracte et paie Jasmin, qui opère le
-voyage, et vous touchez une commission.
-
-Pour la chaîne financière et opérationnelle, « sans intermédiaire » reste
-exact. Mais quatorze affirmations à la première personne supposent une
-autorisation que rien n'atteste.
-
-Les deux issues sont toujours ouvertes et exclusives :
-
-**Option A** — le site est la vitrine francophone de Jasmin. Demande une
-**autorisation écrite** de Jasmin pour sa licence, ses personnes et ses avis.
-
-**Option B** — marque d'apport distincte, Jasmin nommé comme partenaire
-opérateur. Demande de réécrire les quatorze affirmations et `site.json`.
-
-Ce n'est pas un détail de conformité : E-E-A-T repose sur l'identité de
-l'éditeur, et `TravelAgency` déclare une entité juridique précise. Une
-mauvaise déclaration ici fragilise tout le reste.
+Search Console est désormais vérifiée : les positions et les impressions sont
+lisibles dans l'interface, même si ce rapport ne peut pas les lire.
 
 ---
 
 ## Méthode
 
-- Exploration : suivi de tous les liens internes depuis la racine, 22 pages
-- Performance : API PageSpeed Insights, Lighthouse 13.6.0, mobile et bureau
-- Terrain : API CrUX — aucune donnée disponible pour ce domaine
-- En-têtes et poids : mesurés sur les réponses réelles, avec `Accept-Encoding`
-- Données structurées : JSON-LD extrait et analysé page par page
+- Exploration : `scripts/check-seo.py`, suivi de tous les liens internes, 40 pages
+- Performance : API PageSpeed Insights, Lighthouse 13.6.0, **trois exécutions**
+  sur l'accueil mobile, une sur chaque autre combinaison
+- Terrain : API CrUX — aucune donnée pour cette origine
+- En-têtes : `curl -I` sur une ressource de **chaque type**, pas seulement le HTML
+- Données structurées : JSON-LD extrait et résolu nœud par nœud
+- Tiers : requêtes réseau relevées dans un navigateur réel, avant et après clic
 - Aucun sous-agent n'a été employé ; tout a été exécuté séquentiellement

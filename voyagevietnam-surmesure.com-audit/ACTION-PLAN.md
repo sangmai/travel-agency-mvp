@@ -1,207 +1,151 @@
 # Plan d'action — voyagevietnam-surmesure.com
 
-Issu de l'audit du 31 octobre 2026. Chaque entrée porte une manière de savoir
-qu'elle a échoué — une recommandation qu'on ne peut pas réfuter ne vaut rien.
+Issu du ré-audit du 18 novembre 2026. Comme le précédent, chaque entrée porte
+une manière de savoir qu'elle a échoué : une recommandation qu'on ne peut pas
+réfuter ne vaut rien.
+
+**Les cinq points critiques du 31 octobre sont traités.** Ce plan ne les répète
+pas. Ce qui suit est ce qui reste, et il est court.
 
 ---
 
-## Phase 1 — Semaine 1
+## Phase 1 — Cette semaine
 
-### 1.1 Corriger le balisage des avis — **Critique**
+### 1.1 Corriger `docs/google-business-profile.md` — **Haute**
 
-**Constat.** Deux avis Tripadvisor sont déclarés en `review` du nœud
-`TravelAgency` comme s'ils avaient été recueillis par le site. L'un porte sur
-un voyage au **Laos et au Cambodge**, daté de **février 2017**.
+**Constat.** Quatre occurrences de la chaîne littérale `undefined` : année
+d'ouverture, deux fois dans le texte de description, et le numéro de licence.
 
-**Pourquoi c'est critique.** Google demande que les avis balisés soient
-recueillis directement par le site. C'est le type de balisage qui déclenche une
-action manuelle « données structurées trompeuses ». Le coût d'une action
-manuelle dépasse de très loin le gain de deux avis.
+**Pourquoi c'est haut.** Le document existe pour être copié-collé dans une fiche
+Google publique. Le défaut quitte le dépôt dès que quelqu'un suit le document.
 
-**Trois décisions distinctes, à prendre séparément :**
+**Cause.** `scripts/make-gbp-sheet.mjs` lit `site.founded`, `site.legalName` et
+`site.license`. Ces trois champs sont passés dans `site.operator` quand la
+marque et l'opérateur ont été séparés, et le script n'a pas suivi.
 
-| | Action | Effet |
-|---|---|---|
-| Balisage | Retirer `review` du JSON-LD | Supprime le risque de conformité |
-| Affichage | Garder les citations visibles, avec lien vers Tripadvisor | Garde la preuve sociale, honnêtement sourcée |
-| Avis Laos/Cambodge | Retirer | Hors sujet et vieux de neuf ans |
+**La partie mécanique est de trois lignes.** La partie qui ne l'est pas : la
+description doit-elle commencer par « Jasmin Travel est une agence… » ou par
+« Voyage Vietnam Sur Mesure est une agence… » ? La fiche Google décrit un
+établissement physique à Da Nang, qui est celui de Jasmin. C'est une décision
+à prendre, pas une substitution à faire.
 
-Garder le texte visible sur la page est parfaitement légitime — c'est le
-*balisage en données structurées* qui pose problème, pas la citation. Attribuer
-clairement (« Avis publié sur Tripadvisor ») est ce qui distingue la citation
-de l'appropriation.
+**Comment savoir que c'est raté :** `grep -c undefined docs/google-business-profile.md`
+renvoie autre chose que `0`.
 
-**Ne pas remettre `aggregateRating`.** Il a été retiré parce qu'il était
-inventé.
+### 1.2 Trois métadonnées — **Basse, mais c'est l'affaire de dix minutes**
 
-**Corriger aussi `site.json`** : `reviewSource` annonce 3 avis, 2 sont publiés.
+| Page | À faire |
+|---|---|
+| `/blog/` | ajouter une `og:image` |
+| `/blog/internet-vietnam/` | description à 174 caractères → sous 165 |
+| `/voyage-noces-vietnam/` | description à 167 caractères → sous 165 |
 
-**Comment savoir que c'est raté :** le Rich Results Test continue de signaler
-un extrait d'avis ; ou Search Console affiche un avertissement « avis » une
-fois la propriété vérifiée.
+Ne pas toucher à `/credits-photos/` : sa description de 69 caractères ne sera
+jamais affichée, la page est `noindex`.
 
----
-
-### 1.2 Vérifier Search Console — **Critique**
-
-**Constat.** Ni TXT DNS ni balise meta. Aucune donnée Google n'est accessible.
-
-**Pourquoi c'est critique.** Tout le reste du suivi en dépend. Sans propriété,
-vous ne savez pas ce qui est indexé, ce qui remonte, ni ce qui casse.
-
-**Voie recommandée : TXT DNS**, pas la balise meta — une propriété `sc-domain:`
-couvre apex + `www` + http + https d'un coup, et vous avez les deux hôtes.
-
-1. `search.google.com/search-console` → **Domaine** → `voyagevietnam-surmesure.com`
-2. Cloudflare → DNS → `TXT`, nom `@`, contenu = la chaîne fournie
-3. **Valider**
-
-Je ne peux pas le faire à votre place : le jeton wrangler lit les zones mais
-n'écrit pas le DNS (`10000 Authentication error`, scope Workers uniquement).
-
-**Puis nommer le sitemap** dans *Sitemaps* → `sitemap.xml`. À savoir : Google
-l'a déjà découvert via `robots.txt`. Le nommer n'accélère pas l'exploration —
-cela ouvre le **rapport d'erreurs**. C'est de la visibilité, pas de la vitesse.
-
-**Comment savoir que c'est raté :** la validation échoue, ou le sitemap reste
-en `N'a pas pu être récupéré` plus de 48 heures.
+**Comment savoir que c'est raté :** `python3 scripts/check-seo.py` signale
+toujours quatre réserves.
 
 ---
 
-### 1.3 Régler les durées de cache — **Haute**
+## Phase 2 — Le vrai sujet
 
-**Constat.** `public/_headers` ne contient aucune règle de cache. Cloudflare
-applique `max-age=0, must-revalidate` à tout, y compris aux fichiers dont le
-nom contient déjà une empreinte. Confirmé indépendamment par Lighthouse
-(« Use efficient cache lifetimes », score 0,5).
+### 2.1 Le trafic, pas la vitesse — **Critique, et ce n'est pas technique**
 
-**Le correctif n'est pas uniforme, et c'est le point à ne pas rater :**
+**Constat.** CrUX ne renvoie toujours rien, dix-huit jours après le précédent
+essai et quatre semaines après l'audit qui disait « reprendre dans 4 à 6
+semaines ». Le site n'atteint pas le seuil d'éligibilité, qui demande un volume
+de trafic Chrome que ce site n'a pas.
 
-| Ressource | Empreinte dans le nom | Traitement |
-|---|---|---|
-| `/_next/static/*` | **oui** | `max-age=31536000, immutable` — sans risque |
-| `/photos/*` | **non** | cache court + revalidation en arrière-plan |
-| HTML | non | laisser revalider |
+**Ce que cela veut dire.** Tout le reste de ce plan est secondaire. Un LCP
+mobile de 3,5 s sur une page que personne ne visite ne coûte rien ; la même page
+visitée mille fois par mois coûte des clients. L'ordre des priorités suit le
+trafic, pas l'inverse.
 
-Mettre un an sur `/photos/` servirait l'ancienne image à tout visiteur déjà
-venu, parfois pendant des mois, puisque le nom ne change pas quand l'image
-change. C'est exactement le genre de correctif « évident » qui crée un bug
-qu'on ne reproduit jamais sur sa propre machine.
+**Ce qui est déjà en place pour en obtenir.** Search Console est vérifiée, le
+sitemap compte 39 URL, 217 questions sont balisées et rendues, 55 tableaux sont
+lisibles par un moteur génératif, et la page outil vise une requête que les
+pages circuit ne visent pas.
 
-**Comment savoir que c'est raté :** après déploiement, `curl -I` sur un fichier
-`/_next/static/` ne renvoie pas `immutable` ; ou bien une photo remplacée
-continue d'apparaître en ancienne version après vidage du cache Cloudflare.
+**Ce qui manque est hors du code** : la présence de marque. Par ordre de
+corrélation décroissante avec les citations d'IA — YouTube, Reddit, LinkedIn.
+Pour Reddit : participer, pas publier.
 
-**Dépendance :** aucune. À faire indépendamment du reste.
+**Indicateur à suivre, sans ré-auditer :** les impressions dans Search Console,
+qui est enfin vérifiée. Et, dans six semaines, un nouvel essai CrUX : le jour où
+il renvoie des données, le site a franchi un seuil réel.
 
----
+### 2.2 Nommer un auteur — **Moyenne**
 
-### 1.4 Trancher l'identité — option A ou B — **Haute**
+Le champ existe et attend un nom. Le JSON-LD bascule tout seul d'organisation
+vers `Person`. Ne demande pas de code : demande que quelqu'un relise et assume
+la page.
 
-**Constat.** Quatorze affirmations à la première personne, une licence, une
-adresse et trois personnes nommées, pour un modèle d'apport d'affaires.
-
-Ce n'est pas une tâche technique et je ne peux pas la trancher à votre place.
-Mais elle **bloque** tout travail E-E-A-T sérieux : nommer un auteur, écrire
-une page « à propos » crédible, demander des avis en son nom propre.
-
-**Comment savoir que c'est raté :** vous ne pouvez pas produire, sur demande,
-un document écrit de Jasmin autorisant l'usage de sa licence et de ses avis.
+**Comment savoir que c'est raté :** aucun guide ne déclare d'`author` de type
+`Person` six semaines après.
 
 ---
 
-## Phase 2 — Semaines 2 et 3
+## Phase 3 — Quand CrUX parlera
 
-### 2.1 Ajouter `image` et `logo` au nœud `TravelAgency` — **Moyenne**
+### 3.1 Le LCP mobile — **à ne pas toucher avant**
 
-Les deux sont recommandés pour `LocalBusiness` et servent aux panneaux de
-connaissance. Les fichiers existent déjà : `scripts/make-images.mjs` produit
-des images OG en 1200 × 630.
+**Constat mesuré.** Accueil mobile 86/88/88 sur trois exécutions, LCP 3,49 s
+stable. Contre 93 et 3,1 s le 31 octobre. Le recul est réel.
 
-**Comment savoir que c'est raté :** le Rich Results Test continue de signaler
-`image` comme champ recommandé manquant.
+**Ce qui a été identifié, et ce qui ne l'a pas été.** Deux postes sont mesurés :
+12 Ko de CSS bloquant le rendu pour 179 ms, et un tiers nouveau depuis le dernier
+audit — Cloudflare Web Analytics, 10,6 Ko, 11,6 ms de fil principal. Les deux
+ensemble n'expliquent pas 400 ms. Le reste est le poids du hero.
 
-### 2.2 Mailler `/agence-de-voyage-vietnam/` — **Moyenne**
+**La comparaison qui tranche :** la page planner, qui porte le seul composant
+client du site et 121 Ko de script, obtient **97**. L'accueil, qui n'en porte
+presque pas, obtient **87**. L'écart tient aux **509 Ko d'images** que la
+première n'a pas.
 
-Deux liens entrants seulement, alors que c'est la page de la requête de marque
-et de la requête locale. Toutes les autres pages sont correctement maillées.
+**Pourquoi attendre quand même.** Le LCP de laboratoire n'est pas le LCP réel,
+et CrUX ne dit rien. Optimiser le hero aujourd'hui, c'est deviner — exactement
+ce que le précédent plan interdisait, pour la même raison, et la raison n'a pas
+changé.
 
-**Comment savoir que c'est raté :** un nouveau passage de `check-seo.py` montre
-toujours ≤ 2 liens entrants.
+**Quand ce sera le moment :** le hero est déjà en `eager`, `fetchPriority=high`,
+dimensions déclarées et préchargé. Il ne restera que le poids à travailler, donc
+les largeurs servies.
 
-### 2.3 Brancher la mesure d'audience — **Moyenne**
+### 3.2 `image` et `logo` sur le nœud opérateur — **Basse**
 
-Les champs sont déjà câblés et vides : `mesure.cloudflare`, `mesure.ga4`.
-Cloudflare Web Analytics est le moins coûteux pour la page — pas de cookie,
-pas de bandeau.
+Absents du nœud `TravelAgency`, qui décrit désormais l'entreprise de Jasmin et
+non celle du site. La marque, elle, porte les deux.
 
-**Indicateur à suivre ensuite :** première session organique enregistrée.
-
-### 2.4 Rediriger `www` vers l'apex — **Moyenne**
-
-Règle de redirection Cloudflare, 301. Sans elle, deux hôtes servent le même
-contenu.
-
-**Comment savoir que c'est raté :** `curl -I https://www.voyagevietnam-surmesure.com/`
-ne renvoie pas `301` vers l'apex.
-
----
-
-## Phase 3 — Mois 2
-
-### 3.1 Remplacer le contenu de démonstration — **Haute avant tout vrai client**
-
-Six itinéraires, `story.json`, treize photos Wikimedia. Sans impact SEO tant
-qu'il n'y a pas de trafic ; impact immédiat le jour où un prospect lit une page
-circuit.
-
-### 3.2 Nommer un auteur réel — **Moyenne**
-
-Le champ existe dans le CMS et attend un nom. Il ne demande pas de code : il
-demande que quelqu'un relise et assume la page. Le JSON-LD bascule tout seul
-d'`organisation` vers `Person`.
-
-**Dépend de 1.4** — on ne peut pas nommer quelqu'un avant de savoir au nom de
-qui le site parle.
-
-### 3.3 Écrire la politique de confidentialité — **Haute avant tout vrai client**
-
-Texte juridique. Je ne le rédigerai pas.
-
-### 3.4 Vérifier le domaine chez Resend — **Moyenne**
-
-`DEVIS_FROM` utilise encore `onboarding@resend.dev`. L'envoi fonctionne, mais
-l'en-tête d'expéditeur est celui d'un bac à sable.
-
-### 3.5 Présence de marque — **Moyenne, effet lent**
-
-C'est ce qui plafonne la note IA, et aucune ligne de code ne le corrige.
-Par ordre de corrélation décroissante : YouTube (≈ 0,737), Reddit, LinkedIn.
-
-Pour Reddit : participer, pas publier. La différence décide du résultat.
+**Ne pas combler avec une photo du site.** Illustrer l'agence d'un tiers avec
+une image libre de droits de la baie d'Halong serait un faux signal de la même
+famille que les avis retirés en octobre. À demander à Jasmin, ou à laisser vide.
 
 ---
 
 ## Phase 4 — En continu
 
-### 4.1 Reprendre CrUX dans 4 à 6 semaines
+### 4.1 Relire les durées de cache après chaque changement d'infrastructure
 
-Aujourd'hui `404 — données insuffisantes`, ce qui est **normal** à quatre jours
-et n'indique aucun problème. CrUX agrège sur 28 jours glissants.
+Elles sont correctes aujourd'hui, et c'est la correction la plus précise du
+trimestre : un an et `immutable` sur les fichiers à empreinte, une journée plus
+revalidation en arrière-plan sur les photos qui n'en ont pas.
 
-C'est seulement à ce moment qu'on saura si le LCP mobile de 3,1 s en
-laboratoire correspond à quoi que ce soit de réel. **Ne pas optimiser le hero
-avant** : optimiser sans donnée de terrain, c'est deviner.
+**Comment savoir que c'est raté :** `curl -I` sur `/photos/v/*.webp` renvoie un
+`max-age` d'un an — ce qui servirait l'ancienne image pendant des mois.
 
-### 4.2 Relecture trimestrielle des guides
+### 4.2 Interroger une ressource de chaque type, pas seulement le HTML
 
-La page visa affiche « Vérifié le 28 octobre 2026 » dans son texte. En faire
-une habitude, et déplacer `dateModified` **à cette occasion seulement**.
+`scripts/check-seo.py` ne lit que l'en-tête du document. Il affiche donc
+`max-age=0, must-revalidate` même quand tout est correctement réglé. Ce ré-audit
+a failli conclure que rien n'avait été corrigé.
 
-Avancer une date sans rouvrir le texte est exactement le mensonge que le
-critère de fraîcheur cherche à détecter.
+### 4.3 Relecture trimestrielle des guides
 
-### 4.3 Rejouer `check-seo.py` après chaque déploiement
+Avancer `dateModified` sans rouvrir le texte est le mensonge que le critère de
+fraîcheur cherche à détecter.
+
+### 4.4 Rejouer `check-seo.py` après chaque déploiement
 
 Il attrape les liens cassés, les dérives de métadonnées et les divergences
 FAQ / `<details>`.
@@ -210,20 +154,18 @@ FAQ / `<details>`.
 
 ## Ce qu'il ne faut pas faire
 
-**Ne pas compter sur `llms.txt`.** Le site en sert un. Google indique
-explicitement qu'il n'aide ni ne nuit. Il reste parce qu'il ne coûte rien, mais
-il ne doit figurer dans aucun plan comme levier.
+**Ne pas charger le widget GetYourGuide d'office.** Il est derrière un bouton,
+et la production le confirme : avant le clic, aucune balise, aucun script,
+aucune requête tierce. Le charger au rendu coûterait les Core Web Vitals et la
+question du consentement d'un seul coup.
 
-**Ne pas compter sur le balisage `FAQPage`.** Google a retiré les résultats
-enrichis de FAQ pour tous les sites le 7 mai 2026. Les 85 questions gardent
-leur valeur par leur **texte**, lisible dans le HTML même replié — pas par leur
-balisage.
+**Ne pas remplir `mesure.cloudflare`** tant que l'« Automatic setup » est actif
+chez Cloudflare. La page aurait deux balises et compterait chaque vue deux fois.
 
-**Ne pas utiliser l'Indexing API** pour ces pages. Google la réserve
-officiellement à `JobPosting` et `BroadcastEvent`. Pour forcer l'exploration
-d'une page précise, utiliser *Inspection d'URL → Demander une indexation*.
+**Ne pas optimiser le LCP avant CrUX.** Voir 3.1.
 
 **Ne pas remettre `aggregateRating`** tant qu'il n'existe pas d'avis réellement
 recueillis par le site.
 
-**Ne pas optimiser le LCP maintenant.** Voir 4.1.
+**Ne pas compter sur `llms.txt`.** Google indique qu'il n'aide ni ne nuit. Il
+reste parce qu'il ne coûte rien.
