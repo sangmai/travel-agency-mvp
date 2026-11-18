@@ -29,6 +29,15 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "Le blog de Voyage Vietnam Sur Mesure",
       description:
         "Des articles longs sur la préparation d'un voyage au Vietnam, écrits par l'équipe qui opère les circuits.",
+      /* The index was the one page on the site sharing without a picture, so a
+         link to it arrived as a bare grey card. The alt is the photo's own,
+         from content/photos.json, rather than a caption invented here. */
+      images: [{
+        url: "/photos/og/hanoi-matin.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Marchande ambulante poussant son vélo chargé de fruits devant les devantures encore closes",
+      }],
     },
   };
 }

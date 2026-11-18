@@ -15,6 +15,7 @@ Also counts tables: that is the format a generative engine reuses most readily.
 Requests go through the IP address while forcing the Host header: the local
 resolver on some machines caches the absence of a recently created domain.
 """
+import html as htmlmod
 import http.client
 import json
 import re
@@ -74,8 +75,14 @@ if not casses: print("  aucune ✓")
 print("\n=== MÉTADONNÉES ===")
 titres, descs, pb_total = defaultdict(list), defaultdict(list), 0
 for p, h in sorted(pages.items()):
-    t = (re.search(r"<title>(.*?)</title>", h, re.S) or [None, ""])[1].strip()
-    d = (re.search(r'name="description" content="([^"]*)"', h) or [None, ""])[1]
+    # Measure what a reader sees, not what the attribute spells. An apostrophe
+    # is six characters in the source (&#x27;) and one on the page, so three of
+    # them in a description made a 159-character line read as 174 and fail a
+    # limit it never exceeded. Google counts the decoded text.
+    t = htmlmod.unescape(
+        (re.search(r"<title>(.*?)</title>", h, re.S) or [None, ""])[1].strip())
+    d = htmlmod.unescape(
+        (re.search(r'name="description" content="([^"]*)"', h) or [None, ""])[1])
     can = (re.search(r'rel="canonical" href="([^"]*)"', h) or [None, ""])[1]
     h1 = re.findall(r"<h1[^>]*>(.*?)</h1>", h, re.S)
     og = len(re.findall(r'property="og:image"', h))

@@ -58,18 +58,18 @@ ${champ("Téléphone", site.phoneDisplay, "Le même que sur le site, format inte
 ${champ("Site web", site.url, "À mettre à jour le jour du passage au domaine définitif.")}
 ${champ("Horaires", `${site.hours.opens}–${site.hours.closes}`, `Ouvert ${ouverts.join(", ")}. Fermé ${fermes.join(" et ")}.`)}
 ${champ("Zone desservie", "Vietnam, Laos, Cambodge", "L'agence se déplace chez le client : déclarer la zone en plus de l'adresse.")}
-${champ("Année d'ouverture", site.founded, "Correspond à la licence de tour-opérateur.")}
+${champ("Année d'ouverture", site.operator.founded, `Celle de ${site.operator.name}, qui détient la licence et opère les voyages.`)}
 
 ## Description (750 caractères maximum)
 
-> ${site.legalName} est une ${site.tagline[0].toLowerCase() + site.tagline.slice(1)}, installée à
-> ${site.address.city} et titulaire de la licence de tour-opérateur
-> international ${site.license}. Nous concevons et opérons nous-mêmes des
-> circuits privés sur mesure au Vietnam, au Laos et au Cambodge, pour une
-> clientèle francophone. Pas d'intermédiaire entre vous et l'équipe qui
-> réserve les hôtels et missionne les guides : le même interlocuteur du
-> premier message jusqu'au retour. Devis gratuit et détaillé sous
-> ${site.responseTime} ouvrées.
+> ${site.name} est la marque francophone de ${site.operator.name}, agence
+> locale installée à ${site.address.city} et titulaire de la licence de
+> tour-opérateur international ${site.operator.license}. Nous concevons avec
+> vous des circuits privés sur mesure au Vietnam, au Laos et au Cambodge, et
+> c'est ${site.operator.name} qui les opère. Pas d'intermédiaire supplémentaire
+> entre vous et l'équipe qui réserve les hôtels et missionne les guides : le
+> même interlocuteur francophone du premier message jusqu'au retour. Devis
+> gratuit et détaillé sous ${site.responseTime} ouvrées.
 
 ## Après la validation
 
@@ -80,7 +80,7 @@ ${champ("Année d'ouverture", site.founded, "Correspond à la licence de tour-op
 2. Basculer \`reviewSource\` de Tripadvisor vers Google dès que les avis y
    sont plus nombreux.
 3. Demander un avis après chaque voyage. C'est la seule façon d'en obtenir,
-   et la raison pour laquelle une agence en activité depuis ${site.founded}
+   et la raison pour laquelle une agence en activité depuis ${site.operator.founded}
    n'en compte que ${site.reviewSource.count} : personne n'a encore posé la
    question.
 

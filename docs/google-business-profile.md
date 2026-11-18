@@ -28,18 +28,18 @@ depuis la même source que le site, il n'y a donc rien à retaper.
 | Site web | `https://voyagevietnam-surmesure.com` | À mettre à jour le jour du passage au domaine définitif. |
 | Horaires | `09:00–18:00` | Ouvert lundi, mardi, mercredi, jeudi, vendredi. Fermé samedi et dimanche. |
 | Zone desservie | `Vietnam, Laos, Cambodge` | L'agence se déplace chez le client : déclarer la zone en plus de l'adresse. |
-| Année d'ouverture | `undefined` | Correspond à la licence de tour-opérateur. |
+| Année d'ouverture | `2015` | Celle de Jasmin Travel, qui détient la licence et opère les voyages. |
 
 ## Description (750 caractères maximum)
 
-> undefined est une agence de voyage locale francophone au Vietnam, installée à
-> Da Nang et titulaire de la licence de tour-opérateur
-> international undefined. Nous concevons et opérons nous-mêmes des
-> circuits privés sur mesure au Vietnam, au Laos et au Cambodge, pour une
-> clientèle francophone. Pas d'intermédiaire entre vous et l'équipe qui
-> réserve les hôtels et missionne les guides : le même interlocuteur du
-> premier message jusqu'au retour. Devis gratuit et détaillé sous
-> 48 h ouvrées.
+> Voyage Vietnam Sur Mesure est la marque francophone de Jasmin Travel, agence
+> locale installée à Da Nang et titulaire de la licence de
+> tour-opérateur international 48-049/2015/TCDL-GP LHQT. Nous concevons avec
+> vous des circuits privés sur mesure au Vietnam, au Laos et au Cambodge, et
+> c'est Jasmin Travel qui les opère. Pas d'intermédiaire supplémentaire
+> entre vous et l'équipe qui réserve les hôtels et missionne les guides : le
+> même interlocuteur francophone du premier message jusqu'au retour. Devis
+> gratuit et détaillé sous 48 h ouvrées.
 
 ## Après la validation
 
@@ -50,7 +50,7 @@ depuis la même source que le site, il n'y a donc rien à retaper.
 2. Basculer `reviewSource` de Tripadvisor vers Google dès que les avis y
    sont plus nombreux.
 3. Demander un avis après chaque voyage. C'est la seule façon d'en obtenir,
-   et la raison pour laquelle une agence en activité depuis undefined
+   et la raison pour laquelle une agence en activité depuis 2015
    n'en compte que 3 : personne n'a encore posé la
    question.
 
