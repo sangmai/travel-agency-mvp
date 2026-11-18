@@ -313,7 +313,19 @@ export function encoder(plan: Plan): string {
 
 const ENTIER = /^\d+$/;
 
-export function decoder(s: string): Plan | null {
+/**
+ * `connus` is the set of place ids the caller can actually resolve.
+ *
+ * Optional because this file imports nothing — that is what lets `node --test`
+ * run it directly — so it cannot read the place list itself. The caller holds
+ * it and passes it in.
+ *
+ * Omitting it costs more than it looks. Every lookup downstream ends in
+ * `?? 0`, so one unknown id does not fail: it becomes a stop at latitude 0,
+ * longitude 0, and the map then frames a journey in the Atlantic with no land
+ * in it. A renamed place is enough to do it to a link already shared.
+ */
+export function decoder(s: string, connus?: ReadonlySet<string>): Plan | null {
   const parts = s.split("/");
   if (parts.length !== 4) return null;
   const [j, mois, v, etapesRaw] = parts;
@@ -333,6 +345,7 @@ export function decoder(s: string): Plan | null {
     const place = bout.slice(0, coupe);
     const nuits = bout.slice(coupe + 1);
     if (!place || !ENTIER.test(nuits)) return null;
+    if (connus && !connus.has(place)) return null;
     const n = Number(nuits);
     if (n < 1 || n > 30) return null;
     etapes.push({ place, nuits: n });

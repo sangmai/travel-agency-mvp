@@ -1,4 +1,4 @@
-import { NEIGHBOURS, VIETNAM, type Shape } from "@/lib/map-shapes";
+import { NEIGHBOURS, PROVINCES, VIETNAM, type Shape } from "@/lib/map-shapes";
 import { project } from "@/lib/map/project";
 import type { ResolvedStop } from "@/lib/content";
 
@@ -68,6 +68,8 @@ export function TripMap({
   inconnus,
   nuits,
   onPick,
+  provinces,
+  cadre,
 }: {
   stops: ResolvedStop[];
   route?: boolean;
@@ -109,6 +111,29 @@ export function TripMap({
    * primary control; this is a redundant shortcut layered on top of it.
    */
   onPick?: (i: number) => void;
+  /**
+   * Draw Vietnam's internal boundaries.
+   *
+   * Off by default, and the reason is where the cost lands. On the planner the
+   * paths are computed once in the browser from data already in the bundle. On
+   * a trip sheet the component runs on the server, so every path would be
+   * written into that page's HTML — and Next serialises server output twice,
+   * in the markup and again in the RSC payload. Twenty-three kilobytes of
+   * outline becomes forty-six, per sheet, on pages that score 85 on mobile.
+   */
+  provinces?: boolean;
+  /**
+   * Frame the drawing and clip to it.
+   *
+   * Clipping is not free, which is why it is asked for rather than always on.
+   * A path touching the frame is drawn whole, and whether that spill helps or
+   * hurts depends on what lies beside the map. On a trip sheet the surround is
+   * sea, so Laos simply carries on past the edge and the map reads as a window
+   * onto a bigger country — clipping it there replaces that with a straight
+   * vertical cut through solid land. On the planner the surround is paper, and
+   * the same spill paints Cambodia onto the page next to the card.
+   */
+  cadre?: boolean;
 }) {
   const pts = stops.map((s) => ({ label: s.map, ...project(s.lon, s.lat) }));
   const view = frame(pts);
@@ -139,6 +164,11 @@ export function TripMap({
     { dx: r * 0.75, dy: r + gap + fs * 0.75, anchor: "start" as const },
     { dx: -(r * 0.75), dy: r + gap + fs * 0.75, anchor: "end" as const },
   ];
+
+  /* Dérivé du cadrage plutôt que tiré au hasard : deux cartes sur une même
+     page ne peuvent pas se voler leur clip, et un identifiant aléatoire
+     casserait l'hydratation en différant entre le serveur et le client. */
+  const clip = `c${r1(x0)}_${r1(y0)}_${r1(w)}_${r1(h)}`.replace(/[.-]/g, "_");
 
   const inset = 3 * k;
   const inside = (b: Box) =>
@@ -190,7 +220,25 @@ export function TripMap({
       aria-hidden="true"
       focusable="false"
     >
+      {/* Clip to the viewBox.
+          An SVG clips to its ELEMENT box, not to its viewBox, and the two stop
+          being the same rectangle as soon as the element is wider or taller
+          than the framing — `preserveAspectRatio` then centres the drawing and
+          leaves bands on either side. The bands are not empty: a path that
+          merely touches the frame is drawn whole, so Cambodia and four
+          provincial outlines were spilling onto the page beside the map. */}
+      {cadre && (
+        <clipPath id={clip}>
+          <rect x={r1(x0)} y={r1(y0)} width={r1(w)} height={r1(h)} />
+        </clipPath>
+      )}
+
+      {/* Outside the clip on purpose: this rect carries the border, and a
+          stroke straddles the edge it is drawn on. Clipped, half of it would
+          be cut away and the frame would come out at half strength. */}
       <rect x={r1(x0)} y={r1(y0)} width={r1(w)} height={r1(h)} className="tripmap__sea" />
+
+      <g clipPath={cadre ? `url(#${clip})` : undefined}>
 
       {NEIGHBOURS.filter(visible).map((s) => (
         <path key={s.d.slice(0, 24)} d={s.d} className="tripmap__neighbour" />
@@ -198,6 +246,10 @@ export function TripMap({
       {VIETNAM.filter(visible).map((s) => (
         <path key={s.d.slice(0, 24)} d={s.d} className="tripmap__land" />
       ))}
+      {provinces &&
+        PROVINCES.filter(visible).map((s) => (
+          <path key={s.d.slice(0, 24)} d={s.d} className="tripmap__prov" />
+        ))}
 
       {/* Dashed: the line joins stops, it does not describe the road. */}
       {route && !inconnus && (
@@ -293,6 +345,7 @@ export function TripMap({
           )}
         </g>
       ))}
+      </g>
     </svg>
   );
 }

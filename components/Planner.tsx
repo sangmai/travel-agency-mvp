@@ -262,7 +262,10 @@ export function Planner({
      initial state keeps the server and the first client render identical,
      which is what React hydration requires. */
   useEffect(() => {
-    const venu = decoder(decodeURIComponent(location.hash.slice(1)));
+    const venu = decoder(
+      decodeURIComponent(location.hash.slice(1)),
+      new Set(lieux.map((l) => l.id)),
+    );
     if (venu) setPlan(venu);
   }, []);
 
@@ -583,10 +586,9 @@ export function Planner({
           placement and the route are all recomputed from the étapes alone. */}
       {plan.etapes.length >= 2 && (
         <figure className="plan__carte">
-          {/* The SVG letterboxes inside a fixed-height box, so the drawn map
-              and the box are not the same rectangle. This wrapper is what the
-              inset frame hangs off: a border on the figure would sit at the
-              edge of the padding, which is not where the map is. */}
+          {/* The wrapper holds the fixed height; the SVG inside takes the
+              width its own framing implies, so the border lands on the map and
+              not on the card. */}
           <div className="plan__vue">
           <TripMap
             stops={plan.etapes.map((e) => {
@@ -602,6 +604,8 @@ export function Planner({
             inconnus={segmentsInconnus}
             nuits={plan.etapes.map((e) => e.nuits)}
             onPick={versEtape}
+            provinces
+            cadre
           />
           </div>
           <figcaption className="plan__note">

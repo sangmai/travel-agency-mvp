@@ -323,3 +323,11 @@ test("the travellers field has its own bounds", () => {
   assert.equal(saisie("", 1, 12), null);
   assert.equal(saisie("13", 1, 12), null);
 });
+
+test("decoder rejette un lieu inconnu quand la liste est fournie", () => {
+  const connus = new Set(["hanoi", "hue"]);
+  assert.equal(decoder("10/Mars/2/hanoi-2,dalat-3", connus), null);
+  assert.ok(decoder("10/Mars/2/hanoi-2,hue-3", connus));
+  /* Sans la liste, le comportement d'avant : la syntaxe seule décide. */
+  assert.ok(decoder("10/Mars/2/hanoi-2,dalat-3"));
+});

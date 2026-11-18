@@ -3448,44 +3448,67 @@ ol.art__liste {
    over take the sea colour, so the join is invisible. */
 .plan__carte {
   margin: 1.25rem 0 0;
-  /* Le trait de la mer plutôt que --line : --line est fait pour le papier et
-     disparaît sur le sable de la section comme sur la mer. La carte doit se
-     lire comme un objet posé sur la page. */
-  border: 1px solid var(--mer-trait);
+  /* Le papier, pas la mer : autour du cadre c'est la page, pas la carte.
+     C'est ce qui fait lire la carte comme un objet posé là. */
+  border: 1px solid var(--line);
   border-radius: 8px;
   overflow: hidden;
-  /* La mer, pas le papier : le SVG est centré dans un cadre à hauteur fixe et
-     les bandes qui restent doivent prolonger la carte, pas l'encadrer. */
-  background: var(--mer);
+  background: var(--paper);
 }
 
-/* Le cadre intérieur. Sans lui, mer et bandes ayant la même couleur, le tout
-   se lit comme un aplat : rien ne dit où commence la carte. Posé en
-   pseudo-élément pour ne toucher ni TripMap ni les six fiches voyage. */
+/* La boîte à hauteur fixe, et la carte centrée dedans.
+   Hauteur fixe sur le CONTENEUR, jamais sur le SVG : le rapport du cadrage
+   suit le voyage, donc une carte libre de se dimensionner oscille d'environ
+   500 px entre un nord-sud et une boucle compacte. Sur un téléphone cela
+   pousserait la page sous le lecteur à chaque étape ajoutée. Ici le SVG peut
+   rétrécir, le conteneur ne bouge pas, et le CLS reste à 0. */
 .plan__vue {
-  position: relative;
-}
-.plan__vue::after {
-  content: "";
-  position: absolute;
-  inset: .55rem;
-  border: 1px solid var(--mer-trait);
-  border-radius: 4px;
-  pointer-events: none;
-}
-.plan__carte .tripmap {
   height: 58vh;
   max-height: 32rem;
   min-height: 15rem;
+  display: grid;
+  place-items: center;
+  padding: .6rem;
 }
+
+/* Le cadre est le rectangle de mer, pas la bordure de l'élément.
+   Dimensionner le SVG au rapport de son viewBox a l'air de marcher et ne
+   marche qu'au large : dès que max-width bride la largeur, height:100% tient
+   bon, preserveAspectRatio place la carte en boîte aux lettres au milieu, et
+   la bordure encadre du vide au-dessus et au-dessous. Le rect de mer, lui,
+   couvre exactement le viewBox par construction — à toute taille, pour tout
+   itinéraire. Le laisser porter le trait rend la question du rapport inutile.
+
+   non-scaling-stroke parce que l'épaisseur est en unités du viewBox : sans
+   lui, un aller-retour autour de Hanoï zoome le cadre jusqu'au trait gras. */
+.plan__carte .tripmap {
+  width: 100%;
+  height: 100%;
+}
+
+.plan__carte .tripmap__sea {
+  stroke: var(--mer-trait);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
 .plan__carte figcaption {
   padding: .5rem .7rem;
   border-top: 1px solid var(--line);
   margin: 0;
-  /* Son propre fond : la légende n'est pas la carte, et --ink-3 sur la mer
-     tombe à 4,44 contre un seuil AA de 4,5. Mesuré, pas estimé. */
   background: var(--paper);
 }
+
+/* Les limites provinciales. Un trait et pas un aplat : elles donnent une
+   structure à la terre sans disputer l'attention au tracé ambre, qui est le
+   sujet. Même raisonnement que les pays voisins, dessinés en retrait. */
+.tripmap__prov {
+  fill: none;
+  stroke: var(--jade-2);
+  stroke-width: .5;
+  opacity: .22;
+}
+
 /* A hop with no travel data. Grey, not a different dash: the line is already
    dashed, and that dash already means "joins two stops, does not draw the
    road". Two meanings on one signal would cost both. */

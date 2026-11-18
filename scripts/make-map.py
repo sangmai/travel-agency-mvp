@@ -4,7 +4,11 @@ Generates lib/map-shapes.ts — the base map for the trip pages.
 
     cd scripts
     curl -o ne50.json https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson
+    curl -o ne1.json  https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson
     python3 make-map.py
+
+The second file carries Vietnam's 63 provinces. It is admin-1 and only exists at
+10m, hence the separate download; it is 39 MB and is not kept either.
 
 Source: Natural Earth 50m, public domain. The result is written into the
 repository: no mapping library, no tiles, no network call at runtime. The map
@@ -35,6 +39,7 @@ sys.setrecursionlimit(20000)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "ne50.json")
+SRC1 = os.path.join(HERE, "ne1.json")
 OUT = os.path.join(HERE, "..", "lib", "map-shapes.ts")
 
 # Extent: all of Vietnam, plus Cambodia as far as Angkor (103.9E, 13.4N).
@@ -111,6 +116,28 @@ def ring_path(ring, tol, min_px):
                           round(max(sx), 1), round(max(sy), 1)]}
 
 
+# Provinces are context like the neighbours, not the subject: a coarser
+# tolerance. At the coastline's 0.7 they cost 29 KB against 12 for the whole
+# base map, for lines nobody reads as geography — they are there so the land is
+# not an empty shape.
+PROV = (1.4, 10)
+
+
+def provinces():
+    """Vietnam's internal boundaries, or [] when ne1.json was not downloaded."""
+    if not os.path.exists(SRC1):
+        return []
+    data = json.load(open(SRC1))
+    out = []
+    for f in data["features"]:
+        if f["properties"].get("adm0_a3") != "VNM":
+            continue
+        g = f["geometry"]
+        polys = g["coordinates"] if g["type"] == "MultiPolygon" else [g["coordinates"]]
+        out += [p for p in (ring_path(r[0], *PROV) for r in polys) if p]
+    return out
+
+
 def main():
     data = json.load(open(SRC))
     geo = {}
@@ -163,6 +190,19 @@ def main():
     L += [fmt(p) for p in out.get("VNM", [])]
     L += ["];", ""]
 
+    prov = provinces()
+    L += [
+        "/**",
+        " * Les limites provinciales. Dessinées en option : elles meublent la terre,",
+        " * qui sans elles est une forme vide, mais elles pèsent autant que le reste de",
+        " * la carte. Le planner les demande ; les fiches voyage non, car là le SVG part",
+        " * dans le HTML de chaque page au lieu d'être calculé une fois côté client.",
+        " */",
+        "export const PROVINCES: Shape[] = [",
+    ]
+    L += [fmt(p) for p in prov]
+    L += ["];", ""]
+
     txt = "\n".join(L)
     open(OUT, "w").write(txt)
 
@@ -170,6 +210,8 @@ def main():
     for iso in SPEC:
         pts = sum(p["d"].count("L") for p in out.get(iso, []))
         print(f"  {iso}: {len(out.get(iso, [])):2d} tracés, {pts:4d} points")
+    pp = sum(p["d"].count("L") for p in prov)
+    print(f"  provinces: {len(prov):2d} tracés, {pp:4d} points")
     print(f"→ {OUT}  ({len(txt) / 1024:.1f} Ko)")
 
 
