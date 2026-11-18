@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { DataTable } from "@/components/DataTable";
 import { Bande } from "@/components/Bande";
+import { Photo } from "@/components/Photo";
 import { breadcrumb } from "@/components/JsonLd";
 import { Planner } from "@/components/Planner";
 import { QuoteForm } from "@/components/QuoteForm";
@@ -72,11 +73,27 @@ export default async function OrganiserSonVoyage() {
       <Header />
 
       <main id="contenu">
-        <section className="sec sec--sand">
-          <div className="wrap">
-            <Fil items={[{ label: "Accueil", href: "/" }, { label: "Organiser son voyage" }]} />
+        {/* Le bandeau des fiches voyage, repris tel quel : mêmes classes, même
+            voile, même traitement du fil d'Ariane. Une page qui porte le même
+            H1 qu'une fiche doit lui ressembler.
+
+            Le sarrasin du Nord plutôt qu'une baie : c'est la région que l'outil
+            conseille le plus souvent d'abandonner, et la page parle de ce qu'il
+            faut sacrifier. Elle n'est hero nulle part ailleurs.
+
+            Le texte passe de .lede à .trip-hero__tag. .lede est en --ink-2, un
+            brun sombre fait pour le papier ; laissé tel quel sur le voile il
+            aurait été illisible. */}
+        <section className="trip-hero">
+          <div className="trip-hero__img">
+            <Photo id="sarrasin" role="hero" />
+          </div>
+          <div className="trip-hero__veil" />
+
+          <div className="wrap trip-hero__in">
+            <Fil light items={[{ label: "Accueil", href: "/" }, { label: "Organiser son voyage" }]} />
             <h1 className="d1">Organiser son voyage au Vietnam</h1>
-            <p className="lede">
+            <p className="trip-hero__tag">
               <b>Le pays fait 1&nbsp;650 kilomètres et votre congé en fait quinze.</b>{" "}
               Tout le reste en découle. Cet outil ne vous vend rien&nbsp;: il vous
               dit ce qui tient dans le temps dont vous disposez, et ce qu&apos;il
