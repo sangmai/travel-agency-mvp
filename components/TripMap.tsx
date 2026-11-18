@@ -66,6 +66,8 @@ export function TripMap({
   stops,
   route = true,
   inconnus,
+  nuits,
+  onPick,
 }: {
   stops: ResolvedStop[];
   route?: boolean;
@@ -82,6 +84,31 @@ export function TripMap({
    * meaning on the same signal would cost both.
    */
   inconnus?: ReadonlySet<number>;
+  /**
+   * Nights per stop, aligned with `stops`, for the hover line.
+   *
+   * Passed in rather than read off the stop, because `resolveStops` spreads
+   * the PLACE — whose `nuits` is the generic `{min, ideal}` for that town, not
+   * what this trip actually stays. Reading it there would print "Hoi An ·
+   * 4 nuits" on a sheet whose own programme says two. Only a caller that holds
+   * the real figure can supply it, so only a caller that does gets the hover.
+   */
+  nuits?: number[];
+  /**
+   * Called with the stop's index when a marker is clicked.
+   *
+   * This is what closes the loop: the map sits under the list, so spotting a
+   * wrong stop there used to mean scrolling back up and finding it again from
+   * memory. It also gives touch something to do — there is no hover on a
+   * phone, so without this the feature would be invisible to half the visitors.
+   *
+   * The SVG stays `aria-hidden`, which means this shortcut is for pointers
+   * only. That is deliberate and it is a trade: un-hiding the map to make the
+   * markers focusable would have a screen reader read the whole itinerary
+   * twice. The list above remains fully operable by keyboard and is the
+   * primary control; this is a redundant shortcut layered on top of it.
+   */
+  onPick?: (i: number) => void;
 }) {
   const pts = stops.map((s) => ({ label: s.map, ...project(s.lon, s.lat) }));
   const view = frame(pts);
@@ -219,7 +246,14 @@ export function TripMap({
       ))}
 
       {pts.map((p, i) => (
-        <g key={p.label}>
+        <g
+          key={p.label}
+          className={onPick ? "tripmap__pt tripmap__pt--cliquable" : "tripmap__pt"}
+          /* Attached only when a caller asked for it. A trip sheet renders on
+             the server, where a handler cannot exist; leaving the attribute off
+             entirely is what keeps this one file usable from both sides. */
+          {...(onPick ? { onClick: () => onPick(i) } : {})}
+        >
           <circle
             cx={r1(p.x)}
             cy={r1(p.y)}
@@ -235,6 +269,28 @@ export function TripMap({
           >
             {i + 1}
           </text>
+          {/* Shown on hover, and only where the caller supplied real nights.
+              A single line of text rather than a boxed tooltip: the label
+              style already carries a paper-coloured halo drawn under the fill,
+              which is what makes a name readable over land, sea or the route
+              line — the same trick works here and saves measuring a box.
+
+              It repeats the name on purpose. The name is already printed
+              beside the dot, but in a dense cluster the placement algorithm
+              puts it wherever it finds room, and which name belongs to which
+              dot is exactly what a visitor cannot tell. */}
+          {nuits?.[i] !== undefined && (
+            <text
+              x={r1(p.x)}
+              y={r1(p.y + r * 2.9)}
+              textAnchor="middle"
+              className="tripmap__tip"
+              fontSize={r1(fs * 0.92)}
+              strokeWidth={r1(3.6 * k)}
+            >
+              {p.label} · {nuits[i]} {nuits[i] > 1 ? "nuits" : "nuit"}
+            </text>
+          )}
         </g>
       ))}
     </svg>

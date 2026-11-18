@@ -3462,3 +3462,35 @@ ol.art__liste {
 .tripmap__route--inconnu {
   stroke: #9a9289;
 }
+
+/* Hover line on a marker, and the row it points back to.
+   CSS only: TripMap stays a pure function of its props, with no state to hold
+   and nothing to clear. On a touch screen there is no hover and so no line —
+   acceptable only because the list above carries the same name and the same
+   count, in text. The tap does something better anyway: it jumps there. */
+.tripmap__tip {
+  fill: var(--jade);
+  stroke: var(--paper);
+  paint-order: stroke fill;
+  stroke-linejoin: round;
+  font-family: var(--body);
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+}
+.tripmap__pt:hover .tripmap__tip { opacity: 1; }
+.tripmap__pt--cliquable { cursor: pointer; }
+.tripmap__pt--cliquable:hover .tripmap__dot { stroke: var(--jade); }
+
+/* The row a marker sent us back to. It fades out on its own: a highlight left
+   on would keep claiming "this étape is the problem" long after it was fixed. */
+.plan__vise {
+  animation: vise 1.4s ease-out;
+}
+@keyframes vise {
+  0%, 55% { background: var(--amber-soft); }
+  100% { background: transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plan__vise { animation: none; outline: 2px solid var(--amber); }
+}

@@ -295,6 +295,25 @@ export function Planner({
      one itinerary — a loop that returns through Hanoï does exactly that — so
      matching on the label would grey both crossings when only one is unknown.
      Recomputed here from the same rule bilan uses. */
+  /* Clicking a marker brings the traveller back to the row that controls it.
+     Plain DOM rather than state: the flash is a visual acknowledgement with no
+     bearing on the plan, and routing it through React would mean holding, and
+     then clearing, a piece of state that means nothing. The form below does the
+     same thing for the same reason.
+
+     `scrollIntoView` is given `center` so the row does not land under the
+     sticky header, and the class removes itself — a highlight that stayed on
+     would read as "this étape is the problem" long after it was fixed. */
+  const versEtape = (i: number) => {
+    const li = document.getElementById(`etape-${i}`);
+    if (!li) return;
+    li.scrollIntoView({ block: "center", behavior: "smooth" });
+    li.classList.remove("plan__vise");
+    void li.offsetWidth;
+    li.classList.add("plan__vise");
+    window.setTimeout(() => li.classList.remove("plan__vise"), 1400);
+  };
+
   const segmentsInconnus = new Set<number>();
   for (let i = 0; i < plan.etapes.length - 1; i++) {
     const leg = trouverLeg(legs, plan.etapes[i].place, plan.etapes[i + 1].place);
@@ -529,7 +548,7 @@ export function Planner({
           const lieu = lieux.find((l) => l.id === e.place);
           const v = lieu ? verdictSaison(saisons, plan.mois, region(lieu.lat)) : "";
           return (
-            <li key={`${e.place}-${i}`}>
+            <li key={`${e.place}-${i}`} id={`etape-${i}`}>
               <b>{nom(e.place)}</b>
               <span className="plan__nuits">
                 <button type="button" onClick={() => nuits(i, e.nuits - 1)} aria-label="Une nuit de moins">−</button>
@@ -576,6 +595,8 @@ export function Planner({
               };
             }) as never}
             inconnus={segmentsInconnus}
+            nuits={plan.etapes.map((e) => e.nuits)}
+            onPick={versEtape}
           />
           <figcaption className="plan__note">
             {b.inconnus.length > 0
