@@ -72,6 +72,7 @@ import gCircuitVietnam15Jours from "@/content/guides/circuit-vietnam-15-jours.js
 import gRizieresVietnam from "@/content/guides/rizieres-vietnam.json";
 import aVietnamCambodge from "@/content/blog/vietnam-cambodge-combiner.json";
 import aTempsTrajet from "@/content/blog/temps-trajet-vietnam.json";
+import aNordQuandPartir from "@/content/blog/quand-partir-nord-vietnam.json";
 import aItineraireCharge from "@/content/blog/itineraire-vietnam-trop-charge.json";
 import aTrainNuitAvion from "@/content/blog/train-nuit-ou-avion-vietnam.json";
 import aArgentVietnam from "@/content/blog/argent-vietnam.json";
@@ -101,6 +102,7 @@ const GUIDES: Guide[] = [gQuandPartirAuVietnam, gBudgetVoyageVietnam, gVisaVietn
 /* Articles, newest first: the index shows them in that order and the sitemap
    reads their real modification date. */
 const ARTICLES: Article[] = [
+  aNordQuandPartir,
   aTempsTrajet,
   aItineraireCharge,
   aTrainNuitAvion,
