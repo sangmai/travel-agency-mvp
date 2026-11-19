@@ -3141,23 +3141,45 @@ img {
   margin: .5rem 0 1.25rem var(--gouttiere-art);
 }
 
-/* Le chapeau et la photo de tête, côte à côte.
-   Grille ici et pas float : les deux colonnes sont connues, et le sommaire ne
-   doit pas s'enrouler autour de l'image. */
-.art__tete {
+/* Le bandeau d'article. .trip-hero fait tout le travail ; il ne reste ici que
+   ce qui distingue un article d'une fiche voyage.
+
+   .guide__meta est en --ink-3, un brun fait pour le papier : sur le voile il
+   tombait sous le seuil. Même raison que .lede → .trip-hero__tag sur la page
+   du planificateur.
+
+   Le titre et la ligne d'auteur sont bornés comme l'est déjà .trip-hero__tag.
+   Pas pour la mesure de lecture — un titre tient sur deux lignes — mais parce
+   que le voile est un dégradé : il vaut 0,86 à gauche et 0,26 à droite. Un
+   texte libre de courir jusqu'au bord arriverait dans la partie mince, et sur
+   une photo claire il y deviendrait illisible. La borne garantit que tout ce
+   qui porte du texte reste là où le voile couvre. */
+.art-hero {
+  min-height: clamp(20rem, 40vw, 27rem);
   display: grid;
-  /* Même mesure que le corps, sinon la colonne de texte change de largeur
-     entre le chapeau et la première section, et les deux images ne sont pas
-     alignées l'une sous l'autre. */
-  grid-template-columns: minmax(0, var(--mesure)) minmax(0, 1fr);
-  column-gap: var(--gouttiere-art);
-  align-items: start;
+  align-items: center;
 }
 
-.art__tete > .bande {
-  max-width: none;
-  margin-block: .35rem 0;
+.art-hero h1,
+.art-hero .guide__meta {
+  max-width: 44rem;
 }
+
+.art-hero .guide__meta {
+  color: var(--on-dark-2);
+}
+
+/* Le sommaire seul dans sa bande : il n'a pas besoin de toute la largeur, et
+   l'encart d'une section complète au-dessus d'un simple sommaire était trop. */
+.art-sommaire-sec {
+  padding-block: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.art-sommaire-sec .art__sommaire {
+  margin-top: 0;
+  max-width: var(--mesure);
+}
+
 
 /* Le seuil des deux colonnes, et il se calcule plutôt qu'il ne se choisit.
    Deux colonnes n'ont de sens que si les deux en sont : il faut 40rem de
@@ -3174,18 +3196,6 @@ img {
     width: auto;
     max-width: 44rem;
     margin-inline: 0;
-  }
-
-  .art__tete {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 1.5rem;
-  }
-
-  /* La photo repasse au-dessus du sommaire : sur un téléphone, l'image est ce
-     qui dit de quoi parle l'article, et le sommaire ce qu'on saute. */
-  .art__tete > .bande {
-    order: -1;
-    max-width: 44rem;
   }
 }
 

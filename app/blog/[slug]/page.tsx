@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Bande } from "@/components/Bande";
+import { Photo } from "@/components/Photo";
 import { Corps, ancre, enligne, typo } from "@/components/Article";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { GuideMeta } from "@/components/GuideMeta";
@@ -108,9 +108,25 @@ export default async function ArticlePage({
       <Header />
 
       <main id="contenu">
-        <section className="sec sec--sand">
-          <div className="wrap">
+        {/* Le bandeau d'article, repris des fiches voyage : mêmes classes, même
+            voile, même traitement du fil d'Ariane.
+
+            Il remplace une mise en côte à côte qui ne tenait pas. Le chapeau
+            et le sommaire font une hauteur qui dépend de l'article — six
+            entrées de sommaire sur « Hué », deux sur un autre — tandis que la
+            photo garde son 4/3. Sur les articles longs, la colonne de droite
+            finissait en image trop courte surmontant un grand vide. Un bandeau
+            n'a pas ce problème : la photo occupe le fond, le texte passe par
+            dessus, et rien ne dépend de la longueur de l'autre colonne. */}
+        <section className="trip-hero art-hero">
+          <div className="trip-hero__img">
+            <Photo id={article.photo} role="hero" />
+          </div>
+          <div className="trip-hero__veil" />
+
+          <div className="wrap trip-hero__in">
             <Fil
+              light
               items={[
                 { label: "Accueil", href: "/" },
                 { label: "Blog", href: lien(BLOG_BASE) },
@@ -118,32 +134,26 @@ export default async function ArticlePage({
               ]}
             />
             <h1 className="d1">{typo(article.title)}</h1>
+            <p className="trip-hero__tag">{enligne(article.lede)}</p>
+            <GuideMeta guide={article} />
+          </div>
+        </section>
 
-            {/* Chapeau et photo côte à côte. La photo avait sa propre section,
-                seule, dans une colonne large de 44rem avec la moitié droite de
-                la page vide à côté d'elle. Elle remplit maintenant ce vide, et
-                le sommaire a quelque chose en face de lui. */}
-            <div className="art__tete">
-              <div className="art__tete-txt">
-                <p className="lede">{enligne(article.lede)}</p>
-                <GuideMeta guide={article} />
-
-                {/* A table of contents on an article of this length is
-                    navigation, not decoration: it is also what lets an answer
-                    engine address a section instead of the whole page. */}
-                <nav className="art__sommaire" aria-label="Sommaire">
-                  <ol>
-                    {article.sections.map((s) => (
-                      <li key={s.h2}>
-                        <a href={`#${ancre(s.h2)}`}>{typo(s.h2)}</a>
-                      </li>
-                    ))}
-                  </ol>
-                </nav>
-              </div>
-
-              <Bande id={article.photo} />
-            </div>
+        {/* Le sommaire descend sous le bandeau. Il reste de la navigation, pas
+            de la décoration : sur un article de six sections c'est ce qui
+            permet d'aller droit à la bonne, et ce qui laisse un moteur de
+            réponse citer une section plutôt que la page entière. */}
+        <section className="sec sec--sand art-sommaire-sec">
+          <div className="wrap">
+            <nav className="art__sommaire" aria-label="Sommaire">
+              <ol>
+                {article.sections.map((s) => (
+                  <li key={s.h2}>
+                    <a href={`#${ancre(s.h2)}`}>{typo(s.h2)}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
           </div>
         </section>
 
