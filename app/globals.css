@@ -3107,12 +3107,29 @@ img {
 }
 
 /* Le rail suit la lecture : sur neuf mille pixels de page, un sommaire qui
-   disparaît au premier tiers ne sert plus à rien. */
+   disparaît au premier tiers ne sert plus à rien.
+
+   Collé en haut, un rail plus haut que la fenêtre perd son bas pour de bon :
+   avec trois blocs il fait 937 px, et le dernier — les circuits — restait
+   hors d'atteinte sur tout écran de moins de mille pixels de haut. D'où le
+   plafond et le défilement propre : sur un grand écran il ne se voit pas, sur
+   un petit il rend le bas du rail accessible au lieu de le perdre.
+
+   overscroll-behavior pour que la molette, arrivée au bout du rail, ne
+   reparte pas faire défiler l'article derrière. */
 .art__rail {
   position: sticky;
   top: calc(var(--hdr) + 1.25rem);
+  max-height: calc(100vh - var(--hdr) - 2.5rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   display: grid;
   gap: 1.75rem;
+  align-content: start;
+  /* La barre de défilement, quand elle apparaît, ne doit pas coller aux
+     cartes ni rogner leur bordure. */
+  padding-right: .35rem;
+  margin-right: -.35rem;
 }
 
 .art__rail-bloc {
@@ -3206,6 +3223,41 @@ img {
   color: var(--amber-deep);
 }
 
+/* Le bloc du planificateur : le seul sombre du rail.
+   Deux cartes blanches et une troisième identique, c'est trois fois rien.
+   Celle-ci porte ce que le site a de singulier, elle doit se lire comme autre
+   chose — même palette, traitement inverse. C'est la seule hardiesse du rail,
+   et elle y suffit. */
+.art__rail-bloc--outil {
+  background: var(--jade);
+  border-color: var(--jade);
+  color: var(--on-dark-2);
+}
+
+.art__rail-bloc--outil .art__rail-titre {
+  color: var(--on-dark);
+}
+
+.art__rail-texte {
+  margin: 0 0 .9rem;
+  font-size: .88rem;
+  line-height: 1.5;
+}
+
+.art__rail-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: .9rem;
+}
+
+.art__rail-fine {
+  margin: .6rem 0 0;
+  font-size: .75rem;
+  color: var(--on-dark-3);
+  text-align: center;
+}
+
 /* Le seuil, calculé : 40rem de mesure, 2,5rem de gouttière, 19rem de rail,
    plus les marges de page. En dessous, le rail passe sous l'article — il
    garde son utilité, il perd seulement sa position. */
@@ -3216,6 +3268,10 @@ img {
 
   .art__rail {
     position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+    margin-right: 0;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 }

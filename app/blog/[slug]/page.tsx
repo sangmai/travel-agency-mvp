@@ -170,6 +170,31 @@ export default async function ArticlePage({
                 </ol>
               </nav>
 
+              {/* Le planificateur, et c'est le seul bloc sombre du rail.
+                  Trois cartes blanches identiques auraient noyé celle qui
+                  compte : c'est la seule chose du site qu'un concurrent n'a
+                  pas, et un lecteur arrivé ici par « combien de jours pour le
+                  Vietnam » est exactement celui à qui elle sert.
+
+                  Le libellé du bouton est celui de la page d'accueil, mot pour
+                  mot. Une action garde son nom d'un bout à l'autre du
+                  parcours, sinon le visiteur croit arriver ailleurs. */}
+              <div className="art__rail-bloc art__rail-bloc--outil">
+                <p className="art__rail-titre">Votre itinéraire tient-il&nbsp;?</p>
+                <p className="art__rail-texte">
+                  Posez vos étapes&nbsp;: l&apos;outil compte les nuits et les
+                  trajets, puis vous dit ce qui dépasse et ce qu&apos;il faut
+                  retirer.
+                </p>
+                <a
+                  className="btn btn--amber art__rail-btn"
+                  href={lien("/organiser-son-voyage-au-vietnam")}
+                >
+                  Tester mon itinéraire
+                </a>
+                <p className="art__rail-fine">Gratuit, sans inscription.</p>
+              </div>
+
               <div className="art__rail-bloc">
                 <p className="art__rail-titre">Nos circuits</p>
                 <ul className="art__rail-liste">
