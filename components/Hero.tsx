@@ -1,5 +1,5 @@
 import { Photo } from "./Photo";
-import { aggregate, getReviews, getSite, getHome } from "@/lib/content";
+import { aggregate, getReviews, getSite, getHome, lien } from "@/lib/content";
 import { Accent, fill } from "@/lib/text";
 import { score } from "@/lib/format";
 
@@ -51,9 +51,24 @@ export async function Hero() {
 
         <p className="hero__sub">{t(h.sub)}</p>
 
+        {/* Le second bouton mène au planificateur, pas à la liste des
+            circuits : celle-ci est à un coup de molette, et personne ne clique
+            un bouton pour faire défiler. Le planificateur, lui, est la seule
+            chose du site qu'un concurrent n'a pas — il mérite la place.
+
+            « Tester » et non « Organiser » : le bouton d'à côté dit « Composer
+            mon voyage » et mène au devis. Deux libellés quasi synonymes pour
+            deux destinations différentes, c'est un visiteur qui se trompe de
+            porte. « Tester » annonce un outil, pas un formulaire de plus.
+
+            Pas de « Vietnam » dans le libellé non plus : nous avons déjà une
+            page sur l'itinéraire, et lui voler son ancre reviendrait à faire
+            concourir deux pages pour la même requête. */}
         <div className="hero__cta">
           <a className="btn btn--amber" href="#devis">{h.ctaPrimary}</a>
-          <a className="btn btn--glass" href="#circuits">{h.ctaSecondary}</a>
+          <a className="btn btn--glass" href={lien("/organiser-son-voyage-au-vietnam")}>
+            {h.ctaSecondary}
+          </a>
         </div>
       </div>
 

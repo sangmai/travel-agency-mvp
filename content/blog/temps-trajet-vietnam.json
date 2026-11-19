@@ -1,0 +1,344 @@
+{
+  "slug": "temps-trajet-vietnam",
+  "title": "Temps de trajet au Vietnam : les heures qu'on oublie",
+  "description": "Hanoï–Hué : 9 h 30 par la route, 1 h 15 en avion, 12 h 36 en train de nuit — et c'est le train qui ne coûte aucune journée. Durées réelles et sourcées.",
+  "ogTitle": "Temps de trajet au Vietnam : les durées réelles",
+  "ogDescription": "Un itinéraire se construit en heures, pas en villes. Durées réelles des trajets vietnamiens, et ce que chacun coûte en journées de voyage.",
+  "photo": "hanoi",
+  "photoAlt": "Marchande ambulante poussant son vélo chargé de fruits devant les devantures encore closes",
+  "datePublished": "2026-11-19",
+  "dateModified": "2026-11-19",
+  "author": "",
+  "chapo": "Un itinéraire se compose en villes et se paie en heures. Voici le tarif.",
+  "lede": "**Le Vietnam fait 1 650 kilomètres du nord au sud, et c'est là que les itinéraires se cassent.** On ajoute une ville parce qu'elle a l'air proche sur la carte, sans voir qu'elle coûte une journée entière de route. Cette page donne les durées réelles des trajets que font nos voyageurs, avec leurs sources, et surtout ce que chacun retire de vos vacances — ce qui n'est pas la même chose.",
+  "sections": [
+    {
+      "h2": "Une heure de trajet n'est pas une journée perdue",
+      "blocs": [
+        {
+          "p": "**C'est la distinction que presque aucun comparateur ne fait, et c'est celle qui décide de tout.** Un trajet se mesure en heures, mais il se paie en journées, et le taux de change n'est pas constant."
+        },
+        {
+          "p": "Trois trajets de la même durée peuvent coûter trois choses différentes. Da Nang–Hoi An prend 45 minutes : il se glisse dans une matinée et ne retire rien. Hanoï–Hué en avion prend 1 h 15 de vol, mais entre le trajet vers l'aéroport, l'enregistrement, l'attente et la route depuis l'aéroport de Phu Bai, la demi-journée y passe. Et le train de nuit Hanoï–Hué prend 12 h 36, soit dix fois plus que l'avion, en ne coûtant aucune journée du tout — il part à 19 h 20 et arrive à 7 h 55."
+        },
+        {
+          "p": "Le train de nuit fait même mieux que ne rien coûter : il remplace une nuit d'hôtel. Sur un congé de quinze jours, c'est une étape supplémentaire que vous pouvez vous offrir."
+        },
+        {
+          "p": "La dernière catégorie est celle qu'on oublie : le trajet qui *est* le voyage. Le col des Nuages entre Hué et Da Nang prend 3 h 30 par la route de montagne contre 2 h par le tunnel. Une heure et demie de plus, pour la plus belle route côtière du pays. Compter ces 3 h 30 comme une perte, c'est pousser les gens dans le tunnel pour gagner quatre-vingt-dix minutes et leur retirer la raison d'être venus."
+        }
+      ]
+    },
+    {
+      "h2": "Les trajets du Nord",
+      "blocs": [
+        {
+          "p": "Le Nord est compact sur la carte et lent sur la route. Les montagnes y imposent des moyennes de 30 à 40 km/h, et une distance de 150 kilomètres peut demander cinq heures."
+        },
+        {
+          "tableau": {
+            "legende": "Durées de porte à porte, hors arrêts",
+            "colonnes": [
+              "Trajet",
+              "Mode",
+              "Durée",
+              "Ce que ça coûte"
+            ],
+            "lignes": [
+              [
+                "Hanoï → Ninh Binh",
+                "Route",
+                "1 h 35",
+                "Un quart de journée"
+              ],
+              [
+                "Hanoï → baie de Lan Ha",
+                "Navette de croisière",
+                "3 h 15",
+                "Une demi-journée"
+              ],
+              [
+                "Hanoï → Pu Luong",
+                "Route",
+                "4 h 30",
+                "Une journée"
+              ],
+              [
+                "Hanoï → Sapa",
+                "Route",
+                "5 h 30",
+                "Une journée"
+              ],
+              [
+                "Hanoï → Sapa",
+                "Train de nuit",
+                "9 h",
+                "Un quart de journée, et une nuit d'hôtel en moins"
+              ],
+              [
+                "Hanoï → Ha Giang",
+                "Bus de nuit",
+                "7 h",
+                "Rien, et une nuit d'hôtel en moins"
+              ],
+              [
+                "Ha Giang → Dong Van",
+                "Route de montagne",
+                "5 h 30",
+                "Une journée — mais c'est la boucle elle-même"
+              ],
+              [
+                "Dong Van → Cao Bang",
+                "Route de montagne",
+                "8 h",
+                "Une journée pleine"
+              ]
+            ],
+            "note": "Sources : daytripsvietnam.com 2026, opérateurs Hanoï–Ha Giang, travelocal.vn, north-vietnam.com."
+          }
+        },
+        {
+          "p": "Dong Van–Cao Bang mérite un mot. Huit heures de route de montagne entre deux étapes que les cartes montrent voisines : c'est le trajet qui fait exploser les boucles du Nord-Est mal préparées. Il se justifie si le but est la route ; il ne se justifie jamais pour \"relier deux points\"."
+        }
+      ]
+    },
+    {
+      "h2": "Descendre vers le Centre",
+      "blocs": [
+        {
+          "p": "**C'est ici que la longueur du pays se paie.** Entre Hanoï et Hué il y a 700 kilomètres, et aucun moyen de les franchir gratuitement."
+        },
+        {
+          "tableau": {
+            "colonnes": [
+              "Trajet",
+              "Mode",
+              "Durée",
+              "Ce que ça coûte"
+            ],
+            "lignes": [
+              [
+                "Hanoï → Hué",
+                "Avion",
+                "1 h 15 de vol",
+                "Une demi-journée"
+              ],
+              [
+                "Hanoï → Hué",
+                "Train de nuit SE3",
+                "12 h 36",
+                "Rien, et une nuit d'hôtel en moins"
+              ],
+              [
+                "Hanoï → Hué",
+                "Route",
+                "9 h 30",
+                "Une journée pleine"
+              ],
+              [
+                "Hanoï → Phong Nha",
+                "Train de nuit",
+                "10 h 50",
+                "Un quart de journée"
+              ],
+              [
+                "Hanoï → Da Nang",
+                "Avion",
+                "1 h 20 de vol",
+                "Une demi-journée"
+              ],
+              [
+                "Phong Nha → Hué",
+                "Route",
+                "4 h",
+                "Une demi-journée"
+              ]
+            ],
+            "note": "Sources : horaires SE1, SE3 et SE19 des chemins de fer vietnamiens (dsvn.vn), horaires publiés des compagnies, opérateurs de transfert Phong Nha–Hué 2026."
+          }
+        },
+        {
+          "p": "La route Hanoï–Hué en voiture existe et nous la déconseillons presque toujours : neuf heures et demie sur la nationale 1, pour un paysage que le train longe mieux. Elle ne se défend que si vous vous arrêtez à Phong Nha en chemin, et dans ce cas, autant prendre le train de nuit jusqu'à Phong Nha et repartir frais."
+        }
+      ]
+    },
+    {
+      "h2": "Le Centre, et la seule route qu'il ne faut pas éviter",
+      "blocs": [
+        {
+          "p": "Hué, Da Nang et Hoi An tiennent dans un mouchoir de poche à l'échelle du pays. C'est la partie du Vietnam où l'on peut respirer."
+        },
+        {
+          "tableau": {
+            "colonnes": [
+              "Trajet",
+              "Mode",
+              "Durée",
+              "Remarque"
+            ],
+            "lignes": [
+              [
+                "Hué → Da Nang",
+                "Route par le tunnel",
+                "2 h",
+                "Le plus rapide"
+              ],
+              [
+                "Hué → Da Nang",
+                "Route par le col des Nuages",
+                "3 h 30",
+                "1 h 30 de plus, et le paysage"
+              ],
+              [
+                "Hué → Da Nang",
+                "Train",
+                "2 h 36",
+                "La voie longe la mer"
+              ],
+              [
+                "Hué → Da Nang",
+                "Train patrimoine",
+                "3 h 24",
+                "Voiture panoramique"
+              ],
+              [
+                "Hué → Hoi An",
+                "Route directe",
+                "2 h 45",
+                "Direct, sans le col"
+              ],
+              [
+                "Hué → Hoi An",
+                "Route par le col",
+                "6 h",
+                "Avec arrêts, c'est une excursion"
+              ],
+              [
+                "Da Nang → Hoi An",
+                "Route",
+                "45 min",
+                "Négligeable"
+              ]
+            ],
+            "note": "Sources : daytripsvietnam.com 2026, horaires des chemins de fer vietnamiens 2026, horaires du train patrimoine Hué–Da Nang 2026."
+          }
+        },
+        {
+          "p": "Entre le tunnel et le col, nous recommandons le col chaque fois que la journée le permet. Et entre la voiture et le train, le train : la voie ferrée est accrochée à la falaise au-dessus de la mer, à un endroit où aucune route ne passe."
+        }
+      ]
+    },
+    {
+      "h2": "Vers le Sud, et le delta",
+      "blocs": [
+        {
+          "p": "Du Centre au Sud, l'avion n'a pas de concurrent sérieux : la distance est trop grande pour la route et le train y perd son avantage, puisqu'il arrive en pleine journée plutôt qu'au petit matin."
+        },
+        {
+          "tableau": {
+            "colonnes": [
+              "Trajet",
+              "Mode",
+              "Durée",
+              "Ce que ça coûte"
+            ],
+            "lignes": [
+              [
+                "Da Nang → Hô Chi Minh-Ville",
+                "Avion",
+                "1 h 20 de vol",
+                "Une demi-journée"
+              ],
+              [
+                "Hoi An → Hô Chi Minh-Ville",
+                "Route + avion",
+                "2 h 08",
+                "Une demi-journée"
+              ],
+              [
+                "Hué → Hô Chi Minh-Ville",
+                "Avion",
+                "1 h 30 de vol",
+                "Une demi-journée"
+              ],
+              [
+                "Saigon → Can Tho",
+                "Route",
+                "2 h 45",
+                "Une demi-journée"
+              ],
+              [
+                "Can Tho → Chau Doc",
+                "Route",
+                "3 h",
+                "Une demi-journée"
+              ],
+              [
+                "Saigon → Phu Quoc",
+                "Avion",
+                "1 h de vol",
+                "Une demi-journée"
+              ],
+              [
+                "Saigon → Con Dao",
+                "Avion",
+                "45 min de vol",
+                "Une demi-journée"
+              ]
+            ],
+            "note": "Sources : horaires publiés des compagnies intérieures, daytripsvietnam.com 2026, Baolau 2026."
+          }
+        },
+        {
+          "p": "Le delta du Mékong demande une précision que les brochures évitent : Can Tho est à 2 h 45 de Saigon, pas à une excursion d'une journée. Le marché flottant de Cai Rang se tient à l'aube et se vide vers huit heures. Y aller et en revenir dans la journée, c'est partir de Saigon à quatre heures du matin ou arriver après la fin. Une nuit sur place change l'excursion en voyage."
+        }
+      ]
+    },
+    {
+      "h2": "Ce que ces chiffres changent à votre itinéraire",
+      "blocs": [
+        {
+          "p": "**Faites l'addition avant de choisir les villes, pas après.** C'est l'inverse de ce que fait tout le monde, et c'est ce qui sépare un congé de quinze jours réussi d'un congé passé en transit."
+        },
+        {
+          "p": "Un exemple qui revient chaque semaine dans nos messages : Hanoï, baie de Lan Ha, Sapa, Hué, Hoi An, Saigon et le delta en quinze jours. Sur une carte, c'est un beau trait du nord au sud. En heures, c'est six trajets dont deux journées pleines et trois demi-journées — plus de cinq jours de déplacement sur quinze, et une valise refaite tous les deux matins."
+        },
+        {
+          "p": "Retirer Sapa de cette liste rend trois jours au reste du voyage. C'est le genre d'arbitrage qu'aucune brochure ne vous propose, parce qu'une brochure a intérêt à vous vendre la liste complète."
+        },
+        {
+          "p": "Nous avons mis ces durées dans un outil qui fait l'addition pour vous : vous choisissez vos étapes, il vous dit combien de nuits il reste et ce qu'il faut abandonner quand le compte ne tombe pas juste. Il est [en accès libre ici](/organiser-son-voyage-au-vietnam/), sans inscription et sans devis obligatoire."
+        },
+        {
+          "photo": "mekong"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Combien de temps dure le trajet Hanoï–Hué ?",
+      "a": "Trois réponses selon le mode. L'avion : 1 h 15 de vol, mais une demi-journée de porte à porte. Le train de nuit SE3 : 12 h 36, départ 19 h 20, arrivée 7 h 55 — il ne coûte aucune journée et remplace une nuit d'hôtel. La route : 9 h 30 sur la nationale 1, soit une journée pleine. Pour un congé court, le train de nuit est presque toujours le meilleur calcul."
+    },
+    {
+      "q": "Combien de temps pour aller de Hanoï à Sapa ?",
+      "a": "5 h 30 par la route, ou 9 h par le train de nuit jusqu'à Lao Cai suivi de la montée jusqu'à Sapa. Contrairement au train Hanoï–Hué, celui de Sapa ne vous dépose pas à destination : il faut encore monter de Lao Cai, ce qui lui retire une partie de son avantage. Comptez un quart de journée perdu malgré la nuit à bord."
+    },
+    {
+      "q": "Faut-il prendre le tunnel ou le col des Nuages entre Hué et Da Nang ?",
+      "a": "Le col, chaque fois que la journée le permet. Le tunnel prend 2 h, le col 3 h 30. Une heure et demie d'écart, pour la plus belle route côtière du Vietnam. Le train est une troisième option excellente : 2 h 36, et la voie est accrochée à la falaise au-dessus de la mer, là où aucune route ne passe."
+    },
+    {
+      "q": "Peut-on visiter le delta du Mékong depuis Saigon en une journée ?",
+      "a": "Techniquement oui, utilement non. Can Tho est à 2 h 45 de Saigon et le marché flottant de Cai Rang se tient à l'aube, vidé vers huit heures. Un aller-retour dans la journée signifie partir à quatre heures du matin ou arriver après la fin du marché. Une nuit à Can Tho transforme l'excursion en voyage."
+    },
+    {
+      "q": "Combien de temps faut-il compter entre Dong Van et Cao Bang ?",
+      "a": "Huit heures de route de montagne, et c'est le trajet qui fait dérailler les boucles du Nord-Est mal préparées. Les deux villes paraissent voisines sur une carte ; la route, elle, suit les crêtes. Ce trajet se justifie si la route est le but du voyage, jamais pour simplement relier deux points."
+    },
+    {
+      "q": "Combien de journées de transport faut-il prévoir sur quinze jours ?",
+      "a": "Au-delà de quatre, le voyage devient un déplacement. Un itinéraire Nord–Centre–Sud honnête sur quinze jours compte deux à trois journées pleines de transport, pas cinq. Chaque étape ajoutée coûte un trajet, et le trajet se prélève sur les jours de visite, jamais sur les jours de repos."
+    }
+  ]
+}

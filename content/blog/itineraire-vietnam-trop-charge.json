@@ -1,0 +1,181 @@
+{
+  "slug": "itineraire-vietnam-trop-charge",
+  "title": "Itinéraire Vietnam trop chargé : quoi retirer",
+  "description": "Sept étapes en quinze jours, c'est une valise refaite tous les deux matins. Comment compter les nuits, et dans quel ordre couper quand ça ne tient pas.",
+  "ogTitle": "Itinéraire Vietnam trop chargé : quoi retirer",
+  "ogDescription": "Le piège du Vietnam n'est pas de manquer de choses à voir, c'est d'en mettre trop. La méthode pour compter, et pour couper.",
+  "photo": "ninhbinh",
+  "photoAlt": "Barques à rames glissant entre les pitons calcaires et les rizières de Ninh Binh",
+  "datePublished": "2026-11-19",
+  "dateModified": "2026-11-19",
+  "author": "",
+  "chapo": "Le problème du Vietnam n'est pas de manquer de choses à voir. C'est d'en mettre trop.",
+  "lede": "**Un voyage de quinze jours contient quatorze nuits, et c'est tout.** Ce chiffre ne se négocie pas, mais presque personne ne le pose avant de choisir ses étapes. On empile les villes, on découvre trop tard que le compte ne tombe pas, et on rogne partout plutôt que de renoncer quelque part. Cette page explique comment faire l'addition, comment reconnaître un itinéraire intenable, et dans quel ordre couper.",
+  "sections": [
+    {
+      "h2": "Faites l'addition avant de choisir",
+      "blocs": [
+        {
+          "p": "**Quinze jours font quatorze nuits.** Chaque étape consomme des nuits, chaque trajet en consomme parfois une de plus, et le total doit tomber juste. C'est de l'arithmétique, et c'est pourtant la partie du voyage que les gens improvisent."
+        },
+        {
+          "p": "Le calcul tient en trois lignes. On additionne les nuits passées dans chaque ville. On ajoute une nuit pour chaque trajet qui se fait de nuit — le train Hanoï–Hué, le bus de Ha Giang — parce qu'une nuit à bord est une nuit consommée, même si elle ne coûte pas d'hôtel. On compare au nombre de nuits disponibles."
+        },
+        {
+          "p": "Prenons l'itinéraire le plus demandé : Hanoï, baie de Lan Ha, Sapa, Hué, Hoi An, Saigon, delta du Mékong. Deux nuits à Hanoï, une sur la baie, deux à Sapa, deux à Hué, trois à Hoi An, une à Saigon, deux dans le delta : treize nuits. Plus le train de nuit vers Hué : quatorze. Le compte tombe pile."
+        },
+        {
+          "p": "Et pourtant ce voyage est raté. Parce que le compte des nuits ne dit rien du rythme."
+        }
+      ]
+    },
+    {
+      "h2": "La seconde addition, celle que personne ne fait",
+      "blocs": [
+        {
+          "p": "**Un itinéraire peut tenir dans ses jours et rester un mauvais congé.** Sept étapes en quinze jours, c'est six déménagements : une valise refaite tous les deux matins."
+        },
+        {
+          "p": "Reprenons le même exemple. Sept étapes signifient six trajets. En heures réelles, détaillées dans [notre page sur les temps de trajet](/blog/temps-trajet-vietnam/), cela donne : Hanoï–Lan Ha une demi-journée, Lan Ha–Sapa une journée, Sapa–Hué une journée, Hué–Hoi An une demi-journée, Hoi An–Saigon une demi-journée, Saigon–delta une demi-journée. Soit plus de quatre journées de transport sur quinze."
+        },
+        {
+          "p": "Ajoutez-y les matins de départ, les chambres rendues à midi, les bagages en consigne : ce ne sont pas quatre journées qui disparaissent, c'est la moitié du voyage qui se passe à faire et défaire des sacs."
+        },
+        {
+          "p": "La question utile n'est donc pas \"est-ce que ça rentre\" mais \"combien de matins vais-je passer à partir plutôt qu'à être quelque part\"."
+        },
+        {
+          "tableau": {
+            "legende": "Quinze jours, trois façons de les remplir",
+            "colonnes": [
+              "Étapes",
+              "Déménagements",
+              "Journées de transport",
+              "Ce que ça donne"
+            ],
+            "lignes": [
+              [
+                "7 étapes",
+                "6",
+                "Plus de 4",
+                "Un déplacement, pas un voyage"
+              ],
+              [
+                "5 étapes",
+                "4",
+                "2 à 3",
+                "Tenable, rythme soutenu"
+              ],
+              [
+                "4 étapes",
+                "3",
+                "1 à 2",
+                "Du temps sur place, des journées libres"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "h2": "Les quatre signes d'un itinéraire qui ne tient pas",
+      "blocs": [
+        {
+          "p": "Avant de couper, il faut diagnostiquer. Quatre signaux suffisent, et ils se vérifient en cinq minutes sur votre propre liste."
+        },
+        {
+          "ol": [
+            "**Plus de cinq étapes en quinze jours.** Au-delà, chaque ville reçoit moins de deux nuits, c'est-à-dire une seule journée pleine sur place.",
+            "**Une étape à une seule nuit qui n'est pas une étape de transit.** Une nuit, c'est arriver en fin d'après-midi et repartir le lendemain matin. Pour la baie de Lan Ha à bord d'une jonque, c'est le format normal. Pour Hué, c'est passer à côté.",
+            "**Un grand écart nord-sud sans vol intérieur.** Sapa et le delta du Mékong dans le même congé de quinze jours, c'est 1 900 kilomètres. Soit vous prenez l'avion, soit vous passez vos vacances dans les transports.",
+            "**Aucune journée sans transport.** Si chaque jour de votre plan contient un déplacement, vous n'avez pas prévu de vacances, vous avez prévu un itinéraire."
+          ]
+        },
+        {
+          "p": "Si deux de ces quatre signaux sont présents, le problème n'est pas d'optimiser, c'est de retirer une étape."
+        }
+      ]
+    },
+    {
+      "h2": "Dans quel ordre couper",
+      "blocs": [
+        {
+          "p": "**Retirez d'abord ce qui coûte le plus de trajet par nuit sur place.** Pas ce qui vous tente le moins : ce qui vous coûte le plus cher en temps."
+        },
+        {
+          "p": "Sapa est presque toujours le premier candidat sur un quinze jours nord-sud. Non parce qu'elle ne vaut rien — les rizières y sont parmi les plus belles du pays — mais parce qu'elle est un cul-de-sac : on y monte et on en redescend par le même chemin, et le détour coûte deux à trois jours pour deux nuits sur place. Dans un voyage de vingt jours, elle redevient évidente."
+        },
+        {
+          "p": "Le second candidat est l'étape à une nuit qui n'est pas un bateau. Une nuit à Hué ou à Saigon ne vous donne rien : vous arrivez, vous dormez, vous repartez. Mieux vaut deux nuits dans l'une et zéro dans l'autre."
+        },
+        {
+          "p": "Le troisième est le doublon de paysage. Baie de Ha Long et baie de Lan Ha racontent la même chose — [nous avons écrit une page entière sur ce choix](/halong-ou-lan-ha/). Ninh Binh et Pu Luong aussi, dans une certaine mesure. Choisissez-en une, donnez-lui une nuit de plus."
+        },
+        {
+          "p": "Et ce qu'il ne faut jamais couper en premier : la journée libre. C'est la première chose que les gens sacrifient et la seule qui ne se rattrape pas. Un voyage sans un seul jour sans valise n'est pas un voyage court, c'est un voyage raté."
+        },
+        {
+          "photo": "rizieres"
+        }
+      ]
+    },
+    {
+      "h2": "Le cas des quinze jours, en trois versions honnêtes",
+      "blocs": [
+        {
+          "p": "Voici ce que quinze jours permettent réellement, selon ce que vous acceptez d'abandonner. Aucune de ces trois versions n'est meilleure : elles répondent à trois envies différentes."
+        },
+        {
+          "ul": [
+            "**Nord et Centre, sans l'avion.** Hanoï (3 nuits), Ninh Binh (2), baie de Lan Ha (1), train de nuit vers Hué (2), Hoi An (4), retour. Quatre étapes, deux journées de transport, du temps partout. C'est la version que nous recommandons le plus souvent pour un premier voyage.",
+            "**Du nord au sud, en acceptant deux vols.** Hanoï (2), baie de Lan Ha (1), Hué (2), Hoi An (3), Saigon (2), delta du Mékong (2). Six étapes, un rythme soutenu mais tenable parce que les vols remplacent les longs trajets. C'est l'itinéraire classique, et il tient.",
+            "**Le Nord en profondeur.** Hanoï (2), Ha Giang et Dong Van (4), Cao Bang (2), Ba Be (2), Hanoï (1). Les montagnes, les routes de crête, et aucun pont vers le Centre. Le pays du sud n'existera pas pour vous ce voyage-ci, et c'est un choix défendable."
+          ]
+        },
+        {
+          "p": "Le point commun des trois : aucune ne comporte sept étapes. Le Vietnam ne se visite pas en quinze jours, il s'échantillonne. Nos [idées d'itinéraires](/itineraire-vietnam/) détaillent chacune de ces formules jour par jour."
+        }
+      ]
+    },
+    {
+      "h2": "Faire l'addition sans la faire vous-même",
+      "blocs": [
+        {
+          "p": "Nous avons mis ces deux calculs — les nuits et le rythme — dans un outil en accès libre. Vous composez votre liste d'étapes, il additionne les nuits, ajoute les nuits de trajet, compare au temps dont vous disposez, et vous dit ce qui dépasse."
+        },
+        {
+          "p": "Il fait surtout quelque chose qu'aucune brochure ne fera : il nomme l'étape à retirer quand le compte ne tombe pas juste, en choisissant celle qui coûte le plus de trajet pour ce qu'elle rapporte. C'est un outil qui vous dit non, et c'est pour cela que nous l'avons construit."
+        },
+        {
+          "p": "Il est [ici, sans inscription](/organiser-son-voyage-au-vietnam/), et il ne vous demande pas de devis pour fonctionner. Si le résultat vous convient, vous pouvez nous l'envoyer d'un clic ; sinon, il reste dans votre adresse de page et vous pouvez le partager."
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Combien d'étapes faut-il prévoir pour quinze jours au Vietnam ?",
+      "a": "Quatre à cinq. Six reste tenable si deux trajets se font en avion ou en train de nuit. Sept, c'est six déménagements et plus de quatre journées de transport sur quinze : le voyage devient un déplacement. La règle pratique : chaque étape doit recevoir au moins deux nuits, sauf une nuit à bord d'une jonque, qui est un format normal."
+    },
+    {
+      "q": "Quelle étape faut-il retirer en premier d'un itinéraire trop chargé ?",
+      "a": "Celle qui coûte le plus de trajet par nuit sur place. Sur un quinze jours nord-sud, c'est presque toujours Sapa : c'est un cul-de-sac, on y monte et on en redescend par le même chemin, et le détour coûte deux à trois jours pour deux nuits sur place. Dans un voyage de vingt jours, elle redevient évidente."
+    },
+    {
+      "q": "Peut-on faire le Nord et le Sud du Vietnam en quinze jours ?",
+      "a": "Oui, à condition d'accepter deux vols intérieurs et de renoncer aux montagnes du Nord-Ouest. Hanoï, la baie, Hué, Hoi An, Saigon et le delta tiennent en quinze jours. Y ajouter Sapa ou Ha Giang ne tient pas : ce sont 1 900 kilomètres du bout au bout, et le temps gagné en avion se reperd dans la montée."
+    },
+    {
+      "q": "Combien de nuits faut-il à Hoi An ?",
+      "a": "Trois à quatre. C'est l'étape où le temps supplémentaire rapporte le plus : la vieille ville se visite en une matinée, mais les rizières autour, la plage, My Son et l'atelier de tailleur demandent des journées entières. C'est aussi la seule étape du Centre où poser ses valises plusieurs jours ne coûte aucun trajet supplémentaire."
+    },
+    {
+      "q": "Faut-il garder une journée sans rien de prévu ?",
+      "a": "Oui, et c'est la première chose que les gens sacrifient. Une journée sans transport ni programme est ce qui sépare des vacances d'un itinéraire exécuté. Elle sert aussi d'amortisseur : un vol retardé, une pluie qui dure, une envie de rester — sans elle, le moindre imprévu casse tout ce qui suit."
+    },
+    {
+      "q": "Une nuit dans une ville, est-ce suffisant ?",
+      "a": "Presque jamais, sauf en transit ou à bord d'une jonque. Une nuit signifie arriver en fin d'après-midi et repartir le lendemain matin : vous dormez dans la ville, vous ne la visitez pas. Mieux vaut deux nuits dans une étape et zéro dans la suivante que une nuit dans chacune."
+    }
+  ]
+}

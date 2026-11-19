@@ -1,0 +1,158 @@
+{
+  "slug": "train-nuit-ou-avion-vietnam",
+  "title": "Train de nuit ou avion au Vietnam : lequel choisir",
+  "description": "Le train Hanoï–Hué met dix fois plus longtemps que l'avion et ne coûte aucune journée. Le calcul, et les trois cas où il s'inverse.",
+  "ogTitle": "Train de nuit ou avion au Vietnam : le vrai calcul",
+  "ogDescription": "12 h 36 contre 1 h 15, et c'est le train qui gagne. Pourquoi, et dans quels cas c'est faux.",
+  "photo": "hue",
+  "photoAlt": "La citadelle de Hué et ses murs de brique reflétés dans les douves au petit matin",
+  "datePublished": "2026-11-19",
+  "dateModified": "2026-11-19",
+  "author": "",
+  "chapo": "Dix fois plus lent, et pourtant le bon choix. Voici dans quels cas.",
+  "lede": "**Le train de nuit Hanoï–Hué met 12 h 36 et l'avion 1 h 15, et c'est souvent le train qu'il faut prendre.** Ce n'est pas une préférence romantique : c'est une question de comptabilité. Un vol intérieur consomme une demi-journée de vos vacances, le train de nuit n'en consomme aucune et remplace une nuit d'hôtel. Voici le calcul, et les trois cas où il s'inverse.",
+  "sections": [
+    {
+      "h2": "Le calcul, en chiffres",
+      "blocs": [
+        {
+          "p": "**Un trajet ne se mesure pas à sa durée mais à ce qu'il retire de votre journée.** Et sur ce critère, l'avion et le train de nuit ne jouent pas dans la même catégorie."
+        },
+        {
+          "p": "Le vol Hanoï–Hué dure 1 h 15. Mais il faut rejoindre l'aéroport de Noi Bai, à quarante minutes du centre de Hanoï ; se présenter à l'enregistrement ; attendre ; voler ; récupérer les bagages ; rejoindre Hué depuis l'aéroport de Phu Bai, à une quinzaine de kilomètres. Vous partez après le petit-déjeuner et vous êtes installé en début d'après-midi. La matinée est consommée."
+        },
+        {
+          "p": "Le train SE3 part de Hanoï à 19 h 20 et arrive à Hué à 7 h 55. Vous dînez à Hanoï, vous dormez, vous prenez le petit-déjeuner à Hué. Aucune journée de visite n'a été touchée, et vous n'avez pas payé d'hôtel cette nuit-là."
+        },
+        {
+          "tableau": {
+            "legende": "Hanoï → Hué, les trois options",
+            "colonnes": [
+              "Mode",
+              "Durée",
+              "Journées consommées",
+              "Nuit d'hôtel"
+            ],
+            "lignes": [
+              [
+                "Train de nuit SE3",
+                "12 h 36",
+                "Aucune",
+                "Économisée"
+              ],
+              [
+                "Avion",
+                "1 h 15 de vol",
+                "Une demi-journée",
+                "Payée"
+              ],
+              [
+                "Route",
+                "9 h 30",
+                "Une journée pleine",
+                "Payée"
+              ]
+            ],
+            "note": "Sources : horaires SE3 des chemins de fer vietnamiens (dsvn.vn), horaires publiés des compagnies, daytripsvietnam.com 2026."
+          }
+        },
+        {
+          "p": "Sur un congé de quinze jours, cette différence vaut une étape entière. C'est pour cela que nos itinéraires les plus denses passent presque tous par le rail de nuit."
+        }
+      ]
+    },
+    {
+      "h2": "Les trois cas où le train est un piège",
+      "blocs": [
+        {
+          "p": "**Le raisonnement ci-dessus s'effondre dès que le train ne vous dépose pas à destination, ou qu'il arrive au mauvais moment.** Trois situations à connaître."
+        },
+        {
+          "p": "**Le train qui n'arrive pas là où vous allez.** Le train de nuit pour Sapa ne va pas à Sapa : il s'arrête à Lao Cai, et il reste ensuite une montée d'environ une heure. Vous arrivez tôt, vous attendez, vous montez. Le trajet total approche les neuf heures et consomme malgré tout un quart de journée. Il reste meilleur que les 5 h 30 de route en plein jour, mais l'avantage fond."
+        },
+        {
+          "p": "**Le train qui arrive en pleine journée.** Hanoï–Da Nang par le rail de nuit prend 15 h 30 : parti le soir, vous arrivez en milieu de journée. Vous avez dormi à bord, mais vous avez aussi passé la matinée dans le train. Une demi-journée y passe quand même — exactement ce que l'avion aurait coûté, en moins confortable."
+        },
+        {
+          "p": "**Les très longues distances.** Entre le Centre et le Sud, le rail perd. Da Nang–Saigon en train dépasse largement la nuit, et aucun montage d'horaires ne le rend gratuit. L'avion y est sans concurrent : 1 h 20 de vol pour 900 kilomètres."
+        }
+      ]
+    },
+    {
+      "h2": "Ce que le train de nuit vietnamien est vraiment",
+      "blocs": [
+        {
+          "p": "Il faut dire ce qu'on achète, parce que les photos de brochure et la réalité ne coïncident pas toujours."
+        },
+        {
+          "ul": [
+            "**Les cabines à quatre couchettes molles** sont le standard confortable : draps fournis, climatisation, porte qui ferme. C'est ce que nous réservons par défaut.",
+            "**Les cabines à six couchettes dures** existent et coûtent moins cher. Elles sont acceptables pour une nuit si vous dormez n'importe où, difficiles sinon.",
+            "**Les voitures privées** exploitées par des opérateurs indépendants sur certaines lignes offrent des cabines à deux. Plus chères, plus silencieuses.",
+            "**Le bruit et le roulis font partie du voyage.** La voie est ancienne, le train bouge, et les arrêts de nuit réveillent. Qui a le sommeil léger dormira mal."
+          ]
+        },
+        {
+          "p": "Un point pratique qui compte : les billets de train intérieurs se paient en carte vietnamienne sur le site des chemins de fer, ce qui rend la réservation depuis la France plus compliquée qu'il n'y paraît. Nous en parlons dans [notre page sur l'argent au Vietnam](/blog/argent-vietnam/). C'est aussi l'une des trois choses que nous réservons pour nos voyageurs sans qu'ils aient à s'en occuper."
+        }
+      ]
+    },
+    {
+      "h2": "Et la route, alors",
+      "blocs": [
+        {
+          "p": "**La voiture avec chauffeur n'est pas qu'un troisième choix plus lent : c'est parfois le seul qui donne le paysage.** Le critère n'est plus la vitesse mais ce que la route traverse."
+        },
+        {
+          "p": "Entre Hué et Da Nang, les 3 h 30 par le col des Nuages contre 2 h par le tunnel sont une heure et demie bien dépensée : c'est la plus belle route côtière du pays. Entre Ha Giang et Dong Van, les 5 h 30 de route de montagne *sont* la raison d'aller dans le Nord-Est. Compter ces heures comme perdues serait une erreur de méthode."
+        },
+        {
+          "p": "En revanche, Hanoï–Hué par la nationale 1 en 9 h 30 ne se défend presque jamais. Le train longe la même côte, en mieux, et vous rend la journée. Le détail chiffré de tous ces trajets est dans [notre page sur les temps de trajet](/blog/temps-trajet-vietnam/)."
+        },
+        {
+          "photo": "hue-porte"
+        }
+      ]
+    },
+    {
+      "h2": "La règle en une phrase",
+      "blocs": [
+        {
+          "p": "**Train de nuit quand il vous dépose à destination au petit matin. Avion au-delà de 700 kilomètres ou quand le train arrive en pleine journée. Route quand la route est le voyage.**"
+        },
+        {
+          "p": "Appliquée au Vietnam, cette règle donne : train de nuit pour Hanoï–Hué et Hanoï–Phong Nha ; avion pour tout ce qui relie le Centre au Sud ; route pour le col des Nuages et pour les boucles du Nord-Est ; et bus de nuit pour Hanoï–Ha Giang, qui est le seul trajet du pays à ne coûter ni journée ni nuit d'hôtel."
+        },
+        {
+          "p": "Notre [outil d'itinéraire](/organiser-son-voyage-au-vietnam/) applique cette règle automatiquement : pour chaque étape que vous ajoutez, il choisit le mode qui consomme le moins de journées, préfère un trajet qui vaut d'être vécu à un trajet simplement rapide, et vous dit quand un segment n'a pas de solution raisonnable. Il est en accès libre."
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Le train de nuit Hanoï–Hué vaut-il mieux que l'avion ?",
+      "a": "Presque toujours, oui. Le train SE3 part à 19 h 20 et arrive à 7 h 55 : il ne consomme aucune journée de visite et remplace une nuit d'hôtel. L'avion ne dure que 1 h 15 de vol, mais entre les trajets vers les aéroports, l'enregistrement et l'attente, il consomme une demi-journée entière. Sur quinze jours, cette différence vaut une étape."
+    },
+    {
+      "q": "Le train de nuit va-t-il jusqu'à Sapa ?",
+      "a": "Non, et c'est une confusion fréquente. Il s'arrête à Lao Cai, d'où il reste une montée d'environ une heure jusqu'à Sapa. Le trajet complet approche les neuf heures et consomme malgré tout un quart de journée. Il reste préférable aux 5 h 30 de route en plein jour, mais il n'est pas gratuit comme l'est celui de Hué."
+    },
+    {
+      "q": "Quelle classe choisir dans le train de nuit vietnamien ?",
+      "a": "La cabine à quatre couchettes molles est le standard confortable : draps, climatisation, porte qui ferme. Les six couchettes dures coûtent moins cher et conviennent si vous dormez n'importe où. Des opérateurs privés proposent des cabines à deux sur certaines lignes. Dans tous les cas, la voie est ancienne et le train bouge : qui a le sommeil léger dormira mal."
+    },
+    {
+      "q": "Peut-on aller de Da Nang à Hô Chi Minh-Ville en train de nuit ?",
+      "a": "Le trajet existe mais dépasse largement une nuit, et aucun montage d'horaires ne le rend gratuit en journées. Sur cette distance — environ 900 kilomètres — l'avion est sans concurrent sérieux : 1 h 20 de vol, soit une demi-journée de porte à porte. Le rail de nuit n'a d'intérêt que là où il remplace exactement une nuit."
+    },
+    {
+      "q": "Comment réserver un train de nuit au Vietnam depuis la France ?",
+      "a": "C'est plus compliqué qu'il n'y paraît : les billets se paient en carte bancaire vietnamienne sur le site des chemins de fer. Des revendeurs acceptent les cartes étrangères avec une commission. C'est l'une des trois choses que nous réservons pour nos voyageurs, avec le chauffeur pour les étapes sans transport public et le guide francophone."
+    },
+    {
+      "q": "Faut-il prendre la route ou le train entre Hué et Da Nang ?",
+      "a": "Les deux sont bons, pour des raisons différentes. Le train met 2 h 36 et la voie est accrochée à la falaise au-dessus de la mer, là où aucune route ne passe. La route par le col des Nuages met 3 h 30 et permet de s'arrêter. Ce qu'il faut éviter, c'est le tunnel : il gagne une heure et demie et supprime tout l'intérêt du trajet."
+    }
+  ]
+}
