@@ -112,20 +112,36 @@ function Bloc({ bloc }: { bloc: Bloc }) {
 export function Corps({ sections }: { sections: Section[] }) {
   return (
     <>
-      {sections.map((s) => (
-        <section className="sec" key={s.h2}>
-          <div className="wrap art__corps">
-            {/* The id lets the table of contents and any external citation
-                address a section rather than the whole page. */}
-            <h2 className="d2" id={ancre(s.h2)}>
-              {typo(s.h2)}
-            </h2>
-            {s.blocs.map((b, i) => (
-              <Bloc bloc={b} key={i} />
-            ))}
-          </div>
-        </section>
-      ))}
+      {sections.map((s) => {
+        /* The photograph is hoisted to the top of its section and floated into
+           the right margin, so the prose runs beside it instead of under it.
+           Left in place it would land at the end of the section, where there
+           is no text left to flow — which is how it ended up alone in a column
+           with half the page empty beside it.
+           
+           Moving it is safe here and would not be everywhere: these pictures
+           illustrate the section, they are never referred to as "below" or
+           "above", and the figure carries no number. */
+        const photos = s.blocs.filter((b) => "photo" in b);
+        const reste = s.blocs.filter((b) => !("photo" in b));
+        return (
+          <section className="sec" key={s.h2}>
+            <div className="wrap art__corps">
+              {/* The id lets the table of contents and any external citation
+                  address a section rather than the whole page. */}
+              <h2 className="d2" id={ancre(s.h2)}>
+                {typo(s.h2)}
+              </h2>
+              {photos.map((b, i) => (
+                <Bloc bloc={b} key={`photo${i}`} />
+              ))}
+              {reste.map((b, i) => (
+                <Bloc bloc={b} key={i} />
+              ))}
+            </div>
+          </section>
+        );
+      })}
     </>
   );
 }

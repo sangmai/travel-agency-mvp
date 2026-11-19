@@ -2974,6 +2974,67 @@ img {
    sur 1 124 px — soit près du double d'une mesure lisible. Les 44 rem sont ceux
    que `.art__liste` et `.bande` appliquent déjà ; le corps s'y aligne au lieu
    d'inventer une troisième largeur. */
+/* Le corps d'article, sur deux colonnes.
+   Le texte garde ses 44rem — c'est la mesure qui se lit, et l'élargir pour
+   remplir l'écran serait régler un problème en en créant un autre. Ce qui
+   change, c'est que la place restante à droite cesse d'être perdue.
+
+   float plutôt que grid : la photo doit laisser le texte couler à côté d'elle
+   sur autant de paragraphes qu'elle est haute. Une grille la mettrait dans une
+   cellule, à la hauteur d'un seul bloc, avec du blanc au-dessus et au-dessous.
+   C'est le seul cas où float reste le bon outil.
+
+   flow-root contient le flottant : sans lui il déborderait sur la section
+   suivante, qui a son propre fond. */
+.art__corps {
+  display: flow-root;
+}
+
+.art__corps > .bande {
+  float: right;
+  width: clamp(15rem, 27vw, 25rem);
+  max-width: none;
+  margin: .5rem 0 1.25rem clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* Le chapeau et la photo de tête, côte à côte.
+   Grille ici et pas float : les deux colonnes sont connues, et le sommaire ne
+   doit pas s'enrouler autour de l'image. */
+.art__tete {
+  display: grid;
+  grid-template-columns: minmax(0, 44rem) minmax(0, 1fr);
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+}
+
+.art__tete > .bande {
+  max-width: none;
+  margin-block: .35rem 0;
+}
+
+/* En dessous, il n'y a plus de place à droite à récupérer : deux colonnes y
+   donneraient deux colonnes étroites au lieu d'une lisible. */
+@media (max-width: 62rem) {
+  .art__corps > .bande {
+    float: none;
+    width: auto;
+    max-width: 44rem;
+    margin-inline: 0;
+  }
+
+  .art__tete {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.5rem;
+  }
+
+  /* La photo repasse au-dessus du sommaire : sur un téléphone, l'image est ce
+     qui dit de quoi parle l'article, et le sommaire ce qu'on saute. */
+  .art__tete > .bande {
+    order: -1;
+    max-width: 44rem;
+  }
+}
+
 .art__corps > p {
   margin-bottom: 1.1rem;
   max-width: 44rem;

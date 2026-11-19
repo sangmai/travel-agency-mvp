@@ -118,27 +118,32 @@ export default async function ArticlePage({
               ]}
             />
             <h1 className="d1">{typo(article.title)}</h1>
-            <p className="lede">{enligne(article.lede)}</p>
-            <GuideMeta guide={article} />
 
-            {/* A table of contents on an article of this length is navigation,
-                not decoration: it is also what lets an answer engine address a
-                section instead of the whole page. */}
-            <nav className="art__sommaire" aria-label="Sommaire">
-              <ol>
-                {article.sections.map((s) => (
-                  <li key={s.h2}>
-                    <a href={`#${ancre(s.h2)}`}>{typo(s.h2)}</a>
-                  </li>
-                ))}
-              </ol>
-            </nav>
-          </div>
-        </section>
+            {/* Chapeau et photo côte à côte. La photo avait sa propre section,
+                seule, dans une colonne large de 44rem avec la moitié droite de
+                la page vide à côté d'elle. Elle remplit maintenant ce vide, et
+                le sommaire a quelque chose en face de lui. */}
+            <div className="art__tete">
+              <div className="art__tete-txt">
+                <p className="lede">{enligne(article.lede)}</p>
+                <GuideMeta guide={article} />
 
-        <section className="sec">
-          <div className="wrap">
-            <Bande id={article.photo} />
+                {/* A table of contents on an article of this length is
+                    navigation, not decoration: it is also what lets an answer
+                    engine address a section instead of the whole page. */}
+                <nav className="art__sommaire" aria-label="Sommaire">
+                  <ol>
+                    {article.sections.map((s) => (
+                      <li key={s.h2}>
+                        <a href={`#${ancre(s.h2)}`}>{typo(s.h2)}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+              </div>
+
+              <Bande id={article.photo} />
+            </div>
           </div>
         </section>
 
