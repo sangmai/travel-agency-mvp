@@ -7,7 +7,7 @@ import { Corps, ancre, enligne, typo } from "@/components/Article";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { GuideMeta } from "@/components/GuideMeta";
 import { breadcrumb } from "@/components/JsonLd";
-import { getArticles, getSite, articleUrl, BLOG_BASE, lien } from "@/lib/content";
+import { getArticles, getSite, getTrips, articleUrl, tripUrl, BLOG_BASE, lien } from "@/lib/content";
 
 /**
  * One article.
@@ -59,7 +59,7 @@ export default async function ArticlePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [site, articles] = await Promise.all([getSite(), getArticles()]);
+  const [site, articles, trips] = await Promise.all([getSite(), getArticles(), getTrips()]);
   const article = articles.find((a) => a.slug === slug);
   if (!article) notFound();
 
@@ -139,25 +139,60 @@ export default async function ArticlePage({
           </div>
         </section>
 
-        {/* Le sommaire descend sous le bandeau. Il reste de la navigation, pas
-            de la décoration : sur un article de six sections c'est ce qui
-            permet d'aller droit à la bonne, et ce qui laisse un moteur de
-            réponse citer une section plutôt que la page entière. */}
-        <section className="sec sec--sand art-sommaire-sec">
-          <div className="wrap">
-            <nav className="art__sommaire" aria-label="Sommaire">
-              <ol>
-                {article.sections.map((s) => (
-                  <li key={s.h2}>
-                    <a href={`#${ancre(s.h2)}`}>{typo(s.h2)}</a>
-                  </li>
-                ))}
-              </ol>
-            </nav>
+        {/* Le corps et son rail.
+
+            Sans rail, la colonne de droite n'était occupée que par les photos
+            — une par section au mieux — et restait vide partout ailleurs. Lui
+            donner un habitant permanent est ce qui fait tenir la mise en page
+            sur toute la longueur de l'article, et non par à-coups.
+
+            Ce qu'on y met n'est pas du remplissage : le sommaire, qui est la
+            navigation d'un texte de six sections, et les circuits, qui sont
+            ce que l'article doit finir par proposer. Une colonne décorative
+            aurait été pire que le vide. */}
+        <section className="sec">
+          <div className="wrap art__grille">
+            <div className="art__flux">
+              <Corps sections={article.sections} />
+            </div>
+
+            <aside className="art__rail">
+              {/* Collant : sur un article de neuf mille pixels, un sommaire
+                  qui défile hors de l'écran au premier tiers ne sert plus. */}
+              <nav className="art__rail-bloc" aria-label="Sommaire">
+                <p className="art__rail-titre">Dans cet article</p>
+                <ol className="art__rail-som">
+                  {article.sections.map((s) => (
+                    <li key={s.h2}>
+                      <a href={`#${ancre(s.h2)}`}>{typo(s.h2)}</a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+
+              <div className="art__rail-bloc">
+                <p className="art__rail-titre">Nos circuits</p>
+                <ul className="art__rail-liste">
+                  {trips.slice(0, 4).map((t) => (
+                    <li key={t.slug}>
+                      <a href={tripUrl(t.slug)}>
+                        <span className="art__rail-vig">
+                          <Photo id={t.photo} role="card" />
+                        </span>
+                        <span>
+                          <b>{typo(t.name)}</b>
+                          <small>
+                            {t.days} jours &middot; dès {t.priceFrom}&nbsp;€
+                          </small>
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </aside>
           </div>
         </section>
-
-        <Corps sections={article.sections} />
 
         <section className="sec sec--sand" id="faq">
           <div className="wrap">

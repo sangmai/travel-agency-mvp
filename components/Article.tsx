@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { Photo } from "./Photo";
 import { DataTable } from "./DataTable";
 import type { Bloc, Section } from "@/lib/content";
@@ -113,39 +113,48 @@ function Bloc({ bloc }: { bloc: Bloc }) {
   );
 }
 
+/**
+ * Une section qui ouvre sur sa thèse, et la thèse est une phrase entière.
+ *
+ * Le niveau manquant entre un h2 et le corps existait déjà dans le texte :
+ * cinquante-six sections sur soixante-dix commencent par une phrase en gras.
+ * Le promouvoir en CSS, avec `p:first-of-type > b:first-child { display:
+ * block }`, marchait pour celles-là et cassait les cinq autres — « La
+ * bataille de Hué dure du 31 janvier au 2 mars 1968 » suivi, à la ligne,
+ * d'un paragraphe commençant par une virgule.
+ *
+ * La CSS ne peut pas voir la différence ; ce motif le peut. Le gras n'est
+ * promu que s'il se termine comme une phrase.
+ */
+const THESE = /^\*\*([^*]+[.?!])\*\*\s*/;
+
 export function Corps({ sections }: { sections: Section[] }) {
   return (
     <>
-      {sections.map((s) => {
-        /* The photograph is hoisted to the top of its section and floated into
-           the right margin, so the prose runs beside it instead of under it.
-           Left in place it would land at the end of the section, where there
-           is no text left to flow — which is how it ended up alone in a column
-           with half the page empty beside it.
-           
-           Moving it is safe here and would not be everywhere: these pictures
-           illustrate the section, they are never referred to as "below" or
-           "above", and the figure carries no number. */
-        const photos = s.blocs.filter((b) => "photo" in b);
-        const reste = s.blocs.filter((b) => !("photo" in b));
-        return (
-          <section className="sec" key={s.h2}>
-            <div className="wrap art__corps">
-              {/* The id lets the table of contents and any external citation
-                  address a section rather than the whole page. */}
-              <h2 className="d2" id={ancre(s.h2)}>
-                {typo(s.h2)}
-              </h2>
-              {photos.map((b, i) => (
-                <Bloc bloc={b} key={`photo${i}`} />
-              ))}
-              {reste.map((b, i) => (
-                <Bloc bloc={b} key={i} />
-              ))}
-            </div>
-          </section>
-        );
-      })}
+      {sections.map((s) => (
+        <section className="art__corps" key={s.h2}>
+          {/* The id lets the table of contents and any external citation
+              address a section rather than the whole page. */}
+          <h2 className="d2" id={ancre(s.h2)}>
+            {typo(s.h2)}
+          </h2>
+          {s.blocs.map((b, i) => {
+            if (i === 0 && "p" in b) {
+              const m = THESE.exec(b.p);
+              if (m) {
+                const suite = b.p.slice(m[0].length);
+                return (
+                  <Fragment key={i}>
+                    <p className="art__these">{enligne(m[1])}</p>
+                    {suite && <p>{enligne(suite)}</p>}
+                  </Fragment>
+                );
+              }
+            }
+            return <Bloc bloc={b} key={i} />;
+          })}
+        </section>
+      ))}
     </>
   );
 }

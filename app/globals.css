@@ -2927,45 +2927,6 @@ img {
    .tbl — and adds only what an article needs and no page had: a contents list,
    a pull quote with its source, and the index card. */
 
-/* Contents. Numbered because an article is read in order, unlike a guide's
-   sections, which are consulted. */
-.art__sommaire {
-  border-left: 3px solid var(--amber-soft);
-  margin-top: clamp(1.6rem, 3vw, 2.2rem);
-  padding-left: 1.1rem;
-}
-
-.art__sommaire ol {
-  /* A global reset strips list markers; an article's contents is the one place
-     the numbers carry meaning, because the sections are read in order. */
-  color: var(--ink-2);
-  counter-reset: sommaire;
-  font-size: 0.92rem;
-  list-style: none;
-  margin: 0;
-  padding-left: 0;
-}
-
-.art__sommaire li::before {
-  color: var(--amber-deep);
-  content: counter(sommaire) ". ";
-  counter-increment: sommaire;
-  font-variant-numeric: tabular-nums;
-}
-
-.art__sommaire li {
-  margin-bottom: 0.35rem;
-}
-
-.art__sommaire a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.art__sommaire a:hover {
-  color: var(--amber-deep);
-  text-decoration: underline;
-}
 
 /* Corps d'article.
    Le reset global met `margin: 0` sur tout `p`, et les pages guides remettent
@@ -2993,17 +2954,17 @@ img {
 }
 
 /* Le chapeau de section.
-   Il manquait un cran entre un h2 de 46 px et un corps de 17 : l'un écrasait
-   l'autre et six sections se ressemblaient toutes. La phrase de tête est déjà
-   la thèse de la section — elle est en gras dans le contenu depuis le début.
-   Elle passe au display, à un corps intermédiaire, et devient le niveau
-   manquant. Rien n'est ajouté au texte : c'est la même phrase, mieux dite.
+   Il manquait un cran entre le titre et le corps : l'un écrasait l'autre et
+   toutes les sections se ressemblaient. La phrase de tête est déjà la thèse
+   de la section, en gras dans le contenu depuis le début ; elle passe au
+   display à un corps intermédiaire. Rien n'est ajouté au texte.
 
-   Les neuf sections sur soixante-dix qui n'ouvrent pas sur une thèse ne
-   reçoivent simplement rien. */
-.art__corps > p:first-of-type > b:first-child {
-  display: block;
-  margin-bottom: .55rem;
+   La classe est posée par le composant et non par un sélecteur CSS, parce
+   qu'il faut lire la phrase pour savoir si elle en est une — voir THESE dans
+   components/Article.tsx. */
+.art__these {
+  margin-bottom: .75rem;
+  max-width: var(--mesure);
   font-family: var(--display);
   font-weight: 500;
   font-size: 1.45rem;
@@ -3109,93 +3070,153 @@ img {
   line-height: 1.66;
 }
 
-/* Le corps d'article, sur deux colonnes.
-   Le texte garde ses 44rem — c'est la mesure qui se lit, et l'élargir pour
-   remplir l'écran serait régler un problème en en créant un autre. Ce qui
-   change, c'est que la place restante à droite cesse d'être perdue.
+/* Le corps et son rail.
 
-   float plutôt que grid : la photo doit laisser le texte couler à côté d'elle
-   sur autant de paragraphes qu'elle est haute. Une grille la mettrait dans une
-   cellule, à la hauteur d'un seul bloc, avec du blanc au-dessus et au-dessous.
-   C'est le seul cas où float reste le bon outil.
+   La version précédente faisait flotter la photo à droite du texte. Ça marche
+   là où il y a une photo, et nulle part ailleurs : une section sur deux n'en
+   a pas, et la colonne de droite y redevenait un trou. Un rail permanent la
+   remplit sur toute la longueur, et ce qu'il porte — le sommaire, les
+   circuits — a une raison d'être là.
 
-   flow-root contient le flottant : sans lui il déborderait sur la section
-   suivante, qui a son propre fond. */
-.art__corps {
-  display: flow-root;
+   Conséquence agréable : la photo rentre dans la colonne de texte et y prend
+   toute la largeur. Elle passe de 444 px à 780 au lieu de rétrécir. */
+.art__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 19rem;
+  gap: var(--gouttiere-art);
+  align-items: start;
+}
+
+/* Le texte garde sa mesure, les figures prennent la colonne.
+   Les deux ne veulent pas la même largeur : 780 px de texte feraient 88
+   caractères par ligne, mais 780 px de tableau à quatre colonnes se lisent
+   mieux que 640. */
+.art__flux > .art__corps {
+  padding-block: 0 clamp(2.25rem, 4vw, 3.25rem);
+}
+
+.art__flux > .art__corps:last-child {
+  padding-bottom: 0;
 }
 
 .art__corps > .bande {
-  float: right;
-  /* Exactement la colonne qui reste, pas une largeur choisie au jugé.
-     À 22rem l'image faisait 0,55 fois la colonne de texte et laissait 132 px
-     de vide à sa droite : elle se lisait comme une vignette posée dans la
-     marge, pas comme la seconde colonne d'une mise en page. Calculée, elle
-     suit la mesure du texte et la largeur de l'écran sans réglage à la main.
-
-     100% est ici la boîte de contenu du conteneur de l'article, puisque le
-     flottant s'y rattache. max() garde l'image utilisable entre 62rem et la
-     largeur où le calcul devient étroit. */
-  width: max(13rem, calc(100% - var(--mesure) - var(--gouttiere-art)));
+  width: 100%;
   max-width: none;
-  margin: .5rem 0 1.25rem var(--gouttiere-art);
+  margin-block: 1.6rem;
+  float: none;
 }
 
-/* Le bandeau d'article. .trip-hero fait tout le travail ; il ne reste ici que
-   ce qui distingue un article d'une fiche voyage.
-
-   .guide__meta est en --ink-3, un brun fait pour le papier : sur le voile il
-   tombait sous le seuil. Même raison que .lede → .trip-hero__tag sur la page
-   du planificateur.
-
-   Le titre et la ligne d'auteur sont bornés comme l'est déjà .trip-hero__tag.
-   Pas pour la mesure de lecture — un titre tient sur deux lignes — mais parce
-   que le voile est un dégradé : il vaut 0,86 à gauche et 0,26 à droite. Un
-   texte libre de courir jusqu'au bord arriverait dans la partie mince, et sur
-   une photo claire il y deviendrait illisible. La borne garantit que tout ce
-   qui porte du texte reste là où le voile couvre. */
-.art-hero {
-  min-height: clamp(20rem, 40vw, 27rem);
+/* Le rail suit la lecture : sur neuf mille pixels de page, un sommaire qui
+   disparaît au premier tiers ne sert plus à rien. */
+.art__rail {
+  position: sticky;
+  top: calc(var(--hdr) + 1.25rem);
   display: grid;
+  gap: 1.75rem;
+}
+
+.art__rail-bloc {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper-2);
+  padding: 1.1rem 1.15rem;
+}
+
+.art__rail-titre {
+  margin: 0 0 .7rem;
+  font-family: var(--display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.art__rail-som {
+  counter-reset: rail;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.art__rail-som li {
+  margin-bottom: .5rem;
+}
+
+.art__rail-som li::before {
+  content: counter(rail) ". ";
+  counter-increment: rail;
+  color: var(--amber-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+.art__rail-som a {
+  color: var(--ink-2);
+}
+
+.art__rail-som a:hover {
+  color: var(--amber-deep);
+}
+
+.art__rail-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .85rem;
+}
+
+.art__rail-liste a {
+  display: grid;
+  grid-template-columns: 4.25rem 1fr;
+  gap: .7rem;
   align-items: center;
+  color: var(--ink);
 }
 
-.art-hero h1,
-.art-hero .guide__meta {
-  max-width: 44rem;
+.art__rail-vig {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--sand);
 }
 
-.art-hero .guide__meta {
-  color: var(--on-dark-2);
+.art__rail-vig img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Le sommaire seul dans sa bande : il n'a pas besoin de toute la largeur, et
-   l'encart d'une section complète au-dessus d'un simple sommaire était trop. */
-.art-sommaire-sec {
-  padding-block: clamp(1.75rem, 3vw, 2.5rem);
+.art__rail-liste b {
+  display: block;
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
-.art-sommaire-sec .art__sommaire {
-  margin-top: 0;
-  max-width: var(--mesure);
+.art__rail-liste small {
+  display: block;
+  margin-top: .2rem;
+  font-size: .78rem;
+  color: var(--ink-3);
 }
 
+.art__rail-liste a:hover b {
+  color: var(--amber-deep);
+}
 
-/* Le seuil des deux colonnes, et il se calcule plutôt qu'il ne se choisit.
-   Deux colonnes n'ont de sens que si les deux en sont : il faut 40rem de
-   texte, 2,5rem de gouttière et au moins 25rem d'image, plus les marges de la
-   page — soit 75rem. En dessous, l'image fondait sans disparaître : 0,50 fois
-   la colonne de texte à 1100 px, 0,35 à 1000. Une vignette coincée dans la
-   marge, ce qui était exactement le défaut à corriger.
+/* Le seuil, calculé : 40rem de mesure, 2,5rem de gouttière, 19rem de rail,
+   plus les marges de page. En dessous, le rail passe sous l'article — il
+   garde son utilité, il perd seulement sa position. */
+@media (max-width: 72rem) {
+  .art__grille {
+    grid-template-columns: minmax(0, 1fr);
+  }
 
-   Au-delà du seuil, une colonne, et l'image prend toute la mesure. Mieux vaut
-   une grande image sous le texte que deux colonnes dont une est trop maigre. */
-@media (max-width: 75rem) {
-  .art__corps > .bande {
-    float: none;
-    width: auto;
-    max-width: 44rem;
-    margin-inline: 0;
+  .art__rail {
+    position: static;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 }
 
