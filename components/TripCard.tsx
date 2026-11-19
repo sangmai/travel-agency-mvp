@@ -32,7 +32,18 @@ export function TripCard({
           <span className="tile__facts">
             <span><b>{trip.days} jours</b></span>
             <span>Niveau <b>{trip.niveau.toLowerCase()}</b></span>
-            <span><b>{score(rating.value)}/5</b> ({rating.count} avis)</span>
+            {/* Rien tant qu'il n'y a pas d'avis. « 0,0/5 (0 avis) » ne se lit
+                pas comme une absence de note : ça se lit comme une note
+                catastrophique, ou comme un voyage que personne ne réserve.
+                La fiche voyage applique déjà cette règle — voir tripSpecs
+                dans components/trip/Specs.tsx — la vignette ne le faisait pas,
+                et c'est elle qu'on voit en premier.
+
+                La ligne revient d'elle-même au premier avis rattaché au
+                circuit : rien à réactiver. */}
+            {rating.count > 0 && (
+              <span><b>{score(rating.value)}/5</b> ({rating.count} avis)</span>
+            )}
           </span>
 
           <span className="tile__foot">
