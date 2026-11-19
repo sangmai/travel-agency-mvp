@@ -3109,40 +3109,33 @@ img {
 /* Le rail suit la lecture : sur neuf mille pixels de page, un sommaire qui
    disparaît au premier tiers ne sert plus à rien.
 
-   Collé en haut, un rail plus haut que la fenêtre perd son bas pour de bon :
-   avec trois blocs il fait 937 px, et le dernier — les circuits — restait
-   hors d'atteinte sur tout écran de moins de mille pixels de haut. D'où le
-   plafond et le défilement propre : sur un grand écran il ne se voit pas, sur
-   un petit il rend le bas du rail accessible au lieu de le perdre.
+   Il n'a ni plafond ni défilement propre, et c'est le point : une barre de
+   défilement imbriquée dans la page est une barre de trop, d'autant qu'elle
+   n'apparaissait qu'à certaines hauteurs de fenêtre, donc sans raison visible
+   pour qui la voit. Le rail est plutôt taillé pour tenir — trois circuits au
+   lieu de quatre, interlignes resserrés — et rien ne dépasse.
 
-   overscroll-behavior pour que la molette, arrivée au bout du rail, ne
-   reparte pas faire défiler l'article derrière. */
+   `bottom` au lieu de `top` a été essayé et ne tient pas : le rail se
+   détachait et sortait de l'écran par le haut au lieu de se poser. */
 .art__rail {
   position: sticky;
   top: calc(var(--hdr) + 1.25rem);
-  max-height: calc(100vh - var(--hdr) - 2.5rem);
-  overflow-y: auto;
-  overscroll-behavior: contain;
   display: grid;
-  gap: 1.75rem;
+  gap: 1.15rem;
   align-content: start;
-  /* La barre de défilement, quand elle apparaît, ne doit pas coller aux
-     cartes ni rogner leur bordure. */
-  padding-right: .35rem;
-  margin-right: -.35rem;
 }
 
 .art__rail-bloc {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--paper-2);
-  padding: 1.1rem 1.15rem;
+  padding: .9rem 1rem;
 }
 
 .art__rail-titre {
   margin: 0 0 .7rem;
   font-family: var(--display);
-  font-size: 1.02rem;
+  font-size: .98rem;
   font-weight: 600;
   color: var(--ink);
 }
@@ -3152,12 +3145,16 @@ img {
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: 0.9rem;
-  line-height: 1.45;
+  /* Resserré : c'est le bloc le plus haut du rail — six intitulés qui passent
+     à la ligne font 356 px à eux seuls — et c'est lui qui décidait si le bas
+     du rail tenait dans la fenêtre. Un sommaire se balaie du regard, il ne se
+     lit pas : il supporte un corps plus petit que le texte courant. */
+  font-size: 0.84rem;
+  line-height: 1.34;
 }
 
 .art__rail-som li {
-  margin-bottom: .5rem;
+  margin-bottom: .32rem;
 }
 
 .art__rail-som li::before {
@@ -3180,7 +3177,7 @@ img {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: .85rem;
+  gap: .7rem;
 }
 
 .art__rail-liste a {
@@ -3239,9 +3236,9 @@ img {
 }
 
 .art__rail-texte {
-  margin: 0 0 .9rem;
-  font-size: .88rem;
-  line-height: 1.5;
+  margin: 0 0 .8rem;
+  font-size: .85rem;
+  line-height: 1.45;
 }
 
 .art__rail-btn {
@@ -3268,10 +3265,6 @@ img {
 
   .art__rail {
     position: static;
-    max-height: none;
-    overflow: visible;
-    padding-right: 0;
-    margin-right: 0;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 }

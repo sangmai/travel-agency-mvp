@@ -198,7 +198,7 @@ export default async function ArticlePage({
               <div className="art__rail-bloc">
                 <p className="art__rail-titre">Nos circuits</p>
                 <ul className="art__rail-liste">
-                  {trips.slice(0, 4).map((t) => (
+                  {trips.slice(0, 3).map((t) => (
                     <li key={t.slug}>
                       <a href={tripUrl(t.slug)}>
                         <span className="art__rail-vig">
