@@ -384,6 +384,10 @@ img {
   border-bottom: 1px solid var(--line);
 }
 
+/* Rien dans cet en-tête ne peut se contracter : les libellés sont en nowrap et
+   .hdr__end porte flex-shrink: 0. Sa largeur est donc un minimum dur, et la
+   seule variable qui reste est l'espace entre les blocs. Il se resserre en
+   premier, avant qu'on sacrifie quoi que ce soit. */
 .hdr__in {
   max-width: var(--wide);
   margin-inline: auto;
@@ -391,7 +395,7 @@ img {
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: clamp(1.25rem, 2.2vw, 2rem);
 }
 
 .mark {
@@ -428,7 +432,7 @@ img {
 
 .hdr__nav {
   display: flex;
-  gap: 1.6rem;
+  gap: clamp(0.95rem, 1.5vw, 1.6rem);
   margin-left: auto;
   font-size: 0.93rem;
   font-weight: 600;
@@ -2909,7 +2913,10 @@ img {
   text-decoration: underline;
 }
 
-@media (max-width: 1080px) {
+/* L'ordre des sacrifices était déjà écrit dans ce fichier : WhatsApp part en
+   premier, la navigation ensuite. Seul le seuil était faux — WhatsApp tenait
+   jusqu'à 1080 alors que l'en-tête complet demande bien plus. */
+@media (max-width: 1290px) {
   .hdr__wa {
     display: none;
   }
