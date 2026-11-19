@@ -2986,6 +2986,10 @@ img {
    gros qu'en petit. */
 :root {
   --mesure: 40rem;
+  /* L'écart entre la colonne de texte et celle des images. Déclaré une fois :
+     la grille du chapeau et le flottant du corps doivent tomber sur la même
+     verticale, sinon les deux images ne s'alignent pas d'un bloc à l'autre. */
+  --gouttiere-art: 2.5rem;
 }
 
 /* Le chapeau de section.
@@ -3123,9 +3127,18 @@ img {
 
 .art__corps > .bande {
   float: right;
-  width: clamp(14rem, 24vw, 22rem);
+  /* Exactement la colonne qui reste, pas une largeur choisie au jugé.
+     À 22rem l'image faisait 0,55 fois la colonne de texte et laissait 132 px
+     de vide à sa droite : elle se lisait comme une vignette posée dans la
+     marge, pas comme la seconde colonne d'une mise en page. Calculée, elle
+     suit la mesure du texte et la largeur de l'écran sans réglage à la main.
+
+     100% est ici la boîte de contenu du conteneur de l'article, puisque le
+     flottant s'y rattache. max() garde l'image utilisable entre 62rem et la
+     largeur où le calcul devient étroit. */
+  width: max(13rem, calc(100% - var(--mesure) - var(--gouttiere-art)));
   max-width: none;
-  margin: .5rem 0 1.25rem clamp(1.5rem, 3vw, 2.5rem);
+  margin: .5rem 0 1.25rem var(--gouttiere-art);
 }
 
 /* Le chapeau et la photo de tête, côte à côte.
@@ -3133,8 +3146,11 @@ img {
    doit pas s'enrouler autour de l'image. */
 .art__tete {
   display: grid;
-  grid-template-columns: minmax(0, 44rem) minmax(0, 1fr);
-  column-gap: clamp(1.5rem, 3vw, 3rem);
+  /* Même mesure que le corps, sinon la colonne de texte change de largeur
+     entre le chapeau et la première section, et les deux images ne sont pas
+     alignées l'une sous l'autre. */
+  grid-template-columns: minmax(0, var(--mesure)) minmax(0, 1fr);
+  column-gap: var(--gouttiere-art);
   align-items: start;
 }
 
@@ -3143,9 +3159,16 @@ img {
   margin-block: .35rem 0;
 }
 
-/* En dessous, il n'y a plus de place à droite à récupérer : deux colonnes y
-   donneraient deux colonnes étroites au lieu d'une lisible. */
-@media (max-width: 62rem) {
+/* Le seuil des deux colonnes, et il se calcule plutôt qu'il ne se choisit.
+   Deux colonnes n'ont de sens que si les deux en sont : il faut 40rem de
+   texte, 2,5rem de gouttière et au moins 25rem d'image, plus les marges de la
+   page — soit 75rem. En dessous, l'image fondait sans disparaître : 0,50 fois
+   la colonne de texte à 1100 px, 0,35 à 1000. Une vignette coincée dans la
+   marge, ce qui était exactement le défaut à corriger.
+
+   Au-delà du seuil, une colonne, et l'image prend toute la mesure. Mieux vaut
+   une grande image sous le texte que deux colonnes dont une est trop maigre. */
+@media (max-width: 75rem) {
   .art__corps > .bande {
     float: none;
     width: auto;
