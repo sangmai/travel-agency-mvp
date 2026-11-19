@@ -1,0 +1,122 @@
+{
+  "slug": "marches-ateliers-cuisine-vietnam",
+  "title": "Immersion culinaire au Vietnam : marchés et ateliers",
+  "description": "Un marché vietnamien est fini à huit heures du matin. Lesquels valent le réveil, quel atelier suffit, et pourquoi en enchaîner trois ne sert à rien.",
+  "ogTitle": "Marchés et ateliers de cuisine au Vietnam",
+  "ogDescription": "Cai Rang se vide à huit heures, Dong Van ne se tient que le dimanche. Les horaires décident de tout, et un seul cours de cuisine suffit.",
+  "photo": "marche",
+  "photoAlt": "Étal de poissons séchés et de condiments sur un marché vietnamien, prix affichés en dongs",
+  "datePublished": "2026-11-19",
+  "dateModified": "2026-11-19",
+  "author": "",
+  "chapo": "Les marchés ferment avant que la plupart des voyageurs soient levés. C'est toute la difficulté.",
+  "lede": "**Un marché vietnamien n'est pas un lieu, c'est un horaire.** Celui de Cai Rang se vide vers huit heures du matin, celui de Dong Van ne se tient que le dimanche, et celui de Hoi An a perdu l'essentiel de son intérêt passé neuf heures. L'immersion culinaire dont parlent les brochures ne tient pas à la liste des endroits visités mais à l'heure du réveil — et à une discipline que personne ne vend : en faire moins.",
+  "sections": [
+    {
+      "h2": "La règle qui commande tout : l'heure",
+      "blocs": [
+        { "p": "**Ce qui sépare une matinée de marché réussie d'une déception tient à deux heures de décalage.** Un marché vietnamien est d'abord un lieu de gros. Les restaurateurs et les revendeurs s'y approvisionnent avant l'aube ; ce qui reste à dix heures, ce sont les invendus et les étals à touristes." },
+        { "p": "Cai Rang, dans le delta du Mékong, est le cas le plus net. Le départ du quai se fait à 5 h 30, le marché de gros bat son plein entre 6 h et 7 h 30 — chaque barque hisse au bout d'une perche l'échantillon de ce qu'elle vend — et tout est fini à huit heures. Les photographies aériennes qui circulent ont été prises dans cette fenêtre de quatre-vingt-dix minutes." },
+        { "p": "D'où une conséquence que les brochures évitent : Can Tho est à 2 h 45 de route de Saigon, et non à une excursion d'une journée. Y aller et en revenir dans la journée, c'est partir à quatre heures du matin ou arriver après la fin. Une nuit sur place change l'excursion en voyage — [le détail des trajets est ici](/blog/temps-trajet-vietnam/)." },
+        { "photo": "mekong-barque" }
+      ]
+    },
+    {
+      "h2": "Les marchés qui valent le réveil",
+      "blocs": [
+        { "p": "Tous ne se valent pas, et certains que l'on cite partout sont devenus des galeries de souvenirs. Voici ceux où il se passe encore quelque chose, et à quelle condition." },
+        {
+          "tableau": {
+            "legende": "Ce qu'il faut savoir avant d'y aller",
+            "colonnes": ["Marché", "Quand", "Ce qu'on y voit"],
+            "lignes": [
+              ["Cai Rang, Can Tho", "Quai à 5 h 30, fini à 8 h", "Marché de gros flottant, à la perche"],
+              ["Dong Van, Ha Giang", "Le dimanche uniquement", "Marché ethnique de montagne"],
+              ["Meo Vac, Ha Giang", "Le dimanche", "Le même monde, avec les buffles"],
+              ["Hoi An", "Au petit matin", "Point de départ des cours de cuisine"],
+              ["Mai Chau", "Selon le jour", "Petit marché local, sans mise en scène"],
+              ["Ben Thanh, Saigon", "Toute la journée", "Souvenirs surtout. À voir sans illusion"],
+              ["Cho Lon, Saigon", "Toute la journée", "Le quartier chinois, beaucoup plus calme"]
+            ]
+          }
+        },
+        { "p": "Les deux marchés du dimanche de Ha Giang méritent qu'on construise l'itinéraire autour d'eux plutôt que l'inverse. Ce sont des marchés d'échange entre villages, pas des marchés d'approvisionnement urbain : on y vient à pied depuis les hameaux, on y vend un buffle, on y boit de l'alcool de maïs à neuf heures du matin. Passer un mardi au même endroit, c'est voir une place vide." },
+        { "p": "Ben Thanh, à l'inverse, est le marché le plus cité du pays et le moins intéressant pour qui vient pour la nourriture. Nous l'indiquons pour les derniers achats en fin de séjour, pas comme une expérience culinaire. Cho Lon, le quartier chinois, en donne beaucoup plus pour le même temps." }
+      ]
+    },
+    {
+      "h2": "Un seul atelier suffit, et voici lequel",
+      "blocs": [
+        { "p": "**C'est le conseil que personne ne donne, parce qu'il ne se vend pas.** Au-delà d'un cours de cuisine, le gain décroît très vite : le deuxième répète le premier avec d'autres plats, et ce qu'on retient d'un voyage culinaire tient davantage aux repas pris en chemin qu'aux ateliers." },
+        { "p": "Si vous n'en faites qu'un, faites-le à Hoi An. Le format habituel commence par le marché au petit matin avec le chef — c'est la partie qui compte —, puis une traversée en barque jusqu'au village maraîcher de Tra Que, et la cuisine proprement dite ensuite. Comptez 25 à 40 € par personne pour une demi-journée." },
+        { "p": "Ce qui fait la différence entre un bon et un mauvais atelier n'est pas le menu mais la proportion : un cours qui commence directement aux fourneaux vous vend une recette, un cours qui commence au marché vous apprend à lire un étal. Demandez cette précision avant de réserver, c'est la seule qui compte." },
+        { "p": "Hoi An propose d'autres ateliers, et deux tiennent la route pour des raisons différentes : la fabrication de lanternes en bambou et soie, qui occupe une après-midi et dont on repart avec la sienne, et l'essayage chez un tailleur, qui n'a rien de culinaire mais demande d'être lancé tôt dans le séjour pour laisser le temps des retouches." },
+        { "photo": "cuisine" }
+      ]
+    },
+    {
+      "h2": "Manger dans la rue sans y laisser son voyage",
+      "blocs": [
+        { "p": "**La cuisine de rue est sûre, à une condition, et le critère n'est pas celui qu'on croit.** Ce n'est pas la propreté apparente qui protège, c'est la rotation : là où les habitants font la queue, tout a été préparé dans la journée." },
+        { "p": "Les vrais risques sont ailleurs, et ils sont faciles à éviter :" },
+        {
+          "ul": [
+            "**Les buffets tièdes**, qui attendent depuis des heures à température ambiante.",
+            "**Les jus avec de la glace pilée d'origine inconnue** — la glace industrielle en cylindres percés est sûre, la glace pilée artisanale l'est moins.",
+            "**Les crudités dans un établissement vide**, parce qu'elles y ont attendu."
+          ]
+        },
+        { "p": "Nos guides emmènent systématiquement les voyageurs manger dans la rue dès le premier soir, et c'est délibéré : le faire accompagné une fois lève l'hésitation pour tout le reste du séjour. [Notre page sur la cuisine](/vietnam-cuisine/) détaille les plats région par région et les prix réels." }
+      ]
+    },
+    {
+      "h2": "Trois régions, trois matinées différentes",
+      "blocs": [
+        { "p": "Le pays n'a pas une cuisine mais trois, et les marchés le montrent mieux qu'un menu." },
+        { "p": "Au Nord, les étals sont sobres : herbes, bouillons, nouilles de riz fraîches, peu d'épices. En montagne, le marché devient social avant d'être commercial — on y monte pour se voir autant que pour acheter." },
+        { "p": "Au Centre, autour de Hué et Hoi An, l'héritage impérial se lit dans la minutie : petites portions, préparations nombreuses, piment franc. C'est aussi la région où les cours de cuisine sont les mieux organisés." },
+        { "p": "Au Sud, tout est plus sucré, plus métissé, et l'eau commande : les marchés se tiennent sur le fleuve, les barques se chargent à la lampe frontale avant l'aube, et le marché est fini à huit heures. C'est le seul endroit du pays où il faut se lever à quatre heures pour voir une journée commencer." }
+      ]
+    },
+    {
+      "h2": "Combien de temps y consacrer",
+      "blocs": [
+        { "p": "**Une immersion culinaire honnête tient en trois rendez-vous sur quinze jours, pas en dix.**" },
+        {
+          "ol": [
+            "**Un marché de montagne**, si votre itinéraire passe un dimanche dans le Nord-Est. C'est le plus difficile à caler et le plus mémorable.",
+            "**Un cours de cuisine à Hoi An**, une demi-journée, en commençant par le marché.",
+            "**Un marché flottant du delta**, avec une nuit sur place la veille — sinon ne le mettez pas au programme."
+          ]
+        },
+        { "p": "Chacun de ces trois coûte une matinée, et deux d'entre eux imposent une contrainte de date ou d'étape. C'est exactement le genre d'arbitrage que l'on découvre trop tard : notre [outil d'itinéraire](/organiser-son-voyage-au-vietnam/) compte les nuits et les trajets de votre plan et vous dit ce qui dépasse, avant que vous ne réserviez quoi que ce soit." }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "À quelle heure faut-il aller au marché flottant de Cai Rang ?",
+      "a": "Départ du quai à 5 h 30. Le marché de gros bat son plein entre 6 h et 7 h 30, et tout est fini vers huit heures. Chaque barque hisse au bout d'une perche l'échantillon de ce qu'elle vend, ce qui permet de lire le marché de loin. Arriver à dix heures, c'est voir des barques vides."
+    },
+    {
+      "q": "Peut-on visiter le marché de Cai Rang depuis Saigon dans la journée ?",
+      "a": "Techniquement oui, utilement non. Can Tho est à 2 h 45 de route de Saigon et le marché se vide à huit heures : un aller-retour dans la journée signifie partir à quatre heures du matin, ou arriver après la fin. Une nuit à Can Tho la veille transforme l'excursion en voyage."
+    },
+    {
+      "q": "Quel jour se tient le marché de Dong Van ?",
+      "a": "Le dimanche. C'est un marché d'échange entre villages de montagne, et non un marché d'approvisionnement quotidien : les habitants y descendent à pied depuis les hameaux. Le même jour, celui de Meo Vac se tient aussi. Passer un autre jour au même endroit, c'est trouver une place vide — cela vaut la peine de construire l'itinéraire du Nord-Est autour de ce dimanche."
+    },
+    {
+      "q": "Combien coûte un cours de cuisine au Vietnam ?",
+      "a": "Comptez 25 à 40 € par personne pour une demi-journée à Hoi An, format le plus courant : marché au petit matin avec le chef, traversée en barque jusqu'au village maraîcher de Tra Que, puis la cuisine. Le prix varie peu d'un prestataire à l'autre ; ce qui varie, c'est la part donnée au marché."
+    },
+    {
+      "q": "Faut-il faire plusieurs ateliers de cuisine ?",
+      "a": "Non, un seul suffit. Le deuxième répète le premier avec d'autres plats, et le gain décroît vite. Ce qu'on retient d'un voyage culinaire tient davantage aux repas pris en chemin et aux marchés traversés qu'au nombre d'ateliers réservés. Mieux vaut un cours bien choisi et deux marchés que trois cours."
+    },
+    {
+      "q": "La cuisine de rue est-elle sans danger au Vietnam ?",
+      "a": "Oui, à condition de choisir une échoppe fréquentée. Le critère n'est pas la propreté apparente mais la rotation : là où les habitants font la queue, tout est préparé dans la journée. Évitez les buffets tièdes, les jus avec de la glace pilée d'origine inconnue, et les crudités dans un établissement vide."
+    }
+  ]
+}
