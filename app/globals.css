@@ -1918,6 +1918,20 @@ img {
   padding-block: clamp(2rem, 4vw, 3rem) clamp(2.5rem, 5vw, 3.75rem);
 }
 
+/* Le bandeau du planificateur, plus haut que celui d'une fiche.
+   La photo est cadrée en cover : seule la hauteur rendue décide de la part du
+   champ de sarrasin qu'on voit, et à la hauteur d'une fiche les fleurs étaient
+   coupées. min-height plutôt qu'une hauteur fixe — le texte reste maître s'il
+   dépasse, ce qu'il fait aux petites largeurs. */
+.trip-hero--haut {
+  /* Le plancher est pour le téléphone, où il mord : le texte y fait à lui
+     seul la hauteur minimale, et sans marge le champ se réduit à une bande.
+     24rem laisse les fleurs sous le paragraphe. */
+  min-height: clamp(24rem, 46vw, 30rem);
+  display: grid;
+  align-items: center;
+}
+
 .trip-hero__img {
   position: absolute;
   inset: 0;

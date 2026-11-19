@@ -3,7 +3,6 @@ import { Header, MobileBar } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Closing, Fil, JsonLd, SectionHead } from "@/components/ui";
 import { DataTable } from "@/components/DataTable";
-import { Bande } from "@/components/Bande";
 import { Photo } from "@/components/Photo";
 import { breadcrumb } from "@/components/JsonLd";
 import { Planner } from "@/components/Planner";
@@ -81,10 +80,16 @@ export default async function OrganiserSonVoyage() {
             conseille le plus souvent d'abandonner, et la page parle de ce qu'il
             faut sacrifier. Elle n'est hero nulle part ailleurs.
 
+            --haut : le bandeau est plus haut qu'une fiche. object-fit:cover
+            cadre au centre, donc la hauteur rendue décide de ce qu'on voit du
+            sarrasin — à la hauteur d'une fiche, les fleurs tombaient hors
+            cadre. Un modificateur et pas une retouche de .trip-hero : les sept
+            fiches partagent la classe et n'ont rien demandé.
+
             Le texte passe de .lede à .trip-hero__tag. .lede est en --ink-2, un
             brun sombre fait pour le papier ; laissé tel quel sur le voile il
             aurait été illisible. */}
-        <section className="trip-hero">
+        <section className="trip-hero trip-hero--haut">
           <div className="trip-hero__img">
             <Photo id="sarrasin" role="hero" />
           </div>
@@ -130,18 +135,6 @@ export default async function OrganiserSonVoyage() {
                 avant.
               </li>
             </ol>
-
-            {/* The junk at anchor, placed under the three facts rather than at
-                the top of the page. It illustrates the least believable of
-                them — a "one night" cruise that eats two days — and the page
-                is the only one on the site that argued entirely in text.
-
-                Below the fold on purpose. This page scores 97 on mobile with
-                an LCP of 1.74 s precisely because it carries no image; a hero
-                photograph would become the LCP element and spend that. The
-                `bande` role is not priority, so it loads lazily and the number
-                stays where it is. */}
-            <Bande id="jonque-halong" />
           </div>
         </section>
 
