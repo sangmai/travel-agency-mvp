@@ -20,7 +20,11 @@ out/
 .DS_Store
 
 # Artefacts de l'outillage, pas du site.
+# Les skills sont des outils de poste de travail, pas du code du site : le
+# dépôt ignore déjà .agents/, celui-ci suit la même règle. Elles se
+# réinstallent (npx skills add) et pèsent quelques mégaoctets.
 .agents/
+.claude/skills/
 skills-lock.json
 
 # Secrets locaux de wrangler.
