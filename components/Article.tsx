@@ -31,24 +31,28 @@ export function typo(texte: string): string {
   return texte.replace(/ ([:;!?»])/g, "\u00a0$1").replace(/« /g, "«\u00a0");
 }
 
-/** Splits on `**gras**` and `[texte](url)` in one pass, in order. */
+/** Splits on `**gras**`, `*italique*` and `[texte](url)` in one pass, in order. */
 export function enligne(brut: string): ReactNode[] {
   const texte = typo(brut);
   const out: ReactNode[] = [];
-  const motif = /\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)]+)\)/g;
+  /* L'italique passe après le gras dans l'alternative, sinon `**x**` se ferait
+     lire comme une emphase vide suivie d'une autre. */
+  const motif = /\*\*([^*]+)\*\*|\*([^*\n]+)\*|\[([^\]]+)\]\(([^)]+)\)/g;
   let pos = 0;
   let m: RegExpExecArray | null;
   while ((m = motif.exec(texte))) {
     if (m.index > pos) out.push(texte.slice(pos, m.index));
     if (m[1] !== undefined) {
       out.push(<b key={m.index}>{m[1]}</b>);
+    } else if (m[2] !== undefined) {
+      out.push(<em key={m.index}>{m[2]}</em>);
     } else {
       /* Internal addresses carry their trailing slash in the content, and
          scripts/check-links.mjs fails the build if one does not: a link written
          here is a link a reader follows, not an identifier. */
       out.push(
-        <a key={m.index} className="lnk" href={m[3]}>
-          {m[2]}
+        <a key={m.index} className="lnk" href={m[4]}>
+          {m[3]}
         </a>,
       );
     }

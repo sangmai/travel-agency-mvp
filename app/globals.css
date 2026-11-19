@@ -2974,6 +2974,137 @@ img {
    sur 1 124 px — soit près du double d'une mesure lisible. Les 44 rem sont ceux
    que `.art__liste` et `.bande` appliquent déjà ; le corps s'y aligne au lieu
    d'inventer une troisième largeur. */
+/* La mesure du blog.
+   44rem à 17 px donnaient 89 caractères par ligne, mesurés au canvas sur la
+   fonte réellement servie ; au-delà de 80 l'œil perd la ligne suivante.
+
+   La corriger en rétrécissant la colonne marchait et coûtait cher : à 34rem le
+   texte laissait un vide de cinq cents pixels à sa droite dans les passages
+   sans photo ni tableau — le défaut qu'on était venu réparer, en pire. On
+   corrige donc par le corps : 19 px dans 40rem donnent 72 caractères. La
+   colonne reste large, le texte respire, et un article long se lit mieux en
+   gros qu'en petit. */
+:root {
+  --mesure: 40rem;
+}
+
+/* Le chapeau de section.
+   Il manquait un cran entre un h2 de 46 px et un corps de 17 : l'un écrasait
+   l'autre et six sections se ressemblaient toutes. La phrase de tête est déjà
+   la thèse de la section — elle est en gras dans le contenu depuis le début.
+   Elle passe au display, à un corps intermédiaire, et devient le niveau
+   manquant. Rien n'est ajouté au texte : c'est la même phrase, mieux dite.
+
+   Les neuf sections sur soixante-dix qui n'ouvrent pas sur une thèse ne
+   reçoivent simplement rien. */
+.art__corps > p:first-of-type > b:first-child {
+  display: block;
+  margin-bottom: .55rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.45rem;
+  line-height: 1.34;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+/* Le rythme vertical de l'article.
+   Chaque section du corps est un <section class="sec">, et .sec porte 112 px
+   d'encart en haut comme en bas : 224 px entre deux parties d'un même texte.
+   C'est l'écart prévu entre deux blocs d'une page d'accueil — une grille de
+   circuits, un bandeau d'avis — pas entre deux paragraphes d'un raisonnement
+   qui se suit. Un lecteur qui descend perdait le fil à chaque trou.
+
+   Le premier bloc garde son encart haut : là, la séparation est réelle,
+   c'est la fin du chapeau. */
+.art__corps {
+  padding-block: 0;
+}
+
+.sec:has(> .art__corps) {
+  padding-block: clamp(2.25rem, 4vw, 3.5rem);
+}
+
+/* Les tableaux du blog, et c'est ici que va toute la hardiesse.
+   Ces articles ne sont pas des pages d'inspiration : ce sont des arbitrages
+   chiffrés, et les quarante-six trajets sourcés sont ce que personne d'autre
+   ne publie. Ils étaient pourtant le plus petit texte de la page — en-têtes à
+   11 px, cellules à 15, en gris, pendant qu'un titre décoratif occupait 46 px.
+   C'était l'inverse de ce que la page a à dire.
+
+   Ils sortent donc de la mesure du texte pour prendre toute la largeur
+   disponible — c'est l'autre emploi du blanc à droite — et les durées passent
+   au display, en chiffres tabulaires pour que les colonnes s'alignent
+   verticalement comme sur un horaire.
+
+   clear:right parce que la photo flotte de ce côté : cinq sections portent les
+   deux, et un tableau pleine largeur qui démarre à côté d'une photo se ferait
+   écraser. Il passe dessous, et la photo garde ses paragraphes. */
+.art__corps > .tbl-wrap {
+  clear: right;
+  margin-block: 1.9rem;
+}
+
+.art__corps .tbl {
+  font-size: 1rem;
+}
+
+.art__corps .tbl th,
+.art__corps .tbl td {
+  padding-block: 1.05rem;
+}
+
+/* La colonne 1 nomme le trajet, les suivantes le chiffrent. Les chiffres
+   portent l'information, donc ils portent le display et l'alignement. */
+.art__corps .tbl tbody th {
+  font-size: 1.08rem;
+  padding-right: 2rem;
+}
+
+.art__corps .tbl td {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+
+/* La deuxième colonne de données est la durée : c'est le chiffre qu'on vient
+   chercher, et il se lit mieux dans le display que dans le texte courant. */
+.art__corps .tbl td:first-of-type + td,
+.art__corps .tbl tbody th + td + td {
+  font-family: var(--display);
+  font-size: 1.14rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* La note de source reste petite et grise : elle garantit le tableau, elle ne
+   le concurrence pas. */
+/* .note est un <p>, donc `.art__corps > p` l'emportait sur `.note` et la
+   source d'un tableau se retrouvait au corps du texte courant. Elle garantit
+   le tableau ; elle ne le commente pas. */
+.art__corps > .note {
+  max-width: var(--mesure);
+  margin-top: -1.1rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* .lnk porte un corps fixe de 0,88rem — juste pour un lien isolé sous une
+   carte, faux pour un lien au milieu d'une phrase, qui rapetissait en plein
+   texte. L'écart passait inaperçu à 17 px ; à 19 il saute aux yeux. Dans une
+   phrase, un lien a le corps de sa phrase. */
+.art__corps .lnk,
+.lede .lnk {
+  font-size: inherit;
+}
+
+/* Les listes portent des phrases, pas des étiquettes : même corps que le
+   texte courant, sinon elles se lisent comme une annexe. */
+.art__corps > .art__liste {
+  max-width: var(--mesure);
+  font-size: 1.1875rem;
+  line-height: 1.66;
+}
+
 /* Le corps d'article, sur deux colonnes.
    Le texte garde ses 44rem — c'est la mesure qui se lit, et l'élargir pour
    remplir l'écran serait régler un problème en en créant un autre. Ce qui
@@ -2992,7 +3123,7 @@ img {
 
 .art__corps > .bande {
   float: right;
-  width: clamp(15rem, 27vw, 25rem);
+  width: clamp(14rem, 24vw, 22rem);
   max-width: none;
   margin: .5rem 0 1.25rem clamp(1.5rem, 3vw, 2.5rem);
 }
@@ -3036,12 +3167,19 @@ img {
 }
 
 .art__corps > p {
-  margin-bottom: 1.1rem;
-  max-width: 44rem;
+  margin-bottom: 1.15rem;
+  max-width: var(--mesure);
+  font-size: 1.1875rem;
+  line-height: 1.66;
 }
 
+/* Le titre cède du terrain au chapeau qu'il introduit : à 2,9rem il ne
+   laissait rien exister sous lui. */
 .art__corps > h2 {
-  margin-bottom: 1.1rem;
+  margin-bottom: .9rem;
+  font-size: clamp(1.65rem, 2.6vw, 2.05rem);
+  line-height: 1.14;
+  max-width: 22ch;
 }
 
 /* Body lists. Wider spacing than a card list: these carry sentences, not
