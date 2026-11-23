@@ -121,8 +121,8 @@
   },
   "phuquoc": {
     "file": "phuquoc.jpg",
-    "alt": "Radeaux d'élevage et barques de pêche au coucher du soleil, au large de la province de Kien Giang, au sud du Vietnam",
-    "place": "Kien Giang",
+    "alt": "Radeaux d'élevage et barques de pêche au coucher du soleil, au large de Phu Quoc, dans la province d'An Giang, au sud du Vietnam",
+    "place": "Phu Quoc, An Giang",
     "lat": 10,
     "credit": {
       "title": "Houseboats Along Seashore",
@@ -333,6 +333,42 @@
       "author": "Jeffry Surianto",
       "licence": "Pexels",
       "page": "https://www.pexels.com/photo/34861581/"
+    }
+  },
+  "quynhon": {
+    "file": "quynhon.jpg",
+    "alt": "Vue aérienne du port de Quy Nhon, bateaux de pêche au mouillage dans la baie au pied des collines boisées",
+    "place": "Quy Nhon, Gia Lai",
+    "lat": 13.77,
+    "credit": {
+      "title": "Ships in Water at Bay near Tropical Island",
+      "author": "Lam Phn",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/ships-in-water-at-bay-near-tropical-island-6668485/"
+    }
+  },
+  "quynhon-barques": {
+    "file": "quynhon-barques.jpg",
+    "alt": "Barques colorées et kayaks sur l'eau turquoise de la baie de Quy Nhon, vus du ciel",
+    "place": "Quy Nhon, Gia Lai",
+    "lat": 13.77,
+    "credit": {
+      "title": "Aerial shot of boats and kayakers in Qui Nhon",
+      "author": "Lam Phn",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/view-of-boats-on-the-ocean-12355235/"
+    }
+  },
+  "quynhon-peche": {
+    "file": "quynhon-peche.jpg",
+    "alt": "Bateaux de pêche aux coques colorées serrés dans les eaux calmes de la baie de Quy Nhon, vue aérienne",
+    "place": "Quy Nhon, Gia Lai",
+    "lat": 13.77,
+    "credit": {
+      "title": "Colorful Fishing Boats in Quy Nhon Bay, Vietnam",
+      "author": "Tri Nguyen",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/colorful-fishing-boats-in-quy-nhon-bay-vietnam-30881289/"
     }
   }
 }

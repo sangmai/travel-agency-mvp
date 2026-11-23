@@ -362,5 +362,44 @@
       1920
     ],
     "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAABwAgCdASoQAAsAA4BaJbACdGuAt/8DcAtSLw4AAP4zPBq99JX3wDYMM3YytZR0dqZ7CmgXMPdUW+neOj9D29duMq0WO9DBGXwaNCfec2gAAA=="
+  },
+  "quynhon": {
+    "w": 2400,
+    "h": 1348,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACwAQCdASoQAAkAA4BaJbACdAD5URQAAP7gCcZvrl6Y/by8cb/ED7vrssD+QPGXvPhsAqNvmhhRA1mlX3CGy03xOyw/JLEYzjWeAAAA"
+  },
+  "quynhon-barques": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoQAAkAA4BaJbACdAEQE+k7bQUAAPfQtbNB4lQ94n9IiZq5+Fmzm5wG9hG6sLn+x8KDNLuiPnhk4puAAAA="
+  },
+  "quynhon-peche": {
+    "w": 2400,
+    "h": 1597,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoQAAsAA4BaJbACdAEJbMCdAAD+567tLIz0iKD719q7CSAVelz6e1maA36gmZ5T95ZIj/nY7APN5Quqqgl8gxgA"
   }
 }
