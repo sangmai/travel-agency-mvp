@@ -401,5 +401,44 @@
       1920
     ],
     "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoQAAsAA4BaJbACdAEJbMCdAAD+567tLIz0iKD719q7CSAVelz6e1maA36gmZ5T95ZIj/nY7APN5Quqqgl8gxgA"
+  },
+  "danang-dragon": {
+    "w": 2400,
+    "h": 1632,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAsAA4BaJYwC7ADhZd6cwu4AAP7uKZdDeyLJl6cDhCCwR8XgbY2QSJrCNHL1wfTDkrhMZ/ioCYnczkiJVIgcHUmRkrpjkt9BDU19BgAAAA=="
+  },
+  "danang-ville": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoQAAsAA4BaJaACdAEQL9/C4+AAAP7F3OWTDRjCV+ZMzrF6WiYksCziKWzu37TbdNS44/eWFwXHm9hHQAA="
+  },
+  "danang-plage": {
+    "w": 2400,
+    "h": 1622,
+    "widths": [
+      256,
+      384,
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "blur": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAgCdASoQAAsAA4BaJYgCdGuAAt8gZztwAP7g0V0OR5AH+osvHQe96E4EQQzkSl4yx1atJNhYJJVrkAAAAA=="
   }
 }

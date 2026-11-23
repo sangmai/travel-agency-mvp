@@ -4,8 +4,8 @@
   "description": "Une seule remplit les hôtels : le festival de feux d'artifice, de fin mai à mi-juillet. Les deux fêtes traditionnelles de la ville se tiennent au premier trimestre lunaire et ne se cherchent pas sur un calendrier grégorien.",
   "ogTitle": "Les fêtes de Da Nang : laquelle justifie de déplacer un voyage",
   "ogDescription": "Da Nang n'est pas une ville de fêtes traditionnelles, et son plus grand événement a été inventé en 2008. Ce que cela change pour votre date de départ.",
-  "photo": "tet-fleurs",
-  "photoAlt": "Étals de fleurs jaunes sur un marché du Tết au centre du Vietnam, à la saison où se tiennent les fêtes lunaires de Da Nang",
+  "photo": "danang-dragon",
+  "photoAlt": "Vue aérienne de Da Nang au crépuscule, le pont du Dragon enjambant la rivière Han, au-dessus de laquelle se tire le festival de feux d'artifice",
   "datePublished": "2026-11-23",
   "dateModified": "2026-11-23",
   "author": "",
@@ -20,6 +20,9 @@
         },
         {
           "p": "Cela n'enlève rien à ce qui existe. Le ministère de la Culture a inscrit plusieurs éléments du patrimoine immatériel national sur le territoire de la ville, et deux d'entre eux sont des fêtes que l'on peut réellement aller voir. Mais ce sont des fêtes de communauté : on y entre comme invité, pas comme spectateur, et il n'y a ni tribune ni billet."
+        },
+        {
+          "photo": "danang-ville"
         },
         {
           "p": "Le malentendu courant vient d'ailleurs. Beaucoup de voyageurs arrivent à Da Nang en pensant y trouver les lanternes qu'ils ont vues en photo. Ces lanternes sont à Hoi An, à trente kilomètres — on y revient plus bas, parce que c'est l'erreur de planification la plus fréquente du Centre."
@@ -135,6 +138,9 @@
             "**Vous partez en octobre ou novembre** — la question ne se pose pas : aucune fête, et c'est le cœur de la saison des pluies du Centre.",
             "**Vous partez autour du Tết** — c'est un tout autre sujet, et le seul qui puisse rendre un voyage impossible faute de trains et de vols."
           ]
+        },
+        {
+          "photo": "danang-plage"
         },
         {
           "p": "Le classement des douze mois, région par région, est sur notre page [quand partir](/quand-partir-au-vietnam/). Pour le Nouvel An lunaire et ses conséquences sur les transports, voir [Tết](/tet-vietnam/). Et si vous hésitez encore sur la place du Centre dans votre parcours, le circuit [du Nord au Sud](/circuit-vietnam/vietnam-du-nord-au-sud/) montre comment nous enchaînons Hué, le col des Nuages, Da Nang et Hoi An."

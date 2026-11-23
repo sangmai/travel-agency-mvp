@@ -184,5 +184,23 @@
     "auteur": "Tri Nguyen",
     "licence": "Pexels",
     "page": "https://www.pexels.com/photo/colorful-fishing-boats-in-quy-nhon-bay-vietnam-30881289/"
+  },
+  "danang-dragon": {
+    "title": "Aerial view of Đà Nẵng cityscape featuring the iconic Dragon Bridge and river",
+    "auteur": "Giang Nguyễn",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/aerial-view-of-dragon-bridge-in-da-n-ng-vietnam-34373624/"
+  },
+  "danang": {
+    "title": "Downtown of Da Nang",
+    "auteur": "Kirandeep Singh Walia",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/downtown-of-da-nang-19927758/"
+  },
+  "danang-plage": {
+    "title": "Da Nang City Name at Beach",
+    "auteur": "Pragyan Bezbaruah",
+    "licence": "Pexels",
+    "page": "https://www.pexels.com/photo/da-nang-city-name-at-beach-26550067/"
   }
 }

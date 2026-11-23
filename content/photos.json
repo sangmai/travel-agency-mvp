@@ -370,5 +370,41 @@
       "licence": "Pexels",
       "page": "https://www.pexels.com/photo/colorful-fishing-boats-in-quy-nhon-bay-vietnam-30881289/"
     }
+  },
+  "danang-dragon": {
+    "file": "danang-dragon.jpg",
+    "alt": "Vue aérienne de Da Nang au crépuscule, le pont du Dragon enjambant la rivière Han au milieu des tours de la ville",
+    "place": "Da Nang",
+    "lat": 16.06,
+    "credit": {
+      "title": "Aerial view of Đà Nẵng cityscape featuring the iconic Dragon Bridge and river",
+      "author": "Giang Nguyễn",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/aerial-view-of-dragon-bridge-in-da-n-ng-vietnam-34373624/"
+    }
+  },
+  "danang-ville": {
+    "file": "danang.jpg",
+    "alt": "Tours de verre du centre de Da Nang, ville reconstruite depuis les années 2000, sur la côte du centre du Vietnam",
+    "place": "Da Nang",
+    "lat": 16.06,
+    "credit": {
+      "title": "Downtown of Da Nang",
+      "author": "Kirandeep Singh Walia",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/downtown-of-da-nang-19927758/"
+    }
+  },
+  "danang-plage": {
+    "file": "danang-plage.jpg",
+    "alt": "Plage de Da Nang par ciel dégagé, mer calme et lettres du nom de la ville dressées sur le sable",
+    "place": "Da Nang",
+    "lat": 16.06,
+    "credit": {
+      "title": "Da Nang City Name at Beach",
+      "author": "Pragyan Bezbaruah",
+      "licence": "Pexels",
+      "page": "https://www.pexels.com/photo/da-nang-city-name-at-beach-26550067/"
+    }
   }
 }
