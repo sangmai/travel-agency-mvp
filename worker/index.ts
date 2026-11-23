@@ -9,6 +9,7 @@ import { demarrer, retour, type AuthEnv } from "./auth";
 import { clic, record, digest, type ClicEnv } from "./clicks";
 import { envoyerAccuse } from "./accuse";
 import { markdown, page } from "./markdown";
+import { catalogue } from "./catalogue";
 import { enregistrerLead, anonymiserAnciens, type LeadEnv } from "./leads";
 
 interface Env extends AuthEnv, ClicEnv, LeadEnv {
@@ -360,6 +361,13 @@ export default {
     ctx: { waitUntil(p: Promise<unknown>): void },
   ): Promise<Response> {
     const { pathname } = new URL(request.url);
+
+    /* Découverte : /.well-known/api-catalog et le document OpenAPI qu'il
+       désigne. Placé avant tout le reste parce que ces deux adresses ne
+       négocient rien et ne doivent jamais tomber dans la couche d'assets, qui
+       leur donnerait le mauvais type. */
+    const cat = catalogue(request);
+    if (cat) return cat;
 
     if (pathname === "/api/devis") {
       if (request.method !== "POST") {

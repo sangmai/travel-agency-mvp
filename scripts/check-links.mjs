@@ -31,11 +31,18 @@ function pages(dir) {
 }
 
 /* A fragment or a query already names something other than a page, and an
-   address carrying an extension is a file, not a route. */
+   address carrying an extension is a file, not a route.
+
+   /.well-known/ is exempt for a stronger reason than convenience: those URIs
+   are spelled by their specification, not by us. RFC 9727 names the catalogue
+   /.well-known/api-catalog, and a trailing slash would be a different address
+   that no client will ask for. The rule here guards against 301s on pages; a
+   well-known URI is not a page. */
 const aCorriger = (href) =>
   href.startsWith("/") &&
   href !== "/" &&
   !href.endsWith("/") &&
+  !href.startsWith("/.well-known/") &&
   !/[#?]/.test(href) &&
   !/\.[a-z0-9]+$/i.test(href);
 
