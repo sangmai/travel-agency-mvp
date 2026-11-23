@@ -9,7 +9,7 @@ import { demarrer, retour, type AuthEnv } from "./auth";
 import { clic, record, digest, type ClicEnv } from "./clicks";
 import { envoyerAccuse } from "./accuse";
 import { markdown, page } from "./markdown";
-import { catalogue } from "./catalogue";
+import { decouverte } from "./decouverte";
 import { enregistrerLead, anonymiserAnciens, type LeadEnv } from "./leads";
 
 interface Env extends AuthEnv, ClicEnv, LeadEnv {
@@ -362,12 +362,13 @@ export default {
   ): Promise<Response> {
     const { pathname } = new URL(request.url);
 
-    /* Découverte : /.well-known/api-catalog et le document OpenAPI qu'il
-       désigne. Placé avant tout le reste parce que ces deux adresses ne
-       négocient rien et ne doivent jamais tomber dans la couche d'assets, qui
-       leur donnerait le mauvais type. */
-    const cat = catalogue(request);
-    if (cat) return cat;
+    /* Découverte : /.well-known/api-catalog, le document OpenAPI qu'il désigne
+       et /auth.md. Placé avant tout le reste parce que ces adresses ne
+       négocient rien, et que deux d'entre elles seraient mal servies plus bas —
+       l'une par la couche d'assets qui lui donnerait le mauvais type, l'autre
+       par la négociation Markdown qui la prendrait pour le jumeau de /auth/. */
+    const doc = decouverte(request);
+    if (doc) return doc;
 
     if (pathname === "/api/devis") {
       if (request.method !== "POST") {
