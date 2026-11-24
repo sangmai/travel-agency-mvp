@@ -7,7 +7,7 @@
   "photo": "jonque-halong",
   "photoAlt": "Petite jonque de croisière en bois à deux mâts, au mouillage au pied d'un piton calcaire de la baie d'Halong",
   "datePublished": "2026-11-11",
-  "dateModified": "2026-11-11",
+  "dateModified": "2026-11-24",
   "author": "",
   "chapo": "Le nombre de cabines compte plus que les étoiles, et le port d'embarquement décide du reste.",
   "lede": "**Regardez le nombre de cabines avant le nombre d'étoiles.** Un bateau de douze cabines et un bateau de trente-six vendent la même baie, le même dîner et la même nuit au mouillage — mais pas la même journée. Sur le premier, le kayak part quand vous êtes prêt ; sur le second, on attend que trente-six cabines soient descendues. C'est la première des trois décisions qui comptent, et la seule que les brochures ne mettent jamais en avant.",
@@ -179,6 +179,14 @@
       ]
     },
     {
+      "h2": "Comment choisir la meilleure jonque pour votre croisière dans la baie d'Halong ?",
+      "blocs": [
+        {
+          "p": "Choisir la jonque idéale pour explorer la baie d'Halong est une étape cruciale pour garantir une expérience inoubliable. Il ne s'agit pas seulement de confort, mais aussi de l'itinéraire et de l'authenticité de l'embarcation. Pour faire le meilleur choix, considérez trois critères fondamentaux : la taille du bateau, le niveau de luxe souhaité et le parcours proposé. Les jonques traditionnelles en bois offrent un charme historique incomparable, tandis que les navires plus modernes privilégient des équipements haut de gamme comme des balcons privés ou des jacuzzis. Vérifiez également si la croisière inclut des arrêts dans des zones moins fréquentées comme la [baie de Lan Ha](/halong-ou-lan-ha/) ou la baie de Bai Tu Long, qui permettent d'échapper à l'affluence touristique. Priorisez les opérateurs qui mettent en avant la sécurité, la qualité du service à bord et la durabilité environnementale pour une immersion respectueuse dans ce site classé au patrimoine mondial de l'UNESCO."
+        }
+      ]
+    },
+    {
       "h2": "Les six questions à poser avant de réserver",
       "blocs": [
         {
@@ -221,6 +229,10 @@
     {
       "q": "Que se passe-t-il si la baie ferme pour mauvais temps ?",
       "a": "La capitainerie ferme la baie quelques jours par an, surtout en hiver et lors des coups de vent. C'est l'une des rares choses qu'une agence ne maîtrise pas. Ce qu'elle maîtrise, c'est d'avoir prévu la solution de remplacement à l'avance et de vous l'avoir dite. Posez la question avant de réserver plutôt que de la découvrir sur le quai."
+    },
+    {
+      "q": "Quelle est la différence entre une jonque traditionnelle et un bateau de croisière moderne dans la baie d'Halong ?",
+      "a": "La jonque traditionnelle se distingue par son architecture en bois typique et ses voiles caractéristiques, offrant une expérience authentique et intimiste. À l'inverse, les bateaux de croisière modernes sont souvent plus spacieux, dotés d'équipements contemporains comme des baies vitrées panoramiques, des salles de sport et un confort hôtelier supérieur, tout en conservant l'esthétique inspirée des jonques ancestrales."
     }
   ]
 }
