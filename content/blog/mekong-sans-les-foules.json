@@ -1,0 +1,153 @@
+{
+  "slug": "mekong-sans-les-foules",
+  "title": "Delta du Mékong : où aller pour ne pas être avec tout le monde",
+  "description": "Quatre-vingt-dix pour cent de ce qui se vend est la même excursion d'une journée depuis Saigon. Le delta ne se vide qu'à partir de trois heures de route, et à condition d'y dormir.",
+  "ogTitle": "Delta du Mékong : où aller pour ne pas être avec tout le monde",
+  "ogDescription": "Barque à chapeau conique, atelier de bonbons à la coco, thé au miel : l'excursion que tout le monde fait. Voici ce qu'il y a derrière.",
+  "photo": "mekong",
+  "photoAlt": "Le marché flottant de Cai Rang vu du ciel, barques chargées de fruits sur l'eau ocre du Mékong, à l'heure où il est encore actif",
+  "datePublished": "2026-11-26",
+  "dateModified": "2026-11-26",
+  "author": "",
+  "chapo": "Le delta ne se vide qu'au-delà de trois heures de route, et à condition d'y dormir.",
+  "lede": "**L'excursion d'une journée au départ de Saigon est le produit le plus vendu du Vietnam, et c'est le seul endroit du pays où vous ferez la queue en barque.** My Tho, Ben Tre : une heure et demie de route, quatre arrêts identiques pour tous les autocars, retour le soir. Ce n'est pas une arnaque, c'est une logistique — c'est le bout de delta le plus proche de la ville. Le delta commence vraiment plus loin, et la règle est simple : au-delà de trois heures de Saigon, et une nuit sur place au minimum. Voici ce que cela change et où aller.",
+  "sections": [
+    {
+      "h2": "Le produit de masse, et comment le reconnaître",
+      "blocs": [
+        {
+          "p": "**Si le programme contient une barque à chapeau conique, un atelier de bonbons à la noix de coco et un thé au miel, c'est l'excursion standard.** Elle se déroule à My Tho ou à Ben Tre, à une heure et demie de Saigon, et elle est identique chez tous les opérateurs parce qu'elle visite les quatre mêmes prestataires."
+        },
+        {
+          "p": "Le déroulé ne varie pas : bateau collectif sur un bras large, arrêt dans une fabrique de bonbons, dégustation de thé au miel avec musique traditionnelle, puis dix minutes de sampan dans un arroyo étroit — c'est la photo que tout le monde rapporte — et un déjeuner autour d'un poisson « oreille d'éléphant ». Retour à Saigon en fin d'après-midi."
+        },
+        {
+          "p": "Ce qu'on y voit est réel. Ce qui ne l'est pas, c'est l'impression d'avoir vu le delta : vous avez vu la commune la plus proche de la plus grande ville du pays, un jour où trois mille autres personnes faisaient la même chose. Le delta du Mékong fait quarante mille kilomètres carrés et compte dix-sept millions d'habitants."
+        }
+      ]
+    },
+    {
+      "h2": "La règle des trois heures",
+      "blocs": [
+        {
+          "p": "**La densité touristique du delta décroît avec la distance à Saigon, et le seuil se situe autour de trois heures de route.** En deçà, vous êtes dans la zone des excursions à la journée ; au-delà, elles ne sont plus rentables et la fréquentation s'effondre."
+        },
+        {
+          "p": "Can Tho, la capitale du delta, est à 170 kilomètres de Hô Chi Minh-Ville. Les distances et les temps réels, avec les arrêts, sont sur notre page [carte du Vietnam](/carte-vietnam/) — et ce trajet est précisément celui que les brochures présentent comme une journée. Il ne l'est pas."
+        },
+        {
+          "p": "La deuxième moitié de la règle est la nuit sur place, et elle découle de la première. Les marchés flottants vivent à l'aube et se vident dans la matinée ; partir de Saigon le matin, c'est arriver après la fin. Nous avons détaillé ce calcul horaire, marché par marché, dans notre article sur les [temps de trajet](/blog/temps-trajet-vietnam/) et dans celui sur les [marchés et ateliers](/blog/marches-ateliers-cuisine-vietnam/) — il n'est pas repris ici."
+        },
+        {
+          "citation": "Can Tho n'est pas une excursion d'une journée. Un aller-retour signifie partir à quatre heures du matin pour arriver quand le marché se termine.",
+          "source": "Temps de trajet au Vietnam"
+        }
+      ]
+    },
+    {
+      "h2": "Trois marchés flottants, trois foules différentes",
+      "blocs": [
+        {
+          "p": "**Le choix du marché compte autant que l'heure, et il est rarement présenté comme un choix.**"
+        },
+        {
+          "tableau": {
+            "legende": "Les trois marchés flottants qui existent encore",
+            "colonnes": [
+              "Marché",
+              "Où",
+              "Fréquentation",
+              "Ce qu'on y voit"
+            ],
+            "lignes": [
+              [
+                "Cai Rang",
+                "Can Tho",
+                "Forte, embouteillage de barques à touristes vers 8 h",
+                "Le plus grand marché de gros du delta. Spectaculaire, et filmé par cent téléphones"
+              ],
+              [
+                "Cai Be",
+                "Entre My Tho et Vinh Long",
+                "Moyenne",
+                "Plus petit et plus commerçant que touristique, avec les vergers de l'île de Tan Phong à côté"
+              ],
+              [
+                "Long Xuyen",
+                "An Giang, vers Chau Doc",
+                "Très faible",
+                "Un marché de gros qui travaille pour lui-même. Presque aucun visiteur étranger"
+              ]
+            ],
+            "note": "Les marchés flottants reculent partout, concurrencés par les ponts et les camions. Ce qu'on voit aujourd'hui n'existera pas sous cette forme dans vingt ans, et ce n'est pas un argument de vente : c'est une raison de ne pas s'en contenter comme unique motif de descendre dans le delta."
+          }
+        },
+        {
+          "p": "Long Xuyen est la réponse la plus franche à la question posée par cet article, avec sa contrepartie : il est à l'écart de l'axe classique, il n'y a rien d'organisé pour vous y recevoir, et il faut l'insérer dans un itinéraire qui passe par Chau Doc — typiquement celui qui continue vers le Cambodge, dont nous parlons dans [combiner Vietnam et Cambodge](/blog/vietnam-cambodge-combiner/)."
+        }
+      ]
+    },
+    {
+      "h2": "Ce qui vaut mieux que les marchés",
+      "blocs": [
+        {
+          "p": "**Le delta n'est pas un lieu de visites, c'est un lieu de circulation — et son intérêt se trouve entre les arrêts, pas aux arrêts.** C'est ce qui le rend si mal servi par une excursion à la journée, dont la logique est précisément d'enchaîner des arrêts."
+        },
+        {
+          "ul": [
+            "**Les arroyos en fin de journée**, quand les barques de touristes sont rentrées. Les canaux étroits bordés de nipas, à la rame, sans moteur : c'est la seule heure où l'on entend autre chose que des hors-bord.",
+            "**La forêt de cajeputs de Tra Su**, près de Chau Doc. Une forêt inondée que l'on traverse en barque sur un tapis de lentilles d'eau vert fluo, avec des colonies d'oiseaux. Elle est connue, mais elle absorbe la foule parce qu'on s'y disperse.",
+            "**Les pagodes khmères** autour de Tra Vinh et de Soc Trang. Le delta a une population khmère ancienne, et ses pagodes n'ont rien à voir avec les temples vietnamiens du Nord. Presque aucun circuit francophone n'y passe.",
+            "**Une nuit dans un verger**, chez l'habitant, plutôt qu'à l'hôtel en ville. C'est l'étape du pays où cette formule fonctionne le mieux : les maisons sont vastes, le climat est doux la nuit, et le dîner se prend sur le fleuve."
+          ]
+        },
+        {
+          "photo": "mekong-barque"
+        }
+      ]
+    },
+    {
+      "h2": "Combien de nuits, et dans quel ordre",
+      "blocs": [
+        {
+          "p": "**Deux nuits, et jamais zéro.** Une nuit permet le marché du lendemain à l'aube et rien d'autre ; deux laissent une journée entière sur l'eau et dans les villages, qui est le vrai sujet."
+        },
+        {
+          "p": "Dans nos itinéraires, le delta est une fin de voyage : on descend du Centre vers Saigon, puis vers l'eau, et l'on repart de Saigon. Le circuit [du Nord au Sud](/circuit-vietnam/vietnam-du-nord-au-sud/) finit ainsi par deux nuits à Can Tho. Le circuit [Vietnam et Cambodge](/circuit-vietnam/vietnam-et-cambodge/) passe par Can Tho puis Chau Doc, et franchit la frontière par le fleuve."
+        },
+        {
+          "p": "L'ordre a une raison. Le delta est plat, chaud et lent : placé en début de voyage, il paraît monotone parce qu'on n'a pas encore le reste pour le comparer. Placé à la fin, après les montagnes et les villes, il se lit pour ce qu'il est — un pays d'eau où tout se fait en barque, y compris l'école et le marché."
+        },
+        {
+          "p": "Une réserve honnête, enfin : si votre voyage ne dépasse pas douze jours, le delta est l'étape à sacrifier avant les autres. Il demande deux nuits et six heures de route aller-retour pour un paysage qui ne ressemble à rien d'autre, mais qui ne figure pas dans les trois raisons pour lesquelles on vient au Vietnam. Le raisonnement complet est sur notre article [itinéraire trop chargé](/blog/itineraire-vietnam-trop-charge/)."
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Comment visiter le delta du Mékong sans les foules ?",
+      "a": "En allant au-delà de trois heures de route depuis Saigon, et en dormant sur place. La zone des excursions à la journée — My Tho, Ben Tre — concentre l'essentiel des visiteurs parce qu'elle est à une heure et demie de la ville. Au-delà, les excursions ne sont plus rentables et la fréquentation s'effondre. Concrètement : Can Tho et le marché de Cai Rang pour l'étape classique, Cai Be pour une version plus calme, Long Xuyen vers Chau Doc pour un marché de gros que presque aucun étranger ne visite."
+    },
+    {
+      "q": "L'excursion d'une journée au delta du Mékong vaut-elle le coup ?",
+      "a": "Elle montre quelque chose de réel, mais pas le delta. Le programme est identique chez tous les opérateurs parce qu'il visite les quatre mêmes prestataires : barque collective, atelier de bonbons à la noix de coco, thé au miel en musique, dix minutes de sampan dans un arroyo, déjeuner autour d'un poisson « oreille d'éléphant ». Vous aurez vu la commune la plus proche de Saigon, le jour où tout le monde y était. Le delta fait quarante mille kilomètres carrés."
+    },
+    {
+      "q": "Quel marché flottant choisir dans le delta du Mékong ?",
+      "a": "Cai Rang à Can Tho est le plus grand marché de gros du delta et le plus spectaculaire, au prix d'un embouteillage de barques à touristes vers huit heures. Cai Be, entre My Tho et Vinh Long, est plus petit et reste davantage commerçant que touristique. Long Xuyen, en An Giang sur la route de Chau Doc, est un marché de gros qui travaille pour lui-même et ne reçoit presque aucun visiteur étranger — c'est la réponse la plus franche, et la moins commode à organiser."
+    },
+    {
+      "q": "Combien de nuits passer dans le delta du Mékong ?",
+      "a": "Deux, et jamais zéro. Une seule nuit permet d'être au marché à l'aube le lendemain, et rien d'autre. Deux laissent une journée entière sur l'eau et dans les villages, qui est le véritable intérêt du delta — un pays où tout circule en barque. En dessous de douze jours de voyage au total, en revanche, le delta est l'étape que nous proposons de retirer avant les autres."
+    },
+    {
+      "q": "Que faire dans le delta du Mékong à part les marchés flottants ?",
+      "a": "Les arroyos à la rame en fin de journée, quand les bateaux à moteur sont rentrés. La forêt inondée de cajeputs de Tra Su près de Chau Doc, que l'on traverse en barque sur un tapis de lentilles d'eau. Les pagodes khmères de Tra Vinh et Soc Trang, héritage d'une population ancienne et sans rapport avec les temples du Nord, où presque aucun circuit francophone ne passe. Et une nuit chez l'habitant dans un verger plutôt qu'à l'hôtel en ville."
+    },
+    {
+      "q": "Faut-il faire le delta du Mékong au début ou à la fin du voyage ?",
+      "a": "À la fin. Le delta est plat, chaud et lent : en début de parcours il paraît monotone, faute de point de comparaison. Après les montagnes du Nord et les villes du Centre, il se lit pour ce qu'il est. C'est l'ordre de nos circuits, qui descendent vers Saigon puis vers l'eau, et repartent de Saigon — ou franchissent la frontière cambodgienne par le fleuve depuis Chau Doc."
+    }
+  ]
+}

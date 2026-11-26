@@ -1,0 +1,162 @@
+{
+  "slug": "nuit-chez-l-habitant-vietnam",
+  "title": "Nuit chez l'habitant au Vietnam : ce que c'est vraiment",
+  "description": "Un matelas au sol sous une moustiquaire, une salle d'eau froide, et un dîner où l'on vous sert avant de se servir. Ce qu'on trouve, ce qu'on ne trouve pas, et les étapes où cela fonctionne le mieux.",
+  "ogTitle": "Nuit chez l'habitant au Vietnam : ce que c'est vraiment",
+  "ogDescription": "Ce n'est pas un hôtel moins cher, c'est autre chose. Les deux ou trois nuits que nous programmons, décrites avant le départ plutôt qu'à l'arrivée.",
+  "photo": "tet-banh",
+  "photoAlt": "Famille vietnamienne confectionnant des bánh tét autour d'une natte, gâteaux de riz gluant du Nouvel An — la pièce commune où se passe une nuit chez l'habitant",
+  "datePublished": "2026-11-26",
+  "dateModified": "2026-11-26",
+  "author": "",
+  "chapo": "Ce n'est pas un hôtel moins cher. C'est autre chose, et il vaut mieux le savoir avant.",
+  "lede": "**Une nuit chez l'habitant au Vietnam, c'est un matelas posé au sol sous une moustiquaire, dans une pièce commune où dorment aussi d'autres voyageurs, et une salle d'eau souvent froide.** C'est aussi la meilleure soirée de beaucoup de voyages. Les deux phrases sont vraies en même temps, et le problème n'est presque jamais l'hébergement : c'est l'écart entre ce qu'on imaginait et ce qu'on trouve. Cet article décrit l'écart, pour qu'il n'y en ait plus.",
+  "sections": [
+    {
+      "h2": "Ce qu'on trouve, concrètement",
+      "blocs": [
+        {
+          "p": "**Une maison sur pilotis en bois ou en bambou, une grande pièce à l'étage, des matelas alignés au sol, une moustiquaire par matelas.** Voilà le modèle majoritaire dans le Nord, chez les Thaï blancs comme chez les Tày."
+        },
+        {
+          "ul": [
+            "**Le couchage.** Matelas ferme au sol, oreiller, couverture, moustiquaire. Dans la pièce commune, les matelas sont séparés par les moustiquaires et rien d'autre. Certaines maisons proposent une ou deux chambres cloisonnées, à demander à la réservation et pas sur place.",
+            "**La salle d'eau.** Collective, en bas, parfois à l'extérieur. L'eau chaude existe de plus en plus souvent mais n'est jamais garantie ; en montagne l'eau froide est vraiment froide, de novembre à février.",
+            "**L'électricité.** Présente partout, les coupures sont courtes. Prévoyez une lampe frontale : les escaliers extérieurs ne sont pas éclairés.",
+            "**Le chauffage.** Il n'y en a pas. À Ha Giang ou à Ba Be en janvier, il peut faire huit degrés la nuit dans une maison ouverte aux quatre vents. On vous donnera des couvertures, pas de la chaleur."
+          ]
+        },
+        {
+          "p": "Ce qu'on ne trouve pas, et qu'il est inutile d'espérer : chambre privative avec verrou dans la majorité des cas, climatisation, serviettes d'hôtel, réception, service de bagages, et une porte que l'on ferme à clé. On range son sac dans un coin, et il n'arrive rien — mais cela demande de l'admettre."
+        }
+      ]
+    },
+    {
+      "h2": "Le dîner, qui est le vrai sujet",
+      "blocs": [
+        {
+          "p": "**C'est pour lui qu'on y va, et c'est la partie que personne ne décrit.** Le repas se prend en cercle sur une natte, plats au centre, chacun se sert dans un petit bol de riz."
+        },
+        {
+          "p": "L'hôte sert les invités avant de se servir, et remplit votre bol dès qu'il se vide — ce n'est pas une invitation à finir, c'est une politesse. Pour signifier que vous avez assez mangé, laissez un fond de riz plutôt que de vider le bol. C'est le genre de détail qu'un guide vous dit à l'oreille et qu'on ne lit nulle part."
+        },
+        {
+          "p": "L'alcool de riz circule, souvent dès le premier verre, et il est au centre de l'hospitalité du Nord. Refuser est accepté si c'est fait en souriant et une fois pour toutes ; refuser verre après verre est inconfortable pour tout le monde. Un « je ne bois pas d'alcool » annoncé au début règle la soirée."
+        },
+        {
+          "citation": "Un guide qui vous fait entrer chez une famille thaï blanche à Pu Luong ne vous a pas donné une information : il vous a ouvert une porte.",
+          "source": "Faut-il un guide au Vietnam"
+        },
+        {
+          "p": "Sans quelqu'un pour traduire, la soirée se réduit à des sourires et à des photos de téléphone. C'est agréable et c'est court. La différence entre les deux versions est le sujet de notre article [faut-il un guide au Vietnam](/blog/guide-vietnam/)."
+        }
+      ]
+    },
+    {
+      "h2": "Où cela fonctionne le mieux, et où c'est rude",
+      "blocs": [
+        {
+          "p": "**Toutes les nuits chez l'habitant ne se valent pas, et l'écart tient au confort autant qu'à la langue.**"
+        },
+        {
+          "tableau": {
+            "legende": "Les étapes où nous programmons des nuits chez l'habitant",
+            "colonnes": [
+              "Étape",
+              "Niveau réel",
+              "Pour qui"
+            ],
+            "lignes": [
+              [
+                "Mai Chau",
+                "Le plus doux. Maisons thaï blanches, chambres cloisonnées fréquentes, vélo dans les rizières",
+                "Une première nuit chez l'habitant, et les familles"
+              ],
+              [
+                "Lac de Ba Be",
+                "Maison sur pilotis au bord du lac, confort simple, barque le matin",
+                "Ceux qui veulent le cadre avant le confort"
+              ],
+              [
+                "Meo Vac, plateau de Dong Van",
+                "Le plus rude. Froid de novembre à février, salle d'eau extérieure fréquente",
+                "Voyageurs décidés, après avoir lu cette page"
+              ],
+              [
+                "Delta du Mékong",
+                "Maison de verger, climat doux la nuit, dîner sur le fleuve",
+                "Presque tout le monde — c'est la version la plus facile du pays"
+              ]
+            ],
+            "note": "Dans nos circuits, ces nuits sont nommées étape par étape sur les fiches. Le circuit hors des sentiers en compte trois sur douze ; les autres, une ou aucune."
+          }
+        },
+        {
+          "p": "La règle que nous appliquons est simple : **jamais plus de deux nuits consécutives chez l'habitant, et jamais au début du voyage.** Deux nuits de suite sans vraie douche chaude usent plus que le paysage ne récompense, et une première nuit à peine descendu de l'avion est un mauvais souvenir garanti."
+        }
+      ]
+    },
+    {
+      "h2": "Quand il vaut mieux dire non",
+      "blocs": [
+        {
+          "p": "**Nous déconseillons la nuit chez l'habitant dans quatre cas, et cela ne vexe personne.**"
+        },
+        {
+          "ol": [
+            "**Vous avez le sommeil léger.** La maison se lève à cinq heures, les coqs plus tôt, et les cloisons sont en bambou. Des bouchons d'oreilles résolvent la moitié du problème, pas l'autre.",
+            "**Vous avez des difficultés à vous relever du sol.** Un matelas posé par terre et un escalier raide de maison sur pilotis sont deux obstacles réels, et il n'y a pas de rampe.",
+            "**Vous voyagez avec un enfant de moins de trois ans.** Les repas tardifs, la pièce commune et l'absence de chauffage en font une nuit difficile pour tout le monde, y compris les autres voyageurs.",
+            "**Vous n'avez que dix jours.** La nuit chez l'habitant se paie en route : ces villages sont loin. Sur un voyage court, le temps vaut mieux ailleurs."
+          ]
+        },
+        {
+          "p": "Dans ces quatre cas, il existe une position intermédiaire que nous proposons souvent : **le dîner chez l'habitant sans la nuit.** On partage le repas, on repart dormir à une heure de là dans une maison d'hôtes avec eau chaude. L'essentiel de la rencontre tient dans le dîner, pas dans le matelas."
+        }
+      ]
+    },
+    {
+      "h2": "Ce que ça coûte, et à qui l'argent va",
+      "blocs": [
+        {
+          "p": "**Compris dans nos circuits, et c'est l'une des lignes les moins chères du voyage.** Une nuit chez l'habitant avec dîner et petit-déjeuner se situe très en dessous d'un hôtel 3 étoiles de ville."
+        },
+        {
+          "p": "Ce qui compte davantage que le montant est sa destination. Une nuit réservée directement auprès de la famille lui revient presque entièrement ; la même nuit vendue par une plateforme internationale lui en laisse une part. Nous réservons en direct, et c'est l'un des rares endroits du voyage où l'absence d'intermédiaire se voit sur la vie de quelqu'un plutôt que sur votre facture."
+        },
+        {
+          "p": "Deux usages locaux, enfin, qui évitent un malaise. On retire ses chaussures en bas de l'escalier, toujours. Et un petit cadeau pour les enfants est apprécié, à condition qu'il ne soit ni de l'argent ni des bonbons : des crayons, un cahier, un ballon. Distribuer des billets dans un village transforme la rencontre en transaction, et pas seulement pour vous — pour tous ceux qui passeront après."
+        },
+        {
+          "p": "Le niveau de confort étape par étape, gamme par gamme, est détaillé sur notre page [hors des sentiers battus](/vietnam-hors-sentiers/), et la façon dont ces nuits se mêlent à des étapes beaucoup plus confortables sur [voyage de luxe](/voyage-luxe-vietnam/)."
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "À quoi ressemble une nuit chez l'habitant au Vietnam ?",
+      "a": "Une maison sur pilotis en bois ou en bambou, une grande pièce à l'étage, des matelas fermes posés au sol et une moustiquaire par matelas. La salle d'eau est collective, en bas, parfois à l'extérieur, et l'eau chaude n'est jamais garantie. Il n'y a pas de chauffage : en montagne, de novembre à février, il peut faire huit degrés la nuit. Certaines maisons ont une ou deux chambres cloisonnées, à demander à la réservation et pas en arrivant."
+    },
+    {
+      "q": "Y a-t-il des chambres privées en homestay au Vietnam ?",
+      "a": "Parfois, et c'est à préciser avant le départ. Le modèle majoritaire reste la pièce commune où chaque matelas est séparé des autres par sa moustiquaire. Mai Chau est l'étape où les chambres cloisonnées sont les plus fréquentes, ce qui en fait la meilleure première expérience. Sur le plateau de Dong Van et à Meo Vac, il ne faut pas compter dessus. Demander sur place ne sert à rien : ce qui n'a pas été réservé n'existe pas."
+    },
+    {
+      "q": "Comment se comporter chez l'habitant au Vietnam ?",
+      "a": "On retire ses chaussures au bas de l'escalier, toujours. Au dîner, l'hôte sert ses invités avant lui et remplit votre bol dès qu'il se vide : pour signifier que vous avez assez mangé, laissez un fond de riz plutôt que de vider le bol. L'alcool de riz circule ; un refus annoncé une fois au début, en souriant, est parfaitement accepté. Si vous offrez quelque chose aux enfants, que ce soit des crayons ou un cahier, jamais de l'argent ni des bonbons."
+    },
+    {
+      "q": "Combien de nuits chez l'habitant prévoir dans un circuit ?",
+      "a": "Une à trois, jamais plus de deux consécutives, et jamais en début de voyage. Deux nuits de suite sans douche chaude fatiguent plus que le paysage ne récompense, et une première nuit à peine descendu de l'avion laisse un mauvais souvenir. Notre circuit hors des sentiers battus en compte trois sur douze nuits ; les autres circuits en comptent une ou aucune."
+    },
+    {
+      "q": "Peut-on éviter la nuit chez l'habitant tout en rencontrant des familles ?",
+      "a": "Oui, et c'est la formule que nous proposons dès qu'un doute existe : le dîner chez l'habitant sans la nuit. On partage le repas, puis on repart dormir à une heure de là dans une maison d'hôtes avec eau chaude. L'essentiel de la rencontre tient dans le dîner et dans la présence d'un guide qui traduit, pas dans le matelas. C'est la bonne réponse pour un sommeil léger, une mobilité réduite ou un enfant en bas âge."
+    },
+    {
+      "q": "Le homestay est-il moins cher qu'un hôtel au Vietnam ?",
+      "a": "Oui, nettement, et c'est l'une des lignes les moins chères d'un circuit — dîner et petit-déjeuner compris. Mais ce n'est pas la bonne raison de le choisir : une nuit chez l'habitant n'est pas un hôtel bon marché, c'est autre chose, avec un confort qui n'a rien de comparable. Ce qui compte davantage que le prix est sa destination : réservée en direct auprès de la famille, la nuit lui revient presque entièrement."
+    }
+  ]
+}
