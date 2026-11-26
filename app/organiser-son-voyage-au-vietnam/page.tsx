@@ -187,6 +187,9 @@ export default async function OrganiserSonVoyage() {
             which would have discarded the plan the visitor just built. */}
         <Closing
           href="#devis"
+          /* Le lien vers l'outil est masqué ici : il pointerait sur la page
+             qu'on est en train de lire. */
+          outil={false}
           title="Il reste la part qui ne se réserve pas depuis la France."
           body="Les billets de train intérieurs demandent une carte vietnamienne, et un guide francophone en mars se trouve des mois à l'avance. Envoyez-nous votre plan : nous le chiffrons tel quel, et nous vous dirons franchement si la durée ne suffit pas. Devis gratuit, réponse sous 48 heures ouvrées."
         />

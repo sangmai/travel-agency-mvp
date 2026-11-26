@@ -309,8 +309,12 @@ export default async function CircuitQuinzeJours() {
                 </li>
               ))}
             </ul>
-            <p className="cta-row">
+            <p className="cta-row cta-row--duo">
               <a className="btn btn--amber" href={lien(TRIP_BASE)}>Comparer les six circuits</a>
+              {/* Deuxième sortie, pour le lecteur qui n'est pas encore au stade
+                  de comparer : l'outil répond à « est-ce que ça tient en
+                  quinze jours » avant que la question du circuit se pose. */}
+              <a className="btn btn--amber" href={lien("/organiser-son-voyage-au-vietnam")}>Tester mon itinéraire</a>
             </p>
           </div>
         </section>

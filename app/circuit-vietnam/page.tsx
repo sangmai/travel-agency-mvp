@@ -6,7 +6,7 @@ import { TripCard } from "@/components/TripCard";
 import { Fil, JsonLd, SectionHead } from "@/components/ui";
 import { DataTable } from "@/components/DataTable";
 import { breadcrumb, siteId } from "@/components/JsonLd";
-import { aggregate, getGuide, getReviews, getSite, getTrips, tripUrl, TRIP_BASE } from "@/lib/content";
+import { aggregate, getGuide, getReviews, getSite, getTrips, tripUrl, TRIP_BASE, lien } from "@/lib/content";
 import { euro, score } from "@/lib/format";
 
 /**
@@ -281,6 +281,13 @@ export default async function CircuitsIndex() {
                 </details>
               ))}
             </div>
+            {/* Cette page n'a pas de bloc Closing — le formulaire la termine.
+                Le lien vers l'outil est donc posé ici, sous la FAQ : c'est
+                l'endroit où le lecteur a épuisé le texte et où il reste la
+                question que le texte ne tranche pas, celle de sa durée. */}
+            <p className="cta-row">
+              <a className="btn btn--amber" href={lien("/organiser-son-voyage-au-vietnam")}>Tester mon itinéraire</a>
+            </p>
           </div>
         </section>
 

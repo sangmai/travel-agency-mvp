@@ -1597,6 +1597,37 @@ img {
   background: var(--jade);
 }
 
+/* Lien secondaire du bloc de clôture, sous le bouton de devis.
+
+   Blanc souligné, et non la couleur de lien par défaut : `a` hérite de la
+   couleur du texte et ne porte aucun soulignement, ce qui sur l'ambre aurait
+   donné un lien impossible à distinguer d'un mot ordinaire. Le blanc est aussi
+   la seule couleur qui tienne ici le 4.55:1 que le paragraphe au-dessus a déjà
+   coûté — voir la note sur l'opacité.
+
+   Plus petit que le paragraphe : c'est une seconde sortie, pas une concurrente
+   du bouton. */
+.close__outil {
+  font-size: 0.92rem;
+  margin-top: 1.15rem;
+}
+
+.close__outil a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+/* Deux boutons sur la même ligne, sur les trois pages qui n'ont pas de bloc de
+   clôture. Modificateur plutôt que changement de .cta-row, pour la raison
+   écrite au-dessus : onze pages portent déjà cette classe avec un seul bouton
+   dans le fil du texte. */
+.cta-row--duo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 /* FOOTER */
 
 .ftr {

@@ -109,10 +109,17 @@ export function Closing({
      back to the home page from directly above a form is the kind of detail that
      reads as carelessness. */
   href = "/#devis",
+  /* The planner link below the button. On by default because every page that
+     closes with this block is a page where someone has just finished reading
+     about dates, distances or seasons — the exact moment the tool answers a
+     question the text cannot. Off on the planner's own page, where it would
+     link to itself. */
+  outil = true,
 }: {
   title: string;
   body: string;
   href?: string;
+  outil?: boolean;
 }) {
   return (
     <section className="sec close">
@@ -122,6 +129,20 @@ export function Closing({
         <a className="btn" href={lien(href)}>
           Demander mon devis gratuit
         </a>
+        {/* Secondary, and deliberately a plain text link rather than a second
+            button: two buttons side by side split the decision and cost
+            conversions. The wording matches the home page and the blog rail
+            word for word — an action keeps its name across the whole site. */}
+        {outil && (
+          <p className="close__outil">
+            Ou vérifiez d&apos;abord vos dates&nbsp;:{" "}
+            <a href={lien("/organiser-son-voyage-au-vietnam")}>
+              tester mon itinéraire
+            </a>{" "}
+            — l&apos;outil compte les nuits et les trajets, et dit ce qui
+            dépasse. Gratuit, sans inscription.
+          </p>
+        )}
       </div>
     </section>
   );
