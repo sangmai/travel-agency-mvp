@@ -47,7 +47,7 @@ const MASSIFS = [
   },
   {
     nom: "Hoang Su Phi",
-    lieux: "Ouest de la province de Ha Giang · 1 000 à 1 500 m",
+    lieux: "Ouest du plateau de Ha Giang · 1 000 à 1 500 m",
     reponse: "Mise en eau en mai, moisson de mi-septembre à début octobre.",
     corps:
       "Les plus hautes terrasses encore cultivées à la main du nord du Vietnam, classées patrimoine national, et pourtant presque vides en comparaison de Sapa — la route y est longue et c'est précisément ce qui les protège. Les versants sont plus raides qu'ailleurs, l'étagement plus serré, et la brume de fin de matinée monte des vallées et passe entre les niveaux. Hoang Su Phi est à l'ouest de Ha Giang, à l'opposé de la boucle de Dong Van : c'est un détour, pas une étape sur le chemin.",
