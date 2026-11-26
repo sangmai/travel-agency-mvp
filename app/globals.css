@@ -2521,6 +2521,24 @@ img {
   gap: clamp(1.1rem, 2.2vw, 1.75rem);
 }
 
+/* Deux gabarits partagent .tiles, et un seul marchait.
+
+   Envies et « que faire » posent la classe sur le <li> lui-même : le .tile est
+   l'élément de grille, il s'étire, tout va bien. La liste des circuits imbrique
+   un <article class="tile"> dans le <li> — c'est alors le <li> qui s'étire, et
+   l'article s'arrête à la hauteur de son propre texte.
+
+   Conséquence visible : une vignette dont le résumé tient sur une ligne est
+   plus courte que ses voisines à deux lignes, et la ligne des durées puis le
+   prix cessent de s'aligner d'une carte à l'autre. Le flex:1 posé sur
+   .tile__line, qui devait absorber l'écart, n'avait aucune hauteur à remplir.
+
+   Le sélecteur vise l'imbrication et elle seule : en gabarit plat, .tile est
+   le <li>, donc « li > .tile » ne correspond à rien. */
+.tiles > li > .tile {
+  height: 100%;
+}
+
 .tile a {
   display: flex;
   flex-direction: column;
