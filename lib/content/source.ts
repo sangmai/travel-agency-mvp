@@ -89,6 +89,9 @@ import aPhuQuocApec from "@/content/blog/phu-quoc-apec-2027.json";
 import aQuyNhon from "@/content/blog/quy-nhon.json";
 import aSurMesure from "@/content/blog/voyage-sur-mesure-ou-circuit-organise.json";
 import aLuxeNord from "@/content/blog/luxe-vietnam-etapes-sans-cinq-etoiles.json";
+import aHaGiangSansMoto from "@/content/blog/ha-giang-sans-moto.json";
+import aEco from "@/content/blog/voyage-vietnam-eco-responsable.json";
+import aLaosCambodge from "@/content/blog/laos-ou-cambodge-avec-le-vietnam.json";
 import aMekongFoules from "@/content/blog/mekong-sans-les-foules.json";
 import aChezHabitant from "@/content/blog/nuit-chez-l-habitant-vietnam.json";
 import aPuLuong from "@/content/blog/pu-luong-montagne-quatre-heures-hanoi.json";
@@ -113,6 +116,9 @@ const GUIDES: Guide[] = [gQuandPartirAuVietnam, gBudgetVoyageVietnam, gVisaVietn
 /* Articles, newest first: the index shows them in that order and the sitemap
    reads their real modification date. */
 const ARTICLES: Article[] = [
+  aHaGiangSansMoto,
+  aEco,
+  aLaosCambodge,
   aMekongFoules,
   aChezHabitant,
   aPuLuong,
